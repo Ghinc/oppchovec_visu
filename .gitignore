@@ -22,8 +22,15 @@
 *.sbn
 *.sbx
 
-# Fichiers CSV volumineux
+
+
+# Autres fichiers volumineux ou générés
+*.zip
 *.csv
+*.parquet
+*.pkl
+*.txt
+
 
 # ============================================
 # Fichiers de sortie et résultats
