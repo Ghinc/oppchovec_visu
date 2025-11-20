@@ -116,6 +116,9 @@ yarn.lock
 .vscode/
 *.code-workspace
 
+# Claude Code
+.claude/
+
 # PyCharm
 .idea/
 *.iml
