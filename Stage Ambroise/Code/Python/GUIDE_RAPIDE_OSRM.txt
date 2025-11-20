@@ -1,0 +1,144 @@
+========================================================================
+GUIDE RAPIDE - OSRM LOCAL POUR CALCUL ULTRA-RAPIDE
+========================================================================
+
+Vous avez maintenant 2 versions du script :
+
+1. services_accessibles_20min.py          → Version API publique (actuelle)
+2. services_accessibles_osrm_local.py     → Version OSRM local (100× plus rapide)
+
+Rien n'a été modifié dans votre configuration actuelle !
+Si OSRM local ne fonctionne pas, vous pouvez toujours utiliser la version API publique.
+
+========================================================================
+INSTALLATION (À FAIRE UNE SEULE FOIS)
+========================================================================
+
+ÉTAPE 1 : Installer Docker Desktop
+----------------------------------
+1. Télécharger : https://www.docker.com/products/docker-desktop/
+2. Installer et redémarrer le PC si demandé
+3. Lancer Docker Desktop (vérifier qu'il tourne)
+
+ÉTAPE 2 : Configuration automatique d'OSRM
+------------------------------------------
+Double-cliquer sur : setup_osrm_local.bat
+
+Ce script va automatiquement :
+  ✓ Télécharger les données OpenStreetMap Corse (~50 Mo)
+  ✓ Télécharger l'image Docker OSRM (~300 Mo)
+  ✓ Préparer les données de routage
+  ✓ Créer un script de lancement (start_osrm_server.bat)
+
+⏱️ Durée totale : 10-15 minutes
+
+========================================================================
+UTILISATION QUOTIDIENNE
+========================================================================
+
+TERMINAL 1 : Lancer le serveur OSRM
+-----------------------------------
+Double-cliquer sur : start_osrm_server.bat
+
+Vous verrez :
+  [info] starting up engines, v5.27.1
+  [info] running and waiting for requests
+
+→ LAISSER CE TERMINAL OUVERT
+
+TERMINAL 2 : Tester que ça fonctionne (optionnel)
+-------------------------------------------------
+python test_osrm_local.py
+
+Ce script teste 3 choses :
+  1. Connexion au serveur
+  2. Calcul d'un trajet simple (Ajaccio → Bastia)
+  3. Calcul matriciel (5×5 communes)
+
+TERMINAL 3 : Lancer le calcul complet
+-------------------------------------
+python services_accessibles_osrm_local.py
+
+⚡ Temps de calcul attendu : 3-5 MINUTES (vs 3-5 heures avec API publique)
+
+Les résultats seront sauvegardés dans :
+  - services_accessibles_20min_local.csv
+  - services_accessibles_20min_local.xlsx
+  - services_accessibles_20min_local.json
+
+========================================================================
+COMPARAISON DES PERFORMANCES
+========================================================================
+
+| Méthode         | Fichier à lancer                    | Temps calcul | Résultats  |
+|-----------------|-------------------------------------|--------------|------------|
+| API publique    | services_accessibles_20min.py       | 3-5 heures   | ..._20min  |
+| OSRM local      | services_accessibles_osrm_local.py  | 3-5 minutes  | ..._local  |
+
+Gain : ×60 à ×100 !
+
+========================================================================
+EN CAS DE PROBLÈME
+========================================================================
+
+PROBLÈME : Docker n'est pas reconnu
+SOLUTION : Vérifier que Docker Desktop est bien installé et lancé
+
+PROBLÈME : "Cannot connect to localhost:5000"
+SOLUTION : Le serveur OSRM n'est pas lancé
+           → Lancer start_osrm_server.bat dans un terminal séparé
+
+PROBLÈME : Les temps de trajet semblent anormaux
+SOLUTION : Vérifier que les données Corse sont bien chargées
+           → Relancer setup_osrm_local.bat
+
+PROBLÈME : Le script plante pendant l'exécution
+SOLUTION : Vérifier que le serveur OSRM tourne toujours (terminal 1)
+           → Si besoin, relancer start_osrm_server.bat
+
+SI RIEN NE FONCTIONNE :
+Utilisez la version API publique : services_accessibles_20min.py
+(Plus lent mais fonctionne sans installation)
+
+========================================================================
+STRUCTURE DES FICHIERS CRÉÉS
+========================================================================
+
+Code\Python\
+├── services_accessibles_20min.py               ← Version API publique (ORIGINAL)
+├── services_accessibles_osrm_local.py          ← Version OSRM local (NOUVEAU)
+├── setup_osrm_local.bat                        ← Installation auto (NOUVEAU)
+├── start_osrm_server.bat                       ← Lancement serveur (créé par setup)
+├── test_osrm_local.py                          ← Tests de vérification (NOUVEAU)
+├── README_OSRM_LOCAL.md                        ← Documentation complète (NOUVEAU)
+├── GUIDE_RAPIDE_OSRM.txt                       ← Ce fichier (NOUVEAU)
+│
+├── osrm_data\                                  ← Données OSRM (créé par setup)
+│   ├── corse-latest.osm.pbf                    ← Données OpenStreetMap
+│   └── corse-latest.osrm*                      ← Graphe de routage préparé
+│
+├── services_accessibles_20min.csv              ← Résultats API publique
+├── services_accessibles_20min_local.csv        ← Résultats OSRM local
+└── ...
+
+========================================================================
+PROCHAINES ÉTAPES
+========================================================================
+
+1. Installer Docker Desktop (si pas déjà fait)
+2. Lancer setup_osrm_local.bat
+3. Tester avec test_osrm_local.py
+4. Lancer le calcul complet avec services_accessibles_osrm_local.py
+5. Comparer les résultats avec l'API publique (optionnel)
+
+Pour plus de détails : README_OSRM_LOCAL.md
+
+========================================================================
+CONTACT & SUPPORT
+========================================================================
+
+Documentation OSRM : https://project-osrm.org/
+Docker Desktop : https://www.docker.com/products/docker-desktop/
+Données OSM : http://download.geofabrik.de/europe/france/corse.html
+
+========================================================================

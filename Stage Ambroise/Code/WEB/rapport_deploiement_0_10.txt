@@ -1,0 +1,50 @@
+================================================================================
+RAPPORT DE DEPLOIEMENT - APPLICATION WEB NORMALISATION 0-10
+================================================================================
+
+Nombre de communes: 360
+
+FICHIERS DEPLOYES:
+--------------------------------------------------------------------------------
+  [OK] data_scores_0_10.json
+  [OK] seuils_jenks_0_10.json
+  [OK] lisa_oppchovec_0_10_1pct.json
+  [OK] lisa_oppchovec_0_10_5pct.json
+
+SEUILS JENKS (5 classes) - OppChoVec:
+--------------------------------------------------------------------------------
+  Classe 1: 0.00
+  Classe 2: 2.41
+  Classe 3: 3.93
+  Classe 4: 5.11
+  Classe 5: 7.56
+
+STATISTIQUES OppChoVec (0-10):
+--------------------------------------------------------------------------------
+  Min:     0.00
+  Max:     10.00
+  Moyenne: 4.04
+  Mediane: 3.97
+  Ecart-type: 1.35
+
+RESULTATS LISA (OppChoVec uniquement):
+--------------------------------------------------------------------------------
+  LISA 1%: 26/360 communes significatives (7.2%)
+  LISA 5%: 56/360 communes significatives (15.6%)
+
+TOP 10 COMMUNES (OppChoVec 0-10):
+--------------------------------------------------------------------------------
+   1. Afa                            - 10.00/10
+   2. Alata                          - 9.74/10
+   3. Appietto                       - 9.72/10
+   4. Bastelicaccia                  - 9.54/10
+   5. Eccica-Suarella                - 7.85/10
+   6. Cauro                          - 7.56/10
+   7. Ville-di-Pietrabugno           - 7.26/10
+   8. San-Martino-di-Lota            - 6.82/10
+   9. Santa-Maria-di-Lota            - 6.81/10
+  10. Albitreccia                    - 6.70/10
+
+================================================================================
+DEPLOIEMENT TERMINE AVEC SUCCES
+================================================================================

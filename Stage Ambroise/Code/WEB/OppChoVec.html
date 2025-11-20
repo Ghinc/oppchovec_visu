@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Interactive OppChoVec</title>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div id="app">
+    <aside>
+        <div class="section">
+            <h2>1. Import des fichiers</h2>
+            <h3>Fichiers des indicateurs</h3>
+            <input type="file" id="file" multiple accept=".json" /><br>
+            <h3>GeoJSON des communes</h3>
+            <input type="file" id="file_geojson" multiple accept=".geojson" /><br>
+            <button id="validateBtn">Valider les fichiers</button>
+        </div>
+      <!-- 1. Sélection de la commune -->
+      <div class="section">
+        <h2>2. Sélection commune</h2>
+        <select id="communeSelect" style="width:100%; padding:0.5em;">
+          <option value="">-- Sélectionner une commune --</option>
+        </select>
+        <button id="validerCommune" style="margin-top: 0.5em;">Valider</button>
+      </div>
+
+      <div class="section">
+        <h3>Informations de la commune sélectionnée :</h3>
+        <div id="resultCommune" style="background: #f8f8f8; padding: 1em; border-radius: 8px;"></div>
+      </div>
+    </aside>
+    <main>
+      <div class="tabs-container">
+        <div class="tabs">
+          <button class="tab-button active" data-tab="oppchovectab">OppChoVec</button>
+          <button class="tab-button" data-tab="opptab">Opp</button>
+          <button class="tab-button" data-tab="chotab">Cho</button>
+          <button class="tab-button" data-tab="vectab">Vec</button>
+          <button class="tab-button" data-tab="lisatab">LISA</button>
+          <button class="tab-button" data-tab="cahtab">CAH</button>
+          <button class="tab-button" data-tab="chatbottab">DumèGPT</button>
+        </div>
+        <div class="tab-content active" id="oppchovectab">
+          <div id="map-oppchovec" class="map"></div>
+        </div>
+        <div class="tab-content" id="opptab">
+          <div id="map-opp" class="map"></div>
+        </div>
+        <div class="tab-content" id="chotab">
+          <div id="map-cho" class="map"></div>
+        </div>
+        <div class="tab-content" id="vectab">
+          <div id="map-vec" class="map"></div>
+        </div>
+        <div class="tab-content" id="lisatab">
+          <!-- Sous-onglets LISA -->
+          <div class="lisa-subtabs">
+            <button class="lisa-subtab-button active" data-lisa-tab="lisa5pct">LISA 5% (α=0.05)</button>
+            <button class="lisa-subtab-button" data-lisa-tab="lisa1pct">LISA 1% (α=0.01)</button>
+          </div>
+
+          <!-- LISA 5% -->
+          <div class="lisa-subtab-content active" id="lisa5pct">
+            <div id="map-lisa-5pct" class="map"></div>
+            <div class="lisa-legend-overlay">
+              <div class="lisa-legend">
+                <h3>📊 Légende des clusters LISA (Seuil 5%)</h3>
+                <div class="lisa-legend-colors">
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #d73027;"></span>
+                    <span class="lisa-label"><strong>HH (High-High)</strong> - Valeurs élevées entourées de valeurs élevées → Hotspots d'opportunités</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #4575b4;"></span>
+                    <span class="lisa-label"><strong>LL (Low-Low)</strong> - Valeurs faibles entourées de valeurs faibles → Coldspots d'opportunités</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #fdae61;"></span>
+                    <span class="lisa-label"><strong>HL (High-Low)</strong> - Valeur élevée entourée de valeurs faibles → Outlier positif</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #abd9e9;"></span>
+                    <span class="lisa-label"><strong>LH (Low-High)</strong> - Valeur faible entourée de valeurs élevées → Outlier négatif</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #d9d9d9;"></span>
+                    <span class="lisa-label"><strong>Non significatif</strong> - Pas de pattern spatial significatif (p ≥ 0.05)</span>
+                  </div>
+                </div>
+
+                <h3>🔍 Qu'est-ce que LISA ?</h3>
+                <p><strong>LISA (Local Indicators of Spatial Association)</strong> détecte les zones où les communes ont des valeurs similaires ou différentes à leurs voisines.</p>
+
+                <h3>📊 Interprétation des clusters :</h3>
+                <ul>
+                  <li><strong>HH (High-High)</strong> : Communes avec indice <strong>ÉLEVÉ</strong> entourées de communes à indice <strong>ÉLEVÉ</strong> → "Hotspots" d'opportunités</li>
+                  <li><strong>LL (Low-Low)</strong> : Communes avec indice <strong>FAIBLE</strong> entourées de communes à indice <strong>FAIBLE</strong> → "Coldspots" d'opportunités</li>
+                  <li><strong>HL (High-Low)</strong> : Commune <strong>ÉLEVÉE</strong> entourée de communes <strong>FAIBLES</strong> → Outlier positif</li>
+                  <li><strong>LH (Low-High)</strong> : Commune <strong>FAIBLE</strong> entourée de communes <strong>ÉLEVÉES</strong> → Outlier négatif</li>
+                  <li><strong>Non significatif</strong> : Pas de pattern spatial significatif (p ≥ 0.05)</li>
+                </ul>
+
+                <h3>📈 Résultats de l'analyse (Seuil 5%) :</h3>
+                <ul>
+                  <li><strong>13.3% des communes (48 communes)</strong> présentent un pattern spatial significatif</li>
+                  <li><strong>13 communes HH</strong> : Zones d'opportunités systématiquement élevées (hotspots)</li>
+                  <li><strong>20 communes LL</strong> : Zones d'opportunités systématiquement faibles (coldspots)</li>
+                  <li><strong>15 outliers</strong> : Communes avec des valeurs atypiques (10 HL + 5 LH)</li>
+                  <li><strong>Indice de Moran I = 0.1454</strong> (p-value = 0.001) : Autocorrélation spatiale significative</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- LISA 1% -->
+          <div class="lisa-subtab-content" id="lisa1pct">
+            <div id="map-lisa-1pct" class="map"></div>
+            <div class="lisa-legend-overlay">
+              <div class="lisa-legend">
+                <h3>📊 Légende des clusters LISA (Seuil 1%)</h3>
+                <div class="lisa-legend-colors">
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #d73027;"></span>
+                    <span class="lisa-label"><strong>HH (High-High)</strong> - Valeurs élevées entourées de valeurs élevées → Hotspots d'opportunités</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #4575b4;"></span>
+                    <span class="lisa-label"><strong>LL (Low-Low)</strong> - Valeurs faibles entourées de valeurs faibles → Coldspots d'opportunités</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #fdae61;"></span>
+                    <span class="lisa-label"><strong>HL (High-Low)</strong> - Valeur élevée entourée de valeurs faibles → Outlier positif</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #abd9e9;"></span>
+                    <span class="lisa-label"><strong>LH (Low-High)</strong> - Valeur faible entourée de valeurs élevées → Outlier négatif</span>
+                  </div>
+                  <div class="lisa-legend-item">
+                    <span class="lisa-color-box" style="background-color: #d9d9d9;"></span>
+                    <span class="lisa-label"><strong>Non significatif</strong> - Pas de pattern spatial significatif (p ≥ 0.01)</span>
+                  </div>
+                </div>
+
+                <h3>🔍 Qu'est-ce que LISA ?</h3>
+                <p><strong>LISA (Local Indicators of Spatial Association)</strong> détecte les zones où les communes ont des valeurs similaires ou différentes à leurs voisines.</p>
+
+                <h3>📊 Interprétation des clusters :</h3>
+                <ul>
+                  <li><strong>HH (High-High)</strong> : Communes avec indice <strong>ÉLEVÉ</strong> entourées de communes à indice <strong>ÉLEVÉ</strong> → "Hotspots" d'opportunités</li>
+                  <li><strong>LL (Low-Low)</strong> : Communes avec indice <strong>FAIBLE</strong> entourées de communes à indice <strong>FAIBLE</strong> → "Coldspots" d'opportunités</li>
+                  <li><strong>HL (High-Low)</strong> : Commune <strong>ÉLEVÉE</strong> entourée de communes <strong>FAIBLES</strong> → Outlier positif</li>
+                  <li><strong>LH (Low-High)</strong> : Commune <strong>FAIBLE</strong> entourée de communes <strong>ÉLEVÉES</strong> → Outlier négatif</li>
+                  <li><strong>Non significatif</strong> : Pas de pattern spatial significatif (p ≥ 0.01)</li>
+                </ul>
+
+                <h3>📈 Résultats de l'analyse (Seuil 1% - Plus restrictif) :</h3>
+                <ul>
+                  <li><strong>4.2% des communes (15 communes)</strong> présentent un pattern spatial significatif</li>
+                  <li><strong>4 communes HH</strong> : Zones d'opportunités systématiquement élevées (hotspots)</li>
+                  <li><strong>4 communes LL</strong> : Zones d'opportunités systématiquement faibles (coldspots)</li>
+                  <li><strong>7 outliers</strong> : Communes avec des valeurs atypiques (4 HL + 3 LH)</li>
+                  <li><strong>Indice de Moran I = 0.1454</strong> (p-value = 0.001) : Autocorrélation spatiale significative</li>
+                  <li><em>Seuil plus strict = patterns plus robustes et fiables</em></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" id="cahtab">
+          <!-- Sous-onglets CAH -->
+          <div class="lisa-subtabs">
+            <button class="cah-subtab-button active" data-cah-tab="cah3clusters">CAH 3 Clusters</button>
+            <button class="cah-subtab-button" data-cah-tab="cah5clusters">CAH 5 Clusters</button>
+          </div>
+
+          <!-- CAH 3 Clusters -->
+          <div class="cah-subtab-content active" id="cah3clusters">
+            <!-- Bouton toggle -->
+            <div class="cah-controls-top">
+              <button id="toggleCAH3View" class="cah-toggle-button">
+                📊 Voir les écarts standardisés
+              </button>
+            </div>
+
+            <!-- Vue carte -->
+            <div id="cah3-map-view" class="cah-view">
+              <div id="map-cah-3" class="map"></div>
+              <div class="lisa-legend-overlay">
+                <div class="lisa-legend">
+                  <h3>📊 Classification Hiérarchique Ascendante - 3 Clusters</h3>
+                  <div class="lisa-legend-colors">
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #E41A1C;"></span>
+                      <span class="lisa-label"><strong>Cluster 1</strong> (n=100) - Profil élevé sur toutes les dimensions</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #377EB8;"></span>
+                      <span class="lisa-label"><strong>Cluster 2</strong> (n=20) - Profil très faible sur le Choix</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #4DAF4A;"></span>
+                      <span class="lisa-label"><strong>Cluster 3</strong> (n=240) - Profil moyen-faible</span>
+                    </div>
+                  </div>
+
+                  <h3>🔍 Qu'est-ce que la CAH ?</h3>
+                  <p><strong>Classification Hiérarchique Ascendante</strong> : Méthode de clustering qui regroupe les communes similaires selon leurs scores Opportunités, Choix et Vécu.</p>
+
+                  <h3>📊 Méthodologie :</h3>
+                  <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Variables</strong></td>
+                      <td style="padding: 4px 8px;">Score_Opp, Score_Cho, Score_Vec (échelle 0-10)</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Distance</strong></td>
+                      <td style="padding: 4px 8px;">Euclidienne</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Linkage</strong></td>
+                      <td style="padding: 4px 8px;">Ward (minimise la variance intra-cluster)</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Standardisation</strong></td>
+                      <td style="padding: 4px 8px;">Données standardisées (moyenne=0, écart-type=1)</td>
+                    </tr>
+                  </table>
+
+                  <h3>📈 Profils des 3 clusters :</h3>
+                  <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 1</strong></td>
+                      <td style="padding: 4px 8px;">Opp=+0.93σ, Cho=+0.36σ, Vec=+0.87σ</td>
+                      <td style="padding: 4px 8px;">→ Profil <strong>élevé</strong> partout</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 2</strong></td>
+                      <td style="padding: 4px 8px;">Opp=+0.11σ, Cho=<strong>-3.23σ</strong>, Vec=-0.86σ</td>
+                      <td style="padding: 4px 8px;">→ <strong>Très faible Choix</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 3</strong></td>
+                      <td style="padding: 4px 8px;">Opp=-0.40σ, Cho=+0.12σ, Vec=-0.29σ</td>
+                      <td style="padding: 4px 8px;">→ Profil <strong>moyen-faible</strong></td>
+                    </tr>
+                  </table>
+                  <p><em>σ = écart-type par rapport à la moyenne globale</em></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vue graphique -->
+            <div id="cah3-graph-view" class="cah-view" style="display: none;">
+              <img src="cah_3_clusters_ecarts.png" alt="Écarts standardisés - 3 clusters" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+          </div>
+
+          <!-- CAH 5 Clusters -->
+          <div class="cah-subtab-content" id="cah5clusters">
+            <!-- Bouton toggle -->
+            <div class="cah-controls-top">
+              <button id="toggleCAH5View" class="cah-toggle-button">
+                📊 Voir les écarts standardisés
+              </button>
+            </div>
+
+            <!-- Vue carte -->
+            <div id="cah5-map-view" class="cah-view">
+              <div id="map-cah-5" class="map"></div>
+              <div class="lisa-legend-overlay">
+                <div class="lisa-legend">
+                  <h3>📊 Classification Hiérarchique Ascendante - 5 Clusters</h3>
+                  <div class="lisa-legend-colors">
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #E41A1C;"></span>
+                      <span class="lisa-label"><strong>Cluster 1</strong> (n=6) - Profil extrêmement élevé sur le Vécu</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #377EB8;"></span>
+                      <span class="lisa-label"><strong>Cluster 2</strong> (n=94) - Profil élevé équilibré</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #4DAF4A;"></span>
+                      <span class="lisa-label"><strong>Cluster 3</strong> (n=20) - Profil très faible sur le Choix</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #984EA3;"></span>
+                      <span class="lisa-label"><strong>Cluster 4</strong> (n=59) - Opportunités faibles, Choix élevé</span>
+                    </div>
+                    <div class="lisa-legend-item">
+                      <span class="lisa-color-box" style="background-color: #FF7F00;"></span>
+                      <span class="lisa-label"><strong>Cluster 5</strong> (n=181) - Profil moyen-faible</span>
+                    </div>
+                  </div>
+
+                  <h3>🔍 Qu'est-ce que la CAH ?</h3>
+                  <p><strong>Classification Hiérarchique Ascendante</strong> : Méthode de clustering qui regroupe les communes similaires selon leurs scores Opportunités, Choix et Vécu.</p>
+
+                  <h3>📊 Méthodologie :</h3>
+                  <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Variables</strong></td>
+                      <td style="padding: 4px 8px;">Score_Opp, Score_Cho, Score_Vec (échelle 0-10)</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Distance</strong></td>
+                      <td style="padding: 4px 8px;">Euclidienne</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Linkage</strong></td>
+                      <td style="padding: 4px 8px;">Ward (minimise la variance intra-cluster)</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Standardisation</strong></td>
+                      <td style="padding: 4px 8px;">Données standardisées (moyenne=0, écart-type=1)</td>
+                    </tr>
+                  </table>
+
+                  <h3>📈 Profils des 5 clusters :</h3>
+                  <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 1</strong></td>
+                      <td style="padding: 4px 8px;">Opp=+1.98σ, Cho=+0.36σ, Vec=<strong>+4.19σ</strong></td>
+                      <td style="padding: 4px 8px;">→ Profil <strong>extrême sur Vécu</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 2</strong></td>
+                      <td style="padding: 4px 8px;">Opp=+0.87σ, Cho=+0.36σ, Vec=+0.66σ</td>
+                      <td style="padding: 4px 8px;">→ Profil <strong>élevé équilibré</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 3</strong></td>
+                      <td style="padding: 4px 8px;">Opp=+0.11σ, Cho=<strong>-3.23σ</strong>, Vec=-0.86σ</td>
+                      <td style="padding: 4px 8px;">→ <strong>Très faible Choix</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 4</strong></td>
+                      <td style="padding: 4px 8px;">Opp=-1.25σ, Cho=+0.41σ, Vec=+0.14σ</td>
+                      <td style="padding: 4px 8px;">→ <strong>Opp faibles, Cho élevé</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 4px 8px; vertical-align: top;"><strong>Cluster 5</strong></td>
+                      <td style="padding: 4px 8px;">Opp=-0.12σ, Cho=+0.02σ, Vec=-0.43σ</td>
+                      <td style="padding: 4px 8px;">→ Profil <strong>moyen-faible</strong></td>
+                    </tr>
+                  </table>
+                  <p><em>σ = écart-type par rapport à la moyenne globale</em></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vue graphique -->
+            <div id="cah5-graph-view" class="cah-view" style="display: none;">
+              <img src="cah_5_clusters_ecarts.png" alt="Écarts standardisés - 5 clusters" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Onglet DumèGPT -->
+        <div class="tab-content" id="chatbottab">
+          <div class="chatbot-container">
+            <div class="chatbot-header">
+              <h2>💬 DumèGPT - Assistant bien-être des communes</h2>
+              <p class="chatbot-subtitle">Posez vos questions sur le bien-être, les opportunités et le vécu dans les communes corses</p>
+            </div>
+
+            <div class="chatbot-messages" id="chatbotMessages">
+              <div class="message bot-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                  <p>Bonjour ! Je suis <strong>DumèGPT</strong>, votre assistant dédié au bien-être dans les communes de Corse.</p>
+                  <p>Je peux vous aider à comprendre les scores d'Opportunités, de Choix et de Vécu, analyser les clusters, et répondre à vos questions sur les données.</p>
+                  <p><em>Comment puis-je vous aider aujourd'hui ?</em></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="chatbot-input-container">
+              <textarea
+                id="chatbotInput"
+                class="chatbot-input"
+                placeholder="Posez votre question sur le bien-être des communes..."
+                rows="2"
+              ></textarea>
+              <button id="chatbotSend" class="chatbot-send-btn">
+                <span>Envoyer</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="chatbot-footer">
+              <small>💡 <strong>Astuce :</strong> Vous pouvez poser des questions sur une commune spécifique, comparer des profils, ou demander des explications sur les indicateurs.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="lisa_data.js"></script>
+  <script src="lisa_data_1pct.js"></script>
+  <script src="cah_data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

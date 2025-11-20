@@ -1,0 +1,133 @@
+========================================================================
+INSTALLATION DOCKER - GUIDE ULTRA-SIMPLE
+========================================================================
+
+Je ne peux pas installer Docker directement (pas de droits admin),
+mais voici comment faire en 5 minutes chrono :
+
+========================================================================
+METHODE 1 : SCRIPT AUTOMATIQUE (RECOMMANDE)
+========================================================================
+
+1. Double-cliquez sur : telecharger_docker.bat
+
+   → Le script télécharge Docker Desktop automatiquement (~500 Mo)
+   → Durée : 5-10 minutes selon votre connexion
+
+2. Quand le téléchargement est terminé, cliquez sur "O" (Oui)
+
+   → L'installateur Docker se lance automatiquement
+
+3. Dans l'installateur Docker :
+
+   ✓ Cochez "Use WSL 2 instead of Hyper-V" (recommandé)
+   ✓ Cliquez sur "Ok"
+   ✓ Attendez l'installation (2-3 minutes)
+   ✓ Cliquez sur "Close and restart" si demandé
+
+4. Après redémarrage (si nécessaire) :
+
+   → Cherchez "Docker Desktop" dans le menu Démarrer
+   → Lancez-le
+   → Attendez que l'icône Docker apparaisse dans la barre des tâches
+   → Vous verrez "Docker Desktop is running" (voilà c'est bon !)
+
+5. Retournez au dossier Python et lancez :
+
+   setup_osrm_local.bat
+
+TERMINE !
+
+========================================================================
+METHODE 2 : TELECHARGEMENT MANUEL
+========================================================================
+
+Si le script ne fonctionne pas :
+
+1. Ouvrez votre navigateur
+
+2. Allez sur : https://www.docker.com/products/docker-desktop/
+
+3. Cliquez sur "Download for Windows"
+
+4. Une fois téléchargé, double-cliquez sur l'installateur
+
+5. Suivez les mêmes étapes que la Méthode 1 (étapes 3-5)
+
+========================================================================
+VERIFICATION QUE DOCKER FONCTIONNE
+========================================================================
+
+1. Ouvrez un nouveau terminal (PowerShell ou CMD)
+
+2. Tapez : docker --version
+
+3. Vous devriez voir : "Docker version XX.X.X, build..."
+
+✅ Si oui → Docker est installé ! Lancez setup_osrm_local.bat
+
+❌ Si "command not found" → Vérifiez que Docker Desktop est bien lancé
+   (icône dans la barre des tâches en bas à droite)
+
+========================================================================
+PROBLEMES COURANTS
+========================================================================
+
+PROBLEME : "WSL 2 installation is incomplete"
+SOLUTION :
+  1. Ouvrir PowerShell en admin
+  2. Taper : wsl --install
+  3. Redémarrer le PC
+  4. Relancer Docker Desktop
+
+PROBLEME : "Hardware assisted virtualization is not available"
+SOLUTION :
+  1. Redémarrer le PC
+  2. Entrer dans le BIOS (touche F2/F10/DEL au démarrage)
+  3. Chercher "Virtualization" ou "Intel VT-x" ou "AMD-V"
+  4. Activer l'option
+  5. Sauvegarder et redémarrer
+
+PROBLEME : Docker se lance mais ne démarre pas
+SOLUTION :
+  1. Clic droit sur l'icône Docker → Quit Docker Desktop
+  2. Attendre 30 secondes
+  3. Relancer Docker Desktop
+  4. Attendre 1-2 minutes (première fois c'est plus long)
+
+========================================================================
+RESUME ULTRA-RAPIDE
+========================================================================
+
+1. Double-clic : telecharger_docker.bat  (ou téléchargez manuellement)
+2. Installer Docker Desktop (suivre l'assistant)
+3. Redémarrer si demandé
+4. Lancer Docker Desktop
+5. Attendre que l'icône Docker soit verte dans la barre des tâches
+6. Double-clic : setup_osrm_local.bat
+
+C'EST TOUT !
+
+========================================================================
+TEMPS TOTAL ESTIME
+========================================================================
+
+Téléchargement Docker : 5-10 min
+Installation : 3-5 min
+Premier démarrage : 2-3 min
+Setup OSRM : 10-15 min
+
+TOTAL : ~30 minutes (installation unique)
+
+Ensuite, calcul des temps de trajet : 3-5 minutes (vs 3-5 heures !)
+
+========================================================================
+BESOIN D'AIDE ?
+========================================================================
+
+Si ça bloque vraiment, vous pouvez :
+1. Utiliser la version API publique (services_accessibles_20min.py)
+   → Plus lent mais fonctionne sans Docker
+2. Demander de l'aide à un collègue qui a déjà Docker
+
+========================================================================

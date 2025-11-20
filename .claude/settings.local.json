@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(start test_optimal_classes.html)",
+      "Bash(node run_gvf_analysis.js:*)",
+      "Bash(start test_seuils.html)",
+      "Bash(start OppChoVec.html)",
+      "Bash(cat:*)",
+      "Bash(python calculer_moran.py:*)",
+      "Bash(start indices_moran_1pct.xlsx)",
+      "Bash(python calculer_moran_knn.py:*)",
+      "Bash(python calculer_moran_queen.py:*)",
+      "Bash(start indices_moran_knn.xlsx)",
+      "Bash(start:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(findstr:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(dashboard.css)",
+      "Bash(powershell -Command:*)",
+      "Bash(git add:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(del nul)",
+      "Bash(del \"Stage Ambroise\\nul\")",
+      "Bash(rm:*)",
+      "Bash(git rm:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

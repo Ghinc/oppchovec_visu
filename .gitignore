@@ -1,0 +1,197 @@
+# ============================================
+# GITIGNORE - Stage Ambroise
+# ============================================
+
+# ============================================
+# Fichiers de données volumineux
+# ============================================
+
+# Fichiers Excel
+*.xlsx
+*.xls
+
+# Fichiers GeoJSON (volumineux)
+*.geojson
+
+# Fichiers Shapefile
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+
+# Fichiers CSV volumineux
+*.csv
+
+# ============================================
+# Fichiers de sortie et résultats
+# ============================================
+
+# Dossier OUTPUT et ses sous-dossiers
+Stage Ambroise/Code/OUTPUT/**
+!Stage Ambroise/Code/OUTPUT/.gitkeep
+
+# Fichiers d'export
+Stage Ambroise/Code/OUTPUT/export_lise_cah/**
+Stage Ambroise/Code/OUTPUT/export_lise_3d/**
+Stage Ambroise/Code/OUTPUT/communes_chatbot/**
+
+# Images générées
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+!Stage Ambroise/Code/WEB/cah_3_clusters_ecarts.png
+!Stage Ambroise/Code/WEB/cah_5_clusters_ecarts.png
+
+# Fichiers PDF
+*.pdf
+
+# ============================================
+# Archives et backups
+# ============================================
+
+# Dossiers d'archives
+Stage Ambroise/Code/Archive/**
+Stage Ambroise/Code/Python/Archive_anciennes_normalisations/**
+Stage Ambroise/Code/Python/Excel_doublons/**
+Stage Ambroise/Code/Python/Donnees_obsoletes/**
+Stage Ambroise/Code/WEB/archive/**
+
+# Fichiers de backup
+*.bak
+*.backup
+*.old
+*_old.*
+*_backup.*
+~$*
+
+# ============================================
+# Environnements et dépendances
+# ============================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# ============================================
+# IDEs et éditeurs
+# ============================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# Système d'exploitation
+# ============================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+
+# ============================================
+# Fichiers temporaires
+# ============================================
+
+# Fichiers temporaires généraux
+*.tmp
+*.temp
+*.log
+*.cache
+*.swp
+*.swo
+nul
+
+# Fichiers de lock
+*.lock
+
+# ============================================
+# Données sensibles (optionnel)
+# ============================================
+
+# Fichiers de configuration avec secrets
+.env
+.env.local
+secrets.*
+config.secret.*
+
+# ============================================
+# Exceptions - Fichiers à garder
+# ============================================
+
+# Fichiers JSON de configuration essentiels (garder les petits fichiers)
+!Stage Ambroise/Code/WEB/data_scores_0_10.json
+!Stage Ambroise/Code/WEB/donnees_completes_communes.json
+!Stage Ambroise/Code/WEB/lisa_data.js
+!Stage Ambroise/Code/WEB/lisa_data_1pct.js
+!Stage Ambroise/Code/WEB/cah_data.js
+!Stage Ambroise/Code/WEB/cah_3_clusters.json
+!Stage Ambroise/Code/WEB/cah_5_clusters.json
+!Stage Ambroise/Données/data_indicateurs.json
+
+# Fichiers essentiels du projet
+!README.md
+!.gitignore
+!requirements.txt
+!package.json
+
+# ============================================
+# Dossiers spécifiques à exclure
+# ============================================
+
+# Données brutes (si très volumineuses)
+# Décommenter si nécessaire :
+# Données/Corse_Commune/**/*.xlsx
