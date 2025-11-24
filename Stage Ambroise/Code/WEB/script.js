@@ -102,11 +102,18 @@ const villesPrincipales = [
 
 // Fonction pour ajouter les marqueurs des villes principales avec lignes de repère
 function ajouterVillesPrincipales(carte) {
-    // Créer un pane pour les villes avec z-index élevé (au-dessus des routes)
+    // Créer un pane pour les lignes pointillées (arrière-plan)
+    const lignesPaneName = 'villesLignesPane';
+    if (!carte.getPane(lignesPaneName)) {
+        const pane = carte.createPane(lignesPaneName);
+        pane.style.zIndex = 490; // Entre les routes (450) et les labels de villes (500)
+    }
+
+    // Créer un pane pour les villes avec z-index élevé (au-dessus des routes et des lignes)
     const villesPaneName = 'villesPane';
     if (!carte.getPane(villesPaneName)) {
         const pane = carte.createPane(villesPaneName);
-        pane.style.zIndex = 500; // Au-dessus des routes (450) et sous les markers de sélection (600)
+        pane.style.zIndex = 500; // Au-dessus des routes (450) et des lignes (490)
     }
 
     villesPrincipales.forEach(ville => {
@@ -114,12 +121,13 @@ function ajouterVillesPrincipales(carte) {
         const posLabel = [ville.lat + ville.labelOffset.lat, ville.lng + ville.labelOffset.lng];
 
         // Créer une ligne de repère (leader line) entre le point et le label
+        // Utiliser le pane des lignes pour qu'elles soient en arrière-plan
         L.polyline([posVille, posLabel], {
             color: '#000000',
             weight: 1,
             opacity: 0.6,
             dashArray: '3, 3',  // Ligne pointillée
-            pane: villesPaneName
+            pane: lignesPaneName
         }).addTo(carte);
 
         // Créer un marqueur personnalisé (point noir)
@@ -206,17 +214,17 @@ function ajouterLegendeTraits(carte) {
                 <div class="legende-titre" style="font-weight: bold; margin-bottom: 8px; font-size: 13px;">${traductions[lang].legendeTitre}</div>
 
                 <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                    <svg width="30" height="2" style="margin-right: 8px;">
-                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
-                    </svg>
-                    <span class="legende-limites">${traductions[lang].limitesCommunes}</span>
-                </div>
-
-                <div style="display: flex; align-items: center;">
                     <svg width="30" height="3" style="margin-right: 8px;">
                         <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
                     </svg>
                     <span class="legende-routes">${traductions[lang].routesPrincipales}</span>
+                </div>
+
+                <div style="display: flex; align-items: center;">
+                    <svg width="30" height="2" style="margin-right: 8px;">
+                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                    </svg>
+                    <span class="legende-limites">${traductions[lang].limitesCommunes}</span>
                 </div>
             </div>
         `;
@@ -230,10 +238,59 @@ function ajouterLegendeTraits(carte) {
 function mettreAJourLegendes() {
     const lang = langueFrancais ? 'fr' : 'en';
 
-    // Mettre à jour les légendes de traits
-    document.querySelectorAll('.legende-titre').forEach(el => {
-        el.textContent = traductions[lang].legendeTitre;
+    // Définir les catégories LISA pour la traduction
+    const categoriesLISA = [
+        { color: '#8B4513', labelFr: 'Pôle de bien-être', labelEn: 'Wealth cluster' },
+        { color: '#4575b4', labelFr: 'Pôle de mal-être', labelEn: 'Poverty cluster' },
+        { color: '#fdae61', labelFr: 'Oasis de bien-être', labelEn: 'Wealth oasis' },
+        { color: '#abd9e9', labelFr: 'Poche de mal-être', labelEn: 'Poverty pocket' },
+        { color: '#f3f3f3', labelFr: 'Association non significative', labelEn: 'Insignificant association' }
+    ];
+
+    // Mettre à jour les légendes LISA
+    document.querySelectorAll('.legende-lisa').forEach(legendeDiv => {
+        const titreEl = legendeDiv.querySelector('.legende-titre');
+        const parentDiv = legendeDiv.closest('.info.legend');
+
+        // Mettre à jour le titre
+        if (titreEl) {
+            if (parentDiv && parentDiv.textContent.includes('5%')) {
+                titreEl.textContent = lang === 'fr' ? 'Clusters LISA (Seuil 5%)' : 'LISA Clusters (Threshold 5%)';
+            } else if (parentDiv && parentDiv.textContent.includes('1%')) {
+                titreEl.textContent = lang === 'fr' ? 'Clusters LISA (Seuil 1%)' : 'LISA Clusters (Threshold 1%)';
+            }
+        }
+
+        // Mettre à jour les labels des catégories
+        const categoryDivs = legendeDiv.querySelectorAll('div[style*="margin: 4px 0"]');
+        categoryDivs.forEach((div, index) => {
+            if (index < categoriesLISA.length) {
+                const strongEl = div.querySelector('strong');
+                if (strongEl) {
+                    strongEl.textContent = lang === 'fr' ? categoriesLISA[index].labelFr : categoriesLISA[index].labelEn;
+                }
+            }
+        });
     });
+
+    // Mettre à jour les légendes CAH
+    document.querySelectorAll('.legende-cah').forEach(legendeDiv => {
+        const titreEl = legendeDiv.querySelector('.legende-titre');
+        const parentDiv = legendeDiv.closest('.info.legend');
+
+        if (titreEl && parentDiv) {
+            const nClusters = (parentDiv.textContent.match(/(\d+)\s+Cluster/i) || [])[1] || '3';
+            titreEl.textContent = lang === 'fr' ? `CAH - ${nClusters} Clusters` : `HAC - ${nClusters} Clusters`;
+        }
+    });
+
+    // Mettre à jour les autres légendes
+    document.querySelectorAll('.legende-titre').forEach(el => {
+        if (!el.closest('.legende-lisa') && !el.closest('.legende-cah')) {
+            el.textContent = traductions[lang].legendeTitre;
+        }
+    });
+
     document.querySelectorAll('.legende-limites').forEach(el => {
         el.textContent = traductions[lang].limitesCommunes;
     });
@@ -763,8 +820,8 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
 
     // Palette de couleurs LISA
     const colorsLISA = {
-        'Non significatif': '#d9d9d9',
-        'HH (High-High)': '#d73027',
+        'Non significatif': '#f3f3f3',
+        'HH (High-High)': '#8B4513',
         'LL (Low-Low)': '#4575b4',
         'LH (Low-High)': '#abd9e9',
         'HL (High-Low)': '#fdae61'
@@ -823,7 +880,47 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
     ajouterLegendeTraits(cartes[mapType]);
+    ajouterLegendeLISA(cartes[mapType], seuil);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
+}
+
+// Fonction pour ajouter une légende LISA conventionnelle (style Leaflet)
+function ajouterLegendeLISA(carte, seuil) {
+    const legendeControl = L.control({ position: 'bottomright' });
+
+    legendeControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend legende-lisa');
+        const lang = langueFrancais ? 'fr' : 'en';
+
+        const categories = [
+            { color: '#8B4513', labelFr: 'Pôle de bien-être', labelEn: 'Wealth cluster' },
+            { color: '#4575b4', labelFr: 'Pôle de mal-être', labelEn: 'Poverty cluster' },
+            { color: '#fdae61', labelFr: 'Oasis de bien-être', labelEn: 'Wealth oasis' },
+            { color: '#abd9e9', labelFr: 'Poche de mal-être', labelEn: 'Poverty pocket' },
+            { color: '#f3f3f3', labelFr: 'Association non significative', labelEn: 'Insignificant association' }
+        ];
+
+        div.innerHTML = `
+            <div style="background: rgba(255,255,255,0.95); padding: 10px 12px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                <div class="legende-titre" style="font-weight: bold; margin-bottom: 8px; font-size: 14px;">
+                    ${lang === 'fr' ? `Clusters LISA (Seuil ${seuil})` : `LISA Clusters (Threshold ${seuil})`}
+                </div>
+                ${categories.map(cat => `
+                    <div style="margin: 4px 0; display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 18px; height: 18px; background-color: ${cat.color}; border: 1px solid #333; margin-right: 8px;"></span>
+                        <span style="font-size: 12px;"><strong>${lang === 'fr' ? cat.labelFr : cat.labelEn}</strong></span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Empêcher les clics sur la légende de se propager à la carte
+        L.DomEvent.disableClickPropagation(div);
+
+        return div;
+    };
+
+    legendeControl.addTo(carte);
 }
 
 // fonction pour surligner les contours d'une commune
@@ -926,11 +1023,11 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
 
     // Palette de couleurs CAH (jusqu'à 5 clusters)
     const colorsCAH = {
-        1: '#E41A1C',  // Rouge - Cluster 1
-        2: '#377EB8',  // Bleu - Cluster 2
-        3: '#4DAF4A',  // Vert - Cluster 3
-        4: '#984EA3',  // Violet - Cluster 4
-        5: '#FF7F00'   // Orange - Cluster 5
+        1: '#917648',  // Marron - Cluster 1
+        2: '#eee0ba',  // Beige - Cluster 2
+        3: '#61e75c',  // Vert - Cluster 3
+        4: '#de7eed',  // Violet - Cluster 4
+        5: '#f4b474'   // Orange - Cluster 5
     };
 
     // Supprimer anciennes couches si existantes
@@ -948,7 +1045,7 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
             return {
                 fillColor: '#cccccc',
                 fillOpacity: 0.6,
-                color: '#ffffff',
+                color: '#000000',
                 weight: 1
             };
         }
@@ -959,7 +1056,7 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
         return {
             fillColor: fillColor,
             fillOpacity: 0.7,
-            color: '#ffffff',
+            color: '#000000',
             weight: 1
         };
     }
@@ -1022,9 +1119,61 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
     ajouterLegendeTraits(cartes[mapType]);
+    ajouterLegendeCAH(cartes[mapType], nClusters, cahData);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
 
     console.log(`✅ Carte CAH ${nClusters} clusters affichée avec succès`);
+}
+
+// Fonction pour ajouter une légende CAH conventionnelle (style Leaflet)
+function ajouterLegendeCAH(carte, nClusters, cahData) {
+    const legendeControl = L.control({ position: 'bottomright' });
+
+    legendeControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend legende-cah');
+        const lang = langueFrancais ? 'fr' : 'en';
+
+        // Palette de couleurs CAH
+        const colorsCAH = {
+            1: '#917648',  // Marron
+            2: '#eee0ba',  // Beige
+            3: '#61e75c',  // Vert
+            4: '#de7eed',  // Violet
+            5: '#f4b474'   // Orange
+        };
+
+        // Calculer le nombre de communes par cluster
+        const clustersCount = {};
+        if (cahData && cahData.clusters) {
+            for (const commune of Object.values(cahData.clusters)) {
+                clustersCount[commune.cluster] = (clustersCount[commune.cluster] || 0) + 1;
+            }
+        }
+
+        div.innerHTML = `
+            <div style="background: rgba(255,255,255,0.95); padding: 10px 12px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                <div class="legende-titre" style="font-weight: bold; margin-bottom: 8px; font-size: 14px;">
+                    ${lang === 'fr' ? `CAH - ${nClusters} Clusters` : `HAC - ${nClusters} Clusters`}
+                </div>
+                ${[1, 2, 3, 4, 5].slice(0, nClusters).map(cluster => `
+                    <div style="margin: 4px 0; display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 18px; height: 18px; background-color: ${colorsCAH[cluster]}; border: 1px solid #333; margin-right: 8px;"></span>
+                        <span style="font-size: 12px;">
+                            <strong>Cluster ${cluster}</strong>
+                            ${clustersCount[cluster] ? `<span style="font-size: 11px; color: #555;"> (${clustersCount[cluster]} ${lang === 'fr' ? 'communes' : 'municipalities'})</span>` : ''}
+                        </span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Empêcher les clics sur la légende de se propager à la carte
+        L.DomEvent.disableClickPropagation(div);
+
+        return div;
+    };
+
+    legendeControl.addTo(carte);
 }
 
 
