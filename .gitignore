@@ -192,6 +192,9 @@ config.secret.*
 !Stage Ambroise/Code/WEB/cah_5_clusters.json
 !Stage Ambroise/Données/data_indicateurs.json
 
+# Fichiers GeoJSON essentiels
+!Stage Ambroise/Code/WEB/routes.geojson
+
 # Fichiers essentiels du projet
 !README.md
 !.gitignore

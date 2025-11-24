@@ -5,6 +5,7 @@
   <title>Interactive OppChoVec</title>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -31,14 +32,46 @@
         <h3>Informations de la commune sélectionnée :</h3>
         <div id="resultCommune" style="background: #f8f8f8; padding: 1em; border-radius: 8px;"></div>
       </div>
+
+      <!-- Contrôle du réseau routier -->
+      <div class="section">
+        <h2>3. Affichage des routes</h2>
+        <div style="display: flex; flex-direction: column; gap: 0.5em;">
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="checkbox-nationales" class="route-checkbox" checked>
+            <span style="margin-left: 0.5em;">Routes nationales (647)</span>
+          </label>
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="checkbox-departementales" class="route-checkbox" checked>
+            <span style="margin-left: 0.5em;">Routes départementales (2654)</span>
+          </label>
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="checkbox-communales" class="route-checkbox">
+            <span style="margin-left: 0.5em;">Routes communales (3686)</span>
+          </label>
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="checkbox-toutes" class="route-checkbox">
+            <span style="margin-left: 0.5em;">Toutes les routes (7002)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Contrôle de la langue -->
+      <div class="section">
+        <h2>4. Langue / Language</h2>
+        <label style="display: flex; align-items: center; cursor: pointer;">
+          <input type="checkbox" id="checkbox-english">
+          <span style="margin-left: 0.5em;">English labels</span>
+        </label>
+      </div>
     </aside>
     <main>
       <div class="tabs-container">
         <div class="tabs">
-          <button class="tab-button active" data-tab="oppchovectab">OppChoVec</button>
-          <button class="tab-button" data-tab="opptab">Opp</button>
-          <button class="tab-button" data-tab="chotab">Cho</button>
-          <button class="tab-button" data-tab="vectab">Vec</button>
+          <button class="tab-button active" data-tab="oppchovectab" id="tab-oppchovec">OppChoLiv</button>
+          <button class="tab-button" data-tab="opptab" id="tab-opp">Opp</button>
+          <button class="tab-button" data-tab="chotab" id="tab-cho">Cho</button>
+          <button class="tab-button" data-tab="vectab" id="tab-vec">Liv</button>
           <button class="tab-button" data-tab="lisatab">LISA</button>
           <button class="tab-button" data-tab="cahtab">CAH</button>
           <button class="tab-button" data-tab="chatbottab">DumèGPT</button>

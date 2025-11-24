@@ -7,6 +7,40 @@ let data_indicateursOriginaux = {}
     let clustersLISA1pct = {}  // Clusters LISA 1% chargés depuis JSON
     let seuilsJenksCharges = {}  // Seuils Jenks chargés depuis seuils_jenks.json
     let cahCarteInitialisee = false  // Flag pour l'initialisation lazy de la carte CAH
+    let routesGeojson = {
+        nationales: null,
+        departementales: null,
+        communales: null,
+        toutes: null
+    }  // Données GeoJSON du réseau routier par type
+    let routesLayers = {}  // Couches de routes pour chaque carte et type
+    let langueFrancais = true  // Langue par défaut : français
+
+// Traductions
+const traductions = {
+    fr: {
+        legendeTitre: "Légende",
+        limitesCommunes: "Limites des communes",
+        routesPrincipales: "Routes principales",
+        onglets: {
+            oppchovec: "OppChoLiv",
+            opp: "Opp",
+            cho: "Cho",
+            vec: "Liv"
+        }
+    },
+    en: {
+        legendeTitre: "Legend",
+        limitesCommunes: "Municipal boundaries",
+        routesPrincipales: "Main roads",
+        onglets: {
+            oppchovec: "OppChoLiv",
+            opp: "Opp",
+            cho: "Cho",
+            vec: "Liv"
+        }
+    }
+};
 
     // 5 cartes différentes + 2 cartes LISA + 2 cartes CAH
     let cartes = {
@@ -54,8 +88,364 @@ let seuilsJenks = {
     vec: [0, 1.78, 3.05, 4.14, 6.14, 10]
 };
 
-// Palette de couleurs (5 classes) - Rouge vers Vert foncé (gradient affiné)
-const colorsJenks = ["#d73027", "#fc8d59", "#fee08b", "#91cf60", "#1a9850"];
+// Palette de couleurs (5 classes) - Bleu clair vers Violet (inversé pour valeurs croissantes)
+const colorsJenks = ["#bbdefb", "#64b5f6", "#9c27b0", "#7b1fa2", "#4a148c"];
+
+// Coordonnées des villes principales de Corse avec positions des labels
+const villesPrincipales = [
+    { nom: "Ajaccio", lat: 41.9267, lng: 8.7369, labelOffset: { lat: -0.15, lng: -0.25 } },
+    { nom: "Bastia", lat: 42.7028, lng: 9.4503, labelOffset: { lat: 0.15, lng: 0.20 } },
+    { nom: "Corte", lat: 42.3063, lng: 9.1508, labelOffset: { lat: 0.0, lng: 0.70 } },
+    { nom: "Porto-Vecchio", lat: 41.5914, lng: 9.2795, labelOffset: { lat: 0.0, lng: 0.30 } },
+    { nom: "Calvi", lat: 42.5677, lng: 8.7575, labelOffset: { lat: 0.15, lng: -0.25 } }
+];
+
+// Fonction pour ajouter les marqueurs des villes principales avec lignes de repère
+function ajouterVillesPrincipales(carte) {
+    // Créer un pane pour les villes avec z-index élevé (au-dessus des routes)
+    const villesPaneName = 'villesPane';
+    if (!carte.getPane(villesPaneName)) {
+        const pane = carte.createPane(villesPaneName);
+        pane.style.zIndex = 500; // Au-dessus des routes (450) et sous les markers de sélection (600)
+    }
+
+    villesPrincipales.forEach(ville => {
+        const posVille = [ville.lat, ville.lng];
+        const posLabel = [ville.lat + ville.labelOffset.lat, ville.lng + ville.labelOffset.lng];
+
+        // Créer une ligne de repère (leader line) entre le point et le label
+        L.polyline([posVille, posLabel], {
+            color: '#000000',
+            weight: 1,
+            opacity: 0.6,
+            dashArray: '3, 3',  // Ligne pointillée
+            pane: villesPaneName
+        }).addTo(carte);
+
+        // Créer un marqueur personnalisé (point noir)
+        L.circleMarker(posVille, {
+            radius: 5,
+            fillColor: "#000000",
+            color: "#ffffff",
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 1,
+            pane: villesPaneName
+        }).addTo(carte);
+
+        // Ajouter le label du nom de la ville à la position décalée
+        L.marker(posLabel, {
+            icon: L.divIcon({
+                className: 'ville-label',
+                html: `<div style="
+                    font-weight: bold;
+                    font-size: 13px;
+                    color: #000;
+                    background-color: rgba(255, 255, 255, 0.85);
+                    padding: 3px 8px;
+                    border: 1px solid #000;
+                    border-radius: 3px;
+                    white-space: nowrap;
+                ">${ville.nom}</div>`,
+                iconSize: [100, 20],
+                iconAnchor: [50, 10]  // Centrer le label
+            }),
+            pane: villesPaneName
+        }).addTo(carte);
+    });
+}
+
+// Fonction pour ajouter une rose des vents
+function ajouterRoseDesVents(carte) {
+    const roseControl = L.control({ position: 'topleft' });
+
+    roseControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'rose-des-vents');
+        div.innerHTML = `
+            <svg width="80" height="80" viewBox="0 0 80 80" style="background: rgba(255,255,255,0.9); border-radius: 50%; padding: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                <!-- Cercle extérieur -->
+                <circle cx="40" cy="40" r="35" fill="none" stroke="#333" stroke-width="1"/>
+                <!-- Flèche Nord (rouge) -->
+                <polygon points="40,10 45,35 40,30 35,35" fill="#d73027" stroke="#000" stroke-width="0.5"/>
+                <!-- Flèche Sud -->
+                <polygon points="40,70 35,45 40,50 45,45" fill="#333" stroke="#000" stroke-width="0.5"/>
+                <!-- Flèche Est -->
+                <polygon points="70,40 45,35 50,40 45,45" fill="#666" stroke="#000" stroke-width="0.5"/>
+                <!-- Flèche Ouest -->
+                <polygon points="10,40 35,45 30,40 35,35" fill="#666" stroke="#000" stroke-width="0.5"/>
+                <!-- Lettres N, S, E, O -->
+                <text x="40" y="8" text-anchor="middle" font-size="10" font-weight="bold" fill="#d73027">N</text>
+                <text x="40" y="76" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">S</text>
+                <text x="73" y="43" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">E</text>
+                <text x="7" y="43" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">O</text>
+            </svg>
+        `;
+        return div;
+    };
+
+    roseControl.addTo(carte);
+}
+
+// Fonction pour ajouter une légende des traits (limites et routes)
+function ajouterLegendeTraits(carte) {
+    const legendeControl = L.control({ position: 'bottomright' });
+
+    legendeControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'legende-traits');
+        const lang = langueFrancais ? 'fr' : 'en';
+        div.innerHTML = `
+            <div style="
+                background: rgba(255,255,255,0.95);
+                padding: 10px 12px;
+                border: 2px solid #333;
+                border-radius: 5px;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            ">
+                <div class="legende-titre" style="font-weight: bold; margin-bottom: 8px; font-size: 13px;">${traductions[lang].legendeTitre}</div>
+
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <svg width="30" height="2" style="margin-right: 8px;">
+                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                    </svg>
+                    <span class="legende-limites">${traductions[lang].limitesCommunes}</span>
+                </div>
+
+                <div style="display: flex; align-items: center;">
+                    <svg width="30" height="3" style="margin-right: 8px;">
+                        <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
+                    </svg>
+                    <span class="legende-routes">${traductions[lang].routesPrincipales}</span>
+                </div>
+            </div>
+        `;
+        return div;
+    };
+
+    legendeControl.addTo(carte);
+}
+
+// Fonction pour mettre à jour toutes les légendes
+function mettreAJourLegendes() {
+    const lang = langueFrancais ? 'fr' : 'en';
+
+    // Mettre à jour les légendes de traits
+    document.querySelectorAll('.legende-titre').forEach(el => {
+        el.textContent = traductions[lang].legendeTitre;
+    });
+    document.querySelectorAll('.legende-limites').forEach(el => {
+        el.textContent = traductions[lang].limitesCommunes;
+    });
+    document.querySelectorAll('.legende-routes').forEach(el => {
+        el.textContent = traductions[lang].routesPrincipales;
+    });
+}
+
+// Fonction pour ajouter un bouton de téléchargement d'image
+function ajouterBoutonTelechargement(carte, mapType) {
+    const downloadControl = L.control({ position: 'topright' });
+
+    downloadControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        const button = L.DomUtil.create('a', '', div);
+        button.innerHTML = '📷';
+        button.href = '#';
+        button.title = 'Télécharger la carte en PNG';
+        button.style.width = '30px';
+        button.style.height = '30px';
+        button.style.lineHeight = '30px';
+        button.style.textAlign = 'center';
+        button.style.textDecoration = 'none';
+        button.style.fontSize = '18px';
+        button.style.backgroundColor = 'white';
+        button.style.cursor = 'pointer';
+
+        L.DomEvent.on(button, 'click', function(e) {
+            L.DomEvent.preventDefault(e);
+            telechargerCarte(carte, mapType);
+        });
+
+        return div;
+    };
+
+    downloadControl.addTo(carte);
+}
+
+// Fonction pour télécharger la carte en PNG
+async function telechargerCarte(carte, mapType) {
+    try {
+        // Masquer temporairement les contrôles de zoom
+        const zoomControl = carte.getContainer().querySelector('.leaflet-control-zoom');
+        const downloadControl = carte.getContainer().querySelector('.leaflet-bar a[title="Télécharger la carte en PNG"]')?.parentElement;
+
+        if (zoomControl) zoomControl.style.display = 'none';
+        if (downloadControl) downloadControl.style.display = 'none';
+
+        // Attendre un peu pour que les changements soient appliqués
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        // Capturer la carte avec dom-to-image
+        const mapContainer = carte.getContainer();
+
+        const dataUrl = await domtoimage.toPng(mapContainer, {
+            quality: 1,
+            bgcolor: '#ffffff',
+            width: mapContainer.offsetWidth,
+            height: mapContainer.offsetHeight
+        });
+
+        // Restaurer les contrôles
+        if (zoomControl) zoomControl.style.display = '';
+        if (downloadControl) downloadControl.style.display = '';
+
+        // Télécharger l'image
+        const link = document.createElement('a');
+        link.download = `carte_${mapType}_${new Date().toISOString().slice(0,10)}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        console.log(`✅ Carte ${mapType} téléchargée`);
+    } catch (error) {
+        console.error('❌ Erreur lors du téléchargement de la carte:', error);
+        alert('Erreur lors de la génération de l\'image. Veuillez réessayer.');
+
+        // Restaurer les contrôles en cas d'erreur
+        const zoomControl = carte.getContainer().querySelector('.leaflet-control-zoom');
+        const downloadControl = carte.getContainer().querySelector('.leaflet-bar a[title="Télécharger la carte en PNG"]')?.parentElement;
+        if (zoomControl) zoomControl.style.display = '';
+        if (downloadControl) downloadControl.style.display = '';
+    }
+}
+
+// Fonction pour charger le réseau routier depuis les fichiers GeoJSON
+async function chargerReseauRoutier() {
+    // Vérifier si déjà chargé
+    if (routesGeojson.nationales && routesGeojson.departementales &&
+        routesGeojson.communales && routesGeojson.toutes) {
+        console.log('ℹ️ Réseau routier déjà en cache');
+        return routesGeojson;
+    }
+
+    console.log('📡 Chargement des réseaux routiers...');
+
+    const fichiers = {
+        nationales: 'routes_nationales.geojson',
+        departementales: 'routes_departementales.geojson',
+        communales: 'routes_communales.geojson',
+        toutes: 'routes_toutes.geojson'
+    };
+
+    try {
+        const promises = Object.entries(fichiers).map(async ([type, fichier]) => {
+            const response = await fetch(fichier);
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP pour ${fichier}: ${response.status}`);
+            }
+            const data = await response.json();
+            routesGeojson[type] = data;
+            console.log(`✅ Routes ${type} chargées: ${data.features.length} routes`);
+        });
+
+        await Promise.all(promises);
+        console.log('✅ Tous les réseaux routiers chargés');
+        return routesGeojson;
+    } catch (error) {
+        console.error('❌ Erreur lors du chargement du réseau routier:', error);
+        return null;
+    }
+}
+
+// Fonction pour ajouter le réseau routier sur une carte
+function ajouterReseauRoutier(carte, mapType) {
+    if (!routesGeojson.nationales || !routesGeojson.departementales ||
+        !routesGeojson.communales || !routesGeojson.toutes) {
+        console.warn('Réseau routier non chargé');
+        return;
+    }
+
+    // Initialiser les layers pour cette carte si nécessaire
+    if (!routesLayers[mapType]) {
+        routesLayers[mapType] = {};
+    }
+
+    // Créer un pane personnalisé pour les routes avec un z-index élevé
+    const paneName = 'routesPane';
+    if (!carte.getPane(paneName)) {
+        const pane = carte.createPane(paneName);
+        pane.style.zIndex = 450; // Au-dessus de overlayPane (400) mais sous les markers (600)
+        pane.style.pointerEvents = 'auto';
+    }
+
+    // Fonction helper pour créer une couche de routes
+    const creerCoucheRoute = (geojsonData) => {
+        if (!geojsonData) return null;
+
+        return L.geoJSON(geojsonData, {
+            pane: paneName,
+            style: {
+                color: '#ff0000',  // Rouge pour les routes
+                weight: 2,
+                opacity: 0.7
+            },
+            onEachFeature: (feature, layer) => {
+                if (feature.properties) {
+                    let popupContent = '<div style="font-family: Arial, sans-serif;">';
+
+                    if (feature.properties.num_route) {
+                        popupContent += `<strong>Route:</strong> ${feature.properties.num_route}<br>`;
+                    }
+                    if (feature.properties.class_adm) {
+                        popupContent += `<strong>Classification:</strong> ${feature.properties.class_adm}<br>`;
+                    }
+                    if (feature.properties.toponyme) {
+                        popupContent += `<strong>Nom:</strong> ${feature.properties.toponyme}<br>`;
+                    }
+
+                    popupContent += '</div>';
+                    layer.bindPopup(popupContent);
+                }
+            }
+        });
+    };
+
+    // Créer les couches pour chaque type
+    routesLayers[mapType] = {
+        nationales: creerCoucheRoute(routesGeojson.nationales),
+        departementales: creerCoucheRoute(routesGeojson.departementales),
+        communales: creerCoucheRoute(routesGeojson.communales),
+        toutes: creerCoucheRoute(routesGeojson.toutes)
+    };
+
+    // Ajouter les couches cochées par défaut (nationales et départementales)
+    mettreAJourAffichageRoutes(carte, mapType);
+
+    console.log(`✅ Réseau routier ajouté sur la carte ${mapType}`);
+}
+
+// Fonction pour mettre à jour l'affichage des routes selon les checkboxes
+function mettreAJourAffichageRoutes(carte, mapType) {
+    if (!routesLayers[mapType]) return;
+
+    const types = ['nationales', 'departementales', 'communales', 'toutes'];
+
+    types.forEach(type => {
+        const checkbox = document.getElementById(`checkbox-${type}`);
+        const layer = routesLayers[mapType][type];
+
+        if (!layer) return;
+
+        // Retirer la couche si elle existe
+        if (carte.hasLayer(layer)) {
+            carte.removeLayer(layer);
+        }
+
+        // L'ajouter si la checkbox est cochée
+        if (checkbox && checkbox.checked) {
+            layer.addTo(carte);
+        }
+    });
+}
 
 // Fonction pour générer dynamiquement les labels depuis les seuils
 function genererLabelsJenks(seuils) {
@@ -131,11 +521,35 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
             center: [42.0396, 9.0129],
             zoom: 8,
             zoomControl: true,
-            attributionControl: false
+            attributionControl: false,
+            zoomSnap: 0.1,       // Permet des zooms très fins par dixièmes
+            zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
         // Fond blanc au lieu de la carte OpenStreetMap
         cartes[type].getContainer().style.backgroundColor = '#ffffff';
+
+        // Ajouter le contrôle d'échelle avec style amélioré
+        const scaleControl = L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            imperial: false,
+            maxWidth: 200
+        }).addTo(cartes[type]);
+
+        // Améliorer le style de l'échelle pour la rendre plus visible
+        setTimeout(() => {
+            const scaleElement = cartes[type].getContainer().querySelector('.leaflet-control-scale');
+            if (scaleElement) {
+                scaleElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                scaleElement.style.padding = '4px 8px';
+                scaleElement.style.borderRadius = '4px';
+                scaleElement.style.border = '2px solid #333';
+                scaleElement.style.fontWeight = 'bold';
+                scaleElement.style.fontSize = '13px';
+                scaleElement.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            }
+        }, 100);
     }
 
     // Utiliser les seuils de Jenks pour ce type de carte (8 seuils = 7 classes)
@@ -207,6 +621,13 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
     };
 
     legendControls[type].addTo(cartes[type]);
+
+    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    ajouterReseauRoutier(cartes[type], type);
+    ajouterVillesPrincipales(cartes[type]);
+    ajouterRoseDesVents(cartes[type]);
+    ajouterLegendeTraits(cartes[type]);
+    ajouterBoutonTelechargement(cartes[type], type);
 }
 
 // Fonction principale pour afficher toutes les cartes
@@ -310,10 +731,34 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
             center: [42.0396, 9.0129],
             zoom: 8,
             zoomControl: true,
-            attributionControl: false
+            attributionControl: false,
+            zoomSnap: 0.1,       // Permet des zooms très fins par dixièmes
+            zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
+
+        // Ajouter le contrôle d'échelle avec style amélioré
+        L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            imperial: false,
+            maxWidth: 200
+        }).addTo(cartes[mapType]);
+
+        // Améliorer le style de l'échelle pour la rendre plus visible
+        setTimeout(() => {
+            const scaleElement = cartes[mapType].getContainer().querySelector('.leaflet-control-scale');
+            if (scaleElement) {
+                scaleElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                scaleElement.style.padding = '4px 8px';
+                scaleElement.style.borderRadius = '4px';
+                scaleElement.style.border = '2px solid #333';
+                scaleElement.style.fontWeight = 'bold';
+                scaleElement.style.fontSize = '13px';
+                scaleElement.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            }
+        }, 100);
     }
 
     // Palette de couleurs LISA
@@ -372,6 +817,13 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
     if (communesNonTrouvees.length > 0) {
         console.warn(`Communes non trouvées dans LISA ${seuil}:`, communesNonTrouvees.slice(0, 10));
     }
+
+    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    ajouterReseauRoutier(cartes[mapType], mapType);
+    ajouterVillesPrincipales(cartes[mapType]);
+    ajouterRoseDesVents(cartes[mapType]);
+    ajouterLegendeTraits(cartes[mapType]);
+    ajouterBoutonTelechargement(cartes[mapType], mapType);
 }
 
 // fonction pour surligner les contours d'une commune
@@ -442,10 +894,34 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
             center: [42.0396, 9.0129],
             zoom: 8,
             zoomControl: true,
-            attributionControl: false
+            attributionControl: false,
+            zoomSnap: 0.1,       // Permet des zooms très fins par dixièmes
+            zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
+
+        // Ajouter le contrôle d'échelle avec style amélioré
+        L.control.scale({
+            position: 'bottomleft',
+            metric: true,
+            imperial: false,
+            maxWidth: 200
+        }).addTo(cartes[mapType]);
+
+        // Améliorer le style de l'échelle pour la rendre plus visible
+        setTimeout(() => {
+            const scaleElement = cartes[mapType].getContainer().querySelector('.leaflet-control-scale');
+            if (scaleElement) {
+                scaleElement.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                scaleElement.style.padding = '4px 8px';
+                scaleElement.style.borderRadius = '4px';
+                scaleElement.style.border = '2px solid #333';
+                scaleElement.style.fontWeight = 'bold';
+                scaleElement.style.fontSize = '13px';
+                scaleElement.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            }
+        }, 100);
     }
 
     // Palette de couleurs CAH (jusqu'à 5 clusters)
@@ -541,6 +1017,13 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
         }
     }).addTo(cartes[mapType]);
 
+    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    ajouterReseauRoutier(cartes[mapType], mapType);
+    ajouterVillesPrincipales(cartes[mapType]);
+    ajouterRoseDesVents(cartes[mapType]);
+    ajouterLegendeTraits(cartes[mapType]);
+    ajouterBoutonTelechargement(cartes[mapType], mapType);
+
     console.log(`✅ Carte CAH ${nClusters} clusters affichée avec succès`);
 }
 
@@ -569,8 +1052,11 @@ function readFileAsText(file) {
       try {
         console.log("Chargement des fichiers...");
 
-        // 1. Charger les seuils Jenks en premier
-        await chargerSeuilsJenks();
+        // 1. Charger les seuils Jenks et le réseau routier en parallèle
+        await Promise.all([
+          chargerSeuilsJenks(),
+          chargerReseauRoutier()
+        ]);
 
         // 2. Lecture en parallèle des fichiers
         const [textJson, textGeo] = await Promise.all([
@@ -1395,6 +1881,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 graphView.style.display = 'block';
                 this.textContent = '🗺️ Voir la carte';
             }
+        });
+    }
+
+    // Event listeners pour les checkboxes de contrôle des routes
+    const routeCheckboxes = document.querySelectorAll('.route-checkbox');
+    routeCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Mettre à jour l'affichage des routes sur toutes les cartes
+            Object.keys(cartes).forEach(mapType => {
+                if (cartes[mapType]) {
+                    mettreAJourAffichageRoutes(cartes[mapType], mapType);
+                }
+            });
+        });
+    });
+
+    // Event listener pour la checkbox de langue
+    const englishCheckbox = document.getElementById('checkbox-english');
+    if (englishCheckbox) {
+        englishCheckbox.addEventListener('change', function() {
+            langueFrancais = !this.checked;
+            mettreAJourLegendes();
         });
     }
 });
