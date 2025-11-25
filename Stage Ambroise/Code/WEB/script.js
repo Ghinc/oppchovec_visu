@@ -14,7 +14,7 @@ let data_indicateursOriginaux = {}
         toutes: null
     }  // Données GeoJSON du réseau routier par type
     let routesLayers = {}  // Couches de routes pour chaque carte et type
-    let langueFrancais = true  // Langue par défaut : français
+    let langueFrancais = false  // Langue par défaut : anglais
 
 // Traductions
 const traductions = {
@@ -33,6 +33,19 @@ const traductions = {
             opp: "Score Opp",
             cho: "Score Cho",
             vec: "Score Vec"
+        },
+        ui: {
+            "commune-title": "2. Sélection commune",
+            "commune-select": "-- Sélectionner une commune --",
+            "commune-validate": "Valider",
+            "commune-info": "Informations de la commune sélectionnée :",
+            "routes-title": "3. Affichage des routes",
+            "routes-national": "Routes nationales (647)",
+            "routes-departmental": "Routes départementales (2654)",
+            "routes-municipal": "Routes communales (3686)",
+            "routes-all": "Toutes les routes (7002)",
+            "language-title": "4. Langue / Language",
+            "language-english": "Libellés en anglais"
         }
     },
     en: {
@@ -50,6 +63,19 @@ const traductions = {
             opp: "Opp score",
             cho: "Cho score",
             vec: "Liv score"
+        },
+        ui: {
+            "commune-title": "2. Municipality selection",
+            "commune-select": "-- Select a municipality --",
+            "commune-validate": "Validate",
+            "commune-info": "Selected municipality information:",
+            "routes-title": "3. Roads display",
+            "routes-national": "National roads (647)",
+            "routes-departmental": "Departmental roads (2654)",
+            "routes-municipal": "Municipal roads (3686)",
+            "routes-all": "All roads (7002)",
+            "language-title": "4. Language / Langue",
+            "language-english": "English labels"
         }
     }
 };
@@ -1490,7 +1516,7 @@ function ajouterLegendeCAH(carte, nClusters, cahData) {
 }
 
 
-// 1. Utilitaire qui transforme un FileReader en Promise de texte
+// 1. Utilitaire qui transforme un FileReader en Promise de texte (conservé pour compatibilité)
 function readFileAsText(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -1500,61 +1526,117 @@ function readFileAsText(file) {
   });
 }
 
+// Fonction de chargement automatique des fichiers
+async function chargerFichiersAutomatiquement() {
+  try {
+    console.log("🔄 Chargement automatique des fichiers...");
 
+    // 1. Charger les seuils Jenks et le réseau routier en parallèle
+    await Promise.all([
+      chargerSeuilsJenks(),
+      chargerReseauRoutier()
+    ]);
 
-    document.getElementById("validateBtn").addEventListener("click", async () => {
-      const fileJson    = document.getElementById("file").files[0];
-      const fileGeoJson = document.getElementById("file_geojson").files[0];
+    // 2. Chargement en parallèle des fichiers JSON et GeoJSON
+    const [responseJson, responseGeo] = await Promise.all([
+      fetch('data_scores_0_10.json'),
+      fetch('Commune_Corse.geojson')
+    ]);
 
-      if (!fileJson || !fileGeoJson) {
-        alert("Veuillez sélectionner à la fois un fichier JSON et un GeoJSON.");
-        return;
-      }
+    if (!responseJson.ok) {
+      throw new Error(`Erreur lors du chargement de data_scores_0_10.json: ${responseJson.status}`);
+    }
+    if (!responseGeo.ok) {
+      throw new Error(`Erreur lors du chargement de Commune_Corse.geojson: ${responseGeo.status}`);
+    }
 
-      try {
-        console.log("Chargement des fichiers...");
+    // 3. Parsing du JSON indicateurs
+    const dataIndicateurs = await responseJson.json();
+    data_indicateursOriginaux = dataIndicateurs;
+    console.log("✅ Fichier indicateurs chargé automatiquement:", dataIndicateurs);
 
-        // 1. Charger les seuils Jenks et le réseau routier en parallèle
-        await Promise.all([
-          chargerSeuilsJenks(),
-          chargerReseauRoutier()
-        ]);
+    // 4. Parsing et validation du GeoJSON
+    const geojsonData = await responseGeo.json();
+    if (geojsonData.type !== "FeatureCollection" || !Array.isArray(geojsonData.features)) {
+      throw new Error("Invalid GeoJSON : attendu un FeatureCollection avec un tableau 'features'.");
+    }
+    communeJson = geojsonData;
+    console.log("✅ GeoJSON communes chargé automatiquement:", geojsonData);
 
-        // 2. Lecture en parallèle des fichiers
-        const [textJson, textGeo] = await Promise.all([
-          readFileAsText(fileJson),
-          readFileAsText(fileGeoJson)
-        ]);
+    // 5. Charger les clusters LISA (5% et 1%)
+    const { clusters5pct, clusters1pct } = chargerClustersLISA();
+    clustersLISA5pct = clusters5pct;
+    clustersLISA1pct = clusters1pct;
+    console.log("✅ Clusters LISA 5% et 1% chargés");
 
-        // 3. Parsing du JSON indicateurs
-        const dataIndicateurs = JSON.parse(textJson);
-        data_indicateursOriginaux = dataIndicateurs;
-        console.log("✅ Fichier indicateurs chargé :", dataIndicateurs);
+    // 6. Suite du traitement
+    const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
+    populateCommuneSelect(data_indicateurs_dict);
+    console.log("✅ Chargement automatique terminé avec succès !");
 
-        // 4. Parsing et validation du GeoJSON
-        const geojsonData = JSON.parse(textGeo);
-        if (geojsonData.type !== "FeatureCollection" || !Array.isArray(geojsonData.features)) {
-          throw new Error("Invalid GeoJSON : attendu un FeatureCollection avec un tableau 'features'.");
-        }
-        communeJson = geojsonData;
-        console.log("✅ GeoJSON communes chargé :", geojsonData);
+  } catch (err) {
+    console.error("❌ Erreur lors du chargement automatique:", err);
+    alert("Erreur lors du chargement automatique des fichiers : " + err.message);
+  }
+}
 
-        // 5. Charger les clusters LISA (5% et 1%)
-        const { clusters5pct, clusters1pct } = chargerClustersLISA();
-        clustersLISA5pct = clusters5pct;
-        clustersLISA1pct = clusters1pct;
-        console.log("✅ Clusters LISA 5% et 1% chargés");
+// Lancer le chargement automatique au démarrage
+window.addEventListener('DOMContentLoaded', chargerFichiersAutomatiquement);
 
-        // 6. Suite du traitement
-        const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
-        populateCommuneSelect(data_indicateurs_dict);
-        alert("Validation réussie ! Veuillez sélectionner une commune.");
+// Conserver le bouton de validation manuel pour compatibilité (optionnel)
+document.getElementById("validateBtn").addEventListener("click", async () => {
+  const fileJson    = document.getElementById("file").files[0];
+  const fileGeoJson = document.getElementById("file_geojson").files[0];
 
-      } catch (err) {
-        alert("Erreur lors de la lecture ou du traitement : " + err.message);
-      }
+  if (!fileJson || !fileGeoJson) {
+    alert("Veuillez sélectionner à la fois un fichier JSON et un GeoJSON.");
+    return;
+  }
 
-  });
+  try {
+    console.log("Chargement manuel des fichiers...");
+
+    // 1. Charger les seuils Jenks et le réseau routier en parallèle
+    await Promise.all([
+      chargerSeuilsJenks(),
+      chargerReseauRoutier()
+    ]);
+
+    // 2. Lecture en parallèle des fichiers
+    const [textJson, textGeo] = await Promise.all([
+      readFileAsText(fileJson),
+      readFileAsText(fileGeoJson)
+    ]);
+
+    // 3. Parsing du JSON indicateurs
+    const dataIndicateurs = JSON.parse(textJson);
+    data_indicateursOriginaux = dataIndicateurs;
+    console.log("✅ Fichier indicateurs chargé :", dataIndicateurs);
+
+    // 4. Parsing et validation du GeoJSON
+    const geojsonData = JSON.parse(textGeo);
+    if (geojsonData.type !== "FeatureCollection" || !Array.isArray(geojsonData.features)) {
+      throw new Error("Invalid GeoJSON : attendu un FeatureCollection avec un tableau 'features'.");
+    }
+    communeJson = geojsonData;
+    console.log("✅ GeoJSON communes chargé :", geojsonData);
+
+    // 5. Charger les clusters LISA (5% et 1%)
+    const { clusters5pct, clusters1pct } = chargerClustersLISA();
+    clustersLISA5pct = clusters5pct;
+    clustersLISA1pct = clusters1pct;
+    console.log("✅ Clusters LISA 5% et 1% chargés");
+
+    // 6. Suite du traitement
+    const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
+    populateCommuneSelect(data_indicateurs_dict);
+    alert("Validation réussie ! Veuillez sélectionner une commune.");
+
+  } catch (err) {
+    alert("Erreur lors de la lecture ou du traitement : " + err.message);
+  }
+
+});
 
 
   document.getElementById("validerCommune").addEventListener("click", () => {
@@ -1915,7 +1997,7 @@ function ajusterValeur(indicateur, delta) {
 // fonction de rangement et de tri des communes pour la selection
   function populateCommuneSelect(data) {
     const select = document.getElementById("communeSelect");
-    select.innerHTML = '<option value="">-- Sélectionner une commune --</option>'; // reset
+    select.innerHTML = '<option value="">-- Select a municipality --</option>'; // reset
 
     // 🔤 Trier les noms de communes
     const communesTriees = Object.keys(data).sort((a, b) => a.localeCompare(b, 'fr'));
@@ -2359,14 +2441,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Fonction pour mettre à jour les traductions de l'interface
+    function mettreAJourTraductionsUI() {
+        const lang = langueFrancais ? 'fr' : 'en';
+        const uiTranslations = traductions[lang].ui;
+
+        // Mettre à jour tous les éléments avec data-translate
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (uiTranslations[key]) {
+                element.textContent = uiTranslations[key];
+            }
+        });
+
+        console.log(`Interface traduite en ${lang === 'fr' ? 'français' : 'anglais'}`);
+    }
+
     // Event listener pour la checkbox de langue
     const englishCheckbox = document.getElementById('checkbox-english');
     if (englishCheckbox) {
         englishCheckbox.addEventListener('change', function() {
             langueFrancais = !this.checked;
             mettreAJourLegendes();
+            mettreAJourTraductionsUI();
         });
     }
+
+    // Appliquer les traductions par défaut au chargement
+    mettreAJourTraductionsUI();
 });
 
 // ============================================
