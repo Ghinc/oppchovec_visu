@@ -27,6 +27,12 @@ const traductions = {
             opp: "Opp",
             cho: "Cho",
             vec: "Liv"
+        },
+        titresCartes: {
+            oppchovec: "OppChoLiv",
+            opp: "Score Opp",
+            cho: "Score Cho",
+            vec: "Score Vec"
         }
     },
     en: {
@@ -38,6 +44,12 @@ const traductions = {
             opp: "Opp",
             cho: "Cho",
             vec: "Liv"
+        },
+        titresCartes: {
+            oppchovec: "OppChoLiv score",
+            opp: "Opp score",
+            cho: "Cho score",
+            vec: "Liv score"
         }
     }
 };
@@ -284,6 +296,28 @@ function mettreAJourLegendes() {
         }
     });
 
+    // Mettre à jour les titres des cartes choroplèthes (OppChoLiv, Opp, Cho, Vec)
+    document.querySelectorAll('.info.legend').forEach(legendeDiv => {
+        // Ignorer les légendes LISA et CAH
+        if (legendeDiv.querySelector('.legende-lisa') || legendeDiv.querySelector('.legende-cah')) {
+            return;
+        }
+
+        // Trouver le titre (élément strong)
+        const strongEl = legendeDiv.querySelector('strong');
+        if (strongEl) {
+            const currentText = strongEl.textContent;
+            // Identifier le type de carte par son contenu actuel
+            for (const type in traductions.fr.titresCartes) {
+                if (currentText === traductions.fr.titresCartes[type] ||
+                    currentText === traductions.en.titresCartes[type]) {
+                    strongEl.textContent = traductions[lang].titresCartes[type];
+                    break;
+                }
+            }
+        }
+    });
+
     // Mettre à jour les autres légendes
     document.querySelectorAll('.legende-titre').forEach(el => {
         if (!el.closest('.legende-lisa') && !el.closest('.legende-cah')) {
@@ -329,37 +363,207 @@ function ajouterBoutonTelechargement(carte, mapType) {
     downloadControl.addTo(carte);
 }
 
+// Fonction pour recadrer une image en supprimant les bords blancs
+async function recadrerImageBlancs(dataUrl, useJpeg = false) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Dessiner l'image sur un canvas temporaire
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            // Obtenir les données de pixels
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+
+            // Détecter les limites non-blanches (avec marge de tolérance)
+            let top = 0, bottom = canvas.height, left = 0, right = canvas.width;
+            const threshold = 250; // Seuil pour considérer un pixel comme "blanc"
+
+            // Trouver le bord supérieur
+            for (let y = 0; y < canvas.height; y++) {
+                let hasContent = false;
+                for (let x = 0; x < canvas.width; x++) {
+                    const idx = (y * canvas.width + x) * 4;
+                    if (data[idx] < threshold || data[idx+1] < threshold || data[idx+2] < threshold) {
+                        hasContent = true;
+                        break;
+                    }
+                }
+                if (hasContent) {
+                    top = Math.max(0, y - 20); // Marge de 20px
+                    break;
+                }
+            }
+
+            // Trouver le bord inférieur
+            for (let y = canvas.height - 1; y >= 0; y--) {
+                let hasContent = false;
+                for (let x = 0; x < canvas.width; x++) {
+                    const idx = (y * canvas.width + x) * 4;
+                    if (data[idx] < threshold || data[idx+1] < threshold || data[idx+2] < threshold) {
+                        hasContent = true;
+                        break;
+                    }
+                }
+                if (hasContent) {
+                    bottom = Math.min(canvas.height, y + 20); // Marge de 20px
+                    break;
+                }
+            }
+
+            // Trouver le bord gauche
+            for (let x = 0; x < canvas.width; x++) {
+                let hasContent = false;
+                for (let y = 0; y < canvas.height; y++) {
+                    const idx = (y * canvas.width + x) * 4;
+                    if (data[idx] < threshold || data[idx+1] < threshold || data[idx+2] < threshold) {
+                        hasContent = true;
+                        break;
+                    }
+                }
+                if (hasContent) {
+                    left = Math.max(0, x - 20); // Marge de 20px
+                    break;
+                }
+            }
+
+            // Trouver le bord droit
+            for (let x = canvas.width - 1; x >= 0; x--) {
+                let hasContent = false;
+                for (let y = 0; y < canvas.height; y++) {
+                    const idx = (y * canvas.width + x) * 4;
+                    if (data[idx] < threshold || data[idx+1] < threshold || data[idx+2] < threshold) {
+                        hasContent = true;
+                        break;
+                    }
+                }
+                if (hasContent) {
+                    right = Math.min(canvas.width, x + 20); // Marge de 20px
+                    break;
+                }
+            }
+
+            // Créer un nouveau canvas avec les dimensions recadrées
+            const croppedWidth = right - left;
+            const croppedHeight = bottom - top;
+            const croppedCanvas = document.createElement('canvas');
+            croppedCanvas.width = croppedWidth;
+            croppedCanvas.height = croppedHeight;
+            const croppedCtx = croppedCanvas.getContext('2d');
+
+            // Remplir avec un fond blanc pour JPEG (JPEG ne supporte pas la transparence)
+            if (useJpeg) {
+                croppedCtx.fillStyle = '#ffffff';
+                croppedCtx.fillRect(0, 0, croppedWidth, croppedHeight);
+            }
+
+            // Copier la zone recadrée
+            croppedCtx.drawImage(canvas, left, top, croppedWidth, croppedHeight, 0, 0, croppedWidth, croppedHeight);
+
+            // Retourner la nouvelle dataURL en JPEG haute qualité (0.95) ou PNG
+            if (useJpeg) {
+                resolve(croppedCanvas.toDataURL('image/jpeg', 0.95)); // 0.95 = 95% qualité (très haute qualité)
+            } else {
+                resolve(croppedCanvas.toDataURL('image/png'));
+            }
+        };
+        img.onerror = reject;
+        img.src = dataUrl;
+    });
+}
+
 // Fonction pour télécharger la carte en PNG
 async function telechargerCarte(carte, mapType) {
     try {
-        // Masquer temporairement les contrôles de zoom
+        // Masquer temporairement les contrôles de zoom et download
         const zoomControl = carte.getContainer().querySelector('.leaflet-control-zoom');
         const downloadControl = carte.getContainer().querySelector('.leaflet-bar a[title="Télécharger la carte en PNG"]')?.parentElement;
 
         if (zoomControl) zoomControl.style.display = 'none';
         if (downloadControl) downloadControl.style.display = 'none';
 
-        // Attendre un peu pour que les changements soient appliqués
-        await new Promise(resolve => setTimeout(resolve, 200));
-
-        // Capturer la carte avec dom-to-image
+        // Sauvegarder et déplacer temporairement les contrôles vers le centre
         const mapContainer = carte.getContainer();
 
+        // Rose des vents (compass) - déplacer vers la droite uniquement
+        const compass = mapContainer.querySelector('.rose-des-vents');
+        const compassOriginalLeft = compass?.style.left || '';
+        const compassOriginalTop = compass?.style.top || '';
+        if (compass) {
+            compass.style.left = '120px';  // Translation vers la droite
+            // On garde le top original (pas de déplacement vertical)
+        }
+
+        // Échelle (scale) - déplacer vers la droite uniquement (garder en bas)
+        const scale = mapContainer.querySelector('.leaflet-control-scale');
+        const scaleOriginalLeft = scale?.style.left || '';
+        const scaleOriginalBottom = scale?.style.bottom || '';
+        if (scale) {
+            scale.style.left = '120px';  // Translation vers la droite
+            // On garde le bottom original (reste en bas)
+        }
+
+        // Légendes (bottom-right)
+        const legends = mapContainer.querySelectorAll('.leaflet-bottom.leaflet-right .leaflet-control');
+        const legendsOriginalPositions = [];
+        legends.forEach(legend => {
+            legendsOriginalPositions.push({
+                element: legend,
+                right: legend.style.right || '',
+                bottom: legend.style.bottom || ''
+            });
+            legend.style.right = '80px';
+        });
+
+        // Attendre un peu pour que les changements soient appliqués
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        // Capturer la carte en haute résolution (300 DPI pour publication)
+        // Multiplier par un facteur de 3.125 pour obtenir 300 DPI (96 DPI de base × 3.125 ≈ 300 DPI)
+        const scaleFactor = 3.125;
         const dataUrl = await domtoimage.toPng(mapContainer, {
             quality: 1,
             bgcolor: '#ffffff',
-            width: mapContainer.offsetWidth,
-            height: mapContainer.offsetHeight
+            width: mapContainer.offsetWidth * scaleFactor,
+            height: mapContainer.offsetHeight * scaleFactor,
+            style: {
+                transform: `scale(${scaleFactor})`,
+                transformOrigin: 'top left',
+                width: mapContainer.offsetWidth + 'px',
+                height: mapContainer.offsetHeight + 'px'
+            }
         });
 
-        // Restaurer les contrôles
+        // Restaurer les positions originales des contrôles
+        if (compass) {
+            compass.style.left = compassOriginalLeft;
+            compass.style.top = compassOriginalTop;
+        }
+        if (scale) {
+            scale.style.left = scaleOriginalLeft;
+            scale.style.bottom = scaleOriginalBottom;
+        }
+        legendsOriginalPositions.forEach(({ element, right, bottom }) => {
+            element.style.right = right;
+            element.style.bottom = bottom;
+        });
+
+        // Restaurer les contrôles de zoom et download
         if (zoomControl) zoomControl.style.display = '';
         if (downloadControl) downloadControl.style.display = '';
 
-        // Télécharger l'image
+        // Recadrer l'image et convertir en JPEG haute qualité
+        const croppedDataUrl = await recadrerImageBlancs(dataUrl, true); // true = JPEG
+
+        // Télécharger l'image recadrée en JPEG
         const link = document.createElement('a');
-        link.download = `carte_${mapType}_${new Date().toISOString().slice(0,10)}.png`;
-        link.href = dataUrl;
+        link.download = `carte_${mapType}_${new Date().toISOString().slice(0,10)}.jpg`;
+        link.href = croppedDataUrl;
         link.click();
 
         console.log(`✅ Carte ${mapType} téléchargée`);
@@ -586,6 +790,19 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         // Fond blanc au lieu de la carte OpenStreetMap
         cartes[type].getContainer().style.backgroundColor = '#ffffff';
 
+        // Synchroniser le zoom avec toutes les autres cartes
+        cartes[type].on('zoomend', function() {
+            const currentZoom = cartes[type].getZoom();
+            const currentCenter = cartes[type].getCenter();
+
+            // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            for (const mapKey in cartes) {
+                if (cartes[mapKey] && mapKey !== type) {
+                    cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                }
+            }
+        });
+
         // Ajouter le contrôle d'échelle avec style amélioré
         const scaleControl = L.control.scale({
             position: 'bottomleft',
@@ -665,8 +882,13 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         // Générer les labels dynamiquement depuis les seuils
         const labels = genererLabelsJenks(seuils);
 
-        div.innerHTML += `<strong>${titre}</strong><br>`;
-        div.innerHTML += `<small style="color: #666;">Échelle 0-10 (Jenks)</small><br><br>`;
+        // Utiliser les traductions pour le titre selon la langue
+        const lang = langueFrancais ? 'fr' : 'en';
+        const titreFinal = traductions[lang].titresCartes[type] || titre;
+        const sousTitre = lang === 'fr' ? 'Échelle 0-10' : '0–10 scale';
+
+        div.innerHTML += `<strong>${titreFinal}</strong><br>`;
+        div.innerHTML += `<small style="color: #666;">${sousTitre}</small><br><br>`;
 
         for (let i = 0; i < colorsJenks.length; i++) {
             div.innerHTML +=
@@ -794,6 +1016,19 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
         });
 
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
+
+        // Synchroniser le zoom avec toutes les autres cartes
+        cartes[mapType].on('zoomend', function() {
+            const currentZoom = cartes[mapType].getZoom();
+            const currentCenter = cartes[mapType].getCenter();
+
+            // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            for (const mapKey in cartes) {
+                if (cartes[mapKey] && mapKey !== mapType) {
+                    cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                }
+            }
+        });
 
         // Ajouter le contrôle d'échelle avec style amélioré
         L.control.scale({
@@ -998,6 +1233,19 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
 
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
 
+        // Synchroniser le zoom avec toutes les autres cartes
+        cartes[mapType].on('zoomend', function() {
+            const currentZoom = cartes[mapType].getZoom();
+            const currentCenter = cartes[mapType].getCenter();
+
+            // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            for (const mapKey in cartes) {
+                if (cartes[mapKey] && mapKey !== mapType) {
+                    cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                }
+            }
+        });
+
         // Ajouter le contrôle d'échelle avec style amélioré
         L.control.scale({
             position: 'bottomleft',
@@ -1024,7 +1272,7 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
     // Palette de couleurs CAH (jusqu'à 5 clusters)
     const colorsCAH = {
         1: '#917648',  // Marron - Cluster 1
-        2: '#eee0ba',  // Beige - Cluster 2
+        2: '#9e9e9e',  // Gris - Cluster 2
         3: '#61e75c',  // Vert - Cluster 3
         4: '#de7eed',  // Violet - Cluster 4
         5: '#f4b474'   // Orange - Cluster 5
@@ -1136,7 +1384,7 @@ function ajouterLegendeCAH(carte, nClusters, cahData) {
         // Palette de couleurs CAH
         const colorsCAH = {
             1: '#917648',  // Marron
-            2: '#eee0ba',  // Beige
+            2: '#9e9e9e',  // Gris
             3: '#61e75c',  // Vert
             4: '#de7eed',  // Violet
             5: '#f4b474'   // Orange
@@ -1160,7 +1408,7 @@ function ajouterLegendeCAH(carte, nClusters, cahData) {
                         <span style="display: inline-block; width: 18px; height: 18px; background-color: ${colorsCAH[cluster]}; border: 1px solid #333; margin-right: 8px;"></span>
                         <span style="font-size: 12px;">
                             <strong>Cluster ${cluster}</strong>
-                            ${clustersCount[cluster] ? `<span style="font-size: 11px; color: #555;"> (${clustersCount[cluster]} ${lang === 'fr' ? 'communes' : 'municipalities'})</span>` : ''}
+                            ${clustersCount[cluster] ? `<span style="font-size: 11px; color: #555;"> (${clustersCount[cluster]} communes)</span>` : ''}
                         </span>
                     </div>
                 `).join('')}
