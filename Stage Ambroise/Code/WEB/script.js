@@ -85,11 +85,12 @@ const traductions = {
         'cah-3': null,
         'cah-5': null
     };
-    let communeLayers = {};
+    let communeLayers = {};  // Format: { 'mapType': { 'CommuneName': layer } }
     let comparaisonEnCours = null;
     let Dejasurligner = [];
     let lisaCartesInitialisees = false;  // Flag pour l'initialisation lazy des cartes LISA
     let cahCartesInitialisees = false;  // Flag pour l'initialisation lazy des cartes CAH
+    let isSyncing = false;  // Flag pour éviter les boucles infinies de synchronisation
 
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
@@ -791,16 +792,32 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         cartes[type].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
-        cartes[type].on('zoomend', function() {
+        cartes[type].on('zoomend moveend', function() {
+            if (isSyncing) {
+                console.log(`[${type}] Synchronisation ignorée (isSyncing = true)`);
+                return;  // Éviter les boucles infinies
+            }
+
+            console.log(`[${type}] Début synchronisation - zoom: ${cartes[type].getZoom()}, center:`, cartes[type].getCenter());
+            isSyncing = true;
             const currentZoom = cartes[type].getZoom();
             const currentCenter = cartes[type].getCenter();
 
             // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            let cartesSync = 0;
             for (const mapKey in cartes) {
                 if (cartes[mapKey] && mapKey !== type) {
+                    console.log(`  -> Synchronisation de ${mapKey}`);
                     cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                    cartesSync++;
                 }
             }
+            console.log(`[${type}] ${cartesSync} cartes synchronisées`);
+
+            setTimeout(() => {
+                isSyncing = false;
+                console.log(`[${type}] isSyncing remis à false`);
+            }, 100);
         });
 
         // Ajouter le contrôle d'échelle avec style amélioré
@@ -865,10 +882,11 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         onEachFeature: (feature, layer) => {
             const name = feature.properties.nom;
             const val = indicateursDict[name];
-            // Sauvegarder chaque couche par nom (pour la carte principale seulement)
-            if (type === 'oppchovec') {
-                communeLayers[name] = layer;
+            // Sauvegarder chaque couche par type de carte et nom de commune
+            if (!communeLayers[type]) {
+                communeLayers[type] = {};
             }
+            communeLayers[type][name] = layer;
             layer.bindPopup(`<strong>${name}</strong><br>${titre}: ${val !== undefined ? val.toFixed(2) : 'N/A'}/10`);
         }
     }).addTo(cartes[type]);
@@ -1018,16 +1036,32 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
-        cartes[mapType].on('zoomend', function() {
+        cartes[mapType].on('zoomend moveend', function() {
+            if (isSyncing) {
+                console.log(`[${mapType}] Synchronisation ignorée (isSyncing = true)`);
+                return;  // Éviter les boucles infinies
+            }
+
+            console.log(`[${mapType}] Début synchronisation - zoom: ${cartes[mapType].getZoom()}, center:`, cartes[mapType].getCenter());
+            isSyncing = true;
             const currentZoom = cartes[mapType].getZoom();
             const currentCenter = cartes[mapType].getCenter();
 
             // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            let cartesSync = 0;
             for (const mapKey in cartes) {
                 if (cartes[mapKey] && mapKey !== mapType) {
+                    console.log(`  -> Synchronisation de ${mapKey}`);
                     cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                    cartesSync++;
                 }
             }
+            console.log(`[${mapType}] ${cartesSync} cartes synchronisées`);
+
+            setTimeout(() => {
+                isSyncing = false;
+                console.log(`[${mapType}] isSyncing remis à false`);
+            }, 100);
         });
 
         // Ajouter le contrôle d'échelle avec style amélioré
@@ -1095,6 +1129,12 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
             const cluster = clustersLISA[name] || 'Non significatif';
             const val = indiceFinal[name];
 
+            // Sauvegarder chaque couche par type de carte et nom de commune
+            if (!communeLayers[mapType]) {
+                communeLayers[mapType] = {};
+            }
+            communeLayers[mapType][name] = layer;
+
             // Créer un popup informatif
             let popupHTML = `<strong>${name}</strong><br>`;
             popupHTML += `<strong>Cluster LISA (${seuil}):</strong> ${cluster}<br>`;
@@ -1158,32 +1198,38 @@ function ajouterLegendeLISA(carte, seuil) {
     legendeControl.addTo(carte);
 }
 
-// fonction pour surligner les contours d'une commune
+// fonction pour surligner les contours d'une commune sur toutes les cartes
 function surlignerCommune(nomCommune, couleur = "orange") {
-    const layer = communeLayers[nomCommune];
-    if (layer) {
-        layer.setStyle({
-            color: couleur,
-            weight: 3,
-            fillOpacity: 0.7
-        });
-        layer.bringToFront();
+    // Parcourir tous les types de cartes
+    for (const mapType in communeLayers) {
+        if (communeLayers[mapType] && communeLayers[mapType][nomCommune]) {
+            const layer = communeLayers[mapType][nomCommune];
+            layer.setStyle({
+                color: couleur,
+                weight: 3,
+                fillOpacity: 0.7
+            });
+            layer.bringToFront();
+        }
     }
     Dejasurligner.push(nomCommune)
-    console.log(Dejasurligner)
+    console.log("Commune surlignée:", nomCommune, "Couleur:", couleur)
 }
 
-// fonction pour réinitialiser le surlignement d'une commune
+// fonction pour réinitialiser le surlignement d'une commune sur toutes les cartes
 function reinitialiserStyleCommune(nomCommune, indicateursDict) {
-    const layer = communeLayers[nomCommune];
-    if (layer) {
-        layer.setStyle({
-            color: "#ffffff",
-            weight: 1,
-            fillOpacity: 0.7
-        });
-        layer.bringToFront();
+    // Parcourir tous les types de cartes
+    for (const mapType in communeLayers) {
+        if (communeLayers[mapType] && communeLayers[mapType][nomCommune]) {
+            const layer = communeLayers[mapType][nomCommune];
+            layer.setStyle({
+                color: "#000000",  // Noir comme défini dans le style par défaut
+                weight: 1,
+                fillOpacity: 0.7
+            });
+        }
     }
+    console.log("Style réinitialisé pour:", nomCommune)
 }
 
 // ============================================
@@ -1234,16 +1280,32 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
         cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
-        cartes[mapType].on('zoomend', function() {
+        cartes[mapType].on('zoomend moveend', function() {
+            if (isSyncing) {
+                console.log(`[${mapType}] Synchronisation ignorée (isSyncing = true)`);
+                return;  // Éviter les boucles infinies
+            }
+
+            console.log(`[${mapType}] Début synchronisation - zoom: ${cartes[mapType].getZoom()}, center:`, cartes[mapType].getCenter());
+            isSyncing = true;
             const currentZoom = cartes[mapType].getZoom();
             const currentCenter = cartes[mapType].getCenter();
 
             // Mettre à jour toutes les autres cartes avec le même zoom et centre
+            let cartesSync = 0;
             for (const mapKey in cartes) {
                 if (cartes[mapKey] && mapKey !== mapType) {
+                    console.log(`  -> Synchronisation de ${mapKey}`);
                     cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                    cartesSync++;
                 }
             }
+            console.log(`[${mapType}] ${cartesSync} cartes synchronisées`);
+
+            setTimeout(() => {
+                isSyncing = false;
+                console.log(`[${mapType}] isSyncing remis à false`);
+            }, 100);
         });
 
         // Ajouter le contrôle d'échelle avec style amélioré
@@ -1316,8 +1378,11 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
             const nomCommune = feature.properties.nom?.trim();
             const clusterInfo = cahData.clusters?.[nomCommune];
 
-            // Enregistrer la couche pour pouvoir la manipuler plus tard
-            communeLayers[nomCommune] = layer;
+            // Enregistrer la couche par type de carte et nom de commune
+            if (!communeLayers[mapType]) {
+                communeLayers[mapType] = {};
+            }
+            communeLayers[mapType][nomCommune] = layer;
 
             // Contenu du popup
             let popupContent = `<div style="font-family: Arial, sans-serif;">
