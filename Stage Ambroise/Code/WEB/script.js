@@ -1,3 +1,6 @@
+// Chemin de base pour les fichiers (vide si à la racine, sinon "Stage Ambroise/Code/WEB/")
+const BASE_PATH = 'Stage Ambroise/Code/WEB/';
+
 let data_indicateursOriginaux = {}
     let indiceFinale = {}
     let scoresParCommune = {}
@@ -618,10 +621,10 @@ async function chargerReseauRoutier() {
     console.log('📡 Chargement des réseaux routiers...');
 
     const fichiers = {
-        nationales: 'routes_nationales.geojson',
-        departementales: 'routes_departementales.geojson',
-        communales: 'routes_communales.geojson',
-        toutes: 'routes_toutes.geojson'
+        nationales: BASE_PATH + 'routes_nationales.geojson',
+        departementales: BASE_PATH + 'routes_departementales.geojson',
+        communales: BASE_PATH + 'routes_communales.geojson',
+        toutes: BASE_PATH + 'routes_toutes.geojson'
     };
 
     try {
@@ -763,7 +766,7 @@ function genererLabelsJenks(seuils) {
 // Fonction pour charger les seuils Jenks depuis le fichier JSON
 async function chargerSeuilsJenks() {
     try {
-        const response = await fetch('seuils_jenks_optimal_gvf.json');
+        const response = await fetch(BASE_PATH + 'seuils_jenks_optimal_gvf.json');
         if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status}`);
         }
@@ -1539,8 +1542,8 @@ async function chargerFichiersAutomatiquement() {
 
     // 2. Chargement en parallèle des fichiers JSON et GeoJSON
     const [responseJson, responseGeo] = await Promise.all([
-      fetch('data_scores_0_10.json'),
-      fetch('Commune_Corse.geojson')
+      fetch(BASE_PATH + 'data_scores_0_10.json'),
+      fetch(BASE_PATH + 'Commune_Corse.geojson')
     ]);
 
     if (!responseJson.ok) {
