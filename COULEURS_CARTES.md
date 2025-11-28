@@ -7,7 +7,7 @@ Ce document récapitule tous les endroits où les couleurs des cartes sont défi
 ## 📍 Localisation des définitions de couleurs
 
 ### 1. **Cartes OppChoLiv, Opp, Cho, Liv** (Cartes choroplèthes avec Jenks)
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Ligne:** ~92
 
 ```javascript
@@ -30,7 +30,7 @@ const colorsJenks = ["#bbdefb", "#64b5f6", "#9c27b0", "#7b1fa2", "#4a148c"];
 ---
 
 ### 2. **Cartes LISA** (Local Indicators of Spatial Association)
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Ligne:** ~802
 
 ```javascript
@@ -69,7 +69,7 @@ const categories = [
 ---
 
 ### 3. **Cartes CAH** (Classification Hiérarchique Ascendante)
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Ligne:** ~1017
 
 ```javascript
@@ -109,7 +109,7 @@ const colorsCAH = {
 ---
 
 ### 4. **Routes principales**
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Ligne:** ~372
 
 ```javascript
@@ -135,7 +135,7 @@ const creerCoucheRoute = (geojsonData) => {
 ---
 
 ### 5. **Limites des communes**
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Lignes:** ~470, 603, 738, 893, 1036
 
 ```javascript
@@ -164,7 +164,7 @@ const creerCoucheRoute = (geojsonData) => {
 ---
 
 ### 6. **Villes principales**
-**Fichier:** `Stage Ambroise/Code/WEB/script.js`
+**Fichier:** `stage_ambroise/Code/WEB/script.js`
 **Lignes:** ~125-159
 
 ```javascript

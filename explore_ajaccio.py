@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Charger les données
-df = pd.read_parquet(r'Stage Ambroise\Données\RP2022_logemt.parquet')
+df = pd.read_parquet(r'stage_ambroise\Données\RP2022_logemt.parquet')
 
 # Chercher Ajaccio avec différents codes possibles
 ajaccio_codes = ['2A004', '20004']

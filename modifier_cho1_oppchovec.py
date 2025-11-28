@@ -6,10 +6,10 @@ import numpy as np
 # ==============================================================================
 
 # Charger l'ancien fichier Cho1
-df_cho1 = pd.read_excel(r'Stage Ambroise\Données\Corse_Commune\Cho1.xlsx')
+df_cho1 = pd.read_excel(r'stage_ambroise\Données\Corse_Commune\Cho1.xlsx')
 
 # Charger les données de personnes par ville
-df_inper = pd.read_csv(r'Stage Ambroise\Données\inper_quartiers_prioritaires_par_ville.csv', sep=';')
+df_inper = pd.read_csv(r'stage_ambroise\Données\inper_quartiers_prioritaires_par_ville.csv', sep=';')
 
 # Créer un mapping code_commune -> nb_personnes
 mapping_personnes = dict(zip(df_inper['Code_Commune'], df_inper['Nb_Personnes_Quartiers_Prioritaires']))
@@ -51,7 +51,7 @@ for _, row in df_cho1.iterrows():
         print("-"*70)
 
 # Sauvegarder le nouveau fichier
-output_file = r'Stage Ambroise\Données\Corse_Commune\Cho1_personnes.xlsx'
+output_file = r'stage_ambroise\Données\Corse_Commune\Cho1_personnes.xlsx'
 df_cho1.to_excel(output_file, index=False)
 
 print(f"\nFichier sauvegardé: {output_file}")

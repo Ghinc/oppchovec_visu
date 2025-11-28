@@ -13,7 +13,7 @@ from typing import Dict, List, Tuple
 import sys
 
 # Ajouter le répertoire du script oppchovec.py au path
-sys.path.insert(0, str(Path(__file__).parent / "Stage Ambroise/Code/Python"))
+sys.path.insert(0, str(Path(__file__).parent / "stage_ambroise/Code/Python"))
 
 # Importer les fonctions de calcul et constantes depuis oppchovec.py
 from oppchovec import (

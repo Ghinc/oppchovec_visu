@@ -1,5 +1,5 @@
 import sys
-sys.path.append('Stage Ambroise/Code/Python')
+sys.path.append('stage_ambroise/Code/Python')
 
 from oppchovec import calc_cho1, charger_donnees_commune, calculer_indicateurs
 import pandas as pd

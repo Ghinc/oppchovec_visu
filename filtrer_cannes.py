@@ -3,8 +3,8 @@ import pyarrow.parquet as pq
 import pyarrow as pa
 
 # Paramètres
-input_file = r'Stage Ambroise\Données\RP2022_logemt.parquet'
-output_file = r'Stage Ambroise\Données\RP2022_logemt_Cannes.parquet'
+input_file = r'stage_ambroise\Données\RP2022_logemt.parquet'
+output_file = r'stage_ambroise\Données\RP2022_logemt_Cannes.parquet'
 code_iris = '2A0040901'
 
 print(f"Lecture du fichier source...")

@@ -25,7 +25,15 @@
       "Bash(del nul)",
       "Bash(del \"Stage Ambroise\\nul\")",
       "Bash(rm:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(git commit:*)",
+      "Bash(SHAPE_RESTORE_SHX=YES python:*)",
+      "Bash(netstat:*)",
+      "Bash(timeout 2 bash:*)",
+      "Bash(git push:*)",
+      "Bash(curl:*)",
+      "Bash(ren:*)",
+      "Bash(del analyze_notebook_paths.py analyze_all_paths.py find_and_fix_paths.py deep_search_notebook.py)"
     ],
     "deny": [],
     "ask": []

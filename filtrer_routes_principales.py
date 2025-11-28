@@ -9,8 +9,8 @@ import geopandas as gpd
 import os
 
 # Configuration
-input_file = "Stage Ambroise/Code/WEB/routes.geojson"
-output_file = "Stage Ambroise/Code/WEB/routes.geojson"
+input_file = "stage_ambroise/Code/WEB/routes.geojson"
+output_file = "stage_ambroise/Code/WEB/routes.geojson"
 seuil_longueur_km = 1.0  # Longueur minimale en km
 
 print(f"Chargement du reseau routier depuis {input_file}...")

@@ -1,5 +1,5 @@
 # ============================================
-# GITIGNORE - Stage Ambroise
+# GITIGNORE - stage_ambroise
 # ============================================
 
 # ============================================
@@ -37,13 +37,13 @@
 # ============================================
 
 # Dossier OUTPUT et ses sous-dossiers
-Stage Ambroise/Code/OUTPUT/**
-!Stage Ambroise/Code/OUTPUT/.gitkeep
+stage_ambroise/Code/OUTPUT/**
+!stage_ambroise/Code/OUTPUT/.gitkeep
 
 # Fichiers d'export
-Stage Ambroise/Code/OUTPUT/export_lise_cah/**
-Stage Ambroise/Code/OUTPUT/export_lise_3d/**
-Stage Ambroise/Code/OUTPUT/communes_chatbot/**
+stage_ambroise/Code/OUTPUT/export_lise_cah/**
+stage_ambroise/Code/OUTPUT/export_lise_3d/**
+stage_ambroise/Code/OUTPUT/communes_chatbot/**
 
 # Images générées
 *.png
@@ -51,8 +51,8 @@ Stage Ambroise/Code/OUTPUT/communes_chatbot/**
 *.jpeg
 *.gif
 *.svg
-!Stage Ambroise/Code/WEB/cah_3_clusters_ecarts.png
-!Stage Ambroise/Code/WEB/cah_5_clusters_ecarts.png
+!stage_ambroise/Code/WEB/cah_3_clusters_ecarts.png
+!stage_ambroise/Code/WEB/cah_5_clusters_ecarts.png
 
 # Fichiers PDF
 *.pdf
@@ -62,11 +62,11 @@ Stage Ambroise/Code/OUTPUT/communes_chatbot/**
 # ============================================
 
 # Dossiers d'archives
-Stage Ambroise/Code/Archive/**
-Stage Ambroise/Code/Python/Archive_anciennes_normalisations/**
-Stage Ambroise/Code/Python/Excel_doublons/**
-Stage Ambroise/Code/Python/Donnees_obsoletes/**
-Stage Ambroise/Code/WEB/archive/**
+stage_ambroise/Code/Archive/**
+stage_ambroise/Code/Python/Archive_anciennes_normalisations/**
+stage_ambroise/Code/Python/Excel_doublons/**
+stage_ambroise/Code/Python/Donnees_obsoletes/**
+stage_ambroise/Code/WEB/archive/**
 
 # Fichiers de backup
 *.bak
@@ -183,17 +183,17 @@ config.secret.*
 # ============================================
 
 # Fichiers JSON de configuration essentiels (garder les petits fichiers)
-!Stage Ambroise/Code/WEB/data_scores_0_10.json
-!Stage Ambroise/Code/WEB/donnees_completes_communes.json
-!Stage Ambroise/Code/WEB/lisa_data.js
-!Stage Ambroise/Code/WEB/lisa_data_1pct.js
-!Stage Ambroise/Code/WEB/cah_data.js
-!Stage Ambroise/Code/WEB/cah_3_clusters.json
-!Stage Ambroise/Code/WEB/cah_5_clusters.json
-!Stage Ambroise/Données/data_indicateurs.json
+!stage_ambroise/Code/WEB/data_scores_0_10.json
+!stage_ambroise/Code/WEB/donnees_completes_communes.json
+!stage_ambroise/Code/WEB/lisa_data.js
+!stage_ambroise/Code/WEB/lisa_data_1pct.js
+!stage_ambroise/Code/WEB/cah_data.js
+!stage_ambroise/Code/WEB/cah_3_clusters.json
+!stage_ambroise/Code/WEB/cah_5_clusters.json
+!stage_ambroise/Données/data_indicateurs.json
 
 # Fichiers GeoJSON essentiels
-!Stage Ambroise/Code/WEB/routes.geojson
+!stage_ambroise/Code/WEB/routes.geojson
 
 # Fichiers essentiels du projet
 !README.md

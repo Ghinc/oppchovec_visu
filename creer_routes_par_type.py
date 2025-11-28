@@ -17,8 +17,8 @@ if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
 # Configuration
-input_file = "Stage Ambroise/Données/reseau-routier-de-corse.shp"
-output_dir = "Stage Ambroise/Code/WEB"
+input_file = "stage_ambroise/Données/reseau-routier-de-corse.shp"
+output_dir = "stage_ambroise/Code/WEB"
 
 print(f"Chargement du reseau routier depuis {input_file}...")
 routes = gpd.read_file(input_file)
@@ -47,7 +47,7 @@ routes_communales = routes[
 
 # Filtrer les routes maritimes pour toutes les categories
 print("\nFiltrage des routes maritimes...")
-communes = gpd.read_file("Stage Ambroise/Données/Commune_Corse.geojson")
+communes = gpd.read_file("stage_ambroise/Données/Commune_Corse.geojson")
 if communes.crs.to_epsg() != 4326:
     communes = communes.to_crs(epsg=4326)
 

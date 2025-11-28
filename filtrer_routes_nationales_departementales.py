@@ -13,8 +13,8 @@ if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
 # Configuration
-input_file = "Stage Ambroise/Données/reseau-routier-de-corse.shp"
-output_file = "Stage Ambroise/Code/WEB/routes.geojson"
+input_file = "stage_ambroise/Données/reseau-routier-de-corse.shp"
+output_file = "stage_ambroise/Code/WEB/routes.geojson"
 
 print(f"Chargement du reseau routier depuis {input_file}...")
 routes = gpd.read_file(input_file)

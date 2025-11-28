@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Convertir le fichier des Cannes en CSV
-input_file = r'Stage Ambroise\Données\RP2022_logemt_Cannes.parquet'
-output_file = r'Stage Ambroise\Données\RP2022_logemt_Cannes.csv'
+input_file = r'stage_ambroise\Données\RP2022_logemt_Cannes.parquet'
+output_file = r'stage_ambroise\Données\RP2022_logemt_Cannes.csv'
 
 print(f"Lecture du fichier parquet...")
 df = pd.read_parquet(input_file)

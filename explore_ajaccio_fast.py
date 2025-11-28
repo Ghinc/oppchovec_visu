@@ -2,7 +2,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 
 # Lire avec pyarrow pour voir les codes communes disponibles
-parquet_file = pq.ParquetFile(r'Stage Ambroise\Données\RP2022_logemt.parquet')
+parquet_file = pq.ParquetFile(r'stage_ambroise\Données\RP2022_logemt.parquet')
 
 # Lire un échantillon pour voir les codes
 df_sample = parquet_file.read_row_group(0).to_pandas()

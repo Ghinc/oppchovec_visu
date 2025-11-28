@@ -3,9 +3,9 @@ import pyarrow.parquet as pq
 import pyarrow as pa
 
 # Paramètres
-input_file = r'Stage Ambroise\Données\RP2022_logemt.parquet'
-output_parquet = r'Stage Ambroise\Données\RP2022_logemt_quartiers_selectionnes.parquet'
-output_csv = r'Stage Ambroise\Données\RP2022_logemt_quartiers_selectionnes.csv'
+input_file = r'stage_ambroise\Données\RP2022_logemt.parquet'
+output_parquet = r'stage_ambroise\Données\RP2022_logemt_quartiers_selectionnes.parquet'
+output_csv = r'stage_ambroise\Données\RP2022_logemt_quartiers_selectionnes.csv'
 
 # Liste des codes IRIS à extraire
 quartiers = {

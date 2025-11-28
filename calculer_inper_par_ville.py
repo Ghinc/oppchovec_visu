@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Lire le fichier des quartiers sélectionnés
-df = pd.read_csv(r'Stage Ambroise\Données\RP2022_logemt_quartiers_selectionnes.csv', sep=';')
+df = pd.read_csv(r'stage_ambroise\Données\RP2022_logemt_quartiers_selectionnes.csv', sep=';')
 
 print("="*70)
 print("CALCUL DU NOMBRE DE PERSONNES PAR VILLE (QUARTIERS PRIORITAIRES)")
@@ -66,7 +66,7 @@ for code_commune, nom_ville in villes.items():
 df_resultat = pd.DataFrame(resultat)
 
 # Sauvegarder
-output_file = r'Stage Ambroise\Données\inper_quartiers_prioritaires_par_ville.csv'
+output_file = r'stage_ambroise\Données\inper_quartiers_prioritaires_par_ville.csv'
 df_resultat.to_csv(output_file, index=False, encoding='utf-8-sig', sep=';')
 
 print(f"\nFichier sauvegardé: {output_file}")
