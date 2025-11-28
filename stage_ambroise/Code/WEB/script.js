@@ -2630,8 +2630,31 @@ function initMapNumbered() {
     if (!mapNumbered) {
         mapNumbered = L.map('map-numbered', {
             center: [42.0396, 9.0129],
-            zoom: 9,
-            zoomControl: true
+            zoom: 8,
+            zoomControl: true,
+            attributionControl: false,
+            zoomSnap: 0.1,
+            zoomDelta: 0.1
+        });
+
+        // Ajouter à la liste des cartes pour la synchronisation
+        cartes['numbered'] = mapNumbered;
+
+        // Synchroniser avec les autres cartes
+        mapNumbered.on('zoomend moveend', function() {
+            if (isSyncing) return;
+            isSyncing = true;
+
+            const currentZoom = mapNumbered.getZoom();
+            const currentCenter = mapNumbered.getCenter();
+
+            Object.keys(cartes).forEach(mapKey => {
+                if (cartes[mapKey] && mapKey !== 'numbered') {
+                    cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
+                }
+            });
+
+            setTimeout(() => { isSyncing = false; }, 100);
         });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -2744,8 +2767,8 @@ function afficherCommunesNumerotees() {
             const dy = center.lat - mapCenter.lat;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // Normaliser et appliquer un décalage
-            const offset = 0.15; // Décalage en degrés
+            // Normaliser et appliquer un décalage plus important pour éviter la Corse
+            const offset = 0.25; // Décalage en degrés (augmenté de 0.15 à 0.25)
             const labelLng = center.lng + (dx / distance) * offset;
             const labelLat = center.lat + (dy / distance) * offset;
             const labelPos = L.latLng(labelLat, labelLng);
