@@ -33,7 +33,9 @@
       "Bash(git push:*)",
       "Bash(curl:*)",
       "Bash(ren:*)",
-      "Bash(del analyze_notebook_paths.py analyze_all_paths.py find_and_fix_paths.py deep_search_notebook.py)"
+      "Bash(del analyze_notebook_paths.py analyze_all_paths.py find_and_fix_paths.py deep_search_notebook.py)",
+      "Bash(git checkout:*)",
+      "Bash(git ls-tree:*)"
     ],
     "deny": [],
     "ask": []

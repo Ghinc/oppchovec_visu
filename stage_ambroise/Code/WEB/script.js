@@ -2608,3 +2608,156 @@ document.getElementById('chatbotInput').addEventListener('keydown', function(e) 
         sendMessage();
     }
 });
+
+// ============================================================================
+// CARTE DES COMMUNES NUMÉROTÉES
+// ============================================================================
+
+// Liste des communes à numéroter (nom normalisé pour correspondre au GeoJSON)
+const NUMBERED_MUNICIPALITIES = [
+    'Ajaccio', 'Porto-Vecchio', 'Sartène', 'Corte', 'Bastia',
+    'Calvi', 'Ghisonaccia', 'Aghione', 'Antisanti', 'Canale-di-Verde',
+    'Linguizzetta', 'San-Giuliano', 'Olmo', 'Monte', 'Asco',
+    'Moltifao', 'Castifao', 'Canavaggia', 'Monacia-d\'Aullène',
+    'Pianottoli-Caldarello', 'Valle-di-Mezzana', 'Villanova',
+    'Grossetto-Prugna', 'Cargèse', 'Eccica-Suarella', 'Cauro'
+];
+
+let mapNumbered = null;
+let numberedMarkersLayer = null;
+
+function initMapNumbered() {
+    if (!mapNumbered) {
+        mapNumbered = L.map('map-numbered', {
+            center: [42.0396, 9.0129],
+            zoom: 9,
+            zoomControl: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(mapNumbered);
+    }
+}
+
+function afficherCommunesNumerotees() {
+    if (!communeJson || !communeJson.features) {
+        console.error('GeoJSON des communes non chargé');
+        return;
+    }
+
+    initMapNumbered();
+
+    // Supprimer l'ancienne couche si elle existe
+    if (numberedMarkersLayer) {
+        mapNumbered.removeLayer(numberedMarkersLayer);
+    }
+
+    // Créer une nouvelle couche de groupe
+    numberedMarkersLayer = L.layerGroup().addTo(mapNumbered);
+
+    // Ajouter le fond de carte des communes (gris clair)
+    L.geoJSON(communeJson, {
+        style: {
+            fillColor: '#e0e0e0',
+            fillOpacity: 0.3,
+            color: '#999',
+            weight: 1
+        }
+    }).addTo(numberedMarkersLayer);
+
+    // Map pour normaliser les noms
+    const normalizeName = (name) => {
+        return name
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/['-]/g, '')
+            .trim();
+    };
+
+    // Créer un index des communes par nom normalisé
+    const communesByNormalizedName = {};
+    communeJson.features.forEach(feature => {
+        const nom = feature.properties.nom || feature.properties.NOM || feature.properties.name;
+        if (nom) {
+            const normalized = normalizeName(nom);
+            communesByNormalizedName[normalized] = feature;
+        }
+    });
+
+    // Parcourir la liste des communes à numéroter
+    let foundCount = 0;
+    const notFound = [];
+
+    NUMBERED_MUNICIPALITIES.forEach((communeName, index) => {
+        const normalizedSearch = normalizeName(communeName);
+        const feature = communesByNormalizedName[normalizedSearch];
+
+        if (feature) {
+            foundCount++;
+            const numero = index + 1;
+
+            // Calculer le centroïde de la commune
+            const bounds = L.geoJSON(feature).getBounds();
+            const center = bounds.getCenter();
+
+            // Créer un marqueur avec un DivIcon personnalisé
+            const marker = L.marker(center, {
+                icon: L.divIcon({
+                    className: 'numbered-municipality-marker',
+                    html: `<div class="marker-number">${numero}</div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                })
+            });
+
+            // Popup avec les informations
+            marker.bindPopup(`
+                <div style="font-family: Arial, sans-serif;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #333;">
+                        <strong>#${numero}</strong> - ${communeName}
+                    </h3>
+                    <p style="margin: 5px 0; font-size: 13px;">
+                        <strong>Code:</strong> ${feature.properties.code || feature.properties.CODE || 'N/A'}
+                    </p>
+                </div>
+            `);
+
+            marker.addTo(numberedMarkersLayer);
+
+            // Surligner la commune
+            L.geoJSON(feature, {
+                style: {
+                    fillColor: '#4a90e2',
+                    fillOpacity: 0.4,
+                    color: '#2c5aa0',
+                    weight: 2
+                }
+            }).addTo(numberedMarkersLayer);
+
+        } else {
+            notFound.push(communeName);
+        }
+    });
+
+    console.log(`✅ Communes numérotées trouvées: ${foundCount}/${NUMBERED_MUNICIPALITIES.length}`);
+    if (notFound.length > 0) {
+        console.warn('⚠️ Communes non trouvées:', notFound);
+    }
+
+    // Ajuster la vue pour afficher toutes les communes
+    if (numberedMarkersLayer.getLayers().length > 0) {
+        mapNumbered.fitBounds(numberedMarkersLayer.getBounds(), { padding: [20, 20] });
+    }
+}
+
+// Ajouter le gestionnaire d'événement pour l'onglet Numbered
+document.querySelector('[data-tab="numberedtab"]').addEventListener('click', function() {
+    setTimeout(() => {
+        afficherCommunesNumerotees();
+        if (mapNumbered) {
+            mapNumbered.invalidateSize();
+        }
+    }, 100);
+});
