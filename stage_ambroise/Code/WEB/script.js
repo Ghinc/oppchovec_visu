@@ -2656,12 +2656,12 @@ function afficherCommunesNumerotees() {
     // Créer une nouvelle couche de groupe
     numberedMarkersLayer = L.layerGroup().addTo(mapNumbered);
 
-    // Ajouter le fond de carte des communes (gris clair)
+    // Ajouter le fond de carte des communes (blanc)
     L.geoJSON(communeJson, {
         style: {
-            fillColor: '#e0e0e0',
-            fillOpacity: 0.3,
-            color: '#999',
+            fillColor: '#ffffff',
+            fillOpacity: 1,
+            color: '#cccccc',
             weight: 1
         }
     }).addTo(numberedMarkersLayer);
@@ -2707,8 +2707,8 @@ function afficherCommunesNumerotees() {
                 icon: L.divIcon({
                     className: 'numbered-municipality-marker',
                     html: `<div class="marker-number">${numero}</div>`,
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 15]
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 20]
                 })
             });
 
@@ -2726,12 +2726,12 @@ function afficherCommunesNumerotees() {
 
             marker.addTo(numberedMarkersLayer);
 
-            // Surligner la commune
+            // Surligner la commune en rouge
             L.geoJSON(feature, {
                 style: {
-                    fillColor: '#4a90e2',
-                    fillOpacity: 0.4,
-                    color: '#2c5aa0',
+                    fillColor: '#dc3545',
+                    fillOpacity: 0.5,
+                    color: '#a71d2a',
                     weight: 2
                 }
             }).addTo(numberedMarkersLayer);
