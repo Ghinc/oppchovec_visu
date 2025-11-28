@@ -2660,6 +2660,9 @@ function initMapNumbered() {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(mapNumbered);
+
+        // Ajouter le bouton de téléchargement
+        ajouterBoutonDownload(mapNumbered, 'numbered_municipalities_map');
     }
 }
 
@@ -2773,19 +2776,12 @@ function afficherCommunesNumerotees() {
             const labelLat = center.lat + (dy / distance) * offset;
             const labelPos = L.latLng(labelLat, labelLng);
 
-            // Créer la ligne pointillée entre la commune et le label
-            L.polyline([center, labelPos], {
-                color: '#666666',
-                weight: 1.5,
-                opacity: 0.7,
-                dashArray: '3, 6'
-            }).addTo(numberedMarkersLayer);
-
-            // Créer un marqueur avec un DivIcon personnalisé au bout de la ligne
+            // Créer un marqueur DRAGGABLE avec un DivIcon personnalisé au bout de la ligne
             const marker = L.marker(labelPos, {
+                draggable: true,
                 icon: L.divIcon({
                     className: 'numbered-municipality-marker',
-                    html: `<div class="marker-number">${numero}</div>`,
+                    html: `<div class="marker-number" title="Cliquez et glissez pour déplacer">${numero}</div>`,
                     iconSize: [50, 50],
                     iconAnchor: [25, 25]
                 })
@@ -2800,8 +2796,34 @@ function afficherCommunesNumerotees() {
                     <p style="margin: 5px 0; font-size: 13px;">
                         <strong>Code:</strong> ${feature.properties.code || feature.properties.CODE || 'N/A'}
                     </p>
+                    <p style="margin: 5px 0; font-size: 12px; color: #666;">
+                        💡 <em>Vous pouvez déplacer ce numéro en le glissant</em>
+                    </p>
                 </div>
             `);
+
+            // Créer une référence à la ligne pour la mettre à jour lors du drag
+            const polyline = L.polyline([center, labelPos], {
+                color: '#666666',
+                weight: 1.5,
+                opacity: 0.7,
+                dashArray: '3, 6'
+            }).addTo(numberedMarkersLayer);
+
+            // Mettre à jour la ligne lors du déplacement du marqueur
+            marker.on('drag', function(e) {
+                const newPos = e.target.getLatLng();
+                polyline.setLatLngs([center, newPos]);
+            });
+
+            // Ajouter un effet visuel lors du survol
+            marker.on('mouseover', function() {
+                polyline.setStyle({ weight: 2.5, opacity: 1 });
+            });
+
+            marker.on('mouseout', function() {
+                polyline.setStyle({ weight: 1.5, opacity: 0.7 });
+            });
 
             marker.addTo(numberedMarkersLayer);
 
