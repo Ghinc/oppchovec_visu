@@ -248,6 +248,11 @@ main {
   background-color: #e8eef3;
 }
 
+/* Carte Numbered - Mer en blanc */
+#map-numbered {
+  background-color: #ffffff !important;
+}
+
 /* ============================================
    TYPOGRAPHIE
    ============================================ */
@@ -1721,7 +1726,9 @@ tr:nth-child(even) {
   justify-content: center;
   font-weight: bold;
   font-size: 18px;
+  line-height: 1;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   border: 3px solid white;
   font-family: Arial, sans-serif;
+  text-align: center;
 }

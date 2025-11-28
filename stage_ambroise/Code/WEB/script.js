@@ -2656,12 +2656,12 @@ function afficherCommunesNumerotees() {
     // Créer une nouvelle couche de groupe
     numberedMarkersLayer = L.layerGroup().addTo(mapNumbered);
 
-    // Ajouter le fond de carte des communes (blanc)
+    // Ajouter le fond de carte des communes (gris clair)
     L.geoJSON(communeJson, {
         style: {
-            fillColor: '#ffffff',
+            fillColor: '#e8e8e8',
             fillOpacity: 1,
-            color: '#cccccc',
+            color: '#bbbbbb',
             weight: 1
         }
     }).addTo(numberedMarkersLayer);
