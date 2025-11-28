@@ -2656,12 +2656,12 @@ function afficherCommunesNumerotees() {
     // Créer une nouvelle couche de groupe
     numberedMarkersLayer = L.layerGroup().addTo(mapNumbered);
 
-    // Ajouter le fond de carte des communes (gris clair)
+    // Ajouter le fond de carte des communes (blanc)
     L.geoJSON(communeJson, {
         style: {
-            fillColor: '#e8e8e8',
+            fillColor: '#ffffff',
             fillOpacity: 1,
-            color: '#bbbbbb',
+            color: '#d0d0d0',
             weight: 1
         }
     }).addTo(numberedMarkersLayer);
@@ -2735,8 +2735,31 @@ function afficherCommunesNumerotees() {
                 center = bounds.getCenter();
             }
 
-            // Créer un marqueur avec un DivIcon personnalisé
-            const marker = L.marker(center, {
+            // Calculer la position du label à l'extérieur (décalage radial)
+            const bounds = L.geoJSON(communeJson).getBounds();
+            const mapCenter = bounds.getCenter();
+
+            // Vecteur du centre de la carte vers le centre de la commune
+            const dx = center.lng - mapCenter.lng;
+            const dy = center.lat - mapCenter.lat;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Normaliser et appliquer un décalage
+            const offset = 0.15; // Décalage en degrés
+            const labelLng = center.lng + (dx / distance) * offset;
+            const labelLat = center.lat + (dy / distance) * offset;
+            const labelPos = L.latLng(labelLat, labelLng);
+
+            // Créer la ligne pointillée entre la commune et le label
+            L.polyline([center, labelPos], {
+                color: '#666666',
+                weight: 1.5,
+                opacity: 0.7,
+                dashArray: '3, 6'
+            }).addTo(numberedMarkersLayer);
+
+            // Créer un marqueur avec un DivIcon personnalisé au bout de la ligne
+            const marker = L.marker(labelPos, {
                 icon: L.divIcon({
                     className: 'numbered-municipality-marker',
                     html: `<div class="marker-number">${numero}</div>`,
