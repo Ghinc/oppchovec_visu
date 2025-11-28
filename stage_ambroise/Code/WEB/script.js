@@ -2698,17 +2698,50 @@ function afficherCommunesNumerotees() {
             foundCount++;
             const numero = index + 1;
 
-            // Calculer le centroïde de la commune
-            const bounds = L.geoJSON(feature).getBounds();
-            const center = bounds.getCenter();
+            // Calculer le centroïde géométrique réel de la commune
+            const geom = feature.geometry;
+            let center;
+
+            if (geom.type === 'Polygon') {
+                // Pour un polygone simple, calculer le centroïde des coordonnées
+                const coords = geom.coordinates[0];
+                let sumLat = 0, sumLng = 0;
+                coords.forEach(coord => {
+                    sumLng += coord[0];
+                    sumLat += coord[1];
+                });
+                center = L.latLng(sumLat / coords.length, sumLng / coords.length);
+            } else if (geom.type === 'MultiPolygon') {
+                // Pour un multipolygone, prendre le centroïde du plus grand polygone
+                let largestPoly = geom.coordinates[0];
+                let largestArea = 0;
+                geom.coordinates.forEach(poly => {
+                    const polyCoords = poly[0];
+                    if (polyCoords.length > largestArea) {
+                        largestArea = polyCoords.length;
+                        largestPoly = poly;
+                    }
+                });
+                const coords = largestPoly[0];
+                let sumLat = 0, sumLng = 0;
+                coords.forEach(coord => {
+                    sumLng += coord[0];
+                    sumLat += coord[1];
+                });
+                center = L.latLng(sumLat / coords.length, sumLng / coords.length);
+            } else {
+                // Fallback sur la méthode bounds
+                const bounds = L.geoJSON(feature).getBounds();
+                center = bounds.getCenter();
+            }
 
             // Créer un marqueur avec un DivIcon personnalisé
             const marker = L.marker(center, {
                 icon: L.divIcon({
                     className: 'numbered-municipality-marker',
                     html: `<div class="marker-number">${numero}</div>`,
-                    iconSize: [40, 40],
-                    iconAnchor: [20, 20]
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 25]
                 })
             });
 
