@@ -1553,9 +1553,10 @@ async function chargerFichiersAutomatiquement() {
     ]);
 
     // 2. Chargement en parallèle des fichiers JSON et GeoJSON
+    const geojsonPath = BASE_PATH.replace('Code/WEB/', 'Données/');
     const [responseJson, responseGeo] = await Promise.all([
       fetch(BASE_PATH + 'data_scores_0_10.json'),
-      fetch(BASE_PATH + 'Commune_Corse.geojson')
+      fetch(geojsonPath + 'Commune_Corse.geojson')
     ]);
 
     if (!responseJson.ok) {
