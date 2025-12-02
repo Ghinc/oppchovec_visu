@@ -2555,6 +2555,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const key = element.getAttribute('data-translate');
             if (uiTranslations[key]) {
                 element.textContent = uiTranslations[key];
+                // Pour les options de select, forcer la mise à jour
+                if (element.tagName === 'OPTION') {
+                    element.text = uiTranslations[key];
+                }
             }
         });
 
