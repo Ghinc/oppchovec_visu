@@ -338,7 +338,7 @@ function mettreAJourLegendes() {
         }
     });
 
-    // Mettre à jour les titres des cartes choroplèthes (OppChoLiv, Opp, Cho, Vec)
+    // Mettre à jour les titres des cartes choroplèthes (OppChoVec, Opp, Cho, Vec)
     document.querySelectorAll('.info.legend').forEach(legendeDiv => {
         // Ignorer les légendes LISA et CAH
         if (legendeDiv.querySelector('.legende-lisa') || legendeDiv.querySelector('.legende-cah')) {
@@ -358,6 +358,12 @@ function mettreAJourLegendes() {
                 }
             }
         }
+
+        // Mettre à jour le sous-titre (échelle)
+        const smallEl = legendeDiv.querySelector('small[style*="color: #666"]');
+        if (smallEl) {
+            smallEl.textContent = lang === 'fr' ? 'Échelle de 0 à 10' : '0–10 scale';
+        }
     });
 
     // Mettre à jour les autres légendes
@@ -373,6 +379,24 @@ function mettreAJourLegendes() {
     document.querySelectorAll('.legende-routes').forEach(el => {
         el.textContent = traductions[lang].routesPrincipales;
     });
+
+    // Mettre à jour les titres des onglets
+    const tabOppChovec = document.getElementById('tab-oppchovec');
+    if (tabOppChovec) {
+        tabOppChovec.textContent = traductions[lang].onglets.oppchovec;
+    }
+    const tabOpp = document.getElementById('tab-opp');
+    if (tabOpp) {
+        tabOpp.textContent = traductions[lang].onglets.opp;
+    }
+    const tabCho = document.getElementById('tab-cho');
+    if (tabCho) {
+        tabCho.textContent = traductions[lang].onglets.cho;
+    }
+    const tabVec = document.getElementById('tab-vec');
+    if (tabVec) {
+        tabVec.textContent = traductions[lang].onglets.vec;
+    }
 }
 
 // Fonction pour ajouter un bouton de téléchargement d'image
