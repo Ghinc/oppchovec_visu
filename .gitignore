@@ -194,6 +194,10 @@ config.secret.*
 
 # Fichiers GeoJSON essentiels
 !stage_ambroise/Code/WEB/routes.geojson
+!stage_ambroise/Code/WEB/routes_nationales.geojson
+!stage_ambroise/Code/WEB/routes_departementales.geojson
+!stage_ambroise/Code/WEB/routes_communales.geojson
+!stage_ambroise/Code/WEB/routes_toutes.geojson
 !stage_ambroise/Données/Commune_Corse.geojson
 
 # Fichiers essentiels du projet
