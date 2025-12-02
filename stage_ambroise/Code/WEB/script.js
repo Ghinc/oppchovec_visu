@@ -955,16 +955,39 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 `${labels[i]}<br>`;
         }
 
+        // Ajouter un séparateur et la légende des traits
+        div.innerHTML += `<hr style="margin: 10px 0; border: none; border-top: 1px solid #ddd;">`;
+        div.innerHTML += `<strong style="font-size: 12px;">${traductions[lang].legendeTitre}</strong><br>`;
+
+        // Routes principales
+        div.innerHTML += `
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <svg width="30" height="3" style="margin-right: 8px;">
+                    <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
+                </svg>
+                <span class="legende-routes" style="font-size: 11px;">${traductions[lang].routesPrincipales}</span>
+            </div>
+        `;
+
+        // Limites communales
+        div.innerHTML += `
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <svg width="30" height="2" style="margin-right: 8px;">
+                    <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                </svg>
+                <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+            </div>
+        `;
+
         return div;
     };
 
     legendControls[type].addTo(cartes[type]);
 
-    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    // Ajouter le réseau routier, les villes principales, la rose des vents et le bouton de téléchargement
     ajouterReseauRoutier(cartes[type], type);
     ajouterVillesPrincipales(cartes[type]);
     ajouterRoseDesVents(cartes[type]);
-    ajouterLegendeTraits(cartes[type]);
     ajouterBoutonTelechargement(cartes[type], type);
 }
 
@@ -1195,7 +1218,6 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
     ajouterReseauRoutier(cartes[mapType], mapType);
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
-    ajouterLegendeTraits(cartes[mapType]);
     ajouterLegendeLISA(cartes[mapType], seuil);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
 }
@@ -1227,6 +1249,23 @@ function ajouterLegendeLISA(carte, seuil) {
                         <span style="font-size: 12px;"><strong>${lang === 'fr' ? cat.labelFr : cat.labelEn}</strong></span>
                     </div>
                 `).join('')}
+
+                <hr style="margin: 10px 0; border: none; border-top: 1px solid #ddd;">
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">${traductions[lang].legendeTitre}</div>
+
+                <div style="display: flex; align-items: center; margin: 5px 0;">
+                    <svg width="30" height="3" style="margin-right: 8px;">
+                        <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
+                    </svg>
+                    <span class="legende-routes" style="font-size: 11px;">${traductions[lang].routesPrincipales}</span>
+                </div>
+
+                <div style="display: flex; align-items: center; margin: 5px 0;">
+                    <svg width="30" height="2" style="margin-right: 8px;">
+                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                    </svg>
+                    <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+                </div>
             </div>
         `;
 
@@ -1472,7 +1511,6 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
     ajouterReseauRoutier(cartes[mapType], mapType);
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
-    ajouterLegendeTraits(cartes[mapType]);
     ajouterLegendeCAH(cartes[mapType], nClusters, cahData);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
 
@@ -1518,6 +1556,23 @@ function ajouterLegendeCAH(carte, nClusters, cahData) {
                         </span>
                     </div>
                 `).join('')}
+
+                <hr style="margin: 10px 0; border: none; border-top: 1px solid #ddd;">
+                <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">${traductions[lang].legendeTitre}</div>
+
+                <div style="display: flex; align-items: center; margin: 5px 0;">
+                    <svg width="30" height="3" style="margin-right: 8px;">
+                        <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
+                    </svg>
+                    <span class="legende-routes" style="font-size: 11px;">${traductions[lang].routesPrincipales}</span>
+                </div>
+
+                <div style="display: flex; align-items: center; margin: 5px 0;">
+                    <svg width="30" height="2" style="margin-right: 8px;">
+                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                    </svg>
+                    <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+                </div>
             </div>
         `;
 
