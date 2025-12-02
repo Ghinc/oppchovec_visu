@@ -366,6 +366,11 @@ function mettreAJourLegendes() {
         }
     });
 
+    // Mettre à jour le titre principal "Légende" en haut des légendes
+    document.querySelectorAll('.legende-titre-principal').forEach(el => {
+        el.textContent = traductions[lang].legendeTitre;
+    });
+
     // Mettre à jour les autres légendes
     document.querySelectorAll('.legende-titre').forEach(el => {
         if (!el.closest('.legende-lisa') && !el.closest('.legende-cah')) {
@@ -970,6 +975,11 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         const titreFinal = traductions[lang].titresCartes[type] || titre;
         const sousTitre = lang === 'fr' ? 'Échelle de 0 à 10' : '0–10 scale';
 
+        // Titre principal "Légende" en haut
+        div.innerHTML += `<strong class="legende-titre-principal" style="font-size: 14px;">${traductions[lang].legendeTitre}</strong><br>`;
+        div.innerHTML += `<hr style="margin: 8px 0; border: none; border-top: 1px solid #ddd;">`;
+
+        // Sous-titre de la carte
         div.innerHTML += `<strong>${titreFinal}</strong><br>`;
         div.innerHTML += `<small style="color: #666;">${sousTitre}</small><br><br>`;
 
@@ -979,9 +989,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 `${labels[i]}<br>`;
         }
 
-        // Ajouter un séparateur et la légende des traits
+        // Ajouter un séparateur pour les traits
         div.innerHTML += `<hr style="margin: 10px 0; border: none; border-top: 1px solid #ddd;">`;
-        div.innerHTML += `<strong style="font-size: 12px;">${traductions[lang].legendeTitre}</strong><br>`;
 
         // Routes principales
         div.innerHTML += `
