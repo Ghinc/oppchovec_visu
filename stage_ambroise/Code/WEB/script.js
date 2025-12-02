@@ -29,7 +29,7 @@ let data_indicateursOriginaux = {}
         toutes: null
     }  // Données GeoJSON du réseau routier par type
     let routesLayers = {}  // Couches de routes pour chaque carte et type
-    let langueFrancais = false  // Langue par défaut : anglais
+    let langueFrancais = true  // Langue par défaut : français
 
 // Traductions
 const traductions = {
