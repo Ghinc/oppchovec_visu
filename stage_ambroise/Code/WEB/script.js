@@ -38,13 +38,13 @@ const traductions = {
         limitesCommunes: "Limites des communes",
         routesPrincipales: "Routes principales",
         onglets: {
-            oppchovec: "OppChoLiv",
+            oppchovec: "OppChoVec",
             opp: "Opp",
             cho: "Cho",
-            vec: "Liv"
+            vec: "Vec"
         },
         titresCartes: {
-            oppchovec: "OppChoLiv",
+            oppchovec: "OppChoVec",
             opp: "Score Opp",
             cho: "Score Cho",
             vec: "Score Vec"
@@ -944,7 +944,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         // Utiliser les traductions pour le titre selon la langue
         const lang = langueFrancais ? 'fr' : 'en';
         const titreFinal = traductions[lang].titresCartes[type] || titre;
-        const sousTitre = lang === 'fr' ? 'Échelle 0-10' : '0–10 scale';
+        const sousTitre = lang === 'fr' ? 'Échelle de 0 à 10' : '0–10 scale';
 
         div.innerHTML += `<strong>${titreFinal}</strong><br>`;
         div.innerHTML += `<small style="color: #666;">${sousTitre}</small><br><br>`;
