@@ -2564,6 +2564,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Appliquer les traductions par défaut au chargement
     mettreAJourTraductionsUI();
+    mettreAJourLegendes();
 });
 
 // ============================================
