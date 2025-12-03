@@ -44,7 +44,7 @@ const traductions = {
             vec: "Vec"
         },
         titresCartes: {
-            oppchovec: "OppChoVec",
+            oppchovec: "Score OppChoVec",
             opp: "Score Opp",
             cho: "Score Cho",
             vec: "Score Vec"
@@ -339,30 +339,24 @@ function mettreAJourLegendes() {
     });
 
     // Mettre à jour les titres des cartes choroplèthes (OppChoVec, Opp, Cho, Vec)
-    document.querySelectorAll('.info.legend').forEach(legendeDiv => {
-        // Ignorer les légendes LISA et CAH
-        if (legendeDiv.querySelector('.legende-lisa') || legendeDiv.querySelector('.legende-cah')) {
-            return;
-        }
+    document.querySelectorAll('.info.legend[data-carte-type]').forEach(legendeDiv => {
+        // Récupérer le type de carte depuis l'attribut data
+        const type = legendeDiv.getAttribute('data-carte-type');
 
-        // Trouver le titre (élément strong)
-        const strongEl = legendeDiv.querySelector('strong');
-        if (strongEl) {
-            const currentText = strongEl.textContent;
-            // Identifier le type de carte par son contenu actuel
-            for (const type in traductions.fr.titresCartes) {
-                if (currentText === traductions.fr.titresCartes[type] ||
-                    currentText === traductions.en.titresCartes[type]) {
-                    strongEl.textContent = traductions[lang].titresCartes[type];
-                    break;
-                }
+        if (type && traductions[lang].titresCartes[type]) {
+            // Trouver tous les éléments strong
+            const strongElements = legendeDiv.querySelectorAll('strong');
+            // Le titre de la carte est le DEUXIÈME strong (le premier est "Légende")
+            if (strongElements.length >= 2) {
+                const titreCarte = strongElements[1];
+                titreCarte.textContent = traductions[lang].titresCartes[type];
             }
-        }
 
-        // Mettre à jour le sous-titre (échelle)
-        const smallEl = legendeDiv.querySelector('small[style*="color: #666"]');
-        if (smallEl) {
-            smallEl.textContent = lang === 'fr' ? 'Échelle de 0 à 10' : '0–10 scale';
+            // Mettre à jour le sous-titre (échelle)
+            const smallEl = legendeDiv.querySelector('small[style*="color: #666"]');
+            if (smallEl) {
+                smallEl.textContent = lang === 'fr' ? 'Échelle de 0 à 10' : '0–10 scale';
+            }
         }
     });
 
@@ -966,6 +960,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
 
     legendControls[type].onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
+        // Ajouter un attribut pour identifier le type de carte
+        div.setAttribute('data-carte-type', type);
 
         // Générer les labels dynamiquement depuis les seuils
         const labels = genererLabelsJenks(seuils);
@@ -2101,7 +2097,8 @@ function ajusterValeur(indicateur, delta) {
 // fonction de rangement et de tri des communes pour la selection
   function populateCommuneSelect(data) {
     const select = document.getElementById("communeSelect");
-    select.innerHTML = '<option value="">-- Select a municipality --</option>'; // reset
+    const lang = langueFrancais ? 'fr' : 'en';
+    select.innerHTML = `<option value="" data-translate="commune-select">${traductions[lang].ui['commune-select']}</option>`; // reset with dynamic translation
 
     // 🔤 Trier les noms de communes
     const communesTriees = Object.keys(data).sort((a, b) => a.localeCompare(b, 'fr'));
