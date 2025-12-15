@@ -61,6 +61,18 @@ const traductions = {
             "routes-all": "Toutes les routes (7002)",
             "language-title": "4. Langue / Language",
             "language-english": "Libellés en anglais"
+        },
+        descriptions: {
+            Indicateur_Opp1: "Avoir une bonne éducation. Se traduit par le niveau de diplôme de la population sur une échelle de 1 à 7.",
+            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
+            Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
+            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
+            Indicateur_Cho1: "Ne pas être discriminé. Calculé avec exp(-pourcentage_population_quartiers_prioritaires).",
+            Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion de personnes possédant le droit de vote dans la commune.",
+            Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
+            Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
+            Indicateur_Vec3: "Stabilité de l'emploi. Score basé sur la répartition des types de contrats et statuts d'emploi.",
+            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante accessibles en moins de 20 minutes en voiture."
         }
     },
     en: {
@@ -91,6 +103,18 @@ const traductions = {
             "routes-all": "All roads (7002)",
             "language-title": "4. Language / Langue",
             "language-english": "English labels"
+        },
+        descriptions: {
+            Indicateur_Opp1: "Having a good education. Measured by the education level of the population on a scale of 1 to 7.",
+            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories.",
+            Indicateur_Opp3: "Having the means of mobility. Score based on the proportion of households with a car and access to transport.",
+            Indicateur_Opp4: "Having access to ICT. Average of 4G coverage, high-speed Internet and fiber.",
+            Indicateur_Cho1: "Not being discriminated against. Calculated with exp(-percentage_population_priority_areas).",
+            Indicateur_Cho2: "Having the means to influence political decisions. Proportion of people with voting rights in the municipality.",
+            Indicateur_Vec1: "Having a decent income. Median tax income of the municipality.",
+            Indicateur_Vec2: "Having decent housing. Score based on comfort, occupancy density and housing type.",
+            Indicateur_Vec3: "Job stability. Score based on the distribution of contract types and employment status.",
+            Indicateur_Vec4: "Being close to services. Number of everyday services accessible within 20 minutes by car."
         }
     }
 };
@@ -219,6 +243,13 @@ function ajouterVillesPrincipales(carte) {
 
 // Fonction pour ajouter une rose des vents
 function ajouterRoseDesVents(carte) {
+    // Vérifier si la rose des vents existe déjà
+    const mapContainer = carte.getContainer();
+    if (mapContainer.querySelector('.rose-des-vents')) {
+        console.log('Rose des vents déjà présente, pas de duplication');
+        return;
+    }
+
     const roseControl = L.control({ position: 'topleft' });
 
     roseControl.onAdd = function() {
@@ -246,6 +277,74 @@ function ajouterRoseDesVents(carte) {
     };
 
     roseControl.addTo(carte);
+}
+
+// Fonction pour ajouter le copyright
+function ajouterCopyright(carte) {
+    console.log('🔍 ajouterCopyright appelé pour carte:', carte);
+
+    // Vérifier si le copyright existe déjà
+    const mapContainer = carte.getContainer();
+    const existingCopyright = mapContainer.querySelector('.copyright-control');
+    console.log('⚠️ Copyright existant?', existingCopyright);
+
+    if (existingCopyright) {
+        console.log('Copyright déjà présent, pas de duplication');
+        return;
+    }
+
+    const copyrightControl = L.control({ position: 'bottomleft' });
+
+    copyrightControl.onAdd = function() {
+        console.log('✅ onAdd du copyright appelé - création du div');
+        const div = L.DomUtil.create('div', 'copyright-control');
+        div.style.cssText = `
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 9px;
+            color: #666;
+            font-family: Arial, sans-serif;
+            line-height: 1.3;
+            text-align: center;
+        `;
+        div.innerHTML = '© Ghinevra COMITI, Lise BOURDEAU-LEPAGE 2025 — Tous droits réservés';
+        console.log('📝 Div copyright créé:', div);
+        return div;
+    };
+
+    copyrightControl.addTo(carte);
+
+    // Repositionner uniquement le copyright au centre après ajout
+    setTimeout(() => {
+        const copyrightDiv = mapContainer.querySelector('.copyright-control');
+        if (copyrightDiv) {
+            // Trouver le conteneur parent leaflet-bottom leaflet-left
+            const bottomLeftContainer = copyrightDiv.closest('.leaflet-bottom.leaflet-left');
+            if (bottomLeftContainer) {
+                // Créer un nouveau conteneur pour le copyright centré (décalé de 60px vers la gauche)
+                const centerContainer = document.createElement('div');
+                centerContainer.className = 'leaflet-bottom leaflet-center';
+                centerContainer.style.cssText = `
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(calc(-50% - 60px));
+                    bottom: 0;
+                    pointer-events: none;
+                `;
+
+                // Déplacer le copyright dans ce nouveau conteneur
+                centerContainer.appendChild(copyrightDiv);
+                copyrightDiv.style.pointerEvents = 'auto';
+
+                // Ajouter le conteneur centré à la carte
+                mapContainer.querySelector('.leaflet-control-container').appendChild(centerContainer);
+            }
+        }
+    }, 100);
+
+    console.log('✔️ Copyright control ajouté à la carte');
 }
 
 // Fonction pour ajouter une légende des traits (limites et routes)
@@ -396,14 +495,70 @@ function mettreAJourLegendes() {
     if (tabVec) {
         tabVec.textContent = traductions[lang].onglets.vec;
     }
+
+    // Mettre à jour les descriptions des indicateurs
+    document.querySelectorAll('[data-indicator-desc]').forEach(el => {
+        const indicator = el.getAttribute('data-indicator-desc');
+        // Retirer le suffixe _comp si présent
+        const indicatorKey = indicator.replace('_comp', '');
+        if (traductions[lang].descriptions[indicatorKey]) {
+            el.textContent = traductions[lang].descriptions[indicatorKey];
+        }
+    });
+}
+
+// Fonctions pour gérer l'affichage des descriptions d'indicateurs
+function toggleIndicatorInfo(event, indicatorId) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Pour les indicateurs dans la comparaison, on utilise une ligne de tableau
+    if (indicatorId.includes('_comp')) {
+        const infoRow = document.getElementById(`info-row-${indicatorId}`);
+        if (infoRow) {
+            const isHidden = infoRow.style.display === 'none';
+            infoRow.style.display = isHidden ? 'table-row' : 'none';
+        }
+    } else {
+        // Pour les indicateurs normaux, on utilise un div
+        const infoBox = document.getElementById(`info-${indicatorId}`);
+        if (infoBox) {
+            const isHidden = infoBox.style.display === 'none';
+            infoBox.style.display = isHidden ? 'block' : 'none';
+        }
+    }
+}
+
+function closeIndicatorInfo(indicatorId) {
+    // Pour les indicateurs dans la comparaison
+    if (indicatorId.includes('_comp')) {
+        const infoRow = document.getElementById(`info-row-${indicatorId}`);
+        if (infoRow) {
+            infoRow.style.display = 'none';
+        }
+    } else {
+        // Pour les indicateurs normaux
+        const infoBox = document.getElementById(`info-${indicatorId}`);
+        if (infoBox) {
+            infoBox.style.display = 'none';
+        }
+    }
 }
 
 // Fonction pour ajouter un bouton de téléchargement d'image
 function ajouterBoutonTelechargement(carte, mapType) {
+    // Vérifier si le bouton de téléchargement existe déjà
+    const mapContainer = carte.getContainer();
+    const existingButton = Array.from(mapContainer.querySelectorAll('.leaflet-control-container .leaflet-top.leaflet-right .leaflet-bar')).find(el => el.textContent.includes('📷'));
+    if (existingButton) {
+        console.log('Bouton de téléchargement déjà présent, pas de duplication');
+        return;
+    }
+
     const downloadControl = L.control({ position: 'topright' });
 
     downloadControl.onAdd = function() {
-        const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control download-button-control');
         const button = L.DomUtil.create('a', '', div);
         button.innerHTML = '📷';
         button.href = '#';
@@ -1013,10 +1168,11 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
 
     legendControls[type].addTo(cartes[type]);
 
-    // Ajouter le réseau routier, les villes principales, la rose des vents et le bouton de téléchargement
+    // Ajouter le réseau routier, les villes principales, la rose des vents, le copyright et le bouton de téléchargement
     ajouterReseauRoutier(cartes[type], type);
     ajouterVillesPrincipales(cartes[type]);
     ajouterRoseDesVents(cartes[type]);
+    ajouterCopyright(cartes[type]);
     ajouterBoutonTelechargement(cartes[type], type);
 }
 
@@ -1243,10 +1399,11 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
         console.warn(`Communes non trouvées dans LISA ${seuil}:`, communesNonTrouvees.slice(0, 10));
     }
 
-    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    // Ajouter le réseau routier, les villes principales, la rose des vents, le copyright, la légende et le bouton de téléchargement
     ajouterReseauRoutier(cartes[mapType], mapType);
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
+    ajouterCopyright(cartes[mapType]);
     ajouterLegendeLISA(cartes[mapType], seuil);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
 }
@@ -1268,32 +1425,32 @@ function ajouterLegendeLISA(carte, seuil) {
         ];
 
         div.innerHTML = `
-            <div style="background: rgba(255,255,255,0.95); padding: 10px 12px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                <div class="legende-titre" style="font-weight: bold; margin-bottom: 8px; font-size: 14px;">
+            <div style="background: rgba(255,255,255,0.95); padding: 8px 10px; border: 2px solid #333; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                <div class="legende-titre" style="margin-bottom: 6px; font-size: 12px;">
                     ${lang === 'fr' ? `Clusters LISA (Seuil ${seuil})` : `LISA Clusters (Threshold ${seuil})`}
                 </div>
                 ${categories.map(cat => `
-                    <div style="margin: 4px 0; display: flex; align-items: center;">
-                        <span style="display: inline-block; width: 18px; height: 18px; background-color: ${cat.color}; border: 1px solid #333; margin-right: 8px;"></span>
-                        <span style="font-size: 12px;"><strong>${lang === 'fr' ? cat.labelFr : cat.labelEn}</strong></span>
+                    <div style="margin: 3px 0; display: flex; align-items: center;">
+                        <span style="display: inline-block; width: 16px; height: 16px; background-color: ${cat.color}; border: 1px solid #333; margin-right: 6px;"></span>
+                        <span style="font-size: 11px;">${lang === 'fr' ? cat.labelFr : cat.labelEn}</span>
                     </div>
                 `).join('')}
 
-                <hr style="margin: 10px 0; border: none; border-top: 1px solid #ddd;">
-                <div style="font-weight: bold; margin-bottom: 8px; font-size: 12px;">${traductions[lang].legendeTitre}</div>
+                <hr style="margin: 8px 0; border: none; border-top: 1px solid #ddd;">
+                <div style="margin-bottom: 6px; font-size: 11px;">${traductions[lang].legendeTitre}</div>
 
-                <div style="display: flex; align-items: center; margin: 5px 0;">
-                    <svg width="30" height="3" style="margin-right: 8px;">
-                        <line x1="0" y1="1.5" x2="30" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
+                <div style="display: flex; align-items: center; margin: 4px 0;">
+                    <svg width="26" height="3" style="margin-right: 6px;">
+                        <line x1="0" y1="1.5" x2="26" y2="1.5" stroke="#ff0000" stroke-width="2" opacity="0.7" />
                     </svg>
-                    <span class="legende-routes" style="font-size: 11px;">${traductions[lang].routesPrincipales}</span>
+                    <span class="legende-routes" style="font-size: 10px;">${traductions[lang].routesPrincipales}</span>
                 </div>
 
-                <div style="display: flex; align-items: center; margin: 5px 0;">
-                    <svg width="30" height="2" style="margin-right: 8px;">
-                        <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
+                <div style="display: flex; align-items: center; margin: 4px 0;">
+                    <svg width="26" height="2" style="margin-right: 6px;">
+                        <line x1="0" y1="1" x2="26" y2="1" stroke="#333" stroke-width="1.5" />
                     </svg>
-                    <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+                    <span class="legende-limites" style="font-size: 10px;">${traductions[lang].limitesCommunes}</span>
                 </div>
             </div>
         `;
@@ -1536,10 +1693,11 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
         }
     }).addTo(cartes[mapType]);
 
-    // Ajouter le réseau routier, les villes principales, la rose des vents, la légende et le bouton de téléchargement
+    // Ajouter le réseau routier, les villes principales, la rose des vents, le copyright, la légende et le bouton de téléchargement
     ajouterReseauRoutier(cartes[mapType], mapType);
     ajouterVillesPrincipales(cartes[mapType]);
     ajouterRoseDesVents(cartes[mapType]);
+    ajouterCopyright(cartes[mapType]);
     ajouterLegendeCAH(cartes[mapType], nClusters, cahData);
     ajouterBoutonTelechargement(cartes[mapType], mapType);
 
@@ -1684,12 +1842,14 @@ async function chargerFichiersAutomatiquement() {
 window.addEventListener('DOMContentLoaded', chargerFichiersAutomatiquement);
 
 // Conserver le bouton de validation manuel pour compatibilité (optionnel)
-document.getElementById("validateBtn").addEventListener("click", async () => {
-  const fileJson    = document.getElementById("file").files[0];
-  const fileGeoJson = document.getElementById("file_geojson").files[0];
+const validateBtn = document.getElementById("validateBtn");
+if (validateBtn) {
+  validateBtn.addEventListener("click", async () => {
+    const fileJson    = document.getElementById("file").files[0];
+    const fileGeoJson = document.getElementById("file_geojson").files[0];
 
-  if (!fileJson || !fileGeoJson) {
-    alert("Veuillez sélectionner à la fois un fichier JSON et un GeoJSON.");
+    if (!fileJson || !fileGeoJson) {
+      alert("Veuillez sélectionner à la fois un fichier JSON et un GeoJSON.");
     return;
   }
 
@@ -1736,7 +1896,8 @@ document.getElementById("validateBtn").addEventListener("click", async () => {
     alert("Erreur lors de la lecture ou du traitement : " + err.message);
   }
 
-});
+  });
+}
 
 
   document.getElementById("validerCommune").addEventListener("click", () => {
@@ -1787,19 +1948,6 @@ function afficherCommune(communeNom) {
     Indicateur_Vec4: 1
   };
 
-  const descriptionsIndicateurs = {
-  Indicateur_Opp1: "Avoir une bonne éducation. Se traduit par le niveau de diplôme de la population sur une échelle de 1 à 7.",
-  Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
-  Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
-  Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
-  Indicateur_Cho1: "Ne pas être discriminé. Calculé avec exp(-pourcentage_population_quartiers_prioritaires).",
-  Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion d'inscrits sur les listes électorales.",
-  Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
-  Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
-  Indicateur_Vec3: "Stabilité de l'emploi. Score basé sur la répartition des types de contrats et statuts d'emploi.",
-  Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante accessibles."
-};
-
 const bornesParIndicateur = {
   Indicateur_Opp1: { min: 1, max: 7 },
   Indicateur_Opp2: { min: 0, max: 1 },
@@ -1819,17 +1967,21 @@ const bornesParIndicateur = {
     const nombre = typeof valeur === 'number' ? Number(valeur).toFixed(2) : valeur;
 
     const step = stepsParIndicateur[nomIndicateur] || 1;
-    const description = descriptionsIndicateurs[nomIndicateur] || "Aucune description disponible.";
+    const lang = langueFrancais ? 'fr' : 'en';
+    const description = traductions[lang].descriptions[nomIndicateur] || descriptionsIndicateurs[nomIndicateur] || "No description available.";
 
     indicateursHTML += `
       <li class="indicateur-row">
         <div class="indicateur-row-header">
           <strong>${nomIndicateur}</strong>
-          <span class="tooltip-container">
+          <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
-            <span class="tooltip-text">${description}</span>
-          </span>
+          </button>
           <span id="${nomIndicateur}_val">${nombre}</span>
+        </div>
+        <div id="info-${nomIndicateur}" class="indicator-info-box" style="display: none;">
+          <button class="info-close-button" onclick="closeIndicatorInfo('${nomIndicateur}')" aria-label="Close">✕</button>
+          <p data-indicator-desc="${nomIndicateur}">${description}</p>
         </div>
         <input type="range"
                id="${nomIndicateur}"
@@ -1862,6 +2014,13 @@ const bornesParIndicateur = {
 `;
 
   resultDiv.innerHTML = indicateursHTML;
+
+  // Debug: vérifier que les boutons sont bien dans le DOM
+  console.log('🔍 Nombre de boutons .info-button créés:', document.querySelectorAll('.info-button').length);
+  const buttons = document.querySelectorAll('.info-button');
+  buttons.forEach((btn, index) => {
+    console.log(`Bouton ${index}:`, btn, 'Visible?', btn.offsetWidth > 0 && btn.offsetHeight > 0);
+  });
 }
 
 
@@ -1898,19 +2057,6 @@ const bornesParIndicateur = {
 
 // fonction pour afficher le resultat de comparaison
   function afficherResultatComparaison(commune1, commune2) {
-
-    const descriptionsIndicateurs = {
-  Indicateur_Opp1: "Avoir une bonne éducation. Se traduit par le niveau de diplôme de la population sur une échelle de 1 à 7.",
-  Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
-  Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
-  Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
-  Indicateur_Cho1: "Ne pas être discriminé. Calculé avec exp(-pourcentage_population_quartiers_prioritaires).",
-  Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion d'inscrits sur les listes électorales.",
-  Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
-  Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
-  Indicateur_Vec3: "Stabilité de l'emploi. Score basé sur la répartition des types de contrats et statuts d'emploi.",
-  Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante accessibles."
-};
 
   for (const commune of [...Dejasurligner]){
       console.log(Dejasurligner)
@@ -1957,19 +2103,25 @@ const bornesParIndicateur = {
  const valeurIndice2 = indiceFinale[commune2];
 
 for (const indicateur in data1) {
-  const description = descriptionsIndicateurs[indicateur] || "Aucune description disponible.";
+  const lang = langueFrancais ? 'fr' : 'en';
+  const description = traductions[lang].descriptions[indicateur] || descriptionsIndicateurs[indicateur] || "No description available.";
   if (data2[indicateur] !== undefined) {
     html += `
       <tr>
-        <td>
+        <td style="position: relative;">
           ${indicateur}
-          <span class="tooltip-container" style="float: right; margin-left: 8px;">
+          <button class="info-button" data-indicator="${indicateur}" onclick="toggleIndicatorInfo(event, '${indicateur}_comp')" aria-label="Information" style="float: right; margin-left: 8px;">
             🛈
-            <span class="tooltip-text">${description}</span>
-          </span>
+          </button>
         </td>
         <td>${data1[indicateur].toFixed(2)}</td>
         <td>${data2[indicateur].toFixed(2)}</td>
+      </tr>
+      <tr id="info-row-${indicateur}_comp" style="display: none;">
+        <td colspan="3" style="background: #f0f8ff; padding: 10px; border-left: 3px solid #4a90e2;">
+          <button class="info-close-button" onclick="closeIndicatorInfo('${indicateur}_comp')" aria-label="Close">✕</button>
+          <p data-indicator-desc="${indicateur}_comp">${description}</p>
+        </td>
       </tr>
     `;
   }
