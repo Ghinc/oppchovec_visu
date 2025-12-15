@@ -2670,9 +2670,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
+    console.log('🔍 Nombre de boutons d\'onglets trouvés:', tabButtons.length);
+    tabButtons.forEach((btn, index) => {
+        console.log(`  Onglet ${index}:`, btn.getAttribute('data-tab'), btn.textContent);
+    });
+
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
             const targetTab = this.getAttribute('data-tab');
+            console.log('🖱️ Clic sur onglet:', targetTab);
 
             // Retirer la classe active de tous les boutons et contenus
             tabButtons.forEach(btn => btn.classList.remove('active'));
