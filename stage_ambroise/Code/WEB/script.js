@@ -1784,6 +1784,119 @@ function readFileAsText(file) {
 }
 
 // Fonction de chargement automatique des fichiers
+// Fonction pour générer les visualisations de données (top 10 et histogramme)
+function genererDataVisualisations(indiceFinale) {
+    console.log("📊 Génération des visualisations de données...");
+
+    // Créer un tableau de [commune, score] et trier par score décroissant
+    const communesScores = Object.entries(indiceFinale).map(([commune, score]) => ({
+        commune: commune,
+        score: score
+    })).sort((a, b) => b.score - a.score);
+
+    // Remplir le tableau du top 10
+    const tbody = document.getElementById('top10-tbody');
+    if (tbody) {
+        tbody.innerHTML = '';
+        communesScores.slice(0, 10).forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.commune}</td>
+                <td>${item.score.toFixed(2)}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Créer l'histogramme
+    const canvas = document.getElementById('histogram-chart');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        // Calculer les bins pour l'histogramme (intervalles de 0.5)
+        const binSize = 0.5;
+        const minScore = 0;
+        const maxScore = 10;
+        const numBins = Math.ceil((maxScore - minScore) / binSize);
+
+        const bins = new Array(numBins).fill(0);
+        const binLabels = [];
+
+        for (let i = 0; i < numBins; i++) {
+            const start = minScore + i * binSize;
+            const end = start + binSize;
+            binLabels.push(`${start.toFixed(1)}-${end.toFixed(1)}`);
+        }
+
+        // Compter les communes dans chaque bin
+        communesScores.forEach(item => {
+            const binIndex = Math.min(Math.floor((item.score - minScore) / binSize), numBins - 1);
+            if (binIndex >= 0) {
+                bins[binIndex]++;
+            }
+        });
+
+        // Détruire le graphique existant s'il existe
+        if (window.oppchovec_histogram) {
+            window.oppchovec_histogram.destroy();
+        }
+
+        // Créer le nouveau graphique
+        window.oppchovec_histogram = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: binLabels,
+                datasets: [{
+                    label: 'Nombre de communes',
+                    data: bins,
+                    backgroundColor: 'rgba(74, 144, 226, 0.7)',
+                    borderColor: 'rgba(74, 144, 226, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribution des scores OppChoVec',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        title: {
+                            display: true,
+                            text: 'Nombre de communes'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Score OppChoVec'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    console.log("✅ Visualisations de données générées");
+}
+
 async function chargerFichiersAutomatiquement() {
   try {
     console.log("🔄 Chargement automatique des fichiers...");
@@ -1830,6 +1943,12 @@ async function chargerFichiersAutomatiquement() {
     // 6. Suite du traitement
     const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
     populateCommuneSelect(data_indicateurs_dict);
+
+    // 7. Générer les visualisations de données
+    if (indiceFinale && Object.keys(indiceFinale).length > 0) {
+        genererDataVisualisations(indiceFinale);
+    }
+
     console.log("✅ Chargement automatique terminé avec succès !");
 
   } catch (err) {
@@ -2202,6 +2321,10 @@ html += `
   scoresParCommune = scoresNormalises
 
   afficherToutesLesCartes(communeJson, indiceFinale, scoresNormalises);
+
+  // Mettre à jour les visualisations de données
+  genererDataVisualisations(indiceFinale);
+
   valeurIndice = indiceFinale[selectedCommune]
   if (valeurIndice === undefined) {
     const resultDiv = document.getElementById("resultCommune");
@@ -2378,6 +2501,10 @@ function ajusterValeur(indicateur, delta) {
       scoresParCommune = data_dimensions_scores_dict;
 
       afficherToutesLesCartes(communeJson, indiceFinale, scoresParCommune);
+
+      // Générer les visualisations de données
+      genererDataVisualisations(indiceFinale);
+
       return indiceFinale;
     }
 

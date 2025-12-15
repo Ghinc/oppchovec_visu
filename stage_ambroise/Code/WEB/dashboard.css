@@ -536,7 +536,7 @@ button.small {
 }
 
 .indicateur-row strong {
-  flex: 1;
+  flex: 0 1 auto;
   font-weight: 500;
   color: var(--text-primary);
   font-size: 13px;
@@ -545,13 +545,14 @@ button.small {
   min-width: 0;
 }
 
-.indicateur-row span {
+.indicateur-row-header > span {
   font-weight: 600;
   color: var(--primary-blue);
   font-size: 14px;
   min-width: 50px;
   text-align: right;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 /* Slider en dessous */
@@ -569,68 +570,93 @@ button.small {
 /* ============================================
    TOOLTIPS
    ============================================ */
-.tooltip-container {
-  position: relative;
-  display: inline-flex;
+/* Bouton d'information */
+.info-button {
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  cursor: help;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #51cf66 !important;
+  color: white !important;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #40c057 !important;
+  transition: all var(--transition-fast);
+  padding: 0;
+  margin: 0 6px;
+  position: relative;
+  z-index: 999;
+  flex-shrink: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.info-button:hover {
+  background-color: #40c057;
+  color: white;
+  border-color: #37b24d;
+  transform: scale(1.15);
+}
+
+/* Boîte d'information extensible */
+.indicator-info-box {
+  margin: 8px 0;
+  padding: 12px;
+  background-color: #f0f8ff;
+  border-left: 3px solid var(--primary-blue);
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.indicator-info-box p {
+  margin: 0;
+  padding-right: 30px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+/* Bouton de fermeture */
+.info-close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: var(--bg-hover);
-  color: var(--text-secondary);
-  font-size: 12px;
-  font-weight: 600;
+  background-color: var(--border-medium);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
   transition: all var(--transition-fast);
+  z-index: 20;
 }
 
-.tooltip-container:hover {
-  background-color: var(--primary-blue);
-  color: white;
-}
-
-.tooltip-container::before {
-  content: '?';
-}
-
-.tooltip-container .tooltip-text {
-  visibility: hidden;
-  width: 260px;
-  background-color: var(--text-primary);
-  color: white;
-  text-align: left;
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  position: absolute;
-  z-index: 1000;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  white-space: normal;
-  font-size: 12px;
-  line-height: 1.5;
-  box-shadow: var(--shadow-lg);
-  pointer-events: none;
-}
-
-/* Flèche du tooltip */
-.tooltip-container .tooltip-text::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -6px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: var(--text-primary) transparent transparent transparent;
-}
-
-.tooltip-container:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
+.info-close-button:hover {
+  background-color: #e74c3c;
+  transform: rotate(90deg);
 }
 
 /* ============================================
@@ -899,7 +925,7 @@ tr:nth-child(even) {
     word-break: break-word;
   }
 
-  .indicateur-row span {
+  .indicateur-row-header > span {
     font-size: 12px;
     min-width: 45px;
   }
@@ -921,7 +947,7 @@ tr:nth-child(even) {
     font-size: 12px;
   }
 
-  .tooltip-container {
+  .info-button {
     width: 18px;
     height: 18px;
     font-size: 11px;
@@ -945,7 +971,7 @@ tr:nth-child(even) {
     font-size: 11px;
   }
 
-  .indicateur-row span {
+  .indicateur-row-header > span {
     font-size: 12px;
     min-width: 45px;
   }
@@ -1024,20 +1050,19 @@ tr:nth-child(even) {
     min-width: 0;
   }
 
-  .indicateur-row span {
+  .indicateur-row-header > span {
     font-size: 13px;
     min-width: 50px;
   }
 
-  .tooltip-container {
+  .info-button {
     width: 18px;
     height: 18px;
     font-size: 11px;
     flex-shrink: 0;
   }
 
-  .tooltip-container .tooltip-text {
-    width: 200px;
+  .indicator-info-box p {
     font-size: 11px;
   }
 
@@ -1103,20 +1128,22 @@ tr:nth-child(even) {
     word-wrap: break-word;
   }
 
-  .indicateur-row span {
+  .indicateur-row-header > span {
     font-size: 12px;
     min-width: 45px;
   }
 
-  .tooltip-container {
+  .info-button {
     width: 16px;
     height: 16px;
     font-size: 10px;
   }
 
-  .tooltip-container .tooltip-text {
-    width: 180px;
+  .indicator-info-box {
     padding: var(--spacing-sm);
+  }
+
+  .indicator-info-box p {
     font-size: 10px;
   }
 
@@ -1745,4 +1772,111 @@ tr:nth-child(even) {
 .marker-number:active {
   cursor: grabbing;
   transform: scale(1.02);
+}
+
+/* ============================================
+   DATA VISUALISATION TAB
+   ============================================ */
+
+.datavis-container {
+  padding: 2rem;
+  background: var(--bg-main);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.datavis-title {
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.datavis-section {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.datavis-subtitle {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-blue);
+  padding-bottom: 0.5rem;
+}
+
+/* Table styles */
+.table-container {
+  overflow-x: auto;
+}
+
+.datavis-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.datavis-table thead {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.datavis-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.datavis-table th:first-child {
+  border-top-left-radius: var(--border-radius-sm);
+}
+
+.datavis-table th:last-child {
+  border-top-right-radius: var(--border-radius-sm);
+}
+
+.datavis-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background var(--transition-fast);
+}
+
+.datavis-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.datavis-table td {
+  padding: 0.9rem 1rem;
+  color: var(--text-primary);
+}
+
+.datavis-table td:first-child {
+  font-weight: 600;
+  color: var(--primary-blue);
+  text-align: center;
+}
+
+.datavis-table td:nth-child(2) {
+  font-weight: 500;
+}
+
+.datavis-table td:last-child {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Chart container */
+.chart-container {
+  position: relative;
+  height: 400px;
+  padding: 1rem;
+}
+
+.chart-container canvas {
+  max-height: 100%;
 }

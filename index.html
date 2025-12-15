@@ -75,6 +75,7 @@
           <button class="tab-button" data-tab="vectab" id="tab-vec">Vec</button>
           <button class="tab-button" data-tab="lisatab">LISA</button>
           <button class="tab-button" data-tab="cahtab">CAH</button>
+          <button class="tab-button" data-tab="datavistab">Data Visualisation</button>
           <button class="tab-button" data-tab="chatbottab">DumèGPT</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
@@ -154,6 +155,40 @@
           </div>
         </div>
 
+        <!-- Onglet Data Visualisation -->
+        <div class="tab-content" id="datavistab">
+          <div class="datavis-container">
+            <h2 class="datavis-title">📊 Data Visualisation - OppChoVec</h2>
+
+            <!-- Top 10 communes -->
+            <div class="datavis-section">
+              <h3 class="datavis-subtitle">🏆 Top 10 des communes avec le meilleur score OppChoVec</h3>
+              <div class="table-container">
+                <table id="top10-table" class="datavis-table">
+                  <thead>
+                    <tr>
+                      <th>Rang</th>
+                      <th>Commune</th>
+                      <th>Score OppChoVec</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top10-tbody">
+                    <!-- Rempli dynamiquement par JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Histogramme -->
+            <div class="datavis-section">
+              <h3 class="datavis-subtitle">📈 Répartition des communes selon le score OppChoVec</h3>
+              <div class="chart-container">
+                <canvas id="histogram-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Onglet DumèGPT -->
         <div class="tab-content" id="chatbottab">
           <div class="chatbot-container">
@@ -196,6 +231,7 @@
       </div>
     </main>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="stage_ambroise/Code/WEB/lisa_data.js"></script>
   <script src="stage_ambroise/Code/WEB/lisa_data_1pct.js"></script>
   <script src="stage_ambroise/Code/WEB/cah_data.js"></script>
