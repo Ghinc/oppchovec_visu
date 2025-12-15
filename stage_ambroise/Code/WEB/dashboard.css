@@ -126,10 +126,12 @@ main {
 /* Barre d'onglets */
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   background-color: white;
   border-bottom: 2px solid var(--border-light);
   padding: 0 var(--spacing-md);
   gap: 4px;
+  overflow-x: auto;
 }
 
 .tab-button {
