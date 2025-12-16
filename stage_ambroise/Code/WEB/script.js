@@ -1809,31 +1809,30 @@ function genererDataVisualisations(indiceFinale) {
         });
     }
 
-    // Créer l'histogramme
+    // Créer l'histogramme avec les seuils de Jenks
     const canvas = document.getElementById('histogram-chart');
     if (canvas) {
         const ctx = canvas.getContext('2d');
 
-        // Calculer les bins pour l'histogramme (intervalles de 0.5)
-        const binSize = 0.5;
-        const minScore = 0;
-        const maxScore = 10;
-        const numBins = Math.ceil((maxScore - minScore) / binSize);
-
-        const bins = new Array(numBins).fill(0);
+        // Utiliser les seuils de Jenks pour OppChoVec
+        const seuils = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
+        const bins = new Array(seuils.length - 1).fill(0);
         const binLabels = [];
+        const backgroundColors = [];
 
-        for (let i = 0; i < numBins; i++) {
-            const start = minScore + i * binSize;
-            const end = start + binSize;
-            binLabels.push(`${start.toFixed(1)}-${end.toFixed(1)}`);
+        // Générer les labels et couleurs selon les seuils Jenks
+        for (let i = 0; i < seuils.length - 1; i++) {
+            binLabels.push(`${seuils[i].toFixed(2)} - ${seuils[i + 1].toFixed(2)}`);
+            backgroundColors.push(colorsJenks[i]);
         }
 
-        // Compter les communes dans chaque bin
+        // Compter les communes dans chaque classe Jenks
         communesScores.forEach(item => {
-            const binIndex = Math.min(Math.floor((item.score - minScore) / binSize), numBins - 1);
-            if (binIndex >= 0) {
-                bins[binIndex]++;
+            for (let i = 0; i < seuils.length - 1; i++) {
+                if (item.score >= seuils[i] && item.score <= seuils[i + 1]) {
+                    bins[i]++;
+                    break;
+                }
             }
         });
 
@@ -1848,10 +1847,9 @@ function genererDataVisualisations(indiceFinale) {
             data: {
                 labels: binLabels,
                 datasets: [{
-                    label: 'Nombre de communes',
                     data: bins,
-                    backgroundColor: 'rgba(74, 144, 226, 0.7)',
-                    borderColor: 'rgba(74, 144, 226, 1)',
+                    backgroundColor: backgroundColors,
+                    borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
                     borderWidth: 1
                 }]
             },
@@ -1860,33 +1858,43 @@ function genererDataVisualisations(indiceFinale) {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: true,
-                        position: 'top',
+                        display: false
                     },
                     title: {
-                        display: true,
-                        text: 'Distribution des scores OppChoVec',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
-                        }
+                        display: false
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 1
+                            stepSize: 1,
+                            font: {
+                                size: 12
+                            }
                         },
                         title: {
                             display: true,
-                            text: 'Nombre de communes'
+                            text: 'Nombre de communes',
+                            font: {
+                                size: 13,
+                                weight: 'bold'
+                            }
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Score OppChoVec'
+                            text: 'Classes de score OppChoVec (Jenks)',
+                            font: {
+                                size: 13,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            }
                         }
                     }
                 }
