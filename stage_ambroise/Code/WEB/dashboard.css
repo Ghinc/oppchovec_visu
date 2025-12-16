@@ -1784,8 +1784,9 @@ tr:nth-child(even) {
 .datavis-container {
   padding: 1.5rem;
   background: var(--bg-main);
-  height: 100%;
+  flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .datavis-title {
