@@ -1803,6 +1803,9 @@ tr:nth-child(even) {
   padding: 1rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-md);
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .datavis-subtitle {
@@ -1812,12 +1815,15 @@ tr:nth-child(even) {
   margin-bottom: 1rem;
   border-bottom: 2px solid var(--primary-blue);
   padding-bottom: 0.4rem;
+  flex-shrink: 0;
 }
 
 /* Table styles */
 .table-container {
+  overflow-y: auto;
   overflow-x: auto;
   max-width: 100%;
+  flex: 1;
 }
 
 .datavis-table {
