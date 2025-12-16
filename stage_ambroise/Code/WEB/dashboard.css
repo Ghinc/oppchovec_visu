@@ -1781,58 +1781,61 @@ tr:nth-child(even) {
    DATA VISUALISATION TAB
    ============================================ */
 
-.datavis-container {
-  padding: 1.5rem;
-  background: var(--bg-main);
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+/* Sous-onglets Data Visualisation */
+.datavis-subtabs {
+  display: flex;
+  background-color: var(--bg-hover);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--spacing-xs) var(--spacing-md);
+  gap: 4px;
+  flex-shrink: 0;
 }
 
-.datavis-title {
-  color: var(--text-primary);
-  font-size: 1.5rem;
+.datavis-subtab-button {
+  padding: 0.5rem 1.2rem;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.datavis-subtab-button:hover {
+  background-color: rgba(74, 144, 226, 0.1);
+  color: var(--primary-blue);
+}
+
+.datavis-subtab-button.active {
+  background-color: var(--primary-blue);
+  color: white;
   font-weight: 600;
-  margin-bottom: 1.2rem;
-  text-align: center;
 }
 
-.datavis-section {
-  background: var(--bg-card);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-md);
-  max-height: 500px;
+/* Contenu des sous-onglets Data Visualisation */
+.datavis-subtab-content {
+  display: none;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.datavis-subtab-content.active {
   display: flex;
   flex-direction: column;
 }
 
-.datavis-subtitle {
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid var(--primary-blue);
-  padding-bottom: 0.4rem;
-  flex-shrink: 0;
-}
-
 /* Table styles */
-.table-container {
-  overflow-y: auto;
-  overflow-x: auto;
-  max-width: 100%;
-  flex: 1;
-}
-
 .datavis-table {
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
   border-collapse: collapse;
   background: white;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .datavis-table thead {
@@ -1841,20 +1844,19 @@ tr:nth-child(even) {
 }
 
 .datavis-table th {
-  padding: 0.6rem 0.8rem;
+  padding: 0.75rem 1rem;
   text-align: left;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .datavis-table th:first-child {
-  border-top-left-radius: var(--border-radius-sm);
-  width: 60px;
+  width: 80px;
+  text-align: center;
 }
 
 .datavis-table th:last-child {
-  border-top-right-radius: var(--border-radius-sm);
-  width: 100px;
+  width: 120px;
   text-align: right;
 }
 
@@ -1867,15 +1869,20 @@ tr:nth-child(even) {
   background: var(--bg-hover);
 }
 
+.datavis-table tbody tr:last-child {
+  border-bottom: none;
+}
+
 .datavis-table td {
-  padding: 0.5rem 0.8rem;
+  padding: 0.7rem 1rem;
   color: var(--text-primary);
 }
 
 .datavis-table td:first-child {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--primary-blue);
   text-align: center;
+  font-size: 1.1rem;
 }
 
 .datavis-table td:nth-child(2) {
@@ -1889,12 +1896,7 @@ tr:nth-child(even) {
 }
 
 /* Chart container */
-.chart-container {
-  position: relative;
-  height: 350px;
-  padding: 0.5rem;
-}
-
-.chart-container canvas {
-  max-height: 100%;
+#histogram-chart {
+  width: 100% !important;
+  height: 100% !important;
 }

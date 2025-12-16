@@ -157,13 +157,17 @@
 
         <!-- Onglet Data Visualisation -->
         <div class="tab-content" id="datavistab">
-          <div class="datavis-container">
-            <h2 class="datavis-title">📊 Data Visualisation - OppChoVec</h2>
+          <!-- Sous-onglets Data Visualisation -->
+          <div class="datavis-subtabs">
+            <button class="datavis-subtab-button active" data-datavis-tab="top10">🏆 Top 10</button>
+            <button class="datavis-subtab-button" data-datavis-tab="histogram">📈 Histogramme</button>
+          </div>
 
-            <!-- Top 10 communes -->
-            <div class="datavis-section">
-              <h3 class="datavis-subtitle">🏆 Top 10 des communes avec le meilleur score OppChoVec</h3>
-              <div class="table-container">
+          <!-- Top 10 -->
+          <div class="datavis-subtab-content active" id="datavis-top10">
+            <div style="padding: 2rem; display: flex; justify-content: center; align-items: center; height: 100%;">
+              <div style="max-width: 700px; width: 100%;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text-primary); font-size: 1.3rem;">🏆 Top 10 des communes avec le meilleur score OppChoVec</h3>
                 <table id="top10-table" class="datavis-table">
                   <thead>
                     <tr>
@@ -178,11 +182,13 @@
                 </table>
               </div>
             </div>
+          </div>
 
-            <!-- Histogramme -->
-            <div class="datavis-section">
-              <h3 class="datavis-subtitle">📈 Répartition des communes selon le score OppChoVec</h3>
-              <div class="chart-container">
+          <!-- Histogramme -->
+          <div class="datavis-subtab-content" id="datavis-histogram">
+            <div style="padding: 2rem; height: 100%; display: flex; flex-direction: column;">
+              <h3 style="text-align: center; margin-bottom: 1rem; color: var(--text-primary); font-size: 1.3rem;">📈 Répartition des communes selon le score OppChoVec</h3>
+              <div style="flex: 1; position: relative;">
                 <canvas id="histogram-chart"></canvas>
               </div>
             </div>

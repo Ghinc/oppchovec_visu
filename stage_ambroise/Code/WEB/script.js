@@ -2790,6 +2790,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Gestion des sous-onglets Data Visualisation
+    const datavisSubtabButtons = document.querySelectorAll('.datavis-subtab-button');
+    datavisSubtabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetDatavisTab = this.getAttribute('data-datavis-tab');
+
+            // Retirer la classe active de tous les boutons et contenus
+            datavisSubtabButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.datavis-subtab-content').forEach(content => content.classList.remove('active'));
+
+            // Ajouter la classe active au bouton cliqué et au contenu correspondant
+            this.classList.add('active');
+            document.getElementById('datavis-' + targetDatavisTab).classList.add('active');
+        });
+    });
+
     // Gestion du bouton toggle CAH 5 clusters (carte <-> graphique)
     const toggleCAH5Btn = document.getElementById('toggleCAH5View');
     if (toggleCAH5Btn) {
