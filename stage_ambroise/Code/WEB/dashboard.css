@@ -1782,7 +1782,7 @@ tr:nth-child(even) {
    ============================================ */
 
 .datavis-container {
-  padding: 2rem;
+  padding: 1.5rem;
   background: var(--bg-main);
   height: 100%;
   overflow-y: auto;
@@ -1790,38 +1790,42 @@ tr:nth-child(even) {
 
 .datavis-title {
   color: var(--text-primary);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   text-align: center;
 }
 
 .datavis-section {
   background: var(--bg-card);
   border-radius: var(--border-radius);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
   box-shadow: var(--shadow-md);
 }
 
 .datavis-subtitle {
   color: var(--text-primary);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-bottom: 2px solid var(--primary-blue);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
 }
 
 /* Table styles */
 .table-container {
   overflow-x: auto;
+  max-width: 100%;
 }
 
 .datavis-table {
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   border-collapse: collapse;
   background: white;
+  font-size: 0.9rem;
 }
 
 .datavis-table thead {
@@ -1830,18 +1834,21 @@ tr:nth-child(even) {
 }
 
 .datavis-table th {
-  padding: 1rem;
+  padding: 0.6rem 0.8rem;
   text-align: left;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .datavis-table th:first-child {
   border-top-left-radius: var(--border-radius-sm);
+  width: 60px;
 }
 
 .datavis-table th:last-child {
   border-top-right-radius: var(--border-radius-sm);
+  width: 100px;
+  text-align: right;
 }
 
 .datavis-table tbody tr {
@@ -1854,7 +1861,7 @@ tr:nth-child(even) {
 }
 
 .datavis-table td {
-  padding: 0.9rem 1rem;
+  padding: 0.5rem 0.8rem;
   color: var(--text-primary);
 }
 
@@ -1871,13 +1878,14 @@ tr:nth-child(even) {
 .datavis-table td:last-child {
   font-weight: 600;
   color: var(--text-secondary);
+  text-align: right;
 }
 
 /* Chart container */
 .chart-container {
   position: relative;
-  height: 400px;
-  padding: 1rem;
+  height: 350px;
+  padding: 0.5rem;
 }
 
 .chart-container canvas {
