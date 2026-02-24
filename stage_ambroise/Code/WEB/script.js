@@ -2670,7 +2670,9 @@ function recalculerCarteOppChoVec() {
     console.log(`[p_k mode=${modeCalculPk}] Opp=${pkValues[0].toFixed(4)} Cho=${pkValues[1].toFixed(4)} Vec=${pkValues[2].toFixed(4)} (somme=${pkValues.reduce((a,b)=>a+b,0).toFixed(4)})`);
 
     // Recalculer OppChoVec brut avec le bon p_k
-    const indiceBrut = calculerIndiceBienEtre(scoresParCommune, pkValues);
+    // Utiliser les scores 0-1 (cohérent avec le Python/Excel) si disponibles
+    const srcScores = (Object.keys(scoresParCommuneRaw01).length > 0) ? scoresParCommuneRaw01 : scoresParCommune;
+    const indiceBrut = calculerIndiceBienEtre(srcScores, pkValues);
 
     // Renormaliser 0-10
     const valeurs = Object.values(indiceBrut);
