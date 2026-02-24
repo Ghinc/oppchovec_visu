@@ -244,6 +244,35 @@ main {
   flex-direction: column;
 }
 
+/* Bouton bascule p_k */
+.pk-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+#btn-toggle-pk {
+  padding: 4px 12px;
+  border: 1px solid #1976d2;
+  border-radius: 4px;
+  background: white;
+  color: #1976d2;
+  cursor: pointer;
+  font-weight: 500;
+}
+#btn-toggle-pk.active {
+  background: #1976d2;
+  color: white;
+}
+#pk-values-display {
+  color: #555;
+  font-style: italic;
+}
+
 /* Cartes */
 .map {
   width: 100%;

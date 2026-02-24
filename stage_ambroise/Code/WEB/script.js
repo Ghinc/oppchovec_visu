@@ -18,6 +18,8 @@ let data_indicateursOriginaux = {}
     let scoresParCommune = {}
     let indicateursCommune = {}
     let communeJson = {}
+    let modeCalculPk = 'egal'; // 'egal' | 'betti'
+    let scoresParCommuneRaw01 = {}; // scores 0-1 (pour calcul p_k Betti)
     let clustersLISA5pct = {}  // Clusters LISA 5% chargés depuis JSON
     let clustersLISA1pct = {}  // Clusters LISA 1% chargés depuis JSON
     let seuilsJenksCharges = {}  // Seuils Jenks chargés depuis seuils_jenks.json
@@ -2495,6 +2497,12 @@ function ajusterValeur(indicateur, delta) {
           "Score_Cho": valeurs["Score_Cho_0_10"] || valeurs["Score_Cho"],
           "Score_Vec": valeurs["Score_Vec_0_10"] || valeurs["Score_Vec"]
         };
+        // Stocker aussi les scores bruts 0-1 pour le calcul p_k Betti (CV scale-invariant 0-1)
+        scoresParCommuneRaw01[commune] = {
+          "Score_Opp": valeurs["Score_Opp"],
+          "Score_Cho": valeurs["Score_Cho"],
+          "Score_Vec": valeurs["Score_Vec"]
+        };
 
         // Utiliser OppChoVec normalisé 0-10
         indiceFinal[commune] = valeurs["OppChoVec_0_10"] || valeurs["OppChoVec"];
@@ -2517,8 +2525,7 @@ function ajusterValeur(indicateur, delta) {
     }
 
 // fonction de calcul de l'indicateur de vien-être
-function calculerIndiceBienEtre(scoresParCommune) {
-  const pkValues = [1, 1, 1]; // Pondération pour Opp, Cho, Vec
+function calculerIndiceBienEtre(scoresParCommune, pkValues = [1, 1, 1]) {
   const alpha = 2.5;
   const beta = 1.5;
 
@@ -2549,6 +2556,157 @@ function calculerIndiceBienEtre(scoresParCommune) {
   return bienEtreParCommune;
 }
 
+
+// === Calcul du vrai p_k selon Betti et al. (2008) ===
+// Utilise les scores 0-1 (bruts) pour le CV — invariance d'échelle correcte
+function calculerPkBetti(scoresParCommune) {
+    const communes = Object.keys(scoresParCommune);
+    const dims = ['Score_Opp', 'Score_Cho', 'Score_Vec'];
+    // Utiliser les scores 0-1 si disponibles, sinon fallback sur les 0-10
+    const src = (Object.keys(scoresParCommuneRaw01).length > 0) ? scoresParCommuneRaw01 : scoresParCommune;
+    const data = dims.map(dim => communes.map(c => src[c][dim]));
+
+    // p¹_k = cv_k = std / mean (coefficient de variation)
+    const p1 = data.map(arr => {
+        const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+        const variance = arr.reduce((a, b) => a + (b - mean) ** 2, 0) / arr.length;
+        return mean === 0 ? 0 : Math.sqrt(variance) / mean;
+    });
+
+    // Corrélation de Pearson entre deux vecteurs
+    function pearsonCorr(a, b) {
+        const n = a.length;
+        const meanA = a.reduce((s, x) => s + x, 0) / n;
+        const meanB = b.reduce((s, x) => s + x, 0) / n;
+        const num = a.reduce((s, x, i) => s + (x - meanA) * (b[i] - meanB), 0);
+        const denA = Math.sqrt(a.reduce((s, x) => s + (x - meanA) ** 2, 0));
+        const denB = Math.sqrt(b.reduce((s, x) => s + (x - meanB) ** 2, 0));
+        return (denA * denB === 0) ? 0 : num / (denA * denB);
+    }
+
+    // p²_k = 1 / mean(|ρ_{k,k'}|) pour tous k' (incl. k lui-même, ρ_{k,k}=1)
+    const p2 = data.map((a) => {
+        const avgCorr = data.reduce((s, b) => s + Math.abs(pearsonCorr(a, b)), 0) / data.length;
+        return avgCorr === 0 ? 0 : 1 / avgCorr;
+    });
+
+    // p_k = p¹_k × p²_k, normalisé pour que Σp_k = 1
+    const pkRaw = p1.map((v, i) => v * p2[i]);
+    const sum = pkRaw.reduce((a, b) => a + b, 0);
+    return sum === 0 ? [1/3, 1/3, 1/3] : pkRaw.map(v => v / sum);
+}
+
+// === Jenks Natural Breaks (programmation dynamique) ===
+function calculerJenksBreaks(values, nClasses) {
+    const sorted = [...values].filter(v => isFinite(v)).sort((a, b) => a - b);
+    const n = sorted.length;
+    if (n <= nClasses) return sorted.slice(1);
+
+    // Sommes préfixes pour calculer SSQ(i,j) en O(1)
+    const prefSum = new Float64Array(n + 1);
+    const prefSumSq = new Float64Array(n + 1);
+    for (let i = 0; i < n; i++) {
+        prefSum[i + 1] = prefSum[i] + sorted[i];
+        prefSumSq[i + 1] = prefSumSq[i] + sorted[i] * sorted[i];
+    }
+    // SSQ des éléments sorted[i..j] (0-indexés, inclusifs)
+    function ssd(i, j) {
+        const cnt = j - i + 1;
+        const sum = prefSum[j + 1] - prefSum[i];
+        const sumSq = prefSumSq[j + 1] - prefSumSq[i];
+        return sumSq - (sum * sum) / cnt;
+    }
+
+    // dp[i][k] = min SSQ pour les i premiers éléments en k classes
+    const dp = Array.from({length: n + 1}, () => new Float64Array(nClasses + 1).fill(Infinity));
+    const prev = Array.from({length: n + 1}, () => new Int32Array(nClasses + 1));
+    dp[0][0] = 0;
+    for (let i = 1; i <= n; i++) {
+        dp[i][1] = ssd(0, i - 1); // variance réelle des i premiers éléments en 1 classe
+        prev[i][1] = 0;
+    }
+
+    for (let k = 2; k <= nClasses; k++) {
+        for (let i = k; i <= n; i++) {
+            for (let m = k - 1; m < i; m++) {
+                const cost = dp[m][k - 1] + ssd(m, i - 1);
+                if (cost < dp[i][k]) {
+                    dp[i][k] = cost;
+                    prev[i][k] = m;
+                }
+            }
+        }
+    }
+
+    // Backtracking : sorted[m-1] = dernier élément de la classe gauche (convention jenkspy)
+    const breaks = [];
+    let k = nClasses;
+    let i = n;
+    while (k > 1) {
+        const m = prev[i][k];
+        breaks.unshift(sorted[m - 1]);
+        i = m;
+        k--;
+    }
+    return breaks; // nClasses-1 seuils internes
+}
+
+// === Bascule mode p_k ===
+function toggleModePk() {
+    modeCalculPk = (modeCalculPk === 'egal') ? 'betti' : 'egal';
+    recalculerCarteOppChoVec();
+}
+
+function recalculerCarteOppChoVec() {
+    if (!scoresParCommune || Object.keys(scoresParCommune).length === 0) {
+        console.warn('scoresParCommune non disponible');
+        return;
+    }
+
+    const pkValues = modeCalculPk === 'betti'
+        ? calculerPkBetti(scoresParCommune)
+        : [1, 1, 1];
+
+    console.log(`[p_k mode=${modeCalculPk}] Opp=${pkValues[0].toFixed(4)} Cho=${pkValues[1].toFixed(4)} Vec=${pkValues[2].toFixed(4)} (somme=${pkValues.reduce((a,b)=>a+b,0).toFixed(4)})`);
+
+    // Recalculer OppChoVec brut avec le bon p_k
+    const indiceBrut = calculerIndiceBienEtre(scoresParCommune, pkValues);
+
+    // Renormaliser 0-10
+    const valeurs = Object.values(indiceBrut);
+    const minVal = Math.min(...valeurs);
+    const maxVal = Math.max(...valeurs);
+    const indiceNorm = {};
+    for (const commune in indiceBrut) {
+        indiceNorm[commune] = (maxVal === minVal) ? 5
+            : ((indiceBrut[commune] - minVal) / (maxVal - minVal)) * 10;
+    }
+
+    // Recalculer Jenks sur les nouvelles valeurs
+    const breaks = calculerJenksBreaks(Object.values(indiceNorm), 5);
+    seuilsJenks['oppchovec'] = [0, ...breaks, 10];
+    console.log('[Jenks oppchovec]', seuilsJenks['oppchovec'].map(v => v.toFixed(3)).join(' | '));
+
+    // Mettre à jour la carte (afficherCarteUnique gère le rechargement des layers)
+    afficherCarteUnique('map-oppchovec', 'oppchovec', communeJson, indiceNorm, 'OppChoLiv');
+
+    majAffichagePk(pkValues);
+}
+
+function majAffichagePk(pkValues) {
+    const btn = document.getElementById('btn-toggle-pk');
+    const info = document.getElementById('pk-values-display');
+    if (!btn || !info) return;
+    if (modeCalculPk === 'betti') {
+        btn.textContent = 'p_k : Betti et al. ✓';
+        btn.classList.add('active');
+        info.textContent = `Opp=${pkValues[0].toFixed(3)} | Cho=${pkValues[1].toFixed(3)} | Vec=${pkValues[2].toFixed(3)}`;
+    } else {
+        btn.textContent = 'p_k : égal [1,1,1]';
+        btn.classList.remove('active');
+        info.textContent = 'Pondérations égales (p_k = 1/3 chacun)';
+    }
+}
 
 // fonction de calcul des valeurs des dimensions de OppChoVec
 function calculerScoresParCommune(dataNormalise) {
