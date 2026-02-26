@@ -64,6 +64,10 @@
           <input type="checkbox" id="checkbox-english" checked>
           <span style="margin-left: 0.5em;">English labels</span>
         </label>
+        <label style="display: flex; align-items: center; cursor: pointer; margin-top: 0.5em;">
+          <input type="checkbox" id="checkbox-copyright" checked onchange="document.querySelectorAll('.copyright-control').forEach(el => el.style.display = this.checked ? '' : 'none')">
+          <span style="margin-left: 0.5em;">Afficher le copyright</span>
+        </label>
       </div>
 
       <!-- Pondérations p_k (OppChoVec) -->
