@@ -281,26 +281,25 @@ function ajouterRoseDesVents(carte) {
     roseControl.addTo(carte);
 }
 
-// Barre d'échelle fixe à 50 km (se met à jour au zoom)
+// Barre d'échelle fixe à 50 km — style identique au contrôle Leaflet natif
 function ajouterEchelle50km(carte) {
     const ctrl = L.control({ position: 'bottomleft' });
     ctrl.onAdd = function(map) {
-        const div = L.DomUtil.create('div', 'echelle-50km');
-        div.style.cssText = 'background:rgba(255,255,255,0.9);border:2px solid #333;border-top:none;padding:2px 6px;font-size:11px;font-weight:bold;text-align:center;white-space:nowrap;';
+        const container = L.DomUtil.create('div', 'leaflet-control-scale');
+        const line = L.DomUtil.create('div', 'leaflet-control-scale-line', container);
         function update() {
             const c = map.getCenter();
             const p1 = map.latLngToContainerPoint(L.latLng(c.lat, c.lng - 0.5));
             const p2 = map.latLngToContainerPoint(L.latLng(c.lat, c.lng + 0.5));
             const pxPerDeg = Math.abs(p2.x - p1.x);
             const kmPerDeg = 111.32 * Math.cos(c.lat * Math.PI / 180);
-            const w = Math.max(20, Math.round(50 * pxPerDeg / kmPerDeg));
-            div.style.width = w + 'px';
-            div.innerHTML = '50 km';
+            line.style.width = Math.max(20, Math.round(50 * pxPerDeg / kmPerDeg)) + 'px';
+            line.innerHTML = '50 km';
         }
         map.on('zoomend moveend', update);
         setTimeout(update, 50);
-        L.DomEvent.disableClickPropagation(div);
-        return div;
+        L.DomEvent.disableClickPropagation(container);
+        return container;
     };
     ctrl.addTo(carte);
 }
