@@ -2692,6 +2692,32 @@ function recalculerCarteOppChoVec() {
     // Mettre à jour la carte (afficherCarteUnique gère le rechargement des layers)
     afficherCarteUnique('map-oppchovec', 'oppchovec', communeJson, indiceNorm, 'OppChoLiv');
 
+    // Mettre à jour indiceFinale pour que les popups LISA montrent les bonnes valeurs
+    indiceFinale = indiceNorm;
+
+    // Switcher les clusters LISA selon le mode
+    if (modeCalculPk === 'betti' && typeof LISA_DATA_BETTI !== 'undefined' && typeof LISA_DATA_BETTI_1PCT !== 'undefined') {
+        const c5 = {}, c1 = {};
+        for (const [k, v] of Object.entries(LISA_DATA_BETTI.clusters))     c5[k] = v.cluster;
+        for (const [k, v] of Object.entries(LISA_DATA_BETTI_1PCT.clusters)) c1[k] = v.cluster;
+        clustersLISA5pct = c5;
+        clustersLISA1pct = c1;
+        console.log(`[LISA] Mode Betti — I=${LISA_DATA_BETTI.metadata.moran_global_I.toFixed(4)}, sig5%=${LISA_DATA_BETTI.metadata.nb_significatives}, sig1%=${LISA_DATA_BETTI_1PCT.metadata.nb_significatives}`);
+    } else {
+        const c5 = {}, c1 = {};
+        for (const [k, v] of Object.entries(LISA_DATA.clusters))     c5[k] = v.cluster;
+        for (const [k, v] of Object.entries(LISA_DATA_1PCT.clusters)) c1[k] = v.cluster;
+        clustersLISA5pct = c5;
+        clustersLISA1pct = c1;
+        console.log(`[LISA] Mode Égal — I=${LISA_DATA.metadata.moran_global_I.toFixed(4)}, sig5%=${LISA_DATA.metadata.nb_significatives}, sig1%=${LISA_DATA_1PCT.metadata.nb_significatives}`);
+    }
+
+    // Mettre à jour les cartes LISA si déjà initialisées
+    if (lisaCartesInitialisees) {
+        afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', communeJson, indiceNorm, clustersLISA5pct, '5%');
+        afficherCarteLISA('map-lisa-1pct', 'lisa-1pct', communeJson, indiceNorm, clustersLISA1pct, '1%');
+    }
+
     majAffichagePk(pkValues);
 }
 
