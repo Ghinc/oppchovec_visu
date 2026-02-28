@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>OppChoVec — Visualisation Interactive</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside>
+
+        <!-- 1. Import des fichiers -->
+        <div class="section">
+            <h2>1. Import des fichiers</h2>
+            <button id="loadDefaultBtn" style="width:100%;margin-bottom:0.75em;background:#27ae60;">
+                &#9654; Charger les données Corse (défaut)
+            </button>
+            <details style="margin-top:0.5em;">
+                <summary style="cursor:pointer;color:#5a6c7d;font-size:13px;">Charger des fichiers personnalisés…</summary>
+                <div style="margin-top:0.75em;">
+                    <h3>Fichiers des indicateurs</h3>
+                    <input type="file" id="file" accept=".json">
+                    <h3>GeoJSON des communes</h3>
+                    <input type="file" id="file_geojson" accept=".geojson">
+                    <button id="validateBtn">Valider les fichiers</button>
+                </div>
+            </details>
+        </div>
+
+        <!-- 2. Pondération p_k -->
+        <div class="section" id="section-pk">
+            <h2>2. Pondération p_k</h2>
+            <button id="btn-toggle-pk" style="width:100%;">p_k : égal [1,1,1]</button>
+            <div id="pk-values-display" style="font-size:12px;color:#666;margin-top:0.4em;">
+                Pondérations égales (p_k = 1/3 chacun)
+            </div>
+        </div>
+
+        <!-- 3. Sélection commune -->
+        <div class="section">
+            <h2>3. Sélection commune</h2>
+            <select id="communeSelect" style="width:100%;padding:0.5em;">
+                <option value="">-- Sélectionner une commune --</option>
+            </select>
+            <button id="validerCommune" style="margin-top:0.5em;">Valider</button>
+        </div>
+
+        <!-- 4. Réseau routier -->
+        <div class="section" id="section-routes">
+            <h2>4. Réseau routier</h2>
+            <label><input type="checkbox" id="checkbox-nationales">     Routes nationales (647)</label>
+            <label><input type="checkbox" id="checkbox-departementales"> Routes départementales (2654)</label>
+            <label><input type="checkbox" id="checkbox-communales">     Routes communales (3686)</label>
+            <label><input type="checkbox" id="checkbox-toutes">         Toutes les routes (7002)</label>
+        </div>
+
+        <!-- 5. Fiche de la commune sélectionnée -->
+        <div class="section">
+            <h3>Informations de la commune sélectionnée :</h3>
+            <div id="resultCommune" style="background:#f8f8f8;padding:1em;border-radius:8px;"></div>
+        </div>
+
+    </aside>
+
+    <!-- ===================== CONTENU PRINCIPAL ===================== -->
+    <main>
+        <div class="tabs-container">
+
+            <!-- Onglets principaux -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="oppchovectab">OppChoVec</button>
+                <button class="tab-button"         data-tab="opptab">Opp</button>
+                <button class="tab-button"         data-tab="chotab">Cho</button>
+                <button class="tab-button"         data-tab="vectab">Vec</button>
+                <button class="tab-button"         data-tab="lisatab">LISA</button>
+            </div>
+
+            <!-- Carte OppChoVec -->
+            <div class="tab-content active" id="oppchovectab">
+                <div id="map-oppchovec" class="map"></div>
+            </div>
+
+            <!-- Carte Opp -->
+            <div class="tab-content" id="opptab">
+                <div id="map-opp" class="map"></div>
+            </div>
+
+            <!-- Carte Cho -->
+            <div class="tab-content" id="chotab">
+                <div id="map-cho" class="map"></div>
+            </div>
+
+            <!-- Carte Vec -->
+            <div class="tab-content" id="vectab">
+                <div id="map-vec" class="map"></div>
+            </div>
+
+            <!-- Onglet LISA avec sous-onglets -->
+            <div class="tab-content" id="lisatab">
+                <div class="lisa-subtabs">
+                    <button class="lisa-subtab-button active" data-lisa-tab="lisa5pct">
+                        LISA 5% (α=0.05)
+                    </button>
+                    <button class="lisa-subtab-button" data-lisa-tab="lisa1pct">
+                        LISA 1% (α=0.01)
+                    </button>
+                </div>
+
+                <!-- LISA 5% -->
+                <div class="lisa-subtab-content active" id="lisa5pct">
+                    <div id="map-lisa-5pct" class="map"></div>
+                    <div class="lisa-legend-overlay">
+                        <!-- Légende générée dynamiquement par legend.js -->
+                        <div id="lisa-legend-5pct"></div>
+                    </div>
+                </div>
+
+                <!-- LISA 1% -->
+                <div class="lisa-subtab-content" id="lisa1pct">
+                    <div id="map-lisa-1pct" class="map"></div>
+                    <div class="lisa-legend-overlay">
+                        <!-- Légende générée dynamiquement par legend.js -->
+                        <div id="lisa-legend-1pct"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<!-- Données LISA pré-calculées -->
+<script src="js/lisa_data.js"></script>
+<script src="js/lisa_data_1pct.js"></script>
+<script src="js/lisa_data_betti.js"></script>
+<script src="js/lisa_data_betti_1pct.js"></script>
+
+<!-- MVC JavaScript — ordre de chargement important -->
+<script src="js/config.js"></script>
+<script src="js/model/state.js"></script>
+<script src="js/model/calculator.js"></script>
+<script src="js/view/legend.js"></script>
+<script src="js/view/map.js"></script>
+<script src="js/view/commune.js"></script>
+<script src="js/controller/app.js"></script>
+
+</body>
+</html>
