@@ -17,6 +17,48 @@
     cursor: pointer;
 }
 
+/* --- Section import : séparateur "ou" --- */
+.import-separator {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: var(--spacing-md) 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.import-separator::before,
+.import-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* --- Bloc d'import personnalisé (facultatif) --- */
+.import-custom {
+    border: 1px dashed var(--border-medium);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    background-color: var(--bg-hover);
+}
+
+.import-custom-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0 0 var(--spacing-sm) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.import-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: var(--spacing-xs) 0 2px;
+    font-weight: 500;
+}
+
 /* ============================================
    VARIABLES CSS
    ============================================ */
