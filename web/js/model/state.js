@@ -36,7 +36,7 @@ const AppState = {
     /** Mode de calcul des poids : 'egal' → [1,1,1] | 'betti' → Betti et al. */
     modeCalculPk: 'egal',
 
-    /** Scores des 3 dimensions normalisés 0-1 (Score_*/10) — utilisés pour Betti */
+    /** Scores des 3 dimensions normalisés 0-1 (Score_Dim / 10) — utilisés pour Betti */
     scoresParCommune01: {},
 
     /** Seuils Jenks recalculés dynamiquement après changement p_k {type: [...]} */

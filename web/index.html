@@ -28,10 +28,10 @@
             <!-- Option B : import personnalisé (facultatif) -->
             <div class="import-custom">
                 <p class="import-custom-title">Données personnalisées</p>
-                <label class="import-label">Indicateurs (.json)</label>
-                <input type="file" id="file" accept=".json">
-                <label class="import-label">Communes (.geojson)</label>
+                <label class="import-label">Communes (.geojson) <em>— requis</em></label>
                 <input type="file" id="file_geojson" accept=".geojson,.json">
+                <label class="import-label">Indicateurs (.json) <em>— facultatif (gris sans données)</em></label>
+                <input type="file" id="file" accept=".json">
                 <button id="validateBtn" style="width:100%;">&#8593; Charger ces fichiers</button>
             </div>
         </div>

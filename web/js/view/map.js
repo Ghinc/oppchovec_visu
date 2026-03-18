@@ -192,12 +192,13 @@ function initMap(mapId, type) {
             zoom:   MAP_ZOOM,
             zoomControl: true,
             attributionControl: false,
+            zoomSnap:  0.25,
+            zoomDelta: 0.25,
         });
         const carte = AppState.cartes[type];
         carte.getContainer().style.backgroundColor = '#ffffff';
         ajouterRoseDesVents(carte);
         ajouterEchelle50km(carte);
-        ajouterVillesPrincipales(carte);
         ajouterCopyright(carte);
     }
     return AppState.cartes[type];
@@ -215,10 +216,10 @@ function initMap(mapId, type) {
 function getColorJenks(value, type) {
     if (value === undefined || value === null || isNaN(value)) return '#cccccc';
     const seuils = AppState.seuilsJenks[type] || SEUILS_JENKS[type] || [3, 5, 7];
-    if (value <= seuils[0]) return COLORS_JENKS[0];
-    if (value <= seuils[1]) return COLORS_JENKS[1];
-    if (value <= seuils[2]) return COLORS_JENKS[2];
-    return COLORS_JENKS[3];
+    for (let i = 0; i < seuils.length; i++) {
+        if (value <= seuils[i]) return COLORS_JENKS[i];
+    }
+    return COLORS_JENKS[seuils.length];
 }
 
 
@@ -258,7 +259,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
     let _loggedFirst = false;
     AppState.geojsonLayers[type] = L.geoJSON(geojsonData, {
         style: feature => {
-            const nom = feature.properties.nom;
+            const props = feature.properties || {};
+            const nom = props.nom;
             const val = indicateursDict[nom];
             if (!_loggedFirst) {
                 console.log(`[map] style() type=${type} nom="${nom}" val=${val}`);
@@ -272,7 +274,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
             };
         },
         onEachFeature: (feature, layer) => {
-            const nom = feature.properties.nom;
+            const props = feature.properties || {};
+            const nom = props.nom;
             const val = indicateursDict[nom];
 
             // Stocker la couche par nom pour la carte principale (surlignement)
@@ -281,11 +284,15 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
             }
 
             layer.bindPopup(
-                `<strong>${nom}</strong><br>` +
+                `<strong>${nom || '?'}</strong><br>` +
                 `${titre} : ${val !== undefined ? val.toFixed(2) : 'N/A'}/10`
             );
         },
     }).addTo(carte);
+
+    // Cadrer la vue sur les données chargées
+    const bounds = AppState.geojsonLayers[type].getBounds();
+    if (bounds.isValid()) carte.fitBounds(bounds, { padding: [10, 10] });
 
     // Ajouter la légende
     AppState.legendControls[type] = buildChoroplethLegend(type, titre);
@@ -355,10 +362,12 @@ function afficherToutesLesCartes(geojsonData, indiceFinal, scores) {
         scoresVec[commune] = s.Score_Vec;
     }
 
-    afficherCarteUnique('map-oppchovec', 'oppchovec', geojsonData, indiceFinal,  'OppChoVec');
-    afficherCarteUnique('map-opp',       'opp',       geojsonData, scoresOpp,    'Score Opp');
-    afficherCarteUnique('map-cho',       'cho',       geojsonData, scoresCho,    'Score Cho');
-    afficherCarteUnique('map-vec',       'vec',       geojsonData, scoresVec,    'Score Vec');
+    afficherCarteUnique('map-oppchovec', 'oppchovec', geojsonData, indiceFinal, 'OppChoVec');
+
+    // Opp/Cho/Vec : lazy init — ne créer que si déjà initialisés (évite l'init sur div caché)
+    if (AppState.cartes['opp']) afficherCarteUnique('map-opp', 'opp', geojsonData, scoresOpp, 'Score Opp');
+    if (AppState.cartes['cho']) afficherCarteUnique('map-cho', 'cho', geojsonData, scoresCho, 'Score Cho');
+    if (AppState.cartes['vec']) afficherCarteUnique('map-vec', 'vec', geojsonData, scoresVec, 'Score Vec');
 
     if (AppState.lisaCartesInitialisees) {
         afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', geojsonData, indiceFinal, AppState.clustersLISA5pct, '5%');

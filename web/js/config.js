@@ -26,26 +26,26 @@ const VILLES_PRINCIPALES = [
 ];
 
 // ==============================================================================
-// CLASSIFICATION JENKS (4 classes, échelle 1-10)
+// CLASSIFICATION JENKS (5 classes, échelle 1-10)
 // ==============================================================================
 
-/** Seuils de rupture naturelle calculés sur les données normalisées 1-10 */
+/** Seuils de rupture naturelle calculés sur les données normalisées 1-10 (4 seuils = 5 classes) */
 const SEUILS_JENKS = {
-    oppchovec: [3.592, 5.029, 7.105],
-    opp:       [3.929, 6.140, 7.116],
-    cho:       [5.556, 7.579, 9.023],
-    vec:       [4.636, 6.074, 7.946]
+    oppchovec: [2.29, 3.91, 5.08, 7.26],
+    opp:       [2.44, 3.75, 4.95, 6.49],
+    cho:       [2.35, 6.11, 8.20, 9.30],
+    vec:       [1.78, 3.05, 4.14, 6.14]
 };
 
-/** Palette rouge → orange → jaune → vert foncé */
-const COLORS_JENKS = ["#d73027", "#fc8d59", "#fee08b", "#1a9850"];
+/** Palette bleu clair → violet foncé (5 classes, valeurs croissantes) */
+const COLORS_JENKS = ["#bbdefb", "#64b5f6", "#9c27b0", "#7b1fa2", "#4a148c"];
 
-/** Labels des classes pour les légendes */
+/** Labels des classes pour les légendes (fallback statique) */
 const LABELS_JENKS = {
-    oppchovec: ['≤ 3.6', '3.6 – 5.0', '5.0 – 7.1', '> 7.1'],
-    opp:       ['≤ 3.9', '3.9 – 6.1', '6.1 – 7.1', '> 7.1'],
-    cho:       ['≤ 5.6', '5.6 – 7.6', '7.6 – 9.0', '> 9.0'],
-    vec:       ['≤ 4.6', '4.6 – 6.1', '6.1 – 7.9', '> 7.9']
+    oppchovec: ['≤ 2.3', '2.3 – 3.9', '3.9 – 5.1', '5.1 – 7.3', '> 7.3'],
+    opp:       ['≤ 2.4', '2.4 – 3.8', '3.8 – 5.0', '5.0 – 6.5', '> 6.5'],
+    cho:       ['≤ 2.4', '2.4 – 6.1', '6.1 – 8.2', '8.2 – 9.3', '> 9.3'],
+    vec:       ['≤ 1.8', '1.8 – 3.1', '3.1 – 4.1', '4.1 – 6.1', '> 6.1']
 };
 
 // ==============================================================================

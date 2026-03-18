@@ -187,8 +187,8 @@ function recalculerCarteOppChoVec() {
             : ((indiceBrut[commune] - minVal) / (maxVal - minVal)) * 10;
     }
 
-    // Recalculer les seuils Jenks (4 classes = 3 seuils)
-    const breaks = calculerJenksBreaks(Object.values(indiceNorm), 4);
+    // Recalculer les seuils Jenks (5 classes = 4 seuils)
+    const breaks = calculerJenksBreaks(Object.values(indiceNorm), 5);
     AppState.seuilsJenks['oppchovec'] = breaks;
     console.log('[Jenks oppchovec]', breaks.map(v => v.toFixed(3)).join(' | '));
 
@@ -243,6 +243,42 @@ function majAffichagePk(pk) {
 // ==============================================================================
 
 /**
+ * Charge uniquement un GeoJSON (sans indicateurs).
+ * Toutes les communes s'affichent en gris (#cccccc).
+ *
+ * @param {Object} geojsonData - GeoJSON FeatureCollection
+ */
+function chargerGeojsonSeulement(geojsonData) {
+    if (geojsonData.type !== 'FeatureCollection' || !Array.isArray(geojsonData.features)) {
+        throw new Error('GeoJSON invalide : attendu un FeatureCollection.');
+    }
+
+    AppState.indicateursOriginaux = {};
+    AppState.communeJson          = geojsonData;
+    AppState.indicateursCommune  = {};
+    AppState.scoresParCommune    = {};
+    AppState.indiceFinale        = {};
+    AppState.scoresParCommune01  = {};
+    AppState.seuilsJenks         = {};
+    AppState.modeCalculPk           = 'egal';
+    AppState.clustersLISA5pct       = {};
+    AppState.clustersLISA1pct       = {};
+    AppState.lisaCartesInitialisees = false;
+
+    // Toutes les cartes en gris (dicts vides → #cccccc pour chaque commune)
+    afficherToutesLesCartes(geojsonData, {}, {});
+
+    // Remplir le sélecteur avec les noms de features du GeoJSON
+    const communeNames = {};
+    for (const feature of geojsonData.features) {
+        const nom = feature.properties.nom;
+        if (nom) communeNames[nom] = {};
+    }
+    populateCommuneSelect(communeNames);
+}
+
+
+/**
  * Logique commune : initialise l'application à partir des deux objets parsés.
  *
  * @param {Object} dataIndicateurs - JSON des indicateurs
@@ -274,6 +310,12 @@ function chargerEtAfficher(dataIndicateurs, geojsonData) {
     const { clusters5pct, clusters1pct } = chargerClustersLISA();
     AppState.clustersLISA5pct = clusters5pct;
     AppState.clustersLISA1pct = clusters1pct;
+
+    // Calcul Jenks dynamique (5 classes) pour les 4 dimensions
+    AppState.seuilsJenks['oppchovec'] = calculerJenksBreaks(Object.values(indiceDict), 5);
+    AppState.seuilsJenks['opp'] = calculerJenksBreaks(Object.values(scoresDict).map(s => s.Score_Opp), 5);
+    AppState.seuilsJenks['cho'] = calculerJenksBreaks(Object.values(scoresDict).map(s => s.Score_Cho), 5);
+    AppState.seuilsJenks['vec'] = calculerJenksBreaks(Object.values(scoresDict).map(s => s.Score_Vec), 5);
 
     afficherToutesLesCartes(AppState.communeJson, AppState.indiceFinale, AppState.scoresParCommune);
     populateCommuneSelect(AppState.indicateursCommune);
@@ -313,19 +355,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileJson    = document.getElementById('file').files[0];
         const fileGeoJson = document.getElementById('file_geojson').files[0];
 
-        if (!fileJson || !fileGeoJson) {
-            alert('Veuillez sélectionner un fichier JSON et un GeoJSON.');
+        if (!fileGeoJson) {
+            alert('Veuillez sélectionner au moins un fichier GeoJSON (.geojson).');
             return;
         }
 
         try {
-            const [textJson, textGeo] = await Promise.all([
-                readFileAsText(fileJson),
-                readFileAsText(fileGeoJson),
-            ]);
+            const textGeo = await readFileAsText(fileGeoJson);
+            const geojson = JSON.parse(textGeo);
 
-            chargerEtAfficher(JSON.parse(textJson), JSON.parse(textGeo));
-            alert('Fichiers validés. Sélectionnez une commune.');
+            if (fileJson) {
+                // Chargement complet : indicateurs + géométrie → cartes choroplèthes
+                const textJson = await readFileAsText(fileJson);
+                chargerEtAfficher(JSON.parse(textJson), geojson);
+                alert('Fichiers chargés. Sélectionnez une commune.');
+            } else {
+                // GeoJSON seul → toutes les communes en gris
+                chargerGeojsonSeulement(geojson);
+                alert('GeoJSON chargé (affichage en gris — sans données indicateurs).');
+            }
         } catch (err) {
             alert('Erreur : ' + err.message);
         }
@@ -362,9 +410,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 initialiserCartesLISA();
             }
 
-            // Forcer le redimensionnement de la carte active
+            // Lazy init opp/cho/vec : carte créée dans le conteneur visible au clic
             const type = cible.replace('tab', '');
-            if (AppState.cartes[type]) {
+            if (['opp', 'cho', 'vec'].includes(type)) {
+                setTimeout(() => {
+                    if (!AppState.communeJson || Object.keys(AppState.scoresParCommune).length === 0) return;
+                    const titres = { opp: 'Score Opp', cho: 'Score Cho', vec: 'Score Vec' };
+                    const dicts  = {
+                        opp: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Opp])),
+                        cho: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Cho])),
+                        vec: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Vec])),
+                    };
+                    afficherCarteUnique(`map-${type}`, type, AppState.communeJson, dicts[type], titres[type]);
+                }, 50);
+            } else if (AppState.cartes[type]) {
                 setTimeout(() => AppState.cartes[type].invalidateSize(), 100);
             }
         });
