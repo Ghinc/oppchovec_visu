@@ -185,6 +185,9 @@ function mettreAJourAffichageRoutes(carte, mapType) {
  * @param {string} type   - Clé de carte dans AppState.cartes
  * @returns {L.Map}
  */
+/** Flag anti-boucle pour la synchronisation zoom/centre entre cartes */
+let _isSyncing = false;
+
 function initMap(mapId, type) {
     if (!AppState.cartes[type]) {
         AppState.cartes[type] = L.map(mapId, {
@@ -200,6 +203,20 @@ function initMap(mapId, type) {
         ajouterRoseDesVents(carte);
         ajouterEchelle50km(carte);
         ajouterCopyright(carte);
+
+        // Synchronisation zoom + centre — toutes les cartes initialisées
+        carte.on('zoomend moveend', function () {
+            if (_isSyncing) return;
+            _isSyncing = true;
+            const zoom   = carte.getZoom();
+            const center = carte.getCenter();
+            for (const [key, other] of Object.entries(AppState.cartes)) {
+                if (key !== type && other) {
+                    other.setView(center, zoom, { animate: false });
+                }
+            }
+            setTimeout(() => { _isSyncing = false; }, 100);
+        });
     }
     return AppState.cartes[type];
 }
@@ -382,12 +399,142 @@ function afficherToutesLesCartes(geojsonData, indiceFinal, scores) {
 function initialiserCartesLISA() {
     if (AppState.lisaCartesInitialisees) return;
 
+    // Seulement lisa-5pct (sous-onglet actif) — lisa-1pct initialisé en lazy au clic
     afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', AppState.communeJson, AppState.indiceFinale, AppState.clustersLISA5pct, '5%');
-    afficherCarteLISA('map-lisa-1pct', 'lisa-1pct', AppState.communeJson, AppState.indiceFinale, AppState.clustersLISA1pct, '1%');
     AppState.lisaCartesInitialisees = true;
 
     setTimeout(() => {
         if (AppState.cartes['lisa-5pct']) AppState.cartes['lisa-5pct'].invalidateSize();
+    }, 100);
+}
+
+
+// ==============================================================================
+// CAH (Classification Ascendante Hiérarchique)
+// ==============================================================================
+
+/** Palette de couleurs pour les clusters CAH (jusqu'à 5 clusters) */
+const COLORS_CAH = {
+    1: '#917648',
+    2: '#9e9e9e',
+    3: '#61e75c',
+    4: '#de7eed',
+    5: '#f4b474',
+};
+
+/**
+ * Affiche ou met à jour une carte CAH.
+ *
+ * @param {string} mapId       - ID du div conteneur
+ * @param {string} mapType     - Clé de carte ('cah-3' ou 'cah-5')
+ * @param {Object} geojsonData - FeatureCollection GeoJSON
+ * @param {Object} cahData     - Objet CAH_DATA_N (avec .clusters)
+ * @param {number} nClusters   - Nombre de clusters (3 ou 5)
+ */
+function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
+    if (!cahData || !cahData.clusters) {
+        console.error(`[CAH] Données manquantes pour ${mapType}`);
+        return;
+    }
+
+    const carte = initMap(mapId, mapType);
+
+    if (AppState.geojsonLayers[mapType]) {
+        carte.removeLayer(AppState.geojsonLayers[mapType]);
+    }
+    if (AppState.legendControls[mapType]) {
+        carte.removeControl(AppState.legendControls[mapType]);
+    }
+
+    AppState.geojsonLayers[mapType] = L.geoJSON(geojsonData, {
+        style: feature => {
+            const nom  = feature.properties.nom;
+            const info = cahData.clusters[nom];
+            if (!info) return { fillColor: '#cccccc', fillOpacity: 0.6, color: '#000000', weight: 1 };
+            return {
+                fillColor:   COLORS_CAH[info.cluster] || '#cccccc',
+                fillOpacity: 0.7,
+                color:       '#000000',
+                weight:      1,
+            };
+        },
+        onEachFeature: (feature, layer) => {
+            const nom  = feature.properties.nom;
+            const info = cahData.clusters[nom];
+            if (info) {
+                layer.bindPopup(
+                    `<strong>${nom}</strong><br>` +
+                    `<strong>Cluster CAH :</strong> ${info.cluster}<br>` +
+                    `<strong>Score Opp :</strong> ${info.Score_Opp !== undefined ? info.Score_Opp.toFixed(2) : 'N/A'}<br>` +
+                    `<strong>Score Cho :</strong> ${info.Score_Cho !== undefined ? info.Score_Cho.toFixed(2) : 'N/A'}<br>` +
+                    `<strong>Score Vec :</strong> ${info.Score_Vec !== undefined ? info.Score_Vec.toFixed(2) : 'N/A'}`
+                );
+            }
+        },
+    }).addTo(carte);
+
+    const bounds = AppState.geojsonLayers[mapType].getBounds();
+    if (bounds.isValid()) carte.fitBounds(bounds, { padding: [10, 10] });
+
+    // Légende
+    AppState.legendControls[mapType] = _buildLegendeCAH(nClusters, cahData);
+    AppState.legendControls[mapType].addTo(carte);
+
+    ajouterRoseDesVents(carte);
+    ajouterEchelle50km(carte);
+    ajouterVillesPrincipales(carte);
+    ajouterCopyright(carte);
+
+    setTimeout(() => carte.invalidateSize(), 100);
+    setTimeout(() => carte.invalidateSize(), 500);
+}
+
+/**
+ * Construit le contrôle de légende CAH.
+ */
+function _buildLegendeCAH(nClusters, cahData) {
+    // Compter les communes par cluster
+    const counts = {};
+    for (const info of Object.values(cahData.clusters)) {
+        counts[info.cluster] = (counts[info.cluster] || 0) + 1;
+    }
+
+    const ctrl = L.control({ position: 'bottomright' });
+    ctrl.onAdd = function () {
+        const div = L.DomUtil.create('div', 'legend');
+        let html = `<h4>CAH — ${nClusters} clusters</h4>`;
+        for (let i = 1; i <= nClusters; i++) {
+            html += `<div style="display:flex;align-items:center;margin:3px 0;">` +
+                `<i style="background:${COLORS_CAH[i]};width:18px;height:18px;display:inline-block;` +
+                `border:1px solid #333;margin-right:6px;border-radius:2px;"></i>` +
+                `<span>Cluster ${i}` +
+                (counts[i] ? ` <span style="color:#777;font-size:11px;">(${counts[i]})</span>` : '') +
+                `</span></div>`;
+        }
+        div.innerHTML = html;
+        return div;
+    };
+    return ctrl;
+}
+
+/**
+ * Initialise les deux cartes CAH (appelé au premier clic sur l'onglet CAH).
+ */
+function initialiserCartesCAH() {
+    if (AppState.cahCartesInitialisees) return;
+    if (!AppState.communeJson) return;
+
+    if (typeof CAH_DATA_3 === 'undefined' || typeof CAH_DATA_5 === 'undefined') {
+        console.error('[CAH] CAH_DATA_3 ou CAH_DATA_5 non chargé.');
+        return;
+    }
+
+    // Seulement cah-3 (sous-onglet actif) — cah-5 initialisé en lazy au clic
+    afficherCarteCAH('map-cah-3', 'cah-3', AppState.communeJson, CAH_DATA_3, 3);
+    AppState.cahCartesInitialisees = true;
+
+    setTimeout(() => {
+        if (AppState.cartes['cah-3']) AppState.cartes['cah-3'].invalidateSize();
     }, 100);
 }
 

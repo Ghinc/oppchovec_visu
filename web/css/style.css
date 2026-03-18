@@ -185,6 +185,8 @@ main {
   border-bottom: 2px solid var(--border-light);
   padding: 0 var(--spacing-md);
   gap: 4px;
+  position: relative;
+  z-index: 500;
 }
 
 .tab-button {
@@ -223,11 +225,13 @@ main {
   display: none !important;
   flex: 1;
   position: relative;
+  overflow: hidden;
 }
 
 .tab-content.active {
   display: flex !important;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* LISA tab specific */
@@ -1376,6 +1380,108 @@ tr:nth-child(even) {
   color: var(--text-primary);
   font-size: 13px;
   line-height: 1.4;
+}
+
+/* ============================================
+   CAH TAB STYLES
+   ============================================ */
+.cah-subtabs {
+  display: flex;
+  background-color: var(--bg-hover);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--spacing-xs) var(--spacing-md);
+  gap: 4px;
+}
+
+.tab-content:not(.active) .cah-subtabs,
+.tab-content:not(.active) .cah-subtab-content {
+  display: none !important;
+}
+
+.cah-subtab-button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cah-subtab-button:hover {
+  background-color: var(--primary-blue-light);
+  color: white;
+  border-color: var(--primary-blue-light);
+}
+
+.cah-subtab-button.active {
+  background-color: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.cah-subtab-content {
+  display: none;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.cah-subtab-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.cah-view {
+  width: 100%;
+  flex: 1;
+  position: relative;
+}
+
+.cah-controls-top {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.cah-toggle-button {
+  background: white;
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.cah-toggle-button:hover {
+  background: var(--primary-blue);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cah-chart-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  overflow: auto;
+}
+
+.cah-chart-view img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* ============================================

@@ -82,6 +82,7 @@
                 <button class="tab-button"         data-tab="chotab">Cho</button>
                 <button class="tab-button"         data-tab="vectab">Vec</button>
                 <button class="tab-button"         data-tab="lisatab">LISA</button>
+                <button class="tab-button"         data-tab="cahtab">CAH</button>
             </div>
 
             <!-- Carte OppChoVec -->
@@ -134,6 +135,40 @@
                 </div>
             </div>
 
+            <!-- Onglet CAH avec sous-onglets -->
+            <div class="tab-content" id="cahtab">
+                <div class="cah-subtabs">
+                    <button class="cah-subtab-button active" data-cah-tab="cah3clusters">CAH 3 clusters</button>
+                    <button class="cah-subtab-button"        data-cah-tab="cah5clusters">CAH 5 clusters</button>
+                </div>
+
+                <!-- CAH 3 clusters -->
+                <div class="cah-subtab-content active" id="cah3clusters">
+                    <div class="cah-controls-top">
+                        <button id="toggleCAH3View" class="cah-toggle-button">&#128202; Voir les écarts standardisés</button>
+                    </div>
+                    <div id="cah3-map-view" class="cah-view">
+                        <div id="map-cah-3" class="map"></div>
+                    </div>
+                    <div id="cah3-chart-view" class="cah-chart-view" style="display:none;">
+                        <img src="img/cah_3_clusters_ecarts.png" alt="Écarts standardisés CAH 3 clusters">
+                    </div>
+                </div>
+
+                <!-- CAH 5 clusters -->
+                <div class="cah-subtab-content" id="cah5clusters">
+                    <div class="cah-controls-top">
+                        <button id="toggleCAH5View" class="cah-toggle-button">&#128202; Voir les écarts standardisés</button>
+                    </div>
+                    <div id="cah5-map-view" class="cah-view">
+                        <div id="map-cah-5" class="map"></div>
+                    </div>
+                    <div id="cah5-chart-view" class="cah-chart-view" style="display:none;">
+                        <img src="img/cah_5_clusters_ecarts.png" alt="Écarts standardisés CAH 5 clusters">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -144,6 +179,8 @@
 <script src="js/lisa_data_1pct.js"></script>
 <script src="js/lisa_data_betti.js"></script>
 <script src="js/lisa_data_betti_1pct.js"></script>
+<!-- Données CAH pré-calculées -->
+<script src="js/cah_data.js"></script>
 
 <!-- MVC JavaScript — ordre de chargement important -->
 <script src="js/config.js"></script>

@@ -409,19 +409,43 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cible === 'lisatab') {
                 initialiserCartesLISA();
             }
+            if (cible === 'cahtab') {
+                initialiserCartesCAH();
+            }
 
-            // Lazy init opp/cho/vec : carte créée dans le conteneur visible au clic
             const type = cible.replace('tab', '');
             if (['opp', 'cho', 'vec'].includes(type)) {
                 setTimeout(() => {
-                    if (!AppState.communeJson || Object.keys(AppState.scoresParCommune).length === 0) return;
-                    const titres = { opp: 'Score Opp', cho: 'Score Cho', vec: 'Score Vec' };
-                    const dicts  = {
-                        opp: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Opp])),
-                        cho: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Cho])),
-                        vec: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Vec])),
-                    };
-                    afficherCarteUnique(`map-${type}`, type, AppState.communeJson, dicts[type], titres[type]);
+                    if (!AppState.cartes[type]) {
+                        // Premier clic : créer la carte dans le conteneur maintenant visible
+                        if (!AppState.communeJson || Object.keys(AppState.scoresParCommune).length === 0) return;
+                        const titres = { opp: 'Score Opp', cho: 'Score Cho', vec: 'Score Vec' };
+                        const dicts  = {
+                            opp: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Opp])),
+                            cho: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Cho])),
+                            vec: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Vec])),
+                        };
+                        afficherCarteUnique(`map-${type}`, type, AppState.communeJson, dicts[type], titres[type]);
+                    } else {
+                        // Clics suivants : redimensionner et resynchroniser au zoom/centre de référence
+                        AppState.cartes[type].invalidateSize();
+                    }
+                    // Synchroniser au zoom/centre de la carte de référence (oppchovec)
+                    const ref = AppState.cartes['oppchovec'];
+                    if (ref && AppState.cartes[type]) {
+                        AppState.cartes[type].setView(ref.getCenter(), ref.getZoom(), { animate: false });
+                    }
+                }, 50);
+            } else if (type === 'cah') {
+                // Onglet CAH : sous-onglets gèrent leurs cartes — juste re-sync la carte active
+                setTimeout(() => {
+                    const activeCahSubtab = document.querySelector('.cah-subtab-content.active');
+                    const cahMapType = activeCahSubtab && activeCahSubtab.id === 'cah5clusters' ? 'cah-5' : 'cah-3';
+                    if (AppState.cartes[cahMapType]) {
+                        AppState.cartes[cahMapType].invalidateSize();
+                        const ref = AppState.cartes['oppchovec'];
+                        if (ref) AppState.cartes[cahMapType].setView(ref.getCenter(), ref.getZoom(), { animate: false });
+                    }
                 }, 50);
             } else if (AppState.cartes[type]) {
                 setTimeout(() => AppState.cartes[type].invalidateSize(), 100);
@@ -445,10 +469,88 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(cible).classList.add('active');
 
             const mapType = cible === 'lisa5pct' ? 'lisa-5pct' : 'lisa-1pct';
-            if (AppState.cartes[mapType]) {
-                setTimeout(() => AppState.cartes[mapType].invalidateSize(), 100);
-            }
+            setTimeout(() => {
+                if (!AppState.cartes[mapType] && AppState.communeJson) {
+                    // Lazy init LISA 1% : créer dans le sous-onglet maintenant visible
+                    const clusters = mapType === 'lisa-5pct' ? AppState.clustersLISA5pct : AppState.clustersLISA1pct;
+                    const seuil    = mapType === 'lisa-5pct' ? '5%' : '1%';
+                    afficherCarteLISA(`map-${mapType}`, mapType, AppState.communeJson, AppState.indiceFinale, clusters, seuil);
+                } else if (AppState.cartes[mapType]) {
+                    AppState.cartes[mapType].invalidateSize();
+                }
+                // Synchroniser au zoom/centre de la carte de référence (oppchovec)
+                const ref = AppState.cartes['oppchovec'];
+                if (ref && AppState.cartes[mapType]) {
+                    AppState.cartes[mapType].setView(ref.getCenter(), ref.getZoom(), { animate: false });
+                }
+            }, 50);
         });
+    });
+
+
+    // --- Navigation par sous-onglets CAH ---
+    const cahSubBtns     = document.querySelectorAll('.cah-subtab-button');
+    const cahSubContents = document.querySelectorAll('.cah-subtab-content');
+
+    cahSubBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const cible = this.getAttribute('data-cah-tab');
+
+            cahSubBtns.forEach(b     => b.classList.remove('active'));
+            cahSubContents.forEach(c => c.classList.remove('active'));
+
+            this.classList.add('active');
+            document.getElementById(cible).classList.add('active');
+
+            const mapType = cible === 'cah3clusters' ? 'cah-3' : 'cah-5';
+            setTimeout(() => {
+                if (!AppState.cartes[mapType] && AppState.communeJson) {
+                    // Lazy init cah-5 au premier clic
+                    const cahData  = mapType === 'cah-3' ? CAH_DATA_3 : CAH_DATA_5;
+                    const nCluster = mapType === 'cah-3' ? 3 : 5;
+                    afficherCarteCAH(`map-${mapType}`, mapType, AppState.communeJson, cahData, nCluster);
+                } else if (AppState.cartes[mapType]) {
+                    AppState.cartes[mapType].invalidateSize();
+                }
+                // Synchroniser au zoom/centre de la carte de référence
+                const ref = AppState.cartes['oppchovec'];
+                if (ref && AppState.cartes[mapType]) {
+                    AppState.cartes[mapType].setView(ref.getCenter(), ref.getZoom(), { animate: false });
+                }
+            }, 50);
+        });
+    });
+
+    // --- Toggle carte / graphique d'écarts (CAH 3) ---
+    document.getElementById('toggleCAH3View').addEventListener('click', function () {
+        const mapView   = document.getElementById('cah3-map-view');
+        const chartView = document.getElementById('cah3-chart-view');
+        if (mapView.style.display === 'none') {
+            mapView.style.display = 'block';
+            chartView.style.display = 'none';
+            this.textContent = '\u{1F4CA} Voir les écarts standardisés';
+            setTimeout(() => { if (AppState.cartes['cah-3']) AppState.cartes['cah-3'].invalidateSize(); }, 100);
+        } else {
+            mapView.style.display = 'none';
+            chartView.style.display = 'flex';
+            this.textContent = '\u{1F5FA}\uFE0F Voir la carte';
+        }
+    });
+
+    // --- Toggle carte / graphique d'écarts (CAH 5) ---
+    document.getElementById('toggleCAH5View').addEventListener('click', function () {
+        const mapView   = document.getElementById('cah5-map-view');
+        const chartView = document.getElementById('cah5-chart-view');
+        if (mapView.style.display === 'none') {
+            mapView.style.display = 'block';
+            chartView.style.display = 'none';
+            this.textContent = '\u{1F4CA} Voir les écarts standardisés';
+            setTimeout(() => { if (AppState.cartes['cah-5']) AppState.cartes['cah-5'].invalidateSize(); }, 100);
+        } else {
+            mapView.style.display = 'none';
+            chartView.style.display = 'flex';
+            this.textContent = '\u{1F5FA}\uFE0F Voir la carte';
+        }
     });
 
 

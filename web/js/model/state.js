@@ -61,6 +61,9 @@ const AppState = {
     /** Vrai si les cartes LISA ont été initialisées (lazy loading) */
     lisaCartesInitialisees: false,
 
+    /** Vrai si les cartes CAH ont été initialisées (lazy loading) */
+    cahCartesInitialisees: false,
+
     // ---- Instances Leaflet ----
 
     /** Instances de cartes Leaflet {type: L.Map | null} */
@@ -71,6 +74,8 @@ const AppState = {
         vec:        null,
         'lisa-5pct': null,
         'lisa-1pct': null,
+        'cah-3':     null,
+        'cah-5':     null,
     },
 
     /** Couches GeoJSON actives {type: L.GeoJSON | null} */
@@ -81,6 +86,8 @@ const AppState = {
         vec:        null,
         'lisa-5pct': null,
         'lisa-1pct': null,
+        'cah-3':     null,
+        'cah-5':     null,
     },
 
     /** Contrôles de légende Leaflet {type: L.Control | null} */
@@ -91,6 +98,8 @@ const AppState = {
         vec:        null,
         'lisa-5pct': null,
         'lisa-1pct': null,
+        'cah-3':     null,
+        'cah-5':     null,
     },
 
     /** Couches Leaflet indexées par nom de commune (carte oppchovec uniquement) */
