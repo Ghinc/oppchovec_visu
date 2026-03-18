@@ -1334,8 +1334,7 @@ tr:nth-child(even) {
   padding: var(--spacing-sm) 0;
   color: var(--text-secondary);
   line-height: 1.6;
-  display: flex;
-  align-items: center;
+  display: list-item;
 }
 
 .legend-color {
