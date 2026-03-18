@@ -1111,6 +1111,9 @@ tr:nth-child(even) {
 
   .lisa-legend-overlay {
     max-width: 280px;
+  }
+
+  .lisa-legend-overlay > .lisa-legend {
     max-height: 60vh;
   }
 
@@ -1202,9 +1205,12 @@ tr:nth-child(even) {
 
   .lisa-legend-overlay {
     max-width: 90%;
-    max-height: 50vh;
     bottom: 5px;
     right: 5px;
+  }
+
+  .lisa-legend-overlay > .lisa-legend {
+    max-height: 50vh;
   }
 
   .lisa-legend {
@@ -1288,13 +1294,13 @@ tr:nth-child(even) {
   right: 20px;
   z-index: 1000;
   max-width: 400px;
-  max-height: 80vh;
-  overflow-y: auto;
   pointer-events: none;
 }
 
 .lisa-legend-overlay > .lisa-legend {
   pointer-events: auto;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .lisa-legend {
