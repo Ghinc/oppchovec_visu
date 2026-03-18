@@ -461,15 +461,31 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
         onEachFeature: (feature, layer) => {
             const nom  = feature.properties.nom;
             const info = cahData.clusters[nom];
-            if (info) {
-                layer.bindPopup(
-                    `<strong>${nom}</strong><br>` +
-                    `<strong>Cluster CAH :</strong> ${info.cluster}<br>` +
-                    `<strong>Score Opp :</strong> ${info.Score_Opp !== undefined ? info.Score_Opp.toFixed(2) : 'N/A'}<br>` +
-                    `<strong>Score Cho :</strong> ${info.Score_Cho !== undefined ? info.Score_Cho.toFixed(2) : 'N/A'}<br>` +
-                    `<strong>Score Vec :</strong> ${info.Score_Vec !== undefined ? info.Score_Vec.toFixed(2) : 'N/A'}`
-                );
-            }
+            const color = info ? (COLORS_CAH[info.cluster] || '#cccccc') : '#cccccc';
+            const fmt   = v => (v !== undefined && v !== null) ? (+v).toFixed(2) : 'N/A';
+            const row   = (label, val) =>
+                `<tr><td style="padding:3px 10px 3px 0;color:#666;white-space:nowrap;">${label}</td>` +
+                `<td style="padding:3px 0;font-weight:600;text-align:right;">${val}</td></tr>`;
+
+            layer.bindPopup(
+                `<div style="font-family:inherit;min-width:180px;">` +
+                `<strong style="font-size:13px;">${nom}</strong>` +
+                (info ? (
+                    `<div style="margin:6px 0;display:flex;align-items:center;gap:6px;">` +
+                    `<span style="display:inline-block;width:14px;height:14px;background:${color};` +
+                    `border:1px solid #555;border-radius:2px;flex-shrink:0;"></span>` +
+                    `<strong>Cluster ${info.cluster}</strong> <span style="color:#777;font-size:11px;">(${nClusters} clusters)</span>` +
+                    `</div>` +
+                    `<hr style="margin:6px 0;border:none;border-top:1px solid #e0e0e0;">` +
+                    `<table style="border-collapse:collapse;width:100%;font-size:12px;">` +
+                    row('Score Opp', fmt(info.Score_Opp)) +
+                    row('Score Cho', fmt(info.Score_Cho)) +
+                    row('Score Vec', fmt(info.Score_Vec)) +
+                    row('OppChoVec', fmt(info.OppChoVec)) +
+                    `</table>`
+                ) : `<p style="color:#999;margin:4px 0;">Données non disponibles</p>`) +
+                `</div>`
+            );
         },
     }).addTo(carte);
 
@@ -493,25 +509,66 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
  * Construit le contrôle de légende CAH.
  */
 function _buildLegendeCAH(nClusters, cahData) {
-    // Compter les communes par cluster
-    const counts = {};
+    // Compter les communes et calculer les moyennes par cluster
+    const counts = {}, sums = {};
+    for (let i = 1; i <= nClusters; i++) sums[i] = { opp: 0, cho: 0, vec: 0 };
     for (const info of Object.values(cahData.clusters)) {
-        counts[info.cluster] = (counts[info.cluster] || 0) + 1;
+        const c = info.cluster;
+        counts[c] = (counts[c] || 0) + 1;
+        if (sums[c]) {
+            sums[c].opp += info.Score_Opp || 0;
+            sums[c].cho += info.Score_Cho || 0;
+            sums[c].vec += info.Score_Vec || 0;
+        }
+    }
+    const means = {};
+    for (let i = 1; i <= nClusters; i++) {
+        const n = counts[i] || 1;
+        means[i] = { opp: sums[i].opp / n, cho: sums[i].cho / n, vec: sums[i].vec / n };
     }
 
     const ctrl = L.control({ position: 'bottomright' });
     ctrl.onAdd = function () {
         const div = L.DomUtil.create('div', 'legend');
-        let html = `<h4>CAH — ${nClusters} clusters</h4>`;
+
+        // En-tête + couleurs
+        let html = `<h4 style="margin:0 0 8px 0;">CAH — ${nClusters} clusters</h4>`;
         for (let i = 1; i <= nClusters; i++) {
-            html += `<div style="display:flex;align-items:center;margin:3px 0;">` +
-                `<i style="background:${COLORS_CAH[i]};width:18px;height:18px;display:inline-block;` +
-                `border:1px solid #333;margin-right:6px;border-radius:2px;"></i>` +
-                `<span>Cluster ${i}` +
-                (counts[i] ? ` <span style="color:#777;font-size:11px;">(${counts[i]})</span>` : '') +
-                `</span></div>`;
+            html += `<div style="display:flex;align-items:center;gap:6px;margin:3px 0;">` +
+                `<span style="display:inline-block;width:16px;height:16px;float:none;` +
+                `background:${COLORS_CAH[i]};border:1px solid #555;border-radius:2px;flex-shrink:0;"></span>` +
+                `<span style="font-size:12px;font-weight:600;">Cluster ${i}</span>` +
+                (counts[i] ? `<span style="font-size:11px;color:#777;">(${counts[i]})</span>` : '') +
+                `</div>`;
         }
+
+        // Table de profil moyen des clusters
+        html += `<hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">`;
+        html += `<div style="font-size:11px;font-weight:600;margin-bottom:4px;color:#444;">Profil moyen des clusters</div>`;
+        const thStyle = `padding:3px 6px;border:1px solid #ddd;background:#f0f4f8;color:#333;font-weight:600;font-size:11px;`;
+        html += `<table style="border-collapse:collapse;width:100%;font-size:11px;">`;
+        html += `<thead><tr>` +
+            `<th style="${thStyle}text-align:left;">Cluster</th>` +
+            `<th style="${thStyle}text-align:right;">Opp</th>` +
+            `<th style="${thStyle}text-align:right;">Cho</th>` +
+            `<th style="${thStyle}text-align:right;">Vec</th>` +
+            `</tr></thead><tbody>`;
+        for (let i = 1; i <= nClusters; i++) {
+            const m = means[i];
+            html += `<tr>` +
+                `<td style="padding:3px 6px;border:1px solid #ddd;white-space:nowrap;">` +
+                `<span style="display:inline-block;width:10px;height:10px;vertical-align:middle;` +
+                `background:${COLORS_CAH[i]};border:1px solid #555;border-radius:1px;margin-right:4px;"></span>` +
+                `${i}</td>` +
+                `<td style="padding:3px 6px;border:1px solid #ddd;text-align:right;">${m.opp.toFixed(1)}</td>` +
+                `<td style="padding:3px 6px;border:1px solid #ddd;text-align:right;">${m.cho.toFixed(1)}</td>` +
+                `<td style="padding:3px 6px;border:1px solid #ddd;text-align:right;">${m.vec.toFixed(1)}</td>` +
+                `</tr>`;
+        }
+        html += `</tbody></table>`;
+
         div.innerHTML = html;
+        L.DomEvent.disableClickPropagation(div);
         return div;
     };
     return ctrl;
