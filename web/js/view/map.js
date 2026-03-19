@@ -204,9 +204,11 @@ function initMap(mapId, type) {
         ajouterEchelle50km(carte);
         ajouterCopyright(carte);
 
-        // Synchronisation zoom + centre — toutes les cartes initialisées
+        // Synchronisation zoom + centre — uniquement si la carte source est visible
         carte.on('zoomend moveend', function () {
             if (_isSyncing) return;
+            const size = carte.getSize();
+            if (!size || size.x === 0 || size.y === 0) return; // carte cachée → zoom invalide
             _isSyncing = true;
             const zoom   = carte.getZoom();
             const center = carte.getCenter();
