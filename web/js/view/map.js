@@ -527,7 +527,7 @@ function _buildLegendeCAH(nClusters, cahData) {
         means[i] = { opp: sums[i].opp / n, cho: sums[i].cho / n, vec: sums[i].vec / n };
     }
 
-    const ctrl = L.control({ position: 'topright' });
+    const ctrl = L.control({ position: 'bottomright' });
     ctrl.onAdd = function () {
         const div = L.DomUtil.create('div', 'legend');
 

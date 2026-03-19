@@ -879,6 +879,11 @@ tr:nth-child(even) {
   overflow-y: auto;
 }
 
+/* Décaler la légende bottomright vers le haut pour ne pas sortir de la carte */
+.leaflet-bottom.leaflet-right {
+  margin-bottom: 30px;
+}
+
 .legend h4 {
   margin: 0 0 var(--spacing-sm) 0;
   font-size: 13px;
