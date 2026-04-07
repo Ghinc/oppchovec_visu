@@ -6,6 +6,62 @@
  */
 
 /**
+ * Rend un élément DOM déplaçable à la souris dans le conteneur d'une carte Leaflet.
+ *
+ * @param {HTMLElement} div - L'élément à rendre déplaçable
+ * @param {L.Map}       map - La carte Leaflet parent
+ */
+function _makeDraggable(div, map) {
+    div.style.cursor = 'grab';
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+
+    let dragging = false, startX, startY;
+
+    const onMove = (e) => {
+        if (!dragging) return;
+        const mapEl  = map.getContainer();
+        const newLeft = Math.max(0, Math.min(e.clientX - startX, mapEl.offsetWidth  - div.offsetWidth));
+        const newTop  = Math.max(0, Math.min(e.clientY - startY, mapEl.offsetHeight - div.offsetHeight));
+        div.style.left = newLeft + 'px';
+        div.style.top  = newTop  + 'px';
+    };
+
+    const onUp = () => {
+        if (!dragging) return;
+        dragging = false;
+        div.style.cursor = 'grab';
+    };
+
+    div.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        const mapEl  = map.getContainer();
+        const mapRect = mapEl.getBoundingClientRect();
+        const divRect = div.getBoundingClientRect();
+
+        // Détacher du flux Leaflet → position absolue sur le conteneur carte
+        div.style.position = 'absolute';
+        div.style.margin   = '0';
+        div.style.right    = 'auto';
+        div.style.bottom   = 'auto';
+        div.style.left     = (divRect.left - mapRect.left) + 'px';
+        div.style.top      = (divRect.top  - mapRect.top)  + 'px';
+        div.style.zIndex   = '1000';
+        mapEl.appendChild(div);
+
+        startX   = e.clientX - div.offsetLeft;
+        startY   = e.clientY - div.offsetTop;
+        dragging = true;
+        div.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup',   onUp);
+}
+
+
+/**
  * Crée un contrôle Leaflet de légende choroplèthe (classification Jenks).
  *
  * @param {string} type  - Clé de carte ('oppchovec', 'opp', 'cho', 'vec')
@@ -15,7 +71,7 @@
 function buildChoroplethLegend(type, titre) {
     const control = L.control({ position: 'bottomright' });
 
-    control.onAdd = function () {
+    control.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info legend');
         // Utiliser les seuils dynamiques (recalcul p_k) ou les seuils statiques
         const seuils  = AppState.seuilsJenks[type];
@@ -32,6 +88,7 @@ function buildChoroplethLegend(type, titre) {
                 `display:inline-block;margin-right:5px;"></i>${labels[i]}<br>`;
         }
 
+        _makeDraggable(div, map);
         return div;
     };
 

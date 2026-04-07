@@ -97,7 +97,7 @@
   --transition-slow: 0.5s ease;
 
   /* Dimensions */
-  --sidebar-width: 550px;
+  --sidebar-width: 600px;
   --border-radius: 8px;
   --border-radius-sm: 4px;
 }
@@ -131,7 +131,45 @@ body, html {
   overflow: hidden;
 }
 
+/* Contrôle taille de police sidebar */
+#font-size-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: var(--bg-hover);
+  border-bottom: 1px solid var(--border-light);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+#font-size-control span {
+  flex: 1;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+#font-size-control button {
+  padding: 2px 7px;
+  font-size: 11px;
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  line-height: 1.4;
+  color: var(--text-primary);
+  transition: background var(--transition-fast);
+}
+
+#font-size-control button:hover {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
 /* Panneau latéral (sidebar) */
+aside { font-size: var(--sidebar-fs, 13px); }
 aside {
   width: var(--sidebar-width);
   background-color: var(--bg-sidebar);
@@ -622,70 +660,54 @@ button.small {
 }
 
 /* ============================================
-   TOOLTIPS
+   PANNEAU DESCRIPTION INDICATEUR (clic sur ligne)
    ============================================ */
-.tooltip-container {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: help;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--bg-hover);
-  color: var(--text-secondary);
+#indicateur-desc-panel {
+  display: none;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #eef4ff;
+  border-left: 3px solid var(--primary-blue);
+  border-radius: 0 4px 4px 0;
   font-size: 12px;
-  font-weight: 600;
-  transition: all var(--transition-fast);
+  color: #333;
+  line-height: 1.6;
 }
 
-.tooltip-container:hover {
-  background-color: var(--primary-blue);
-  color: white;
+/* Forcer l'héritage de font-size depuis aside (contrôle A-/A+) */
+aside .indicateur-row strong,
+aside .indicateur-row span {
+  font-size: 1em;
 }
 
-.tooltip-container::before {
-  content: '?';
+/* Variable globale pour A-/A/A+ — valeur par défaut */
+:root { --sidebar-fs: 13px; }
+
+/* Boutons d'action commune sur une seule ligne */
+.commune-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
 }
 
-.tooltip-container .tooltip-text {
-  visibility: hidden;
-  width: 260px;
-  background-color: var(--text-primary);
-  color: white;
-  text-align: left;
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  position: absolute;
-  z-index: 1000;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  white-space: normal;
-  font-size: 12px;
-  line-height: 1.5;
-  box-shadow: var(--shadow-lg);
-  pointer-events: none;
+.commune-actions button {
+  flex: 1;
+  white-space: nowrap;
+  font-size: 0.85em;
+  padding: 5px 4px;
 }
 
-/* Flèche du tooltip */
-.tooltip-container .tooltip-text::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -6px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: var(--text-primary) transparent transparent transparent;
+li.indicateur-row[data-desc] {
+  cursor: pointer;
 }
 
-.tooltip-container:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
+li.indicateur-row[data-desc]:hover {
+  background: #f0f4ff;
+  border-radius: 4px;
+}
+
+tr[data-desc]:hover td {
+  background: #f0f4ff;
 }
 
 /* ============================================
@@ -874,9 +896,12 @@ tr:nth-child(even) {
   box-shadow: var(--shadow-lg);
   line-height: 1.5;
   color: var(--text-primary);
-  font-size: 12px;
+  font-size: var(--sidebar-fs, 12px);
   max-height: 70vh;
-  overflow-y: auto;
+  overflow: auto;
+  resize: both;
+  min-width: 120px;
+  min-height: 60px;
 }
 
 /* Décaler la légende bottomright vers le haut pour ne pas sortir de la carte */
@@ -983,11 +1008,7 @@ tr:nth-child(even) {
     font-size: 12px;
   }
 
-  .tooltip-container {
-    width: 18px;
-    height: 18px;
-    font-size: 11px;
-  }
+
 }
 
 @media (max-width: 992px) {
@@ -1091,17 +1112,6 @@ tr:nth-child(even) {
     min-width: 50px;
   }
 
-  .tooltip-container {
-    width: 18px;
-    height: 18px;
-    font-size: 11px;
-    flex-shrink: 0;
-  }
-
-  .tooltip-container .tooltip-text {
-    width: 200px;
-    font-size: 11px;
-  }
 
   #resultCommune {
     padding: var(--spacing-md);
@@ -1173,17 +1183,6 @@ tr:nth-child(even) {
     min-width: 45px;
   }
 
-  .tooltip-container {
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
-  }
-
-  .tooltip-container .tooltip-text {
-    width: 180px;
-    padding: var(--spacing-sm);
-    font-size: 10px;
-  }
 
   #resultCommune {
     padding: var(--spacing-sm);
@@ -1392,6 +1391,87 @@ tr:nth-child(even) {
   color: var(--text-primary);
   font-size: 13px;
   line-height: 1.4;
+}
+
+/* ============================================
+   VISUALISATION TAB
+   ============================================ */
+.vizu-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 28px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.vizu-titre {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.vizu-subtabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 0;
+}
+
+.vizu-subtab-button {
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--transition-fast);
+}
+
+.vizu-subtab-button:hover  { color: var(--primary-blue); }
+.vizu-subtab-button.active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+  font-weight: 700;
+}
+
+.vizu-panel        { display: none; flex-direction: column; flex: 1; }
+.vizu-panel.active { display: flex; }
+
+.vizu-chart-wrap {
+  flex: 1;
+  min-height: 0;
+  height: 55vh;
+  position: relative;
+}
+
+.vizu-export {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.vizu-export button {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 2px solid var(--primary-blue);
+  border-radius: 6px;
+  background: white;
+  color: var(--primary-blue);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.vizu-export button:hover {
+  background: var(--primary-blue);
+  color: white;
 }
 
 /* ============================================

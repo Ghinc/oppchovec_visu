@@ -48,13 +48,9 @@ function renderCommuneDetails(communeNom, valeurIndice, indicateurs) {
         const max    = meta.max ?? 100;
 
         html += `
-            <li class="indicateur-row">
+            <li class="indicateur-row" data-desc="${desc.replace(/"/g, '&quot;')}">
                 <div class="indicateur-row-header">
                     <strong>${nomIndicateur}</strong>
-                    <span class="tooltip-container">
-                        &#9432;
-                        <span class="tooltip-text">${desc}</span>
-                    </span>
                     <span id="${nomIndicateur}_val">${nombre}</span>
                 </div>
                 <input type="range"
@@ -70,11 +66,9 @@ function renderCommuneDetails(communeNom, valeurIndice, indicateurs) {
 
     html += `
         </ul>
-        <div style="display:flex;justify-content:space-between;margin-top:10px;">
-            <button onclick="recalculerIndice('${communeNom}')">&#8635; Recalculer Indice</button>
+        <div class="commune-actions">
+            <button onclick="recalculerIndice('${communeNom}')">&#8635; Recalculer</button>
             <button onclick="reinitialiserValeurs('${communeNom}')">&#8634; Réinitialiser</button>
-        </div>
-        <div style="text-align:center;margin-top:1em;">
             <button onclick="afficherComparaison('${communeNom}')">&#128202; Comparer</button>
         </div>
         <div id="comparaisonCommune" style="display:none;margin-top:1em;">
@@ -117,14 +111,8 @@ function renderComparaisonTable(commune1, commune2, data1, data2, indice1, indic
         if (data2[indicateur] === undefined) continue;
         const desc = INDICATEURS_META[indicateur]?.description ?? 'Aucune description disponible.';
         html += `
-                <tr>
-                    <td>
-                        ${indicateur}
-                        <span class="tooltip-container" style="float:right;margin-left:8px;">
-                            &#9432;
-                            <span class="tooltip-text">${desc}</span>
-                        </span>
-                    </td>
+                <tr data-desc="${desc.replace(/"/g, '&quot;')}" style="cursor:pointer;">
+                    <td>${indicateur}</td>
                     <td>${data1[indicateur].toFixed(2)}</td>
                     <td>${data2[indicateur].toFixed(2)}</td>
                 </tr>`;

@@ -5,6 +5,7 @@
     <title>OppChoVec — Visualisation Interactive</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,6 +13,14 @@
 
     <!-- ===================== SIDEBAR ===================== -->
     <aside>
+
+        <!-- Contrôle taille de police -->
+        <div id="font-size-control">
+            <span>Police</span>
+            <button id="btn-font-decrease" title="Réduire la police">A−</button>
+            <button id="btn-font-reset"    title="Taille par défaut">A</button>
+            <button id="btn-font-increase" title="Agrandir la police">A+</button>
+        </div>
 
         <!-- 1. Import des données -->
         <div class="section" id="section-import">
@@ -67,6 +76,7 @@
         <div class="section">
             <h3>Informations de la commune sélectionnée :</h3>
             <div id="resultCommune" style="background:#f8f8f8;padding:1em;border-radius:8px;"></div>
+            <div id="indicateur-desc-panel"></div>
         </div>
 
     </aside>
@@ -83,6 +93,7 @@
                 <button class="tab-button"         data-tab="vectab">Vec</button>
                 <button class="tab-button"         data-tab="lisatab">LISA</button>
                 <button class="tab-button"         data-tab="cahtab">CAH</button>
+                <button class="tab-button"         data-tab="vizutab">Visualisation</button>
             </div>
 
             <!-- Carte OppChoVec -->
@@ -169,6 +180,67 @@
                 </div>
             </div>
 
+            <!-- Onglet Visualisation -->
+            <div class="tab-content" id="vizutab">
+                <div class="vizu-container">
+
+                    <h2 class="vizu-titre">Visualisation des données</h2>
+
+                    <!-- Sous-onglets -->
+                    <div class="vizu-subtabs">
+                        <button class="vizu-subtab-button active" data-vizu="oppchovec">OppChoVec</button>
+                        <button class="vizu-subtab-button"        data-vizu="opp">Opportunités</button>
+                        <button class="vizu-subtab-button"        data-vizu="cho">Choix</button>
+                        <button class="vizu-subtab-button"        data-vizu="vec">Vécu</button>
+                    </div>
+
+                    <!-- Panneau OppChoVec -->
+                    <div class="vizu-panel active" id="vizu-panel-oppchovec">
+                        <div class="vizu-chart-wrap">
+                            <canvas id="chart-oppchovec"></canvas>
+                        </div>
+                        <div class="vizu-export">
+                            <button onclick="exporterChartPNG('chart-oppchovec','OppChoVec_Jenks')">&#11015; PNG</button>
+                            <button onclick="exporterCSV('oppchovec')">&#11015; CSV</button>
+                        </div>
+                    </div>
+
+                    <!-- Panneau Opp -->
+                    <div class="vizu-panel" id="vizu-panel-opp">
+                        <div class="vizu-chart-wrap">
+                            <canvas id="chart-opp"></canvas>
+                        </div>
+                        <div class="vizu-export">
+                            <button onclick="exporterChartPNG('chart-opp','Opp_Jenks')">&#11015; PNG</button>
+                            <button onclick="exporterCSV('opp')">&#11015; CSV</button>
+                        </div>
+                    </div>
+
+                    <!-- Panneau Cho -->
+                    <div class="vizu-panel" id="vizu-panel-cho">
+                        <div class="vizu-chart-wrap">
+                            <canvas id="chart-cho"></canvas>
+                        </div>
+                        <div class="vizu-export">
+                            <button onclick="exporterChartPNG('chart-cho','Cho_Jenks')">&#11015; PNG</button>
+                            <button onclick="exporterCSV('cho')">&#11015; CSV</button>
+                        </div>
+                    </div>
+
+                    <!-- Panneau Vec -->
+                    <div class="vizu-panel" id="vizu-panel-vec">
+                        <div class="vizu-chart-wrap">
+                            <canvas id="chart-vec"></canvas>
+                        </div>
+                        <div class="vizu-export">
+                            <button onclick="exporterChartPNG('chart-vec','Vec_Jenks')">&#11015; PNG</button>
+                            <button onclick="exporterCSV('vec')">&#11015; CSV</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -187,6 +259,7 @@
 <script src="js/model/state.js"></script>
 <script src="js/model/calculator.js"></script>
 <script src="js/view/legend.js"></script>
+<script src="js/view/charts.js"></script>
 <script src="js/view/map.js"></script>
 <script src="js/view/commune.js"></script>
 <script src="js/controller/app.js"></script>

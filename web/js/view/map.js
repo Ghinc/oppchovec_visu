@@ -58,6 +58,8 @@ function ajouterEchelle50km(carte) {
 
 /** Labels des 5 villes principales avec point noir et ligne de repère pointillée. */
 function ajouterVillesPrincipales(carte) {
+    if (carte.getContainer().dataset.villesAdded) return;
+    carte.getContainer().dataset.villesAdded = '1';
     const lignesPane = 'villesLignesPane';
     const labelsPane = 'villesPane';
     if (!carte.getPane(lignesPane)) carte.createPane(lignesPane).style.zIndex = 490;
@@ -195,13 +197,14 @@ function initMap(mapId, type) {
             zoom:   MAP_ZOOM,
             zoomControl: true,
             attributionControl: false,
-            zoomSnap:  0.25,
-            zoomDelta: 0.25,
+            zoomSnap:  0.1,
+            zoomDelta: 0.1,
         });
         const carte = AppState.cartes[type];
         carte.getContainer().style.backgroundColor = '#ffffff';
         ajouterRoseDesVents(carte);
         ajouterEchelle50km(carte);
+        ajouterVillesPrincipales(carte);
         ajouterCopyright(carte);
 
         // Synchronisation zoom + centre — uniquement si la carte source est visible
@@ -497,11 +500,6 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
     // Légende
     AppState.legendControls[mapType] = _buildLegendeCAH(nClusters, cahData);
     AppState.legendControls[mapType].addTo(carte);
-
-    ajouterRoseDesVents(carte);
-    ajouterEchelle50km(carte);
-    ajouterVillesPrincipales(carte);
-    ajouterCopyright(carte);
 
     setTimeout(() => carte.invalidateSize(), 100);
     setTimeout(() => carte.invalidateSize(), 500);

@@ -79,12 +79,41 @@ function recalculerIndice(selectedCommune) {
     AppState.indicateursCommune[selectedCommune] = communeData;
 
     // Recalculer
-    const { indiceFinale, scoresParCommune } = recalculerDepuisIndicateurs(AppState.indicateursCommune);
+    const { indiceFinale: indiceBrut, scoresParCommune: scoresBruts } =
+        recalculerDepuisIndicateurs(AppState.indicateursCommune);
+
+    // Normaliser l'indice brut → 0-10 (même logique que recalculerCarteOppChoVec)
+    const valeursIndice = Object.values(indiceBrut);
+    const minI = Math.min(...valeursIndice), maxI = Math.max(...valeursIndice);
+    const indiceFinale = {};
+    for (const c in indiceBrut) {
+        indiceFinale[c] = (maxI === minI) ? 5 : ((indiceBrut[c] - minI) / (maxI - minI)) * 10;
+    }
+
+    // Normaliser les scores bruts 0-1 → 0-10 pour cohérence avec l'affichage opp/cho/vec
+    const scoresParCommune = {};
+    for (const [c, s] of Object.entries(scoresBruts)) {
+        scoresParCommune[c] = {
+            Score_Opp: s.Score_Opp * 10,
+            Score_Cho: s.Score_Cho * 10,
+            Score_Vec: s.Score_Vec * 10,
+        };
+    }
+
+    // Recalculer les seuils Jenks sur les nouvelles valeurs
+    AppState.seuilsJenks['oppchovec'] = calculerJenksBreaks(Object.values(indiceFinale), 5);
+    AppState.seuilsJenks['opp'] = calculerJenksBreaks(Object.values(scoresParCommune).map(s => s.Score_Opp), 5);
+    AppState.seuilsJenks['cho'] = calculerJenksBreaks(Object.values(scoresParCommune).map(s => s.Score_Cho), 5);
+    AppState.seuilsJenks['vec'] = calculerJenksBreaks(Object.values(scoresParCommune).map(s => s.Score_Vec), 5);
+
     AppState.indiceFinale     = indiceFinale;
     AppState.scoresParCommune = scoresParCommune;
 
     // Mettre à jour toutes les cartes
     afficherToutesLesCartes(AppState.communeJson, AppState.indiceFinale, AppState.scoresParCommune);
+
+    // Réappliquer le surlignement rouge (la couche GeoJSON vient d'être recrée)
+    surlignerCommune(selectedCommune, 'red');
 
     // Mettre à jour l'affichage de l'indice dans la sidebar
     const resultDiv = document.getElementById('resultCommune');
@@ -324,8 +353,32 @@ function chargerEtAfficher(dataIndicateurs, geojsonData) {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Taille de police sidebar + légendes ---
+    let fontSize = 13;
+    const setFont = (size) => {
+        fontSize = Math.max(9, Math.min(22, size));
+        document.documentElement.style.setProperty('--sidebar-fs', fontSize + 'px');
+    };
+    document.getElementById('btn-font-decrease').addEventListener('click', () => setFont(fontSize - 1));
+    document.getElementById('btn-font-reset')   .addEventListener('click', () => setFont(13));
+    document.getElementById('btn-font-increase').addEventListener('click', () => setFont(fontSize + 1));
+
     // --- Toggle p_k ---
     document.getElementById('btn-toggle-pk').addEventListener('click', toggleModePk);
+
+    // --- Description des indicateurs au clic sur une ligne ---
+    const descPanel = document.getElementById('indicateur-desc-panel');
+    document.getElementById('resultCommune').addEventListener('click', e => {
+        const target = e.target.closest('li[data-desc], tr[data-desc]');
+        if (!target) { descPanel.style.display = 'none'; return; }
+        const desc = target.dataset.desc;
+        if (descPanel.style.display === 'block' && descPanel.textContent === desc) {
+            descPanel.style.display = 'none';
+        } else {
+            descPanel.textContent = desc;
+            descPanel.style.display = 'block';
+        }
+    });
 
 
     // --- Chargement des données Corse par défaut (fetch) ---
@@ -406,11 +459,12 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('active');
             document.getElementById(cible).classList.add('active');
 
-            if (cible === 'lisatab') {
-                initialiserCartesLISA();
-            }
-            if (cible === 'cahtab') {
-                initialiserCartesCAH();
+            if (cible === 'lisatab') initialiserCartesLISA();
+            if (cible === 'cahtab')  initialiserCartesCAH();
+            if (cible === 'vizutab') {
+                const active = document.querySelector('.vizu-subtab-button.active');
+                const type   = active ? active.dataset.vizu : 'oppchovec';
+                construireHistogrammeJenks(type, `chart-${type}`);
             }
 
             const type = cible.replace('tab', '');
@@ -551,6 +605,19 @@ document.addEventListener('DOMContentLoaded', () => {
             chartView.style.display = 'flex';
             this.textContent = '\u{1F5FA}\uFE0F Voir la carte';
         }
+    });
+
+
+    // --- Sous-onglets Visualisation ---
+    document.querySelectorAll('.vizu-subtab-button').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.vizu-subtab-button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.vizu-panel').forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            const type = this.dataset.vizu;
+            document.getElementById(`vizu-panel-${type}`).classList.add('active');
+            construireHistogrammeJenks(type, `chart-${type}`);
+        });
     });
 
 
