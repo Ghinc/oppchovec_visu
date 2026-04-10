@@ -1033,7 +1033,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         });
 
         // Fond blanc au lieu de la carte OpenStreetMap
-        cartes[type].getContainer().style.backgroundColor = '#ffffff';
+        cartes[type].getContainer().style.backgroundColor = 'hotpink';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[type].on('zoomend moveend', function() {
@@ -1302,7 +1302,7 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
             zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
-        cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
+        cartes[mapType].getContainer().style.backgroundColor = 'hotpink';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[mapType].on('zoomend moveend', function() {
@@ -1558,7 +1558,7 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
             zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
-        cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
+        cartes[mapType].getContainer().style.backgroundColor = 'hotpink';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[mapType].on('zoomend moveend', function() {
