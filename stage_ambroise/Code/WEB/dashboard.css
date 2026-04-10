@@ -1929,3 +1929,161 @@ tr:nth-child(even) {
   width: 100% !important;
   height: 100% !important;
 }
+
+/* ============================================
+   ONGLET PARANGONS
+   ============================================ */
+
+#parangonstab {
+  display: none;
+  height: 100%;
+}
+#parangonstab.active {
+  display: flex;
+}
+
+.parangons-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+
+.parangons-map-col {
+  flex: 1 1 60%;
+  min-width: 0;
+  height: 100%;
+}
+
+.parangons-panel-col {
+  flex: 0 0 360px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-left: 1px solid #ddd;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.parangons-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px 12px 8px 12px;
+  box-sizing: border-box;
+}
+
+.parangons-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: #222;
+}
+
+.parangons-subtitle {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+}
+
+.parangons-cluster-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.parangons-cluster-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: opacity 0.15s, box-shadow 0.15s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.parangons-cluster-btn:hover {
+  opacity: 0.85;
+}
+
+.parangons-cluster-btn.active {
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.parangons-list-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.parangons-list-header {
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+  margin: 0 0 6px 0;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #ddd;
+}
+
+.parangons-cluster-info {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.parangons-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.parangons-table th {
+  text-align: left;
+  padding: 4px 6px;
+  background: #eee;
+  color: #444;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.parangons-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.parangons-table tr:hover td {
+  background: #f0f4ff;
+}
+
+.parangons-table tr.parangon-selected td {
+  background: #ffe5e5;
+  font-weight: 600;
+}
+
+.parangons-rank-badge {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  background: #ddd;
+  font-size: 10px;
+  font-weight: 700;
+  color: #444;
+  margin-right: 2px;
+}
+
+.parangons-rank-badge.gold { background: #ffd700; color: #5a4000; }
+.parangons-rank-badge.silver { background: #c0c0c0; color: #333; }
+.parangons-rank-badge.bronze { background: #cd7f32; color: #fff; }

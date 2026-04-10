@@ -2953,6 +2953,220 @@ function minmax(data) {
   };
 }
 
+// ==============================================================================
+// ONGLET PARANGONS
+// ==============================================================================
+
+let parangonsInitialise = false;
+let parangonsLayerRef = null;      // couche GeoJSON de la carte parangons
+let parangonsSelectedCommune = null;
+let parangonsCurrentCluster = null;
+
+function initialiserOngletParangons() {
+    if (parangonsInitialise) {
+        setTimeout(() => { if (cartes['parangons']) cartes['parangons'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+        console.warn('Parangons: données non prêtes');
+        return;
+    }
+
+    parangonsInitialise = true;
+
+    const seuils = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
+    const labels = genererLabelsJenks(seuils);
+    const nbClasses = seuils.length - 1;
+
+    // ---- 1. Construire les clusters ----
+    // clusters[i] = { communes: [{nom, score}], mean, label, couleur }
+    const clusters = [];
+    for (let i = 0; i < nbClasses; i++) {
+        clusters.push({ communes: [], mean: 0, label: labels[i], couleur: colorsJenks[i] });
+    }
+
+    for (const [nom, score] of Object.entries(indiceFinale)) {
+        let classe = nbClasses - 1;
+        for (let i = 1; i < seuils.length; i++) {
+            if (score <= seuils[i]) { classe = i - 1; break; }
+        }
+        clusters[classe].communes.push({ nom, score });
+    }
+
+    // Calculer les moyennes
+    clusters.forEach(cl => {
+        if (cl.communes.length === 0) { cl.mean = 0; return; }
+        cl.mean = cl.communes.reduce((s, c) => s + c.score, 0) / cl.communes.length;
+        // Trier par distance croissante à la moyenne
+        cl.communes.sort((a, b) =>
+            Math.abs(a.score - cl.mean) - Math.abs(b.score - cl.mean)
+        );
+    });
+
+    // ---- 2. Initialiser la carte ----
+    const mapEl = document.getElementById('map-parangons');
+    const carte = L.map(mapEl, {
+        center: [42.0, 9.0],
+        zoom: 8,
+        zoomSnap: 0.1,
+        zoomDelta: 0.1
+    });
+    cartes['parangons'] = carte;
+    carte.getContainer().style.backgroundColor = '#ffffff';
+    ajouterCopyright(carte);
+
+    // Créer la couche GeoJSON
+    const getColor = (val) => {
+        if (val === undefined || val === null) return '#ccc';
+        for (let i = 1; i < seuils.length; i++) {
+            if (val <= seuils[i]) return colorsJenks[i - 1];
+        }
+        return colorsJenks[seuils.length - 2];
+    };
+
+    parangonsLayerRef = L.geoJSON(communeJson, {
+        style: feature => {
+            const val = indiceFinale[feature.properties.nom];
+            return {
+                fillColor: getColor(val),
+                color: '#333',
+                weight: 0.8,
+                fillOpacity: 0.75
+            };
+        },
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            const val = indiceFinale[nom];
+            layer._parangonsNom = nom;
+            layer.on('click', () => {
+                // Trouver le cluster de cette commune
+                let classeIdx = nbClasses - 1;
+                if (val !== undefined) {
+                    for (let i = 1; i < seuils.length; i++) {
+                        if (val <= seuils[i]) { classeIdx = i - 1; break; }
+                    }
+                }
+                // Activer ce cluster dans le panneau
+                _parangonsActiverCluster(classeIdx, clusters, carte);
+                // Sélectionner cette commune dans la liste
+                _parangonsSelectionnerCommune(nom, carte, parangonsLayerRef, getColor);
+            });
+            layer.bindTooltip(`<strong>${nom}</strong><br>OppChoVec: ${val !== undefined ? val.toFixed(2) : 'N/A'}`);
+        }
+    }).addTo(carte);
+
+    // ---- 3. Construire les boutons clusters ----
+    const btnsDiv = document.getElementById('parangons-cluster-btns');
+    btnsDiv.innerHTML = '';
+    clusters.forEach((cl, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'parangons-cluster-btn';
+        btn.style.background = cl.couleur;
+        btn.textContent = `Classe ${i + 1} (${cl.communes.length})`;
+        btn.dataset.cluster = i;
+        btn.addEventListener('click', () => _parangonsActiverCluster(i, clusters, carte));
+        btnsDiv.appendChild(btn);
+    });
+
+    // Activer la classe 1 par défaut
+    _parangonsActiverCluster(0, clusters, carte);
+
+    setTimeout(() => carte.invalidateSize(), 150);
+}
+
+function _parangonsActiverCluster(idx, clusters, carte) {
+    parangonsCurrentCluster = idx;
+    parangonsSelectedCommune = null;
+
+    // Mettre à jour les boutons
+    document.querySelectorAll('.parangons-cluster-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.cluster) === idx);
+    });
+
+    const cl = clusters[idx];
+    const listDiv = document.getElementById('parangons-list');
+    listDiv.innerHTML = `
+        <p class="parangons-list-header">Classe ${idx + 1} — ${cl.label}</p>
+        <p class="parangons-cluster-info">
+            ${cl.communes.length} communes · Moyenne : <strong>${cl.mean.toFixed(2)}</strong>
+        </p>
+        <table class="parangons-table">
+            <thead><tr>
+                <th>#</th>
+                <th>Commune</th>
+                <th>Score</th>
+                <th>|Δ moy|</th>
+            </tr></thead>
+            <tbody id="parangons-tbody"></tbody>
+        </table>`;
+
+    const tbody = document.getElementById('parangons-tbody');
+    cl.communes.forEach((c, rank) => {
+        const dist = Math.abs(c.score - cl.mean).toFixed(3);
+        const badgeClass = rank === 0 ? 'gold' : rank === 1 ? 'silver' : rank === 2 ? 'bronze' : '';
+        const tr = document.createElement('tr');
+        tr.dataset.nom = c.nom;
+        tr.innerHTML = `
+            <td><span class="parangons-rank-badge ${badgeClass}">${rank + 1}</span></td>
+            <td>${c.nom}</td>
+            <td>${c.score.toFixed(2)}</td>
+            <td>${dist}</td>`;
+        tr.addEventListener('click', () => {
+            _parangonsSelectionnerCommune(c.nom, carte, parangonsLayerRef,
+                (v) => {
+                    const seuils2 = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
+                    if (v === undefined || v === null) return '#ccc';
+                    for (let i = 1; i < seuils2.length; i++) {
+                        if (v <= seuils2[i]) return colorsJenks[i - 1];
+                    }
+                    return colorsJenks[seuils2.length - 2];
+                });
+        });
+        tbody.appendChild(tr);
+    });
+
+    // Zoomer sur l'étendue du cluster
+    const communesCluster = new Set(cl.communes.map(c => c.nom));
+    const bounds = [];
+    parangonsLayerRef.eachLayer(layer => {
+        if (communesCluster.has(layer._parangonsNom)) {
+            bounds.push(layer.getBounds());
+        }
+    });
+    if (bounds.length > 0) {
+        const combined = bounds.reduce((acc, b) => acc.extend(b), bounds[0]);
+        carte.fitBounds(combined, { padding: [20, 20] });
+    }
+}
+
+function _parangonsSelectionnerCommune(nom, carte, layer, getColor) {
+    parangonsSelectedCommune = nom;
+
+    // Réinitialiser tous les styles
+    layer.eachLayer(l => {
+        const val = indiceFinale[l._parangonsNom];
+        l.setStyle({
+            fillColor: l._parangonsNom === nom ? '#ff0000' : getColor(val),
+            color: l._parangonsNom === nom ? '#cc0000' : '#333',
+            weight: l._parangonsNom === nom ? 2.5 : 0.8,
+            fillOpacity: l._parangonsNom === nom ? 0.9 : 0.75
+        });
+        if (l._parangonsNom === nom) l.bringToFront();
+    });
+
+    // Surligner dans la liste
+    document.querySelectorAll('#parangons-tbody tr').forEach(tr => {
+        tr.classList.toggle('parangon-selected', tr.dataset.nom === nom);
+    });
+
+    // Centrer sur la commune sélectionnée
+    layer.eachLayer(l => {
+        if (l._parangonsNom === nom) {
+            carte.fitBounds(l.getBounds(), { padding: [40, 40], maxZoom: 11 });
+        }
+    });
+}
+
 // Gestion des onglets
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -2984,6 +3198,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Si on clique sur l'onglet CAH, initialiser les cartes CAH (lazy loading)
             if (targetTab === 'cahtab') {
                 initialiserCartesCAH();
+            }
+
+            // Si on clique sur l'onglet Parangons, initialiser (lazy loading)
+            if (targetTab === 'parangonstab') {
+                initialiserOngletParangons();
             }
 
             // Invalider la taille de la carte pour forcer le redimensionnement
