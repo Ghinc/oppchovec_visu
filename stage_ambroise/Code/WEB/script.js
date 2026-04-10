@@ -18,7 +18,7 @@ let data_indicateursOriginaux = {}
     let scoresParCommune = {}
     let indicateursCommune = {}
     let communeJson = {}
-    let modeCalculPk = 'egal'; // 'egal' | 'betti'
+    let modeCalculPk = 'betti'; // 'egal' | 'betti'
     let scoresParCommuneRaw01 = {}; // scores 0-1 (pour calcul p_k Betti)
     let clustersLISA5pct = {}  // Clusters LISA 5% chargés depuis JSON
     let clustersLISA1pct = {}  // Clusters LISA 1% chargés depuis JSON
@@ -2048,7 +2048,10 @@ async function chargerFichiersAutomatiquement() {
     const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
     populateCommuneSelect(data_indicateurs_dict);
 
-    // 7. Générer les visualisations de données
+    // 7. Appliquer le mode Betti par défaut
+    recalculerCarteOppChoVec();
+
+    // 8. Générer les visualisations de données
     if (indiceFinale && Object.keys(indiceFinale).length > 0) {
         genererDataVisualisations(indiceFinale);
     }
