@@ -1937,9 +1937,11 @@ tr:nth-child(even) {
 #parangonstab {
   display: none;
   height: 100%;
+  overflow: hidden;
 }
 #parangonstab.active {
   display: flex;
+  overflow: hidden;
 }
 
 .parangons-layout {
@@ -1947,12 +1949,15 @@ tr:nth-child(even) {
   width: 100%;
   height: 100%;
   gap: 0;
+  overflow: hidden;
 }
 
 .parangons-map-col {
   flex: 1 1 60%;
   min-width: 0;
   height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .parangons-panel-col {
@@ -2087,3 +2092,22 @@ tr:nth-child(even) {
 .parangons-rank-badge.gold { background: #ffd700; color: #5a4000; }
 .parangons-rank-badge.silver { background: #c0c0c0; color: #333; }
 .parangons-rank-badge.bronze { background: #cd7f32; color: #fff; }
+
+.parangons-search-row {
+  margin-bottom: 10px;
+}
+
+.parangons-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.parangons-search:focus {
+  border-color: #6a9fd8;
+}

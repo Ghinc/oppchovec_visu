@@ -2813,6 +2813,12 @@ function recalculerCarteOppChoVec() {
     }
 
     majAffichagePk(pkValues);
+
+    // Mettre à jour les parangons si déjà initialisés
+    if (parangonsInitialise) {
+        parangonsInitialise = false; // forcer recalcul complet
+        initialiserOngletParangons();
+    }
 }
 
 function majAffichagePk(pkValues) {
@@ -2958,14 +2964,22 @@ function minmax(data) {
 // ==============================================================================
 
 let parangonsInitialise = false;
+let _carteParangons = null;        // carte Leaflet parangons (hors sync)
 let parangonsLayerRef = null;      // couche GeoJSON de la carte parangons
 let parangonsSelectedCommune = null;
 let parangonsCurrentCluster = null;
 
 function initialiserOngletParangons() {
     if (parangonsInitialise) {
-        setTimeout(() => { if (cartes['parangons']) cartes['parangons'].invalidateSize(); }, 100);
+        setTimeout(() => { if (_carteParangons) _carteParangons.invalidateSize(); }, 100);
         return;
+    }
+    // Détruire la carte précédente si elle existe (recalcul après bascule p_k)
+    if (_carteParangons) {
+        _carteParangons.remove();
+        _carteParangons = null;
+        parangonsLayerRef = null;
+        document.getElementById('map-parangons').innerHTML = '';
     }
     if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
         console.warn('Parangons: données non prêtes');
@@ -3011,7 +3025,7 @@ function initialiserOngletParangons() {
         zoomSnap: 0.1,
         zoomDelta: 0.1
     });
-    cartes['parangons'] = carte;
+    _carteParangons = carte;   // NE PAS mettre dans cartes[] pour éviter le sync
     carte.getContainer().style.backgroundColor = '#ffffff';
     ajouterCopyright(carte);
 
@@ -3070,6 +3084,42 @@ function initialiserOngletParangons() {
 
     // Activer la classe 1 par défaut
     _parangonsActiverCluster(0, clusters, carte);
+
+    // ---- 4. Recherche de commune ----
+    const searchInput = document.getElementById('parangons-search');
+    if (searchInput) {
+        searchInput.value = '';
+        searchInput.oninput = function() {
+            const query = this.value.trim().toLowerCase();
+            if (!query) return;
+            // Chercher dans tous les clusters
+            for (let i = 0; i < clusters.length; i++) {
+                const match = clusters[i].communes.find(c => c.nom.toLowerCase().includes(query));
+                if (match) {
+                    // Basculer vers ce cluster si nécessaire
+                    if (parangonsCurrentCluster !== i) {
+                        _parangonsActiverCluster(i, clusters, carte);
+                    }
+                    // Sélectionner la commune
+                    _parangonsSelectionnerCommune(match.nom, carte, parangonsLayerRef,
+                        (v) => {
+                            const s = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
+                            if (v === undefined || v === null) return '#ccc';
+                            for (let j = 1; j < s.length; j++) {
+                                if (v <= s[j]) return colorsJenks[j - 1];
+                            }
+                            return colorsJenks[s.length - 2];
+                        });
+                    // Faire défiler jusqu'à la ligne dans le tableau
+                    setTimeout(() => {
+                        const row = document.querySelector(`#parangons-tbody tr[data-nom="${match.nom}"]`);
+                        if (row) row.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    }, 100);
+                    break;
+                }
+            }
+        };
+    }
 
     setTimeout(() => carte.invalidateSize(), 150);
 }
