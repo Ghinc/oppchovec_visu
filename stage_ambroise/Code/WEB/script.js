@@ -582,30 +582,116 @@ function ajouterBoutonTelechargement(carte, mapType) {
 
     const downloadControl = L.control({ position: 'topright' });
 
+    const jenksTypes = ['oppchovec', 'opp', 'cho', 'vec'];
+
     downloadControl.onAdd = function() {
         const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control download-button-control');
-        const button = L.DomUtil.create('a', '', div);
-        button.innerHTML = '📷';
-        button.href = '#';
-        button.title = 'Télécharger la carte en PNG';
-        button.style.width = '30px';
-        button.style.height = '30px';
-        button.style.lineHeight = '30px';
-        button.style.textAlign = 'center';
-        button.style.textDecoration = 'none';
-        button.style.fontSize = '18px';
-        button.style.backgroundColor = 'white';
-        button.style.cursor = 'pointer';
 
-        L.DomEvent.on(button, 'click', function(e) {
+        // Bouton PNG
+        const btnPng = L.DomUtil.create('a', '', div);
+        btnPng.innerHTML = '📷';
+        btnPng.href = '#';
+        btnPng.title = 'Télécharger la carte en PNG';
+        btnPng.style.cssText = 'width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;font-size:18px;background:white;cursor:pointer;display:block;';
+        L.DomEvent.on(btnPng, 'click', function(e) {
             L.DomEvent.preventDefault(e);
             telechargerCarte(carte, mapType);
         });
+
+        // Bouton GeoJSON (uniquement pour les cartes Jenks)
+        if (jenksTypes.includes(mapType)) {
+            const btnGeo = L.DomUtil.create('a', '', div);
+            btnGeo.innerHTML = '⬇️';
+            btnGeo.href = '#';
+            btnGeo.title = 'Exporter en GeoJSON (avec classes Jenks)';
+            btnGeo.style.cssText = 'width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;font-size:16px;background:white;cursor:pointer;display:block;border-top:1px solid #ccc;';
+            L.DomEvent.on(btnGeo, 'click', function(e) {
+                L.DomEvent.preventDefault(e);
+                exporterGeoJSONAvecJenks(mapType);
+            });
+        }
 
         return div;
     };
 
     downloadControl.addTo(carte);
+}
+
+// Exporter le GeoJSON enrichi avec les classes Jenks
+function exporterGeoJSONAvecJenks(type) {
+    if (!communeJson || !communeJson.features) {
+        alert("GeoJSON des communes non chargé.");
+        return;
+    }
+
+    const titres = { oppchovec: 'OppChoVec', opp: 'Score_Opp', cho: 'Score_Cho', vec: 'Score_Vec' };
+    const seuils = seuilsJenks[type];
+    const labels = genererLabelsJenks(seuils);
+
+    // Récupérer le bon dictionnaire de valeurs
+    const getValeur = (commune) => {
+        if (type === 'oppchovec') return indiceFinale[commune];
+        const key = type === 'opp' ? 'Score_Opp' : type === 'cho' ? 'Score_Cho' : 'Score_Vec';
+        return scoresParCommune[commune] ? scoresParCommune[commune][key] : undefined;
+    };
+
+    // Fonction couleur (identique à getColor dans afficherCarteUnique)
+    const getCouleur = (val) => {
+        if (val === undefined || val === null) return '#ccc';
+        for (let i = 1; i < seuils.length; i++) {
+            if (val <= seuils[i]) return colorsJenks[i - 1];
+        }
+        return colorsJenks[seuils.length - 2];
+    };
+
+    // Enrichir les features
+    const features = communeJson.features.map(f => {
+        const nom = f.properties.nom;
+        const valeur = getValeur(nom);
+        let classeJenks = null, labelJenks = null, couleur = '#ccc';
+        if (valeur !== undefined && valeur !== null) {
+            for (let i = 1; i < seuils.length; i++) {
+                if (valeur <= seuils[i]) { classeJenks = i; break; }
+            }
+            if (!classeJenks) classeJenks = seuils.length - 1;
+            labelJenks = labels[classeJenks - 1];
+            couleur = colorsJenks[classeJenks - 1];
+        }
+        return {
+            ...f,
+            properties: {
+                ...f.properties,
+                valeur: valeur !== undefined ? parseFloat(valeur.toFixed(4)) : null,
+                classe_jenks: classeJenks,
+                label_jenks: labelJenks,
+                couleur_jenks: couleur
+            }
+        };
+    });
+
+    const geojson = {
+        type: 'FeatureCollection',
+        metadata: {
+            indicateur: titres[type],
+            date_export: new Date().toISOString().slice(0, 10),
+            methode_classification: 'Jenks Natural Breaks',
+            seuils_jenks: seuils.map(s => parseFloat(s.toFixed(4))),
+            classes: colorsJenks.map((couleur, i) => ({
+                classe: i + 1,
+                label: labels[i],
+                couleur
+            }))
+        },
+        features
+    };
+
+    const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: 'application/geo+json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `carte_${type}_jenks_${new Date().toISOString().slice(0, 10)}.geojson`;
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 // Fonction pour recadrer une image en supprimant les bords blancs
@@ -1033,7 +1119,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         });
 
         // Fond blanc au lieu de la carte OpenStreetMap
-        cartes[type].getContainer().style.backgroundColor = 'hotpink';
+        cartes[type].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[type].on('zoomend moveend', function() {
@@ -1302,7 +1388,7 @@ function afficherCarteLISA(mapId, mapType, geojsonData, indiceFinal, clustersLIS
             zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
-        cartes[mapType].getContainer().style.backgroundColor = 'hotpink';
+        cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[mapType].on('zoomend moveend', function() {
@@ -1558,7 +1644,7 @@ function afficherCarteCAH(mapId, mapType, geojsonData, cahData, nClusters) {
             zoomDelta: 0.1       // Incrément de zoom très fin pour les boutons +/-
         });
 
-        cartes[mapType].getContainer().style.backgroundColor = 'hotpink';
+        cartes[mapType].getContainer().style.backgroundColor = '#ffffff';
 
         // Synchroniser le zoom avec toutes les autres cartes
         cartes[mapType].on('zoomend moveend', function() {
