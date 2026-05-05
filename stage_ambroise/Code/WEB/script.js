@@ -2817,6 +2817,15 @@ function recalculerCarteOppChoVec() {
 
     majAffichagePk(pkValues);
 
+    // Mettre à jour le tableau top 10 et l'histogramme
+    genererDataVisualisations(indiceNorm);
+
+    // Mettre à jour l'affichage de la commune sélectionnée si présent
+    const communeSelectEl = document.getElementById('communeSelect');
+    if (communeSelectEl && communeSelectEl.value) {
+        afficherCommune(communeSelectEl.value);
+    }
+
     // Mettre à jour les parangons si déjà initialisés
     if (parangonsInitialise) {
         parangonsInitialise = false; // forcer recalcul complet
