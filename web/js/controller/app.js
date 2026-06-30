@@ -28,6 +28,10 @@ function readFileAsText(file) {
     });
 }
 
+/** Mode production: masquer l'import manuel et charger automatiquement les données par défaut. */
+const AUTO_LOAD_DEFAULT_DATA = false;
+const SHOW_MANUAL_IMPORT_UI  = true;
+
 
 /**
  * Charge les clusters LISA depuis les globals LISA_DATA et LISA_DATA_1PCT
@@ -294,6 +298,13 @@ function chargerGeojsonSeulement(geojsonData) {
     AppState.clustersLISA1pct       = {};
     AppState.lisaCartesInitialisees = false;
 
+    if (window.SanteController) {
+        window.SanteController.reset();
+    }
+    if (window.ProjectionSanteController) {
+        window.ProjectionSanteController.reset();
+    }
+
     // Toutes les cartes en gris (dicts vides → #cccccc pour chaque commune)
     afficherToutesLesCartes(geojsonData, {}, {});
 
@@ -329,6 +340,13 @@ function chargerEtAfficher(dataIndicateurs, geojsonData) {
     AppState.seuilsJenks         = {};    // reset les seuils dynamiques
     AppState.modeCalculPk        = 'egal';
 
+    if (window.SanteController) {
+        window.SanteController.reset();
+    }
+    if (window.ProjectionSanteController) {
+        window.ProjectionSanteController.reset();
+    }
+
     if (Object.keys(indiceDict).length === 0) {
         throw new Error(
             'Aucune commune trouvée dans le JSON. ' +
@@ -350,6 +368,55 @@ function chargerEtAfficher(dataIndicateurs, geojsonData) {
     populateCommuneSelect(AppState.indicateursCommune);
 }
 
+/** Charge les jeux de données par défaut (OppChoVec + Santé). */
+async function chargerDonneesParDefaut() {
+    const cacheBust = `v=${Date.now()}`;
+    const [textJson, textGeo, textSante, textEtab, textTensions, textProjection] = await Promise.all([
+        fetch(`data/data_indicateurs.json?${cacheBust}`).then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} pour data_indicateurs.json`);
+            return r.text();
+        }),
+        fetch(`data/Commune_Corse.geojson?${cacheBust}`).then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} pour Commune_Corse.geojson`);
+            return r.text();
+        }),
+        fetch(`data/sante/sante_indicateurs_professionnels.json?${cacheBust}`).then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} pour sante_indicateurs_professionnels.json`);
+            return r.text();
+        }),
+        fetch(`data/sante/etablissements_indicateurs.json?${cacheBust}`).then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status} pour etablissements_indicateurs.json`);
+            return r.text();
+        }),
+        fetch(`data/sante/sante_tensions_professionnels.json?${cacheBust}`)
+            .then(r => {
+                if (!r.ok) return null;
+                return r.text();
+            })
+            .catch(() => null),
+        fetch(`data/sante/projection_offre_soins.json?${cacheBust}`)
+            .then(r => {
+                if (!r.ok) return null;
+                return r.text();
+            })
+            .catch(() => null),
+    ]);
+
+    chargerEtAfficher(JSON.parse(textJson), JSON.parse(textGeo));
+    if (window.SanteController) {
+        window.SanteController.chargerDonnees(
+            JSON.parse(textSante),
+            JSON.parse(textEtab),
+            textTensions ? JSON.parse(textTensions) : null
+        );
+    }
+    if (window.ProjectionSanteController) {
+        window.ProjectionSanteController.chargerDonnees(
+            textProjection ? JSON.parse(textProjection) : null
+        );
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -362,6 +429,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-font-decrease').addEventListener('click', () => setFont(fontSize - 1));
     document.getElementById('btn-font-reset')   .addEventListener('click', () => setFont(13));
     document.getElementById('btn-font-increase').addEventListener('click', () => setFont(fontSize + 1));
+
+    if (!SHOW_MANUAL_IMPORT_UI) {
+        const importCustom = document.getElementById('import-custom-block');
+        const importSep = document.getElementById('import-separator');
+        const loadBtn = document.getElementById('loadDefaultBtn');
+        if (importCustom) importCustom.style.display = 'none';
+        if (importSep) importSep.style.display = 'none';
+        if (loadBtn) loadBtn.style.display = 'none';
+    }
 
     // --- Toggle p_k ---
     document.getElementById('btn-toggle-pk').addEventListener('click', toggleModePk);
@@ -384,23 +460,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Chargement des données Corse par défaut (fetch) ---
     document.getElementById('loadDefaultBtn').addEventListener('click', async () => {
         try {
-            const [textJson, textGeo] = await Promise.all([
-                fetch('data/data_indicateurs.json').then(r => {
-                    if (!r.ok) throw new Error(`HTTP ${r.status} pour data_indicateurs.json`);
-                    return r.text();
-                }),
-                fetch('data/Commune_Corse.geojson').then(r => {
-                    if (!r.ok) throw new Error(`HTTP ${r.status} pour Commune_Corse.geojson`);
-                    return r.text();
-                }),
-            ]);
-
-            chargerEtAfficher(JSON.parse(textJson), JSON.parse(textGeo));
+            await chargerDonneesParDefaut();
             alert('Données Corse chargées. Sélectionnez une commune.');
         } catch (err) {
             alert('Erreur lors du chargement des données par défaut : ' + err.message);
         }
     });
+
+    if (AUTO_LOAD_DEFAULT_DATA) {
+        chargerDonneesParDefaut().catch(err => {
+            alert('Erreur au chargement automatique des données : ' + err.message);
+        });
+    }
 
 
     // --- Validation des fichiers uploadés manuellement ---
@@ -452,12 +523,17 @@ document.addEventListener('DOMContentLoaded', () => {
     tabButtons.forEach(btn => {
         btn.addEventListener('click', function () {
             const cible = this.getAttribute('data-tab');
+            const santeDataset = this.getAttribute('data-sante-dataset');
 
             tabButtons.forEach(b  => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
 
             this.classList.add('active');
             document.getElementById(cible).classList.add('active');
+
+            if (santeDataset && window.SanteController) {
+                window.SanteController.setActiveDataset(santeDataset);
+            }
 
             if (cible === 'lisatab') initialiserCartesLISA();
             if (cible === 'cahtab')  initialiserCartesCAH();
@@ -466,19 +542,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 const type   = active ? active.dataset.vizu : 'oppchovec';
                 construireHistogrammeJenks(type, `chart-${type}`);
             }
+            if (cible === 'projectiontab' && window.ProjectionSanteController) {
+                setTimeout(() => window.ProjectionSanteController.ouvrirOngletProjection(), 50);
+            }
 
             const type = cible.replace('tab', '');
             if (['opp', 'cho', 'vec'].includes(type)) {
                 setTimeout(() => {
                     if (!AppState.cartes[type]) {
                         // Premier clic : créer la carte dans le conteneur maintenant visible
-                        if (!AppState.communeJson || Object.keys(AppState.scoresParCommune).length === 0) return;
-                        const titres = { opp: 'Score Opp', cho: 'Score Cho', vec: 'Score Vec' };
+                        if (!AppState.communeJson) return;
+                        const titres = {
+                            opp: 'Score Opp',
+                            cho: 'Score Cho',
+                            vec: 'Score Vec',
+                        };
                         const dicts  = {
                             opp: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Opp])),
                             cho: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Cho])),
                             vec: Object.fromEntries(Object.entries(AppState.scoresParCommune).map(([c, s]) => [c, s.Score_Vec])),
                         };
+                        if (Object.keys(AppState.scoresParCommune).length === 0) return;
                         afficherCarteUnique(`map-${type}`, type, AppState.communeJson, dicts[type], titres[type]);
                     } else {
                         // Clics suivants : redimensionner et resynchroniser au zoom/centre de référence
@@ -488,6 +572,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const ref = AppState.cartes['oppchovec'];
                     if (ref && AppState.cartes[type]) {
                         AppState.cartes[type].setView(ref.getCenter(), ref.getZoom(), { animate: false });
+                    }
+                }, 50);
+            } else if (type === 'sante') {
+                setTimeout(() => {
+                    if (window.SanteController) {
+                        window.SanteController.ouvrirOngletSante();
                     }
                 }, 50);
             } else if (type === 'cah') {

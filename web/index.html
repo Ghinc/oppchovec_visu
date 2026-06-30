@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -32,10 +34,10 @@
             </button>
 
             <!-- Séparateur visuel -->
-            <div class="import-separator"><span>ou</span></div>
+            <div class="import-separator" id="import-separator"><span>ou</span></div>
 
             <!-- Option B : import personnalisé (facultatif) -->
-            <div class="import-custom">
+            <div class="import-custom" id="import-custom-block">
                 <p class="import-custom-title">Données personnalisées</p>
                 <label class="import-label">Communes (.geojson) <em>— requis</em></label>
                 <input type="file" id="file_geojson" accept=".geojson,.json">
@@ -94,6 +96,9 @@
                 <button class="tab-button"         data-tab="lisatab">LISA</button>
                 <button class="tab-button"         data-tab="cahtab">CAH</button>
                 <button class="tab-button"         data-tab="vizutab">Visualisation</button>
+                <button class="tab-button"         data-tab="santetab" data-sante-dataset="pro">Carte professionnels de santé</button>
+                <button class="tab-button"         data-tab="santetab" data-sante-dataset="etab">Carte établissements sanitaires</button>
+                <button class="tab-button"         data-tab="projectiontab">Projection Offre de Soins</button>
             </div>
 
             <!-- Carte OppChoVec -->
@@ -114,6 +119,225 @@
             <!-- Carte Vec -->
             <div class="tab-content" id="vectab">
                 <div id="map-vec" class="map"></div>
+            </div>
+
+            <!-- Carte Santé Corse -->
+            <div class="tab-content" id="santetab">
+                <div class="sante-subtabs">
+                    <button class="sante-subtab-button active" data-sante-tab="sante-map-view">Cartographies</button>
+                    <button class="sante-subtab-button" data-sante-tab="sante-stats-view">Statistiques</button>
+                    <button class="sante-subtab-button" data-sante-tab="sante-viz-view">Visualisation</button>
+                    <button class="sante-subtab-button" data-sante-tab="sante-scoring-view">Scoring</button>
+                    <button class="sante-subtab-button" id="sante-aggregation-tab-btn" data-sante-tab="sante-aggregation-view" style="display:none;">Agrégation</button>
+                    <button class="sante-subtab-button" id="sante-tensions-tab-btn" data-sante-tab="sante-tensions-view" style="display:none;">Zones de tensions</button>
+                </div>
+
+                <div class="sante-subtab-content active" id="sante-map-view">
+                    <div id="sante-layout">
+                        <div class="sante-categories-panel">
+                            <h3 id="sante-category-title">Catégories de praticiens</h3>
+                            <div id="sante-categorie-list" class="sante-categorie-list"></div>
+                        </div>
+                        <div class="sante-map-panel">
+                            <div class="sante-map-mode-control">
+                                <label for="sante-display-mode">Indicateur d'offre de soins</label>
+                                <select id="sante-display-mode">
+                                    <option value="density">Densité / 10 000 habitants</option>
+                                    <option value="score">Densité + diversité</option>
+                                    <option value="gravity">Accessibilité spatiale gravitaire</option>
+                                    <option value="sfca">Accessibilité spatiale 2SFCA classique</option>
+                                </select>
+                            </div>
+                            <!-- Ligne paramètres + description de la méthode -->
+                            <div id="sante-params-desc-row">
+                                <!-- Colonne gauche : paramètres spécifiques à l'indicateur -->
+                                <div id="sante-params-col">
+                                    <!-- Sélecteur d'offre pour densité sur la carte -->
+                                    <div class="sante-map-mode-control" id="sante-density-offer-map-control" style="display:none;">
+                                        <label for="sante-density-offer-map">Choix selon l'offre</label>
+                                        <select id="sante-density-offer-map">
+                                            <option value="raw">Non pondérée</option>
+                                            <option value="weighted">Pondérée</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sélecteur d'offre pour composite sur la carte -->
+                                    <div class="sante-map-mode-control" id="sante-score-offer-map-control" style="display:none;">
+                                        <label for="sante-score-offer-map">Choix selon l'offre</label>
+                                        <select id="sante-score-offer-map">
+                                            <option value="raw">Non pondérée</option>
+                                            <option value="weighted">Pondérée</option>
+                                        </select>
+                                    </div>
+                                    <div class="sante-scoring-mode-control" id="sante-gravity-controls-map">
+                                        <label for="sante-gravity-type-map">Type d'accessibilité</label>
+                                        <select id="sante-gravity-type-map"></select>
+                                        <label for="sante-gravity-beta-map">Paramètre de décroissance β</label>
+                                        <select id="sante-gravity-beta-map"></select>
+                                        <label for="sante-gravity-radius-map">Rayon de recherche</label>
+                                        <select id="sante-gravity-radius-map"></select>
+                                        <label for="sante-gravity-offer-map">Choix selon l'offre</label>
+                                        <select id="sante-gravity-offer-map"></select>
+                                    </div>
+                                </div>
+                                <!-- Colonne droite : description de la méthode -->
+                                <div id="sante-indicator-desc">
+                                    <button id="sante-desc-toggle" title="Afficher les détails">▼</button>
+                                    <div id="sante-indicator-desc-content"></div>
+                                </div>
+                            </div>
+                            <div id="sante-current-category" class="sante-current-category"></div>
+                            <div id="map-sante" class="map"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sante-subtab-content" id="sante-stats-view">
+                    <div id="sante-pro-stats">
+                        <div class="sante-stats-kpis" id="sante-pro-kpis"></div>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-pro-sort">Trier les spécialités par</label>
+                            <select id="sante-pro-sort">
+                                <option value="coverage">Couverture geographique communale</option>
+                                <option value="volume">Total des professionnels</option>
+                            </select>
+                        </div>
+                        <div id="sante-pro-types-table"></div>
+                    </div>
+                    <div id="sante-etab-stats" style="display:none;">
+                        <div class="sante-stats-kpis" id="sante-etab-kpis"></div>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-etab-sort">Trier les types par</label>
+                            <select id="sante-etab-sort">
+                                <option value="coverage">Couverture géographique communale</option>
+                                <option value="volume">Total des établissements</option>
+                            </select>
+                        </div>
+                        <div id="sante-etab-types-table"></div>
+                    </div>
+                </div>
+
+                <div class="sante-subtab-content" id="sante-viz-view">
+                    <div class="sante-scoring-panel" id="sante-pro-viz">
+                        <h3>Histogramme des professionnels par commune</h3>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-pro-viz-offer">Affichage</label>
+                            <select id="sante-pro-viz-offer">
+                                <option value="raw">Offre non pondérée</option>
+                                <option value="weighted">Offre pondérée</option>
+                            </select>
+                        </div>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-pro-viz-communes">Commune affichée</label>
+                            <select id="sante-pro-viz-communes" size="6"></select>
+                        </div>
+                        <div class="sante-scoring-chart">
+                            <canvas id="sante-pro-histogram"></canvas>
+                        </div>
+                    </div>
+                    <div class="sante-scoring-panel" id="sante-etab-viz" style="display:none;">
+                        <h3>Histogramme des établissements par commune</h3>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-etab-viz-communes">Commune affichée</label>
+                            <select id="sante-etab-viz-communes" size="6"></select>
+                        </div>
+                        <div class="sante-scoring-chart">
+                            <canvas id="sante-etab-histogram"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sante-subtab-content" id="sante-scoring-view">
+                    <div class="sante-scoring-panel">
+                        <h3 id="sante-scoring-title">Scoring de couverture en soins (Top 10 communes)</h3>
+                        <div class="sante-scoring-mode-control">
+                            <label for="sante-scoring-mode">Indicateur</label>
+                            <select id="sante-scoring-mode">
+                                <option value="composite">Densité + diversité</option>
+                                <option value="density">Densité / 10 000 hab.</option>
+                                <option value="gravity">Accessibilité spatiale gravitaire</option>
+                                <option value="sfca">Accessibilité spatiale 2SFCA classique</option>
+                            </select>
+                        </div>
+                        <!-- Sélecteur d'offre pour le mode densité -->
+                        <div class="sante-scoring-mode-control" id="sante-density-offer-control">
+                            <label for="sante-density-offer-scoring">Choix selon l'offre</label>
+                            <select id="sante-density-offer-scoring">
+                                <option value="raw">Non pondérée</option>
+                                <option value="weighted">Pondérée</option>
+                            </select>
+                        </div>
+                        <div class="sante-scoring-mode-control" id="sante-gravity-controls-scoring">
+                            <label for="sante-gravity-type-scoring">Type d'accessibilité</label>
+                            <select id="sante-gravity-type-scoring"></select>
+                            <label for="sante-gravity-beta-scoring">Paramètre de décroissance β</label>
+                            <select id="sante-gravity-beta-scoring"></select>
+                            <label for="sante-gravity-radius-scoring">Rayon de recherche</label>
+                            <select id="sante-gravity-radius-scoring"></select>
+                            <label for="sante-gravity-offer-scoring">Choix selon l'offre</label>
+                            <select id="sante-gravity-offer-scoring"></select>
+                        </div>
+                        <div id="sante-scoring-method" class="sante-scoring-method"></div>
+                        <div id="sante-scoring-list" class="sante-scoring-list"></div>
+                    </div>
+                </div>
+
+                <!-- Sous-onglet Agrégation -->
+                <div class="sante-subtab-content" id="sante-aggregation-view">
+                    <div class="sante-aggregation-panel">
+                        <div class="sante-map-mode-control">
+                            <label for="sante-aggregation-type">Carte d'agrégation</label>
+                            <select id="sante-aggregation-type">
+                                <option value="density">Densité agrégée</option>
+                                <option value="score">Score densité + diversité agrégé</option>
+                                <option value="gravity">Accessibilité gravitaire agrégée</option>
+                                <option value="sfca">Accessibilité 2SFCA agrégée</option>
+                                <option value="global">Agrégation globale (tous indicateurs)</option>
+                            </select>
+                        </div>
+                        <div id="sante-aggregation-desc" class="sante-aggregation-desc"></div>
+                        <div id="map-sante-aggregation" class="map"></div>
+                    </div>
+                </div>
+
+                <!-- Sous-onglet Zones de tensions -->
+                <div class="sante-subtab-content" id="sante-tensions-view">
+                    <div class="sante-tension-panel">
+                        <div class="sante-map-mode-control sante-tension-controls">
+                            <label for="sante-tension-aggregation-type">Carte agrégée</label>
+                            <select id="sante-tension-aggregation-type">
+                                <option value="density">Densité agrégée</option>
+                                <option value="score">Score densité + diversité agrégé</option>
+                                <option value="gravity">Accessibilité gravitaire agrégée</option>
+                                <option value="sfca">Accessibilité 2SFCA agrégée</option>
+                                <option value="global">Agrégation globale (tous indicateurs)</option>
+                            </select>
+
+                            <label for="sante-tension-remove-level">Offre réduite</label>
+                            <select id="sante-tension-remove-level">
+                                <option value="1">1 professionnel réduit</option>
+                                <option value="2">2 professionnels réduits</option>
+                                <option value="3">3 professionnels réduits</option>
+                            </select>
+                        </div>
+
+                        <div id="sante-tension-desc" class="sante-aggregation-desc"></div>
+
+                        <div class="sante-tension-compare-grid">
+                            <div class="sante-tension-map-card">
+                                <div class="sante-tension-map-title" id="sante-tension-map-reduced-title">Offre réduite</div>
+                                <div id="map-sante-tension-reduced" class="map"></div>
+                            </div>
+                            <div class="sante-tension-resizer" id="sante-tension-resizer" title="Glisser pour redimensionner">
+                                <div class="sante-tension-resizer-handle"></div>
+                            </div>
+                            <div class="sante-tension-map-card">
+                                <div class="sante-tension-map-title">Carte de variation (Delta %)</div>
+                                <div id="map-sante-tension-delta" class="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Onglet LISA avec sous-onglets -->
@@ -241,8 +465,93 @@
                 </div>
             </div>
 
-        </div>
-    </main>
+            <div class="tab-content" id="projectiontab">
+                <div class="projection-container">
+                    <div class="projection-header">
+                        <h2>Projection Offre de Soins</h2>
+                        <p>Projections tendancielles exploratoires basées sur les effectifs historiques observés.</p>
+                    </div>
+
+                    <div class="projection-controls" id="projection-main-controls">
+                        <label for="projection-departement">Département</label>
+                        <select id="projection-departement"></select>
+
+                        <label for="projection-specialite">Profession</label>
+                        <select id="projection-specialite"></select>
+                    </div>
+
+                    <!-- Sous-onglets -->
+                    <div class="projection-subtabs">
+                        <button class="projection-subtab-btn active" data-projection-tab="proj-historique">Historique</button>
+                        <button class="projection-subtab-btn" data-projection-tab="proj-future">Projection future</button>
+                        <button class="projection-subtab-btn" data-projection-tab="proj-demographie">Démographie par tranche d'âge</button>
+                        <button class="projection-subtab-btn" data-projection-tab="proj-synthese">Synthèse</button>
+                    </div>
+
+                    <!-- Sous-onglet : Historique -->
+                    <div class="projection-subtab-content active" id="proj-historique">
+                        <div id="projection-historique-kpis" class="projection-summary"></div>
+                        <div class="projection-grid">
+                            <section class="projection-card projection-card-wide">
+                                <h3>Évolution comparée par département — Historique observé</h3>
+                                <div class="projection-chart-wrap projection-chart-wrap-large">
+                                    <canvas id="projection-compare-chart"></canvas>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Sous-onglet : Projection future -->
+                    <div class="projection-subtab-content" id="proj-future">
+                        <div id="projection-future-kpis" class="projection-summary"></div>
+                        <div class="projection-grid">
+                            <section class="projection-card projection-card-wide">
+                                <h3>Historique observé + Projection tendancielle 2036</h3>
+                                <div class="projection-chart-wrap projection-chart-wrap-large">
+                                    <canvas id="projection-history-chart"></canvas>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Sous-onglet : Démographie -->
+                    <div class="projection-subtab-content" id="proj-demographie">
+                        <div id="projection-demo-kpis" class="projection-summary"></div>
+                        <div class="projection-grid">
+                            <section class="projection-card projection-card-wide">
+                                <h3>Évolution des grandes classes d'âge</h3>
+                                <div class="projection-chart-wrap projection-chart-wrap-large">
+                                    <canvas id="projection-age-chart"></canvas>
+                                </div>
+                            </section>
+                            <section class="projection-card projection-card-wide">
+                                <h3>Distribution complète des tranches d'âges par spécialité</h3>
+                                <div class="projection-chart-wrap projection-chart-wrap-tall">
+                                    <canvas id="projection-age-stacked-chart"></canvas>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Sous-onglet : Synthèse -->
+                    <div class="projection-subtab-content" id="proj-synthese">
+                        <div id="projection-synthese-table" class="projection-summary"></div>
+                        <div class="projection-grid projection-grid-wide">
+                            <section class="projection-card projection-card-wide">
+                                <h3>Matrice Projection / Vieillissement</h3>
+                                <div style="margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                                    <label for="synthese-scatter-dep" style="font-size:13px;font-weight:500;">Département :</label>
+                                    <select id="synthese-scatter-dep" style="font-size:13px;padding:4px 8px;border-radius:4px;border:1px solid #ccc;"></select>
+                                </div>
+                                <div class="projection-chart-wrap projection-chart-wrap-free">
+                                    <canvas id="projection-scatter-chart"></canvas>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </div>
 
@@ -262,7 +571,94 @@
 <script src="js/view/charts.js"></script>
 <script src="js/view/map.js"></script>
 <script src="js/view/commune.js"></script>
+<script src="js/model/sante.js?v=20260427"></script>
+<script src="js/view/sante_map.js?v=20260427"></script>
+<script src="js/controller/sante.js?v=20260427"></script>
+<script src="js/controller/projection_sante.js?v=20260614"></script>
 <script src="js/controller/app.js"></script>
+
+<script>
+(function () {
+    const resizer = document.getElementById('sante-tension-resizer');
+    if (!resizer) return;
+
+    const grid = resizer.closest('.sante-tension-compare-grid');
+    const leftCard  = resizer.previousElementSibling;
+    const rightCard = resizer.nextElementSibling;
+
+    // Initialise les deux cartes à 50/50
+    function initWidths() {
+        const total = grid.clientWidth - resizer.offsetWidth;
+        leftCard.style.flex  = 'none';
+        rightCard.style.flex = 'none';
+        leftCard.style.width  = (total / 2) + 'px';
+        rightCard.style.width = (total / 2) + 'px';
+    }
+
+    let dragging = false, startX, startLeft, startRight;
+
+    resizer.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        if (!leftCard.style.width) initWidths();
+        dragging = true;
+        startX     = e.clientX;
+        startLeft  = leftCard.offsetWidth;
+        startRight = rightCard.offsetWidth;
+        resizer.classList.add('dragging');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        const minW = 120;
+        const newLeft  = Math.max(minW, startLeft  + dx);
+        const newRight = Math.max(minW, startRight - dx);
+        // N'applique que si les deux respectent le min
+        if (startLeft + dx >= minW && startRight - dx >= minW) {
+            leftCard.style.width  = newLeft  + 'px';
+            rightCard.style.width = newRight + 'px';
+            // Invalider les cartes Leaflet pour qu'elles se redessinent
+            const tensionTypes = ['sante-tension-reduced', 'sante-tension-delta'];
+            tensionTypes.forEach(t => {
+                const m = window.AppState?.cartes?.[t];
+                if (m) m.invalidateSize();
+            });
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!dragging) return;
+        dragging = false;
+        resizer.classList.remove('dragging');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        // Invalider une dernière fois après relâchement
+        setTimeout(() => {
+            ['sante-tension-reduced', 'sante-tension-delta'].forEach(t => {
+                const m = window.AppState?.cartes?.[t];
+                if (m) m.invalidateSize();
+            });
+        }, 50);
+    });
+
+    // Réinitialiser au double-clic
+    resizer.addEventListener('dblclick', () => {
+        leftCard.style.width  = '';
+        rightCard.style.width = '';
+        leftCard.style.flex   = '1 1 0';
+        rightCard.style.flex  = '1 1 0';
+        setTimeout(() => {
+            ['sante-tension-reduced', 'sante-tension-delta'].forEach(t => {
+                const m = window.AppState?.cartes?.[t];
+                if (m) m.invalidateSize();
+            });
+        }, 50);
+    });
+})();
+</script>
 
 </body>
 </html>

@@ -310,11 +310,28 @@ function calculerJenksBreaks(values, nClasses) {
  */
 function genererLabelsJenks(seuils) {
     if (seuils.length < 3) return seuils.slice(1).map((s, i) => `Classe ${i + 1}`);
+
+    const maxAbs = Math.max(...seuils.map(v => Math.abs(Number(v) || 0)));
+    let decimals = 2;
+    if (maxAbs < 0.001) decimals = 6;
+    else if (maxAbs < 0.01) decimals = 5;
+    else if (maxAbs < 0.1) decimals = 4;
+    else if (maxAbs < 1) decimals = 3;
+    else if (maxAbs >= 10 && maxAbs < 100) decimals = 1;
+    else if (maxAbs >= 100) decimals = 0;
+
+    const fmt = (v) => {
+        const n = Number(v);
+        if (!isFinite(n)) return 'N/A';
+        const txt = n.toFixed(decimals);
+        return txt.includes('.') ? txt.replace(/\.0+$/, '').replace(/(\.\d*?)0+$/, '$1') : txt;
+    };
+
     const labels = [];
-    labels.push(`≤ ${seuils[1].toFixed(2)}`);
+    labels.push(`≤ ${fmt(seuils[1])}`);
     for (let i = 1; i < seuils.length - 2; i++) {
-        labels.push(`${seuils[i].toFixed(2)} – ${seuils[i + 1].toFixed(2)}`);
+        labels.push(`${fmt(seuils[i])} – ${fmt(seuils[i + 1])}`);
     }
-    labels.push(`> ${seuils[seuils.length - 2].toFixed(2)}`);
+    labels.push(`> ${fmt(seuils[seuils.length - 2])}`);
     return labels;
 }
