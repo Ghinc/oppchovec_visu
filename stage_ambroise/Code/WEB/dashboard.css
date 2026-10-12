@@ -593,6 +593,98 @@ button.small {
   margin: 0;
 }
 
+/* Sliders homogènes 0-100 % : repère de la valeur d'origine au-dessus de la piste */
+.slider-wrap {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.slider-origine {
+  position: absolute;
+  top: 0;
+  /* compense la largeur du curseur (18px) pour aligner le repère sur son centre */
+  left: calc(var(--p) * 1% + (0.5 - var(--p) / 100) * 18px);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--text-secondary, #666);
+  pointer-events: none;
+}
+
+.slider-echelle,
+.sliders-legende {
+  font-size: 11px;
+  color: var(--text-secondary, #666);
+}
+
+.sliders-legende {
+  margin: 0 0 var(--spacing-sm);
+}
+
+/* Indicateur décomposé : jauge en lecture seule, pilotée par les sous-composantes */
+.jauge-indicateur {
+  height: 6px;
+  margin: 6px 0;
+  border-radius: 3px;
+  background: var(--border-light);
+  overflow: hidden;
+}
+
+.jauge-remplie {
+  height: 100%;
+  background: var(--primary-blue);
+  opacity: 0.55;
+}
+
+.sous-composantes {
+  align-self: stretch;
+  margin-top: var(--spacing-xs);
+  padding-left: var(--spacing-sm);
+  border-left: 2px solid var(--border-light);
+  text-align: left;
+}
+
+.sc-row {
+  margin-bottom: var(--spacing-sm);
+}
+
+.sc-header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.sc-header > span:last-child {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.sc-header em {
+  font-style: normal;
+  color: var(--text-secondary, #666);
+}
+
+.sc-binaire {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--spacing-xs);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.sc-row input[type="range"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
 /* Masquer les inputs number et boutons +/- */
 .indicateur-row input[type="number"],
 .indicateur-row button {

@@ -20,6 +20,15 @@ let data_indicateursOriginaux = {}
     let communeJson = {}
     let modeCalculPk = 'betti'; // 'egal' | 'betti'
     let scoresParCommuneRaw01 = {}; // scores 0-1 (pour calcul p_k Betti)
+    // Référence figée sur les données d'origine : modifier une commune via les sliders ne déplace pas les autres
+    let indicateursOrigine = {}  // indicateurs bruts d'origine (jamais modifiés)
+    let bornesRef = null         // {min, max} par indicateur
+    let bornesScoresRef = null   // {min, max} par Score_* (0-1)
+    let refParModePk = {}        // {pk, min, max, jenks} par mode p_k
+    let sousComposantesOrigine = {}  // sous-composantes brutes d'origine, par commune puis indicateur
+    let sousComposantesCommune = {}  // sous-composantes courantes (modifiées via les sliders)
+    let bornesSousComp = {}          // {min, max} figés par indicateur puis sous-composante
+    let brouillonSousComp = null     // sous-composantes en cours d'édition dans le panneau commune
     let clustersLISA5pct = {}  // Clusters LISA 5% chargés depuis JSON
     let clustersLISA1pct = {}  // Clusters LISA 1% chargés depuis JSON
     let seuilsJenksCharges = {}  // Seuils Jenks chargés depuis seuils_jenks.json
@@ -69,7 +78,7 @@ const traductions = {
             Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
             Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
             Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
-            Indicateur_Cho1: "Ne pas être discriminé. Calculé avec exp(-pourcentage_population_quartiers_prioritaires).",
+            Indicateur_Cho1: "Ne pas être discriminé. Calculé avec −log(nombre de personnes vivant en quartier prioritaire), 0 si aucune.",
             Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion de personnes possédant le droit de vote dans la commune.",
             Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
             Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
@@ -111,7 +120,7 @@ const traductions = {
             Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories.",
             Indicateur_Opp3: "Having the means of mobility. Score based on the proportion of households with a car and access to transport.",
             Indicateur_Opp4: "Having access to ICT. Average of 4G coverage, high-speed Internet and fiber.",
-            Indicateur_Cho1: "Not being discriminated against. Calculated with exp(-percentage_population_priority_areas).",
+            Indicateur_Cho1: "Not being discriminated against. Calculated with −log(number of people living in priority areas), 0 if none.",
             Indicateur_Cho2: "Having the means to influence political decisions. Proportion of people with voting rights in the municipality.",
             Indicateur_Vec1: "Having a decent income. Median tax income of the municipality.",
             Indicateur_Vec2: "Having decent housing. Score based on comfort, occupancy density and housing type.",
@@ -1331,7 +1340,7 @@ function afficherToutesLesCartes(geojsonData, indiceFinal, scores) {
     }
 
     // Afficher chaque carte (sauf LISA qui sera chargé au clic)
-    afficherCarteUnique('map-oppchovec', 'oppchovec', geojsonData, indiceFinal, 'OppChoVec');
+    afficherCarteUnique('map-oppchovec', 'oppchovec', geojsonData, indiceFinal, 'OppChoLiv');
     afficherCarteUnique('map-opp', 'opp', geojsonData, scoresOpp, 'Score Opp');
     afficherCarteUnique('map-cho', 'cho', geojsonData, scoresCho, 'Score Cho');
     afficherCarteUnique('map-vec', 'vec', geojsonData, scoresVec, 'Score Vec');
@@ -2082,6 +2091,7 @@ async function chargerFichiersAutomatiquement() {
     // 6. Suite du traitement
     const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
     populateCommuneSelect(data_indicateurs_dict);
+    await chargerSousComposantes();
 
     // 7. Appliquer le mode Betti par défaut
     recalculerCarteOppChoVec();
@@ -2170,6 +2180,257 @@ if (validateBtn) {
   afficherCommune(selectedCommune);
 });
 
+// === Sliders homogènes : position 0-100 % = valeur normalisée min-max sur la Corse (bornes figées) ===
+// La position est exactement le v_norm de la formule ; la valeur brute est toujours affichée à côté.
+const META_INDICATEURS = {
+  Indicateur_Opp1: { unite: '/ 7', decimales: 2 },
+  Indicateur_Opp2: { unite: '', decimales: 3 },
+  Indicateur_Opp3: { unite: 'pts', decimales: 1 },
+  Indicateur_Opp4: { unite: '%', decimales: 1 },
+  Indicateur_Cho1: { unite: '', decimales: 2 },
+  Indicateur_Cho2: { unite: '%', decimales: 1 },
+  Indicateur_Vec1: { unite: '€', decimales: 0 },
+  Indicateur_Vec2: { unite: '', decimales: 3 },
+  Indicateur_Vec3: { unite: '', decimales: 3 },
+  Indicateur_Vec4: { unite: 'services', decimales: 0 }
+};
+
+// Indicateurs décomposés : un slider par sous-composante, l'indicateur est recalculé par sa formule d'origine
+// (mêmes formules que Code/Python/exporter_sous_composantes.py, qui vérifie qu'elles redonnent le JSON).
+// binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
+// facteur = multiplicateur d'affichage (fractions 0-1 affichées en %).
+const SOUS_COMPOSANTES = {
+  Indicateur_Opp3: {
+    cle: 'Opp3',
+    composantes: {
+      voiture: { label: 'Ménages avec au moins une voiture', unite: '%', decimales: 1 },
+      tc:      { label: 'Réseau de transports en commun (+100 pts)', binaire: 100 },
+      bus:     { label: 'Réseau de bus urbain (+100 pts)', binaire: 1 }
+    },
+    calcul: c => c.voiture + (c.tc > 0 ? 100 : 0) + (c.bus ? 100 : 0)
+  },
+  Indicateur_Opp4: {
+    cle: 'Opp4',
+    composantes: {
+      g4:    { label: 'Population couverte en 4G', unite: '%', decimales: 0 },
+      debit: { label: 'Population avec débit > 30 Mb/s', unite: '%', decimales: 0 },
+      fibre: { label: 'Taux de fibre', unite: '%', decimales: 0 }
+    },
+    calcul: c => (c.g4 + c.debit + c.fibre) / 3
+  },
+  Indicateur_Cho1: {
+    cle: 'Cho1',
+    composantes: {
+      personnes_qpv: { label: 'Personnes en quartier prioritaire', unite: 'pers.', decimales: 0, entier: true, inverse: true }
+    },
+    calcul: c => c.personnes_qpv > 0 ? -Math.log(c.personnes_qpv) : 0
+  },
+  Indicateur_Vec2: {
+    cle: 'Vec2',
+    composantes: {
+      pers_piece: { label: 'Personnes par pièce', unite: '', decimales: 2, inverse: true },
+      sdb:        { label: 'Logements avec salle de bain', unite: '%', decimales: 1, facteur: 100 },
+      chauffage:  { label: 'Logements avec chauffage', unite: '%', decimales: 1, facteur: 100 },
+      maisons:    { label: 'Maisons individuelles', unite: '%', decimales: 1, facteur: 100 }
+    },
+    calcul: c => (Math.exp(-c.pers_piece) + (c.sdb + c.chauffage) / 2 + c.maisons) / 3
+  },
+  Indicateur_Vec3: {
+    cle: 'Vec3',
+    parts: true,  // parts d'actifs qui somment à 100 % : bouger l'une redistribue les autres
+    composantes: {
+      stable:   { label: 'Emploi stable (poids 1)', unite: '%', decimales: 1 },
+      cdd:      { label: 'CDD (poids 0,75)', unite: '%', decimales: 1 },
+      ponctuel: { label: 'Contrat ponctuel (poids 0,5)', unite: '%', decimales: 1 },
+      chomeur:  { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 },
+      aide:     { label: 'Emploi aidé (poids 0,25)', unite: '%', decimales: 1 }
+    },
+    calcul: c => {
+      const total = c.stable + c.cdd + c.ponctuel + c.chomeur + c.aide;
+      return total === 0 ? 0 : (c.stable * 1 + c.cdd * 0.75 + c.ponctuel * 0.5 + c.chomeur * 0 + c.aide * 0.25) / total;
+    }
+  }
+};
+
+function pctEntre(bornes, valeur) {
+  if (!bornes || typeof valeur !== 'number') return null;
+  return bornes.max === bornes.min ? 0 : 100 * (valeur - bornes.min) / (bornes.max - bornes.min);
+}
+
+function valeurEntre(bornes, pct) {
+  return bornes.min + (pct / 100) * (bornes.max - bornes.min);
+}
+
+function bornesIndicateur(indicateur) {
+  return bornesRef && { min: bornesRef.min[indicateur], max: bornesRef.max[indicateur] };
+}
+
+function pctDepuisValeur(indicateur, valeur) {
+  return pctEntre(bornesIndicateur(indicateur), valeur);
+}
+
+function valeurDepuisPct(indicateur, pct) {
+  return valeurEntre(bornesIndicateur(indicateur), pct);
+}
+
+function formaterValeur(meta, valeur) {
+  meta = meta || { unite: '', decimales: 2 };
+  const txt = (valeur * (meta.facteur || 1)).toLocaleString('fr-FR', { minimumFractionDigits: meta.decimales, maximumFractionDigits: meta.decimales });
+  return meta.unite ? `${txt} ${meta.unite}` : txt;
+}
+
+function formaterBrut(indicateur, valeur) {
+  return formaterValeur(META_INDICATEURS[indicateur], valeur);
+}
+
+function libelleSlider(indicateur, valeur) {
+  return `${pctDepuisValeur(indicateur, valeur).toFixed(0)} % · ${formaterBrut(indicateur, valeur)}`;
+}
+
+function libelleEchelle(indicateur) {
+  return `Corse : ${formaterBrut(indicateur, bornesRef.min[indicateur])} → ${formaterBrut(indicateur, bornesRef.max[indicateur])}`;
+}
+
+// Valeur brute lue sur le slider ; tant qu'il n'a pas bougé, on garde la valeur exacte (pas d'arrondi).
+// Le navigateur normalise la valeur d'un <input type="range"> (15 chiffres significatifs) : « pas bougé » se teste avec une tolérance.
+function valeurBruteDepuisSlider(indicateur, input) {
+  if (Math.abs(parseFloat(input.value) - parseFloat(input.defaultValue)) < 1e-9) return parseFloat(input.dataset.brut);
+  return valeurDepuisPct(indicateur, parseFloat(input.value));
+}
+
+function majLibelleSlider(indicateur) {
+  const input = document.getElementById(indicateur);
+  document.getElementById(indicateur + '_val').innerText = libelleSlider(indicateur, valeurBruteDepuisSlider(indicateur, input));
+}
+
+// --- Sous-composantes ---
+
+async function chargerSousComposantes() {
+  try {
+    const response = await fetch(BASE_PATH + 'sous_composantes.json');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const parIndicateur = {};
+    for (const [commune, sc] of Object.entries(data)) {
+      parIndicateur[commune] = {};
+      for (const [indicateur, def] of Object.entries(SOUS_COMPOSANTES)) {
+        if (sc[def.cle]) parIndicateur[commune][indicateur] = sc[def.cle];
+      }
+    }
+    sousComposantesOrigine = parIndicateur;
+    sousComposantesCommune = structuredClone(parIndicateur);
+    // Bornes figées de chaque sous-composante sur les données d'origine
+    bornesSousComp = {};
+    for (const [indicateur, def] of Object.entries(SOUS_COMPOSANTES)) {
+      bornesSousComp[indicateur] = {};
+      for (const comp in def.composantes) {
+        const vals = Object.values(parIndicateur).map(sc => sc[indicateur]?.[comp]).filter(v => typeof v === 'number');
+        bornesSousComp[indicateur][comp] = { min: Math.min(...vals), max: Math.max(...vals) };
+      }
+    }
+    console.log(`✅ Sous-composantes chargées (${Object.keys(data).length} communes)`);
+  } catch (e) {
+    console.warn('⚠ sous_composantes.json indisponible : un seul slider par indicateur', e);
+  }
+}
+
+function libelleSousComposante(indicateur, comp, valeur) {
+  const def = SOUS_COMPOSANTES[indicateur].composantes[comp];
+  const pct = pctEntre(bornesSousComp[indicateur][comp], valeur);
+  return `${pct.toFixed(0)} % · ${formaterValeur(def, valeur)}`;
+}
+
+// Libellé de l'indicateur recalculé depuis ses sous-composantes (peut sortir de l'échelle corse)
+function libelleIndicateurDecompose(indicateur, valeur) {
+  const pct = pctDepuisValeur(indicateur, valeur);
+  const hors = pct > 100.0001 ? ' ↑ au-delà du max corse' : pct < -0.0001 ? ' ↓ en deçà du min corse' : '';
+  return `${pct.toFixed(0)} % · ${formaterBrut(indicateur, valeur)}${hors}`;
+}
+
+function htmlSousComposantes(indicateur, communeNom) {
+  const def = SOUS_COMPOSANTES[indicateur];
+  const valeurs = brouillonSousComp.valeurs[indicateur];
+  const origine = sousComposantesOrigine[communeNom][indicateur];
+  let html = '<div class="sous-composantes">';
+  for (const [comp, meta] of Object.entries(def.composantes)) {
+    const id = `${indicateur}__${comp}`;
+    if (meta.binaire !== undefined) {
+      html += `
+        <label class="sc-binaire">
+          <input type="checkbox" id="${id}" ${valeurs[comp] ? 'checked' : ''} onchange="majSousComposante('${indicateur}', '${comp}')" />
+          ${meta.label}
+        </label>`;
+      continue;
+    }
+    const bornes = bornesSousComp[indicateur][comp];
+    const constante = bornes.max === bornes.min;
+    html += `
+      <div class="sc-row">
+        <div class="sc-header">
+          <span>${meta.label}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
+          <span id="${id}_val">${libelleSousComposante(indicateur, comp, valeurs[comp])}</span>
+        </div>
+        <div class="slider-wrap">
+          <span class="slider-origine" style="--p:${pctEntre(bornes, origine[comp])}" title="Valeur d'origine"></span>
+          <input type="range" id="${id}" min="0" max="100" step="any"
+                 value="${pctEntre(bornes, valeurs[comp])}" ${constante ? 'disabled' : ''}
+                 oninput="majSousComposante('${indicateur}', '${comp}')" />
+        </div>
+        <div class="slider-echelle">${constante
+          ? `Identique pour toutes les communes corses (${formaterValeur(meta, bornes.min)})`
+          : `Corse : ${formaterValeur(meta, bornes.min)} → ${formaterValeur(meta, bornes.max)}`}</div>
+      </div>`;
+  }
+  return html + '</div>';
+}
+
+// Parts qui somment à un total fixe : la part modifiée prend sa nouvelle valeur, les autres
+// se partagent le reste au prorata de leurs valeurs actuelles
+function redistribuerParts(valeurs, comp, nouvelle) {
+  const total = Object.values(valeurs).reduce((a, b) => a + b, 0);
+  nouvelle = Math.min(Math.max(nouvelle, 0), total);
+  const autres = Object.keys(valeurs).filter(k => k !== comp);
+  const resteAvant = total - valeurs[comp];
+  const resteApres = total - nouvelle;
+  for (const k of autres) {
+    valeurs[k] = resteAvant > 0 ? valeurs[k] * resteApres / resteAvant : resteApres / autres.length;
+  }
+  valeurs[comp] = nouvelle;
+}
+
+function majSousComposante(indicateur, comp) {
+  const def = SOUS_COMPOSANTES[indicateur];
+  const meta = def.composantes[comp];
+  const valeurs = brouillonSousComp.valeurs[indicateur];
+  const input = document.getElementById(`${indicateur}__${comp}`);
+
+  if (meta.binaire !== undefined) {
+    valeurs[comp] = input.checked ? meta.binaire : 0;
+  } else {
+    let v = valeurEntre(bornesSousComp[indicateur][comp], parseFloat(input.value));
+    if (meta.entier) v = Math.round(v);
+    if (def.parts) redistribuerParts(valeurs, comp, v);
+    else valeurs[comp] = v;
+  }
+
+  // Rafraîchir les libellés (et la position des autres parts, qui ont pu bouger)
+  for (const [c, m] of Object.entries(def.composantes)) {
+    if (m.binaire !== undefined) continue;
+    document.getElementById(`${indicateur}__${c}_val`).innerText = libelleSousComposante(indicateur, c, valeurs[c]);
+    if (c !== comp) {
+      document.getElementById(`${indicateur}__${c}`).value = Math.min(100, Math.max(0, pctEntre(bornesSousComp[indicateur][c], valeurs[c])));
+    }
+  }
+  const valeurIndicateur = def.calcul(valeurs);
+  document.getElementById(indicateur + '_val').innerText = libelleIndicateurDecompose(indicateur, valeurIndicateur);
+  document.getElementById(indicateur + '_jauge').style.width = `${Math.min(100, Math.max(0, pctDepuisValeur(indicateur, valeurIndicateur)))}%`;
+}
+
+function estDecompose(indicateur, communeNom) {
+  return !!(SOUS_COMPOSANTES[indicateur] && brouillonSousComp?.commune === communeNom
+            && brouillonSousComp.valeurs[indicateur]);
+}
+
 // fonction pour afficher le detail d'une commune
 function afficherCommune(communeNom) {
 
@@ -2189,68 +2450,60 @@ function afficherCommune(communeNom) {
     return;
   }
 
+  // Copie de travail des sous-composantes, validée par « Recalculer »
+  brouillonSousComp = sousComposantesCommune[communeNom]
+    ? { commune: communeNom, valeurs: structuredClone(sousComposantesCommune[communeNom]) }
+    : null;
+
+  const horsEchelle = valeurIndice > 10 ? ' <em>(au-delà de la meilleure commune corse)</em>'
+                    : valeurIndice < 0 ? ' <em>(en deçà de la plus faible commune corse)</em>' : '';
   let indicateursHTML = `
     <p><strong>Commune :</strong> ${communeNom}</p>
-    <p><strong>OppChoVec :</strong> ${valeurIndice.toFixed(2)}/10</p>
+    <p><strong>OppChoVec :</strong> ${valeurIndice.toFixed(2)}/10${horsEchelle}</p>
     <h4>Indicateurs :</h4>
+    <p class="sliders-legende">0 % = valeur la plus basse observée en Corse, 100 % = la plus haute · ▾ = valeur d'origine</p>
     <ul>
   `;
 
-  const stepsParIndicateur = {
-    Indicateur_Opp1: 0.1,
-    Indicateur_Opp2: 0.01,
-    Indicateur_Opp3: 1,
-    Indicateur_Opp4: 1,
-    Indicateur_Cho1: 0.01,
-    Indicateur_Cho2: 1,
-    Indicateur_Vec1: 100,
-    Indicateur_Vec2: 0.01,
-    Indicateur_Vec3: 0.01,
-    Indicateur_Vec4: 1
-  };
-
-const bornesParIndicateur = {
-  Indicateur_Opp1: { min: 1, max: 7 },
-  Indicateur_Opp2: { min: 0, max: 1 },
-  Indicateur_Opp3: { min: 0, max: 300 },
-  Indicateur_Opp4: { min: 0, max: 100 },
-  Indicateur_Cho1: { min: 0, max: 1 },
-  Indicateur_Cho2: { min: 0, max: 100 },
-  Indicateur_Vec1: { min: 15000, max: 30000 },
-  Indicateur_Vec2: { min: 0, max: 1 },
-  Indicateur_Vec3: { min: 0, max: 1 },
-  Indicateur_Vec4: { min: 0, max: 20 }
-};
-
-
-
   for (const [nomIndicateur, valeur] of Object.entries(commune)) {
-    const nombre = typeof valeur === 'number' ? Number(valeur).toFixed(2) : valeur;
-
-    const step = stepsParIndicateur[nomIndicateur] || 1;
+    const pct = pctDepuisValeur(nomIndicateur, valeur);
+    const pctOrigine = pctDepuisValeur(nomIndicateur, indicateursOrigine[communeNom]?.[nomIndicateur]);
     const lang = langueFrancais ? 'fr' : 'en';
     const description = traductions[lang].descriptions[nomIndicateur] || descriptionsIndicateurs[nomIndicateur] || "No description available.";
+    const decompose = estDecompose(nomIndicateur, communeNom);
+
+    // Indicateur décomposé : jauge en lecture seule + un slider par sous-composante
+    const controle = decompose ? `
+        <div class="slider-wrap">
+          ${pctOrigine === null ? '' : `<span class="slider-origine" style="--p:${pctOrigine}" title="Valeur d'origine"></span>`}
+          <div class="jauge-indicateur"><div class="jauge-remplie" id="${nomIndicateur}_jauge" style="width:${Math.min(100, Math.max(0, pct))}%"></div></div>
+        </div>
+        <div class="slider-echelle">${libelleEchelle(nomIndicateur)}</div>
+        ${htmlSousComposantes(nomIndicateur, communeNom)}` : `
+        <div class="slider-wrap">
+          ${pctOrigine === null ? '' : `<span class="slider-origine" style="--p:${pctOrigine}" title="Valeur d'origine"></span>`}
+          <input type="range"
+                 id="${nomIndicateur}"
+                 min="0" max="100" step="any"
+                 value="${pct}"
+                 data-brut="${valeur}"
+                 oninput="majLibelleSlider('${nomIndicateur}')" />
+        </div>
+        <div class="slider-echelle">${libelleEchelle(nomIndicateur)}</div>`;
 
     indicateursHTML += `
-      <li class="indicateur-row">
+      <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
           <strong>${nomIndicateur}</strong>
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>
-          <span id="${nomIndicateur}_val">${nombre}</span>
+          <span id="${nomIndicateur}_val">${decompose ? libelleIndicateurDecompose(nomIndicateur, valeur) : libelleSlider(nomIndicateur, valeur)}</span>
         </div>
         <div id="info-${nomIndicateur}" class="indicator-info-box" style="display: none;">
           <button class="info-close-button" onclick="closeIndicatorInfo('${nomIndicateur}')" aria-label="Close">✕</button>
           <p data-indicator-desc="${nomIndicateur}">${description}</p>
-        </div>
-        <input type="range"
-               id="${nomIndicateur}"
-               value="${nombre}"
-               step="${step}"
-               min="${bornesParIndicateur[nomIndicateur]?.min ?? 0}"
-               max="${bornesParIndicateur[nomIndicateur]?.max ?? 100}"
-               oninput="document.getElementById('${nomIndicateur}_val').innerText = parseFloat(this.value).toFixed(2)" />
+        </div>${controle}
       </li>`;
   }
 
@@ -2404,82 +2657,42 @@ html += `
 
 
 
-// fonction de réinitialisation
+// fonction de réinitialisation : toutes les communes reprennent leurs valeurs d'origine
   function reinitialiserValeurs(commune) {
-    calculerIndicateurs(data_indicateursOriginaux)
+    indicateursCommune = structuredClone(indicateursOrigine);
+    sousComposantesCommune = structuredClone(sousComposantesOrigine);
+    recalculerCarteOppChoVec();
     afficherCommune(commune);
     alert("Valeurs réinitialisées avec succès");
 }
 
-// fonction pour recalcules l'indice après modification des valeurs d'indicateur
+// fonction pour recalculer l'indice après modification des valeurs d'indicateur
   function recalculerIndice(selectedCommune) {
   const communeData = indicateursCommune[selectedCommune];
   if (!communeData) return;
 
-  // Étape 1 : mise à jour des valeurs depuis les champs input
+  // Étape 1 : valeurs brutes reconstruites depuis la position des sliders (0-100 % de l'échelle corse)
   for (const indicateur in communeData) {
     const input = document.getElementById(indicateur);
     if (input) {
-      communeData[indicateur] = parseFloat(input.value);
+      communeData[indicateur] = valeurBruteDepuisSlider(indicateur, input);
     }
   }
 
-  // Étape 2 : recalculer à partir des valeurs mises à jour
-  indicateursCommune[selectedCommune] = communeData
-  const min_vals = (minmax(indicateursCommune)).min
-  const max_vals = (minmax(indicateursCommune)).max
-
-  const donneesNormalisees = normaliserDonnees(indicateursCommune, min_vals, max_vals);
-
-  const data_dimensions_scores_dict = calculerScoresParCommune(donneesNormalisees)
-
-  const indiceFinalBrut = calculerIndiceBienEtre(data_dimensions_scores_dict);
-
-  // Normaliser l'indice final sur 0-10
-  const valeursIndice = Object.values(indiceFinalBrut);
-  const minIndice = Math.min(...valeursIndice);
-  const maxIndice = Math.max(...valeursIndice);
-
-  const indiceFinal = {};
-  for (const commune in indiceFinalBrut) {
-    if (maxIndice === minIndice) {
-      indiceFinal[commune] = 5; // Valeur par défaut si tous égaux
-    } else {
-      indiceFinal[commune] = ((indiceFinalBrut[commune] - minIndice) / (maxIndice - minIndice)) * 10;
+  // Indicateurs décomposés : recalculés par leur formule seulement si une sous-composante a bougé
+  if (brouillonSousComp && brouillonSousComp.commune === selectedCommune) {
+    for (const [indicateur, apres] of Object.entries(brouillonSousComp.valeurs)) {
+      const avant = sousComposantesCommune[selectedCommune][indicateur];
+      if (Object.keys(apres).some(k => apres[k] !== avant[k])) {
+        sousComposantesCommune[selectedCommune][indicateur] = { ...apres };
+        communeData[indicateur] = SOUS_COMPOSANTES[indicateur].calcul(apres);
+      }
     }
   }
 
-  // Normaliser les scores par dimension sur 0-10
-  const scoresNormalises = {};
-  for (const commune in data_dimensions_scores_dict) {
-    scoresNormalises[commune] = {
-      Score_Opp: data_dimensions_scores_dict[commune].Score_Opp * 10,
-      Score_Cho: data_dimensions_scores_dict[commune].Score_Cho * 10,
-      Score_Vec: data_dimensions_scores_dict[commune].Score_Vec * 10
-    };
-  }
-
-  indiceFinale = indiceFinal
-  scoresParCommune = scoresNormalises
-
-  afficherToutesLesCartes(communeJson, indiceFinale, scoresNormalises);
-
-  // Mettre à jour les visualisations de données
-  genererDataVisualisations(indiceFinale);
-
-  valeurIndice = indiceFinale[selectedCommune]
-  if (valeurIndice === undefined) {
-    const resultDiv = document.getElementById("resultCommune");
-    resultDiv.innerHTML = "<p style='color:red;'>❌ Données introuvables pour cette commune.</p>";
-    return;
-  }
-
-  // Étape 3 : mettre à jour l'affichage
-  const resultDiv = document.getElementById("resultCommune");
-  let outputHTML = `
-    <p><strong>OppChoVec :</strong> ${valeurIndice.toFixed(2)}/10</p>
-  `;
-  resultDiv.querySelector("p:nth-child(2)").innerHTML = outputHTML;
+  // Étape 2 : recalcul complet avec les références figées (seule cette commune bouge)
+  recalculerCarteOppChoVec();
+  afficherCommune(selectedCommune);
 
   alert("Indice recalculé avec succès");
 
@@ -2489,24 +2702,6 @@ html += `
     (comparaisonEnCours.commune1 === selectedCommune || comparaisonEnCours.commune2 === selectedCommune)
   ) {
     afficherResultatComparaison(comparaisonEnCours.commune1, comparaisonEnCours.commune2);
-  }
-}
-
-// fonction pour ajuster les valeurs d'indicateur lors de la modification
-function ajusterValeur(indicateur, delta) {
-  const input = document.getElementById(indicateur);
-  const display = document.getElementById(indicateur + "_val");
-
-  if (input && display) {
-    let nouvelleValeur = parseFloat(input.value) + delta;
-
-    // Clamp la valeur dans les bornes min/max
-    const min = parseFloat(input.min);
-    const max = parseFloat(input.max);
-    nouvelleValeur = Math.max(min, Math.min(max, nouvelleValeur));
-
-    input.value = nouvelleValeur.toFixed(2);
-    display.innerText = nouvelleValeur.toFixed(2);
   }
 }
 
@@ -2530,57 +2725,6 @@ function ajusterValeur(indicateur, delta) {
     console.log("✅ Communes chargées et triées par ordre alphabétique");
 }
 
-
-
-// fonctions de calculs des indicateurs
-
-    function calc_opp1(e) {
-        return e;
-    }
-
-    function calc_opp2(indice) {
-        return indice;
-    }
-
-    function calc_opp3(voiture, transport) {
-        return (voiture + transport) / 2;
-    }
-
-    function calc_opp4(internet, debit) {
-        return (internet + debit) / 2;
-    }
-
-    function calc_cho1(quartier) {
-        console.log(Math.exp(-quartier))
-        return Math.exp(-quartier);
-    }
-
-    function calc_cho2(proportion) {
-        return proportion;
-    }
-
-    function calc_vec1(revenu) {
-        return revenu;
-    }
-
-    function calc_vec2(piece, logement, individuel) {
-        const vec21 = Math.exp(-piece);
-        const vec22 = logement;
-        const vec23 = individuel;
-        return (vec21 + vec22 + vec23) / 3;
-    }
-
-    function calc_vec3(p_vec, valeur) {
-        let sum = 0;
-        for (let i = 0; i < p_vec.length; i++) {
-            sum += p_vec[i] * valeur[i];
-        }
-        return sum / 100;
-    }
-
-    function calc_vec4(n_etablissements) {
-        return n_etablissements;
-    }
 
 
     function calculerIndicateurs(data_indicateurs) {
@@ -2648,6 +2792,12 @@ function ajusterValeur(indicateur, delta) {
       indiceFinale = indiceFinal;
       scoresParCommune = data_dimensions_scores_dict;
 
+      // Références figées (bornes min-max, p_k, Jenks) calculées une fois sur les données d'origine
+      indicateursOrigine = structuredClone(data_indicateurs_dict);
+      bornesRef = minmax(indicateursOrigine);
+      bornesScoresRef = minmax(calculerScores01(indicateursOrigine));
+      refParModePk = {};
+
       afficherToutesLesCartes(communeJson, indiceFinale, scoresParCommune);
 
       // Générer les visualisations de données
@@ -2690,13 +2840,11 @@ function calculerIndiceBienEtre(scoresParCommune, pkValues = [1, 1, 1]) {
 
 
 // === Calcul du vrai p_k selon Betti et al. (2008) ===
-// Utilise les scores 0-1 (bruts) pour le CV — invariance d'échelle correcte
-function calculerPkBetti(scoresParCommune) {
-    const communes = Object.keys(scoresParCommune);
+// Attend les scores 0-1 (bruts) pour le CV — invariance d'échelle correcte
+function calculerPkBetti(scores01) {
+    const communes = Object.keys(scores01);
     const dims = ['Score_Opp', 'Score_Cho', 'Score_Vec'];
-    // Utiliser les scores 0-1 si disponibles, sinon fallback sur les 0-10
-    const src = (Object.keys(scoresParCommuneRaw01).length > 0) ? scoresParCommuneRaw01 : scoresParCommune;
-    const data = dims.map(dim => communes.map(c => src[c][dim]));
+    const data = dims.map(dim => communes.map(c => scores01[c][dim]));
 
     // p¹_k = cv_k = std / mean (coefficient de variation)
     const p1 = data.map(arr => {
@@ -2789,40 +2937,62 @@ function toggleModePk() {
     recalculerCarteOppChoVec();
 }
 
+// Scores de dimension 0-1 à partir des indicateurs bruts (min-max sur les bornes figées)
+function calculerScores01(indicateurs) {
+    return calculerScoresParCommune(normaliserDonnees(indicateurs, bornesRef.min, bornesRef.max));
+}
+
+// Passage 0-10 des scores de dimension avec les bornes figées (identique au JSON sur les données d'origine)
+function scoresDimension0a10(scores01) {
+    const scores = {};
+    for (const commune in scores01) {
+        scores[commune] = {};
+        for (const dim of ['Score_Opp', 'Score_Cho', 'Score_Vec']) {
+            const min = bornesScoresRef.min[dim], max = bornesScoresRef.max[dim];
+            scores[commune][dim] = (max === min) ? 5 : ((scores01[commune][dim] - min) / (max - min)) * 10;
+        }
+    }
+    return scores;
+}
+
+// p_k, bornes de l'indice brut et seuils Jenks d'un mode p_k, figés sur les données d'origine
+function referencePk(mode) {
+    if (!refParModePk[mode]) {
+        const scoresOrigine = calculerScores01(indicateursOrigine);
+        const pk = mode === 'betti' ? calculerPkBetti(scoresOrigine) : [1, 1, 1];
+        const brut = Object.values(calculerIndiceBienEtre(scoresOrigine, pk));
+        const min = Math.min(...brut), max = Math.max(...brut);
+        const norm = brut.map(v => (max === min) ? 5 : ((v - min) / (max - min)) * 10);
+        refParModePk[mode] = { pk, min, max, jenks: [0, ...calculerJenksBreaks(norm, 5), 10] };
+    }
+    return refParModePk[mode];
+}
+
 function recalculerCarteOppChoVec() {
-    if (!scoresParCommune || Object.keys(scoresParCommune).length === 0) {
-        console.warn('scoresParCommune non disponible');
+    if (!bornesRef) {
+        console.warn('Indicateurs non chargés');
         return;
     }
 
-    const pkValues = modeCalculPk === 'betti'
-        ? calculerPkBetti(scoresParCommune)
-        : [1, 1, 1];
+    const ref = referencePk(modeCalculPk);
+    const pkValues = ref.pk;
 
     console.log(`[p_k mode=${modeCalculPk}] Opp=${pkValues[0].toFixed(4)} Cho=${pkValues[1].toFixed(4)} Vec=${pkValues[2].toFixed(4)} (somme=${pkValues.reduce((a,b)=>a+b,0).toFixed(4)})`);
 
-    // Recalculer OppChoVec brut avec le bon p_k
-    // Utiliser les scores 0-1 (cohérent avec le Python/Excel) si disponibles
-    const srcScores = (Object.keys(scoresParCommuneRaw01).length > 0) ? scoresParCommuneRaw01 : scoresParCommune;
-    const indiceBrut = calculerIndiceBienEtre(srcScores, pkValues);
+    // Scores recalculés depuis les indicateurs courants (éventuellement modifiés via les sliders)
+    scoresParCommuneRaw01 = calculerScores01(indicateursCommune);
+    scoresParCommune = scoresDimension0a10(scoresParCommuneRaw01);
+    const indiceBrut = calculerIndiceBienEtre(scoresParCommuneRaw01, pkValues);
 
-    // Renormaliser 0-10
-    const valeurs = Object.values(indiceBrut);
-    const minVal = Math.min(...valeurs);
-    const maxVal = Math.max(...valeurs);
+    // Renormaliser 0-10 avec les bornes figées : une commune modifiée ne déplace pas les autres
     const indiceNorm = {};
     for (const commune in indiceBrut) {
-        indiceNorm[commune] = (maxVal === minVal) ? 5
-            : ((indiceBrut[commune] - minVal) / (maxVal - minVal)) * 10;
+        indiceNorm[commune] = (ref.max === ref.min) ? 5
+            : ((indiceBrut[commune] - ref.min) / (ref.max - ref.min)) * 10;
     }
 
-    // Recalculer Jenks sur les nouvelles valeurs
-    const breaks = calculerJenksBreaks(Object.values(indiceNorm), 5);
-    seuilsJenks['oppchovec'] = [0, ...breaks, 10];
+    seuilsJenks['oppchovec'] = ref.jenks;
     console.log('[Jenks oppchovec]', seuilsJenks['oppchovec'].map(v => v.toFixed(3)).join(' | '));
-
-    // Mettre à jour la carte (afficherCarteUnique gère le rechargement des layers)
-    afficherCarteUnique('map-oppchovec', 'oppchovec', communeJson, indiceNorm, 'OppChoLiv');
 
     // Mettre à jour indiceFinale pour que les popups LISA montrent les bonnes valeurs
     indiceFinale = indiceNorm;
@@ -2844,11 +3014,8 @@ function recalculerCarteOppChoVec() {
         console.log(`[LISA] Mode Égal — I=${LISA_DATA.metadata.moran_global_I.toFixed(4)}, sig5%=${LISA_DATA.metadata.nb_significatives}, sig1%=${LISA_DATA_1PCT.metadata.nb_significatives}`);
     }
 
-    // Mettre à jour les cartes LISA si déjà initialisées
-    if (lisaCartesInitialisees) {
-        afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', communeJson, indiceNorm, clustersLISA5pct, '5%');
-        afficherCarteLISA('map-lisa-1pct', 'lisa-1pct', communeJson, indiceNorm, clustersLISA1pct, '1%');
-    }
+    // Cartes OppChoVec, dimensions et LISA (si déjà initialisées)
+    afficherToutesLesCartes(communeJson, indiceNorm, scoresParCommune);
 
     majAffichagePk(pkValues);
 
@@ -2863,8 +3030,43 @@ function recalculerCarteOppChoVec() {
 
     // Mettre à jour les parangons si déjà initialisés
     if (parangonsInitialise) {
-        parangonsInitialise = false; // forcer recalcul complet
+        parangonsInitialise = false;
         initialiserOngletParangons();
+    }
+
+    // Mettre à jour la corrélation si déjà initialisée
+    if (correlationInitialise) {
+        correlationInitialise = false;
+        if (cartes['correlation']) {
+            cartes['correlation'].remove();
+            cartes['correlation'] = null;
+            document.getElementById('map-correlation').innerHTML = '';
+        }
+        initialiserOngletCorrelation();
+    }
+    if (corrInverseInitialise) {
+        corrInverseInitialise = false;
+        if (cartes['correlation2']) {
+            cartes['correlation2'].remove();
+            cartes['correlation2'] = null;
+            document.getElementById('map-correlation2').innerHTML = '';
+        }
+    }
+    if (corrSubjectifInitialise) {
+        corrSubjectifInitialise = false;
+        if (cartes['subjectif']) {
+            cartes['subjectif'].remove();
+            cartes['subjectif'] = null;
+            document.getElementById('map-subjectif').innerHTML = '';
+        }
+    }
+    if (corrSubjectifDensInitialise) {
+        corrSubjectifDensInitialise = false;
+        if (cartes['subjectif-dens']) {
+            cartes['subjectif-dens'].remove();
+            cartes['subjectif-dens'] = null;
+            document.getElementById('map-subjectif-dens').innerHTML = '';
+        }
     }
 }
 
@@ -2896,7 +3098,6 @@ function calculerScoresParCommune(dataNormalise) {
   const vecPonderation = {
     "Vec1": 0.25, "Vec2": 0.25, "Vec3": 0.25, "Vec4": 0.25
   };
-  console.log(dataNormalise)
 
   function calcDik(indicateurs, ponderations) {
     const valeurs = [];
@@ -2945,7 +3146,6 @@ function calculerScoresParCommune(dataNormalise) {
       Score_Vec: scoreVec
     };
   }
-  console.log(scores)
   return scores;
 }
 
