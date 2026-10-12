@@ -1,0 +1,8 @@
+{
+  "name": "oppchovec-tests",
+  "private": true,
+  "description": "Dépendance optionnelle des tests e2e (navigateur). Les autres tests n'ont aucune dépendance npm.",
+  "devDependencies": {
+    "playwright-core": "1.55.0"
+  }
+}

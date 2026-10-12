@@ -2,15 +2,13 @@
 
 ## Résumé
 
-**✅ Les données sont IDENTIQUES entre la carte web et le tableau `donnees_oppchovec_par_dimension.xlsx`**
+Les données affichées par l'appli sont **celles de `WEB/data_scores_0_10.json`**, et elles se **recalculent exactement** à partir
+des 10 indicateurs bruts qu'il contient (écart < 1e-9 sur les 360 communes). Cette vérification n'est plus manuelle : elle est
+rejouée par la suite de tests (`python tests/run_tests.py`, voir `tests/README.md`), avec en plus :
 
-Une vérification complète a été effectuée sur les **360 communes** et **aucune différence** n'a été détectée.
-
-## Fichiers comparés
-
-1. **donnees_oppchovec_par_dimension.xlsx** (tableau de référence)
-2. **data_indicateurs.json** (fichier utilisé par la carte web)
-3. **oppchovec_resultats_V.xlsx** (résultats complets)
+- le recalcul de chaque indicateur depuis les fichiers sources bruts (quand ils sont disponibles) ;
+- la comparaison avec l'état antérieur aux dernières corrections (non-régression) ;
+- la cohérence entre l'appli (JavaScript), les scripts Python, les fichiers dérivés et cette documentation.
 
 ## Formules utilisées
 
@@ -39,58 +37,48 @@ const sommePonderee = sum(pk * dik[i]);
 const indice = (1/3) * Math.pow(sommePonderee, alpha / beta);
 ```
 
+Chaque indicateur est d'abord normalisé par un min-max sur les 360 communes (`(x - min) / (max - min)`), puis moyenné dans sa
+dimension avec les pondérations ci-dessus. Les `p_k` valent 1 (mode « égal ») ou sont calculés selon Betti et al. (2008) à partir des
+scores de dimension (mode « Betti », mode par défaut de l'appli).
+
 ## Exemple de vérification : Ajaccio
 
-| Indicateur | Tableau Excel | Carte Web | Différence |
-|------------|---------------|-----------|------------|
-| **OppChoVec** | 1.368496 | 1.368496 | **0.000000** |
-| **Score_Opp** | 9.621243 | 9.621243 | **0.000000** |
-| **Score_Cho** | 0.547654 | 0.547654 | **0.000000** |
-| **Score_Vec** | 4.581839 | 4.581839 | **0.000000** |
-| Opp1 (Éducation) | 5.76 | 5.76 | 0.00 |
-| Opp2 (Theil) | 0.278668 | 0.278668 | 0.000000 |
-| Opp3 (Transport) | 186.1 | 186.1 | 0.0 |
-| Opp4 (Connectivité) | 93.5 | 93.5 | 0.0 |
+| Champ | Valeur dans `data_scores_0_10.json` | Recalcul indépendant (tests) | Différence |
+|------------|---------------|-------------|------------|
+| **OppChoVec** | 0.531550 | 0.531550 | **0.000000** |
+| **Score_Opp** | 0.709504 | 0.709504 | **0.000000** |
+| **Score_Cho** | 0.429369 | 0.429369 | **0.000000** |
+| **Score_Vec** | 0.582122 | 0.582122 | **0.000000** |
 
 ## Si vous observez des différences
 
 ### Cas possibles :
 
 1. **Versions de fichiers différentes**
-   - Vérifiez que vous utilisez les fichiers les plus récents
-   - Date de modification des fichiers
+   - Vérifiez que vous utilisez les fichiers les plus récents (voir la procédure de régénération dans `WEB/README_FICHIERS.md`)
+   - Les poids de Vec3 (chômeur 0, emploi aidé 0,25) ont été corrigés le 2026-10-11 : les résultats antérieurs diffèrent légèrement
 
-2. **Confusion entre valeurs normalisées et non-normalisées**
+2. **Confusion entre valeurs avec et sans suffixe `_0_10`**
    - Les **indicateurs bruts** (Opp1, Opp2, etc.) ne sont PAS normalisés
-   - Les **scores de dimensions** (Score_Opp, Score_Cho, Score_Vec) sont normalisés sur **0-10**
-   - L'**indice OppChoVec** final est calculé à partir des scores normalisés
+   - `Score_Opp`, `Score_Cho`, `Score_Vec` et `OppChoVec` sont les valeurs avant mise à l'échelle (scores de dimension dans [0, 1])
+   - `Score_Opp_0_10`, `Score_Cho_0_10`, `Score_Vec_0_10` et `OppChoVec_0_10` sont leur min-max sur 0-10 (c'est ce que l'appli affiche)
 
-3. **Confusion entre anciennes et nouvelles versions**
-   - Ancien fichier : valeurs normalisées sur 0-1
-   - Nouveau fichier : valeurs normalisées sur 0-10
-   - Vérifiez quelle échelle vous comparez
+3. **Mode p_k**
+   - `OppChoVec_0_10` correspond au mode « égal » ; l'appli affiche par défaut le mode « Betti », qui donne d'autres valeurs
 
 4. **Arrondis d'affichage**
    - Les valeurs affichées peuvent être arrondies (2 décimales)
    - Les valeurs stockées ont 6+ décimales de précision
-   - Cela peut donner l'impression de différences minimes
 
 ## Comment vérifier vous-même
 
-### Méthode 1 : Script Python
+### Méthode 1 : suite de tests
 ```bash
-cd "Code/Python"
-python verifier_coherence_donnees.py
+python tests/run_tests.py            # tests rapides (Python + JavaScript + navigateur si disponible)
+OPPCHOVEC_SLOW=1 python tests/run_tests.py   # ajoute le rejeu complet de LISA (9999 permutations)
 ```
 
-### Méthode 2 : Vérification manuelle
-1. Ouvrir `donnees_oppchovec_par_dimension.xlsx`
-2. Ouvrir la carte web dans le navigateur
-3. Sélectionner une commune (ex: Ajaccio)
-4. Comparer les valeurs affichées
-5. Vérifier que les décimales correspondent
-
-### Méthode 3 : Inspecter le JSON
+### Méthode 2 : inspecter dans le navigateur
 ```javascript
 // Ouvrir la console du navigateur (F12)
 // Taper dans la console :
@@ -102,30 +90,24 @@ console.log(scoresParCommune["Ajaccio"]);
 
 ### Indicateurs bruts (NON normalisés)
 - **Opp1** : 1 à 7 (niveau d'éducation)
-- **Opp2** : 0 à 1 (indice de Theil)
-- **Opp3** : 0 à 200 (accès transport, en %)
-- **Opp4** : 0 à 100 (connectivité, en %)
-- **Cho1** : 0 à 1 (exp(-quartiers))
-- **Cho2** : 0 à 100 (participation électorale, en %)
+- **Opp2** : 0 à 1.1 (indice de Theil ; maximum observé 1,016)
+- **Opp3** : 0 à 300 (mobilité : % de ménages avec voiture, +100 si transports en commun, +100 si réseau de bus urbain)
+- **Opp4** : 0 à 100 (connectivité : moyenne de la 4G, du haut débit et de la fibre, en %)
+- **Cho1** : -10 à 0 (-log du nombre de personnes en quartier prioritaire ; 0 si aucune)
+- **Cho2** : 0 à 100 (droit de vote, en %)
 - **Vec1** : 15000 à 30000 (revenu médian, en €)
-- **Vec2** : 0 à 1 (qualité logement)
-- **Vec3** : 1 à 5 (stabilité emploi)
-- **Vec4** : 0 à 5000 (nb services accessibles)
+- **Vec2** : 0 à 1 (qualité du logement)
+- **Vec3** : 0 à 1 (stabilité de l'emploi : moyenne pondérée des parts d'actifs par type de contrat)
+- **Vec4** : 0 à 5300 (nombre de services accessibles en moins de 20 minutes ; maximum observé 5278)
 
-### Scores normalisés (NORMALISÉS sur 0-10)
-- **Score_Opp** : 0 à 10
-- **Score_Cho** : 0 à 10
-- **Score_Vec** : 0 à 10
-- **OppChoVec** : 0 à 10 (indice final)
+### Scores avant mise à l'échelle
+- **Score_Opp** : 0 à 1
+- **Score_Cho** : 0 à 1
+- **Score_Vec** : 0 à 1
+- **OppChoVec** : 0 à 2.09 (maximum théorique 3^(2/3) ≈ 2,08)
 
-## Contact
-
-Si vous constatez toujours des différences après ces vérifications, merci de préciser :
-1. **Quelle commune** présente une différence
-2. **Quel indicateur** diffère
-3. **Quelles valeurs** vous voyez (tableau vs carte)
-4. **Quelle version** des fichiers vous utilisez
-
----
-*Document généré automatiquement le 2025-01-06*
-*Script de vérification : `verifier_coherence_donnees.py`*
+### Scores normalisés (0-10)
+- **Score_Opp_0_10** : 0 à 10
+- **Score_Cho_0_10** : 0 à 10
+- **Score_Vec_0_10** : 0 à 10
+- **OppChoVec_0_10** : 0 à 10 (indice final)

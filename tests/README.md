@@ -1,0 +1,100 @@
+# Tests de l'application OppChoVec
+
+Une suite automatique qui vérifie que **le code fonctionne**, que **les résultats restent cohérents avec ceux d'avant**, que tout est
+**recalculable** depuis les sources, et que **la documentation dit vrai**.
+
+```bash
+python tests/run_tests.py            # tout : Python + JavaScript + navigateur   (~1,5 min)
+python tests/run_tests.py --rapide   # sans le navigateur                         (~35 s)
+python tests/run_tests.py --e2e      # uniquement le navigateur
+python tests/run_tests.py --lent     # + rejeu complet de LISA (9999 permutations, plusieurs minutes)
+python tests/run_tests.py -v         # détail des échecs
+python tests/mutations.py            # « test des tests » : voir plus bas
+```
+
+Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénération sont rejoués sur une copie temporaire).
+
+## Prérequis
+
+| Couche | Il faut |
+|---|---|
+| Python | Python 3.10+ ; `numpy pandas openpyxl scipy scikit-learn jenkspy geopandas libpysal esda matplotlib`. Un module absent fait *ignorer* les tests qui en dépendent (et le dit), jamais échouer. |
+| JavaScript | Node 20+ (testé avec 22). Aucune dépendance npm : `node:test`, `node:vm`. |
+| Navigateur | `cd tests && npm install` (playwright-core) et un Chromium (cache Playwright, ou variable `CHROME_PATH`). Sans cela, les tests e2e sont ignorés. Les bibliothèques Leaflet et Chart.js sont chargées depuis leur CDN : il faut un accès réseau. |
+| Sources brutes | Les fichiers xlsx/csv par indicateur ne sont pas dans le dépôt. Définir `OPPCHOVEC_SOURCES` = dossier « Stage Ambroise » contenant `Données/Corse_Commune/` (par défaut, `C:\These\Données2\visualisation_oppchovec_1111\Stage Ambroise`). Sans elles, les tests de recalcul depuis les sources sont ignorés. |
+
+## Ce qui est vérifié
+
+| Fichier | Question posée |
+|---|---|
+| `python/test_01_integrite_donnees.py` | Les 360 communes sont-elles complètes, finies, dans leurs bornes, avec les mêmes noms que le GeoJSON et tous les fichiers dérivés ? |
+| `python/test_02_formules_et_recalcul.py` | Tout `data_scores_0_10.json` se recalcule-t-il depuis les 10 indicateurs avec une implémentation indépendante ? p_k de Betti (somme 1, invariance d'échelle) ? Monotonie de l'indice ? Fonctions de `oppchovec.py` ? |
+| `python/test_03_fichiers_derives.py` | Seuils de Jenks = `jenkspy` ; CAH = Ward recalculé ; LISA = I de Moran, I local et quadrants recalculés avec `esda` ; fichier chatbot ; sous-composantes qui recomposent exactement les indicateurs |
+| `python/test_04_non_regression.py` | Les résultats actuels vs l'état **avant** la correction des poids Vec3 : seuls les champs attendus ont changé, avec l'ampleur attendue |
+| `python/test_05_recalcul_depuis_sources.py` | Chaque indicateur se retrouve-t-il depuis les fichiers sources ? Les scripts de régénération rejoués redonnent-ils les fichiers du dépôt ? Refusent-ils d'écrire des données incohérentes ? |
+| `python/test_06_documentation.py` | Les `.md` disent-ils vrai (fichiers cités, tableaux de seuils, échelles, exemples, procédure) ? |
+| `python/test_07_coherence_du_code.py` | Poids et constantes dupliqués (Python / JS / scripts) identiques ? Fichiers et identifiants du DOM référencés existants ? |
+| `python/test_08_js_vs_python.py` | L'appli (script.js réel) contre un recalcul Python indépendant : état de base, seuils de Jenks, et 30 scénarios de modification aléatoires |
+| `js/*.test.js` | La logique de `script.js` dans un bac à sable Node : chargement, curseurs, recalcul, bascule p_k, sous-composantes |
+| `e2e/*.e2e.test.js` | Dans un vrai navigateur : cartes (couleur de chaque commune), histogramme, top 10, panneau commune, tous les onglets, coefficients de corrélation |
+
+### Comment le JavaScript est testé sans navigateur
+`tests/js/helpers/charger_script.js` charge le **vrai** `script.js` (et `lisa_data*.js`, `cah_data.js`) dans un contexte `node:vm` avec un DOM,
+Leaflet et Chart.js factices, puis exécute le chargement automatique de la page. Le DOM factice est fidèle sur un point important :
+`getElementById` renvoie `null` pour un identifiant absent de la page. Les `<input>` du panneau commune sont recréés à partir du HTML
+réellement produit par `afficherCommune`.
+
+## Références de non-régression (« ce qu'on avait avant »)
+
+`tests/fixtures/` contient l'état du projet **avant la correction des poids de Vec3** (commit `4438162`, 2026-10-11) :
+`baseline_data_scores_0_10.json` (copie exacte) et `baseline_derives.json` (seuils Jenks, clusters LISA et CAH). `generer_baseline.py` les
+reconstruit depuis git.
+
+Cette référence est corroborée par trois archives du dépôt qui lui sont identiques (aux noms « La Porta » / « L'Île-Rousse » près) :
+`Code/Python/data_scores_0_10.json`, `Code/WEB/data_scores_0_10_backup_20251112_204530.json` et `Code/Python/data_scores_1_10.json`.
+Surtout, la formule recalculée *indépendamment* reproduit ces résultats d'origine à 1e-9 : la référence n'est pas qu'une photographie.
+
+Les fichiers plus anciens (`Code/data_scores.json`, `data_scores_normalisation_elem.json`, `Code/Python/data_scores.json`,
+`oppchovec_resultats_V.xlsx`) relèvent d'une méthode antérieure (corrélation de rang avec l'indice actuel de 0,40 à 0,74) : ils ne sont **pas**
+des références valables et ne sont pas utilisés.
+
+Les bornes de `test_04` (corrélation de rang ≥ 0,999, écart max 0,25, 0 à 3 communes LISA qui changent…) sont l'empreinte **mesurée** de la
+correction Vec3, avec une petite marge. Pour changer volontairement de référence (nouvelle correction de méthode) : relancer
+`fixtures/generer_baseline.py` avec le nouveau commit de référence et mettre à jour ces bornes, en le disant ici.
+
+## Dettes connues (signalées, pas cachées)
+
+Elles sont marquées « échec attendu » (Python) ou `todo` (Node) : elles n'échouent pas la suite, mais apparaissent dans le bilan, et le jour où
+le défaut est corrigé le test le signale (« succès inattendu ») pour qu'on retire la marque.
+
+| Dette | Où |
+|---|---|
+| `oppchovec.py` n'est pas synchronisé avec le JSON pour **Opp4** (fibre absente) et **Cho2** (lit `Cho2.xlsx` au lieu de `Cho2_francais_18plus.xlsx`) | `test_05`, 2 tests |
+| `gen_lisa_knn5.py` contient des chemins absolus vers un **autre** clone (`c:/These/oppchovec_visu/`) : le lancer écrit là-bas | `test_07` |
+| `stage_ambroise/Code/WEB/index.html` est une copie plus ancienne de `index.html` (il lui manque 3 onglets) | `test_07` |
+| Course : basculer le mode p_k dans les 150 ms qui suivent l'ouverture d'un sous-onglet de Corrélation → `TypeError … _leaflet_pos` (minuterie `invalidateSize` sur une carte détruite) | e2e, `todo` |
+| La croix ✕ de la bulle d'info d'un indicateur est masquée par `.indicateur-row button { display: none }` (on la referme en recliquant sur 🛈) | e2e, `todo` |
+
+Autres points d'attention, sans test qui échoue :
+- **Erreur console connue** à chaque chargement : `Cannot read properties of null (reading 'addEventListener')` (`script.js`, dernière ligne : reliquat de
+  l'onglet « Numbered » absent de `index.html`). Elle est tolérée explicitement par l'e2e ; toute *autre* erreur échoue.
+- `graphique_ecarts_types_cah.py` ne produit le graphique à 5 classes que si l'on met `n_clusters_list = [3, 4, 5]` (le rejeu de `test_05` le fait).
+- `FICHIERS_A_SUPPRIMER.md` et `README_OSRM_LOCAL.md` sont des documents historiques dont les affirmations ne sont pas vérifiées.
+- Deux communes ont un nom différent dans les anciennes archives (« La Porta » / « L'Île-Rousse » au lieu de « Porta » / « Île-Rousse »).
+
+## Le « test des tests » : `mutations.py`
+
+Une suite qui passe ne prouve rien tant qu'on n'a pas vu qu'elle sait échouer. `tests/mutations.py` copie le projet, y introduit **une faute à la
+fois** (donnée altérée, constante modifiée, formule inversée, ancien défaut réintroduit, document périmé, tri inversé…) et vérifie que la suite devient
+rouge, en indiquant quelle couche a détecté la faute. Une mutation *non détectée* est une lacune à combler. Voir `python tests/mutations.py --liste`.
+Résultat au 2026-10-12 : **31 mutations sur 31 détectées**. La première campagne avait révélé deux lacunes, comblées depuis : un test JS qui ne dépassait
+jamais l'échelle corse (donc incapable de voir des bornes recalculées) et un test de valeur de curseur trop peu sensible. Une mutation « non concluante »
+signifie que la suite a été interrompue (ce n'est pas une absence de détection) : relancer avec `--seulement`.
+
+## Ajouter un test
+- Un invariant sur les données ou les scripts → `tests/python/test_NN_*.py` (`unittest`, `common.py` fournit les chemins et une implémentation
+  de référence indépendante).
+- Un comportement de `script.js` → `tests/js/*.test.js` (`helpers/outils.js` : `chargerApp`, `afficherCommune`, `photo`).
+- Un comportement visible → `tests/e2e/*.e2e.test.js` (`helpers/contexte.js` : `avecAppli`, `couleursCarte`…).
+- Écrire d'abord le test qui échoue, puis corriger : c'est ainsi qu'a été trouvé le défaut des curseurs (valeur normalisée à 15 chiffres par le
+  navigateur → bruit de 1e-16 au « Recalculer » à vide, Afa passant à 10,000000000000002).

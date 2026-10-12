@@ -1,27 +1,27 @@
 # Guide d'intégration des données 0-10 dans l'application web
 
-## 📁 Fichiers générés
+Le détail de chaque fichier et la procédure de régénération sont dans `../WEB/README_FICHIERS.md`. Ce guide montre comment
+utiliser les données dans une page web.
+
+## 📁 Fichiers utilisés
 
 ### Dans `../WEB/`
-1. **data_scores_0_10.json** - Données des communes avec tous les scores
-2. **seuils_jenks_0_10.json** - Seuils Jenks pour les cartes choroplèthes
-3. **lisa_oppchovec_0_10_1pct.json** - Clusters LISA au seuil 1%
-4. **lisa_oppchovec_0_10_5pct.json** - Clusters LISA au seuil 5%
-5. **config_0_10.json** - Configuration de l'application
+1. **data_scores_0_10.json** - Données des communes avec tous les scores et les 10 indicateurs
+2. **seuils_jenks_optimal_gvf.json** - Seuils de Jenks (4 seuils internes par variable) pour les cartes choroplèthes
+3. **lisa_data.js**, **lisa_data_1pct.js**, **lisa_data_betti.js**, **lisa_data_betti_1pct.js** - Clusters LISA (constantes JavaScript)
+4. **cah_data.js** - Clusters de la CAH à 3 et 5 classes
 
-### Dans `../Python/`
-6. **tableau_indicateurs_0_10.xlsx** - Tableau Excel avec 4 feuilles
+### Générés à part (non versionnés)
+5. **tableau_indicateurs_0_10.xlsx** - Tableau Excel à 4 feuilles, produit par `generer_tableau_excel_0_10.py`
 
 ## 🎨 Seuils Jenks (5 classes)
 
-Les seuils pour la carte choroplèthe OppChoVec (0-10) :
+`seuils_jenks_optimal_gvf.json` contient, pour chaque variable, la liste `breaks` des **4 seuils internes**. Pour obtenir les
+6 bornes d'une carte, on ajoute 0 au début et 10 à la fin :
+```javascript
+const seuils = [0, ...data.OppChoVec_0_10.breaks, 10];   // [0, s1, s2, s3, s4, 10]
 ```
-Classe 1 (Très faible) : 0.00 - 2.41
-Classe 2 (Faible)      : 2.41 - 3.93
-Classe 3 (Moyen)       : 3.93 - 5.11
-Classe 4 (Élevé)       : 5.11 - 7.56
-Classe 5 (Très élevé)  : 7.56 - 10.00
-```
+Les valeurs actuelles sont données dans `../WEB/README_FICHIERS.md`.
 
 ## 🗺️ Structure des données
 
@@ -29,7 +29,7 @@ Classe 5 (Très élevé)  : 7.56 - 10.00
 ```json
 {
   "Nom_Commune": {
-    "OppChoVec_0_10": float,      // Score OppChoVec normalisé 0-10
+    "OppChoVec_0_10": float,      // Indice OppChoVec normalisé 0-10
     "Score_Opp_0_10": float,      // Score Opp normalisé 0-10
     "Score_Cho_0_10": float,      // Score Cho normalisé 0-10
     "Score_Vec_0_10": float,      // Score Vec normalisé 0-10
@@ -46,25 +46,30 @@ Classe 5 (Très élevé)  : 7.56 - 10.00
   }
 }
 ```
+(le fichier contient aussi `OppChoVec`, `Score_Opp`, `Score_Cho` et `Score_Vec`, avant mise à l'échelle 0-10)
 
-### seuils_jenks_0_10.json
+### seuils_jenks_optimal_gvf.json
 ```json
 {
-  "OppChoVec_0_10": [0.0, 2.41, 3.93, 5.11, 7.56, 10.0]
+  "OppChoVec_0_10": { "breaks": [s1, s2, s3, s4], "gvf": float, "nb_classes": 5, "min": 0.0, "max": 10.0 }
 }
 ```
 
-### lisa_oppchovec_0_10_1pct.json et 5pct.json
-```json
-{
-  "Nom_Commune": {
-    "cluster": "HH (High-High)" | "LL (Low-Low)" | "HL (High-Low)" | "LH (Low-High)" | "Non significatif",
-    "p_value": float,
-    "I": float,
-    "significatif": boolean,
-    "quadrant": int (1-4)
+### lisa_data.js (et variantes)
+```javascript
+const LISA_DATA = {
+  "metadata": { "moran_global_I": float, "seuil_significativite": 0.05, "nb_significatives": int, ... },
+  "statistiques": { "HH (High-High)": int, ... },
+  "clusters": {
+    "Nom_Commune": {
+      "cluster": "HH (High-High)" | "LL (Low-Low)" | "HL (High-Low)" | "LH (Low-High)" | "Non significatif",
+      "lisa_I": float,
+      "p_value": float,
+      "significatif": boolean,
+      "oppchovec": float
+    }
   }
-}
+};
 ```
 
 ## 🎯 Utilisation dans l'application web
@@ -76,23 +81,23 @@ Classe 5 (Très élevé)  : 7.56 - 10.00
 const dataScores = await fetch('data_scores_0_10.json').then(r => r.json());
 
 // Charger les seuils Jenks
-const seuilsJenks = await fetch('seuils_jenks_0_10.json').then(r => r.json());
+const jenks = await fetch('seuils_jenks_optimal_gvf.json').then(r => r.json());
+const seuilsOppChoVec = [0, ...jenks.OppChoVec_0_10.breaks, 10];
 
-// Charger LISA
-const lisa1pct = await fetch('lisa_oppchovec_0_10_1pct.json').then(r => r.json());
-const lisa5pct = await fetch('lisa_oppchovec_0_10_5pct.json').then(r => r.json());
+// Les clusters LISA se chargent par une balise <script src="lisa_data.js"></script> (constante LISA_DATA)
 ```
 
 ### 2. Colorisation de la carte
 
 ```javascript
-// Fonction pour obtenir la couleur selon le score
+// Fonction pour obtenir la couleur selon le score.
+// Les seuils de Jenks sont des valeurs observées : un score égal à un seuil appartient à la classe INFÉRIEURE (<=).
 function getColorFromScore(score, seuils) {
-  const colors = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#1a9850'];
+  const colors = ['#bbdefb', '#64b5f6', '#9c27b0', '#7b1fa2', '#4a148c'];
 
-  for (let i = 0; i < seuils.length - 1; i++) {
-    if (score >= seuils[i] && score < seuils[i + 1]) {
-      return colors[i];
+  for (let i = 1; i < seuils.length - 1; i++) {
+    if (score <= seuils[i]) {
+      return colors[i - 1];
     }
   }
   return colors[colors.length - 1];
@@ -102,7 +107,7 @@ function getColorFromScore(score, seuils) {
 communes.forEach(commune => {
   const score = dataScores[commune.nom]?.OppChoVec_0_10;
   if (score !== undefined) {
-    commune.style.fill = getColorFromScore(score, seuilsJenks.OppChoVec_0_10);
+    commune.style.fill = getColorFromScore(score, seuilsOppChoVec);
   }
 });
 ```
@@ -121,7 +126,7 @@ const lisaColors = {
 
 // Appliquer les couleurs LISA
 communes.forEach(commune => {
-  const lisa = lisa1pct[commune.nom];
+  const lisa = LISA_DATA_1PCT.clusters[commune.nom];
   if (lisa && lisa.significatif) {
     commune.style.fill = lisaColors[lisa.cluster];
   }
@@ -163,9 +168,10 @@ communes.forEach(commune => {
 
 Pour vérifier que tout fonctionne :
 
-1. **Vérifier que les seuils Jenks ont 6 valeurs** (pour 5 classes)
+1. **Vérifier que les seuils Jenks ont 6 valeurs** (pour 5 classes) : `[0, s1, s2, s3, s4, 10]`
 2. **Vérifier que toutes les communes ont un score OppChoVec_0_10**
 3. **Vérifier que les noms de communes correspondent** entre les fichiers JSON et les géométries
+4. **Lancer la suite de tests** : `python tests/run_tests.py`
 
 ## 🐛 Résolution du problème de couleurs
 
@@ -190,7 +196,7 @@ Si les couleurs ne s'affichent pas :
 
 ## 📝 Notes importantes
 
-- **Normalisation** : Tous les scores sont entre 0 et 10
+- **Normalisation** : Tous les scores en `_0_10` sont entre 0 et 10
 - **LISA** : Uniquement calculé sur OppChoVec (pas sur Opp, Cho, Vec)
 - **Seuils** : Calculés avec l'algorithme de Jenks (Natural Breaks)
 - **Communes** : 360 communes de Corse
