@@ -128,8 +128,6 @@ test('Corrélation : les 4 coefficients r affichés = Pearson recalculé indépe
       assert.equal(lu.n, a.n, `${a.id} : n`);
     }
     // bascule de mode : les coefficients doivent être recalculés avec les nouveaux indices
-    // (on laisse d'abord se terminer les minuteries d'initialisation de 150 ms : voir le test « dette connue » ci-dessous)
-    await page.waitForTimeout(400);
     await page.click('#btn-toggle-pk');
     await cliquerOnglet(page, 'correlationtab');
     await ouvrirSousOnglets(page);
@@ -174,30 +172,32 @@ test('langue : les descriptions des indicateurs sont décrites en français et e
 });
 
 // ---------------------------------------------------------------------------------------------------------------
-// DETTES CONNUES (préexistantes, non corrigées) : « todo » = le test échoue aujourd'hui sans faire échouer la suite ;
-// le jour où le défaut est corrigé, il passe et il suffit de retirer `todo`.
-test("dette connue : basculer le mode p_k tout de suite après l'ouverture de « B-E subjectif × Densité » ne lève aucune erreur", {
-  skip: sauter, todo: "setTimeout(invalidateSize, 150) en fin d'initialisation (script.js, initialiserCorrSubjectifDens) vise une carte détruite par la bascule",
-}, async () => {
-  await avecAppli(async (appli) => {
-    const { page } = appli;
-    await cliquerOnglet(page, 'correlationtab');
-    await page.click('.corr-subtab-btn[data-corr="corr-subjectif-dens"]');
-    await page.waitForFunction(() => /r = /.test(document.getElementById('correlation-r4').textContent));
-    await page.click('#btn-toggle-pk');
-    await page.waitForTimeout(600);
-    assert.deepEqual(appli.nouvellesErreurs(), []);
-  });
+// Anciennes dettes corrigées, gardées comme tests de non-régression.
+test("basculer le mode p_k tout de suite après l'ouverture d'un sous-onglet de Corrélation ne lève aucune erreur (minuteries invalidateSize)", { skip: sauter }, async () => {
+  // les minuteries de 150 ms en fin d'initialisation visaient une carte détruite par la bascule : TypeError « _leaflet_pos »
+  for (const [sousOnglet, entete] of [['corr-occ-entr', 'correlation-r2'], ['corr-subjectif', 'correlation-r3'], ['corr-subjectif-dens', 'correlation-r4']]) {
+    await avecAppli(async (appli) => {
+      const { page } = appli;
+      await cliquerOnglet(page, 'correlationtab');
+      await page.click(`.corr-subtab-btn[data-corr="${sousOnglet}"]`);
+      await page.waitForFunction((id) => /r = /.test(document.getElementById(id).textContent), entete);
+      await page.click('#btn-toggle-pk');
+      await page.waitForTimeout(600);
+      assert.deepEqual(appli.nouvellesErreurs(), [], sousOnglet);
+    });
+  }
 });
 
-test("dette connue : la croix de fermeture de la bulle d'info d'un indicateur est visible", {
-  skip: sauter, todo: "dashboard.css : « .indicateur-row button { display: none } » masque aussi le bouton ✕ de la bulle (on la referme en recliquant sur 🛈)",
-}, async () => {
+test("la croix de la bulle d'info d'un indicateur est visible et la referme", { skip: sauter }, async () => {
+  // le CSS « .indicateur-row button { display: none } » masquait aussi ce bouton : seule la bulle info (🛈) la refermait
   await avecAppli(async ({ page }) => {
     await page.selectOption('#communeSelect', 'Bastia');
     await page.click('#validerCommune');
     await page.waitForSelector('#resultCommune .indicateur-row');
     await page.click('.info-button[data-indicator="Indicateur_Cho1"]');
+    assert.equal(await page.locator('#info-Indicateur_Cho1').isVisible(), true);
     assert.equal(await page.locator('#info-Indicateur_Cho1 .info-close-button').isVisible(), true);
+    await page.click('#info-Indicateur_Cho1 .info-close-button');
+    assert.equal(await page.locator('#info-Indicateur_Cho1').isVisible(), false);
   });
 });

@@ -687,7 +687,7 @@ button.small {
 
 /* Masquer les inputs number et boutons +/- */
 .indicateur-row input[type="number"],
-.indicateur-row button {
+.indicateur-row button:not(.info-button):not(.info-close-button) {
   display: none;
 }
 
@@ -1855,47 +1855,6 @@ tr:nth-child(even) {
     width: 100%;
     justify-content: center;
   }
-}
-
-/* ============================================================================
-   NUMBERED MUNICIPALITIES MARKERS
-   ============================================================================ */
-
-.numbered-municipality-marker {
-  background: transparent !important;
-  border: none !important;
-}
-
-.marker-number {
-  width: 50px;
-  height: 50px;
-  background: #2c3e50;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 22px;
-  line-height: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  border: 4px solid white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  cursor: move;
-  cursor: grab;
-  transition: all 0.2s ease;
-}
-
-.marker-number:hover {
-  background: #34495e;
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
-}
-
-.marker-number:active {
-  cursor: grabbing;
-  transform: scale(1.02);
 }
 
 /* ============================================

@@ -192,12 +192,6 @@ class RejeuDesScriptsDeRegeneration(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         cls.code = construire_miroir(cls.tmp.name)
-        # La chaîne documentée ne produit le graphique à 5 classes que si l'on élargit la liste à la main :
-        # on le fait ici (voir tests/README.md, « points d'attention »).
-        graphique = cls.code / "Python" / "graphique_ecarts_types_cah.py"
-        texte = graphique.read_text(encoding="utf-8")
-        assert "n_clusters_list = [3, 4]" in texte
-        graphique.write_text(texte.replace("n_clusters_list = [3, 4]", "n_clusters_list = [3, 4, 5]"), encoding="utf-8")
         cls.resultats = {}
         for s in ("calculer_jenks_5_classes.py", "graphique_ecarts_types_cah.py", "preparer_donnees_cah_web_complet.py",
                   "generer_cah_data_js_complet.py", "generer_donnees_communes_chatbot.py"):

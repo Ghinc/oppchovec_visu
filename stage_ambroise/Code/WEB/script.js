@@ -3228,6 +3228,14 @@ function toggleCorrMap(mapId, btn) {
     }
 }
 
+// invalidateSize différé : la carte a pu être détruite entre-temps (ex. bascule du mode p_k juste après l'ouverture d'un onglet),
+// ce que Leaflet signale par une exception sur une carte déjà retirée
+function invaliderTailleApres(carte, delai = 150) {
+    setTimeout(() => {
+        try { carte.invalidateSize(); } catch (e) { /* carte détruite entre-temps : rien à redimensionner */ }
+    }, delai);
+}
+
 // Communes à étiqueter : nom → décalage [dx, dy] en pixels
 const COMMUNES_LABELS = {
     'Ajaccio':           [9, -14],
@@ -3530,7 +3538,7 @@ async function initialiserOngletCorrelation() {
     ajouterVillesPrincipales(carte);
     ajouterCopyright(carte);
     ajouterBoutonTelechargement(carte, 'correlation');
-    setTimeout(() => carte.invalidateSize(), 150);
+    invaliderTailleApres(carte);
 }
 
 // ==============================================================================
@@ -3701,7 +3709,7 @@ async function initialiserCorrInverse() {
     ajouterVillesPrincipales(carte2);
     ajouterCopyright(carte2);
     ajouterBoutonTelechargement(carte2, 'correlation2');
-    setTimeout(() => carte2.invalidateSize(), 150);
+    invaliderTailleApres(carte2);
 }
 
 // ==============================================================================
@@ -3886,7 +3894,7 @@ async function initialiserCorrSubjectif() {
     ajouterVillesPrincipales(carteSubj);
     ajouterCopyright(carteSubj);
     ajouterBoutonTelechargement(carteSubj, 'subjectif');
-    setTimeout(() => carteSubj.invalidateSize(), 150);
+    invaliderTailleApres(carteSubj);
 }
 
 // ==============================================================================
@@ -4109,7 +4117,7 @@ async function initialiserCorrSubjectifDens() {
     ajouterVillesPrincipales(carteSubjDens);
     ajouterCopyright(carteSubjDens);
     ajouterBoutonTelechargement(carteSubjDens, 'subjectif-dens');
-    setTimeout(() => carteSubjDens.invalidateSize(), 150);
+    invaliderTailleApres(carteSubjDens);
 }
 
 // ==============================================================================
@@ -4239,7 +4247,7 @@ async function initialiserOngletEntreprises() {
         setTimeout(() => { isSyncing = false; }, 100);
     });
 
-    setTimeout(() => carte.invalidateSize(), 150);
+    invaliderTailleApres(carte);
 }
 
 // ONGLET PARANGONS
@@ -4403,7 +4411,7 @@ function initialiserOngletParangons() {
         };
     }
 
-    setTimeout(() => carte.invalidateSize(), 150);
+    invaliderTailleApres(carte);
 }
 
 function _parangonsActiverCluster(idx, clusters, carte) {
@@ -4870,258 +4878,4 @@ document.getElementById('chatbotInput').addEventListener('keydown', function(e) 
         e.preventDefault();
         sendMessage();
     }
-});
-
-// ============================================================================
-// CARTE DES COMMUNES NUMÉROTÉES
-// ============================================================================
-
-// Liste des communes à numéroter (nom normalisé pour correspondre au GeoJSON)
-const NUMBERED_MUNICIPALITIES = [
-    'Ajaccio', 'Porto-Vecchio', 'Sartène', 'Corte', 'Bastia',
-    'Calvi', 'Ghisonaccia', 'Aghione', 'Antisanti', 'Canale-di-Verde',
-    'Linguizzetta', 'San-Giuliano', 'Olmo', 'Monte', 'Asco',
-    'Moltifao', 'Castifao', 'Canavaggia', 'Monacia-d\'Aullène',
-    'Pianottoli-Caldarello', 'Valle-di-Mezzana', 'Villanova',
-    'Grossetto-Prugna', 'Cargèse', 'Eccica-Suarella', 'Cauro'
-];
-
-let mapNumbered = null;
-let numberedMarkersLayer = null;
-
-function initMapNumbered() {
-    if (!mapNumbered) {
-        mapNumbered = L.map('map-numbered', {
-            center: [42.0396, 9.0129],
-            zoom: 8,
-            zoomControl: true,
-            attributionControl: false,
-            zoomSnap: 0.1,
-            zoomDelta: 0.1
-        });
-
-        // Ajouter à la liste des cartes pour la synchronisation
-        cartes['numbered'] = mapNumbered;
-
-        // Synchroniser avec les autres cartes
-        mapNumbered.on('zoomend moveend', function() {
-            if (isSyncing) return;
-            isSyncing = true;
-
-            const currentZoom = mapNumbered.getZoom();
-            const currentCenter = mapNumbered.getCenter();
-
-            Object.keys(cartes).forEach(mapKey => {
-                if (cartes[mapKey] && mapKey !== 'numbered') {
-                    cartes[mapKey].setView(currentCenter, currentZoom, { animate: false });
-                }
-            });
-
-            setTimeout(() => { isSyncing = false; }, 100);
-        });
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(mapNumbered);
-
-        // Ajouter le bouton de téléchargement
-        ajouterBoutonDownload(mapNumbered, 'numbered_municipalities_map');
-    }
-}
-
-function afficherCommunesNumerotees() {
-    if (!communeJson || !communeJson.features) {
-        console.error('GeoJSON des communes non chargé');
-        return;
-    }
-
-    initMapNumbered();
-
-    // Supprimer l'ancienne couche si elle existe
-    if (numberedMarkersLayer) {
-        mapNumbered.removeLayer(numberedMarkersLayer);
-    }
-
-    // Créer une nouvelle couche de groupe
-    numberedMarkersLayer = L.layerGroup().addTo(mapNumbered);
-
-    // Ajouter le fond de carte des communes (blanc)
-    L.geoJSON(communeJson, {
-        style: {
-            fillColor: '#ffffff',
-            fillOpacity: 1,
-            color: '#d0d0d0',
-            weight: 1
-        }
-    }).addTo(numberedMarkersLayer);
-
-    // Map pour normaliser les noms
-    const normalizeName = (name) => {
-        return name
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .toLowerCase()
-            .replace(/['-]/g, '')
-            .trim();
-    };
-
-    // Créer un index des communes par nom normalisé
-    const communesByNormalizedName = {};
-    communeJson.features.forEach(feature => {
-        const nom = feature.properties.nom || feature.properties.NOM || feature.properties.name;
-        if (nom) {
-            const normalized = normalizeName(nom);
-            communesByNormalizedName[normalized] = feature;
-        }
-    });
-
-    // Parcourir la liste des communes à numéroter
-    let foundCount = 0;
-    const notFound = [];
-
-    NUMBERED_MUNICIPALITIES.forEach((communeName, index) => {
-        const normalizedSearch = normalizeName(communeName);
-        const feature = communesByNormalizedName[normalizedSearch];
-
-        if (feature) {
-            foundCount++;
-            const numero = index + 1;
-
-            // Calculer le centroïde géométrique réel de la commune
-            const geom = feature.geometry;
-            let center;
-
-            if (geom.type === 'Polygon') {
-                // Pour un polygone simple, calculer le centroïde des coordonnées
-                const coords = geom.coordinates[0];
-                let sumLat = 0, sumLng = 0;
-                coords.forEach(coord => {
-                    sumLng += coord[0];
-                    sumLat += coord[1];
-                });
-                center = L.latLng(sumLat / coords.length, sumLng / coords.length);
-            } else if (geom.type === 'MultiPolygon') {
-                // Pour un multipolygone, prendre le centroïde du plus grand polygone
-                let largestPoly = geom.coordinates[0];
-                let largestArea = 0;
-                geom.coordinates.forEach(poly => {
-                    const polyCoords = poly[0];
-                    if (polyCoords.length > largestArea) {
-                        largestArea = polyCoords.length;
-                        largestPoly = poly;
-                    }
-                });
-                const coords = largestPoly[0];
-                let sumLat = 0, sumLng = 0;
-                coords.forEach(coord => {
-                    sumLng += coord[0];
-                    sumLat += coord[1];
-                });
-                center = L.latLng(sumLat / coords.length, sumLng / coords.length);
-            } else {
-                // Fallback sur la méthode bounds
-                const bounds = L.geoJSON(feature).getBounds();
-                center = bounds.getCenter();
-            }
-
-            // Calculer la position du label à l'extérieur (décalage radial)
-            const bounds = L.geoJSON(communeJson).getBounds();
-            const mapCenter = bounds.getCenter();
-
-            // Vecteur du centre de la carte vers le centre de la commune
-            const dx = center.lng - mapCenter.lng;
-            const dy = center.lat - mapCenter.lat;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            // Normaliser et appliquer un décalage plus important pour éviter la Corse
-            const offset = 0.25; // Décalage en degrés (augmenté de 0.15 à 0.25)
-            const labelLng = center.lng + (dx / distance) * offset;
-            const labelLat = center.lat + (dy / distance) * offset;
-            const labelPos = L.latLng(labelLat, labelLng);
-
-            // Créer un marqueur DRAGGABLE avec un DivIcon personnalisé au bout de la ligne
-            const marker = L.marker(labelPos, {
-                draggable: true,
-                icon: L.divIcon({
-                    className: 'numbered-municipality-marker',
-                    html: `<div class="marker-number" title="Cliquez et glissez pour déplacer">${numero}</div>`,
-                    iconSize: [50, 50],
-                    iconAnchor: [25, 25]
-                })
-            });
-
-            // Popup avec les informations
-            marker.bindPopup(`
-                <div style="font-family: Arial, sans-serif;">
-                    <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #333;">
-                        <strong>#${numero}</strong> - ${communeName}
-                    </h3>
-                    <p style="margin: 5px 0; font-size: 13px;">
-                        <strong>Code:</strong> ${feature.properties.code || feature.properties.CODE || 'N/A'}
-                    </p>
-                    <p style="margin: 5px 0; font-size: 12px; color: #666;">
-                        💡 <em>Vous pouvez déplacer ce numéro en le glissant</em>
-                    </p>
-                </div>
-            `);
-
-            // Créer une référence à la ligne pour la mettre à jour lors du drag
-            const polyline = L.polyline([center, labelPos], {
-                color: '#666666',
-                weight: 1.5,
-                opacity: 0.7,
-                dashArray: '3, 6'
-            }).addTo(numberedMarkersLayer);
-
-            // Mettre à jour la ligne lors du déplacement du marqueur
-            marker.on('drag', function(e) {
-                const newPos = e.target.getLatLng();
-                polyline.setLatLngs([center, newPos]);
-            });
-
-            // Ajouter un effet visuel lors du survol
-            marker.on('mouseover', function() {
-                polyline.setStyle({ weight: 2.5, opacity: 1 });
-            });
-
-            marker.on('mouseout', function() {
-                polyline.setStyle({ weight: 1.5, opacity: 0.7 });
-            });
-
-            marker.addTo(numberedMarkersLayer);
-
-            // Surligner la commune en rouge
-            L.geoJSON(feature, {
-                style: {
-                    fillColor: '#dc3545',
-                    fillOpacity: 0.5,
-                    color: '#a71d2a',
-                    weight: 2
-                }
-            }).addTo(numberedMarkersLayer);
-
-        } else {
-            notFound.push(communeName);
-        }
-    });
-
-    console.log(`✅ Communes numérotées trouvées: ${foundCount}/${NUMBERED_MUNICIPALITIES.length}`);
-    if (notFound.length > 0) {
-        console.warn('⚠️ Communes non trouvées:', notFound);
-    }
-
-    // Ajuster la vue pour afficher toutes les communes
-    if (numberedMarkersLayer.getLayers().length > 0) {
-        mapNumbered.fitBounds(numberedMarkersLayer.getBounds(), { padding: [20, 20] });
-    }
-}
-
-// Ajouter le gestionnaire d'événement pour l'onglet Numbered
-document.querySelector('[data-tab="numberedtab"]').addEventListener('click', function() {
-    setTimeout(() => {
-        afficherCommunesNumerotees();
-        if (mapNumbered) {
-            mapNumbered.invalidateSize();
-        }
-    }, 100);
 });

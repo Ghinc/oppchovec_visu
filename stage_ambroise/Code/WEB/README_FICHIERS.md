@@ -113,8 +113,8 @@ dépôt : `<sources>` désigne le dossier contenant `Données/Corse_Commune/`.
 3. **Données sous-jacentes aux curseurs** : `python exporter_sous_composantes.py "<sources>"`
 4. **LISA** (depuis la racine du dépôt) : `python gen_lisa_knn5.py` (**attention : les chemins `WEB_DIR` et `GEOJSON` en tête de ce
    script sont absolus, à adapter à votre machine**)
-5. **CAH** : `python graphique_ecarts_types_cah.py` (**mettre `n_clusters_list = [3, 4, 5]`** : la liste par défaut `[3, 4]` ne
-   produit pas le graphique à 5 classes), puis `python preparer_donnees_cah_web_complet.py`, puis `python generer_cah_data_js_complet.py`
+5. **CAH** : `python graphique_ecarts_types_cah.py` (graphiques à 3, 4 et 5 classes), puis `python preparer_donnees_cah_web_complet.py`,
+   puis `python generer_cah_data_js_complet.py`
 6. **Assistant** : `python generer_donnees_communes_chatbot.py`
 7. **Documentation et repli** : reporter les nouveaux seuils dans les tableaux ci-dessus et dans `let seuilsJenks` de `script.js`.
 8. **Contrôle** : `python tests/run_tests.py` (depuis la racine du dépôt).
@@ -127,8 +127,7 @@ de `Cho2_francais_18plus.xlsx`). Les tests le signalent comme « échec attendu 
 
 ## ✅ Vérification rapide
 
-1. **Console navigateur (F12)** : vérifier qu'il n'y a pas d'erreur (hormis `reading 'addEventListener'` : un reliquat connu de
-   l'ancien onglet « Numbered », sans conséquence).
+1. **Console navigateur (F12)** : la page doit se charger sans aucune erreur.
 2. **Test rapide** : `console.log(data_indicateursOriginaux['Afa'].OppChoVec_0_10)` devrait afficher `10`.
 3. **Seuils** : `console.log(seuilsJenks.oppchovec)` devrait afficher 6 valeurs.
 

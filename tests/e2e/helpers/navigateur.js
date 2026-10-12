@@ -53,10 +53,9 @@ function disponibilite() {
   return { ok: true, playwright, exe };
 }
 
-// Erreurs de page déjà présentes avant les tests (documentées dans tests/README.md) : tout le reste est une régression.
-const ERREURS_CONNUES = [
-  /Cannot read properties of null \(reading 'addEventListener'\)/,   // reliquat de l'onglet « Numbered » (script.js, fin de fichier)
-];
+// Erreurs de page tolérées (documentées dans tests/README.md) : tout le reste est une régression.
+// Liste vide depuis la suppression du code mort de l'onglet « Numbered » : la page se charge sans aucune erreur.
+const ERREURS_CONNUES = [];
 const REQUETES_IGNOREES = [/favicon\.ico/];
 
 /** Ouvre la page de l'appli et attend qu'elle soit entièrement initialisée. Renvoie {page, erreurs, alertes}. */

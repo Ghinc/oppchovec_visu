@@ -243,7 +243,7 @@ def main():
     gdf = charger_donnees()
 
     # Calculer les clusters pour 3 et 4
-    n_clusters_list = [3, 4]
+    n_clusters_list = [3, 4, 5]
     clusters_dict, X, scaler = recalculer_clusters(gdf, n_clusters_list)
 
     # Calculer les écarts standardisés

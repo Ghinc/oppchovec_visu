@@ -119,16 +119,16 @@ class FichiersEtIdentifiantsReferences(unittest.TestCase):
         ids_html = set(re.findall(r'\bid="([^"]+)"', html))
         ids_dynamiques = set(re.findall(r'\bid="([\w\-]+)"', src)) | set(re.findall(r"\.id\s*=\s*'([\w\-]+)'", src))
         utilises = set(re.findall(r"getElementById\(\s*['\"]([\w\-]+)['\"]\s*\)", src))
-        # reliquats connus de l'ancien onglet « Numbered » (hors index.html) : sans effet, voir tests/README.md
-        legacy = {"map-numbered"}
-        manquants = sorted(utilises - ids_html - ids_dynamiques - legacy)
+        manquants = sorted(utilises - ids_html - ids_dynamiques)
         self.assertEqual(manquants, [], f"identifiants utilisés par script.js mais absents de index.html : {manquants}")
 
-    def test_reliquat_numberedtab_connu(self):
-        """Documente l'erreur console existante (querySelector('[data-tab=\"numberedtab\"]') renvoie null au chargement).
-        Si ce test échoue, le reliquat a été nettoyé : retirer l'exception correspondante des tests e2e."""
-        self.assertIn('[data-tab="numberedtab"]', js())
-        self.assertNotIn('data-tab="numberedtab"', INDEX.read_text(encoding="utf-8"))
+    def test_onglets_cibles_par_script_js_existent_dans_index_html(self):
+        """`document.querySelector('[data-tab="x"]')` sur un onglet absent renvoie null : l'appel suivant lève une erreur au
+        chargement (c'était le cas de l'ancien onglet « Numbered », dont le code mort a été supprimé)."""
+        onglets_html = set(re.findall(r'data-tab="([\w\-]+)"', INDEX.read_text(encoding="utf-8")))
+        cites = set(re.findall(r'\[data-tab="([\w\-]+)"\]', js()))
+        self.assertEqual(sorted(cites - onglets_html), [], "onglets visés par script.js mais absents de index.html")
+        self.assertNotIn("numberedtab", js().lower())
 
 
 class DescriptionsDeLInterface(unittest.TestCase):
