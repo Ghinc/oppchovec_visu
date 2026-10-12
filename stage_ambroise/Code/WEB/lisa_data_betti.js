@@ -7,2547 +7,2547 @@ const LISA_DATA_BETTI = {
     "variable": "OppChoVec_Betti_0_10",
     "poids": {
       "type": "betti",
-      "Opp": 0.5337,
-      "Cho": 0.1982,
-      "Vec": 0.268
+      "Opp": 0.5336,
+      "Cho": 0.1988,
+      "Vec": 0.2676
     },
     "methode": "Moran Local - KNN k=5 - row-standardized",
     "permutations": 9999,
     "seed": 42,
-    "moran_global_I": 0.2915781122001632,
+    "moran_global_I": 0.29124756193912227,
     "moran_global_p": 0.001,
     "seuil_significativite": 0.05,
     "nb_communes": 360,
-    "nb_significatives": 52,
-    "pourcent_significatives": 14.444444444444443
+    "nb_significatives": 54,
+    "pourcent_significatives": 15.0
   },
   "statistiques": {
     "HH (High-High)": 19,
-    "LL (Low-Low)": 23,
+    "LL (Low-Low)": 25,
     "HL (High-Low)": 6,
     "LH (Low-High)": 4,
-    "Non significatif": 308
+    "Non significatif": 306
   },
   "clusters": {
     "Cristinacce": {
       "cluster": "Non significatif",
-      "lisa_I": 0.006195894889255074,
-      "p_value": 0.48,
+      "lisa_I": 0.00472603911085097,
+      "p_value": 0.4766,
       "significatif": false,
-      "oppchovec": 2.890151286544996
+      "oppchovec": 2.8850123993544106
     },
     "Bastelica": {
       "cluster": "Non significatif",
-      "lisa_I": 0.022239379838935702,
-      "p_value": 0.4148,
+      "lisa_I": 0.017284507073223553,
+      "p_value": 0.4248,
       "significatif": false,
-      "oppchovec": 3.9835329944686753
+      "oppchovec": 3.995206405000458
     },
     "Quenza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5896945359629971,
+      "lisa_I": 0.5914463258960796,
       "p_value": 0.083,
       "significatif": false,
-      "oppchovec": 1.8939909399151158
+      "oppchovec": 1.9067666363903095
     },
     "Chiatra": {
       "cluster": "Non significatif",
-      "lisa_I": 0.007982293762897904,
-      "p_value": 0.3026,
+      "lisa_I": 0.009267201137298864,
+      "p_value": 0.3073,
       "significatif": false,
-      "oppchovec": 3.301612939902283
+      "oppchovec": 3.3097634555249322
     },
     "Ogliastro": {
       "cluster": "Non significatif",
-      "lisa_I": 0.03609523261552711,
-      "p_value": 0.4559,
+      "lisa_I": 0.03672287857585438,
+      "p_value": 0.4547,
       "significatif": false,
-      "oppchovec": 2.752517561422389
+      "oppchovec": 2.7567012508015614
     },
     "Frasseto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.05546331252323444,
-      "p_value": 0.3786,
+      "lisa_I": 0.056124578718383424,
+      "p_value": 0.3861,
       "significatif": false,
-      "oppchovec": 2.87936627674823
+      "oppchovec": 2.8661421169552264
     },
     "Serriera": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.7450096591609474,
-      "p_value": 0.0431,
+      "lisa_I": 0.7602064398183467,
+      "p_value": 0.0424,
       "significatif": true,
-      "oppchovec": 1.8524631498476398
+      "oppchovec": 1.844686882941087
     },
     "Valle-di-Mezzana": {
       "cluster": "HH (High-High)",
-      "lisa_I": 0.3875660330998449,
+      "lisa_I": 0.38597715648129255,
       "p_value": 0.0116,
       "significatif": true,
-      "oppchovec": 3.770272471832365
+      "oppchovec": 3.783752007151459
     },
     "Lozzi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3767796605443552,
-      "p_value": 0.0999,
+      "lisa_I": 0.37838245539604337,
+      "p_value": 0.0985,
       "significatif": false,
-      "oppchovec": 2.353016353100438
+      "oppchovec": 2.3763563069884626
     },
     "Sant'Andréa-di-Bozio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.26992154595421236,
-      "p_value": 0.3775,
+      "lisa_I": -0.2692123198289625,
+      "p_value": 0.3759,
       "significatif": false,
-      "oppchovec": 5.514447527223059
+      "oppchovec": 5.501113121324429
     },
     "Balogna": {
       "cluster": "Non significatif",
-      "lisa_I": -0.00765070813076116,
-      "p_value": 0.4895,
+      "lisa_I": -0.007209297073558283,
+      "p_value": 0.4875,
       "significatif": false,
-      "oppchovec": 3.549705423031698
+      "oppchovec": 3.5450913862535147
     },
     "Campo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.2653482971473257,
-      "p_value": 0.3258,
+      "lisa_I": -0.26504013355989686,
+      "p_value": 0.3273,
       "significatif": false,
-      "oppchovec": 4.943476876180582
+      "oppchovec": 4.965103194912993
     },
     "Foce": {
       "cluster": "Non significatif",
-      "lisa_I": -0.14093248999674798,
-      "p_value": 0.3317,
+      "lisa_I": -0.13713027018714036,
+      "p_value": 0.342,
       "significatif": false,
-      "oppchovec": 4.228758919570424
+      "oppchovec": 4.2618947248651855
     },
     "Pietrosella": {
       "cluster": "Non significatif",
-      "lisa_I": 0.16527516748204046,
-      "p_value": 0.2249,
+      "lisa_I": 0.16819304572265398,
+      "p_value": 0.2237,
       "significatif": false,
-      "oppchovec": 4.1253095657124454
+      "oppchovec": 4.146066881604933
     },
     "Propriano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.4849194549225731,
-      "p_value": 0.1872,
+      "lisa_I": -0.4818132792076216,
+      "p_value": 0.1888,
       "significatif": false,
-      "oppchovec": 1.5140916666162452
+      "oppchovec": 1.526995301776104
     },
     "Zérubia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.25309334577210535,
-      "p_value": 0.2194,
+      "lisa_I": 0.2555303401935392,
+      "p_value": 0.2071,
       "significatif": false,
-      "oppchovec": 2.3324939787182886
+      "oppchovec": 2.3848878200552095
     },
     "Linguizzetta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.25449920316072944,
-      "p_value": 0.4266,
+      "lisa_I": 0.2515436267219671,
+      "p_value": 0.4284,
       "significatif": false,
-      "oppchovec": 0.08731452981950022
+      "oppchovec": 0.11182481661396888
     },
     "Piedicorte-di-Gaggio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.001968971521678836,
-      "p_value": 0.4532,
+      "lisa_I": -0.003232347342733389,
+      "p_value": 0.4462,
       "significatif": false,
-      "oppchovec": 3.124406554467352
+      "oppchovec": 3.124966138662738
     },
     "Brando": {
       "cluster": "Non significatif",
-      "lisa_I": 0.4351258275059339,
-      "p_value": 0.057,
+      "lisa_I": 0.43664823624825955,
+      "p_value": 0.0571,
       "significatif": false,
-      "oppchovec": 4.100323997340575
+      "oppchovec": 4.119736765192049
     },
     "Pancheraccia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.29977475403411247,
-      "p_value": 0.3171,
+      "lisa_I": 0.29735993045337167,
+      "p_value": 0.3194,
       "significatif": false,
-      "oppchovec": 1.5367418483626065
+      "oppchovec": 1.5552462069145836
     },
     "Aiti": {
       "cluster": "Non significatif",
-      "lisa_I": 0.12233420852338883,
-      "p_value": 0.064,
+      "lisa_I": 0.1362314150837811,
+      "p_value": 0.0617,
       "significatif": false,
-      "oppchovec": 3.071432634693258
+      "oppchovec": 3.0601725365976873
     },
     "Bustanico": {
       "cluster": "Non significatif",
-      "lisa_I": 0.21570976235439573,
-      "p_value": 0.2263,
+      "lisa_I": 0.2060902340755067,
+      "p_value": 0.2425,
       "significatif": false,
-      "oppchovec": 2.4653730258831237
+      "oppchovec": 2.4656105024856196
     },
     "Cagnano": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08561437154787878,
-      "p_value": 0.4318,
+      "lisa_I": 0.08381606909236018,
+      "p_value": 0.4339,
       "significatif": false,
-      "oppchovec": 2.2272438775630645
+      "oppchovec": 2.253244772197731
     },
     "Corscia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.18261407892035547,
-      "p_value": 0.2892,
+      "lisa_I": 0.18596230510130768,
+      "p_value": 0.2843,
       "significatif": false,
-      "oppchovec": 2.382513645502046
+      "oppchovec": 2.4021934877424918
     },
     "Monte": {
       "cluster": "Non significatif",
-      "lisa_I": 0.17902033570229187,
-      "p_value": 0.3089,
+      "lisa_I": 0.17657026263734935,
+      "p_value": 0.3135,
       "significatif": false,
-      "oppchovec": 2.324714348450377
+      "oppchovec": 2.3368765661459427
     },
     "Porri": {
       "cluster": "Non significatif",
-      "lisa_I": 0.15164547654675647,
-      "p_value": 0.1555,
+      "lisa_I": 0.15601194164472748,
+      "p_value": 0.155,
       "significatif": false,
-      "oppchovec": 3.832182000064906
+      "oppchovec": 3.860039503395119
     },
     "Porta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.008868878751111734,
-      "p_value": 0.4284,
+      "lisa_I": 0.008410724846355985,
+      "p_value": 0.4323,
       "significatif": false,
-      "oppchovec": 3.6818013510345637
+      "oppchovec": 3.7138008508138034
     },
     "Speloncato": {
       "cluster": "Non significatif",
-      "lisa_I": 0.03539600241767919,
-      "p_value": 0.4818,
+      "lisa_I": 0.038382212738962355,
+      "p_value": 0.4779,
       "significatif": false,
-      "oppchovec": 2.4915466014237
+      "oppchovec": 2.50413771566357
     },
     "Cognocoli-Monticchi": {
       "cluster": "Non significatif",
-      "lisa_I": -0.05629792136344914,
-      "p_value": 0.4202,
+      "lisa_I": -0.05697542560321225,
+      "p_value": 0.4187,
       "significatif": false,
-      "oppchovec": 1.7499318020668595
+      "oppchovec": 1.801339436143963
     },
     "Villanova": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.2672947815438675,
+      "lisa_I": 2.23935934250473,
       "p_value": 0.0001,
       "significatif": true,
-      "oppchovec": 4.250629471542126
+      "oppchovec": 4.256560685308559
     },
     "Mausoléo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5459721203442941,
-      "p_value": 0.065,
+      "lisa_I": 0.5512269734429597,
+      "p_value": 0.0639,
       "significatif": false,
-      "oppchovec": 2.116069984329302
+      "oppchovec": 2.1223065344410705
     },
     "Osani": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.4307575038984749,
-      "p_value": 0.0161,
+      "lisa_I": 0.4412736444021036,
+      "p_value": 0.0156,
       "significatif": true,
-      "oppchovec": 2.642003265560253
+      "oppchovec": 2.6471343475964018
     },
     "Aghione": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 2.2172540775936374,
-      "p_value": 0.0058,
+      "lisa_I": 2.218408650247764,
+      "p_value": 0.0056,
       "significatif": true,
-      "oppchovec": 0.15472821146628774
+      "oppchovec": 0.18096750957833813
     },
     "Casabianca": {
       "cluster": "Non significatif",
-      "lisa_I": -0.01296190659357589,
-      "p_value": 0.4204,
+      "lisa_I": -0.010365422613758914,
+      "p_value": 0.4285,
       "significatif": false,
-      "oppchovec": 2.979177393130569
+      "oppchovec": 3.0051355063242995
     },
     "Focicchia": {
       "cluster": "LH (Low-High)",
-      "lisa_I": -0.711790564292439,
-      "p_value": 0.0378,
+      "lisa_I": -0.6909333969138755,
+      "p_value": 0.0388,
       "significatif": true,
-      "oppchovec": 2.3166144885647033
+      "oppchovec": 2.3557606342948816
     },
     "Luri": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07447656778525852,
-      "p_value": 0.2707,
+      "lisa_I": 0.07339117315481072,
+      "p_value": 0.271,
       "significatif": false,
-      "oppchovec": 2.9821679582631995
+      "oppchovec": 3.0033399445626014
     },
     "Nocario": {
       "cluster": "Non significatif",
-      "lisa_I": 0.004949816851440351,
-      "p_value": 0.4676,
+      "lisa_I": 0.005496668832464054,
+      "p_value": 0.474,
       "significatif": false,
-      "oppchovec": 3.2517103929057307
+      "oppchovec": 3.2480589376222557
     },
     "San-Nicolao": {
       "cluster": "Non significatif",
-      "lisa_I": -0.014791549864381408,
-      "p_value": 0.3069,
+      "lisa_I": -0.013906943435358674,
+      "p_value": 0.3066,
       "significatif": false,
-      "oppchovec": 3.231019869362855
+      "oppchovec": 3.255088308534702
     },
     "Serra-di-Ferro": {
       "cluster": "Non significatif",
-      "lisa_I": 0.23640948944162446,
-      "p_value": 0.1974,
+      "lisa_I": 0.232761050413263,
+      "p_value": 0.2011,
       "significatif": false,
-      "oppchovec": 2.4734869327705757
+      "oppchovec": 2.4926590569550604
     },
     "Sorbollano": {
       "cluster": "Non significatif",
-      "lisa_I": 0.17871844202664147,
-      "p_value": 0.1033,
+      "lisa_I": 0.18512516202542328,
+      "p_value": 0.1026,
       "significatif": false,
-      "oppchovec": 2.875069620729876
+      "oppchovec": 2.8776053517912707
     },
     "Felce": {
       "cluster": "Non significatif",
-      "lisa_I": 0.044295894933992594,
-      "p_value": 0.3563,
+      "lisa_I": 0.04908508389058221,
+      "p_value": 0.3636,
       "significatif": false,
-      "oppchovec": 3.8683752541695684
+      "oppchovec": 3.9905539115040294
     },
     "Pioggiola": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.03234745489309677,
-      "p_value": 0.0086,
+      "lisa_I": 0.02641673051694587,
+      "p_value": 0.0087,
       "significatif": true,
-      "oppchovec": 3.297698349678137
+      "oppchovec": 3.3227789985916347
     },
     "Valle-d'Alesani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.028597498856826775,
-      "p_value": 0.4542,
+      "lisa_I": 0.026899338471915484,
+      "p_value": 0.4584,
       "significatif": false,
-      "oppchovec": 2.890673175236258
+      "oppchovec": 2.904089207744052
     },
     "Palneca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0017422767771643165,
-      "p_value": 0.4702,
+      "lisa_I": 0.0038912886154454157,
+      "p_value": 0.476,
       "significatif": false,
-      "oppchovec": 2.895414808188322
+      "oppchovec": 2.8983886623433683
     },
     "Peri": {
       "cluster": "Non significatif",
-      "lisa_I": 0.055055449906233636,
-      "p_value": 0.3414,
+      "lisa_I": 0.05564254966817512,
+      "p_value": 0.3416,
       "significatif": false,
-      "oppchovec": 3.919732163047129
+      "oppchovec": 3.9415749531986135
     },
     "Rosazia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.13703113179592313,
-      "p_value": 0.2135,
+      "lisa_I": -0.14145157525471894,
+      "p_value": 0.206,
       "significatif": false,
-      "oppchovec": 2.7566207840982058
+      "oppchovec": 2.772202689283811
     },
     "Sollacaro": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.0761071196253361,
-      "p_value": 0.0276,
+      "lisa_I": 0.0773735515069806,
+      "p_value": 0.0296,
       "significatif": true,
-      "oppchovec": 3.2089399431593
+      "oppchovec": 3.2213184321250865
     },
     "Aregno": {
-      "cluster": "Non significatif",
-      "lisa_I": 0.7516771559176174,
-      "p_value": 0.0504,
-      "significatif": false,
-      "oppchovec": 1.7719387583585764
+      "cluster": "LL (Low-Low)",
+      "lisa_I": 0.7567895967216016,
+      "p_value": 0.0494,
+      "significatif": true,
+      "oppchovec": 1.792843631269493
     },
     "Castellare-di-Casinca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.055393160554462084,
-      "p_value": 0.3137,
+      "lisa_I": 0.05604147179665501,
+      "p_value": 0.3122,
       "significatif": false,
-      "oppchovec": 3.7983162965272674
+      "oppchovec": 3.8149777373234555
     },
     "Castineta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06120966738739224,
-      "p_value": 0.3836,
+      "lisa_I": 0.06299935038525396,
+      "p_value": 0.3831,
       "significatif": false,
-      "oppchovec": 4.358777862353514
+      "oppchovec": 4.387503239441094
     },
     "Pietra-di-Verde": {
       "cluster": "Non significatif",
-      "lisa_I": -0.09186709499089435,
-      "p_value": 0.2626,
+      "lisa_I": -0.08714206962043104,
+      "p_value": 0.2696,
       "significatif": false,
-      "oppchovec": 2.819458946960151
+      "oppchovec": 2.840273520420493
     },
     "Calcatoggio": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.0388416616832714,
-      "p_value": 0.0015,
+      "lisa_I": 2.0266523461058386,
+      "p_value": 0.0014,
       "significatif": true,
-      "oppchovec": 5.007512380579923
+      "oppchovec": 5.0103549207260585
     },
     "Moca-Croce": {
       "cluster": "Non significatif",
-      "lisa_I": 0.008688681737001686,
-      "p_value": 0.4992,
+      "lisa_I": 0.008240213304369366,
+      "p_value": 0.4986,
       "significatif": false,
-      "oppchovec": 3.0364618243226227
+      "oppchovec": 3.0433957480378444
     },
     "Albertacce": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1760698121872947,
-      "p_value": 0.1394,
+      "lisa_I": 0.178609117799556,
+      "p_value": 0.1353,
       "significatif": false,
-      "oppchovec": 2.819056113078475
+      "oppchovec": 2.836422203329813
     },
     "Pie-d'Orezza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.34348507036987486,
-      "p_value": 0.3346,
+      "lisa_I": 0.3304769493865738,
+      "p_value": 0.343,
       "significatif": false,
-      "oppchovec": 1.0631614028092797
+      "oppchovec": 1.0659523310693584
     },
     "Poggio-Mezzana": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1324426744254292,
-      "p_value": 0.2126,
+      "lisa_I": -0.13402568355506553,
+      "p_value": 0.2114,
       "significatif": false,
-      "oppchovec": 2.777288634096735
+      "oppchovec": 2.7902980869318212
     },
     "Quercitello": {
       "cluster": "Non significatif",
-      "lisa_I": -0.09095900162002077,
-      "p_value": 0.3012,
+      "lisa_I": -0.09318742881418235,
+      "p_value": 0.3007,
       "significatif": false,
-      "oppchovec": 2.673075131997452
+      "oppchovec": 2.67675892891273
     },
     "Vallecalle": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10253900585420574,
-      "p_value": 0.3612,
+      "lisa_I": 0.1029112888477908,
+      "p_value": 0.3623,
       "significatif": false,
-      "oppchovec": 4.66913108261198
+      "oppchovec": 4.691227545324056
     },
     "Olivese": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09901016645821462,
-      "p_value": 0.163,
+      "lisa_I": 0.09704382693077379,
+      "p_value": 0.1635,
       "significatif": false,
-      "oppchovec": 3.6763632990752537
+      "oppchovec": 3.6867664114577217
     },
     "Sampolo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.002029696747991613,
-      "p_value": 0.4426,
+      "lisa_I": -0.0017565324897143586,
+      "p_value": 0.4495,
       "significatif": false,
-      "oppchovec": 3.2166721982941544
+      "oppchovec": 3.215664944161195
     },
     "Pietraserena": {
       "cluster": "Non significatif",
-      "lisa_I": 0.054119861182386084,
-      "p_value": 0.2861,
+      "lisa_I": 0.05737312672572116,
+      "p_value": 0.2855,
       "significatif": false,
-      "oppchovec": 3.060407547824953
+      "oppchovec": 3.0606886556220165
     },
     "Poggio-di-Nazza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06526012393243967,
-      "p_value": 0.4304,
+      "lisa_I": 0.06440345884938956,
+      "p_value": 0.4283,
       "significatif": false,
-      "oppchovec": 2.5178022389714934
+      "oppchovec": 2.562330717855574
     },
     "Sant'Antonino": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.2492190890666832,
-      "p_value": 0.0499,
+      "lisa_I": -0.24208187151514418,
+      "p_value": 0.0496,
       "significatif": true,
-      "oppchovec": 3.862301566813972
+      "oppchovec": 3.861373945547042
     },
     "Santa-Reparata-di-Moriani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.13594970520703725,
-      "p_value": 0.3143,
+      "lisa_I": 0.15048162194175282,
+      "p_value": 0.2983,
       "significatif": false,
-      "oppchovec": 4.485306522106665
+      "oppchovec": 4.492063094203933
     },
     "Coti-Chiavari": {
       "cluster": "Non significatif",
-      "lisa_I": -0.21661283510809526,
-      "p_value": 0.1509,
+      "lisa_I": -0.20946928123593855,
+      "p_value": 0.156,
       "significatif": false,
-      "oppchovec": 4.015232805762555
+      "oppchovec": 4.019211337706813
     },
     "Figari": {
       "cluster": "Non significatif",
-      "lisa_I": 0.028121183713979054,
-      "p_value": 0.4942,
+      "lisa_I": 0.026019559553014986,
+      "p_value": 0.498,
       "significatif": false,
-      "oppchovec": 2.399477612800864
+      "oppchovec": 2.4049320970499997
     },
     "Altiani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.3391291517238692,
-      "p_value": 0.3911,
+      "lisa_I": -0.33560819991522106,
+      "p_value": 0.394,
       "significatif": false,
-      "oppchovec": 6.383525485477111
+      "oppchovec": 6.416555533210224
     },
     "San-Gavino-di-Tenda": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0167797042979654,
-      "p_value": 0.4143,
+      "lisa_I": -0.015382482689288065,
+      "p_value": 0.4191,
       "significatif": false,
-      "oppchovec": 2.900455141546536
+      "oppchovec": 2.9077592476425296
     },
     "Santo-Pietro-di-Tenda": {
       "cluster": "Non significatif",
-      "lisa_I": 0.05957740852593922,
-      "p_value": 0.4076,
+      "lisa_I": 0.061219028717522,
+      "p_value": 0.4015,
       "significatif": false,
-      "oppchovec": 2.7274702067775753
+      "oppchovec": 2.7510097441731727
     },
     "Santo-Pietro-di-Venaco": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04202352988624454,
-      "p_value": 0.2493,
+      "lisa_I": 0.03854577648327902,
+      "p_value": 0.2555,
       "significatif": false,
-      "oppchovec": 3.1564632955123977
+      "oppchovec": 3.183163457454983
     },
     "Santa-Maria-Poggio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.18867664449604937,
-      "p_value": 0.2529,
+      "lisa_I": 0.18954470410597984,
+      "p_value": 0.2544,
       "significatif": false,
-      "oppchovec": 4.394488506622457
+      "oppchovec": 4.422256254481243
     },
     "Granace": {
       "cluster": "Non significatif",
-      "lisa_I": -0.008795748090599294,
-      "p_value": 0.3697,
+      "lisa_I": -0.006634569769951485,
+      "p_value": 0.3637,
       "significatif": false,
-      "oppchovec": 3.2245817942794015
+      "oppchovec": 3.2774247117267006
     },
     "Parata": {
       "cluster": "Non significatif",
-      "lisa_I": -0.01978810417688716,
-      "p_value": 0.3019,
+      "lisa_I": -0.017288573683003135,
+      "p_value": 0.3121,
       "significatif": false,
-      "oppchovec": 3.4567685665345627
+      "oppchovec": 3.462470257132413
     },
     "Silvareccio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.4259414363777816,
-      "p_value": 0.1691,
+      "lisa_I": 0.4379514970182497,
+      "p_value": 0.168,
       "significatif": false,
-      "oppchovec": 4.821750646715276
+      "oppchovec": 4.869951715192116
     },
     "Bastelicaccia": {
       "cluster": "HH (High-High)",
-      "lisa_I": 10.392258840320935,
+      "lisa_I": 10.35644933502914,
       "p_value": 0.0001,
       "significatif": true,
-      "oppchovec": 9.811896981969628
+      "oppchovec": 9.80636584150634
     },
     "Porto-Vecchio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.23273171691820493,
-      "p_value": 0.3046,
+      "lisa_I": -0.23030604358943502,
+      "p_value": 0.3087,
       "significatif": false,
-      "oppchovec": 1.5404131143361919
+      "oppchovec": 1.547367736993523
     },
     "Favalello": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0715351679193106,
-      "p_value": 0.4628,
+      "lisa_I": 0.07922099798539872,
+      "p_value": 0.4565,
       "significatif": false,
-      "oppchovec": 2.089645254875662
+      "oppchovec": 2.0859515650046454
     },
     "Prunelli-di-Fiumorbo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.26497593639373596,
-      "p_value": 0.0636,
+      "lisa_I": 0.2572472938064676,
+      "p_value": 0.0651,
       "significatif": false,
-      "oppchovec": 2.757303153638399
+      "oppchovec": 2.786306900264876
     },
     "Ambiegna": {
       "cluster": "Non significatif",
-      "lisa_I": 0.010621664768596856,
-      "p_value": 0.2414,
+      "lisa_I": 0.007934293250559294,
+      "p_value": 0.2375,
       "significatif": false,
-      "oppchovec": 3.401291200654067
+      "oppchovec": 3.402438903311633
     },
     "Cauro": {
       "cluster": "HH (High-High)",
-      "lisa_I": 4.5839115955807594,
+      "lisa_I": 4.570978117434554,
       "p_value": 0.0004,
       "significatif": true,
-      "oppchovec": 6.394125561728475
+      "oppchovec": 6.404401011825311
     },
     "Letia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.179005233362696,
-      "p_value": 0.1853,
+      "lisa_I": -0.17977976145658803,
+      "p_value": 0.1854,
       "significatif": false,
-      "oppchovec": 2.6734988037427874
+      "oppchovec": 2.68716975121853
     },
     "Santa-Lucia-di-Moriani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.023028222948154747,
-      "p_value": 0.2132,
+      "lisa_I": 0.02114954056240234,
+      "p_value": 0.2105,
       "significatif": false,
-      "oppchovec": 3.4469259349886414
+      "oppchovec": 3.4534336341667378
     },
     "Eccica-Suarella": {
       "cluster": "HH (High-High)",
-      "lisa_I": 4.315299969061839,
+      "lisa_I": 4.30351435126887,
       "p_value": 0.0011,
       "significatif": true,
-      "oppchovec": 6.622097108728288
+      "oppchovec": 6.63025371115144
     },
     "Soveria": {
       "cluster": "Non significatif",
-      "lisa_I": 0.16109776212969565,
-      "p_value": 0.3746,
+      "lisa_I": 0.16451668948831233,
+      "p_value": 0.3704,
       "significatif": false,
-      "oppchovec": 2.03843768077937
+      "oppchovec": 2.066441144371219
     },
     "San-Damiano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.06527708811537523,
-      "p_value": 0.2613,
+      "lisa_I": -0.0656225094574911,
+      "p_value": 0.2663,
       "significatif": false,
-      "oppchovec": 2.9651074780520377
+      "oppchovec": 2.967674690751271
     },
     "Crocicchia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.055393940017645034,
-      "p_value": 0.4565,
+      "lisa_I": -0.05644904737730402,
+      "p_value": 0.4537,
       "significatif": false,
-      "oppchovec": 4.175909523521138
+      "oppchovec": 4.172643023807564
     },
     "Cargiaca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08263589936136745,
-      "p_value": 0.4788,
+      "lisa_I": 0.0919459302276633,
+      "p_value": 0.4713,
       "significatif": false,
-      "oppchovec": 1.5098753656904804
+      "oppchovec": 1.51729008343538
     },
     "Grossa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.13390113346695884,
-      "p_value": 0.3583,
+      "lisa_I": 0.13639882315407312,
+      "p_value": 0.3609,
       "significatif": false,
-      "oppchovec": 2.371083085876462
+      "oppchovec": 2.356717817871393
     },
     "Guargualé": {
       "cluster": "Non significatif",
-      "lisa_I": -0.5769445175363767,
-      "p_value": 0.1001,
+      "lisa_I": -0.5752912679077492,
+      "p_value": 0.1006,
       "significatif": false,
-      "oppchovec": 2.002491192195078
+      "oppchovec": 2.020707643473969
     },
     "Olmiccia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07512294367443595,
-      "p_value": 0.4661,
+      "lisa_I": 0.061036973798590785,
+      "p_value": 0.4796,
       "significatif": false,
-      "oppchovec": 1.9904308169496276
+      "oppchovec": 1.9959095825902051
     },
     "Salice": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08270513442635273,
-      "p_value": 0.2023,
+      "lisa_I": 0.08782647215923425,
+      "p_value": 0.1897,
       "significatif": false,
-      "oppchovec": 3.6919396722387714
+      "oppchovec": 3.704112704897908
     },
     "Ersa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.21637179498309647,
-      "p_value": 0.2495,
+      "lisa_I": 0.2223807318904384,
+      "p_value": 0.2444,
       "significatif": false,
-      "oppchovec": 2.3791517528501487
+      "oppchovec": 2.3911116447823852
     },
     "Muracciole": {
       "cluster": "Non significatif",
-      "lisa_I": 0.6914988865355881,
-      "p_value": 0.1702,
+      "lisa_I": 0.6750131169041146,
+      "p_value": 0.1738,
       "significatif": false,
-      "oppchovec": 1.0226561327212864
+      "oppchovec": 1.063861739681746
     },
     "Piano": {
       "cluster": "Non significatif",
-      "lisa_I": 0.49441358474380465,
-      "p_value": 0.1244,
+      "lisa_I": 0.5125136587391631,
+      "p_value": 0.1203,
       "significatif": false,
-      "oppchovec": 4.659920389623753
+      "oppchovec": 4.690114035162073
     },
     "Pino": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07333627801758413,
-      "p_value": 0.2754,
+      "lisa_I": 0.07125967439786438,
+      "p_value": 0.2756,
       "significatif": false,
-      "oppchovec": 2.983955469134243
+      "oppchovec": 3.0097435032629907
     },
     "Santa-Reparata-di-Balagna": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0503672498941091,
-      "p_value": 0.4049,
+      "lisa_I": 0.0442015924459517,
+      "p_value": 0.4093,
       "significatif": false,
-      "oppchovec": 4.724450232342928
+      "oppchovec": 4.735175494474962
     },
     "Aullène": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08102801112956574,
-      "p_value": 0.3872,
+      "lisa_I": 0.07727670871046331,
+      "p_value": 0.3926,
       "significatif": false,
-      "oppchovec": 2.6473833878152853
+      "oppchovec": 2.679016797548291
     },
     "Azilone-Ampaza": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0603178551574668,
-      "p_value": 0.4942,
+      "lisa_I": -0.0584209047759004,
+      "p_value": 0.4922,
       "significatif": false,
-      "oppchovec": 5.319777783272928
+      "oppchovec": 5.316716292512705
     },
     "Santa-Maria-di-Lota": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.5362845300693078,
-      "p_value": 0.0173,
+      "lisa_I": 2.536179393127368,
+      "p_value": 0.0172,
       "significatif": true,
-      "oppchovec": 6.444267480817869
+      "oppchovec": 6.451908131661188
     },
     "Petreto-Bicchisano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.12290091441978643,
-      "p_value": 0.3092,
+      "lisa_I": -0.12376773906897862,
+      "p_value": 0.3087,
       "significatif": false,
-      "oppchovec": 4.041930614138534
+      "oppchovec": 4.060892444808341
     },
     "Vero": {
       "cluster": "Non significatif",
-      "lisa_I": 0.041885434881672075,
-      "p_value": 0.3726,
+      "lisa_I": 0.05493030066263027,
+      "p_value": 0.3505,
       "significatif": false,
-      "oppchovec": 3.9826187511309286
+      "oppchovec": 4.004598071800778
     },
     "Bastia": {
       "cluster": "LH (Low-High)",
-      "lisa_I": -0.48284953138626896,
-      "p_value": 0.0231,
+      "lisa_I": -0.487522813172354,
+      "p_value": 0.0227,
       "significatif": true,
-      "oppchovec": 2.7186475549108247
+      "oppchovec": 2.729917133744232
     },
     "Érone": {
       "cluster": "Non significatif",
-      "lisa_I": 0.7040464872284014,
-      "p_value": 0.2567,
+      "lisa_I": 0.7014117850100048,
+      "p_value": 0.2594,
       "significatif": false,
       "oppchovec": 0.0
     },
     "Ville-di-Paraso": {
       "cluster": "Non significatif",
-      "lisa_I": -0.010459367251709132,
-      "p_value": 0.4269,
+      "lisa_I": -0.011085668582861679,
+      "p_value": 0.42,
       "significatif": false,
-      "oppchovec": 3.461767905818478
+      "oppchovec": 3.4790227094338273
     },
     "Sartène": {
       "cluster": "Non significatif",
-      "lisa_I": 0.37336359633024513,
-      "p_value": 0.1943,
+      "lisa_I": 0.37410913365524545,
+      "p_value": 0.1907,
       "significatif": false,
-      "oppchovec": 1.9889098926266089
+      "oppchovec": 2.0195949639817097
     },
     "Sant'Andréa-d'Orcino": {
       "cluster": "Non significatif",
-      "lisa_I": -0.19619278036439627,
-      "p_value": 0.1882,
+      "lisa_I": -0.18424946157598956,
+      "p_value": 0.1912,
       "significatif": false,
-      "oppchovec": 2.5975163233822975
+      "oppchovec": 2.6497034804016812
     },
     "Algajola": {
       "cluster": "Non significatif",
-      "lisa_I": 0.287904717513035,
-      "p_value": 0.1757,
+      "lisa_I": 0.2889682235812866,
+      "p_value": 0.1752,
       "significatif": false,
-      "oppchovec": 2.3640518103891193
+      "oppchovec": 2.377620429748213
     },
     "Azzana": {
       "cluster": "Non significatif",
-      "lisa_I": 0.4118456889282314,
-      "p_value": 0.2203,
+      "lisa_I": 0.4409636478380132,
+      "p_value": 0.223,
       "significatif": false,
-      "oppchovec": 5.273676958007282
+      "oppchovec": 5.458640493533058
     },
     "Cargèse": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2570233704348188,
-      "p_value": 0.363,
+      "lisa_I": 0.26306238506199126,
+      "p_value": 0.36,
       "significatif": false,
-      "oppchovec": 1.3981791271436563
+      "oppchovec": 1.4126337597827825
     },
     "Serra-di-Scopamène": {
       "cluster": "Non significatif",
-      "lisa_I": 0.047491053960881276,
-      "p_value": 0.4965,
+      "lisa_I": 0.04474087042614565,
+      "p_value": 0.494,
       "significatif": false,
-      "oppchovec": 1.676555047392432
+      "oppchovec": 1.7002217354621962
     },
     "Borgo": {
       "cluster": "HH (High-High)",
-      "lisa_I": 1.0013074273389677,
-      "p_value": 0.0143,
+      "lisa_I": 1.0012836537715357,
+      "p_value": 0.0139,
       "significatif": true,
-      "oppchovec": 4.497354109907546
+      "oppchovec": 4.508536427931494
     },
     "Pero-Casevecchie": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10397943123970675,
-      "p_value": 0.0853,
+      "lisa_I": 0.11099705716457457,
+      "p_value": 0.0857,
       "significatif": false,
-      "oppchovec": 3.571407334162963
+      "oppchovec": 3.603141795195191
     },
     "Venzolasca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1091274858248762,
+      "lisa_I": 0.11025212888227061,
       "p_value": 0.238,
       "significatif": false,
-      "oppchovec": 3.907626475318743
+      "oppchovec": 3.9254740977243756
     },
     "Vico": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0013502954313262179,
-      "p_value": 0.4207,
+      "lisa_I": 0.0014728772543077895,
+      "p_value": 0.4253,
       "significatif": false,
-      "oppchovec": 3.4011548193462864
+      "oppchovec": 3.4294404266106855
     },
     "Casamaccioli": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09907280782507656,
-      "p_value": 0.3083,
+      "lisa_I": 0.10217380710862828,
+      "p_value": 0.31,
       "significatif": false,
-      "oppchovec": 2.7821870114151848
+      "oppchovec": 2.7763335297404717
     },
     "Corte": {
       "cluster": "Non significatif",
-      "lisa_I": 0.12481680699071096,
-      "p_value": 0.2813,
+      "lisa_I": 0.12324375004982727,
+      "p_value": 0.2778,
       "significatif": false,
-      "oppchovec": 2.7132539117157406
+      "oppchovec": 2.745387309717712
     },
     "Lumio": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.05641640600004187,
-      "p_value": 0.0122,
+      "lisa_I": 0.038191274540469965,
+      "p_value": 0.012,
       "significatif": true,
-      "oppchovec": 3.255718455769594
+      "oppchovec": 3.301223002232333
     },
     "Urtaca": {
       "cluster": "Non significatif",
-      "lisa_I": -0.3266989240084262,
-      "p_value": 0.2898,
+      "lisa_I": -0.33293433661955163,
+      "p_value": 0.2849,
       "significatif": false,
-      "oppchovec": 5.039550345081904
+      "oppchovec": 5.048634958540852
     },
     "Giuncheto": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0778028217248361,
-      "p_value": 0.3506,
+      "lisa_I": -0.08017807479017704,
+      "p_value": 0.3473,
       "significatif": false,
-      "oppchovec": 2.4328447155564543
+      "oppchovec": 2.4598708365358113
     },
     "Olmo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.03587991906200437,
-      "p_value": 0.4838,
+      "lisa_I": 0.035533997847724846,
+      "p_value": 0.4847,
       "significatif": false,
-      "oppchovec": 1.6933425247107161
+      "oppchovec": 1.7083794903619318
     },
     "Palasca": {
       "cluster": "Non significatif",
-      "lisa_I": -1.2680670495582342,
-      "p_value": 0.0725,
+      "lisa_I": -1.265496242877433,
+      "p_value": 0.0739,
       "significatif": false,
-      "oppchovec": 0.8235688947685347
+      "oppchovec": 0.8275724500396548
     },
     "Piedigriggio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1523123816306167,
-      "p_value": 0.1973,
+      "lisa_I": -0.15343524980229056,
+      "p_value": 0.1994,
       "significatif": false,
-      "oppchovec": 2.727285798626156
+      "oppchovec": 2.731717054874921
     },
     "Coggia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.010887029213638589,
-      "p_value": 0.1653,
+      "lisa_I": -0.010475004837542485,
+      "p_value": 0.166,
       "significatif": false,
-      "oppchovec": 3.3084426020229567
+      "oppchovec": 3.32606365889062
     },
     "Forciolo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2103249699406581,
-      "p_value": 0.1033,
+      "lisa_I": 0.20333524191127947,
+      "p_value": 0.1062,
       "significatif": false,
-      "oppchovec": 3.855778283622259
+      "oppchovec": 3.859640310982499
     },
     "Loreto-di-Tallano": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.3027645010364915,
-      "p_value": 0.0404,
+      "lisa_I": -0.30752220317079587,
+      "p_value": 0.0384,
       "significatif": true,
-      "oppchovec": 3.9514535612812725
+      "oppchovec": 3.9689981535752272
     },
     "Cambia": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.25591388101018137,
-      "p_value": 0.0015,
+      "lisa_I": 0.2373549628524995,
+      "p_value": 0.0017,
       "significatif": true,
-      "oppchovec": 3.035819121172022
+      "oppchovec": 3.0723433281433943
     },
     "Arbellara": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1323244173433485,
-      "p_value": 0.365,
+      "lisa_I": -0.12863771057740792,
+      "p_value": 0.3728,
       "significatif": false,
-      "oppchovec": 4.317033581457287
+      "oppchovec": 4.346634323116072
     },
     "Bocognano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.5340593957598239,
-      "p_value": 0.2948,
+      "lisa_I": -0.531106452302345,
+      "p_value": 0.2953,
       "significatif": false,
-      "oppchovec": 6.192401184324331
+      "oppchovec": 6.195640647414866
     },
     "Renno": {
       "cluster": "Non significatif",
-      "lisa_I": -0.023220752261681795,
-      "p_value": 0.4676,
+      "lisa_I": -0.026173333367351934,
+      "p_value": 0.4703,
       "significatif": false,
-      "oppchovec": 5.052740476989578
+      "oppchovec": 5.04943837095393
     },
     "Campile": {
       "cluster": "Non significatif",
-      "lisa_I": -0.044945032482225825,
-      "p_value": 0.3645,
+      "lisa_I": -0.04396457627575176,
+      "p_value": 0.3666,
       "significatif": false,
-      "oppchovec": 2.7380762522229185
+      "oppchovec": 2.7598373682506323
     },
     "Gavignano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.044486440814038304,
-      "p_value": 0.2321,
+      "lisa_I": -0.04723634256676729,
+      "p_value": 0.2342,
       "significatif": false,
-      "oppchovec": 3.1249542461196422
+      "oppchovec": 3.1257276598740598
     },
     "Casaglione": {
       "cluster": "Non significatif",
-      "lisa_I": -0.30794604488430544,
-      "p_value": 0.1156,
+      "lisa_I": -0.3081154650202605,
+      "p_value": 0.1167,
       "significatif": false,
-      "oppchovec": 2.5497410271560366
+      "oppchovec": 2.5639323179668176
     },
     "Bigorno": {
       "cluster": "Non significatif",
-      "lisa_I": -0.046911753166544126,
-      "p_value": 0.078,
+      "lisa_I": -0.05447509522066083,
+      "p_value": 0.0781,
       "significatif": false,
-      "oppchovec": 3.248670782085796
+      "oppchovec": 3.249042229920423
     },
     "Carcheto-Brustico": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.44463350261814083,
-      "p_value": 0.0085,
+      "lisa_I": 0.43928824804112326,
+      "p_value": 0.0101,
       "significatif": true,
-      "oppchovec": 2.6616841798580375
+      "oppchovec": 2.6725379634621262
     },
     "Castirla": {
       "cluster": "Non significatif",
-      "lisa_I": -0.5757186197720046,
-      "p_value": 0.0623,
+      "lisa_I": -0.5757651407841646,
+      "p_value": 0.0615,
       "significatif": false,
-      "oppchovec": 4.638682812952629
+      "oppchovec": 4.65003140792913
     },
     "Scolca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3667982233087034,
-      "p_value": 0.1053,
+      "lisa_I": 0.3738308831546244,
+      "p_value": 0.1068,
       "significatif": false,
-      "oppchovec": 4.247878398051345
+      "oppchovec": 4.284528911867315
     },
     "Tallone": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.6394440110772166,
-      "p_value": 0.0233,
+      "lisa_I": 0.6341969967202822,
+      "p_value": 0.024,
       "significatif": true,
-      "oppchovec": 2.19923617245515
+      "oppchovec": 2.219183605336856
     },
     "Bilia": {
       "cluster": "Non significatif",
-      "lisa_I": -1.069701639232822,
+      "lisa_I": -1.0701320648128132,
       "p_value": 0.0582,
       "significatif": false,
-      "oppchovec": 5.707538815563812
+      "oppchovec": 5.717989711015852
     },
     "Marignana": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06774127253221876,
-      "p_value": 0.4179,
+      "lisa_I": 0.073276872288897,
+      "p_value": 0.4107,
       "significatif": false,
-      "oppchovec": 2.641515731315094
+      "oppchovec": 2.638369095046311
     },
     "Piana": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.4532716766730487,
-      "p_value": 0.0125,
+      "lisa_I": 0.4568298695170177,
+      "p_value": 0.0118,
       "significatif": true,
-      "oppchovec": 2.6055697440311043
+      "oppchovec": 2.623035274552988
     },
     "Rospigliani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.01862555462651604,
-      "p_value": 0.477,
+      "lisa_I": 0.00596244265537255,
+      "p_value": 0.4649,
       "significatif": false,
-      "oppchovec": 1.9864264749197273
+      "oppchovec": 1.9925179082624187
     },
     "Talasani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.00047232559884809866,
-      "p_value": 0.4545,
+      "lisa_I": -0.000585380117919319,
+      "p_value": 0.4538,
       "significatif": false,
-      "oppchovec": 5.104338076779484
+      "oppchovec": 5.116094812804245
     },
     "Valle-di-Campoloro": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1948015145363701,
-      "p_value": 0.1473,
+      "lisa_I": 0.1956160273398264,
+      "p_value": 0.1455,
       "significatif": false,
-      "oppchovec": 3.9619004000767215
+      "oppchovec": 3.9731260668417283
     },
     "Rezza": {
       "cluster": "Non significatif",
-      "lisa_I": -0.021286569735719664,
-      "p_value": 0.1193,
+      "lisa_I": -0.03223431602663163,
+      "p_value": 0.1131,
       "significatif": false,
-      "oppchovec": 3.2890622729855616
+      "oppchovec": 3.2794651731099513
     },
     "Poggio-Marinaccio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.057054228243694154,
-      "p_value": 0.4399,
+      "lisa_I": 0.06187460857090898,
+      "p_value": 0.4353,
       "significatif": false,
-      "oppchovec": 2.6183760304596806
+      "oppchovec": 2.6024717799383668
     },
     "Lecci": {
       "cluster": "Non significatif",
-      "lisa_I": 0.14761456883763396,
-      "p_value": 0.2259,
+      "lisa_I": 0.15144064397878454,
+      "p_value": 0.2214,
       "significatif": false,
-      "oppchovec": 2.736755422848962
+      "oppchovec": 2.7465527815882678
     },
     "Viggianello": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0037540346272181765,
-      "p_value": 0.4601,
+      "lisa_I": -0.000963472857787661,
+      "p_value": 0.4554,
       "significatif": false,
-      "oppchovec": 4.221056486499883
+      "oppchovec": 4.242787665058353
     },
     "San-Gavino-d'Ampugnani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.060532048574930816,
-      "p_value": 0.3917,
+      "lisa_I": 0.056178574135450556,
+      "p_value": 0.3945,
       "significatif": false,
-      "oppchovec": 4.582261427735469
+      "oppchovec": 4.579397041584415
     },
     "San-Lorenzo": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.22473972978970724,
-      "p_value": 0.0084,
+      "lisa_I": 0.20713466089771287,
+      "p_value": 0.0088,
       "significatif": true,
-      "oppchovec": 2.9997658321760863
+      "oppchovec": 3.041743028706976
     },
     "Valle-d'Orezza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.006070445398363494,
-      "p_value": 0.1717,
+      "lisa_I": 0.008878662383616006,
+      "p_value": 0.1784,
       "significatif": false,
-      "oppchovec": 3.3256675929974366
+      "oppchovec": 3.33158038701318
     },
     "Zoza": {
       "cluster": "Non significatif",
-      "lisa_I": -0.019533286084400487,
-      "p_value": 0.3936,
+      "lisa_I": -0.01652003404649861,
+      "p_value": 0.3922,
       "significatif": false,
-      "oppchovec": 3.517498765199641
+      "oppchovec": 3.5058392183788496
     },
     "Lano": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.2032678887988013,
-      "p_value": 0.0108,
+      "lisa_I": -0.19761280962580705,
+      "p_value": 0.0102,
       "significatif": true,
-      "oppchovec": 3.6702545182734885
+      "oppchovec": 3.67435627617716
     },
     "Mazzola": {
       "cluster": "Non significatif",
-      "lisa_I": 0.11388337342103937,
-      "p_value": 0.2521,
+      "lisa_I": 0.09872374677332878,
+      "p_value": 0.2512,
       "significatif": false,
-      "oppchovec": 2.8246824669117405
+      "oppchovec": 2.913396223615198
     },
     "Scata": {
       "cluster": "Non significatif",
-      "lisa_I": -0.061312809359774456,
-      "p_value": 0.0699,
+      "lisa_I": -0.06693275087473288,
+      "p_value": 0.0682,
       "significatif": false,
-      "oppchovec": 3.224382758379245
+      "oppchovec": 3.2305106899936877
     },
     "Grosseto-Prugna": {
       "cluster": "HH (High-High)",
-      "lisa_I": 1.2292834692182901,
+      "lisa_I": 1.2295904693705395,
       "p_value": 0.0002,
       "significatif": true,
-      "oppchovec": 4.119598289469224
+      "oppchovec": 4.136937006462983
     },
     "Ucciani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.20848514825205033,
-      "p_value": 0.2469,
+      "lisa_I": -0.20956100931775898,
+      "p_value": 0.2439,
       "significatif": false,
-      "oppchovec": 2.221925398460956
+      "oppchovec": 2.2511813741310203
     },
     "Campi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.19122156997798861,
-      "p_value": 0.1686,
+      "lisa_I": 0.18613813485398895,
+      "p_value": 0.1702,
       "significatif": false,
-      "oppchovec": 4.0249219191753545
+      "oppchovec": 4.028211085250227
     },
     "Monacia-d'Orezza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2414000883860547,
-      "p_value": 0.2925,
+      "lisa_I": 0.24653388599938356,
+      "p_value": 0.2912,
       "significatif": false,
-      "oppchovec": 2.046982761390275
+      "oppchovec": 2.0441870057604423
     },
     "Pianello": {
       "cluster": "Non significatif",
-      "lisa_I": -0.027983818403255898,
-      "p_value": 0.4106,
+      "lisa_I": -0.025726510414652588,
+      "p_value": 0.4176,
       "significatif": false,
-      "oppchovec": 3.6156350574983804
+      "oppchovec": 3.6247348605483394
     },
     "Argiusta-Moriccio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.004297355007588308,
-      "p_value": 0.4563,
+      "lisa_I": -0.009094014883371018,
+      "p_value": 0.4587,
       "significatif": false,
-      "oppchovec": 5.09416612365926
+      "oppchovec": 5.114532773771029
     },
     "Bonifacio": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.6298951071763035,
-      "p_value": 0.0259,
+      "lisa_I": -0.6329675496383286,
+      "p_value": 0.0255,
       "significatif": true,
-      "oppchovec": 4.49998028144763
+      "oppchovec": 4.516230003869926
     },
     "San-Gavino-di-Carbini": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06668746448905825,
-      "p_value": 0.4595,
+      "lisa_I": 0.06974956465980271,
+      "p_value": 0.4554,
       "significatif": false,
-      "oppchovec": 2.312883165848668
+      "oppchovec": 2.3247888740344083
     },
     "Tolla": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11506645937534467,
-      "p_value": 0.2096,
+      "lisa_I": -0.11714462843427367,
+      "p_value": 0.2056,
       "significatif": false,
-      "oppchovec": 2.84200308064914
+      "oppchovec": 2.8578589099659046
     },
     "Centuri": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1963564302147644,
-      "p_value": 0.3533,
+      "lisa_I": 0.2015404908610761,
+      "p_value": 0.3475,
       "significatif": false,
-      "oppchovec": 1.970716251354733
+      "oppchovec": 1.988798021174739
     },
     "Piazzole": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11658394073451575,
-      "p_value": 0.1042,
+      "lisa_I": -0.12078668457423244,
+      "p_value": 0.1003,
       "significatif": false,
-      "oppchovec": 3.6559780569671796
+      "oppchovec": 3.6791743904804886
     },
     "Tasso": {
       "cluster": "Non significatif",
-      "lisa_I": 0.042523586889824036,
-      "p_value": 0.2345,
+      "lisa_I": 0.039295812850231836,
+      "p_value": 0.2411,
       "significatif": false,
-      "oppchovec": 3.563340973128317
+      "oppchovec": 3.570846746931929
     },
     "Moïta": {
       "cluster": "Non significatif",
-      "lisa_I": -0.005179329935976882,
-      "p_value": 0.3739,
+      "lisa_I": -0.006073569233635014,
+      "p_value": 0.3843,
       "significatif": false,
-      "oppchovec": 3.266177663887362
+      "oppchovec": 3.2547132347260233
     },
     "Stazzona": {
       "cluster": "Non significatif",
-      "lisa_I": 0.385959087958806,
-      "p_value": 0.159,
+      "lisa_I": 0.3924754334030242,
+      "p_value": 0.1574,
       "significatif": false,
-      "oppchovec": 2.096519775053319
+      "oppchovec": 2.1019834813827054
     },
     "Cannelle": {
       "cluster": "Non significatif",
-      "lisa_I": 0.006992785217668149,
-      "p_value": 0.4488,
+      "lisa_I": 0.011313950261144208,
+      "p_value": 0.4445,
       "significatif": false,
-      "oppchovec": 4.750570278487082
+      "oppchovec": 4.748330592794499
     },
     "Olmeto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10555706865529325,
-      "p_value": 0.094,
+      "lisa_I": 0.10356089262823669,
+      "p_value": 0.0966,
       "significatif": false,
-      "oppchovec": 3.0734269889133605
+      "oppchovec": 3.0930310042678095
     },
     "Cervione": {
       "cluster": "Non significatif",
-      "lisa_I": -0.007916732597262869,
-      "p_value": 0.3194,
+      "lisa_I": -0.00796231431787487,
+      "p_value": 0.3156,
       "significatif": false,
-      "oppchovec": 3.274989417511711
+      "oppchovec": 3.2926212013201828
     },
     "Giuncaggio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2127476638297954,
-      "p_value": 0.15,
+      "lisa_I": 0.21402176634959888,
+      "p_value": 0.148,
       "significatif": false,
-      "oppchovec": 2.681669057486353
+      "oppchovec": 2.6998763702809123
     },
     "Nessa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3667454445290791,
-      "p_value": 0.0697,
+      "lisa_I": 0.3678213964685137,
+      "p_value": 0.0707,
       "significatif": false,
-      "oppchovec": 2.4848024954335437
+      "oppchovec": 2.495352323665817
     },
     "Novella": {
       "cluster": "Non significatif",
-      "lisa_I": -0.6824566351878573,
-      "p_value": 0.1466,
+      "lisa_I": -0.6947958603602259,
+      "p_value": 0.1412,
       "significatif": false,
-      "oppchovec": 5.4394114054158385
+      "oppchovec": 5.451284560265672
     },
     "Levie": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0620543987743695,
-      "p_value": 0.2111,
+      "lisa_I": -0.06050521856470248,
+      "p_value": 0.213,
       "significatif": false,
-      "oppchovec": 3.0724302814036424
+      "oppchovec": 3.0919554704387693
     },
     "Castiglione": {
       "cluster": "Non significatif",
-      "lisa_I": -0.10308506576248833,
-      "p_value": 0.1828,
+      "lisa_I": -0.11027828923392449,
+      "p_value": 0.1855,
       "significatif": false,
-      "oppchovec": 2.950297340223825
+      "oppchovec": 2.934941071797368
     },
     "Rogliano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.008469848918890252,
-      "p_value": 0.1416,
+      "lisa_I": -0.0052430627640629454,
+      "p_value": 0.1368,
       "significatif": false,
-      "oppchovec": 3.3717097556956155
+      "oppchovec": 3.377839931852619
     },
     "Vignale": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2546798647662026,
-      "p_value": 0.332,
+      "lisa_I": 0.2627588424606866,
+      "p_value": 0.329,
       "significatif": false,
-      "oppchovec": 5.987794059399347
+      "oppchovec": 6.002586519999587
     },
     "Partinello": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.6318347378642339,
-      "p_value": 0.0194,
+      "lisa_I": 0.6308997664858638,
+      "p_value": 0.0179,
       "significatif": true,
-      "oppchovec": 2.2331621487200497
+      "oppchovec": 2.266953562784355
     },
     "Ghisonaccia": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 2.1367052345247584,
+      "lisa_I": 2.13134714586284,
       "p_value": 0.0011,
       "significatif": true,
-      "oppchovec": 0.8326709520308196
+      "oppchovec": 0.8504783509668139
     },
     "Tox": {
       "cluster": "Non significatif",
-      "lisa_I": -0.004707751969670061,
-      "p_value": 0.458,
+      "lisa_I": -0.012900045758670048,
+      "p_value": 0.4616,
       "significatif": false,
-      "oppchovec": 5.813126237153735
+      "oppchovec": 5.836272882438918
     },
     "Volpajola": {
       "cluster": "Non significatif",
-      "lisa_I": 0.21648916549142652,
-      "p_value": 0.1903,
+      "lisa_I": 0.21867236966909254,
+      "p_value": 0.19,
       "significatif": false,
-      "oppchovec": 4.211647463268639
+      "oppchovec": 4.232211267060425
     },
     "Zicavo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.015205233909992434,
-      "p_value": 0.13,
+      "lisa_I": 0.016576072945181184,
+      "p_value": 0.1277,
       "significatif": false,
-      "oppchovec": 3.3014716556643164
+      "oppchovec": 3.3139638442098422
     },
     "Alando": {
       "cluster": "Non significatif",
-      "lisa_I": 0.18717304283179206,
-      "p_value": 0.1563,
+      "lisa_I": 0.18199910231500932,
+      "p_value": 0.161,
       "significatif": false,
-      "oppchovec": 2.751434364535104
+      "oppchovec": 2.7750541921096232
     },
     "Croce": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0010727445836107468,
-      "p_value": 0.4055,
+      "lisa_I": -0.0013517639010163758,
+      "p_value": 0.4008,
       "significatif": false,
-      "oppchovec": 3.320710878643738
+      "oppchovec": 3.333081676990041
     },
     "Feliceto": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 1.007328886129046,
-      "p_value": 0.0333,
+      "lisa_I": 1.0094259029462904,
+      "p_value": 0.0334,
       "significatif": true,
-      "oppchovec": 1.3769627228566828
+      "oppchovec": 1.3920198549720189
     },
     "Vezzani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1688013831568452,
-      "p_value": 0.1761,
+      "lisa_I": -0.1681624858810129,
+      "p_value": 0.1787,
       "significatif": false,
-      "oppchovec": 2.720369619391782
+      "oppchovec": 2.7324458829604614
     },
     "Afa": {
       "cluster": "HH (High-High)",
-      "lisa_I": 14.936015407865645,
+      "lisa_I": 14.890639878362272,
       "p_value": 0.0001,
       "significatif": true,
       "oppchovec": 10.0
     },
     "Cardo-Torgia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.16647216604303952,
-      "p_value": 0.0845,
+      "lisa_I": -0.17027077287045614,
+      "p_value": 0.0851,
       "significatif": false,
-      "oppchovec": 2.9769138866374885
+      "oppchovec": 2.9829239075693215
     },
     "Tavaco": {
       "cluster": "Non significatif",
-      "lisa_I": -0.10711539338180041,
-      "p_value": 0.1491,
+      "lisa_I": -0.10813697847859574,
+      "p_value": 0.1482,
       "significatif": false,
-      "oppchovec": 2.9999594754595815
+      "oppchovec": 3.0150310216427743
     },
     "Biguglia": {
       "cluster": "Non significatif",
-      "lisa_I": 1.1361570218408468,
-      "p_value": 0.0792,
+      "lisa_I": 1.1404294589063824,
+      "p_value": 0.0788,
       "significatif": false,
-      "oppchovec": 5.791718192629381
+      "oppchovec": 5.808851725141279
     },
     "Carticasi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.277483037611747,
-      "p_value": 0.0626,
+      "lisa_I": 0.2532307505658887,
+      "p_value": 0.065,
       "significatif": false,
-      "oppchovec": 2.7149375041494146
+      "oppchovec": 2.7796410776629035
     },
     "Cateri": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.864290914100541,
-      "p_value": 0.0151,
+      "lisa_I": 0.8677660965595159,
+      "p_value": 0.0145,
       "significatif": true,
-      "oppchovec": 1.8904096348598647
+      "oppchovec": 1.911070211707021
     },
     "Giocatojo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.14198334546425764,
-      "p_value": 0.2554,
+      "lisa_I": -0.1361695044546058,
+      "p_value": 0.2513,
       "significatif": false,
-      "oppchovec": 3.9774387067521504
+      "oppchovec": 3.959390781539722
     },
     "Morosaglia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08362412240769584,
-      "p_value": 0.2301,
+      "lisa_I": 0.08462146204562412,
+      "p_value": 0.2317,
       "significatif": false,
-      "oppchovec": 3.767853150495781
+      "oppchovec": 3.7928640297547696
     },
     "Quasquara": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11983976887726065,
-      "p_value": 0.31,
+      "lisa_I": -0.11390539161213016,
+      "p_value": 0.3119,
       "significatif": false,
-      "oppchovec": 2.319442574315695
+      "oppchovec": 2.370832823133877
     },
     "Barbaggio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.2707049807156684,
-      "p_value": 0.1751,
+      "lisa_I": -0.27275797877226476,
+      "p_value": 0.1752,
       "significatif": false,
-      "oppchovec": 2.3250403156190638
+      "oppchovec": 2.337526802642056
     },
     "Popolasca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06661679774021759,
-      "p_value": 0.2037,
+      "lisa_I": 0.06075560043449777,
+      "p_value": 0.2071,
       "significatif": false,
-      "oppchovec": 3.637172959728826
+      "oppchovec": 3.6320439992416427
     },
     "Orto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.08849337702633914,
-      "p_value": 0.3238,
+      "lisa_I": 0.08827543179032331,
+      "p_value": 0.3271,
       "significatif": false,
-      "oppchovec": 4.22338702470105
+      "oppchovec": 4.24838824031744
     },
     "Pianottoli-Caldarello": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5789428202747279,
-      "p_value": 0.0542,
+      "lisa_I": 0.5746387901388005,
+      "p_value": 0.0544,
       "significatif": false,
-      "oppchovec": 2.088807683350169
+      "oppchovec": 2.113036689116702
     },
     "Urbalacone": {
       "cluster": "Non significatif",
-      "lisa_I": -0.5023060509547418,
-      "p_value": 0.2371,
+      "lisa_I": -0.5120177949028805,
+      "p_value": 0.2335,
       "significatif": false,
-      "oppchovec": 5.432023882835006
+      "oppchovec": 5.463820741747427
     },
     "Canari": {
       "cluster": "Non significatif",
-      "lisa_I": 0.025211297084536562,
-      "p_value": 0.4663,
+      "lisa_I": 0.02546076735566258,
+      "p_value": 0.4638,
       "significatif": false,
-      "oppchovec": 2.9190571551630566
+      "oppchovec": 2.943062976118979
     },
     "Tralonca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2993779680457684,
-      "p_value": 0.1331,
+      "lisa_I": 0.30285018826742993,
+      "p_value": 0.1319,
       "significatif": false,
-      "oppchovec": 2.458266778628966
+      "oppchovec": 2.4699152943959173
     },
     "Vescovato": {
       "cluster": "Non significatif",
-      "lisa_I": -0.10264937879752496,
-      "p_value": 0.4499,
+      "lisa_I": -0.10339625757133589,
+      "p_value": 0.4502,
       "significatif": false,
-      "oppchovec": 4.707842424759106
+      "oppchovec": 4.734743981490464
     },
     "Lopigna": {
       "cluster": "Non significatif",
-      "lisa_I": 0.11538498208831983,
-      "p_value": 0.1102,
+      "lisa_I": 0.11818980878130489,
+      "p_value": 0.112,
       "significatif": false,
-      "oppchovec": 3.6471582470765984
+      "oppchovec": 3.6741396311032473
     },
     "Matra": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07037720385474197,
-      "p_value": 0.2333,
+      "lisa_I": 0.06425404292651846,
+      "p_value": 0.2387,
       "significatif": false,
-      "oppchovec": 3.709086939156151
+      "oppchovec": 3.7051113048760143
     },
     "Penta-Acquatella": {
       "cluster": "Non significatif",
-      "lisa_I": -0.04446960374048874,
-      "p_value": 0.2387,
+      "lisa_I": -0.04389543950329413,
+      "p_value": 0.2407,
       "significatif": false,
-      "oppchovec": 3.1108378369394236
+      "oppchovec": 3.125734856267148
     },
     "Pietralba": {
       "cluster": "Non significatif",
-      "lisa_I": -0.21971772264226658,
-      "p_value": 0.3902,
+      "lisa_I": -0.22122960596393687,
+      "p_value": 0.3891,
       "significatif": false,
-      "oppchovec": 5.1732478215875055
+      "oppchovec": 5.183153630035817
     },
     "Prunelli-di-Casacconi": {
       "cluster": "Non significatif",
-      "lisa_I": -0.029750205984563516,
+      "lisa_I": -0.030086631612560588,
       "p_value": 0.4072,
       "significatif": false,
-      "oppchovec": 2.597044014719905
+      "oppchovec": 2.611071306426826
     },
     "Ventiseri": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1386418380491898,
-      "p_value": 0.2268,
+      "lisa_I": 0.1430758759163263,
+      "p_value": 0.2285,
       "significatif": false,
-      "oppchovec": 4.031269073353831
+      "oppchovec": 4.073508422936735
     },
     "Arro": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0024769911390867478,
-      "p_value": 0.4524,
+      "lisa_I": 0.008500026676984355,
+      "p_value": 0.4498,
       "significatif": false,
-      "oppchovec": 6.003220029185941
+      "oppchovec": 5.9954970582628855
     },
     "Carbuccia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.03184877144451244,
-      "p_value": 0.2583,
+      "lisa_I": -0.03156475349090913,
+      "p_value": 0.2577,
       "significatif": false,
-      "oppchovec": 3.15349701498097
+      "oppchovec": 3.173693458233502
     },
     "Sari-Solenzara": {
       "cluster": "Non significatif",
-      "lisa_I": 0.048043114918152746,
-      "p_value": 0.4641,
+      "lisa_I": 0.05071247306480411,
+      "p_value": 0.4592,
       "significatif": false,
-      "oppchovec": 2.5321451214096276
+      "oppchovec": 2.549964860337393
     },
     "Ajaccio": {
       "cluster": "HH (High-High)",
-      "lisa_I": 5.6990858816660435,
+      "lisa_I": 5.661996494172972,
       "p_value": 0.0001,
       "significatif": true,
-      "oppchovec": 5.779753756260899
+      "oppchovec": 5.782875041130727
     },
     "Mela": {
       "cluster": "Non significatif",
-      "lisa_I": -0.05154625730913314,
-      "p_value": 0.3545,
+      "lisa_I": -0.050980399279291946,
+      "p_value": 0.3505,
       "significatif": false,
-      "oppchovec": 3.7053018246584966
+      "oppchovec": 3.7085538846483077
     },
     "Calenzana": {
       "cluster": "Non significatif",
-      "lisa_I": 0.004088050825636618,
-      "p_value": 0.1299,
+      "lisa_I": 0.0067731245692591435,
+      "p_value": 0.1296,
       "significatif": false,
-      "oppchovec": 3.334200596582642
+      "oppchovec": 3.3425450683455016
     },
     "Manso": {
       "cluster": "Non significatif",
-      "lisa_I": -0.012329614071645971,
-      "p_value": 0.1517,
+      "lisa_I": -0.010358352615301738,
+      "p_value": 0.1484,
       "significatif": false,
-      "oppchovec": 3.384530388839061
+      "oppchovec": 3.394053607772813
     },
     "Montegrosso": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.17042245704389258,
-      "p_value": 0.0236,
+      "lisa_I": 0.1674109414822631,
+      "p_value": 0.0237,
       "significatif": true,
-      "oppchovec": 3.035846051726937
+      "oppchovec": 3.0579100438022664
     },
     "Nonza": {
       "cluster": "Non significatif",
-      "lisa_I": -0.2820425038798145,
-      "p_value": 0.2882,
+      "lisa_I": -0.2844372289729581,
+      "p_value": 0.288,
       "significatif": false,
-      "oppchovec": 4.803822194991872
+      "oppchovec": 4.822762644207837
     },
     "Vallica": {
       "cluster": "Non significatif",
-      "lisa_I": 0.22036662553633832,
-      "p_value": 0.076,
+      "lisa_I": 0.2337810596759699,
+      "p_value": 0.0783,
       "significatif": false,
-      "oppchovec": 2.819481451172047
+      "oppchovec": 2.798909042787923
     },
     "Velone-Orneto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.05352305733949047,
+      "lisa_I": 0.05321447758245981,
       "p_value": 0.4177,
       "significatif": false,
-      "oppchovec": 5.259582786983135
+      "oppchovec": 5.284293424709513
     },
     "San-Gavino-di-Fiumorbo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.011110981485378682,
-      "p_value": 0.4811,
+      "lisa_I": 0.012384512206631875,
+      "p_value": 0.475,
       "significatif": false,
-      "oppchovec": 3.109101409901868
+      "oppchovec": 3.1203473863102875
     },
     "Conca": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.7740202926000979,
-      "p_value": 0.0316,
+      "lisa_I": 0.7801560204428843,
+      "p_value": 0.0315,
       "significatif": true,
-      "oppchovec": 1.8476511740147292
+      "oppchovec": 1.8590503541524017
     },
     "Verdèse": {
       "cluster": "Non significatif",
-      "lisa_I": -0.08031542015254813,
-      "p_value": 0.2147,
+      "lisa_I": -0.07898887354292275,
+      "p_value": 0.2102,
       "significatif": false,
-      "oppchovec": 3.6598284395144405
+      "oppchovec": 3.6651764189538922
     },
     "Monacia-d'Aullène": {
       "cluster": "Non significatif",
-      "lisa_I": 0.46200320165009534,
-      "p_value": 0.0958,
+      "lisa_I": 0.45738759002889556,
+      "p_value": 0.0994,
       "significatif": false,
-      "oppchovec": 2.1527531831262356
+      "oppchovec": 2.170108285187429
     },
     "Pruno": {
       "cluster": "Non significatif",
-      "lisa_I": -0.26697370162495415,
-      "p_value": 0.1412,
+      "lisa_I": -0.2668096278485733,
+      "p_value": 0.1417,
       "significatif": false,
-      "oppchovec": 2.5289089703312357
+      "oppchovec": 2.5434748158544145
     },
     "Solaro": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10270676146728798,
-      "p_value": 0.3798,
+      "lisa_I": 0.10309451138306061,
+      "p_value": 0.3788,
       "significatif": false,
-      "oppchovec": 5.1572623991322954
+      "oppchovec": 5.171846400256204
     },
     "Taglio-Isolaccio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.03942246646368391,
-      "p_value": 0.2245,
+      "lisa_I": 0.03953963158677037,
+      "p_value": 0.2238,
       "significatif": false,
-      "oppchovec": 3.536959728732617
+      "oppchovec": 3.5526659109132694
     },
     "Zuani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.00735257810594112,
-      "p_value": 0.4901,
+      "lisa_I": 0.008340305713131197,
+      "p_value": 0.4937,
       "significatif": false,
-      "oppchovec": 3.060249424197172
+      "oppchovec": 3.058566288547271
     },
     "Casanova": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1342845720827941,
-      "p_value": 0.2376,
+      "lisa_I": 0.13155766367825678,
+      "p_value": 0.2455,
       "significatif": false,
-      "oppchovec": 2.7695011429158205
+      "oppchovec": 2.783192521262701
     },
     "Poggio-d'Oletta": {
       "cluster": "Non significatif",
-      "lisa_I": -0.024779968190039706,
-      "p_value": 0.4917,
+      "lisa_I": -0.024062654697387484,
+      "p_value": 0.4923,
       "significatif": false,
-      "oppchovec": 4.233686281799185
+      "oppchovec": 4.238995450279294
     },
     "Zonza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.15425252354007107,
-      "p_value": 0.3082,
+      "lisa_I": 0.15747674114452467,
+      "p_value": 0.304,
       "significatif": false,
-      "oppchovec": 2.462548976444874
+      "oppchovec": 2.478505367568633
     },
     "Erbajolo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5263946910927808,
-      "p_value": 0.1472,
+      "lisa_I": 0.5242814221359566,
+      "p_value": 0.1468,
       "significatif": false,
-      "oppchovec": 5.06226645525491
+      "oppchovec": 5.064880903914758
     },
     "Rapaggio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2900944785966319,
-      "p_value": 0.139,
+      "lisa_I": 0.2778620072872151,
+      "p_value": 0.1474,
       "significatif": false,
-      "oppchovec": 2.471675569051897
+      "oppchovec": 2.504361671659328
     },
     "Rapale": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07691078013803906,
-      "p_value": 0.4363,
+      "lisa_I": 0.07362140949412029,
+      "p_value": 0.4418,
       "significatif": false,
-      "oppchovec": 2.37988085528257
+      "oppchovec": 2.4005941962902373
     },
     "Serra-di-Fiumorbo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11662850036986519,
-      "p_value": 0.2308,
+      "lisa_I": -0.11712958952068178,
+      "p_value": 0.2298,
       "significatif": false,
-      "oppchovec": 2.7626227990733074
+      "oppchovec": 2.777684111005407
     },
     "Arbori": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09484183385297766,
-      "p_value": 0.2883,
+      "lisa_I": 0.09888602536451929,
+      "p_value": 0.2876,
       "significatif": false,
-      "oppchovec": 4.057103955009081
+      "oppchovec": 4.10194212780196
     },
     "Piedicroce": {
       "cluster": "Non significatif",
-      "lisa_I": -0.06609198842239164,
-      "p_value": 0.1384,
+      "lisa_I": -0.06763906527807727,
+      "p_value": 0.1353,
       "significatif": false,
-      "oppchovec": 3.543407638464905
+      "oppchovec": 3.56170132064888
     },
     "Pila-Canale": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2816321675439656,
-      "p_value": 0.2304,
+      "lisa_I": 0.2717904883795042,
+      "p_value": 0.2373,
       "significatif": false,
-      "oppchovec": 2.169553122501324
+      "oppchovec": 2.198268913451053
     },
     "Noceta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.013835702113725699,
-      "p_value": 0.4136,
+      "lisa_I": 0.009804503919200671,
+      "p_value": 0.4221,
       "significatif": false,
-      "oppchovec": 3.204977884088805
+      "oppchovec": 3.2557965743011392
     },
     "Cozzano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.05189952847360097,
-      "p_value": 0.4089,
+      "lisa_I": -0.04354723130211636,
+      "p_value": 0.4177,
       "significatif": false,
-      "oppchovec": 1.9502997420134018
+      "oppchovec": 1.975146591078585
     },
     "Cuttoli-Corticchiato": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.2983150990072834,
+      "lisa_I": 2.2892548482764057,
       "p_value": 0.002,
       "significatif": true,
-      "oppchovec": 5.140357717747231
+      "oppchovec": 5.148626939433053
     },
     "Barrettali": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0333609017454119,
-      "p_value": 0.1638,
+      "lisa_I": 0.032703819085392834,
+      "p_value": 0.1657,
       "significatif": false,
-      "oppchovec": 3.2380953388313194
+      "oppchovec": 3.255804193133856
     },
     "Monticello": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1657341068615173,
-      "p_value": 0.2882,
+      "lisa_I": 0.16074999761541622,
+      "p_value": 0.2927,
       "significatif": false,
-      "oppchovec": 4.5839359412518625
+      "oppchovec": 4.593424762611244
     },
     "Ota": {
       "cluster": "Non significatif",
-      "lisa_I": 0.8760574391676386,
-      "p_value": 0.0785,
+      "lisa_I": 0.8943538333947529,
+      "p_value": 0.0765,
       "significatif": false,
-      "oppchovec": 1.2293848113657995
+      "oppchovec": 1.226959617435625
     },
     "Pastricciola": {
       "cluster": "LH (Low-High)",
-      "lisa_I": -0.7549073143487844,
-      "p_value": 0.0349,
+      "lisa_I": -0.7742585782483961,
+      "p_value": 0.033,
       "significatif": true,
-      "oppchovec": 2.2266146671017313
+      "oppchovec": 2.2400995250330293
     },
     "Sari-d'Orcino": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1141462901321774,
-      "p_value": 0.0913,
+      "lisa_I": -0.11509692429486451,
+      "p_value": 0.0911,
       "significatif": false,
-      "oppchovec": 3.0838644679372633
+      "oppchovec": 3.0985105913639215
     },
     "Aléria": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 1.8957690527321132,
+      "lisa_I": 1.8976427410366936,
       "p_value": 0.001,
       "significatif": true,
-      "oppchovec": 1.0027844239526353
+      "oppchovec": 1.014209986395279
     },
     "Antisanti": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 1.1426834266273418,
-      "p_value": 0.0139,
+      "lisa_I": 1.133152932037174,
+      "p_value": 0.014,
       "significatif": true,
-      "oppchovec": 1.4390004468866713
+      "oppchovec": 1.4716905381334842
     },
     "Isolaccio-di-Fiumorbo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.16997483235429264,
-      "p_value": 0.1501,
+      "lisa_I": -0.1664099852207903,
+      "p_value": 0.1497,
       "significatif": false,
-      "oppchovec": 3.865766378543049
+      "oppchovec": 3.8689163231337638
     },
     "Canale-di-Verde": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1491464902456914,
-      "p_value": 0.1625,
+      "lisa_I": 0.149766286270637,
+      "p_value": 0.1648,
       "significatif": false,
-      "oppchovec": 2.86618519874073
+      "oppchovec": 2.8776535752451586
     },
     "Furiani": {
       "cluster": "Non significatif",
-      "lisa_I": 0.39089442709616895,
-      "p_value": 0.2611,
+      "lisa_I": 0.38843367386739314,
+      "p_value": 0.2632,
       "significatif": false,
-      "oppchovec": 5.825284430545887
+      "oppchovec": 5.850659961515129
     },
     "Oletta": {
       "cluster": "Non significatif",
-      "lisa_I": -7.659064648908018e-05,
-      "p_value": 0.4553,
+      "lisa_I": 0.00010797749747269134,
+      "p_value": 0.4554,
       "significatif": false,
-      "oppchovec": 2.8430253216646193
+      "oppchovec": 2.852942895607264
     },
     "Sorio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.16916860970339545,
-      "p_value": 0.236,
+      "lisa_I": -0.17180279773107507,
+      "p_value": 0.2351,
       "significatif": false,
-      "oppchovec": 2.4690314579736135
+      "oppchovec": 2.475422848407886
     },
     "Carpineto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.20431453251181578,
-      "p_value": 0.1791,
+      "lisa_I": 0.1737689786008425,
+      "p_value": 0.175,
       "significatif": false,
-      "oppchovec": 2.640135086039235
+      "oppchovec": 2.773231092682524
     },
     "Castellare-di-Mercurio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3985821407574604,
-      "p_value": 0.0878,
+      "lisa_I": 0.4109613830240738,
+      "p_value": 0.085,
       "significatif": false,
-      "oppchovec": 2.3531569168624213
+      "oppchovec": 2.3475193130894647
     },
     "Lucciana": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04875900896374529,
-      "p_value": 0.06,
+      "lisa_I": 0.04962648105573584,
+      "p_value": 0.0596,
       "significatif": false,
-      "oppchovec": 3.4371712791285827
+      "oppchovec": 3.454625633238547
     },
     "Poggio-di-Venaco": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04590314072195079,
-      "p_value": 0.4905,
+      "lisa_I": 0.047133815549570336,
+      "p_value": 0.4881,
       "significatif": false,
-      "oppchovec": 2.227594472163372
+      "oppchovec": 2.2484931079339177
     },
     "Corbara": {
       "cluster": "Non significatif",
-      "lisa_I": -0.3990961997786088,
-      "p_value": 0.198,
+      "lisa_I": -0.40011514407655574,
+      "p_value": 0.1946,
       "significatif": false,
-      "oppchovec": 4.79931110194473
+      "oppchovec": 4.803134118100364
     },
     "Muro": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.819425967914265,
+      "lisa_I": 0.8114152483121707,
       "p_value": 0.0051,
       "significatif": true,
-      "oppchovec": 2.1521955653221103
+      "oppchovec": 2.185226890892548
     },
     "Olmeta-di-Tuda": {
       "cluster": "Non significatif",
-      "lisa_I": -0.05430454158869945,
+      "lisa_I": -0.054272390511831144,
       "p_value": 0.1948,
       "significatif": false,
-      "oppchovec": 3.124184352224884
+      "oppchovec": 3.1407757227301247
     },
     "Belvédère-Campomoro": {
       "cluster": "Non significatif",
-      "lisa_I": -0.13670397120716907,
-      "p_value": 0.179,
+      "lisa_I": -0.1382093711098394,
+      "p_value": 0.1781,
       "significatif": false,
-      "oppchovec": 3.8130500939604812
+      "oppchovec": 3.8308815982287445
     },
     "Murzo": {
       "cluster": "Non significatif",
-      "lisa_I": -0.25600316920654864,
-      "p_value": 0.1568,
+      "lisa_I": -0.244740835845314,
+      "p_value": 0.1561,
       "significatif": false,
-      "oppchovec": 2.498458397891751
+      "oppchovec": 2.552360480746871
     },
     "Murato": {
       "cluster": "Non significatif",
-      "lisa_I": 0.17118667974970544,
-      "p_value": 0.2339,
+      "lisa_I": 0.17354822137432,
+      "p_value": 0.2299,
       "significatif": false,
-      "oppchovec": 4.227436928041974
+      "oppchovec": 4.237468576910743
     },
     "Saint-Florent": {
       "cluster": "Non significatif",
-      "lisa_I": 0.212868270869767,
-      "p_value": 0.2286,
+      "lisa_I": 0.21471264568239948,
+      "p_value": 0.2273,
       "significatif": false,
-      "oppchovec": 2.4673433594014407
+      "oppchovec": 2.4809815949161877
     },
     "San-Giuliano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.15627924559818285,
-      "p_value": 0.3298,
+      "lisa_I": -0.15586755173253444,
+      "p_value": 0.3296,
       "significatif": false,
-      "oppchovec": 1.8258233819694283
+      "oppchovec": 1.8518153200838872
     },
     "Olcani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.049967572774090946,
-      "p_value": 0.3879,
+      "lisa_I": -0.0520729771459527,
+      "p_value": 0.3876,
       "significatif": false,
-      "oppchovec": 2.404416381124786
+      "oppchovec": 2.4037651818801824
     },
     "Carbini": {
       "cluster": "Non significatif",
-      "lisa_I": -0.2631606860523018,
-      "p_value": 0.4321,
+      "lisa_I": -0.2659167354151895,
+      "p_value": 0.43,
       "significatif": false,
-      "oppchovec": 6.319570970392322
+      "oppchovec": 6.32431800565623
     },
     "Calacuccia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07104947341072299,
-      "p_value": 0.2788,
+      "lisa_I": 0.07478776317336097,
+      "p_value": 0.2782,
       "significatif": false,
-      "oppchovec": 2.991883099734701
+      "oppchovec": 2.990159474124916
     },
     "Ficaja": {
       "cluster": "Non significatif",
-      "lisa_I": 0.03356245460525349,
-      "p_value": 0.4094,
+      "lisa_I": 0.03668821127946712,
+      "p_value": 0.408,
       "significatif": false,
-      "oppchovec": 4.386009117412298
+      "oppchovec": 4.460830410008338
     },
     "Ortale": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09002546163618111,
-      "p_value": 0.2823,
+      "lisa_I": 0.09564938255380838,
+      "p_value": 0.2797,
       "significatif": false,
-      "oppchovec": 2.891792444695003
+      "oppchovec": 2.8843634164909098
     },
     "Patrimonio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.3726022010368495,
-      "p_value": 0.1182,
+      "lisa_I": -0.3690790764631101,
+      "p_value": 0.1196,
       "significatif": false,
-      "oppchovec": 2.353966893850848
+      "oppchovec": 2.3751221976459473
     },
     "Casalta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.6929088848069358,
-      "p_value": 0.076,
+      "lisa_I": 0.6946920598830316,
+      "p_value": 0.0751,
       "significatif": false,
-      "oppchovec": 4.810424934473171
+      "oppchovec": 4.81750541871777
     },
     "Farinole": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3127425382724613,
-      "p_value": 0.0896,
+      "lisa_I": 0.31526898591005686,
+      "p_value": 0.09,
       "significatif": false,
-      "oppchovec": 4.058546032926404
+      "oppchovec": 4.0804924491795385
     },
     "Ghisoni": {
       "cluster": "Non significatif",
-      "lisa_I": -0.19518775323525236,
-      "p_value": 0.0865,
+      "lisa_I": -0.20098871353625028,
+      "p_value": 0.087,
       "significatif": false,
-      "oppchovec": 3.825950998399978
+      "oppchovec": 3.856757494962573
     },
     "Sermano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.004438765552340059,
-      "p_value": 0.0567,
+      "lisa_I": -0.0009765120946099776,
+      "p_value": 0.0538,
       "significatif": false,
-      "oppchovec": 3.355680164839296
+      "oppchovec": 3.3642922093819525
     },
     "Altagène": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1250945518038638,
-      "p_value": 0.3494,
+      "lisa_I": -0.12357727881969473,
+      "p_value": 0.3464,
       "significatif": false,
-      "oppchovec": 4.174089118248835
+      "oppchovec": 4.166567741286274
     },
     "Sainte-Lucie-de-Tallano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.012337569167099209,
-      "p_value": 0.4316,
+      "lisa_I": -0.008803268263841587,
+      "p_value": 0.4388,
       "significatif": false,
-      "oppchovec": 2.64473352831909
+      "oppchovec": 2.68818052907221
     },
     "Tavera": {
       "cluster": "Non significatif",
-      "lisa_I": 0.23849802916731602,
-      "p_value": 0.2091,
+      "lisa_I": 0.23972409956998966,
+      "p_value": 0.2099,
       "significatif": false,
-      "oppchovec": 4.395241825444975
+      "oppchovec": 4.422235284739043
     },
     "Belgodère": {
       "cluster": "Non significatif",
-      "lisa_I": -0.18197874223784372,
-      "p_value": 0.3064,
+      "lisa_I": -0.17654779200013543,
+      "p_value": 0.3117,
       "significatif": false,
-      "oppchovec": 1.8925279779226043
+      "oppchovec": 1.902420791783868
     },
     "Chisa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04453525922069074,
-      "p_value": 0.4096,
+      "lisa_I": 0.04831538659432727,
+      "p_value": 0.4054,
       "significatif": false,
-      "oppchovec": 4.821469344388431
+      "oppchovec": 4.816953020673745
     },
     "Fozzano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.011876461215408472,
-      "p_value": 0.4438,
+      "lisa_I": -0.008975820513770685,
+      "p_value": 0.4466,
       "significatif": false,
-      "oppchovec": 2.078614488212868
+      "oppchovec": 2.1163034950527724
     },
     "Zévaco": {
       "cluster": "Non significatif",
-      "lisa_I": -0.21297335043215723,
-      "p_value": 0.2903,
+      "lisa_I": -0.2088056645778195,
+      "p_value": 0.2918,
       "significatif": false,
-      "oppchovec": 1.856313198684966
+      "oppchovec": 1.8943747637526167
     },
     "Piobetta": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1965514009434359,
-      "p_value": 0.3124,
+      "lisa_I": 0.18989918241175152,
+      "p_value": 0.3224,
       "significatif": false,
-      "oppchovec": 2.227576731904467
+      "oppchovec": 2.227442763435326
     },
     "San-Giovanni-di-Moriani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0012813202195794534,
-      "p_value": 0.1367,
+      "lisa_I": 0.0038854701313283655,
+      "p_value": 0.1373,
       "significatif": false,
-      "oppchovec": 3.342327273965298
+      "oppchovec": 3.373684935156669
     },
     "Sarrola-Carcopino": {
       "cluster": "HH (High-High)",
-      "lisa_I": 1.5298485637234585,
-      "p_value": 0.0054,
+      "lisa_I": 1.5253730409522421,
+      "p_value": 0.0056,
       "significatif": true,
-      "oppchovec": 4.775307686605864
+      "oppchovec": 4.790743578329536
     },
     "Castello-di-Rostino": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0685492361668803,
+      "lisa_I": 0.06726961041940173,
       "p_value": 0.2321,
       "significatif": false,
-      "oppchovec": 3.68758360759021
+      "oppchovec": 3.6972966620765324
     },
     "Lugo-di-Nazza": {
       "cluster": "Non significatif",
-      "lisa_I": 0.24726194655222714,
-      "p_value": 0.2069,
+      "lisa_I": 0.25145081124971863,
+      "p_value": 0.2071,
       "significatif": false,
-      "oppchovec": 2.411079505086782
+      "oppchovec": 2.412127834568437
     },
     "Saliceto": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10667662756176086,
-      "p_value": 0.1332,
+      "lisa_I": 0.11231686307009178,
+      "p_value": 0.1316,
       "significatif": false,
-      "oppchovec": 3.0344499246049406
+      "oppchovec": 3.0368888436312416
     },
     "Sorbo-Ocagnano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0426815359831757,
-      "p_value": 0.1736,
+      "lisa_I": -0.043092432962387586,
+      "p_value": 0.1724,
       "significatif": false,
-      "oppchovec": 3.194717795113868
+      "oppchovec": 3.210264181283838
     },
     "Soccia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09304486503163809,
-      "p_value": 0.2133,
+      "lisa_I": 0.09390694467724292,
+      "p_value": 0.216,
       "significatif": false,
-      "oppchovec": 3.765747020458781
+      "oppchovec": 3.791788778215328
     },
     "Rusio": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5574044797080946,
-      "p_value": 0.0731,
+      "lisa_I": 0.5537961254032433,
+      "p_value": 0.0747,
       "significatif": false,
-      "oppchovec": 2.038192963770334
+      "oppchovec": 2.054576736937313
     },
     "Sisco": {
       "cluster": "Non significatif",
-      "lisa_I": 0.10733471494380532,
-      "p_value": 0.2513,
+      "lisa_I": 0.10796932988246107,
+      "p_value": 0.2526,
       "significatif": false,
-      "oppchovec": 3.9464129327024233
+      "oppchovec": 3.9672256059883244
     },
     "Valle-di-Rostino": {
       "cluster": "Non significatif",
-      "lisa_I": 0.11159048933391628,
-      "p_value": 0.3241,
+      "lisa_I": 0.11136466163419506,
+      "p_value": 0.3247,
       "significatif": false,
-      "oppchovec": 4.364242778371245
+      "oppchovec": 4.382665683157839
     },
     "Albitreccia": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5904274505564101,
-      "p_value": 0.2452,
+      "lisa_I": 0.601667030815437,
+      "p_value": 0.2418,
       "significatif": false,
-      "oppchovec": 6.6439829244575055
+      "oppchovec": 6.6416443888096035
     },
     "Ciamannacce": {
       "cluster": "Non significatif",
-      "lisa_I": -0.15486751002781493,
-      "p_value": 0.3783,
+      "lisa_I": -0.15784552671057978,
+      "p_value": 0.3729,
       "significatif": false,
-      "oppchovec": 4.55280615291242
+      "oppchovec": 4.553344799210222
     },
     "Corrano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.07414536449030334,
-      "p_value": 0.3389,
+      "lisa_I": -0.0713635177510969,
+      "p_value": 0.3451,
       "significatif": false,
-      "oppchovec": 2.594694054588558
+      "oppchovec": 2.609140452359932
     },
     "Île-Rousse": {
       "cluster": "Non significatif",
-      "lisa_I": -0.6988102768945993,
-      "p_value": 0.1133,
+      "lisa_I": -0.6937017237998314,
+      "p_value": 0.1149,
       "significatif": false,
-      "oppchovec": 1.517694286362087
+      "oppchovec": 1.5294322961174363
     },
     "Olmi-Cappella": {
       "cluster": "Non significatif",
-      "lisa_I": 0.20673308548831765,
-      "p_value": 0.2538,
+      "lisa_I": 0.2138272579615602,
+      "p_value": 0.2456,
       "significatif": false,
-      "oppchovec": 2.400573932082166
+      "oppchovec": 2.4154313895830573
     },
     "Penta-di-Casinca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.014549347508991992,
-      "p_value": 0.1627,
+      "lisa_I": 0.013700408574253906,
+      "p_value": 0.162,
       "significatif": false,
-      "oppchovec": 3.3954365999079243
+      "oppchovec": 3.4084533268163666
     },
     "Novale": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1965901558547364,
-      "p_value": 0.1174,
+      "lisa_I": -0.19048969578242178,
+      "p_value": 0.1115,
       "significatif": false,
-      "oppchovec": 3.886448804324489
+      "oppchovec": 3.8761168011661344
     },
     "Olmeta-di-Capocorso": {
       "cluster": "LH (Low-High)",
-      "lisa_I": -0.4387698073041743,
-      "p_value": 0.0192,
+      "lisa_I": -0.4328001074842008,
+      "p_value": 0.0195,
       "significatif": true,
-      "oppchovec": 2.8009738153227577
+      "oppchovec": 2.824270236092156
     },
     "Ortiporio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.009257045837946277,
-      "p_value": 0.4374,
+      "lisa_I": -0.0038717092926183368,
+      "p_value": 0.448,
       "significatif": false,
-      "oppchovec": 2.6916672420221817
+      "oppchovec": 2.70208749365231
     },
     "Piève": {
       "cluster": "Non significatif",
-      "lisa_I": -0.10128663693707798,
-      "p_value": 0.2159,
+      "lisa_I": -0.09199097994591043,
+      "p_value": 0.2175,
       "significatif": false,
-      "oppchovec": 2.8866653607909347
+      "oppchovec": 2.9419950692739762
     },
     "Prato-di-Giovellina": {
       "cluster": "Non significatif",
-      "lisa_I": -0.4101131785506549,
-      "p_value": 0.3206,
+      "lisa_I": -0.4325926096413624,
+      "p_value": 0.3112,
       "significatif": false,
-      "oppchovec": 5.761087432614746
+      "oppchovec": 5.784316718885077
     },
     "Tarrano": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0024102498257771044,
-      "p_value": 0.295,
+      "lisa_I": 0.003070019252007157,
+      "p_value": 0.3191,
       "significatif": false,
-      "oppchovec": 3.3589405101087637
+      "oppchovec": 3.3440332893757407
     },
     "Tomino": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07252282906082523,
-      "p_value": 0.3108,
+      "lisa_I": 0.077367899409413,
+      "p_value": 0.3078,
       "significatif": false,
-      "oppchovec": 2.929446418282395
+      "oppchovec": 2.925401475532765
     },
     "Zalana": {
       "cluster": "Non significatif",
-      "lisa_I": -0.021233499998455047,
-      "p_value": 0.4751,
+      "lisa_I": -0.02393120929519203,
+      "p_value": 0.4668,
       "significatif": false,
-      "oppchovec": 3.7360630317806667
+      "oppchovec": 3.7619634096730685
     },
     "Guitera-les-Bains": {
       "cluster": "Non significatif",
-      "lisa_I": -0.16042462582241235,
-      "p_value": 0.1868,
+      "lisa_I": -0.16120702627465203,
+      "p_value": 0.1832,
       "significatif": false,
-      "oppchovec": 3.914134542929617
+      "oppchovec": 3.9243088363032856
     },
     "Poggiolo": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04214542488448396,
-      "p_value": 0.4198,
+      "lisa_I": 0.0797010950597302,
+      "p_value": 0.3942,
       "significatif": false,
-      "oppchovec": 4.992467681726117
+      "oppchovec": 4.9978462720954715
     },
     "Canavaggia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.306895376721512,
+      "lisa_I": -0.3103063505326388,
       "p_value": 0.05,
       "significatif": false,
-      "oppchovec": 2.808159785865287
+      "oppchovec": 2.817943680556216
     },
     "Riventosa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0024772567090537664,
-      "p_value": 0.4972,
+      "lisa_I": 0.00178872618839304,
+      "p_value": 0.492,
       "significatif": false,
-      "oppchovec": 3.2718953084043836
+      "oppchovec": 3.3021256449678433
     },
     "Santa-Lucia-di-Mercurio": {
-      "cluster": "Non significatif",
-      "lisa_I": 0.27472177353689886,
-      "p_value": 0.0506,
-      "significatif": false,
-      "oppchovec": 2.7714993167290936
+      "cluster": "LL (Low-Low)",
+      "lisa_I": 0.2813476349978039,
+      "p_value": 0.0483,
+      "significatif": true,
+      "oppchovec": 2.782007514343008
     },
     "Alata": {
       "cluster": "HH (High-High)",
-      "lisa_I": 12.05318076708206,
+      "lisa_I": 12.003441680683466,
       "p_value": 0.0001,
       "significatif": true,
-      "oppchovec": 9.586596683308997
+      "oppchovec": 9.588197335275307
     },
     "Campana": {
       "cluster": "Non significatif",
-      "lisa_I": -0.08481148052252248,
-      "p_value": 0.1149,
+      "lisa_I": -0.10823897068091617,
+      "p_value": 0.1113,
       "significatif": false,
-      "oppchovec": 3.5769508616478083
+      "oppchovec": 3.6526805506620463
     },
     "Sant'Andréa-di-Cotone": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1561458702039621,
-      "p_value": 0.3235,
+      "lisa_I": -0.16231332282508334,
+      "p_value": 0.3197,
       "significatif": false,
-      "oppchovec": 4.2795010451839035
+      "oppchovec": 4.313213052948916
     },
     "Appietto": {
       "cluster": "HH (High-High)",
-      "lisa_I": 9.935192806326823,
+      "lisa_I": 9.914821403512232,
       "p_value": 0.0001,
       "significatif": true,
-      "oppchovec": 9.611318060382366
+      "oppchovec": 9.608573324169457
     },
     "Santa-Maria-Siché": {
       "cluster": "Non significatif",
-      "lisa_I": -0.15384601846176635,
-      "p_value": 0.1672,
+      "lisa_I": -0.1536396492836058,
+      "p_value": 0.1678,
       "significatif": false,
-      "oppchovec": 2.8145014833588355
+      "oppchovec": 2.8323418072234356
     },
     "Zigliara": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04129326304695971,
-      "p_value": 0.1715,
+      "lisa_I": 0.03751129327211789,
+      "p_value": 0.1706,
       "significatif": false,
-      "oppchovec": 3.491716686076324
+      "oppchovec": 3.494221585025579
     },
     "Meria": {
       "cluster": "Non significatif",
-      "lisa_I": 0.11236057145944167,
-      "p_value": 0.3309,
+      "lisa_I": 0.11551154401097538,
+      "p_value": 0.3261,
       "significatif": false,
-      "oppchovec": 2.6409014416402337
+      "oppchovec": 2.6506254793888866
     },
     "Pietracorbara": {
       "cluster": "Non significatif",
-      "lisa_I": 0.02771350365989978,
-      "p_value": 0.2664,
+      "lisa_I": 0.026608887028815857,
+      "p_value": 0.2661,
       "significatif": false,
-      "oppchovec": 3.213035473009694
+      "oppchovec": 3.23443712334327
     },
     "Pietroso": {
       "cluster": "Non significatif",
-      "lisa_I": 0.06777407714412094,
-      "p_value": 0.1436,
+      "lisa_I": 0.07208736580371672,
+      "p_value": 0.1454,
       "significatif": false,
-      "oppchovec": 3.1394662225235237
+      "oppchovec": 3.14163239476125
     },
     "Pigna": {
       "cluster": "Non significatif",
-      "lisa_I": -0.03563096366409133,
-      "p_value": 0.4171,
+      "lisa_I": -0.03287795900586247,
+      "p_value": 0.4208,
       "significatif": false,
-      "oppchovec": 2.30627813004858
+      "oppchovec": 2.321743483058444
     },
     "Guagno": {
       "cluster": "Non significatif",
-      "lisa_I": 0.1260522383340375,
-      "p_value": 0.2424,
+      "lisa_I": 0.12340703958523763,
+      "p_value": 0.2452,
       "significatif": false,
-      "oppchovec": 4.008005938188913
+      "oppchovec": 4.016316305719103
     },
     "Sotta": {
       "cluster": "Non significatif",
-      "lisa_I": -0.046720990267459316,
-      "p_value": 0.1356,
+      "lisa_I": -0.046089658625575174,
+      "p_value": 0.1351,
       "significatif": false,
-      "oppchovec": 3.48461003298753
+      "oppchovec": 3.4981997493231876
     },
     "Ampriani": {
       "cluster": "Non significatif",
-      "lisa_I": -0.04741053519337874,
-      "p_value": 0.4012,
+      "lisa_I": -0.04138894262390115,
+      "p_value": 0.4072,
       "significatif": false,
-      "oppchovec": 2.370689934578375
+      "oppchovec": 2.404321603895116
     },
     "Asco": {
       "cluster": "Non significatif",
-      "lisa_I": 0.5006867054450359,
+      "lisa_I": 0.4998974684134969,
       "p_value": 0.0635,
       "significatif": false,
-      "oppchovec": 2.235016815302923
+      "oppchovec": 2.2530185034563672
     },
     "Lento": {
       "cluster": "Non significatif",
-      "lisa_I": -0.33363625947559006,
-      "p_value": 0.2828,
+      "lisa_I": -0.3333034810814747,
+      "p_value": 0.2823,
       "significatif": false,
-      "oppchovec": 5.030298756873503
+      "oppchovec": 5.03284370692803
     },
     "Omessa": {
       "cluster": "Non significatif",
-      "lisa_I": -0.016735937888281024,
-      "p_value": 0.4238,
+      "lisa_I": -0.014856020991597956,
+      "p_value": 0.4276,
       "significatif": false,
-      "oppchovec": 2.7688408249771763
+      "oppchovec": 2.798872029532411
     },
     "Pietricaggio": {
       "cluster": "Non significatif",
-      "lisa_I": -0.35245658866539953,
-      "p_value": 0.0678,
+      "lisa_I": -0.33649709667400046,
+      "p_value": 0.0714,
       "significatif": false,
-      "oppchovec": 4.138588100732538
+      "oppchovec": 4.128319841851321
     },
     "Ville-di-Pietrabugno": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.030197407863625,
-      "p_value": 0.0487,
+      "lisa_I": 2.0271320888688287,
+      "p_value": 0.0486,
       "significatif": true,
-      "oppchovec": 6.878753367294054
+      "oppchovec": 6.885415624820457
     },
     "Loreto-di-Casinca": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0731928958766592,
-      "p_value": 0.3346,
+      "lisa_I": 0.07086072381803006,
+      "p_value": 0.3402,
       "significatif": false,
-      "oppchovec": 2.8814789005838466
+      "oppchovec": 2.90181494662854
     },
     "Venaco": {
       "cluster": "Non significatif",
-      "lisa_I": 0.05179819812617292,
-      "p_value": 0.1227,
+      "lisa_I": 0.04650266798661165,
+      "p_value": 0.1284,
       "significatif": false,
-      "oppchovec": 3.2007019234052936
+      "oppchovec": 3.228649420522684
     },
     "Casalabriva": {
       "cluster": "Non significatif",
-      "lisa_I": 0.3296152214506733,
-      "p_value": 0.1996,
+      "lisa_I": 0.32105195150433535,
+      "p_value": 0.2048,
       "significatif": false,
-      "oppchovec": 2.1163915586497724
+      "oppchovec": 2.1422983034721326
     },
     "Calvi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.47293680048121145,
-      "p_value": 0.2878,
+      "lisa_I": 0.4716845073403814,
+      "p_value": 0.2856,
       "significatif": false,
-      "oppchovec": 0.8558989777100254
+      "oppchovec": 0.893131953788838
     },
     "Campitello": {
       "cluster": "Non significatif",
-      "lisa_I": 0.018913845185065684,
-      "p_value": 0.2943,
+      "lisa_I": 0.01694413967697212,
+      "p_value": 0.2917,
       "significatif": false,
-      "oppchovec": 3.4801572168411528
+      "oppchovec": 3.4798169442170557
     },
     "Castifao": {
       "cluster": "Non significatif",
-      "lisa_I": -0.2966022334042489,
-      "p_value": 0.1793,
+      "lisa_I": -0.2787742591919665,
+      "p_value": 0.1851,
       "significatif": false,
-      "oppchovec": 2.257577027499047
+      "oppchovec": 2.3142946338701362
     },
     "Costa": {
       "cluster": "Non significatif",
-      "lisa_I": -0.093598128632255,
-      "p_value": 0.3521,
+      "lisa_I": -0.0922948219134816,
+      "p_value": 0.3494,
       "significatif": false,
-      "oppchovec": 3.984030933229815
+      "oppchovec": 3.981064395883424
     },
     "Lama": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11651078302224487,
-      "p_value": 0.1082,
+      "lisa_I": -0.1251155621835458,
+      "p_value": 0.1069,
       "significatif": false,
-      "oppchovec": 3.0498246473659414
+      "oppchovec": 3.0459146827383634
     },
     "Ocana": {
       "cluster": "HH (High-High)",
-      "lisa_I": 0.12268076099556269,
+      "lisa_I": 0.1259861634151338,
       "p_value": 0.0128,
       "significatif": true,
-      "oppchovec": 3.485107878778325
+      "oppchovec": 3.5049375448093056
     },
     "Bisinchi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.0011420834543106504,
-      "p_value": 0.4515,
+      "lisa_I": 1.6633316449854346e-05,
+      "p_value": 0.4575,
       "significatif": false,
-      "oppchovec": 3.593179338798885
+      "oppchovec": 3.6192438008988903
     },
     "Morsiglia": {
       "cluster": "Non significatif",
-      "lisa_I": -0.1609402302412026,
-      "p_value": 0.0896,
+      "lisa_I": -0.1572379049958099,
+      "p_value": 0.0903,
       "significatif": false,
-      "oppchovec": 3.7417698377131687
+      "oppchovec": 3.748567649696601
     },
     "Santa-Maria-Figaniella": {
       "cluster": "Non significatif",
-      "lisa_I": 0.36318836377554853,
-      "p_value": 0.1201,
+      "lisa_I": 0.3722994288902986,
+      "p_value": 0.1225,
       "significatif": false,
-      "oppchovec": 2.337465530333712
+      "oppchovec": 2.3234426718676926
     },
     "Perelli": {
       "cluster": "Non significatif",
-      "lisa_I": -0.0031110669175029118,
-      "p_value": 0.2786,
+      "lisa_I": -0.002857373993946669,
+      "p_value": 0.2662,
       "significatif": false,
-      "oppchovec": 3.361735346386938
+      "oppchovec": 3.3759214918919174
     },
     "Polveroso": {
       "cluster": "Non significatif",
-      "lisa_I": -0.08066684531643677,
-      "p_value": 0.3822,
+      "lisa_I": -0.08487684525958221,
+      "p_value": 0.3787,
       "significatif": false,
-      "oppchovec": 2.1431166808825366
+      "oppchovec": 2.1527153916425106
     },
     "Zilia": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.19372006542602527,
-      "p_value": 0.0074,
+      "lisa_I": 0.19313213210863883,
+      "p_value": 0.0075,
       "significatif": true,
-      "oppchovec": 3.052552675652378
+      "oppchovec": 3.0700777743738064
     },
     "Casevecchie": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.890970529310355,
-      "p_value": 0.0046,
+      "lisa_I": -0.885582091012218,
+      "p_value": 0.0047,
       "significatif": true,
-      "oppchovec": 4.599399733274043
+      "oppchovec": 4.607252998816987
     },
     "Galéria": {
       "cluster": "Non significatif",
-      "lisa_I": 0.07501899465233955,
-      "p_value": 0.1245,
+      "lisa_I": 0.0806867779562136,
+      "p_value": 0.1229,
       "significatif": false,
-      "oppchovec": 3.1341820406788483
+      "oppchovec": 3.136948207517399
     },
     "Lavatoggio": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.8260721037089217,
-      "p_value": 0.0233,
+      "lisa_I": 0.8332159400596226,
+      "p_value": 0.0238,
       "significatif": true,
-      "oppchovec": 1.877451464508284
+      "oppchovec": 1.8752856669755205
     },
     "Moltifao": {
       "cluster": "Non significatif",
-      "lisa_I": 0.14360289391596306,
-      "p_value": 0.2179,
+      "lisa_I": 0.1471510124724881,
+      "p_value": 0.2103,
       "significatif": false,
-      "oppchovec": 2.7764451983089256
+      "oppchovec": 2.7944430076011706
     },
     "Piazzali": {
       "cluster": "Non significatif",
-      "lisa_I": -0.11018903045921476,
-      "p_value": 0.4092,
+      "lisa_I": -0.09034015356346235,
+      "p_value": 0.4205,
       "significatif": false,
-      "oppchovec": 1.0160399060359293
+      "oppchovec": 1.024447698528693
     },
     "Rutali": {
       "cluster": "HH (High-High)",
-      "lisa_I": 0.9106695951124821,
-      "p_value": 0.0465,
+      "lisa_I": 0.9188922698720187,
+      "p_value": 0.0461,
       "significatif": true,
-      "oppchovec": 4.875007456590183
+      "oppchovec": 4.896118356471575
     },
     "San-Martino-di-Lota": {
       "cluster": "HH (High-High)",
-      "lisa_I": 2.5288017213228615,
-      "p_value": 0.0182,
+      "lisa_I": 2.5273073565013715,
+      "p_value": 0.0183,
       "significatif": true,
-      "oppchovec": 6.486729871882465
+      "oppchovec": 6.4998603655842535
     },
     "Piedipartino": {
       "cluster": "LL (Low-Low)",
-      "lisa_I": 0.610958906059898,
-      "p_value": 0.0193,
+      "lisa_I": 0.5822119079398099,
+      "p_value": 0.0228,
       "significatif": true,
-      "oppchovec": 2.300912523236207
+      "oppchovec": 2.343830137566217
     },
     "Alzi": {
       "cluster": "Non significatif",
-      "lisa_I": 0.09897243205832784,
-      "p_value": 0.2973,
+      "lisa_I": 0.09213134888334508,
+      "p_value": 0.303,
       "significatif": false,
-      "oppchovec": 2.811550678084189
+      "oppchovec": 2.8509034089279512
     },
     "Avapessa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.7538976980803592,
-      "p_value": 0.0767,
+      "lisa_I": 0.762893919910248,
+      "p_value": 0.0761,
       "significatif": false,
-      "oppchovec": 1.5583656261997754
+      "oppchovec": 1.5607413922186253
     },
     "Occhiatana": {
       "cluster": "Non significatif",
-      "lisa_I": -0.05777940827128736,
-      "p_value": 0.4986,
+      "lisa_I": -0.0639806912244998,
+      "p_value": 0.4962,
       "significatif": false,
-      "oppchovec": 5.038675180743205
+      "oppchovec": 5.049550136887259
     },
     "Évisa": {
       "cluster": "Non significatif",
-      "lisa_I": 0.2278000366707032,
-      "p_value": 0.158,
+      "lisa_I": 0.2320345605282099,
+      "p_value": 0.151,
       "significatif": false,
-      "oppchovec": 2.6139962806911172
+      "oppchovec": 2.638646603882673
     },
     "Moncale": {
       "cluster": "HL (High-Low)",
-      "lisa_I": -0.05879949479587986,
-      "p_value": 0.0466,
+      "lisa_I": -0.051101849333085515,
+      "p_value": 0.0468,
       "significatif": true,
-      "oppchovec": 3.465349272562013
+      "oppchovec": 3.4656811212141596
     },
     "Vivario": {
       "cluster": "Non significatif",
-      "lisa_I": 0.04656679428010763,
-      "p_value": 0.4138,
+      "lisa_I": 0.04282043798442957,
+      "p_value": 0.4224,
       "significatif": false,
-      "oppchovec": 2.8569301697868577
+      "oppchovec": 2.882922988865377
     }
   }
 };

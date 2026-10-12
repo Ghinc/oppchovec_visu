@@ -19,7 +19,7 @@
     "vecu": {
       "Vec1_NiveauVie": 27250,
       "Vec2_Logement": 0.8028,
-      "Vec3_StatutSocial": 0.9259,
+      "Vec3_StatutSocial": 0.9092,
       "Vec4_Emploi": 5278
     }
   },
@@ -28,7 +28,7 @@
       "OppChoVec": 3.0,
       "Opportunités": 10.0,
       "Choix": 1.27,
-      "Vécu": 4.8
+      "Vécu": 4.81
     },
     "opportunites": {
       "Opp1_Education": 5.76,
@@ -43,7 +43,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23320,
       "Vec2_Logement": 0.5347,
-      "Vec3_StatutSocial": 0.914,
+      "Vec3_StatutSocial": 0.8948,
       "Vec4_Emploi": 4799
     }
   },
@@ -67,16 +67,16 @@
     "vecu": {
       "Vec1_NiveauVie": 27810,
       "Vec2_Logement": 0.8242,
-      "Vec3_StatutSocial": 0.9268,
+      "Vec3_StatutSocial": 0.9103,
       "Vec4_Emploi": 4314
     }
   },
   "Albitreccia": {
     "scores_globaux": {
-      "OppChoVec": 6.7,
+      "OppChoVec": 6.68,
       "Opportunités": 7.22,
       "Choix": 9.52,
-      "Vécu": 5.09
+      "Vécu": 5.07
     },
     "opportunites": {
       "Opp1_Education": 5.78,
@@ -91,16 +91,16 @@
     "vecu": {
       "Vec1_NiveauVie": 26850,
       "Vec2_Logement": 0.7443,
-      "Vec3_StatutSocial": 0.8954,
+      "Vec3_StatutSocial": 0.8664,
       "Vec4_Emploi": 1028
     }
   },
   "Altagène": {
     "scores_globaux": {
-      "OppChoVec": 5.3,
+      "OppChoVec": 5.28,
       "Opportunités": 4.03,
       "Choix": 10.0,
-      "Vécu": 4.57
+      "Vécu": 4.52
     },
     "opportunites": {
       "Opp1_Education": 5.79,
@@ -115,16 +115,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8452,
-      "Vec3_StatutSocial": 0.9168,
+      "Vec3_StatutSocial": 0.889,
       "Vec4_Emploi": 117
     }
   },
   "Ambiegna": {
     "scores_globaux": {
-      "OppChoVec": 4.04,
+      "OppChoVec": 4.03,
       "Opportunités": 4.13,
       "Choix": 8.61,
-      "Vécu": 3.87
+      "Vécu": 3.84
     },
     "opportunites": {
       "Opp1_Education": 5.8,
@@ -139,16 +139,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7786,
-      "Vec3_StatutSocial": 0.9267,
+      "Vec3_StatutSocial": 0.9047,
       "Vec4_Emploi": 157
     }
   },
   "Appietto": {
     "scores_globaux": {
-      "OppChoVec": 9.72,
+      "OppChoVec": 9.71,
       "Opportunités": 7.97,
       "Choix": 9.5,
-      "Vécu": 9.45
+      "Vécu": 9.44
     },
     "opportunites": {
       "Opp1_Education": 5.81,
@@ -163,16 +163,16 @@
     "vecu": {
       "Vec1_NiveauVie": 26500,
       "Vec2_Logement": 0.8124,
-      "Vec3_StatutSocial": 0.9365,
+      "Vec3_StatutSocial": 0.9217,
       "Vec4_Emploi": 4697
     }
   },
   "Arbellara": {
     "scores_globaux": {
-      "OppChoVec": 4.21,
+      "OppChoVec": 4.23,
       "Opportunités": 6.25,
       "Choix": 8.29,
-      "Vécu": 2.64
+      "Vécu": 2.7
     },
     "opportunites": {
       "Opp1_Education": 5.82,
@@ -187,16 +187,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22340,
       "Vec2_Logement": 0.7672,
-      "Vec3_StatutSocial": 0.8013,
+      "Vec3_StatutSocial": 0.756,
       "Vec4_Emploi": 664
     }
   },
   "Arbori": {
     "scores_globaux": {
-      "OppChoVec": 5.01,
+      "OppChoVec": 5.05,
       "Opportunités": 4.32,
       "Choix": 9.85,
-      "Vécu": 3.92
+      "Vécu": 4.01
     },
     "opportunites": {
       "Opp1_Education": 5.83,
@@ -211,16 +211,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8523,
-      "Vec3_StatutSocial": 0.8472,
+      "Vec3_StatutSocial": 0.8194,
       "Vec4_Emploi": 14
     }
   },
   "Argiusta-Moriccio": {
     "scores_globaux": {
-      "OppChoVec": 5.68,
+      "OppChoVec": 5.69,
       "Opportunités": 5.76,
       "Choix": 10.0,
-      "Vécu": 3.74
+      "Vécu": 3.77
     },
     "opportunites": {
       "Opp1_Education": 5.84,
@@ -235,16 +235,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8242,
-      "Vec3_StatutSocial": 0.8586,
+      "Vec3_StatutSocial": 0.8253,
       "Vec4_Emploi": 84
     }
   },
   "Arro": {
     "scores_globaux": {
-      "OppChoVec": 6.18,
+      "OppChoVec": 6.16,
       "Opportunités": 6.87,
       "Choix": 9.8,
-      "Vécu": 3.97
+      "Vécu": 3.93
     },
     "opportunites": {
       "Opp1_Education": 5.85,
@@ -259,16 +259,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8046,
-      "Vec3_StatutSocial": 0.9123,
+      "Vec3_StatutSocial": 0.8853,
       "Vec4_Emploi": 51
     }
   },
   "Aullène": {
     "scores_globaux": {
-      "OppChoVec": 1.89,
+      "OppChoVec": 1.91,
       "Opportunités": 6.2,
       "Choix": 5.49,
-      "Vécu": 0.72
+      "Vécu": 0.81
     },
     "opportunites": {
       "Opp1_Education": 5.86,
@@ -283,16 +283,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20160,
       "Vec2_Logement": 0.7141,
-      "Vec3_StatutSocial": 0.8041,
+      "Vec3_StatutSocial": 0.7628,
       "Vec4_Emploi": 51
     }
   },
   "Azilone-Ampaza": {
     "scores_globaux": {
-      "OppChoVec": 5.31,
+      "OppChoVec": 5.29,
       "Opportunités": 6.86,
       "Choix": 9.43,
-      "Vécu": 2.67
+      "Vécu": 2.63
     },
     "opportunites": {
       "Opp1_Education": 5.87,
@@ -307,16 +307,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18910,
       "Vec2_Logement": 0.8234,
-      "Vec3_StatutSocial": 0.9025,
+      "Vec3_StatutSocial": 0.8735,
       "Vec4_Emploi": 154
     }
   },
   "Azzana": {
     "scores_globaux": {
-      "OppChoVec": 5.94,
+      "OppChoVec": 6.15,
       "Opportunités": 5.67,
       "Choix": 10.0,
-      "Vécu": 4.39
+      "Vécu": 4.82
     },
     "opportunites": {
       "Opp1_Education": 5.88,
@@ -331,16 +331,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8731,
-      "Vec3_StatutSocial": 0.8685,
+      "Vec3_StatutSocial": 0.8948,
       "Vec4_Emploi": 23
     }
   },
   "Balogna": {
     "scores_globaux": {
-      "OppChoVec": 3.67,
+      "OppChoVec": 3.65,
       "Opportunités": 5.49,
       "Choix": 8.56,
-      "Vécu": 1.63
+      "Vécu": 1.58
     },
     "opportunites": {
       "Opp1_Education": 5.89,
@@ -355,7 +355,7 @@
     "vecu": {
       "Vec1_NiveauVie": 16870,
       "Vec2_Logement": 0.8326,
-      "Vec3_StatutSocial": 0.8591,
+      "Vec3_StatutSocial": 0.8148,
       "Vec4_Emploi": 101
     }
   },
@@ -364,7 +364,7 @@
       "OppChoVec": 4.28,
       "Opportunités": 5.21,
       "Choix": 8.38,
-      "Vécu": 3.77
+      "Vécu": 3.78
     },
     "opportunites": {
       "Opp1_Education": 5.9,
@@ -379,16 +379,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22770,
       "Vec2_Logement": 0.8183,
-      "Vec3_StatutSocial": 0.899,
+      "Vec3_StatutSocial": 0.874,
       "Vec4_Emploi": 29
     }
   },
   "Bastelicaccia": {
     "scores_globaux": {
-      "OppChoVec": 9.54,
+      "OppChoVec": 9.53,
       "Opportunités": 8.41,
       "Choix": 8.94,
-      "Vécu": 9.51
+      "Vécu": 9.5
     },
     "opportunites": {
       "Opp1_Education": 5.91,
@@ -403,16 +403,16 @@
     "vecu": {
       "Vec1_NiveauVie": 27450,
       "Vec2_Logement": 0.7767,
-      "Vec3_StatutSocial": 0.913,
+      "Vec3_StatutSocial": 0.8912,
       "Vec4_Emploi": 5152
     }
   },
   "Belvédère-Campomoro": {
     "scores_globaux": {
-      "OppChoVec": 4.2,
+      "OppChoVec": 4.21,
       "Opportunités": 4.87,
       "Choix": 8.33,
-      "Vécu": 4.01
+      "Vécu": 4.03
     },
     "opportunites": {
       "Opp1_Education": 5.92,
@@ -427,7 +427,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23910,
       "Vec2_Logement": 0.8136,
-      "Vec3_StatutSocial": 0.8893,
+      "Vec3_StatutSocial": 0.8638,
       "Vec4_Emploi": 29
     }
   },
@@ -436,7 +436,7 @@
       "OppChoVec": 5.36,
       "Opportunités": 7.52,
       "Choix": 9.07,
-      "Vécu": 2.62
+      "Vécu": 2.63
     },
     "opportunites": {
       "Opp1_Education": 5.93,
@@ -451,16 +451,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8002,
-      "Vec3_StatutSocial": 0.7582,
+      "Vec3_StatutSocial": 0.6937,
       "Vec4_Emploi": 217
     }
   },
   "Bocognano": {
     "scores_globaux": {
-      "OppChoVec": 6.21,
+      "OppChoVec": 6.2,
       "Opportunités": 7.14,
       "Choix": 9.52,
-      "Vécu": 4.18
+      "Vécu": 4.17
     },
     "opportunites": {
       "Opp1_Education": 5.94,
@@ -475,7 +475,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23650,
       "Vec2_Logement": 0.8074,
-      "Vec3_StatutSocial": 0.918,
+      "Vec3_StatutSocial": 0.8967,
       "Vec4_Emploi": 108
     }
   },
@@ -484,7 +484,7 @@
       "OppChoVec": 3.82,
       "Opportunités": 7.17,
       "Choix": 7.17,
-      "Vécu": 2.42
+      "Vécu": 2.45
     },
     "opportunites": {
       "Opp1_Education": 5.95,
@@ -499,16 +499,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22670,
       "Vec2_Logement": 0.7209,
-      "Vec3_StatutSocial": 0.8542,
+      "Vec3_StatutSocial": 0.8195,
       "Vec4_Emploi": 381
     }
   },
   "Calcatoggio": {
     "scores_globaux": {
-      "OppChoVec": 4.97,
+      "OppChoVec": 4.96,
       "Opportunités": 6.49,
       "Choix": 8.59,
-      "Vécu": 3.7
+      "Vécu": 3.68
     },
     "opportunites": {
       "Opp1_Education": 5.96,
@@ -523,16 +523,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23120,
       "Vec2_Logement": 0.7794,
-      "Vec3_StatutSocial": 0.9235,
+      "Vec3_StatutSocial": 0.903,
       "Vec4_Emploi": 94
     }
   },
   "Campo": {
     "scores_globaux": {
-      "OppChoVec": 5.4,
+      "OppChoVec": 5.41,
       "Opportunités": 5.96,
       "Choix": 9.95,
-      "Vécu": 2.99
+      "Vécu": 3.02
     },
     "opportunites": {
       "Opp1_Education": 5.97,
@@ -547,16 +547,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20230,
       "Vec2_Logement": 0.8499,
-      "Vec3_StatutSocial": 0.8531,
+      "Vec3_StatutSocial": 0.8188,
       "Vec4_Emploi": 156
     }
   },
   "Cannelle": {
     "scores_globaux": {
-      "OppChoVec": 5.33,
+      "OppChoVec": 5.31,
       "Opportunités": 5.41,
       "Choix": 9.5,
-      "Vécu": 4.14
+      "Vécu": 4.11
     },
     "opportunites": {
       "Opp1_Education": 5.98,
@@ -571,7 +571,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8102,
-      "Vec3_StatutSocial": 0.9193,
+      "Vec3_StatutSocial": 0.895,
       "Vec4_Emploi": 97
     }
   },
@@ -580,7 +580,7 @@
       "OppChoVec": 6.29,
       "Opportunités": 7.45,
       "Choix": 10.0,
-      "Vécu": 3.21
+      "Vécu": 3.2
     },
     "opportunites": {
       "Opp1_Education": 5.99,
@@ -595,16 +595,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7641,
-      "Vec3_StatutSocial": 0.8898,
+      "Vec3_StatutSocial": 0.8608,
       "Vec4_Emploi": 0
     }
   },
   "Carbuccia": {
     "scores_globaux": {
-      "OppChoVec": 4.16,
+      "OppChoVec": 4.17,
       "Opportunités": 3.24,
       "Choix": 9.21,
-      "Vécu": 3.97
+      "Vécu": 3.99
     },
     "opportunites": {
       "Opp1_Education": 5.1,
@@ -619,16 +619,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22170,
       "Vec2_Logement": 0.8031,
-      "Vec3_StatutSocial": 0.8909,
+      "Vec3_StatutSocial": 0.8659,
       "Vec4_Emploi": 785
     }
   },
   "Cardo-Torgia": {
     "scores_globaux": {
-      "OppChoVec": 4.74,
+      "OppChoVec": 4.73,
       "Opportunités": 1.18,
       "Choix": 10.0,
-      "Vécu": 5.51
+      "Vécu": 5.48
     },
     "opportunites": {
       "Opp1_Education": 5.1,
@@ -652,7 +652,7 @@
       "OppChoVec": 2.25,
       "Opportunités": 1.43,
       "Choix": 8.14,
-      "Vécu": 2.19
+      "Vécu": 2.18
     },
     "opportunites": {
       "Opp1_Education": 5.1,
@@ -667,16 +667,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21490,
       "Vec2_Logement": 0.7088,
-      "Vec3_StatutSocial": 0.9062,
+      "Vec3_StatutSocial": 0.8822,
       "Vec4_Emploi": 189
     }
   },
   "Cargiaca": {
     "scores_globaux": {
-      "OppChoVec": 2.08,
+      "OppChoVec": 2.07,
       "Opportunités": 1.96,
       "Choix": 6.87,
-      "Vécu": 3.34
+      "Vécu": 3.31
     },
     "opportunites": {
       "Opp1_Education": 5.1,
@@ -691,7 +691,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8071,
-      "Vec3_StatutSocial": 0.8407,
+      "Vec3_StatutSocial": 0.7953,
       "Vec4_Emploi": 56
     }
   },
@@ -715,16 +715,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22580,
       "Vec2_Logement": 0.7496,
-      "Vec3_StatutSocial": 0.9401,
+      "Vec3_StatutSocial": 0.9268,
       "Vec4_Emploi": 115
     }
   },
   "Casalabriva": {
     "scores_globaux": {
-      "OppChoVec": 2.43,
+      "OppChoVec": 2.44,
       "Opportunités": 3.4,
       "Choix": 6.89,
-      "Vécu": 3.11
+      "Vécu": 3.16
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -739,7 +739,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23480,
       "Vec2_Logement": 0.7327,
-      "Vec3_StatutSocial": 0.9,
+      "Vec3_StatutSocial": 0.881,
       "Vec4_Emploi": 202
     }
   },
@@ -763,16 +763,16 @@
     "vecu": {
       "Vec1_NiveauVie": 26380,
       "Vec2_Logement": 0.7624,
-      "Vec3_StatutSocial": 0.898,
+      "Vec3_StatutSocial": 0.8735,
       "Vec4_Emploi": 5037
     }
   },
   "Ciamannacce": {
     "scores_globaux": {
-      "OppChoVec": 5.39,
+      "OppChoVec": 5.37,
       "Opportunités": 4.95,
       "Choix": 10.0,
-      "Vécu": 3.91
+      "Vécu": 3.88
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -787,7 +787,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8145,
-      "Vec3_StatutSocial": 0.8911,
+      "Vec3_StatutSocial": 0.8594,
       "Vec4_Emploi": 73
     }
   },
@@ -796,7 +796,7 @@
       "OppChoVec": 4.04,
       "Opportunités": 3.83,
       "Choix": 8.62,
-      "Vécu": 4.13
+      "Vécu": 4.15
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -811,16 +811,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24900,
       "Vec2_Logement": 0.795,
-      "Vec3_StatutSocial": 0.8798,
+      "Vec3_StatutSocial": 0.851,
       "Vec4_Emploi": 144
     }
   },
   "Cognocoli-Monticchi": {
     "scores_globaux": {
-      "OppChoVec": 2.52,
+      "OppChoVec": 2.57,
       "Opportunités": 2.07,
       "Choix": 7.95,
-      "Vécu": 2.78
+      "Vécu": 2.91
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -835,13 +835,13 @@
     "vecu": {
       "Vec1_NiveauVie": 21100,
       "Vec2_Logement": 0.8393,
-      "Vec3_StatutSocial": 0.8203,
+      "Vec3_StatutSocial": 0.7908,
       "Vec4_Emploi": 82
     }
   },
   "Conca": {
     "scores_globaux": {
-      "OppChoVec": 2.21,
+      "OppChoVec": 2.2,
       "Opportunités": 3.09,
       "Choix": 7.02,
       "Vécu": 2.53
@@ -859,7 +859,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19850,
       "Vec2_Logement": 0.784,
-      "Vec3_StatutSocial": 0.8854,
+      "Vec3_StatutSocial": 0.8549,
       "Vec4_Emploi": 377
     }
   },
@@ -868,7 +868,7 @@
       "OppChoVec": 3.82,
       "Opportunités": 2.1,
       "Choix": 9.23,
-      "Vécu": 4.05
+      "Vécu": 4.04
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -883,16 +883,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8535,
-      "Vec3_StatutSocial": 0.8518,
+      "Vec3_StatutSocial": 0.8128,
       "Vec4_Emploi": 91
     }
   },
   "Coti-Chiavari": {
     "scores_globaux": {
-      "OppChoVec": 4.96,
+      "OppChoVec": 4.95,
       "Opportunités": 4.08,
       "Choix": 9.35,
-      "Vécu": 4.83
+      "Vécu": 4.8
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -907,16 +907,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25460,
       "Vec2_Logement": 0.8422,
-      "Vec3_StatutSocial": 0.873,
+      "Vec3_StatutSocial": 0.8372,
       "Vec4_Emploi": 124
     }
   },
   "Cozzano": {
     "scores_globaux": {
-      "OppChoVec": 3.16,
+      "OppChoVec": 3.17,
       "Opportunités": 1.46,
       "Choix": 9.27,
-      "Vécu": 2.77
+      "Vécu": 2.8
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -931,16 +931,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20680,
       "Vec2_Logement": 0.7932,
-      "Vec3_StatutSocial": 0.8973,
+      "Vec3_StatutSocial": 0.8757,
       "Vec4_Emploi": 71
     }
   },
   "Cristinacce": {
     "scores_globaux": {
-      "OppChoVec": 4.14,
+      "OppChoVec": 4.11,
       "Opportunités": 2.75,
       "Choix": 10.0,
-      "Vécu": 3.0
+      "Vécu": 2.93
     },
     "opportunites": {
       "Opp1_Education": 5.11,
@@ -955,13 +955,13 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7927,
-      "Vec3_StatutSocial": 0.8172,
+      "Vec3_StatutSocial": 0.7595,
       "Vec4_Emploi": 126
     }
   },
   "Cuttoli-Corticchiato": {
     "scores_globaux": {
-      "OppChoVec": 6.18,
+      "OppChoVec": 6.17,
       "Opportunités": 4.81,
       "Choix": 10.0,
       "Vécu": 5.67
@@ -979,13 +979,13 @@
     "vecu": {
       "Vec1_NiveauVie": 25510,
       "Vec2_Logement": 0.8431,
-      "Vec3_StatutSocial": 0.9087,
+      "Vec3_StatutSocial": 0.8855,
       "Vec4_Emploi": 673
     }
   },
   "Eccica-Suarella": {
     "scores_globaux": {
-      "OppChoVec": 7.85,
+      "OppChoVec": 7.86,
       "Opportunités": 4.74,
       "Choix": 9.13,
       "Vécu": 9.85
@@ -1003,16 +1003,16 @@
     "vecu": {
       "Vec1_NiveauVie": 27290,
       "Vec2_Logement": 0.8083,
-      "Vec3_StatutSocial": 0.9277,
+      "Vec3_StatutSocial": 0.9114,
       "Vec4_Emploi": 4992
     }
   },
   "Évisa": {
     "scores_globaux": {
-      "OppChoVec": 3.42,
+      "OppChoVec": 3.44,
       "Opportunités": 3.15,
       "Choix": 8.73,
-      "Vécu": 3.03
+      "Vécu": 3.06
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1027,16 +1027,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20170,
       "Vec2_Logement": 0.8186,
-      "Vec3_StatutSocial": 0.9116,
+      "Vec3_StatutSocial": 0.8946,
       "Vec4_Emploi": 48
     }
   },
   "Figari": {
     "scores_globaux": {
-      "OppChoVec": 2.73,
+      "OppChoVec": 2.72,
       "Opportunités": 3.8,
       "Choix": 7.46,
-      "Vécu": 2.67
+      "Vécu": 2.64
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1051,16 +1051,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20620,
       "Vec2_Logement": 0.7743,
-      "Vec3_StatutSocial": 0.8903,
+      "Vec3_StatutSocial": 0.8588,
       "Vec4_Emploi": 316
     }
   },
   "Foce": {
     "scores_globaux": {
-      "OppChoVec": 4.91,
+      "OppChoVec": 4.94,
       "Opportunités": 4.61,
       "Choix": 8.82,
-      "Vécu": 5.08
+      "Vécu": 5.13
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1075,16 +1075,16 @@
     "vecu": {
       "Vec1_NiveauVie": 26190,
       "Vec2_Logement": 0.8085,
-      "Vec3_StatutSocial": 0.9087,
+      "Vec3_StatutSocial": 0.8941,
       "Vec4_Emploi": 222
     }
   },
   "Forciolo": {
     "scores_globaux": {
-      "OppChoVec": 5.13,
+      "OppChoVec": 5.12,
       "Opportunités": 3.42,
       "Choix": 9.97,
-      "Vécu": 4.78
+      "Vécu": 4.75
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1099,16 +1099,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8648,
-      "Vec3_StatutSocial": 0.9125,
+      "Vec3_StatutSocial": 0.8875,
       "Vec4_Emploi": 118
     }
   },
   "Fozzano": {
     "scores_globaux": {
-      "OppChoVec": 3.04,
+      "OppChoVec": 3.07,
       "Opportunités": 2.43,
       "Choix": 9.24,
-      "Vécu": 1.73
+      "Vécu": 1.81
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1123,16 +1123,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20520,
       "Vec2_Logement": 0.7165,
-      "Vec3_StatutSocial": 0.8964,
+      "Vec3_StatutSocial": 0.8816,
       "Vec4_Emploi": 38
     }
   },
   "Frasseto": {
     "scores_globaux": {
-      "OppChoVec": 4.07,
+      "OppChoVec": 4.03,
       "Opportunités": 2.66,
       "Choix": 9.53,
-      "Vécu": 3.7
+      "Vécu": 3.62
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1147,16 +1147,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8464,
-      "Vec3_StatutSocial": 0.8222,
+      "Vec3_StatutSocial": 0.763,
       "Vec4_Emploi": 115
     }
   },
   "Giuncheto": {
     "scores_globaux": {
-      "OppChoVec": 3.88,
+      "OppChoVec": 3.89,
       "Opportunités": 1.44,
       "Choix": 9.65,
-      "Vécu": 3.96
+      "Vécu": 3.99
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1171,16 +1171,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8094,
-      "Vec3_StatutSocial": 0.887,
+      "Vec3_StatutSocial": 0.8632,
       "Vec4_Emploi": 238
     }
   },
   "Granace": {
     "scores_globaux": {
-      "OppChoVec": 4.69,
+      "OppChoVec": 4.74,
       "Opportunités": 2.39,
       "Choix": 10.0,
-      "Vécu": 4.58
+      "Vécu": 4.69
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1201,10 +1201,10 @@
   },
   "Grossa": {
     "scores_globaux": {
-      "OppChoVec": 3.21,
+      "OppChoVec": 3.17,
       "Opportunités": 3.09,
       "Choix": 9.19,
-      "Vécu": 1.68
+      "Vécu": 1.57
     },
     "opportunites": {
       "Opp1_Education": 5.12,
@@ -1219,7 +1219,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7254,
-      "Vec3_StatutSocial": 0.76,
+      "Vec3_StatutSocial": 0.68,
       "Vec4_Emploi": 181
     }
   },
@@ -1228,7 +1228,7 @@
       "OppChoVec": 4.9,
       "Opportunités": 4.36,
       "Choix": 8.92,
-      "Vécu": 5.11
+      "Vécu": 5.13
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1243,7 +1243,7 @@
     "vecu": {
       "Vec1_NiveauVie": 26630,
       "Vec2_Logement": 0.7534,
-      "Vec3_StatutSocial": 0.9107,
+      "Vec3_StatutSocial": 0.8909,
       "Vec4_Emploi": 848
     }
   },
@@ -1252,7 +1252,7 @@
       "OppChoVec": 4.67,
       "Opportunités": 4.47,
       "Choix": 8.69,
-      "Vécu": 4.88
+      "Vécu": 4.87
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1267,16 +1267,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8364,
-      "Vec3_StatutSocial": 0.9713,
+      "Vec3_StatutSocial": 0.9655,
       "Vec4_Emploi": 13
     }
   },
   "Guargualé": {
     "scores_globaux": {
-      "OppChoVec": 3.07,
+      "OppChoVec": 3.08,
       "Opportunités": 1.62,
       "Choix": 8.59,
-      "Vécu": 3.56
+      "Vécu": 3.57
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1291,7 +1291,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7832,
-      "Vec3_StatutSocial": 0.8884,
+      "Vec3_StatutSocial": 0.8614,
       "Vec4_Emploi": 144
     }
   },
@@ -1300,7 +1300,7 @@
       "OppChoVec": 4.89,
       "Opportunités": 4.13,
       "Choix": 9.75,
-      "Vécu": 3.99
+      "Vécu": 3.98
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1315,7 +1315,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23950,
       "Vec2_Logement": 0.7787,
-      "Vec3_StatutSocial": 0.93,
+      "Vec3_StatutSocial": 0.9125,
       "Vec4_Emploi": 48
     }
   },
@@ -1324,7 +1324,7 @@
       "OppChoVec": 3.45,
       "Opportunités": 2.98,
       "Choix": 7.62,
-      "Vécu": 4.96
+      "Vécu": 4.95
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1339,13 +1339,13 @@
     "vecu": {
       "Vec1_NiveauVie": 23640,
       "Vec2_Logement": 0.7841,
-      "Vec3_StatutSocial": 0.8571,
+      "Vec3_StatutSocial": 0.8187,
       "Vec4_Emploi": 1960
     }
   },
   "Letia": {
     "scores_globaux": {
-      "OppChoVec": 3.46,
+      "OppChoVec": 3.45,
       "Opportunités": 3.4,
       "Choix": 8.98,
       "Vécu": 2.47
@@ -1363,16 +1363,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19930,
       "Vec2_Logement": 0.8175,
-      "Vec3_StatutSocial": 0.8539,
+      "Vec3_StatutSocial": 0.8153,
       "Vec4_Emploi": 134
     }
   },
   "Levie": {
     "scores_globaux": {
-      "OppChoVec": 3.37,
+      "OppChoVec": 3.38,
       "Opportunités": 4.81,
       "Choix": 8.59,
-      "Vécu": 1.49
+      "Vécu": 1.51
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1387,16 +1387,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20980,
       "Vec2_Logement": 0.7357,
-      "Vec3_StatutSocial": 0.8305,
+      "Vec3_StatutSocial": 0.7887,
       "Vec4_Emploi": 16
     }
   },
   "Lopigna": {
     "scores_globaux": {
-      "OppChoVec": 4.9,
+      "OppChoVec": 4.92,
       "Opportunités": 3.2,
       "Choix": 9.72,
-      "Vécu": 4.87
+      "Vécu": 4.9
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1411,7 +1411,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8505,
-      "Vec3_StatutSocial": 0.9502,
+      "Vec3_StatutSocial": 0.9447,
       "Vec4_Emploi": 22
     }
   },
@@ -1420,7 +1420,7 @@
       "OppChoVec": 4.89,
       "Opportunités": 4.13,
       "Choix": 9.49,
-      "Vécu": 4.41
+      "Vécu": 4.42
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1435,16 +1435,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8624,
-      "Vec3_StatutSocial": 0.846,
+      "Vec3_StatutSocial": 0.8075,
       "Vec4_Emploi": 436
     }
   },
   "Marignana": {
     "scores_globaux": {
-      "OppChoVec": 3.78,
+      "OppChoVec": 3.75,
       "Opportunités": 2.51,
       "Choix": 9.37,
-      "Vécu": 3.38
+      "Vécu": 3.32
     },
     "opportunites": {
       "Opp1_Education": 5.13,
@@ -1459,16 +1459,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7869,
-      "Vec3_StatutSocial": 0.8592,
+      "Vec3_StatutSocial": 0.8145,
       "Vec4_Emploi": 199
     }
   },
   "Mela": {
     "scores_globaux": {
-      "OppChoVec": 4.78,
+      "OppChoVec": 4.77,
       "Opportunités": 3.5,
       "Choix": 9.28,
-      "Vécu": 5.05
+      "Vécu": 5.02
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1489,10 +1489,10 @@
   },
   "Moca-Croce": {
     "scores_globaux": {
-      "OppChoVec": 3.91,
+      "OppChoVec": 3.9,
       "Opportunités": 3.42,
       "Choix": 8.96,
-      "Vécu": 3.62
+      "Vécu": 3.6
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1507,7 +1507,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22180,
       "Vec2_Logement": 0.8284,
-      "Vec3_StatutSocial": 0.8795,
+      "Vec3_StatutSocial": 0.8458,
       "Vec4_Emploi": 144
     }
   },
@@ -1516,7 +1516,7 @@
       "OppChoVec": 3.33,
       "Opportunités": 1.81,
       "Choix": 9.26,
-      "Vécu": 2.97
+      "Vécu": 2.98
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1531,16 +1531,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22110,
       "Vec2_Logement": 0.7885,
-      "Vec3_StatutSocial": 0.8634,
+      "Vec3_StatutSocial": 0.8287,
       "Vec4_Emploi": 174
     }
   },
   "Murzo": {
     "scores_globaux": {
-      "OppChoVec": 3.93,
+      "OppChoVec": 3.98,
       "Opportunités": 1.43,
       "Choix": 9.44,
-      "Vécu": 4.42
+      "Vécu": 4.53
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1561,10 +1561,10 @@
   },
   "Ocana": {
     "scores_globaux": {
-      "OppChoVec": 4.17,
+      "OppChoVec": 4.18,
       "Opportunités": 4.22,
       "Choix": 8.97,
-      "Vécu": 3.52
+      "Vécu": 3.54
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1579,7 +1579,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22250,
       "Vec2_Logement": 0.8089,
-      "Vec3_StatutSocial": 0.8715,
+      "Vec3_StatutSocial": 0.8413,
       "Vec4_Emploi": 361
     }
   },
@@ -1588,7 +1588,7 @@
       "OppChoVec": 4.62,
       "Opportunités": 4.16,
       "Choix": 10.0,
-      "Vécu": 2.91
+      "Vécu": 2.9
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1603,16 +1603,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19710,
       "Vec2_Logement": 0.7864,
-      "Vec3_StatutSocial": 0.96,
+      "Vec3_StatutSocial": 0.9508,
       "Vec4_Emploi": 33
     }
   },
   "Olmeto": {
     "scores_globaux": {
-      "OppChoVec": 3.86,
+      "OppChoVec": 3.87,
       "Opportunités": 3.57,
       "Choix": 8.76,
-      "Vécu": 3.71
+      "Vécu": 3.73
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1627,16 +1627,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22710,
       "Vec2_Logement": 0.7564,
-      "Vec3_StatutSocial": 0.9267,
+      "Vec3_StatutSocial": 0.912,
       "Vec4_Emploi": 554
     }
   },
   "Olmiccia": {
     "scores_globaux": {
-      "OppChoVec": 2.93,
+      "OppChoVec": 2.92,
       "Opportunités": 1.97,
       "Choix": 8.41,
-      "Vécu": 3.24
+      "Vécu": 3.2
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1651,16 +1651,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21880,
       "Vec2_Logement": 0.7667,
-      "Vec3_StatutSocial": 0.8673,
+      "Vec3_StatutSocial": 0.8282,
       "Vec4_Emploi": 824
     }
   },
   "Orto": {
     "scores_globaux": {
-      "OppChoVec": 5.53,
+      "OppChoVec": 5.55,
       "Opportunités": 3.62,
       "Choix": 10.0,
-      "Vécu": 5.4
+      "Vécu": 5.43
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1681,10 +1681,10 @@
   },
   "Osani": {
     "scores_globaux": {
-      "OppChoVec": 3.57,
+      "OppChoVec": 3.56,
       "Opportunités": 2.96,
       "Choix": 9.02,
-      "Vécu": 3.08
+      "Vécu": 3.05
     },
     "opportunites": {
       "Opp1_Education": 5.14,
@@ -1699,16 +1699,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7888,
-      "Vec3_StatutSocial": 0.8417,
+      "Vec3_StatutSocial": 0.7957,
       "Vec4_Emploi": 17
     }
   },
   "Ota": {
     "scores_globaux": {
-      "OppChoVec": 1.76,
+      "OppChoVec": 1.74,
       "Opportunités": 2.33,
       "Choix": 7.89,
-      "Vécu": 0.26
+      "Vécu": 0.18
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1723,16 +1723,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22590,
       "Vec2_Logement": 0.6278,
-      "Vec3_StatutSocial": 0.7698,
+      "Vec3_StatutSocial": 0.6959,
       "Vec4_Emploi": 168
     }
   },
   "Palneca": {
     "scores_globaux": {
-      "OppChoVec": 3.46,
+      "OppChoVec": 3.44,
       "Opportunités": 4.4,
       "Choix": 9.46,
-      "Vécu": 0.53
+      "Vécu": 0.49
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1747,16 +1747,16 @@
     "vecu": {
       "Vec1_NiveauVie": 16760,
       "Vec2_Logement": 0.7662,
-      "Vec3_StatutSocial": 0.8368,
+      "Vec3_StatutSocial": 0.7878,
       "Vec4_Emploi": 61
     }
   },
   "Partinello": {
     "scores_globaux": {
-      "OppChoVec": 3.08,
+      "OppChoVec": 3.1,
       "Opportunités": 2.14,
       "Choix": 7.66,
-      "Vécu": 4.65
+      "Vécu": 4.71
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1795,16 +1795,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7487,
-      "Vec3_StatutSocial": 0.925,
+      "Vec3_StatutSocial": 0.9062,
       "Vec4_Emploi": 8
     }
   },
   "Peri": {
     "scores_globaux": {
-      "OppChoVec": 5.18,
+      "OppChoVec": 5.19,
       "Opportunités": 3.26,
       "Choix": 9.46,
-      "Vécu": 5.8
+      "Vécu": 5.82
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1819,16 +1819,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25940,
       "Vec2_Logement": 0.8145,
-      "Vec3_StatutSocial": 0.9373,
+      "Vec3_StatutSocial": 0.9263,
       "Vec4_Emploi": 745
     }
   },
   "Petreto-Bicchisano": {
     "scores_globaux": {
-      "OppChoVec": 4.75,
+      "OppChoVec": 4.76,
       "Opportunités": 4.73,
       "Choix": 9.47,
-      "Vécu": 3.56
+      "Vécu": 3.58
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1843,7 +1843,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21200,
       "Vec2_Logement": 0.8141,
-      "Vec3_StatutSocial": 0.8995,
+      "Vec3_StatutSocial": 0.877,
       "Vec4_Emploi": 442
     }
   },
@@ -1852,7 +1852,7 @@
       "OppChoVec": 2.67,
       "Opportunités": 4.54,
       "Choix": 7.09,
-      "Vécu": 2.37
+      "Vécu": 2.39
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1867,16 +1867,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22900,
       "Vec2_Logement": 0.6866,
-      "Vec3_StatutSocial": 0.896,
+      "Vec3_StatutSocial": 0.8723,
       "Vec4_Emploi": 278
     }
   },
   "Pianottoli-Caldarello": {
     "scores_globaux": {
-      "OppChoVec": 3.39,
+      "OppChoVec": 3.4,
       "Opportunités": 1.36,
       "Choix": 9.39,
-      "Vécu": 3.24
+      "Vécu": 3.26
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1891,16 +1891,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21730,
       "Vec2_Logement": 0.7936,
-      "Vec3_StatutSocial": 0.8899,
+      "Vec3_StatutSocial": 0.8659,
       "Vec4_Emploi": 265
     }
   },
   "Pietrosella": {
     "scores_globaux": {
-      "OppChoVec": 5.08,
+      "OppChoVec": 5.09,
       "Opportunités": 4.07,
       "Choix": 9.26,
-      "Vécu": 5.25
+      "Vécu": 5.27
     },
     "opportunites": {
       "Opp1_Education": 5.15,
@@ -1915,16 +1915,16 @@
     "vecu": {
       "Vec1_NiveauVie": 28370,
       "Vec2_Logement": 0.7635,
-      "Vec3_StatutSocial": 0.8965,
+      "Vec3_StatutSocial": 0.8738,
       "Vec4_Emploi": 335
     }
   },
   "Pila-Canale": {
     "scores_globaux": {
-      "OppChoVec": 2.54,
+      "OppChoVec": 2.55,
       "Opportunités": 3.48,
       "Choix": 7.34,
-      "Vécu": 2.62
+      "Vécu": 2.67
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -1939,7 +1939,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22090,
       "Vec2_Logement": 0.7635,
-      "Vec3_StatutSocial": 0.8611,
+      "Vec3_StatutSocial": 0.8323,
       "Vec4_Emploi": 154
     }
   },
@@ -1948,7 +1948,7 @@
       "OppChoVec": 5.05,
       "Opportunités": 6.11,
       "Choix": 8.2,
-      "Vécu": 4.89
+      "Vécu": 4.88
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -1963,7 +1963,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8635,
-      "Vec3_StatutSocial": 0.9289,
+      "Vec3_StatutSocial": 0.9112,
       "Vec4_Emploi": 93
     }
   },
@@ -1972,7 +1972,7 @@
       "OppChoVec": 0.47,
       "Opportunités": 5.28,
       "Choix": 0.66,
-      "Vécu": 3.58
+      "Vécu": 3.57
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -1987,7 +1987,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21560,
       "Vec2_Logement": 0.7026,
-      "Vec3_StatutSocial": 0.8899,
+      "Vec3_StatutSocial": 0.8609,
       "Vec4_Emploi": 1999
     }
   },
@@ -2011,16 +2011,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19650,
       "Vec2_Logement": 0.5905,
-      "Vec3_StatutSocial": 0.8385,
+      "Vec3_StatutSocial": 0.7955,
       "Vec4_Emploi": 801
     }
   },
   "Quasquara": {
     "scores_globaux": {
-      "OppChoVec": 3.73,
+      "OppChoVec": 3.78,
       "Opportunités": 1.38,
       "Choix": 9.59,
-      "Vécu": 3.73
+      "Vécu": 3.84
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -2035,7 +2035,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8484,
-      "Vec3_StatutSocial": 0.8224,
+      "Vec3_StatutSocial": 0.7912,
       "Vec4_Emploi": 115
     }
   },
@@ -2044,7 +2044,7 @@
       "OppChoVec": 2.6,
       "Opportunités": 2.53,
       "Choix": 8.15,
-      "Vécu": 2.3
+      "Vécu": 2.29
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -2059,16 +2059,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19510,
       "Vec2_Logement": 0.7746,
-      "Vec3_StatutSocial": 0.9075,
+      "Vec3_StatutSocial": 0.8835,
       "Vec4_Emploi": 143
     }
   },
   "Renno": {
     "scores_globaux": {
-      "OppChoVec": 5.75,
+      "OppChoVec": 5.73,
       "Opportunités": 5.47,
       "Choix": 9.91,
-      "Vécu": 4.33
+      "Vécu": 4.3
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -2083,16 +2083,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8335,
-      "Vec3_StatutSocial": 0.9042,
+      "Vec3_StatutSocial": 0.8754,
       "Vec4_Emploi": 143
     }
   },
   "Rezza": {
     "scores_globaux": {
-      "OppChoVec": 4.33,
+      "OppChoVec": 4.3,
       "Opportunités": 3.52,
       "Choix": 9.74,
-      "Vécu": 3.26
+      "Vécu": 3.19
     },
     "opportunites": {
       "Opp1_Education": 5.16,
@@ -2107,7 +2107,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8466,
-      "Vec3_StatutSocial": 0.784,
+      "Vec3_StatutSocial": 0.7157,
       "Vec4_Emploi": 16
     }
   },
@@ -2131,7 +2131,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8343,
-      "Vec3_StatutSocial": 0.9,
+      "Vec3_StatutSocial": 0.875,
       "Vec4_Emploi": 22
     }
   },
@@ -2155,16 +2155,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8506,
-      "Vec3_StatutSocial": 0.903,
+      "Vec3_StatutSocial": 0.8788,
       "Vec4_Emploi": 23
     }
   },
   "Sampolo": {
     "scores_globaux": {
-      "OppChoVec": 4.58,
+      "OppChoVec": 4.56,
       "Opportunités": 2.48,
       "Choix": 9.58,
-      "Vécu": 4.93
+      "Vécu": 4.88
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2179,7 +2179,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8517,
-      "Vec3_StatutSocial": 0.9497,
+      "Vec3_StatutSocial": 0.933,
       "Vec4_Emploi": 77
     }
   },
@@ -2188,7 +2188,7 @@
       "OppChoVec": 2.99,
       "Opportunités": 4.07,
       "Choix": 8.63,
-      "Vécu": 1.1
+      "Vécu": 1.12
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2203,7 +2203,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20370,
       "Vec2_Logement": 0.6854,
-      "Vec3_StatutSocial": 0.8592,
+      "Vec3_StatutSocial": 0.8245,
       "Vec4_Emploi": 221
     }
   },
@@ -2227,7 +2227,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22070,
       "Vec2_Logement": 0.7778,
-      "Vec3_StatutSocial": 0.9042,
+      "Vec3_StatutSocial": 0.8808,
       "Vec4_Emploi": 102
     }
   },
@@ -2236,7 +2236,7 @@
       "OppChoVec": 5.45,
       "Opportunités": 4.86,
       "Choix": 8.69,
-      "Vécu": 6.14
+      "Vécu": 6.16
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2251,16 +2251,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22590,
       "Vec2_Logement": 0.655,
-      "Vec3_StatutSocial": 0.9036,
+      "Vec3_StatutSocial": 0.8816,
       "Vec4_Emploi": 5024
     }
   },
   "Sartène": {
     "scores_globaux": {
-      "OppChoVec": 2.22,
+      "OppChoVec": 2.24,
       "Opportunités": 3.87,
       "Choix": 7.59,
-      "Vécu": 0.85
+      "Vécu": 0.91
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2275,16 +2275,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20130,
       "Vec2_Logement": 0.6461,
-      "Vec3_StatutSocial": 0.8765,
+      "Vec3_StatutSocial": 0.854,
       "Vec4_Emploi": 390
     }
   },
   "Serra-di-Ferro": {
     "scores_globaux": {
-      "OppChoVec": 2.94,
+      "OppChoVec": 2.95,
       "Opportunités": 3.31,
       "Choix": 7.18,
-      "Vécu": 4.11
+      "Vécu": 4.13
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2299,16 +2299,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25310,
       "Vec2_Logement": 0.7629,
-      "Vec3_StatutSocial": 0.9087,
+      "Vec3_StatutSocial": 0.889,
       "Vec4_Emploi": 105
     }
   },
   "Serra-di-Scopamène": {
     "scores_globaux": {
-      "OppChoVec": 1.49,
+      "OppChoVec": 1.5,
       "Opportunités": 3.77,
       "Choix": 4.68,
-      "Vécu": 3.3
+      "Vécu": 3.35
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2323,16 +2323,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7482,
-      "Vec3_StatutSocial": 0.915,
+      "Vec3_StatutSocial": 0.9,
       "Vec4_Emploi": 64
     }
   },
   "Serriera": {
     "scores_globaux": {
-      "OppChoVec": 3.01,
+      "OppChoVec": 2.98,
       "Opportunités": 1.24,
       "Choix": 8.82,
-      "Vécu": 3.3
+      "Vécu": 3.21
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2347,16 +2347,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8251,
-      "Vec3_StatutSocial": 0.8055,
+      "Vec3_StatutSocial": 0.742,
       "Vec4_Emploi": 132
     }
   },
   "Soccia": {
     "scores_globaux": {
-      "OppChoVec": 4.65,
+      "OppChoVec": 4.67,
       "Opportunités": 4.16,
       "Choix": 9.54,
-      "Vécu": 3.77
+      "Vécu": 3.81
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2371,7 +2371,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21050,
       "Vec2_Logement": 0.8668,
-      "Vec3_StatutSocial": 0.8976,
+      "Vec3_StatutSocial": 0.8771,
       "Vec4_Emploi": 22
     }
   },
@@ -2395,16 +2395,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23090,
       "Vec2_Logement": 0.7914,
-      "Vec3_StatutSocial": 0.8507,
+      "Vec3_StatutSocial": 0.8115,
       "Vec4_Emploi": 167
     }
   },
   "Sorbollano": {
     "scores_globaux": {
-      "OppChoVec": 4.28,
+      "OppChoVec": 4.26,
       "Opportunités": 2.18,
       "Choix": 9.88,
-      "Vécu": 4.0
+      "Vécu": 3.97
     },
     "opportunites": {
       "Opp1_Education": 5.17,
@@ -2419,16 +2419,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8313,
-      "Vec3_StatutSocial": 0.875,
+      "Vec3_StatutSocial": 0.8375,
       "Vec4_Emploi": 111
     }
   },
   "Sotta": {
     "scores_globaux": {
-      "OppChoVec": 3.99,
+      "OppChoVec": 4.0,
       "Opportunités": 4.24,
       "Choix": 7.99,
-      "Vécu": 4.63
+      "Vécu": 4.64
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2443,16 +2443,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23970,
       "Vec2_Logement": 0.7863,
-      "Vec3_StatutSocial": 0.892,
+      "Vec3_StatutSocial": 0.8655,
       "Vec4_Emploi": 1062
     }
   },
   "Sant'Andréa-d'Orcino": {
     "scores_globaux": {
-      "OppChoVec": 4.13,
+      "OppChoVec": 4.18,
       "Opportunités": 1.21,
       "Choix": 9.49,
-      "Vécu": 4.95
+      "Vécu": 5.06
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2467,7 +2467,7 @@
     "vecu": {
       "Vec1_NiveauVie": 24510,
       "Vec2_Logement": 0.8429,
-      "Vec3_StatutSocial": 0.9184,
+      "Vec3_StatutSocial": 0.9139,
       "Vec4_Emploi": 143
     }
   },
@@ -2491,16 +2491,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25110,
       "Vec2_Logement": 0.7928,
-      "Vec3_StatutSocial": 0.9214,
+      "Vec3_StatutSocial": 0.9024,
       "Vec4_Emploi": 94
     }
   },
   "Sainte-Lucie-de-Tallano": {
     "scores_globaux": {
-      "OppChoVec": 3.28,
+      "OppChoVec": 3.32,
       "Opportunités": 3.61,
       "Choix": 8.61,
-      "Vécu": 2.45
+      "Vécu": 2.55
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2515,16 +2515,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22600,
       "Vec2_Logement": 0.7205,
-      "Vec3_StatutSocial": 0.8834,
+      "Vec3_StatutSocial": 0.8674,
       "Vec4_Emploi": 137
     }
   },
   "Santa-Maria-Figaniella": {
     "scores_globaux": {
-      "OppChoVec": 2.97,
+      "OppChoVec": 2.93,
       "Opportunités": 3.12,
       "Choix": 8.04,
-      "Vécu": 2.98
+      "Vécu": 2.89
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2539,16 +2539,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8119,
-      "Vec3_StatutSocial": 0.7975,
+      "Vec3_StatutSocial": 0.73,
       "Vec4_Emploi": 46
     }
   },
   "Santa-Maria-Siché": {
     "scores_globaux": {
-      "OppChoVec": 3.93,
+      "OppChoVec": 3.94,
       "Opportunités": 2.74,
       "Choix": 9.4,
-      "Vécu": 3.53
+      "Vécu": 3.54
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2563,16 +2563,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21890,
       "Vec2_Logement": 0.7708,
-      "Vec3_StatutSocial": 0.9496,
+      "Vec3_StatutSocial": 0.9401,
       "Vec4_Emploi": 221
     }
   },
   "Tasso": {
     "scores_globaux": {
-      "OppChoVec": 4.54,
+      "OppChoVec": 4.53,
       "Opportunités": 3.95,
       "Choix": 9.85,
-      "Vécu": 3.17
+      "Vécu": 3.15
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2587,7 +2587,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7946,
-      "Vec3_StatutSocial": 0.84,
+      "Vec3_StatutSocial": 0.7952,
       "Vec4_Emploi": 49
     }
   },
@@ -2611,16 +2611,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24060,
       "Vec2_Logement": 0.8303,
-      "Vec3_StatutSocial": 0.9002,
+      "Vec3_StatutSocial": 0.8755,
       "Vec4_Emploi": 501
     }
   },
   "Tavera": {
     "scores_globaux": {
-      "OppChoVec": 5.16,
+      "OppChoVec": 5.17,
       "Opportunités": 4.81,
       "Choix": 9.48,
-      "Vécu": 4.39
+      "Vécu": 4.43
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2635,7 +2635,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22530,
       "Vec2_Logement": 0.8439,
-      "Vec3_StatutSocial": 0.9307,
+      "Vec3_StatutSocial": 0.9202,
       "Vec4_Emploi": 120
     }
   },
@@ -2644,7 +2644,7 @@
       "OppChoVec": 4.09,
       "Opportunités": 2.44,
       "Choix": 9.53,
-      "Vécu": 3.93
+      "Vécu": 3.94
     },
     "opportunites": {
       "Opp1_Education": 5.18,
@@ -2659,16 +2659,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22150,
       "Vec2_Logement": 0.8047,
-      "Vec3_StatutSocial": 0.9528,
+      "Vec3_StatutSocial": 0.9433,
       "Vec4_Emploi": 70
     }
   },
   "Ucciani": {
     "scores_globaux": {
-      "OppChoVec": 3.56,
+      "OppChoVec": 3.57,
       "Opportunités": 1.4,
       "Choix": 9.37,
-      "Vécu": 3.66
+      "Vécu": 3.7
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2683,16 +2683,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20900,
       "Vec2_Logement": 0.8415,
-      "Vec3_StatutSocial": 0.8961,
+      "Vec3_StatutSocial": 0.8761,
       "Vec4_Emploi": 323
     }
   },
   "Urbalacone": {
     "scores_globaux": {
-      "OppChoVec": 5.87,
+      "OppChoVec": 5.9,
       "Opportunités": 6.22,
       "Choix": 10.0,
-      "Vécu": 3.68
+      "Vécu": 3.73
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2707,7 +2707,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.7901,
-      "Vec3_StatutSocial": 0.89,
+      "Vec3_StatutSocial": 0.87,
       "Vec4_Emploi": 161
     }
   },
@@ -2731,16 +2731,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24300,
       "Vec2_Logement": 0.8041,
-      "Vec3_StatutSocial": 0.8993,
+      "Vec3_StatutSocial": 0.8742,
       "Vec4_Emploi": 685
     }
   },
   "Vero": {
     "scores_globaux": {
-      "OppChoVec": 5.02,
+      "OppChoVec": 5.03,
       "Opportunités": 3.81,
       "Choix": 9.32,
-      "Vécu": 5.23
+      "Vécu": 5.26
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2755,16 +2755,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23610,
       "Vec2_Logement": 0.8164,
-      "Vec3_StatutSocial": 0.9329,
+      "Vec3_StatutSocial": 0.9209,
       "Vec4_Emploi": 1025
     }
   },
   "Vico": {
     "scores_globaux": {
-      "OppChoVec": 4.12,
+      "OppChoVec": 4.14,
       "Opportunités": 4.06,
       "Choix": 8.9,
-      "Vécu": 3.66
+      "Vécu": 3.7
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2779,16 +2779,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23820,
       "Vec2_Logement": 0.7604,
-      "Vec3_StatutSocial": 0.9067,
+      "Vec3_StatutSocial": 0.89,
       "Vec4_Emploi": 223
     }
   },
   "Viggianello": {
     "scores_globaux": {
-      "OppChoVec": 4.87,
+      "OppChoVec": 4.88,
       "Opportunités": 4.74,
       "Choix": 8.93,
-      "Vécu": 4.69
+      "Vécu": 4.72
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2803,7 +2803,7 @@
     "vecu": {
       "Vec1_NiveauVie": 24940,
       "Vec2_Logement": 0.7655,
-      "Vec3_StatutSocial": 0.9187,
+      "Vec3_StatutSocial": 0.9029,
       "Vec4_Emploi": 763
     }
   },
@@ -2812,7 +2812,7 @@
       "OppChoVec": 5.79,
       "Opportunités": 2.94,
       "Choix": 9.83,
-      "Vécu": 6.7
+      "Vécu": 6.68
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2827,16 +2827,16 @@
     "vecu": {
       "Vec1_NiveauVie": 28130,
       "Vec2_Logement": 0.852,
-      "Vec3_StatutSocial": 0.9293,
+      "Vec3_StatutSocial": 0.9106,
       "Vec4_Emploi": 484
     }
   },
   "Zérubia": {
     "scores_globaux": {
-      "OppChoVec": 3.85,
+      "OppChoVec": 3.9,
       "Opportunités": 1.27,
       "Choix": 10.0,
-      "Vécu": 3.42
+      "Vécu": 3.54
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2851,16 +2851,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8526,
-      "Vec3_StatutSocial": 0.79,
+      "Vec3_StatutSocial": 0.75,
       "Vec4_Emploi": 53
     }
   },
   "Zévaco": {
     "scores_globaux": {
-      "OppChoVec": 2.55,
+      "OppChoVec": 2.58,
       "Opportunités": 2.08,
       "Choix": 7.27,
-      "Vécu": 3.93
+      "Vécu": 4.01
     },
     "opportunites": {
       "Opp1_Education": 5.19,
@@ -2881,10 +2881,10 @@
   },
   "Zicavo": {
     "scores_globaux": {
-      "OppChoVec": 4.22,
+      "OppChoVec": 4.21,
       "Opportunités": 3.92,
       "Choix": 9.86,
-      "Vécu": 2.39
+      "Vécu": 2.38
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -2899,16 +2899,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18510,
       "Vec2_Logement": 0.8253,
-      "Vec3_StatutSocial": 0.8992,
+      "Vec3_StatutSocial": 0.8732,
       "Vec4_Emploi": 2
     }
   },
   "Zigliara": {
     "scores_globaux": {
-      "OppChoVec": 4.89,
+      "OppChoVec": 4.88,
       "Opportunités": 2.62,
       "Choix": 9.62,
-      "Vécu": 5.43
+      "Vécu": 5.4
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -2923,7 +2923,7 @@
     "vecu": {
       "Vec1_NiveauVie": 25850,
       "Vec2_Logement": 0.8394,
-      "Vec3_StatutSocial": 0.9243,
+      "Vec3_StatutSocial": 0.902,
       "Vec4_Emploi": 157
     }
   },
@@ -2947,16 +2947,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22550,
       "Vec2_Logement": 0.7741,
-      "Vec3_StatutSocial": 0.8504,
+      "Vec3_StatutSocial": 0.8124,
       "Vec4_Emploi": 424
     }
   },
   "Zoza": {
     "scores_globaux": {
-      "OppChoVec": 4.75,
+      "OppChoVec": 4.72,
       "Opportunités": 3.31,
       "Choix": 10.0,
-      "Vécu": 3.98
+      "Vécu": 3.9
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -2971,16 +2971,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23420,
       "Vec2_Logement": 0.8434,
-      "Vec3_StatutSocial": 0.8575,
+      "Vec3_StatutSocial": 0.81,
       "Vec4_Emploi": 94
     }
   },
   "Aghione": {
     "scores_globaux": {
-      "OppChoVec": 0.0,
+      "OppChoVec": 0.02,
       "Opportunités": 1.73,
       "Choix": 3.33,
-      "Vécu": 1.83
+      "Vécu": 1.89
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -2995,16 +2995,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19870,
       "Vec2_Logement": 0.7246,
-      "Vec3_StatutSocial": 0.871,
+      "Vec3_StatutSocial": 0.846,
       "Vec4_Emploi": 561
     }
   },
   "Aiti": {
     "scores_globaux": {
-      "OppChoVec": 3.86,
+      "OppChoVec": 3.83,
       "Opportunités": 3.65,
       "Choix": 8.93,
-      "Vécu": 3.36
+      "Vécu": 3.28
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -3019,16 +3019,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8549,
-      "Vec3_StatutSocial": 0.85,
+      "Vec3_StatutSocial": 0.8,
       "Vec4_Emploi": 65
     }
   },
   "Alando": {
     "scores_globaux": {
-      "OppChoVec": 3.72,
+      "OppChoVec": 3.73,
       "Opportunités": 3.43,
       "Choix": 10.0,
-      "Vécu": 1.27
+      "Vécu": 1.3
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -3043,7 +3043,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.6168,
-      "Vec3_StatutSocial": 0.911,
+      "Vec3_StatutSocial": 0.8932,
       "Vec4_Emploi": 408
     }
   },
@@ -3052,7 +3052,7 @@
       "OppChoVec": 3.42,
       "Opportunités": 4.06,
       "Choix": 9.03,
-      "Vécu": 1.61
+      "Vécu": 1.62
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -3067,7 +3067,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19020,
       "Vec2_Logement": 0.7451,
-      "Vec3_StatutSocial": 0.8979,
+      "Vec3_StatutSocial": 0.8739,
       "Vec4_Emploi": 67
     }
   },
@@ -3076,7 +3076,7 @@
       "OppChoVec": 1.37,
       "Opportunités": 2.01,
       "Choix": 6.57,
-      "Vécu": 1.6
+      "Vécu": 1.59
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -3091,16 +3091,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19030,
       "Vec2_Logement": 0.7034,
-      "Vec3_StatutSocial": 0.9138,
+      "Vec3_StatutSocial": 0.8905,
       "Vec4_Emploi": 469
     }
   },
   "Algajola": {
     "scores_globaux": {
-      "OppChoVec": 3.1,
+      "OppChoVec": 3.09,
       "Opportunités": 3.01,
       "Choix": 8.4,
-      "Vécu": 2.84
+      "Vécu": 2.83
     },
     "opportunites": {
       "Opp1_Education": 5.2,
@@ -3115,16 +3115,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22750,
       "Vec2_Logement": 0.6415,
-      "Vec3_StatutSocial": 0.89,
+      "Vec3_StatutSocial": 0.8618,
       "Vec4_Emploi": 1556
     }
   },
   "Altiani": {
     "scores_globaux": {
-      "OppChoVec": 6.6,
+      "OppChoVec": 6.63,
       "Opportunités": 7.0,
       "Choix": 10.0,
-      "Vécu": 4.37
+      "Vécu": 4.43
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3145,10 +3145,10 @@
   },
   "Alzi": {
     "scores_globaux": {
-      "OppChoVec": 4.07,
+      "OppChoVec": 4.1,
       "Opportunités": 2.64,
       "Choix": 10.0,
-      "Vécu": 2.92
+      "Vécu": 3.0
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3169,10 +3169,10 @@
   },
   "Ampriani": {
     "scores_globaux": {
-      "OppChoVec": 3.51,
+      "OppChoVec": 3.53,
       "Opportunités": 2.05,
       "Choix": 9.04,
-      "Vécu": 3.63
+      "Vécu": 3.69
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3187,16 +3187,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8724,
-      "Vec3_StatutSocial": 0.8612,
+      "Vec3_StatutSocial": 0.8335,
       "Vec4_Emploi": 10
     }
   },
   "Antisanti": {
     "scores_globaux": {
-      "OppChoVec": 1.36,
+      "OppChoVec": 1.39,
       "Opportunités": 3.33,
       "Choix": 4.94,
-      "Vécu": 2.95
+      "Vécu": 3.03
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3211,16 +3211,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21880,
       "Vec2_Logement": 0.7913,
-      "Vec3_StatutSocial": 0.8797,
+      "Vec3_StatutSocial": 0.8592,
       "Vec4_Emploi": 23
     }
   },
   "Aregno": {
     "scores_globaux": {
-      "OppChoVec": 3.09,
+      "OppChoVec": 3.1,
       "Opportunités": 0.9,
       "Choix": 9.45,
-      "Vécu": 2.67
+      "Vécu": 2.68
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3235,7 +3235,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20750,
       "Vec2_Logement": 0.7295,
-      "Vec3_StatutSocial": 0.8696,
+      "Vec3_StatutSocial": 0.8381,
       "Vec4_Emploi": 1114
     }
   },
@@ -3259,16 +3259,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8483,
-      "Vec3_StatutSocial": 0.9642,
+      "Vec3_StatutSocial": 0.9583,
       "Vec4_Emploi": 29
     }
   },
   "Avapessa": {
     "scores_globaux": {
-      "OppChoVec": 2.41,
+      "OppChoVec": 2.39,
       "Opportunités": 1.37,
       "Choix": 7.69,
-      "Vécu": 3.41
+      "Vécu": 3.37
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3283,7 +3283,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7273,
-      "Vec3_StatutSocial": 0.94,
+      "Vec3_StatutSocial": 0.92,
       "Vec4_Emploi": 970
     }
   },
@@ -3292,7 +3292,7 @@
       "OppChoVec": 3.75,
       "Opportunités": 1.27,
       "Choix": 9.49,
-      "Vécu": 4.02
+      "Vécu": 4.01
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3307,7 +3307,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22110,
       "Vec2_Logement": 0.7996,
-      "Vec3_StatutSocial": 0.9322,
+      "Vec3_StatutSocial": 0.915,
       "Vec4_Emploi": 476
     }
   },
@@ -3316,7 +3316,7 @@
       "OppChoVec": 4.17,
       "Opportunités": 3.7,
       "Choix": 9.57,
-      "Vécu": 2.99
+      "Vécu": 3.0
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3331,7 +3331,7 @@
     "vecu": {
       "Vec1_NiveauVie": 18520,
       "Vec2_Logement": 0.8213,
-      "Vec3_StatutSocial": 0.9645,
+      "Vec3_StatutSocial": 0.9595,
       "Vec4_Emploi": 45
     }
   },
@@ -3340,7 +3340,7 @@
       "OppChoVec": 0.9,
       "Opportunités": 7.51,
       "Choix": 0.0,
-      "Vécu": 3.23
+      "Vécu": 3.25
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3355,7 +3355,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20530,
       "Vec2_Logement": 0.5271,
-      "Vec3_StatutSocial": 0.8868,
+      "Vec3_StatutSocial": 0.8605,
       "Vec4_Emploi": 4498
     }
   },
@@ -3364,7 +3364,7 @@
       "OppChoVec": 2.98,
       "Opportunités": 1.52,
       "Choix": 8.78,
-      "Vécu": 3.09
+      "Vécu": 3.07
     },
     "opportunites": {
       "Opp1_Education": 5.21,
@@ -3379,16 +3379,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23180,
       "Vec2_Logement": 0.7308,
-      "Vec3_StatutSocial": 0.8626,
+      "Vec3_StatutSocial": 0.8241,
       "Vec4_Emploi": 708
     }
   },
   "Bigorno": {
     "scores_globaux": {
-      "OppChoVec": 4.33,
+      "OppChoVec": 4.31,
       "Opportunités": 3.52,
       "Choix": 10.0,
-      "Vécu": 2.79
+      "Vécu": 2.74
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3403,16 +3403,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7867,
-      "Vec3_StatutSocial": 0.8798,
+      "Vec3_StatutSocial": 0.8428,
       "Vec4_Emploi": 65
     }
   },
   "Biguglia": {
     "scores_globaux": {
-      "OppChoVec": 6.37,
+      "OppChoVec": 6.38,
       "Opportunités": 5.56,
       "Choix": 8.74,
-      "Vécu": 7.21
+      "Vécu": 7.23
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3427,16 +3427,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23730,
       "Vec2_Logement": 0.7038,
-      "Vec3_StatutSocial": 0.9121,
+      "Vec3_StatutSocial": 0.8936,
       "Vec4_Emploi": 5016
     }
   },
   "Bisinchi": {
     "scores_globaux": {
-      "OppChoVec": 4.69,
+      "OppChoVec": 4.71,
       "Opportunités": 3.71,
       "Choix": 10.0,
-      "Vécu": 3.5
+      "Vécu": 3.54
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3451,7 +3451,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19410,
       "Vec2_Logement": 0.8302,
-      "Vec3_StatutSocial": 0.9588,
+      "Vec3_StatutSocial": 0.9555,
       "Vec4_Emploi": 214
     }
   },
@@ -3475,16 +3475,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23070,
       "Vec2_Logement": 0.7025,
-      "Vec3_StatutSocial": 0.9233,
+      "Vec3_StatutSocial": 0.9055,
       "Vec4_Emploi": 3735
     }
   },
   "Brando": {
     "scores_globaux": {
-      "OppChoVec": 5.23,
+      "OppChoVec": 5.24,
       "Opportunités": 3.75,
       "Choix": 9.5,
-      "Vécu": 5.44
+      "Vécu": 5.46
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3499,16 +3499,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24860,
       "Vec2_Logement": 0.7659,
-      "Vec3_StatutSocial": 0.9303,
+      "Vec3_StatutSocial": 0.9165,
       "Vec4_Emploi": 1513
     }
   },
   "Bustanico": {
     "scores_globaux": {
-      "OppChoVec": 3.59,
+      "OppChoVec": 3.57,
       "Opportunités": 2.12,
       "Choix": 8.91,
-      "Vécu": 3.97
+      "Vécu": 3.92
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3523,16 +3523,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.839,
-      "Vec3_StatutSocial": 0.94,
+      "Vec3_StatutSocial": 0.92,
       "Vec4_Emploi": 32
     }
   },
   "Cagnano": {
     "scores_globaux": {
-      "OppChoVec": 3.34,
+      "OppChoVec": 3.36,
       "Opportunités": 2.25,
       "Choix": 9.52,
-      "Vécu": 2.22
+      "Vécu": 2.26
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3547,16 +3547,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20210,
       "Vec2_Logement": 0.8129,
-      "Vec3_StatutSocial": 0.8108,
+      "Vec3_StatutSocial": 0.7653,
       "Vec4_Emploi": 263
     }
   },
   "Calacuccia": {
     "scores_globaux": {
-      "OppChoVec": 3.49,
+      "OppChoVec": 3.47,
       "Opportunités": 4.52,
       "Choix": 9.2,
-      "Vécu": 0.99
+      "Vécu": 0.94
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3571,16 +3571,16 @@
     "vecu": {
       "Vec1_NiveauVie": 17950,
       "Vec2_Logement": 0.7436,
-      "Vec3_StatutSocial": 0.8723,
+      "Vec3_StatutSocial": 0.8315,
       "Vec4_Emploi": 74
     }
   },
   "Calenzana": {
     "scores_globaux": {
-      "OppChoVec": 3.72,
+      "OppChoVec": 3.71,
       "Opportunités": 4.58,
       "Choix": 8.2,
-      "Vécu": 3.32
+      "Vécu": 3.31
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3595,16 +3595,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21060,
       "Vec2_Logement": 0.7798,
-      "Vec3_StatutSocial": 0.8906,
+      "Vec3_StatutSocial": 0.8614,
       "Vec4_Emploi": 808
     }
   },
   "Calvi": {
     "scores_globaux": {
-      "OppChoVec": 0.48,
+      "OppChoVec": 0.51,
       "Opportunités": 3.79,
       "Choix": 4.43,
-      "Vécu": 0.12
+      "Vécu": 0.24
     },
     "opportunites": {
       "Opp1_Education": 5.22,
@@ -3619,16 +3619,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20080,
       "Vec2_Logement": 0.6095,
-      "Vec3_StatutSocial": 0.7997,
+      "Vec3_StatutSocial": 0.7622,
       "Vec4_Emploi": 911
     }
   },
   "Cambia": {
     "scores_globaux": {
-      "OppChoVec": 3.46,
+      "OppChoVec": 3.49,
       "Opportunités": 4.05,
       "Choix": 7.65,
-      "Vécu": 4.03
+      "Vécu": 4.11
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3643,16 +3643,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8852,
-      "Vec3_StatutSocial": 0.8847,
+      "Vec3_StatutSocial": 0.8655,
       "Vec4_Emploi": 36
     }
   },
   "Campana": {
     "scores_globaux": {
-      "OppChoVec": 4.7,
+      "OppChoVec": 4.78,
       "Opportunités": 3.64,
       "Choix": 10.0,
-      "Vécu": 3.59
+      "Vécu": 3.77
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3673,10 +3673,10 @@
   },
   "Campi": {
     "scores_globaux": {
-      "OppChoVec": 5.34,
+      "OppChoVec": 5.32,
       "Opportunités": 3.48,
       "Choix": 10.0,
-      "Vécu": 5.11
+      "Vécu": 5.08
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3697,10 +3697,10 @@
   },
   "Campile": {
     "scores_globaux": {
-      "OppChoVec": 3.55,
+      "OppChoVec": 3.56,
       "Opportunités": 3.21,
       "Choix": 8.65,
-      "Vécu": 3.42
+      "Vécu": 3.45
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3715,16 +3715,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19110,
       "Vec2_Logement": 0.8465,
-      "Vec3_StatutSocial": 0.909,
+      "Vec3_StatutSocial": 0.89,
       "Vec4_Emploi": 538
     }
   },
   "Campitello": {
     "scores_globaux": {
-      "OppChoVec": 4.64,
+      "OppChoVec": 4.62,
       "Opportunités": 3.48,
       "Choix": 10.0,
-      "Vécu": 3.58
+      "Vécu": 3.54
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3739,7 +3739,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7993,
-      "Vec3_StatutSocial": 0.9497,
+      "Vec3_StatutSocial": 0.933,
       "Vec4_Emploi": 46
     }
   },
@@ -3748,7 +3748,7 @@
       "OppChoVec": 3.57,
       "Opportunités": 3.51,
       "Choix": 8.43,
-      "Vécu": 3.57
+      "Vécu": 3.56
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3763,16 +3763,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21180,
       "Vec2_Logement": 0.8384,
-      "Vec3_StatutSocial": 0.8801,
+      "Vec3_StatutSocial": 0.8486,
       "Vec4_Emploi": 325
     }
   },
   "Canari": {
     "scores_globaux": {
-      "OppChoVec": 3.36,
+      "OppChoVec": 3.37,
       "Opportunités": 4.58,
       "Choix": 9.1,
-      "Vécu": 0.75
+      "Vécu": 0.79
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3787,7 +3787,7 @@
     "vecu": {
       "Vec1_NiveauVie": 18470,
       "Vec2_Logement": 0.7688,
-      "Vec3_StatutSocial": 0.797,
+      "Vec3_StatutSocial": 0.7477,
       "Vec4_Emploi": 37
     }
   },
@@ -3796,7 +3796,7 @@
       "OppChoVec": 3.78,
       "Opportunités": 2.89,
       "Choix": 8.89,
-      "Vécu": 3.89
+      "Vécu": 3.87
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3811,16 +3811,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20470,
       "Vec2_Logement": 0.8358,
-      "Vec3_StatutSocial": 0.952,
+      "Vec3_StatutSocial": 0.9401,
       "Vec4_Emploi": 234
     }
   },
   "Carcheto-Brustico": {
     "scores_globaux": {
-      "OppChoVec": 3.94,
+      "OppChoVec": 3.93,
       "Opportunités": 2.16,
       "Choix": 9.48,
-      "Vécu": 3.86
+      "Vécu": 3.84
     },
     "opportunites": {
       "Opp1_Education": 5.23,
@@ -3835,16 +3835,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8192,
-      "Vec3_StatutSocial": 0.952,
+      "Vec3_StatutSocial": 0.9401,
       "Vec4_Emploi": 54
     }
   },
   "Carpineto": {
     "scores_globaux": {
-      "OppChoVec": 3.74,
+      "OppChoVec": 3.89,
       "Opportunités": 2.74,
       "Choix": 9.59,
-      "Vécu": 2.72
+      "Vécu": 3.11
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3865,10 +3865,10 @@
   },
   "Carticasi": {
     "scores_globaux": {
-      "OppChoVec": 3.85,
+      "OppChoVec": 3.91,
       "Opportunités": 2.92,
       "Choix": 10.0,
-      "Vécu": 2.11
+      "Vécu": 2.28
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3883,16 +3883,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8791,
-      "Vec3_StatutSocial": 0.6875,
+      "Vec3_StatutSocial": 0.625,
       "Vec4_Emploi": 33
     }
   },
   "Casabianca": {
     "scores_globaux": {
-      "OppChoVec": 3.4,
+      "OppChoVec": 3.41,
       "Opportunités": 4.44,
       "Choix": 8.57,
-      "Vécu": 1.99
+      "Vécu": 2.04
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3907,16 +3907,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7575,
-      "Vec3_StatutSocial": 0.832,
+      "Vec3_StatutSocial": 0.7935,
       "Vec4_Emploi": 84
     }
   },
   "Casalta": {
     "scores_globaux": {
-      "OppChoVec": 5.63,
+      "OppChoVec": 5.62,
       "Opportunités": 5.07,
       "Choix": 9.9,
-      "Vécu": 4.49
+      "Vécu": 4.48
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3931,16 +3931,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8456,
-      "Vec3_StatutSocial": 0.941,
+      "Vec3_StatutSocial": 0.9263,
       "Vec4_Emploi": 515
     }
   },
   "Casamaccioli": {
     "scores_globaux": {
-      "OppChoVec": 3.98,
+      "OppChoVec": 3.95,
       "Opportunités": 2.54,
       "Choix": 9.53,
-      "Vécu": 3.59
+      "Vécu": 3.52
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3955,7 +3955,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20770,
       "Vec2_Logement": 0.8657,
-      "Vec3_StatutSocial": 0.8845,
+      "Vec3_StatutSocial": 0.846,
       "Vec4_Emploi": 79
     }
   },
@@ -3964,7 +3964,7 @@
       "OppChoVec": 4.17,
       "Opportunités": 1.92,
       "Choix": 9.58,
-      "Vécu": 4.42
+      "Vécu": 4.41
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -3979,16 +3979,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23100,
       "Vec2_Logement": 0.7874,
-      "Vec3_StatutSocial": 0.9422,
+      "Vec3_StatutSocial": 0.9287,
       "Vec4_Emploi": 605
     }
   },
   "Casevecchie": {
     "scores_globaux": {
-      "OppChoVec": 5.0,
+      "OppChoVec": 4.99,
       "Opportunités": 5.6,
       "Choix": 9.16,
-      "Vécu": 3.78
+      "Vécu": 3.77
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -4003,16 +4003,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8327,
-      "Vec3_StatutSocial": 0.9289,
+      "Vec3_StatutSocial": 0.9112,
       "Vec4_Emploi": 16
     }
   },
   "Castellare-di-Casinca": {
     "scores_globaux": {
-      "OppChoVec": 4.36,
+      "OppChoVec": 4.37,
       "Opportunités": 4.53,
       "Choix": 8.53,
-      "Vécu": 4.38
+      "Vécu": 4.39
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -4027,16 +4027,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21530,
       "Vec2_Logement": 0.7612,
-      "Vec3_StatutSocial": 0.887,
+      "Vec3_StatutSocial": 0.8602,
       "Vec4_Emploi": 2116
     }
   },
   "Castellare-di-Mercurio": {
     "scores_globaux": {
-      "OppChoVec": 3.78,
+      "OppChoVec": 3.75,
       "Opportunités": 1.61,
       "Choix": 10.0,
-      "Vécu": 3.01
+      "Vécu": 2.93
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -4051,7 +4051,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8015,
-      "Vec3_StatutSocial": 0.8591,
+      "Vec3_StatutSocial": 0.8122,
       "Vec4_Emploi": 325
     }
   },
@@ -4060,7 +4060,7 @@
       "OppChoVec": 4.08,
       "Opportunités": 5.04,
       "Choix": 8.91,
-      "Vécu": 2.6
+      "Vécu": 2.59
     },
     "opportunites": {
       "Opp1_Education": 5.24,
@@ -4075,16 +4075,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20730,
       "Vec2_Logement": 0.7878,
-      "Vec3_StatutSocial": 0.8689,
+      "Vec3_StatutSocial": 0.8339,
       "Vec4_Emploi": 229
     }
   },
   "Castifao": {
     "scores_globaux": {
-      "OppChoVec": 3.25,
+      "OppChoVec": 3.3,
       "Opportunités": 2.25,
       "Choix": 8.74,
-      "Vécu": 3.31
+      "Vécu": 3.45
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4099,16 +4099,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21880,
       "Vec2_Logement": 0.8389,
-      "Vec3_StatutSocial": 0.837,
+      "Vec3_StatutSocial": 0.8133,
       "Vec4_Emploi": 209
     }
   },
   "Castiglione": {
     "scores_globaux": {
-      "OppChoVec": 3.76,
+      "OppChoVec": 3.72,
       "Opportunités": 3.82,
       "Choix": 9.59,
-      "Vécu": 1.78
+      "Vécu": 1.68
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4123,16 +4123,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7858,
-      "Vec3_StatutSocial": 0.775,
+      "Vec3_StatutSocial": 0.7,
       "Vec4_Emploi": 45
     }
   },
   "Castineta": {
     "scores_globaux": {
-      "OppChoVec": 5.02,
+      "OppChoVec": 5.04,
       "Opportunités": 5.25,
       "Choix": 10.0,
-      "Vécu": 2.76
+      "Vécu": 2.8
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4147,16 +4147,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.9028,
-      "Vec3_StatutSocial": 0.714,
+      "Vec3_StatutSocial": 0.6425,
       "Vec4_Emploi": 148
     }
   },
   "Castirla": {
     "scores_globaux": {
-      "OppChoVec": 5.01,
+      "OppChoVec": 5.0,
       "Opportunités": 5.87,
       "Choix": 9.61,
-      "Vécu": 2.74
+      "Vécu": 2.75
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4171,7 +4171,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20070,
       "Vec2_Logement": 0.808,
-      "Vec3_StatutSocial": 0.8392,
+      "Vec3_StatutSocial": 0.797,
       "Vec4_Emploi": 679
     }
   },
@@ -4180,7 +4180,7 @@
       "OppChoVec": 3.45,
       "Opportunités": 0.24,
       "Choix": 9.67,
-      "Vécu": 3.61
+      "Vécu": 3.62
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4195,7 +4195,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21180,
       "Vec2_Logement": 0.7769,
-      "Vec3_StatutSocial": 0.8865,
+      "Vec3_StatutSocial": 0.8595,
       "Vec4_Emploi": 1165
     }
   },
@@ -4204,7 +4204,7 @@
       "OppChoVec": 2.89,
       "Opportunités": 2.37,
       "Choix": 9.02,
-      "Vécu": 1.72
+      "Vécu": 1.73
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4219,7 +4219,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19490,
       "Vec2_Logement": 0.7588,
-      "Vec3_StatutSocial": 0.8659,
+      "Vec3_StatutSocial": 0.8323,
       "Vec4_Emploi": 152
     }
   },
@@ -4228,7 +4228,7 @@
       "OppChoVec": 3.88,
       "Opportunités": 4.33,
       "Choix": 9.0,
-      "Vécu": 2.62
+      "Vécu": 2.64
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4243,7 +4243,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21300,
       "Vec2_Logement": 0.7173,
-      "Vec3_StatutSocial": 0.902,
+      "Vec3_StatutSocial": 0.8795,
       "Vec4_Emploi": 679
     }
   },
@@ -4252,7 +4252,7 @@
       "OppChoVec": 3.55,
       "Opportunités": 4.62,
       "Choix": 7.55,
-      "Vécu": 3.89
+      "Vécu": 3.88
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4267,16 +4267,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23740,
       "Vec2_Logement": 0.7828,
-      "Vec3_StatutSocial": 0.9012,
+      "Vec3_StatutSocial": 0.8752,
       "Vec4_Emploi": 268
     }
   },
   "Corbara": {
     "scores_globaux": {
-      "OppChoVec": 5.2,
+      "OppChoVec": 5.19,
       "Opportunités": 5.59,
       "Choix": 8.94,
-      "Vécu": 4.59
+      "Vécu": 4.58
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4291,16 +4291,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22870,
       "Vec2_Logement": 0.7977,
-      "Vec3_StatutSocial": 0.9163,
+      "Vec3_StatutSocial": 0.8938,
       "Vec4_Emploi": 1022
     }
   },
   "Corscia": {
     "scores_globaux": {
-      "OppChoVec": 3.28,
+      "OppChoVec": 3.29,
       "Opportunités": 2.85,
       "Choix": 9.07,
-      "Vécu": 2.32
+      "Vécu": 2.33
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4315,16 +4315,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18710,
       "Vec2_Logement": 0.7945,
-      "Vec3_StatutSocial": 0.9185,
+      "Vec3_StatutSocial": 0.901,
       "Vec4_Emploi": 73
     }
   },
   "Corte": {
     "scores_globaux": {
-      "OppChoVec": 1.96,
+      "OppChoVec": 1.98,
       "Opportunités": 6.34,
       "Choix": 5.87,
-      "Vécu": 0.11
+      "Vécu": 0.2
     },
     "opportunites": {
       "Opp1_Education": 5.25,
@@ -4339,16 +4339,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20820,
       "Vec2_Logement": 0.5563,
-      "Vec3_StatutSocial": 0.8815,
+      "Vec3_StatutSocial": 0.863,
       "Vec4_Emploi": 500
     }
   },
   "Costa": {
     "scores_globaux": {
-      "OppChoVec": 4.99,
+      "OppChoVec": 4.97,
       "Opportunités": 4.2,
       "Choix": 10.0,
-      "Vécu": 3.74
+      "Vécu": 3.69
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4363,7 +4363,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8101,
-      "Vec3_StatutSocial": 0.9422,
+      "Vec3_StatutSocial": 0.923,
       "Vec4_Emploi": 153
     }
   },
@@ -4387,16 +4387,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8364,
-      "Vec3_StatutSocial": 0.9167,
+      "Vec3_StatutSocial": 0.896,
       "Vec4_Emploi": 79
     }
   },
   "Crocicchia": {
     "scores_globaux": {
-      "OppChoVec": 4.44,
+      "OppChoVec": 4.42,
       "Opportunités": 5.61,
       "Choix": 8.93,
-      "Vécu": 2.84
+      "Vécu": 2.79
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4411,16 +4411,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7344,
-      "Vec3_StatutSocial": 0.9513,
+      "Vec3_StatutSocial": 0.935,
       "Vec4_Emploi": 100
     }
   },
   "Erbajolo": {
     "scores_globaux": {
-      "OppChoVec": 5.77,
+      "OppChoVec": 5.76,
       "Opportunités": 5.3,
       "Choix": 9.56,
-      "Vécu": 5.1
+      "Vécu": 5.08
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4435,16 +4435,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8729,
-      "Vec3_StatutSocial": 0.972,
+      "Vec3_StatutSocial": 0.965,
       "Vec4_Emploi": 493
     }
   },
   "Érone": {
     "scores_globaux": {
-      "OppChoVec": 0.01,
+      "OppChoVec": 0.0,
       "Opportunités": 0.0,
       "Choix": 2.35,
-      "Vécu": 4.27
+      "Vécu": 4.2
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4459,7 +4459,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8983,
-      "Vec3_StatutSocial": 0.8928,
+      "Vec3_StatutSocial": 0.857,
       "Vec4_Emploi": 31
     }
   },
@@ -4468,7 +4468,7 @@
       "OppChoVec": 3.4,
       "Opportunités": 2.65,
       "Choix": 9.45,
-      "Vécu": 2.16
+      "Vécu": 2.14
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4483,16 +4483,16 @@
     "vecu": {
       "Vec1_NiveauVie": 17870,
       "Vec2_Logement": 0.8455,
-      "Vec3_StatutSocial": 0.858,
+      "Vec3_StatutSocial": 0.8193,
       "Vec4_Emploi": 136
     }
   },
   "Farinole": {
     "scores_globaux": {
-      "OppChoVec": 4.7,
+      "OppChoVec": 4.72,
       "Opportunités": 4.68,
       "Choix": 9.0,
-      "Vécu": 4.27
+      "Vécu": 4.3
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4507,16 +4507,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23220,
       "Vec2_Logement": 0.821,
-      "Vec3_StatutSocial": 0.9055,
+      "Vec3_StatutSocial": 0.886,
       "Vec4_Emploi": 313
     }
   },
   "Favalello": {
     "scores_globaux": {
-      "OppChoVec": 3.34,
+      "OppChoVec": 3.31,
       "Opportunités": 1.5,
       "Choix": 9.28,
-      "Vécu": 3.19
+      "Vécu": 3.12
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4531,16 +4531,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.82,
-      "Vec3_StatutSocial": 0.8313,
+      "Vec3_StatutSocial": 0.7773,
       "Vec4_Emploi": 562
     }
   },
   "Felce": {
     "scores_globaux": {
-      "OppChoVec": 4.59,
+      "OppChoVec": 4.72,
       "Opportunités": 4.58,
       "Choix": 9.43,
-      "Vécu": 3.41
+      "Vécu": 3.73
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4555,7 +4555,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8309,
-      "Vec3_StatutSocial": 0.89,
+      "Vec3_StatutSocial": 0.9057,
       "Vec4_Emploi": 42
     }
   },
@@ -4564,7 +4564,7 @@
       "OppChoVec": 2.56,
       "Opportunités": 0.6,
       "Choix": 9.07,
-      "Vécu": 2.04
+      "Vécu": 2.03
     },
     "opportunites": {
       "Opp1_Education": 5.26,
@@ -4579,16 +4579,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20360,
       "Vec2_Logement": 0.7574,
-      "Vec3_StatutSocial": 0.865,
+      "Vec3_StatutSocial": 0.829,
       "Vec4_Emploi": 211
     }
   },
   "Ficaja": {
     "scores_globaux": {
-      "OppChoVec": 4.56,
+      "OppChoVec": 4.64,
       "Opportunités": 6.16,
       "Choix": 9.57,
-      "Vécu": 1.38
+      "Vécu": 1.58
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4603,16 +4603,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7954,
-      "Vec3_StatutSocial": 0.7163,
+      "Vec3_StatutSocial": 0.6663,
       "Vec4_Emploi": 82
     }
   },
   "Focicchia": {
     "scores_globaux": {
-      "OppChoVec": 3.74,
+      "OppChoVec": 3.77,
       "Opportunités": 1.6,
       "Choix": 10.0,
-      "Vécu": 2.9
+      "Vécu": 2.97
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4633,10 +4633,10 @@
   },
   "Furiani": {
     "scores_globaux": {
-      "OppChoVec": 6.34,
+      "OppChoVec": 6.37,
       "Opportunités": 5.65,
       "Choix": 8.62,
-      "Vécu": 7.26
+      "Vécu": 7.29
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4651,16 +4651,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23840,
       "Vec2_Logement": 0.7195,
-      "Vec3_StatutSocial": 0.9163,
+      "Vec3_StatutSocial": 0.9015,
       "Vec4_Emploi": 4761
     }
   },
   "Galéria": {
     "scores_globaux": {
-      "OppChoVec": 3.84,
+      "OppChoVec": 3.83,
       "Opportunités": 4.08,
       "Choix": 9.28,
-      "Vécu": 2.29
+      "Vécu": 2.26
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4675,16 +4675,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21850,
       "Vec2_Logement": 0.7818,
-      "Vec3_StatutSocial": 0.8203,
+      "Vec3_StatutSocial": 0.7675,
       "Vec4_Emploi": 50
     }
   },
   "Gavignano": {
     "scores_globaux": {
-      "OppChoVec": 3.78,
+      "OppChoVec": 3.77,
       "Opportunités": 3.85,
       "Choix": 8.5,
-      "Vécu": 3.68
+      "Vécu": 3.64
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4699,7 +4699,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.839,
-      "Vec3_StatutSocial": 0.8916,
+      "Vec3_StatutSocial": 0.8591,
       "Vec4_Emploi": 213
     }
   },
@@ -4708,7 +4708,7 @@
       "OppChoVec": 0.82,
       "Opportunités": 2.51,
       "Choix": 4.78,
-      "Vécu": 2.11
+      "Vécu": 2.13
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4723,16 +4723,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20420,
       "Vec2_Logement": 0.7243,
-      "Vec3_StatutSocial": 0.8542,
+      "Vec3_StatutSocial": 0.8185,
       "Vec4_Emploi": 848
     }
   },
   "Ghisoni": {
     "scores_globaux": {
-      "OppChoVec": 4.34,
+      "OppChoVec": 4.36,
       "Opportunités": 5.23,
       "Choix": 9.81,
-      "Vécu": 1.42
+      "Vécu": 1.48
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4747,16 +4747,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20410,
       "Vec2_Logement": 0.71,
-      "Vec3_StatutSocial": 0.8753,
+      "Vec3_StatutSocial": 0.8512,
       "Vec4_Emploi": 46
     }
   },
   "Giocatojo": {
     "scores_globaux": {
-      "OppChoVec": 4.4,
+      "OppChoVec": 4.36,
       "Opportunités": 5.16,
       "Choix": 8.96,
-      "Vécu": 3.17
+      "Vécu": 3.08
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4771,7 +4771,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8595,
-      "Vec3_StatutSocial": 0.8215,
+      "Vec3_StatutSocial": 0.762,
       "Vec4_Emploi": 87
     }
   },
@@ -4780,7 +4780,7 @@
       "OppChoVec": 3.39,
       "Opportunités": 3.48,
       "Choix": 8.69,
-      "Vécu": 2.71
+      "Vécu": 2.73
     },
     "opportunites": {
       "Opp1_Education": 5.27,
@@ -4795,16 +4795,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7456,
-      "Vec3_StatutSocial": 0.9135,
+      "Vec3_StatutSocial": 0.8942,
       "Vec4_Emploi": 199
     }
   },
   "Isolaccio-di-Fiumorbo": {
     "scores_globaux": {
-      "OppChoVec": 4.06,
+      "OppChoVec": 4.05,
       "Opportunités": 5.68,
       "Choix": 9.08,
-      "Vécu": 1.53
+      "Vécu": 1.5
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4819,16 +4819,16 @@
     "vecu": {
       "Vec1_NiveauVie": 17680,
       "Vec2_Logement": 0.8022,
-      "Vec3_StatutSocial": 0.8658,
+      "Vec3_StatutSocial": 0.827,
       "Vec4_Emploi": 28
     }
   },
   "Lama": {
     "scores_globaux": {
-      "OppChoVec": 3.57,
+      "OppChoVec": 3.54,
       "Opportunités": 4.13,
       "Choix": 8.38,
-      "Vécu": 3.08
+      "Vécu": 3.02
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4843,16 +4843,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24250,
       "Vec2_Logement": 0.734,
-      "Vec3_StatutSocial": 0.8655,
+      "Vec3_StatutSocial": 0.8233,
       "Vec4_Emploi": 209
     }
   },
   "Lano": {
     "scores_globaux": {
-      "OppChoVec": 4.8,
+      "OppChoVec": 4.79,
       "Opportunités": 3.52,
       "Choix": 9.65,
-      "Vécu": 4.49
+      "Vécu": 4.46
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4873,10 +4873,10 @@
   },
   "Lavatoggio": {
     "scores_globaux": {
-      "OppChoVec": 2.92,
+      "OppChoVec": 2.9,
       "Opportunités": 1.77,
       "Choix": 8.94,
-      "Vécu": 2.47
+      "Vécu": 2.4
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4891,16 +4891,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19770,
       "Vec2_Logement": 0.7512,
-      "Vec3_StatutSocial": 0.828,
+      "Vec3_StatutSocial": 0.7732,
       "Vec4_Emploi": 1401
     }
   },
   "Lento": {
     "scores_globaux": {
-      "OppChoVec": 5.3,
+      "OppChoVec": 5.29,
       "Opportunités": 6.18,
       "Choix": 9.44,
-      "Vécu": 3.38
+      "Vécu": 3.36
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4915,16 +4915,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7926,
-      "Vec3_StatutSocial": 0.936,
+      "Vec3_StatutSocial": 0.9185,
       "Vec4_Emploi": 64
     }
   },
   "Linguizzetta": {
     "scores_globaux": {
-      "OppChoVec": 0.13,
+      "OppChoVec": 0.15,
       "Opportunités": 1.25,
       "Choix": 4.62,
-      "Vécu": 0.79
+      "Vécu": 0.85
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4939,7 +4939,7 @@
     "vecu": {
       "Vec1_NiveauVie": 18010,
       "Vec2_Logement": 0.7284,
-      "Vec3_StatutSocial": 0.8612,
+      "Vec3_StatutSocial": 0.8323,
       "Vec4_Emploi": 153
     }
   },
@@ -4948,7 +4948,7 @@
       "OppChoVec": 3.56,
       "Opportunités": 4.1,
       "Choix": 9.49,
-      "Vécu": 1.1
+      "Vécu": 1.12
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4963,16 +4963,16 @@
     "vecu": {
       "Vec1_NiveauVie": 15600,
       "Vec2_Logement": 0.8206,
-      "Vec3_StatutSocial": 0.8635,
+      "Vec3_StatutSocial": 0.831,
       "Vec4_Emploi": 102
     }
   },
   "Lozzi": {
     "scores_globaux": {
-      "OppChoVec": 3.45,
+      "OppChoVec": 3.46,
       "Opportunités": 2.27,
       "Choix": 9.2,
-      "Vécu": 3.04
+      "Vécu": 3.06
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -4987,16 +4987,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20710,
       "Vec2_Logement": 0.8001,
-      "Vec3_StatutSocial": 0.9149,
+      "Vec3_StatutSocial": 0.8979,
       "Vec4_Emploi": 76
     }
   },
   "Lucciana": {
     "scores_globaux": {
-      "OppChoVec": 3.89,
+      "OppChoVec": 3.9,
       "Opportunités": 4.29,
       "Choix": 7.86,
-      "Vécu": 4.54
+      "Vécu": 4.56
     },
     "opportunites": {
       "Opp1_Education": 5.28,
@@ -5011,16 +5011,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20920,
       "Vec2_Logement": 0.6749,
-      "Vec3_StatutSocial": 0.8944,
+      "Vec3_StatutSocial": 0.8701,
       "Vec4_Emploi": 3675
     }
   },
   "Lugo-di-Nazza": {
     "scores_globaux": {
-      "OppChoVec": 3.64,
+      "OppChoVec": 3.62,
       "Opportunités": 1.93,
       "Choix": 9.27,
-      "Vécu": 3.66
+      "Vécu": 3.61
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5035,16 +5035,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8242,
-      "Vec3_StatutSocial": 0.8945,
+      "Vec3_StatutSocial": 0.8615,
       "Vec4_Emploi": 367
     }
   },
   "Lumio": {
     "scores_globaux": {
-      "OppChoVec": 3.46,
+      "OppChoVec": 3.5,
       "Opportunités": 4.54,
       "Choix": 7.13,
-      "Vécu": 4.39
+      "Vécu": 4.49
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5059,16 +5059,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24240,
       "Vec2_Logement": 0.7725,
-      "Vec3_StatutSocial": 0.8273,
+      "Vec3_StatutSocial": 0.7953,
       "Vec4_Emploi": 1558
     }
   },
   "Luri": {
     "scores_globaux": {
-      "OppChoVec": 3.65,
+      "OppChoVec": 3.66,
       "Opportunités": 4.07,
       "Choix": 9.23,
-      "Vécu": 1.88
+      "Vécu": 1.91
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5083,16 +5083,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21080,
       "Vec2_Logement": 0.7523,
-      "Vec3_StatutSocial": 0.8377,
+      "Vec3_StatutSocial": 0.7982,
       "Vec4_Emploi": 114
     }
   },
   "Manso": {
     "scores_globaux": {
-      "OppChoVec": 4.66,
+      "OppChoVec": 4.65,
       "Opportunités": 3.07,
       "Choix": 9.95,
-      "Vécu": 4.04
+      "Vécu": 4.02
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5107,16 +5107,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23640,
       "Vec2_Logement": 0.8354,
-      "Vec3_StatutSocial": 0.8751,
+      "Vec3_StatutSocial": 0.8411,
       "Vec4_Emploi": 7
     }
   },
   "Matra": {
     "scores_globaux": {
-      "OppChoVec": 4.76,
+      "OppChoVec": 4.74,
       "Opportunités": 3.79,
       "Choix": 9.71,
-      "Vécu": 4.06
+      "Vécu": 4.01
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5131,16 +5131,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8537,
-      "Vec3_StatutSocial": 0.9318,
+      "Vec3_StatutSocial": 0.909,
       "Vec4_Emploi": 16
     }
   },
   "Mausoléo": {
     "scores_globaux": {
-      "OppChoVec": 2.97,
+      "OppChoVec": 2.96,
       "Opportunités": 2.03,
       "Choix": 7.73,
-      "Vécu": 4.34
+      "Vécu": 4.32
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5161,10 +5161,10 @@
   },
   "Mazzola": {
     "scores_globaux": {
-      "OppChoVec": 3.27,
+      "OppChoVec": 3.37,
       "Opportunités": 3.8,
       "Choix": 7.56,
-      "Vécu": 3.94
+      "Vécu": 4.18
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5185,10 +5185,10 @@
   },
   "Meria": {
     "scores_globaux": {
-      "OppChoVec": 3.79,
+      "OppChoVec": 3.78,
       "Opportunités": 2.53,
       "Choix": 9.47,
-      "Vécu": 3.23
+      "Vécu": 3.21
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5203,16 +5203,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8347,
-      "Vec3_StatutSocial": 0.8595,
+      "Vec3_StatutSocial": 0.8205,
       "Vec4_Emploi": 107
     }
   },
   "Moïta": {
     "scores_globaux": {
-      "OppChoVec": 3.87,
+      "OppChoVec": 3.84,
       "Opportunités": 4.71,
       "Choix": 9.88,
-      "Vécu": 0.57
+      "Vécu": 0.48
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5227,7 +5227,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7251,
-      "Vec3_StatutSocial": 0.7283,
+      "Vec3_StatutSocial": 0.6412,
       "Vec4_Emploi": 25
     }
   },
@@ -5236,7 +5236,7 @@
       "OppChoVec": 3.95,
       "Opportunités": 2.56,
       "Choix": 9.46,
-      "Vécu": 3.62
+      "Vécu": 3.63
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5251,16 +5251,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22540,
       "Vec2_Logement": 0.8183,
-      "Vec3_StatutSocial": 0.8689,
+      "Vec3_StatutSocial": 0.8363,
       "Vec4_Emploi": 266
     }
   },
   "Monacia-d'Orezza": {
     "scores_globaux": {
-      "OppChoVec": 3.07,
+      "OppChoVec": 3.04,
       "Opportunités": 2.05,
       "Choix": 8.93,
-      "Vécu": 2.66
+      "Vécu": 2.6
     },
     "opportunites": {
       "Opp1_Education": 5.29,
@@ -5275,16 +5275,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7756,
-      "Vec3_StatutSocial": 0.8845,
+      "Vec3_StatutSocial": 0.846,
       "Vec4_Emploi": 27
     }
   },
   "Moncale": {
     "scores_globaux": {
-      "OppChoVec": 4.18,
+      "OppChoVec": 4.17,
       "Opportunités": 4.21,
       "Choix": 9.14,
-      "Vécu": 3.28
+      "Vécu": 3.24
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5299,7 +5299,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20830,
       "Vec2_Logement": 0.806,
-      "Vec3_StatutSocial": 0.8635,
+      "Vec3_StatutSocial": 0.8228,
       "Vec4_Emploi": 763
     }
   },
@@ -5323,16 +5323,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19490,
       "Vec2_Logement": 0.7301,
-      "Vec3_StatutSocial": 0.9074,
+      "Vec3_StatutSocial": 0.8846,
       "Vec4_Emploi": 300
     }
   },
   "Montegrosso": {
     "scores_globaux": {
-      "OppChoVec": 4.04,
+      "OppChoVec": 4.05,
       "Opportunités": 3.01,
       "Choix": 8.91,
-      "Vécu": 4.36
+      "Vécu": 4.39
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5347,7 +5347,7 @@
     "vecu": {
       "Vec1_NiveauVie": 23070,
       "Vec2_Logement": 0.7876,
-      "Vec3_StatutSocial": 0.909,
+      "Vec3_StatutSocial": 0.89,
       "Vec4_Emploi": 905
     }
   },
@@ -5371,16 +5371,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23000,
       "Vec2_Logement": 0.7303,
-      "Vec3_StatutSocial": 0.9062,
+      "Vec3_StatutSocial": 0.8826,
       "Vec4_Emploi": 850
     }
   },
   "Morosaglia": {
     "scores_globaux": {
-      "OppChoVec": 4.01,
+      "OppChoVec": 4.02,
       "Opportunités": 5.39,
       "Choix": 8.75,
-      "Vécu": 2.3
+      "Vécu": 2.34
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5395,16 +5395,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20840,
       "Vec2_Logement": 0.7464,
-      "Vec3_StatutSocial": 0.8862,
+      "Vec3_StatutSocial": 0.863,
       "Vec4_Emploi": 251
     }
   },
   "Morsiglia": {
     "scores_globaux": {
-      "OppChoVec": 4.37,
+      "OppChoVec": 4.36,
       "Opportunités": 4.86,
       "Choix": 9.69,
-      "Vécu": 2.13
+      "Vécu": 2.11
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5419,16 +5419,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7798,
-      "Vec3_StatutSocial": 0.8141,
+      "Vec3_StatutSocial": 0.7618,
       "Vec4_Emploi": 112
     }
   },
   "Muracciole": {
     "scores_globaux": {
-      "OppChoVec": 1.1,
+      "OppChoVec": 1.14,
       "Opportunités": 1.96,
       "Choix": 4.01,
-      "Vécu": 4.5
+      "Vécu": 4.6
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5449,10 +5449,10 @@
   },
   "Murato": {
     "scores_globaux": {
-      "OppChoVec": 5.16,
+      "OppChoVec": 5.15,
       "Opportunités": 4.31,
       "Choix": 9.49,
-      "Vécu": 4.83
+      "Vécu": 4.82
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5467,16 +5467,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23330,
       "Vec2_Logement": 0.7928,
-      "Vec3_StatutSocial": 0.933,
+      "Vec3_StatutSocial": 0.9168,
       "Vec4_Emploi": 1007
     }
   },
   "Muro": {
     "scores_globaux": {
-      "OppChoVec": 3.27,
+      "OppChoVec": 3.29,
       "Opportunités": 2.04,
       "Choix": 9.3,
-      "Vécu": 2.58
+      "Vécu": 2.64
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5491,16 +5491,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20680,
       "Vec2_Logement": 0.759,
-      "Vec3_StatutSocial": 0.875,
+      "Vec3_StatutSocial": 0.8512,
       "Vec4_Emploi": 564
     }
   },
   "Nessa": {
     "scores_globaux": {
-      "OppChoVec": 3.66,
+      "OppChoVec": 3.65,
       "Opportunités": 2.17,
       "Choix": 9.24,
-      "Vécu": 3.57
+      "Vécu": 3.55
     },
     "opportunites": {
       "Opp1_Education": 5.3,
@@ -5515,16 +5515,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.838,
-      "Vec3_StatutSocial": 0.8828,
+      "Vec3_StatutSocial": 0.8508,
       "Vec4_Emploi": 198
     }
   },
   "Nocario": {
     "scores_globaux": {
-      "OppChoVec": 4.18,
+      "OppChoVec": 4.16,
       "Opportunités": 3.6,
       "Choix": 9.33,
-      "Vécu": 3.51
+      "Vécu": 3.46
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5539,16 +5539,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.813,
-      "Vec3_StatutSocial": 0.9213,
+      "Vec3_StatutSocial": 0.895,
       "Vec4_Emploi": 73
     }
   },
   "Noceta": {
     "scores_globaux": {
-      "OppChoVec": 4.49,
+      "OppChoVec": 4.53,
       "Opportunités": 2.92,
       "Choix": 10.0,
-      "Vécu": 3.7
+      "Vécu": 3.81
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5563,16 +5563,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8425,
-      "Vec3_StatutSocial": 0.9,
+      "Vec3_StatutSocial": 0.89,
       "Vec4_Emploi": 102
     }
   },
   "Nonza": {
     "scores_globaux": {
-      "OppChoVec": 5.12,
+      "OppChoVec": 5.13,
       "Opportunités": 5.98,
       "Choix": 9.45,
-      "Vécu": 3.18
+      "Vécu": 3.21
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5587,16 +5587,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7682,
-      "Vec3_StatutSocial": 0.9429,
+      "Vec3_StatutSocial": 0.9334,
       "Vec4_Emploi": 107
     }
   },
   "Novale": {
     "scores_globaux": {
-      "OppChoVec": 4.49,
+      "OppChoVec": 4.46,
       "Opportunités": 4.72,
       "Choix": 9.08,
-      "Vécu": 3.62
+      "Vécu": 3.56
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5611,7 +5611,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8506,
-      "Vec3_StatutSocial": 0.8875,
+      "Vec3_StatutSocial": 0.85,
       "Vec4_Emploi": 30
     }
   },
@@ -5635,7 +5635,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7803,
-      "Vec3_StatutSocial": 0.9247,
+      "Vec3_StatutSocial": 0.908,
       "Vec4_Emploi": 39
     }
   },
@@ -5659,16 +5659,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21370,
       "Vec2_Logement": 0.772,
-      "Vec3_StatutSocial": 0.9116,
+      "Vec3_StatutSocial": 0.8901,
       "Vec4_Emploi": 685
     }
   },
   "Ogliastro": {
     "scores_globaux": {
-      "OppChoVec": 3.33,
+      "OppChoVec": 3.32,
       "Opportunités": 3.91,
       "Choix": 8.69,
-      "Vécu": 2.14
+      "Vécu": 2.11
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5683,16 +5683,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7385,
-      "Vec3_StatutSocial": 0.875,
+      "Vec3_StatutSocial": 0.8383,
       "Vec4_Emploi": 58
     }
   },
   "Olcani": {
     "scores_globaux": {
-      "OppChoVec": 3.3,
+      "OppChoVec": 3.28,
       "Opportunités": 2.99,
       "Choix": 9.28,
-      "Vécu": 1.88
+      "Vécu": 1.83
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5707,7 +5707,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.6966,
-      "Vec3_StatutSocial": 0.9085,
+      "Vec3_StatutSocial": 0.878,
       "Vec4_Emploi": 4
     }
   },
@@ -5716,7 +5716,7 @@
       "OppChoVec": 3.52,
       "Opportunités": 3.72,
       "Choix": 8.76,
-      "Vécu": 2.71
+      "Vécu": 2.7
     },
     "opportunites": {
       "Opp1_Education": 5.31,
@@ -5731,16 +5731,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21900,
       "Vec2_Logement": 0.7321,
-      "Vec3_StatutSocial": 0.8764,
+      "Vec3_StatutSocial": 0.8428,
       "Vec4_Emploi": 615
     }
   },
   "Olmeta-di-Capocorso": {
     "scores_globaux": {
-      "OppChoVec": 3.77,
+      "OppChoVec": 3.78,
       "Opportunités": 3.12,
       "Choix": 9.31,
-      "Vécu": 2.96
+      "Vécu": 2.99
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5755,7 +5755,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19560,
       "Vec2_Logement": 0.8381,
-      "Vec3_StatutSocial": 0.9012,
+      "Vec3_StatutSocial": 0.8805,
       "Vec4_Emploi": 43
     }
   },
@@ -5779,7 +5779,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21730,
       "Vec2_Logement": 0.7492,
-      "Vec3_StatutSocial": 0.8985,
+      "Vec3_StatutSocial": 0.874,
       "Vec4_Emploi": 2888
     }
   },
@@ -5803,7 +5803,7 @@
     "vecu": {
       "Vec1_NiveauVie": 18300,
       "Vec2_Logement": 0.7988,
-      "Vec3_StatutSocial": 0.8183,
+      "Vec3_StatutSocial": 0.7698,
       "Vec4_Emploi": 20
     }
   },
@@ -5812,7 +5812,7 @@
       "OppChoVec": 1.45,
       "Opportunités": 3.85,
       "Choix": 4.41,
-      "Vécu": 3.48
+      "Vécu": 3.5
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5827,16 +5827,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.726,
-      "Vec3_StatutSocial": 0.9401,
+      "Vec3_StatutSocial": 0.9281,
       "Vec4_Emploi": 1069
     }
   },
   "Omessa": {
     "scores_globaux": {
-      "OppChoVec": 3.16,
+      "OppChoVec": 3.18,
       "Opportunités": 4.25,
       "Choix": 8.28,
-      "Vécu": 2.03
+      "Vécu": 2.09
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5851,16 +5851,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20320,
       "Vec2_Logement": 0.7115,
-      "Vec3_StatutSocial": 0.8749,
+      "Vec3_StatutSocial": 0.8506,
       "Vec4_Emploi": 758
     }
   },
   "Ortale": {
     "scores_globaux": {
-      "OppChoVec": 3.77,
+      "OppChoVec": 3.74,
       "Opportunités": 3.34,
       "Choix": 9.07,
-      "Vécu": 3.17
+      "Vécu": 3.1
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5875,16 +5875,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8167,
-      "Vec3_StatutSocial": 0.8747,
+      "Vec3_StatutSocial": 0.833,
       "Vec4_Emploi": 125
     }
   },
   "Ortiporio": {
     "scores_globaux": {
-      "OppChoVec": 3.85,
+      "OppChoVec": 3.84,
       "Opportunités": 2.71,
       "Choix": 9.78,
-      "Vécu": 2.69
+      "Vécu": 2.68
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5899,16 +5899,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20690,
       "Vec2_Logement": 0.8314,
-      "Vec3_StatutSocial": 0.8362,
+      "Vec3_StatutSocial": 0.7908,
       "Vec4_Emploi": 87
     }
   },
   "Palasca": {
     "scores_globaux": {
-      "OppChoVec": 1.53,
+      "OppChoVec": 1.52,
       "Opportunités": 0.64,
       "Choix": 7.25,
-      "Vécu": 2.02
+      "Vécu": 1.97
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5923,16 +5923,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19960,
       "Vec2_Logement": 0.7386,
-      "Vec3_StatutSocial": 0.8519,
+      "Vec3_StatutSocial": 0.8059,
       "Vec4_Emploi": 747
     }
   },
   "Pancheraccia": {
     "scores_globaux": {
-      "OppChoVec": 1.88,
+      "OppChoVec": 1.89,
       "Opportunités": 2.89,
       "Choix": 7.06,
-      "Vécu": 1.66
+      "Vécu": 1.68
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5947,16 +5947,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18390,
       "Vec2_Logement": 0.7864,
-      "Vec3_StatutSocial": 0.8591,
+      "Vec3_StatutSocial": 0.8247,
       "Vec4_Emploi": 192
     }
   },
   "Parata": {
     "scores_globaux": {
-      "OppChoVec": 4.54,
+      "OppChoVec": 4.53,
       "Opportunités": 3.65,
       "Choix": 10.0,
-      "Vécu": 3.2
+      "Vécu": 3.17
     },
     "opportunites": {
       "Opp1_Education": 5.32,
@@ -5980,7 +5980,7 @@
       "OppChoVec": 3.13,
       "Opportunités": 2.83,
       "Choix": 8.32,
-      "Vécu": 3.2
+      "Vécu": 3.23
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -5995,7 +5995,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20520,
       "Vec2_Logement": 0.7635,
-      "Vec3_StatutSocial": 0.903,
+      "Vec3_StatutSocial": 0.882,
       "Vec4_Emploi": 978
     }
   },
@@ -6019,7 +6019,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8704,
-      "Vec3_StatutSocial": 0.9,
+      "Vec3_StatutSocial": 0.875,
       "Vec4_Emploi": 79
     }
   },
@@ -6043,7 +6043,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20440,
       "Vec2_Logement": 0.6967,
-      "Vec3_StatutSocial": 0.8518,
+      "Vec3_StatutSocial": 0.8133,
       "Vec4_Emploi": 1814
     }
   },
@@ -6052,7 +6052,7 @@
       "OppChoVec": 4.1,
       "Opportunités": 4.09,
       "Choix": 9.14,
-      "Vécu": 3.19
+      "Vécu": 3.2
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6067,16 +6067,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8517,
-      "Vec3_StatutSocial": 0.84,
+      "Vec3_StatutSocial": 0.7983,
       "Vec4_Emploi": 32
     }
   },
   "Pero-Casevecchie": {
     "scores_globaux": {
-      "OppChoVec": 4.48,
+      "OppChoVec": 4.5,
       "Opportunités": 4.19,
       "Choix": 10.0,
-      "Vécu": 2.55
+      "Vécu": 2.6
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6091,7 +6091,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7549,
-      "Vec3_StatutSocial": 0.867,
+      "Vec3_StatutSocial": 0.8403,
       "Vec4_Emploi": 374
     }
   },
@@ -6100,7 +6100,7 @@
       "OppChoVec": 4.33,
       "Opportunités": 4.57,
       "Choix": 9.73,
-      "Vécu": 2.27
+      "Vécu": 2.26
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6115,16 +6115,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7572,
-      "Vec3_StatutSocial": 0.869,
+      "Vec3_StatutSocial": 0.8333,
       "Vec4_Emploi": 13
     }
   },
   "Piano": {
     "scores_globaux": {
-      "OppChoVec": 5.63,
+      "OppChoVec": 5.65,
       "Opportunités": 4.71,
       "Choix": 10.0,
-      "Vécu": 4.65
+      "Vécu": 4.69
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6148,7 +6148,7 @@
       "OppChoVec": 0.82,
       "Opportunités": 3.59,
       "Choix": 5.35,
-      "Vécu": 0.16
+      "Vécu": 0.14
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6163,16 +6163,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8633,
-      "Vec3_StatutSocial": 0.5002,
+      "Vec3_StatutSocial": 0.3575,
       "Vec4_Emploi": 31
     }
   },
   "Piazzole": {
     "scores_globaux": {
-      "OppChoVec": 4.51,
+      "OppChoVec": 4.52,
       "Opportunités": 4.01,
       "Choix": 9.2,
-      "Vécu": 4.14
+      "Vécu": 4.17
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6187,16 +6187,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8736,
-      "Vec3_StatutSocial": 0.9109,
+      "Vec3_StatutSocial": 0.8931,
       "Vec4_Emploi": 48
     }
   },
   "Piedicorte-di-Gaggio": {
     "scores_globaux": {
-      "OppChoVec": 3.15,
+      "OppChoVec": 3.14,
       "Opportunités": 5.29,
       "Choix": 8.0,
-      "Vécu": 1.4
+      "Vécu": 1.36
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6211,16 +6211,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7246,
-      "Vec3_StatutSocial": 0.8069,
+      "Vec3_StatutSocial": 0.7498,
       "Vec4_Emploi": 133
     }
   },
   "Piedicroce": {
     "scores_globaux": {
-      "OppChoVec": 4.47,
+      "OppChoVec": 4.48,
       "Opportunités": 3.94,
       "Choix": 9.61,
-      "Vécu": 3.43
+      "Vécu": 3.44
     },
     "opportunites": {
       "Opp1_Education": 5.33,
@@ -6235,16 +6235,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.782,
-      "Vec3_StatutSocial": 0.9535,
+      "Vec3_StatutSocial": 0.9457,
       "Vec4_Emploi": 77
     }
   },
   "Piedigriggio": {
     "scores_globaux": {
-      "OppChoVec": 3.85,
+      "OppChoVec": 3.83,
       "Opportunités": 2.42,
       "Choix": 8.97,
-      "Vécu": 4.27
+      "Vécu": 4.24
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6259,16 +6259,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21300,
       "Vec2_Logement": 0.8365,
-      "Vec3_StatutSocial": 0.9567,
+      "Vec3_StatutSocial": 0.9437,
       "Vec4_Emploi": 295
     }
   },
   "Piedipartino": {
     "scores_globaux": {
-      "OppChoVec": 3.57,
+      "OppChoVec": 3.61,
       "Opportunités": 1.61,
       "Choix": 9.2,
-      "Vécu": 3.85
+      "Vécu": 3.94
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6289,10 +6289,10 @@
   },
   "Pie-d'Orezza": {
     "scores_globaux": {
-      "OppChoVec": 1.2,
+      "OppChoVec": 1.19,
       "Opportunités": 2.01,
       "Choix": 4.56,
-      "Vécu": 4.05
+      "Vécu": 4.01
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6307,7 +6307,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8288,
-      "Vec3_StatutSocial": 0.9603,
+      "Vec3_StatutSocial": 0.947,
       "Vec4_Emploi": 48
     }
   },
@@ -6331,7 +6331,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22830,
       "Vec2_Logement": 0.7977,
-      "Vec3_StatutSocial": 0.9498,
+      "Vec3_StatutSocial": 0.939,
       "Vec4_Emploi": 271
     }
   },
@@ -6340,7 +6340,7 @@
       "OppChoVec": 3.83,
       "Opportunités": 4.19,
       "Choix": 8.84,
-      "Vécu": 2.91
+      "Vécu": 2.94
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6355,7 +6355,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21900,
       "Vec2_Logement": 0.8088,
-      "Vec3_StatutSocial": 0.8333,
+      "Vec3_StatutSocial": 0.7928,
       "Vec4_Emploi": 214
     }
   },
@@ -6364,7 +6364,7 @@
       "OppChoVec": 3.87,
       "Opportunités": 3.17,
       "Choix": 9.81,
-      "Vécu": 2.28
+      "Vécu": 2.3
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6379,16 +6379,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19510,
       "Vec2_Logement": 0.8022,
-      "Vec3_StatutSocial": 0.8785,
+      "Vec3_StatutSocial": 0.85,
       "Vec4_Emploi": 38
     }
   },
   "Pietraserena": {
     "scores_globaux": {
-      "OppChoVec": 2.87,
+      "OppChoVec": 2.86,
       "Opportunités": 5.54,
       "Choix": 7.32,
-      "Vécu": 1.49
+      "Vécu": 1.45
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6403,16 +6403,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.6924,
-      "Vec3_StatutSocial": 0.8683,
+      "Vec3_StatutSocial": 0.8287,
       "Vec4_Emploi": 39
     }
   },
   "Pietricaggio": {
     "scores_globaux": {
-      "OppChoVec": 4.12,
+      "OppChoVec": 4.1,
       "Opportunités": 5.68,
       "Choix": 7.56,
-      "Vécu": 4.2
+      "Vécu": 4.15
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6427,16 +6427,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8744,
-      "Vec3_StatutSocial": 0.9168,
+      "Vec3_StatutSocial": 0.889,
       "Vec4_Emploi": 44
     }
   },
   "Pietroso": {
     "scores_globaux": {
-      "OppChoVec": 3.84,
+      "OppChoVec": 3.83,
       "Opportunités": 3.78,
       "Choix": 8.59,
-      "Vécu": 3.74
+      "Vécu": 3.71
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6451,16 +6451,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21320,
       "Vec2_Logement": 0.8491,
-      "Vec3_StatutSocial": 0.8984,
+      "Vec3_StatutSocial": 0.8684,
       "Vec4_Emploi": 122
     }
   },
   "Piève": {
     "scores_globaux": {
-      "OppChoVec": 3.75,
+      "OppChoVec": 3.81,
       "Opportunités": 3.28,
       "Choix": 8.89,
-      "Vécu": 3.48
+      "Vécu": 3.61
     },
     "opportunites": {
       "Opp1_Education": 5.34,
@@ -6475,7 +6475,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8431,
-      "Vec3_StatutSocial": 0.8839,
+      "Vec3_StatutSocial": 0.8721,
       "Vec4_Emploi": 16
     }
   },
@@ -6499,16 +6499,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7883,
-      "Vec3_StatutSocial": 0.8272,
+      "Vec3_StatutSocial": 0.7817,
       "Vec4_Emploi": 950
     }
   },
   "Pino": {
     "scores_globaux": {
-      "OppChoVec": 4.02,
+      "OppChoVec": 4.04,
       "Opportunités": 3.21,
       "Choix": 9.58,
-      "Vécu": 3.04
+      "Vécu": 3.08
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6523,16 +6523,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20060,
       "Vec2_Logement": 0.8383,
-      "Vec3_StatutSocial": 0.8829,
+      "Vec3_StatutSocial": 0.8579,
       "Vec4_Emploi": 134
     }
   },
   "Piobetta": {
     "scores_globaux": {
-      "OppChoVec": 3.24,
+      "OppChoVec": 3.22,
       "Opportunités": 2.19,
       "Choix": 8.78,
-      "Vécu": 3.25
+      "Vécu": 3.2
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6547,16 +6547,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7943,
-      "Vec3_StatutSocial": 0.925,
+      "Vec3_StatutSocial": 0.9,
       "Vec4_Emploi": 5
     }
   },
   "Pioggiola": {
     "scores_globaux": {
-      "OppChoVec": 4.35,
+      "OppChoVec": 4.37,
       "Opportunités": 3.57,
       "Choix": 9.9,
-      "Vécu": 2.98
+      "Vécu": 3.02
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6571,16 +6571,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8492,
-      "Vec3_StatutSocial": 0.8218,
+      "Vec3_StatutSocial": 0.779,
       "Vec4_Emploi": 22
     }
   },
   "Poggio-di-Nazza": {
     "scores_globaux": {
-      "OppChoVec": 3.23,
+      "OppChoVec": 3.27,
       "Opportunités": 3.41,
       "Choix": 8.84,
-      "Vécu": 2.08
+      "Vécu": 2.19
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6595,7 +6595,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21380,
       "Vec2_Logement": 0.718,
-      "Vec3_StatutSocial": 0.9009,
+      "Vec3_StatutSocial": 0.8906,
       "Vec4_Emploi": 38
     }
   },
@@ -6604,7 +6604,7 @@
       "OppChoVec": 3.02,
       "Opportunités": 2.47,
       "Choix": 7.94,
-      "Vécu": 3.82
+      "Vécu": 3.84
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6619,16 +6619,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24630,
       "Vec2_Logement": 0.7212,
-      "Vec3_StatutSocial": 0.9113,
+      "Vec3_StatutSocial": 0.8925,
       "Vec4_Emploi": 599
     }
   },
   "Poggio-d'Oletta": {
     "scores_globaux": {
-      "OppChoVec": 5.58,
+      "OppChoVec": 5.57,
       "Opportunités": 3.21,
       "Choix": 9.36,
-      "Vécu": 6.76
+      "Vécu": 6.75
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6643,16 +6643,16 @@
     "vecu": {
       "Vec1_NiveauVie": 29320,
       "Vec2_Logement": 0.8296,
-      "Vec3_StatutSocial": 0.9118,
+      "Vec3_StatutSocial": 0.8881,
       "Vec4_Emploi": 597
     }
   },
   "Poggio-Marinaccio": {
     "scores_globaux": {
-      "OppChoVec": 3.49,
+      "OppChoVec": 3.45,
       "Opportunités": 3.2,
       "Choix": 9.2,
-      "Vécu": 2.36
+      "Vécu": 2.26
     },
     "opportunites": {
       "Opp1_Education": 5.35,
@@ -6667,7 +6667,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8339,
-      "Vec3_StatutSocial": 0.769,
+      "Vec3_StatutSocial": 0.692,
       "Vec4_Emploi": 90
     }
   },
@@ -6691,16 +6691,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20470,
       "Vec2_Logement": 0.7998,
-      "Vec3_StatutSocial": 0.8818,
+      "Vec3_StatutSocial": 0.8515,
       "Vec4_Emploi": 1011
     }
   },
   "Polveroso": {
     "scores_globaux": {
-      "OppChoVec": 3.5,
+      "OppChoVec": 3.49,
       "Opportunités": 1.63,
       "Choix": 10.0,
-      "Vécu": 2.25
+      "Vécu": 2.22
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6715,16 +6715,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7991,
-      "Vec3_StatutSocial": 0.8055,
+      "Vec3_StatutSocial": 0.75,
       "Vec4_Emploi": 63
     }
   },
   "Popolasca": {
     "scores_globaux": {
-      "OppChoVec": 4.84,
+      "OppChoVec": 4.81,
       "Opportunités": 3.48,
       "Choix": 10.0,
-      "Vécu": 4.04
+      "Vécu": 3.98
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6739,16 +6739,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8516,
-      "Vec3_StatutSocial": 0.9168,
+      "Vec3_StatutSocial": 0.889,
       "Vec4_Emploi": 178
     }
   },
   "Porri": {
     "scores_globaux": {
-      "OppChoVec": 4.94,
+      "OppChoVec": 4.96,
       "Opportunités": 3.85,
       "Choix": 10.0,
-      "Vécu": 3.94
+      "Vécu": 3.98
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6769,10 +6769,10 @@
   },
   "Prato-di-Giovellina": {
     "scores_globaux": {
-      "OppChoVec": 6.18,
+      "OppChoVec": 6.19,
       "Opportunités": 6.33,
       "Choix": 9.84,
-      "Vécu": 4.46
+      "Vécu": 4.49
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6796,7 +6796,7 @@
       "OppChoVec": 3.7,
       "Opportunités": 2.58,
       "Choix": 9.4,
-      "Vécu": 3.1
+      "Vécu": 3.09
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6811,16 +6811,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20140,
       "Vec2_Logement": 0.7734,
-      "Vec3_StatutSocial": 0.8491,
+      "Vec3_StatutSocial": 0.8091,
       "Vec4_Emploi": 1434
     }
   },
   "Prunelli-di-Fiumorbo": {
     "scores_globaux": {
-      "OppChoVec": 2.88,
+      "OppChoVec": 2.9,
       "Opportunités": 4.64,
       "Choix": 7.51,
-      "Vécu": 2.17
+      "Vécu": 2.23
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6835,7 +6835,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20410,
       "Vec2_Logement": 0.7466,
-      "Vec3_StatutSocial": 0.8456,
+      "Vec3_StatutSocial": 0.8128,
       "Vec4_Emploi": 698
     }
   },
@@ -6844,7 +6844,7 @@
       "OppChoVec": 3.22,
       "Opportunités": 3.67,
       "Choix": 9.22,
-      "Vécu": 1.09
+      "Vécu": 1.1
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6859,16 +6859,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18950,
       "Vec2_Logement": 0.7489,
-      "Vec3_StatutSocial": 0.8027,
+      "Vec3_StatutSocial": 0.7498,
       "Vec4_Emploi": 461
     }
   },
   "Quercitello": {
     "scores_globaux": {
-      "OppChoVec": 3.95,
+      "OppChoVec": 3.94,
       "Opportunités": 2.37,
       "Choix": 9.87,
-      "Vécu": 3.08
+      "Vécu": 3.04
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6883,16 +6883,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8774,
-      "Vec3_StatutSocial": 0.7875,
+      "Vec3_StatutSocial": 0.725,
       "Vec4_Emploi": 96
     }
   },
   "Rapaggio": {
     "scores_globaux": {
-      "OppChoVec": 3.49,
+      "OppChoVec": 3.51,
       "Opportunités": 2.77,
       "Choix": 9.48,
-      "Vécu": 2.24
+      "Vécu": 2.3
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -6907,16 +6907,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7288,
-      "Vec3_StatutSocial": 0.8997,
+      "Vec3_StatutSocial": 0.883,
       "Vec4_Emploi": 44
     }
   },
   "Rapale": {
     "scores_globaux": {
-      "OppChoVec": 3.25,
+      "OppChoVec": 3.26,
       "Opportunités": 2.39,
       "Choix": 8.02,
-      "Vécu": 4.34
+      "Vécu": 4.36
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -6931,16 +6931,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21960,
       "Vec2_Logement": 0.8536,
-      "Vec3_StatutSocial": 0.909,
+      "Vec3_StatutSocial": 0.8895,
       "Vec4_Emploi": 380
     }
   },
   "Riventosa": {
     "scores_globaux": {
-      "OppChoVec": 3.9,
+      "OppChoVec": 3.92,
       "Opportunités": 4.25,
       "Choix": 9.02,
-      "Vécu": 2.74
+      "Vécu": 2.79
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -6955,7 +6955,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20290,
       "Vec2_Logement": 0.7875,
-      "Vec3_StatutSocial": 0.8645,
+      "Vec3_StatutSocial": 0.8367,
       "Vec4_Emploi": 611
     }
   },
@@ -6964,7 +6964,7 @@
       "OppChoVec": 3.64,
       "Opportunités": 5.04,
       "Choix": 8.57,
-      "Vécu": 2.03
+      "Vécu": 2.01
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -6979,16 +6979,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19350,
       "Vec2_Logement": 0.7772,
-      "Vec3_StatutSocial": 0.8768,
+      "Vec3_StatutSocial": 0.8423,
       "Vec4_Emploi": 187
     }
   },
   "Rospigliani": {
     "scores_globaux": {
-      "OppChoVec": 2.29,
+      "OppChoVec": 2.28,
       "Opportunités": 3.29,
       "Choix": 6.78,
-      "Vécu": 2.98
+      "Vécu": 2.96
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7003,7 +7003,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8176,
-      "Vec3_StatutSocial": 0.86,
+      "Vec3_StatutSocial": 0.82,
       "Vec4_Emploi": 59
     }
   },
@@ -7027,16 +7027,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.833,
-      "Vec3_StatutSocial": 0.8971,
+      "Vec3_StatutSocial": 0.8714,
       "Vec4_Emploi": 16
     }
   },
   "Rutali": {
     "scores_globaux": {
-      "OppChoVec": 5.6,
+      "OppChoVec": 5.61,
       "Opportunités": 5.28,
       "Choix": 9.79,
-      "Vécu": 4.38
+      "Vécu": 4.41
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7051,16 +7051,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22100,
       "Vec2_Logement": 0.8228,
-      "Vec3_StatutSocial": 0.8846,
+      "Vec3_StatutSocial": 0.8589,
       "Vec4_Emploi": 1061
     }
   },
   "Saliceto": {
     "scores_globaux": {
-      "OppChoVec": 4.15,
+      "OppChoVec": 4.14,
       "Opportunités": 3.24,
       "Choix": 10.0,
-      "Vécu": 2.61
+      "Vécu": 2.57
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7075,16 +7075,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.782,
-      "Vec3_StatutSocial": 0.8533,
+      "Vec3_StatutSocial": 0.8093,
       "Vec4_Emploi": 210
     }
   },
   "Scata": {
     "scores_globaux": {
-      "OppChoVec": 4.44,
+      "OppChoVec": 4.42,
       "Opportunités": 3.13,
       "Choix": 10.0,
-      "Vécu": 3.4
+      "Vécu": 3.37
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7099,16 +7099,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8863,
-      "Vec3_StatutSocial": 0.8155,
+      "Vec3_StatutSocial": 0.7628,
       "Vec4_Emploi": 38
     }
   },
   "Scolca": {
     "scores_globaux": {
-      "OppChoVec": 4.76,
+      "OppChoVec": 4.79,
       "Opportunités": 5.28,
       "Choix": 9.42,
-      "Vécu": 3.11
+      "Vécu": 3.19
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7123,16 +7123,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8527,
-      "Vec3_StatutSocial": 0.8241,
+      "Vec3_StatutSocial": 0.7873,
       "Vec4_Emploi": 96
     }
   },
   "Sermano": {
     "scores_globaux": {
-      "OppChoVec": 4.58,
+      "OppChoVec": 4.57,
       "Opportunités": 3.12,
       "Choix": 9.81,
-      "Vécu": 4.05
+      "Vécu": 4.03
     },
     "opportunites": {
       "Opp1_Education": 5.37,
@@ -7147,7 +7147,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8752,
-      "Vec3_StatutSocial": 0.8982,
+      "Vec3_StatutSocial": 0.8705,
       "Vec4_Emploi": 55
     }
   },
@@ -7171,16 +7171,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22640,
       "Vec2_Logement": 0.8465,
-      "Vec3_StatutSocial": 0.8723,
+      "Vec3_StatutSocial": 0.8395,
       "Vec4_Emploi": 294
     }
   },
   "Silvareccio": {
     "scores_globaux": {
-      "OppChoVec": 5.04,
+      "OppChoVec": 5.08,
       "Opportunités": 6.08,
       "Choix": 9.14,
-      "Vécu": 3.4
+      "Vécu": 3.5
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7195,16 +7195,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22310,
       "Vec2_Logement": 0.8463,
-      "Vec3_StatutSocial": 0.8279,
+      "Vec3_StatutSocial": 0.7967,
       "Vec4_Emploi": 138
     }
   },
   "Sisco": {
     "scores_globaux": {
-      "OppChoVec": 4.62,
+      "OppChoVec": 4.63,
       "Opportunités": 4.73,
       "Choix": 9.4,
-      "Vécu": 3.38
+      "Vécu": 3.41
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7219,7 +7219,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21760,
       "Vec2_Logement": 0.8076,
-      "Vec3_StatutSocial": 0.8909,
+      "Vec3_StatutSocial": 0.8666,
       "Vec4_Emploi": 213
     }
   },
@@ -7228,7 +7228,7 @@
       "OppChoVec": 5.84,
       "Opportunités": 5.56,
       "Choix": 9.93,
-      "Vécu": 4.4
+      "Vécu": 4.41
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7243,13 +7243,13 @@
     "vecu": {
       "Vec1_NiveauVie": 23330,
       "Vec2_Logement": 0.8495,
-      "Vec3_StatutSocial": 0.8993,
+      "Vec3_StatutSocial": 0.8755,
       "Vec4_Emploi": 78
     }
   },
   "Sorbo-Ocagnano": {
     "scores_globaux": {
-      "OppChoVec": 4.0,
+      "OppChoVec": 4.01,
       "Opportunités": 3.28,
       "Choix": 8.08,
       "Vécu": 5.33
@@ -7267,16 +7267,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21480,
       "Vec2_Logement": 0.7729,
-      "Vec3_StatutSocial": 0.921,
+      "Vec3_StatutSocial": 0.9032,
       "Vec4_Emploi": 2687
     }
   },
   "Sorio": {
     "scores_globaux": {
-      "OppChoVec": 3.9,
+      "OppChoVec": 3.89,
       "Opportunités": 1.63,
       "Choix": 9.85,
-      "Vécu": 3.55
+      "Vécu": 3.52
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7291,16 +7291,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8241,
-      "Vec3_StatutSocial": 0.9098,
+      "Vec3_StatutSocial": 0.8832,
       "Vec4_Emploi": 86
     }
   },
   "Soveria": {
     "scores_globaux": {
-      "OppChoVec": 2.82,
+      "OppChoVec": 2.84,
       "Opportunités": 2.28,
       "Choix": 7.91,
-      "Vécu": 3.51
+      "Vécu": 3.55
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7315,7 +7315,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8165,
-      "Vec3_StatutSocial": 0.8647,
+      "Vec3_StatutSocial": 0.836,
       "Vec4_Emploi": 620
     }
   },
@@ -7324,7 +7324,7 @@
       "OppChoVec": 3.26,
       "Opportunités": 3.25,
       "Choix": 8.88,
-      "Vécu": 2.24
+      "Vécu": 2.23
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7339,16 +7339,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18910,
       "Vec2_Logement": 0.7798,
-      "Vec3_StatutSocial": 0.9122,
+      "Vec3_StatutSocial": 0.8897,
       "Vec4_Emploi": 179
     }
   },
   "Stazzona": {
     "scores_globaux": {
-      "OppChoVec": 2.65,
+      "OppChoVec": 2.64,
       "Opportunités": 2.62,
       "Choix": 6.93,
-      "Vécu": 4.28
+      "Vécu": 4.25
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7369,10 +7369,10 @@
   },
   "Sant'Andréa-di-Bozio": {
     "scores_globaux": {
-      "OppChoVec": 6.05,
+      "OppChoVec": 6.02,
       "Opportunités": 6.05,
       "Choix": 10.0,
-      "Vécu": 4.24
+      "Vécu": 4.18
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7387,16 +7387,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8777,
-      "Vec3_StatutSocial": 0.9062,
+      "Vec3_StatutSocial": 0.875,
       "Vec4_Emploi": 148
     }
   },
   "Sant'Andréa-di-Cotone": {
     "scores_globaux": {
-      "OppChoVec": 4.62,
+      "OppChoVec": 4.65,
       "Opportunités": 5.5,
       "Choix": 8.98,
-      "Vécu": 3.3
+      "Vécu": 3.36
     },
     "opportunites": {
       "Opp1_Education": 5.38,
@@ -7411,16 +7411,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22830,
       "Vec2_Logement": 0.7438,
-      "Vec3_StatutSocial": 0.896,
+      "Vec3_StatutSocial": 0.8788,
       "Vec4_Emploi": 543
     }
   },
   "Sant'Antonino": {
     "scores_globaux": {
-      "OppChoVec": 4.8,
+      "OppChoVec": 4.78,
       "Opportunités": 4.32,
       "Choix": 10.0,
-      "Vécu": 3.17
+      "Vécu": 3.13
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7435,16 +7435,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8134,
-      "Vec3_StatutSocial": 0.8196,
+      "Vec3_StatutSocial": 0.7658,
       "Vec4_Emploi": 763
     }
   },
   "San-Damiano": {
     "scores_globaux": {
-      "OppChoVec": 4.13,
+      "OppChoVec": 4.12,
       "Opportunités": 2.91,
       "Choix": 9.76,
-      "Vécu": 3.27
+      "Vécu": 3.23
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7459,7 +7459,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8323,
-      "Vec3_StatutSocial": 0.875,
+      "Vec3_StatutSocial": 0.8375,
       "Vec4_Emploi": 21
     }
   },
@@ -7483,16 +7483,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21600,
       "Vec2_Logement": 0.6565,
-      "Vec3_StatutSocial": 0.8716,
+      "Vec3_StatutSocial": 0.8383,
       "Vec4_Emploi": 391
     }
   },
   "San-Gavino-d'Ampugnani": {
     "scores_globaux": {
-      "OppChoVec": 4.95,
+      "OppChoVec": 4.93,
       "Opportunités": 5.72,
       "Choix": 9.31,
-      "Vécu": 3.29
+      "Vécu": 3.26
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7507,16 +7507,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8354,
-      "Vec3_StatutSocial": 0.8431,
+      "Vec3_StatutSocial": 0.7965,
       "Vec4_Emploi": 342
     }
   },
   "San-Gavino-di-Tenda": {
     "scores_globaux": {
-      "OppChoVec": 4.11,
+      "OppChoVec": 4.1,
       "Opportunités": 2.87,
       "Choix": 10.0,
-      "Vécu": 2.82
+      "Vécu": 2.79
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7531,16 +7531,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8408,
-      "Vec3_StatutSocial": 0.8128,
+      "Vec3_StatutSocial": 0.7593,
       "Vec4_Emploi": 47
     }
   },
   "San-Giovanni-di-Moriani": {
     "scores_globaux": {
-      "OppChoVec": 4.45,
+      "OppChoVec": 4.47,
       "Opportunités": 3.52,
       "Choix": 10.0,
-      "Vécu": 3.08
+      "Vécu": 3.13
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7555,16 +7555,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7905,
-      "Vec3_StatutSocial": 0.8608,
+      "Vec3_StatutSocial": 0.8317,
       "Vec4_Emploi": 542
     }
   },
   "San-Giuliano": {
     "scores_globaux": {
-      "OppChoVec": 1.43,
+      "OppChoVec": 1.45,
       "Opportunités": 4.55,
       "Choix": 4.78,
-      "Vécu": 2.24
+      "Vécu": 2.29
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7579,16 +7579,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21160,
       "Vec2_Logement": 0.7289,
-      "Vec3_StatutSocial": 0.856,
+      "Vec3_StatutSocial": 0.8257,
       "Vec4_Emploi": 621
     }
   },
   "San-Lorenzo": {
     "scores_globaux": {
-      "OppChoVec": 4.14,
+      "OppChoVec": 4.18,
       "Opportunités": 2.89,
       "Choix": 9.52,
-      "Vécu": 3.72
+      "Vécu": 3.81
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7603,16 +7603,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8249,
-      "Vec3_StatutSocial": 0.932,
+      "Vec3_StatutSocial": 0.9278,
       "Vec4_Emploi": 32
     }
   },
   "San-Martino-di-Lota": {
     "scores_globaux": {
-      "OppChoVec": 6.82,
+      "OppChoVec": 6.83,
       "Opportunités": 6.63,
       "Choix": 9.53,
-      "Vécu": 5.92
+      "Vécu": 5.94
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7627,16 +7627,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25230,
       "Vec2_Logement": 0.7,
-      "Vec3_StatutSocial": 0.9035,
+      "Vec3_StatutSocial": 0.8815,
       "Vec4_Emploi": 3128
     }
   },
   "Santa-Lucia-di-Mercurio": {
     "scores_globaux": {
-      "OppChoVec": 3.57,
+      "OppChoVec": 3.56,
       "Opportunités": 3.38,
       "Choix": 8.88,
-      "Vécu": 2.93
+      "Vécu": 2.92
     },
     "opportunites": {
       "Opp1_Education": 5.39,
@@ -7651,7 +7651,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8114,
-      "Vec3_StatutSocial": 0.8216,
+      "Vec3_StatutSocial": 0.7725,
       "Vec4_Emploi": 499
     }
   },
@@ -7660,7 +7660,7 @@
       "OppChoVec": 3.48,
       "Opportunités": 5.38,
       "Choix": 7.89,
-      "Vécu": 2.41
+      "Vécu": 2.4
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7675,7 +7675,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20060,
       "Vec2_Logement": 0.7449,
-      "Vec3_StatutSocial": 0.8577,
+      "Vec3_StatutSocial": 0.8185,
       "Vec4_Emploi": 999
     }
   },
@@ -7699,16 +7699,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24920,
       "Vec2_Logement": 0.7619,
-      "Vec3_StatutSocial": 0.9167,
+      "Vec3_StatutSocial": 0.8968,
       "Vec4_Emploi": 1990
     }
   },
   "Santa-Maria-Poggio": {
     "scores_globaux": {
-      "OppChoVec": 4.72,
+      "OppChoVec": 4.74,
       "Opportunités": 5.7,
       "Choix": 9.24,
-      "Vécu": 2.9
+      "Vécu": 2.95
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7723,16 +7723,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21360,
       "Vec2_Logement": 0.7876,
-      "Vec3_StatutSocial": 0.8174,
+      "Vec3_StatutSocial": 0.7755,
       "Vec4_Emploi": 880
     }
   },
   "San-Nicolao": {
     "scores_globaux": {
-      "OppChoVec": 2.81,
+      "OppChoVec": 2.82,
       "Opportunités": 6.21,
       "Choix": 7.34,
-      "Vécu": 0.43
+      "Vécu": 0.48
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7747,7 +7747,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19060,
       "Vec2_Logement": 0.6634,
-      "Vec3_StatutSocial": 0.8013,
+      "Vec3_StatutSocial": 0.7548,
       "Vec4_Emploi": 880
     }
   },
@@ -7756,7 +7756,7 @@
       "OppChoVec": 3.97,
       "Opportunités": 2.59,
       "Choix": 9.93,
-      "Vécu": 2.83
+      "Vécu": 2.86
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7771,16 +7771,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19530,
       "Vec2_Logement": 0.7923,
-      "Vec3_StatutSocial": 0.952,
+      "Vec3_StatutSocial": 0.9454,
       "Vec4_Emploi": 15
     }
   },
   "Santo-Pietro-di-Venaco": {
     "scores_globaux": {
-      "OppChoVec": 3.51,
+      "OppChoVec": 3.52,
       "Opportunités": 4.46,
       "Choix": 7.97,
-      "Vécu": 3.27
+      "Vécu": 3.32
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7795,7 +7795,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20830,
       "Vec2_Logement": 0.775,
-      "Vec3_StatutSocial": 0.9196,
+      "Vec3_StatutSocial": 0.9063,
       "Vec4_Emploi": 598
     }
   },
@@ -7804,7 +7804,7 @@
       "OppChoVec": 4.8,
       "Opportunités": 6.2,
       "Choix": 8.79,
-      "Vécu": 3.29
+      "Vécu": 3.3
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7819,16 +7819,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21500,
       "Vec2_Logement": 0.762,
-      "Vec3_StatutSocial": 0.8846,
+      "Vec3_StatutSocial": 0.8556,
       "Vec4_Emploi": 918
     }
   },
   "Santa-Reparata-di-Moriani": {
     "scores_globaux": {
-      "OppChoVec": 4.96,
+      "OppChoVec": 4.95,
       "Opportunités": 5.48,
       "Choix": 9.42,
-      "Vécu": 3.39
+      "Vécu": 3.37
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7843,16 +7843,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8466,
-      "Vec3_StatutSocial": 0.8553,
+      "Vec3_StatutSocial": 0.8157,
       "Vec4_Emploi": 159
     }
   },
   "Taglio-Isolaccio": {
     "scores_globaux": {
-      "OppChoVec": 4.37,
+      "OppChoVec": 4.38,
       "Opportunités": 3.87,
       "Choix": 8.99,
-      "Vécu": 4.28
+      "Vécu": 4.29
     },
     "opportunites": {
       "Opp1_Education": 5.4,
@@ -7867,7 +7867,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21550,
       "Vec2_Logement": 0.8103,
-      "Vec3_StatutSocial": 0.888,
+      "Vec3_StatutSocial": 0.8607,
       "Vec4_Emploi": 1302
     }
   },
@@ -7891,16 +7891,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21610,
       "Vec2_Logement": 0.8085,
-      "Vec3_StatutSocial": 0.9023,
+      "Vec3_StatutSocial": 0.879,
       "Vec4_Emploi": 1101
     }
   },
   "Tallone": {
     "scores_globaux": {
-      "OppChoVec": 2.91,
+      "OppChoVec": 2.92,
       "Opportunités": 2.62,
       "Choix": 7.8,
-      "Vécu": 3.65
+      "Vécu": 3.66
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -7915,16 +7915,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22280,
       "Vec2_Logement": 0.7993,
-      "Vec3_StatutSocial": 0.909,
+      "Vec3_StatutSocial": 0.8892,
       "Vec4_Emploi": 233
     }
   },
   "Tarrano": {
     "scores_globaux": {
-      "OppChoVec": 4.46,
+      "OppChoVec": 4.42,
       "Opportunités": 3.54,
       "Choix": 10.0,
-      "Vécu": 3.09
+      "Vécu": 3.0
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -7939,16 +7939,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8641,
-      "Vec3_StatutSocial": 0.8125,
+      "Vec3_StatutSocial": 0.75,
       "Vec4_Emploi": 33
     }
   },
   "Tomino": {
     "scores_globaux": {
-      "OppChoVec": 3.89,
+      "OppChoVec": 3.87,
       "Opportunités": 3.18,
       "Choix": 9.17,
-      "Vécu": 3.43
+      "Vécu": 3.37
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -7963,16 +7963,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21930,
       "Vec2_Logement": 0.8217,
-      "Vec3_StatutSocial": 0.8771,
+      "Vec3_StatutSocial": 0.8377,
       "Vec4_Emploi": 144
     }
   },
   "Tox": {
     "scores_globaux": {
-      "OppChoVec": 6.0,
+      "OppChoVec": 6.01,
       "Opportunités": 6.7,
       "Choix": 9.58,
-      "Vécu": 4.12
+      "Vécu": 4.16
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -7996,7 +7996,7 @@
       "OppChoVec": 3.51,
       "Opportunités": 2.59,
       "Choix": 9.34,
-      "Vécu": 2.69
+      "Vécu": 2.68
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -8011,7 +8011,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7991,
-      "Vec3_StatutSocial": 0.801,
+      "Vec3_StatutSocial": 0.746,
       "Vec4_Emploi": 613
     }
   },
@@ -8035,16 +8035,16 @@
     "vecu": {
       "Vec1_NiveauVie": 25510,
       "Vec2_Logement": 0.7909,
-      "Vec3_StatutSocial": 0.899,
+      "Vec3_StatutSocial": 0.8738,
       "Vec4_Emploi": 194
     }
   },
   "Vallecalle": {
     "scores_globaux": {
-      "OppChoVec": 5.52,
+      "OppChoVec": 5.54,
       "Opportunités": 4.8,
       "Choix": 9.62,
-      "Vécu": 4.95
+      "Vécu": 4.98
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -8059,7 +8059,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22960,
       "Vec2_Logement": 0.7858,
-      "Vec3_StatutSocial": 0.9275,
+      "Vec3_StatutSocial": 0.9143,
       "Vec4_Emploi": 1443
     }
   },
@@ -8068,7 +8068,7 @@
       "OppChoVec": 3.61,
       "Opportunités": 3.69,
       "Choix": 8.88,
-      "Vécu": 2.78
+      "Vécu": 2.77
     },
     "opportunites": {
       "Opp1_Education": 5.41,
@@ -8083,7 +8083,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7643,
-      "Vec3_StatutSocial": 0.9061,
+      "Vec3_StatutSocial": 0.8826,
       "Vec4_Emploi": 88
     }
   },
@@ -8107,16 +8107,16 @@
     "vecu": {
       "Vec1_NiveauVie": 24310,
       "Vec2_Logement": 0.7683,
-      "Vec3_StatutSocial": 0.944,
+      "Vec3_StatutSocial": 0.9315,
       "Vec4_Emploi": 664
     }
   },
   "Valle-di-Rostino": {
     "scores_globaux": {
-      "OppChoVec": 4.86,
+      "OppChoVec": 4.87,
       "Opportunités": 5.24,
       "Choix": 9.11,
-      "Vécu": 3.93
+      "Vécu": 3.95
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8131,16 +8131,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21300,
       "Vec2_Logement": 0.8268,
-      "Vec3_StatutSocial": 0.9358,
+      "Vec3_StatutSocial": 0.9237,
       "Vec4_Emploi": 259
     }
   },
   "Valle-d'Orezza": {
     "scores_globaux": {
-      "OppChoVec": 4.52,
+      "OppChoVec": 4.51,
       "Opportunités": 3.27,
       "Choix": 10.0,
-      "Vécu": 3.48
+      "Vécu": 3.45
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8155,16 +8155,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8743,
-      "Vec3_StatutSocial": 0.8407,
+      "Vec3_StatutSocial": 0.7953,
       "Vec4_Emploi": 26
     }
   },
   "Vallica": {
     "scores_globaux": {
-      "OppChoVec": 3.12,
+      "OppChoVec": 3.08,
       "Opportunités": 4.35,
       "Choix": 7.89,
-      "Vécu": 2.49
+      "Vécu": 2.38
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8179,16 +8179,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8638,
-      "Vec3_StatutSocial": 0.7503,
+      "Vec3_StatutSocial": 0.667,
       "Vec4_Emploi": 18
     }
   },
   "Velone-Orneto": {
     "scores_globaux": {
-      "OppChoVec": 5.94,
+      "OppChoVec": 5.96,
       "Opportunités": 5.61,
       "Choix": 9.95,
-      "Vécu": 4.54
+      "Vécu": 4.57
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8203,16 +8203,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8484,
-      "Vec3_StatutSocial": 0.9112,
+      "Vec3_StatutSocial": 0.8945,
       "Vec4_Emploi": 842
     }
   },
   "Venaco": {
     "scores_globaux": {
-      "OppChoVec": 3.48,
+      "OppChoVec": 3.5,
       "Opportunités": 4.62,
       "Choix": 7.88,
-      "Vécu": 3.2
+      "Vécu": 3.25
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8227,16 +8227,16 @@
     "vecu": {
       "Vec1_NiveauVie": 23850,
       "Vec2_Logement": 0.7356,
-      "Vec3_StatutSocial": 0.8936,
+      "Vec3_StatutSocial": 0.8736,
       "Vec4_Emploi": 188
     }
   },
   "Ventiseri": {
     "scores_globaux": {
-      "OppChoVec": 4.75,
+      "OppChoVec": 4.78,
       "Opportunités": 4.61,
       "Choix": 9.27,
-      "Vécu": 4.01
+      "Vécu": 4.09
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8251,16 +8251,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22800,
       "Vec2_Logement": 0.8257,
-      "Vec3_StatutSocial": 0.8909,
+      "Vec3_StatutSocial": 0.8749,
       "Vec4_Emploi": 264
     }
   },
   "Venzolasca": {
     "scores_globaux": {
-      "OppChoVec": 4.15,
+      "OppChoVec": 4.16,
       "Opportunités": 5.09,
       "Choix": 7.88,
-      "Vécu": 4.37
+      "Vécu": 4.39
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8275,16 +8275,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20280,
       "Vec2_Logement": 0.7491,
-      "Vec3_StatutSocial": 0.9103,
+      "Vec3_StatutSocial": 0.8911,
       "Vec4_Emploi": 2516
     }
   },
   "Verdèse": {
     "scores_globaux": {
-      "OppChoVec": 4.3,
+      "OppChoVec": 4.29,
       "Opportunités": 4.82,
       "Choix": 9.81,
-      "Vécu": 1.78
+      "Vécu": 1.75
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8299,16 +8299,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8339,
-      "Vec3_StatutSocial": 0.7085,
+      "Vec3_StatutSocial": 0.6251,
       "Vec4_Emploi": 68
     }
   },
   "Vescovato": {
     "scores_globaux": {
-      "OppChoVec": 4.53,
+      "OppChoVec": 4.55,
       "Opportunités": 6.32,
       "Choix": 7.71,
-      "Vécu": 4.27
+      "Vécu": 4.32
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8323,7 +8323,7 @@
     "vecu": {
       "Vec1_NiveauVie": 20200,
       "Vec2_Logement": 0.6907,
-      "Vec3_StatutSocial": 0.9001,
+      "Vec3_StatutSocial": 0.8819,
       "Vec4_Emploi": 3356
     }
   },
@@ -8347,7 +8347,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19440,
       "Vec2_Logement": 0.7751,
-      "Vec3_StatutSocial": 0.8856,
+      "Vec3_StatutSocial": 0.8564,
       "Vec4_Emploi": 41
     }
   },
@@ -8356,7 +8356,7 @@
       "OppChoVec": 6.28,
       "Opportunités": 6.57,
       "Choix": 9.61,
-      "Vécu": 4.79
+      "Vécu": 4.8
     },
     "opportunites": {
       "Opp1_Education": 5.42,
@@ -8371,7 +8371,7 @@
     "vecu": {
       "Vec1_NiveauVie": 21630,
       "Vec2_Logement": 0.8107,
-      "Vec3_StatutSocial": 0.8949,
+      "Vec3_StatutSocial": 0.8706,
       "Vec4_Emploi": 1765
     }
   },
@@ -8380,7 +8380,7 @@
       "OppChoVec": 4.48,
       "Opportunités": 3.65,
       "Choix": 9.6,
-      "Vécu": 3.71
+      "Vécu": 3.72
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8395,7 +8395,7 @@
     "vecu": {
       "Vec1_NiveauVie": 22260,
       "Vec2_Logement": 0.8005,
-      "Vec3_StatutSocial": 0.8922,
+      "Vec3_StatutSocial": 0.8665,
       "Vec4_Emploi": 472
     }
   },
@@ -8419,16 +8419,16 @@
     "vecu": {
       "Vec1_NiveauVie": 28720,
       "Vec2_Logement": 0.6296,
-      "Vec3_StatutSocial": 0.9197,
+      "Vec3_StatutSocial": 0.9008,
       "Vec4_Emploi": 3596
     }
   },
   "Vivario": {
     "scores_globaux": {
-      "OppChoVec": 3.57,
+      "OppChoVec": 3.58,
       "Opportunités": 3.68,
       "Choix": 8.87,
-      "Vécu": 2.68
+      "Vécu": 2.72
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8443,16 +8443,16 @@
     "vecu": {
       "Vec1_NiveauVie": 22980,
       "Vec2_Logement": 0.6973,
-      "Vec3_StatutSocial": 0.9273,
+      "Vec3_StatutSocial": 0.9156,
       "Vec4_Emploi": 110
     }
   },
   "Volpajola": {
     "scores_globaux": {
-      "OppChoVec": 4.79,
+      "OppChoVec": 4.8,
       "Opportunités": 5.16,
       "Choix": 9.54,
-      "Vécu": 3.12
+      "Vécu": 3.15
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8467,16 +8467,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21000,
       "Vec2_Logement": 0.8006,
-      "Vec3_StatutSocial": 0.9038,
+      "Vec3_StatutSocial": 0.8832,
       "Vec4_Emploi": 171
     }
   },
   "Zalana": {
     "scores_globaux": {
-      "OppChoVec": 4.28,
+      "OppChoVec": 4.29,
       "Opportunités": 4.82,
       "Choix": 9.16,
-      "Vécu": 2.88
+      "Vécu": 2.92
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8491,16 +8491,16 @@
     "vecu": {
       "Vec1_NiveauVie": 20020,
       "Vec2_Logement": 0.8141,
-      "Vec3_StatutSocial": 0.911,
+      "Vec3_StatutSocial": 0.8947,
       "Vec4_Emploi": 10
     }
   },
   "Zilia": {
     "scores_globaux": {
-      "OppChoVec": 3.33,
+      "OppChoVec": 3.34,
       "Opportunités": 4.79,
       "Choix": 8.46,
-      "Vécu": 1.65
+      "Vécu": 1.67
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8515,16 +8515,16 @@
     "vecu": {
       "Vec1_NiveauVie": 19450,
       "Vec2_Logement": 0.77,
-      "Vec3_StatutSocial": 0.8285,
+      "Vec3_StatutSocial": 0.7853,
       "Vec4_Emploi": 332
     }
   },
   "Zuani": {
     "scores_globaux": {
-      "OppChoVec": 3.56,
+      "OppChoVec": 3.54,
       "Opportunités": 4.15,
       "Choix": 8.29,
-      "Vécu": 3.19
+      "Vécu": 3.14
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8539,16 +8539,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.7756,
-      "Vec3_StatutSocial": 0.9422,
+      "Vec3_StatutSocial": 0.923,
       "Vec4_Emploi": 15
     }
   },
   "San-Gavino-di-Fiumorbo": {
     "scores_globaux": {
-      "OppChoVec": 4.18,
+      "OppChoVec": 4.17,
       "Opportunités": 3.36,
       "Choix": 9.84,
-      "Vécu": 2.84
+      "Vécu": 2.83
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8563,16 +8563,16 @@
     "vecu": {
       "Vec1_NiveauVie": 18520,
       "Vec2_Logement": 0.8652,
-      "Vec3_StatutSocial": 0.893,
+      "Vec3_StatutSocial": 0.8645,
       "Vec4_Emploi": 17
     }
   },
   "Chisa": {
     "scores_globaux": {
-      "OppChoVec": 5.11,
+      "OppChoVec": 5.09,
       "Opportunités": 5.86,
       "Choix": 8.98,
-      "Vécu": 4.07
+      "Vécu": 4.03
     },
     "opportunites": {
       "Opp1_Education": 5.43,
@@ -8587,16 +8587,16 @@
     "vecu": {
       "Vec1_NiveauVie": 21460,
       "Vec2_Logement": 0.8606,
-      "Vec3_StatutSocial": 0.9245,
+      "Vec3_StatutSocial": 0.9012,
       "Vec4_Emploi": 6
     }
   },
   "Porta": {
     "scores_globaux": {
-      "OppChoVec": 4.04,
+      "OppChoVec": 4.06,
       "Opportunités": 5.39,
       "Choix": 9.52,
-      "Vécu": 0.96
+      "Vécu": 1.03
     },
     "opportunites": {
       "Opp1_Education": 5.36,
@@ -8611,7 +8611,7 @@
     "vecu": {
       "Vec1_NiveauVie": 18980,
       "Vec2_Logement": 0.7144,
-      "Vec3_StatutSocial": 0.8674,
+      "Vec3_StatutSocial": 0.8421,
       "Vec4_Emploi": 101
     }
   },
@@ -8635,7 +8635,7 @@
     "vecu": {
       "Vec1_NiveauVie": 19410,
       "Vec2_Logement": 0.5527,
-      "Vec3_StatutSocial": 0.8908,
+      "Vec3_StatutSocial": 0.8622,
       "Vec4_Emploi": 1000
     }
   }

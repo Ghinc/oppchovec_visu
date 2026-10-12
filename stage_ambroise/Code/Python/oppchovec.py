@@ -69,8 +69,9 @@ COLONNES = {
     'Vec4': "nb_services_20min",  # Nombre de services accessibles < 20 min
 }
 
-# Pondérations pour Vec3 (stabilité d'emploi)
-POND_VEC3 = [1, 0.75, 0.5, 0.25, 0]
+# Pondérations pour Vec3 (stabilité d'emploi), dans l'ordre de COLONNES['Vec3'] :
+# stable, CDD, ponctuel, chômeur, aidé = (rang - 1) / 4 avec chômeur = rang 1 et emploi aidé = rang 2
+POND_VEC3 = [1, 0.75, 0.5, 0, 0.25]
 
 
 # ==============================================================================

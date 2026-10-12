@@ -162,10 +162,10 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 2.29, 3.91, 5.08, 7.26, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    oppchovec: [0, 2.28, 3.94, 5.13, 7.26, 10],  // 5 classes - valeurs par défaut basées sur Jenks
     opp: [0, 2.44, 3.75, 4.95, 6.49, 10],
     cho: [0, 2.35, 6.11, 8.20, 9.30, 10],
-    vec: [0, 1.78, 3.05, 4.14, 6.14, 10]
+    vec: [0, 2.04, 3.37, 4.53, 6.80, 10]
 };
 
 // Palette de couleurs (5 classes) - Bleu clair vers Violet (inversé pour valeurs croissantes)
