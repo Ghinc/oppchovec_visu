@@ -98,6 +98,8 @@
           <button class="tab-button" data-tab="lisatab">LISA</button>
           <button class="tab-button" data-tab="cahtab">CAH</button>
           <button class="tab-button" data-tab="datavistab" style="display: inline-block !important; visibility: visible !important; opacity: 1 !important; background-color: #ffcccc !important;">Data Visualisation</button>
+          <button class="tab-button" data-tab="entreprisestab">Entreprises</button>
+          <button class="tab-button" data-tab="correlationtab">Corrélation</button>
           <button class="tab-button" data-tab="parangonstab">Parangons</button>
           <button class="tab-button" data-tab="chatbottab">DumèGPT</button>
         </div>
@@ -213,6 +215,77 @@
               <h3 style="text-align: center; margin-bottom: 1rem; color: var(--text-primary); font-size: 1.3rem;">📈 Répartition des communes selon le score OppChoVec</h3>
               <div style="flex: 1; position: relative;">
                 <canvas id="histogram-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Onglet Entreprises -->
+        <div class="tab-content" id="entreprisestab">
+          <div id="map-entreprises" class="map"></div>
+        </div>
+
+        <!-- Onglet Corrélation -->
+        <div class="tab-content" id="correlationtab">
+          <div class="corr-subtabs">
+            <button class="corr-subtab-btn active" data-corr="corr-entr-occ">Densité → OppChoVec</button>
+            <button class="corr-subtab-btn" data-corr="corr-occ-entr">OppChoVec → Densité</button>
+            <button class="corr-subtab-btn" data-corr="corr-subjectif">B-E subjectif × OppChoVec</button>
+            <button class="corr-subtab-btn" data-corr="corr-subjectif-dens">B-E subjectif × Densité</button>
+          </div>
+
+          <!-- Sous-onglet 1 : Densité → OppChoVec -->
+          <div class="corr-subtab-content active" id="corr-entr-occ">
+            <div class="corr-page">
+              <div class="corr-header-bar"><span id="correlation-r"></span><button class="scatter-export-btn" onclick="exporterScatterPNG(_scatterChart, 'densite_oppchovec')">📥 PNG</button></div>
+              <div class="corr-chart-wrap"><canvas id="scatter-chart"></canvas></div>
+              <div class="corr-map-toggle-bar">
+                <button class="corr-map-toggle-btn" onclick="toggleCorrMap('map-correlation', this)">📍 Voir la carte des résidus</button>
+              </div>
+              <div class="corr-map-panel" id="map-correlation-panel" style="display:none;">
+                <div id="map-correlation" class="map corr-map"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sous-onglet 2 : OppChoVec → Densité -->
+          <div class="corr-subtab-content" id="corr-occ-entr">
+            <div class="corr-page">
+              <div class="corr-header-bar"><span id="correlation-r2"></span><button class="scatter-export-btn" onclick="exporterScatterPNG(_scatterChart2, 'oppchovec_densite')">📥 PNG</button></div>
+              <div class="corr-chart-wrap"><canvas id="scatter-chart2"></canvas></div>
+              <div class="corr-map-toggle-bar">
+                <button class="corr-map-toggle-btn" onclick="toggleCorrMap('map-correlation2', this)">📍 Voir la carte des résidus</button>
+              </div>
+              <div class="corr-map-panel" id="map-correlation2-panel" style="display:none;">
+                <div id="map-correlation2" class="map corr-map"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sous-onglet 3 : Bien-être subjectif × OppChoVec -->
+          <div class="corr-subtab-content" id="corr-subjectif">
+            <div class="corr-page">
+              <div class="corr-header-bar"><span id="correlation-r3"></span><button class="scatter-export-btn" onclick="exporterScatterPNG(_scatterChart3, 'be_subjectif_oppchovec')">📥 PNG</button></div>
+              <div class="corr-chart-wrap"><canvas id="scatter-chart3"></canvas></div>
+              <div class="corr-map-toggle-bar">
+                <button class="corr-map-toggle-btn" onclick="toggleCorrMap('map-subjectif', this)">📍 Voir la carte</button>
+              </div>
+              <div class="corr-map-panel" id="map-subjectif-panel" style="display:none;">
+                <div id="map-subjectif" class="map corr-map"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sous-onglet 4 : Bien-être subjectif × Densité -->
+          <div class="corr-subtab-content" id="corr-subjectif-dens">
+            <div class="corr-page">
+              <div class="corr-header-bar"><span id="correlation-r4"></span><button class="scatter-export-btn" onclick="exporterScatterPNG(_scatterChart4, 'be_subjectif_densite')">📥 PNG</button></div>
+              <div class="corr-chart-wrap"><canvas id="scatter-chart4"></canvas></div>
+              <div class="corr-map-toggle-bar">
+                <button class="corr-map-toggle-btn" onclick="toggleCorrMap('map-subjectif-dens', this)">📍 Voir la carte</button>
+              </div>
+              <div class="corr-map-panel" id="map-subjectif-dens-panel" style="display:none;">
+                <div id="map-subjectif-dens" class="map corr-map"></div>
               </div>
             </div>
           </div>

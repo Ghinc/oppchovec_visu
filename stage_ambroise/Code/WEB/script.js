@@ -570,6 +570,41 @@ function closeIndicatorInfo(indicatorId) {
     }
 }
 
+// Rendre une div Leaflet draggable (légende déplaçable)
+function _makeDraggable(div, map) {
+    div.style.cursor = 'grab';
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+    let dragging = false, startX, startY;
+    const onMove = (e) => {
+        if (!dragging) return;
+        const mapEl = map.getContainer();
+        const newLeft = Math.max(0, Math.min(e.clientX - startX, mapEl.offsetWidth  - div.offsetWidth));
+        const newTop  = Math.max(0, Math.min(e.clientY - startY, mapEl.offsetHeight - div.offsetHeight));
+        div.style.left = newLeft + 'px';
+        div.style.top  = newTop  + 'px';
+    };
+    const onUp = () => { dragging = false; div.style.cursor = 'grab'; };
+    div.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        const mapEl  = map.getContainer();
+        const mapRect = mapEl.getBoundingClientRect();
+        const divRect = div.getBoundingClientRect();
+        div.style.position = 'absolute';
+        div.style.margin = '0'; div.style.right = 'auto'; div.style.bottom = 'auto';
+        div.style.left = (divRect.left - mapRect.left) + 'px';
+        div.style.top  = (divRect.top  - mapRect.top)  + 'px';
+        div.style.zIndex = '1000';
+        mapEl.appendChild(div);
+        startX = e.clientX - div.offsetLeft;
+        startY = e.clientY - div.offsetTop;
+        dragging = true; div.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+}
+
 // Fonction pour ajouter un bouton de téléchargement d'image
 function ajouterBoutonTelechargement(carte, mapType) {
     // Vérifier si le bouton de téléchargement existe déjà
@@ -2972,6 +3007,1041 @@ function minmax(data) {
 }
 
 // ==============================================================================
+// ==============================================================================
+// ONGLET CORRÉLATION OppChoVec × Densité entrepreneuriale
+// ==============================================================================
+
+// mapId ex: 'map-correlation', 'map-subjectif', 'map-correlation2', 'map-subjectif-dens'
+// clé dans cartes[] : 'correlation', 'subjectif', 'correlation2', 'subjectif-dens'
+function toggleCorrMap(mapId, btn) {
+    const panel = document.getElementById(mapId + '-panel');
+    if (!panel) return;
+    const isOpen = panel.style.display !== 'none';
+    panel.style.display = isOpen ? 'none' : 'block';
+    btn.classList.toggle('active', !isOpen);
+    if (!isOpen) {
+        btn.textContent = btn.textContent.replace('📍 Voir', 'Masquer');
+        const carteKey = mapId.replace(/^map-/, '');
+        setTimeout(() => { if (cartes[carteKey]) cartes[carteKey].invalidateSize(); }, 150);
+    } else {
+        btn.textContent = btn.textContent.replace('Masquer', '📍 Voir');
+    }
+}
+
+// Communes à étiqueter : nom → décalage [dx, dy] en pixels
+const COMMUNES_LABELS = {
+    'Ajaccio':           [9, -14],
+    'Bastia':            [9,  14],
+    'Corte':             [9,   0],
+    'Furiani':           [9,   0],
+    'Lucciana':          [9,   0],
+    'Calvi':             [9,   0],
+    'Biguglia':          [9,   0],
+    'Linguizzetta':      [9, -14],
+    'Penta-di-Casinca':  [9,   0],
+    'Porto-Vecchio':     [-105, -14],
+};
+
+// Plugin Chart.js : affiche les noms des communes ciblées à côté de leurs points
+const communeLabelsPlugin = {
+    id: 'communeLabels',
+    afterDatasetsDraw(chart) {
+        const dataset = chart.data.datasets[0];
+        if (!dataset || !dataset.data) return;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textBaseline = 'middle';
+        dataset.data.forEach((point, i) => {
+            if (!point.nom || !(point.nom in COMMUNES_LABELS)) return;
+            const el = meta.data[i];
+            if (!el) return;
+            const [dx, dy] = COMMUNES_LABELS[point.nom];
+            const x = el.x + dx, y = el.y + dy;
+            const label = point.nom;
+            const w = ctx.measureText(label).width;
+            ctx.fillStyle = 'rgba(255,255,255,0.78)';
+            ctx.fillRect(x - 1, y - 8, w + 4, 16);
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillText(label, x + 1, y);
+        });
+        ctx.restore();
+    }
+};
+Chart.register(communeLabelsPlugin);
+
+function exporterScatterPNG(chart, filename) {
+    if (!chart) return;
+    const EXPORT_W = 1200;
+    const EXPORT_H = 800;
+
+    // Données du 1er dataset (points scatter, pas la droite de tendance)
+    const scatterData = chart.data.datasets[0].data;
+    const xs = scatterData.map(p => p.x);
+    const ys = scatterData.map(p => p.y);
+    const xMin = Math.min(...xs), xMax = Math.max(...xs);
+    const yMin = Math.min(...ys), yMax = Math.max(...ys);
+    const xPad = (xMax - xMin) * 0.08 || 0.5;
+    const yPad = (yMax - yMin) * 0.12 || 0.2;
+
+    const sx = chart.options.scales.x;
+    const sy = chart.options.scales.y;
+
+    // Sauvegarder les valeurs courantes
+    const saved = {
+        xMin: sx.min, xMax: sx.max,
+        yMin: sy.min, yMax: sy.max,
+        xTitleFont: sx.title?.font,
+        yTitleFont: sy.title?.font,
+        xTicksFont: sx.ticks?.font,
+        yTicksFont: sy.ticks?.font,
+        padding: chart.options.layout?.padding,
+    };
+
+    // Axe X : serré autour des données
+    sx.min = xMin - xPad;
+    sx.max = xMax + xPad;
+    // Axe Y : idem (ignorer le min:1/max:5 fixe pour l'export)
+    sy.min = yMin - yPad;
+    sy.max = yMax + yPad;
+
+    // Grossir les polices pour l'export
+    if (!sx.title) sx.title = { display: true };
+    if (!sy.title) sy.title = { display: true };
+    if (!sx.ticks) sx.ticks = {};
+    if (!sy.ticks) sy.ticks = {};
+    sx.title.font = { size: 20, weight: 'bold' };
+    sy.title.font = { size: 20, weight: 'bold' };
+    sx.ticks.font = { size: 15 };
+    sy.ticks.font = { size: 15 };
+    if (!chart.options.layout) chart.options.layout = {};
+    chart.options.layout.padding = { top: 20, right: 30, bottom: 10, left: 10 };
+
+    chart.update('none');
+    chart.resize(EXPORT_W, EXPORT_H);
+
+    setTimeout(() => {
+        // Fond blanc (Chart.js exporte en transparent sinon)
+        const offscreen = document.createElement('canvas');
+        offscreen.width = EXPORT_W;
+        offscreen.height = EXPORT_H;
+        const ctx = offscreen.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, EXPORT_W, EXPORT_H);
+        ctx.drawImage(chart.canvas, 0, 0);
+
+        const link = document.createElement('a');
+        link.download = filename + '_1200x800.png';
+        link.href = offscreen.toDataURL('image/png');
+        link.click();
+
+        // Restaurer les options et taille d'affichage
+        sx.min = saved.xMin;
+        sx.max = saved.xMax;
+        sy.min = saved.yMin;
+        sy.max = saved.yMax;
+        sx.title.font = saved.xTitleFont;
+        sy.title.font = saved.yTitleFont;
+        sx.ticks.font = saved.xTicksFont;
+        sy.ticks.font = saved.yTicksFont;
+        chart.options.layout.padding = saved.padding;
+        chart.update('none');
+        chart.resize();
+    }, 200);
+}
+
+let correlationInitialise = false;
+let _scatterChart = null;
+
+async function initialiserOngletCorrelation() {
+    if (correlationInitialise) {
+        setTimeout(() => { if (cartes['correlation']) cartes['correlation'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+        console.warn('Corrélation: données non prêtes'); return;
+    }
+
+    // Charger densité si pas encore fait
+    if (!_densiteEntrepreneuriale) {
+        try {
+            const resp = await fetch(BASE_PATH + 'densite_entrepreneuriale.json');
+            _densiteEntrepreneuriale = await resp.json();
+        } catch(e) { console.error('Erreur chargement densité', e); return; }
+    }
+
+    correlationInitialise = true;
+
+    // ---- Données communes appariées ----
+    const points = [];
+    for (const [nom, occ] of Object.entries(indiceFinale)) {
+        const dens = _densiteEntrepreneuriale[nom];
+        if (dens !== undefined && dens !== null) points.push({ nom, occ, dens });
+    }
+
+    // ---- Régression linéaire ----
+    const n  = points.length;
+    const mx = points.reduce((s, p) => s + p.dens, 0) / n;
+    const my = points.reduce((s, p) => s + p.occ,  0) / n;
+    const ss_xy = points.reduce((s, p) => s + (p.dens - mx) * (p.occ - my), 0);
+    const ss_xx = points.reduce((s, p) => s + (p.dens - mx) ** 2, 0);
+    const ss_yy = points.reduce((s, p) => s + (p.occ  - my) ** 2, 0);
+    const slope = ss_xy / ss_xx;
+    const intercept = my - slope * mx;
+    const r = ss_xy / Math.sqrt(ss_xx * ss_yy);
+
+    // Résidu par commune
+    points.forEach(p => {
+        p.predicted = slope * p.dens + intercept;
+        p.residual  = p.occ - p.predicted;
+    });
+    const maxAbsRes = Math.max(...points.map(p => Math.abs(p.residual)));
+
+    // ---- Corrélation header ----
+    const headerEl = document.getElementById('correlation-r');
+    if (headerEl) {
+        const force = Math.abs(r) >= 0.7 ? 'forte' : Math.abs(r) >= 0.4 ? 'modérée' : 'faible';
+        const signe = r >= 0 ? 'positive' : 'négative';
+        headerEl.innerHTML = `
+            <strong>Corrélation OppChoVec × Densité entrepreneuriale</strong><br>
+            <span style="font-size:20px;font-weight:700;color:${r>=0?'#1b5e20':'#b71c1c'};">r = ${r.toFixed(3)}</span>
+            &nbsp;·&nbsp; Corrélation ${force} ${signe} (n = ${n} communes)`;
+    }
+
+    // ---- Scatter Chart.js ----
+    const minDens = Math.min(...points.map(p => p.dens));
+    const maxDens = Math.max(...points.map(p => p.dens));
+    const canvas = document.getElementById('scatter-chart');
+    if (canvas) {
+        if (_scatterChart) { _scatterChart.destroy(); _scatterChart = null; }
+        const ctx = canvas.getContext('2d');
+        _scatterChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Communes',
+                        data: points.map(p => ({ x: p.dens, y: p.occ, nom: p.nom })),
+                        backgroundColor: points.map(p => {
+                            const t = (p.residual + maxAbsRes) / (2 * maxAbsRes);
+                            const r2 = Math.round(220 * (1 - t)), g2 = Math.round(50 + 150 * t), b2 = 80;
+                            return `rgba(${r2},${g2},${b2},0.65)`;
+                        }),
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                    },
+                    {
+                        label: 'Tendance',
+                        data: [
+                            { x: minDens, y: slope * minDens + intercept },
+                            { x: maxDens, y: slope * maxDens + intercept }
+                        ],
+                        type: 'line',
+                        borderColor: '#555',
+                        borderWidth: 1.5,
+                        borderDash: [5, 4],
+                        pointRadius: 0,
+                        fill: false,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => {
+                                const d = ctx.raw;
+                                return `${d.nom} — OppChoVec: ${d.y.toFixed(2)}, Densité: ${d.x.toFixed(1)}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Densité entrepreneuriale (entr./1000 hab.)' } },
+                    y: { title: { display: true, text: 'OppChoVec (0–10)' } }
+                }
+            }
+        });
+    }
+
+    // ---- Carte des résidus ----
+    const panelCorr1 = document.getElementById('map-correlation-panel');
+    if (panelCorr1) panelCorr1.style.display = 'block';
+    const carte = L.map(document.getElementById('map-correlation'), {
+        center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
+    });
+    if (panelCorr1) panelCorr1.style.display = 'none';
+    cartes['correlation'] = carte;
+    carte.getContainer().style.backgroundColor = '#ffffff';
+
+    const residualMap = Object.fromEntries(points.map(p => [p.nom, p.residual]));
+
+    const getColorRes = (res) => {
+        if (res === undefined) return '#ccc';
+        const t = Math.max(0, Math.min(1, (res + maxAbsRes) / (2 * maxAbsRes)));
+        if (t >= 0.5) {
+            const intensity = (t - 0.5) * 2;
+            const g = Math.round(100 + 100 * intensity);
+            return `rgb(${Math.round(220*(1-intensity))},${g},${Math.round(50*(1-intensity))})`;
+        } else {
+            const intensity = (0.5 - t) * 2;
+            return `rgb(${Math.round(180+40*intensity)},${Math.round(80*(1-intensity))},${Math.round(80*(1-intensity))})`;
+        }
+    };
+
+    L.geoJSON(communeJson, {
+        style: feature => ({
+            fillColor: getColorRes(residualMap[feature.properties.nom]),
+            color: '#333', weight: 0.8, fillOpacity: 0.8
+        }),
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            const res = residualMap[nom];
+            const occ = indiceFinale[nom];
+            const dens = _densiteEntrepreneuriale[nom];
+            layer.bindPopup(`<strong>${nom}</strong><br>
+                OppChoVec : ${occ !== undefined ? occ.toFixed(2) : 'N/A'}<br>
+                Densité : ${dens !== undefined ? dens.toFixed(1) + ' entr./1000 hab.' : 'N/A'}<br>
+                Résidu : <strong>${res !== undefined ? (res > 0 ? '+' : '') + res.toFixed(2) : 'N/A'}</strong>`);
+        }
+    }).addTo(carte);
+
+    // Légende résidus
+    const legendRes = L.control({ position: 'bottomright' });
+    legendRes.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = `<strong style="font-size:14px;">Légende</strong><br>
+            <hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">
+            <strong>Résidu OppChoVec</strong><br>
+            <small style="color:#666;">OppChoVec observé − attendu</small><br><br>
+            <i style="background:#1e7c1e;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>OppChoVec &gt; attendu<br>
+            <i style="background:#aaa;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Proche tendance<br>
+            <i style="background:#c05050;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>OppChoVec &lt; attendu<br>`;
+        _makeDraggable(div, carte);
+        return div;
+    };
+    legendRes.addTo(carte);
+
+    ajouterVillesPrincipales(carte);
+    ajouterCopyright(carte);
+    ajouterBoutonTelechargement(carte, 'correlation');
+    setTimeout(() => carte.invalidateSize(), 150);
+}
+
+// ==============================================================================
+// CORRÉLATION INVERSE : OppChoVec → Densité entrepreneuriale
+// ==============================================================================
+
+let corrInverseInitialise = false;
+let _scatterChart2 = null;
+
+async function initialiserCorrInverse() {
+    if (corrInverseInitialise) {
+        setTimeout(() => { if (cartes['correlation2']) cartes['correlation2'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+        console.warn('CorrInverse: données non prêtes'); return;
+    }
+    if (!_densiteEntrepreneuriale) {
+        try {
+            const resp = await fetch(BASE_PATH + 'densite_entrepreneuriale.json');
+            _densiteEntrepreneuriale = await resp.json();
+        } catch(e) { console.error('Erreur chargement densité', e); return; }
+    }
+
+    corrInverseInitialise = true;
+
+    const points = [];
+    for (const [nom, occ] of Object.entries(indiceFinale)) {
+        const dens = _densiteEntrepreneuriale[nom];
+        if (dens !== undefined && dens !== null) points.push({ nom, occ, dens });
+    }
+
+    // Régression : OppChoVec (X) → Densité (Y)
+    const n  = points.length;
+    const mx = points.reduce((s, p) => s + p.occ,  0) / n;
+    const my = points.reduce((s, p) => s + p.dens, 0) / n;
+    const ss_xy = points.reduce((s, p) => s + (p.occ - mx) * (p.dens - my), 0);
+    const ss_xx = points.reduce((s, p) => s + (p.occ - mx) ** 2, 0);
+    const ss_yy = points.reduce((s, p) => s + (p.dens - my) ** 2, 0);
+    const slope = ss_xy / ss_xx;
+    const intercept = my - slope * mx;
+    const r = ss_xy / Math.sqrt(ss_xx * ss_yy);
+
+    points.forEach(p => {
+        p.predicted = slope * p.occ + intercept;
+        p.residual  = p.dens - p.predicted;
+    });
+    const maxAbsRes = Math.max(...points.map(p => Math.abs(p.residual)));
+
+    // Header
+    const headerEl2 = document.getElementById('correlation-r2');
+    if (headerEl2) {
+        const force = Math.abs(r) >= 0.7 ? 'forte' : Math.abs(r) >= 0.4 ? 'modérée' : 'faible';
+        const signe = r >= 0 ? 'positive' : 'négative';
+        headerEl2.innerHTML = `
+            <strong>Densité attendue selon OppChoVec</strong><br>
+            <span style="font-size:20px;font-weight:700;color:${r>=0?'#1b5e20':'#b71c1c'};">r = ${r.toFixed(3)}</span>
+            &nbsp;·&nbsp; Corrélation ${force} ${signe} (n = ${n} communes)`;
+    }
+
+    // Scatter : X = OppChoVec, Y = Densité
+    const minOcc = Math.min(...points.map(p => p.occ));
+    const maxOcc = Math.max(...points.map(p => p.occ));
+    const canvas2 = document.getElementById('scatter-chart2');
+    if (canvas2) {
+        if (_scatterChart2) { _scatterChart2.destroy(); _scatterChart2 = null; }
+        const ctx2 = canvas2.getContext('2d');
+        _scatterChart2 = new Chart(ctx2, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Communes',
+                        data: points.map(p => ({ x: p.occ, y: p.dens, nom: p.nom })),
+                        backgroundColor: points.map(p => {
+                            const t = (p.residual + maxAbsRes) / (2 * maxAbsRes);
+                            const r2 = Math.round(220 * (1 - t)), g2 = Math.round(50 + 150 * t), b2 = 80;
+                            return `rgba(${r2},${g2},${b2},0.65)`;
+                        }),
+                        pointRadius: 4, pointHoverRadius: 7,
+                    },
+                    {
+                        label: 'Tendance',
+                        data: [
+                            { x: minOcc, y: slope * minOcc + intercept },
+                            { x: maxOcc, y: slope * maxOcc + intercept }
+                        ],
+                        type: 'line', borderColor: '#555', borderWidth: 1.5,
+                        borderDash: [5, 4], pointRadius: 0, fill: false,
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => {
+                        const d = ctx.raw;
+                        return `${d.nom} — OppChoVec: ${d.x.toFixed(2)}, Densité: ${d.y.toFixed(1)}`;
+                    }}}
+                },
+                scales: {
+                    x: { title: { display: true, text: 'OppChoVec (0–10)' } },
+                    y: { title: { display: true, text: 'Densité entrepreneuriale (entr./1000 hab.)' } }
+                }
+            }
+        });
+    }
+
+    // Carte des résidus (densité observée − densité attendue)
+    const panelCorr2 = document.getElementById('map-correlation2-panel');
+    if (panelCorr2) panelCorr2.style.display = 'block';
+    const carte2 = L.map(document.getElementById('map-correlation2'), {
+        center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
+    });
+    if (panelCorr2) panelCorr2.style.display = 'none';
+    cartes['correlation2'] = carte2;
+    carte2.getContainer().style.backgroundColor = '#ffffff';
+
+    const residualMap2 = Object.fromEntries(points.map(p => [p.nom, p.residual]));
+
+    const getColorRes2 = (res) => {
+        if (res === undefined) return '#ccc';
+        const t = Math.max(0, Math.min(1, (res + maxAbsRes) / (2 * maxAbsRes)));
+        if (t >= 0.5) {
+            const intensity = (t - 0.5) * 2;
+            const g = Math.round(100 + 100 * intensity);
+            return `rgb(${Math.round(220*(1-intensity))},${g},${Math.round(50*(1-intensity))})`;
+        } else {
+            const intensity = (0.5 - t) * 2;
+            return `rgb(${Math.round(180+40*intensity)},${Math.round(80*(1-intensity))},${Math.round(80*(1-intensity))})`;
+        }
+    };
+
+    L.geoJSON(communeJson, {
+        style: feature => ({
+            fillColor: getColorRes2(residualMap2[feature.properties.nom]),
+            color: '#333', weight: 0.8, fillOpacity: 0.8
+        }),
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            const res = residualMap2[nom];
+            const occ = indiceFinale[nom];
+            const dens = _densiteEntrepreneuriale[nom];
+            layer.bindPopup(`<strong>${nom}</strong><br>
+                OppChoVec : ${occ !== undefined ? occ.toFixed(2) : 'N/A'}<br>
+                Densité observée : ${dens !== undefined ? dens.toFixed(1) + ' entr./1000 hab.' : 'N/A'}<br>
+                Densité attendue : ${occ !== undefined ? (slope * occ + intercept).toFixed(1) + ' entr./1000 hab.' : 'N/A'}<br>
+                Résidu : <strong>${res !== undefined ? (res > 0 ? '+' : '') + res.toFixed(2) : 'N/A'}</strong>`);
+        }
+    }).addTo(carte2);
+
+    const legendRes2 = L.control({ position: 'bottomright' });
+    legendRes2.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = `<strong style="font-size:14px;">Légende</strong><br>
+            <hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">
+            <strong>Résidu densité entrepreneuriale</strong><br>
+            <small style="color:#666;">Densité observée − attendue selon OppChoVec</small><br><br>
+            <i style="background:#1e7c1e;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Plus dynamique qu'attendu<br>
+            <i style="background:#aaa;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Proche tendance<br>
+            <i style="background:#c05050;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Moins dynamique qu'attendu<br>`;
+        _makeDraggable(div, carte2);
+        return div;
+    };
+    legendRes2.addTo(carte2);
+
+    ajouterVillesPrincipales(carte2);
+    ajouterCopyright(carte2);
+    ajouterBoutonTelechargement(carte2, 'correlation2');
+    setTimeout(() => carte2.invalidateSize(), 150);
+}
+
+// ==============================================================================
+// CORRÉLATION BIEN-ÊTRE SUBJECTIF × OppChoVec
+// ==============================================================================
+
+let corrSubjectifInitialise = false;
+let _scatterChart3 = null;
+let _bienEtreSubjectif = null;
+
+async function initialiserCorrSubjectif() {
+    if (corrSubjectifInitialise) {
+        setTimeout(() => { if (cartes['subjectif']) cartes['subjectif'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+        console.warn('CorrSubjectif: données non prêtes'); return;
+    }
+
+    if (!_bienEtreSubjectif) {
+        try {
+            const resp = await fetch(BASE_PATH + 'bien_etre_subjectif.json');
+            _bienEtreSubjectif = await resp.json();
+        } catch(e) { console.error('Erreur chargement bien_etre_subjectif.json', e); return; }
+    }
+
+    corrSubjectifInitialise = true;
+
+    // Points appariés (communes avec les deux données)
+    const points = [];
+    for (const [nom, data] of Object.entries(_bienEtreSubjectif)) {
+        const occ = indiceFinale[nom];
+        if (occ !== undefined && occ !== null) {
+            points.push({ nom, occ, subjScore: data.score, n: data.n });
+        }
+    }
+
+    // Régression et corrélation si assez de points
+    let r = null, slope = null, intercept = null;
+    if (points.length >= 3) {
+        const n  = points.length;
+        const mx = points.reduce((s, p) => s + p.occ,       0) / n;
+        const my = points.reduce((s, p) => s + p.subjScore, 0) / n;
+        const ss_xy = points.reduce((s, p) => s + (p.occ - mx) * (p.subjScore - my), 0);
+        const ss_xx = points.reduce((s, p) => s + (p.occ - mx) ** 2, 0);
+        const ss_yy = points.reduce((s, p) => s + (p.subjScore - my) ** 2, 0);
+        slope = ss_xy / ss_xx;
+        intercept = my - slope * mx;
+        r = ss_xy / Math.sqrt(ss_xx * ss_yy);
+    }
+
+    // Header
+    const headerEl3 = document.getElementById('correlation-r3');
+    if (headerEl3) {
+        if (r !== null) {
+            const force = Math.abs(r) >= 0.7 ? 'forte' : Math.abs(r) >= 0.4 ? 'modérée' : 'faible';
+            const signe = r >= 0 ? 'positive' : 'négative';
+            headerEl3.innerHTML = `
+                <strong>Bien-être subjectif × OppChoVec</strong><br>
+                <span style="font-size:20px;font-weight:700;color:${r>=0?'#1b5e20':'#b71c1c'};">r = ${r.toFixed(3)}</span>
+                &nbsp;·&nbsp; Corrélation ${force} ${signe} (n = ${points.length} communes avec données)`;
+        } else {
+            headerEl3.innerHTML = `<strong>Bien-être subjectif × OppChoVec</strong><br>
+                <em style="color:#888;">Données insuffisantes pour calculer la corrélation</em>`;
+        }
+    }
+
+    // Scatter : X = OppChoVec, Y = score subjectif
+    const canvas3 = document.getElementById('scatter-chart3');
+    if (canvas3) {
+        if (_scatterChart3) { _scatterChart3.destroy(); _scatterChart3 = null; }
+        const ctx3 = canvas3.getContext('2d');
+        const datasets = [{
+            label: 'Communes',
+            data: points.map(p => ({ x: p.occ, y: p.subjScore, nom: p.nom, n: p.n })),
+            backgroundColor: 'rgba(70, 130, 180, 0.7)',
+            pointRadius: points.map(p => Math.min(4 + p.n * 0.15, 10)),
+            pointHoverRadius: 8,
+        }];
+        if (r !== null) {
+            const minOcc = Math.min(...points.map(p => p.occ));
+            const maxOcc = Math.max(...points.map(p => p.occ));
+            datasets.push({
+                label: 'Tendance',
+                data: [
+                    { x: minOcc, y: slope * minOcc + intercept },
+                    { x: maxOcc, y: slope * maxOcc + intercept }
+                ],
+                type: 'line', borderColor: '#555', borderWidth: 1.5,
+                borderDash: [5, 4], pointRadius: 0, fill: false,
+            });
+        }
+        _scatterChart3 = new Chart(ctx3, {
+            type: 'scatter',
+            data: { datasets },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => {
+                        const d = ctx.raw;
+                        return `${d.nom} — OppChoVec: ${d.x.toFixed(2)}, B-E subjectif: ${d.y.toFixed(3)} (n=${d.n})`;
+                    }}}
+                },
+                scales: {
+                    x: { title: { display: true, text: 'OppChoVec (0–10)' } },
+                    y: { title: { display: true, text: 'Score bien-être subjectif (1–5)' }, min: 1, max: 5 }
+                }
+            }
+        });
+    }
+
+    // Carte colorée par score subjectif (uniquement les communes avec données)
+    const panelSubj = document.getElementById('map-subjectif-panel');
+    if (panelSubj) panelSubj.style.display = 'block';
+    const carteSubj = L.map(document.getElementById('map-subjectif'), {
+        center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
+    });
+    if (panelSubj) panelSubj.style.display = 'none';
+    cartes['subjectif'] = carteSubj;
+    carteSubj.getContainer().style.backgroundColor = '#ffffff';
+
+    const scoreMap = Object.fromEntries(points.map(p => [p.nom, p]));
+
+    // Palette : 1=rouge, 3=jaune, 5=vert
+    const getColorSubj = (score) => {
+        if (score === undefined) return '#e0e0e0';
+        const t = Math.max(0, Math.min(1, (score - 1) / 4));
+        if (t < 0.5) {
+            const i = t * 2;
+            return `rgb(${Math.round(220)},${Math.round(80 + 140 * i)},${Math.round(50 * i)})`;
+        } else {
+            const i = (t - 0.5) * 2;
+            return `rgb(${Math.round(220 * (1 - i))},${Math.round(180 + 40 * i)},${Math.round(50 * (1 - i))})`;
+        }
+    };
+
+    L.geoJSON(communeJson, {
+        style: feature => {
+            const nom = feature.properties.nom;
+            const hasData = scoreMap[nom] !== undefined;
+            return {
+                fillColor: hasData ? getColorSubj(scoreMap[nom].subjScore) : '#e0e0e0',
+                color: hasData ? '#333' : '#bbb',
+                weight: hasData ? 1 : 0.5,
+                fillOpacity: hasData ? 0.85 : 0.3
+            };
+        },
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            const occ = indiceFinale[nom];
+            const p = scoreMap[nom];
+            if (p) {
+                layer.bindPopup(`<strong>${nom}</strong><br>
+                    OppChoVec : ${occ !== undefined ? occ.toFixed(2) : 'N/A'}<br>
+                    Bien-être subjectif : <strong>${p.subjScore.toFixed(3)}</strong> (n=${p.n} répondants)`);
+            } else {
+                layer.bindPopup(`<strong>${nom}</strong><br>
+                    OppChoVec : ${occ !== undefined ? occ.toFixed(2) : 'N/A'}<br>
+                    <em style="color:#888;">Pas de données subjectives</em>`);
+            }
+        }
+    }).addTo(carteSubj);
+
+    // Légende
+    const legendSubj = L.control({ position: 'bottomright' });
+    legendSubj.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = `<strong style="font-size:14px;">Légende</strong><br>
+            <hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">
+            <strong>Score bien-être subjectif</strong><br>
+            <small style="color:#666;">Moyenne questionnaire (1–5)<br>${points.length} communes avec données</small><br><br>
+            <i style="background:#1e7c1e;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Élevé (≥ 4)<br>
+            <i style="background:#e8c820;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Moyen (≈ 3)<br>
+            <i style="background:#c05050;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Faible (≤ 2)<br>
+            <i style="background:#e0e0e0;width:18px;height:18px;display:inline-block;margin-right:5px;border:1px solid #bbb;"></i>Pas de données<br>`;
+        _makeDraggable(div, carteSubj);
+        return div;
+    };
+    legendSubj.addTo(carteSubj);
+
+    ajouterVillesPrincipales(carteSubj);
+    ajouterCopyright(carteSubj);
+    ajouterBoutonTelechargement(carteSubj, 'subjectif');
+    setTimeout(() => carteSubj.invalidateSize(), 150);
+}
+
+// ==============================================================================
+// CORRÉLATION BIEN-ÊTRE SUBJECTIF × DENSITÉ ENTREPRENEURIALE
+// ==============================================================================
+
+let corrSubjectifDensInitialise = false;
+let _scatterChart4 = null;
+
+async function initialiserCorrSubjectifDens() {
+    if (corrSubjectifDensInitialise) {
+        setTimeout(() => { if (cartes['subjectif-dens']) cartes['subjectif-dens'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features) {
+        console.warn('CorrSubjectifDens: données non prêtes'); return;
+    }
+
+    // Charger les deux sources si nécessaire
+    if (!_bienEtreSubjectif) {
+        try {
+            const resp = await fetch(BASE_PATH + 'bien_etre_subjectif.json');
+            _bienEtreSubjectif = await resp.json();
+        } catch(e) { console.error('Erreur chargement bien_etre_subjectif.json', e); return; }
+    }
+    if (!_densiteEntrepreneuriale) {
+        try {
+            const resp = await fetch(BASE_PATH + 'densite_entrepreneuriale.json');
+            _densiteEntrepreneuriale = await resp.json();
+        } catch(e) { console.error('Erreur chargement densité', e); return; }
+    }
+
+    corrSubjectifDensInitialise = true;
+
+    // Points appariés : communes avec les deux données
+    const points = [];
+    for (const [nom, data] of Object.entries(_bienEtreSubjectif)) {
+        const dens = _densiteEntrepreneuriale[nom];
+        if (dens !== undefined && dens !== null) {
+            points.push({ nom, subjScore: data.score, n: data.n, dens });
+        }
+    }
+
+    // Régression et corrélation : X = densité, Y = bien-être subjectif
+    let r = null, slope = null, intercept = null;
+    if (points.length >= 3) {
+        const n  = points.length;
+        const mx = points.reduce((s, p) => s + p.dens,      0) / n;
+        const my = points.reduce((s, p) => s + p.subjScore, 0) / n;
+        const ss_xy = points.reduce((s, p) => s + (p.dens - mx) * (p.subjScore - my), 0);
+        const ss_xx = points.reduce((s, p) => s + (p.dens - mx) ** 2, 0);
+        const ss_yy = points.reduce((s, p) => s + (p.subjScore - my) ** 2, 0);
+        slope = ss_xy / ss_xx;
+        intercept = my - slope * mx;
+        r = ss_xy / Math.sqrt(ss_xx * ss_yy);
+        points.forEach(p => { p.residual = p.subjScore - (slope * p.dens + intercept); });
+    }
+
+    // Header
+    const headerEl4 = document.getElementById('correlation-r4');
+    if (headerEl4) {
+        if (r !== null) {
+            const force = Math.abs(r) >= 0.7 ? 'forte' : Math.abs(r) >= 0.4 ? 'modérée' : 'faible';
+            const signe = r >= 0 ? 'positive' : 'négative';
+            headerEl4.innerHTML = `
+                <strong>Bien-être subjectif × Densité entrepreneuriale</strong><br>
+                <span style="font-size:20px;font-weight:700;color:${r>=0?'#1b5e20':'#b71c1c'};">r = ${r.toFixed(3)}</span>
+                &nbsp;·&nbsp; Corrélation ${force} ${signe} (n = ${points.length} communes avec données)`;
+        } else {
+            headerEl4.innerHTML = `<strong>Bien-être subjectif × Densité entrepreneuriale</strong><br>
+                <em style="color:#888;">Données insuffisantes pour calculer la corrélation</em>`;
+        }
+    }
+
+    // Scatter : X = densité, Y = score subjectif
+    const canvas4 = document.getElementById('scatter-chart4');
+    if (canvas4) {
+        if (_scatterChart4) { _scatterChart4.destroy(); _scatterChart4 = null; }
+        const ctx4 = canvas4.getContext('2d');
+        const maxAbsRes = r !== null ? Math.max(...points.map(p => Math.abs(p.residual))) : 1;
+        const datasets = [{
+            label: 'Communes',
+            data: points.map(p => ({ x: p.dens, y: p.subjScore, nom: p.nom, n: p.n })),
+            backgroundColor: r !== null
+                ? points.map(p => {
+                    const t = (p.residual + maxAbsRes) / (2 * maxAbsRes);
+                    const r2 = Math.round(220 * (1 - t)), g2 = Math.round(50 + 150 * t), b2 = 80;
+                    return `rgba(${r2},${g2},${b2},0.75)`;
+                })
+                : 'rgba(70, 130, 180, 0.7)',
+            pointRadius: points.map(p => Math.min(4 + p.n * 0.15, 10)),
+            pointHoverRadius: 8,
+        }];
+        if (r !== null) {
+            const minDens = Math.min(...points.map(p => p.dens));
+            const maxDens = Math.max(...points.map(p => p.dens));
+            datasets.push({
+                label: 'Tendance',
+                data: [
+                    { x: minDens, y: slope * minDens + intercept },
+                    { x: maxDens, y: slope * maxDens + intercept }
+                ],
+                type: 'line', borderColor: '#555', borderWidth: 1.5,
+                borderDash: [5, 4], pointRadius: 0, fill: false,
+            });
+        }
+        _scatterChart4 = new Chart(ctx4, {
+            type: 'scatter',
+            data: { datasets },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { label: ctx => {
+                        const d = ctx.raw;
+                        return `${d.nom} — Densité: ${d.x.toFixed(1)}, B-E subjectif: ${d.y.toFixed(3)} (n=${d.n})`;
+                    }}}
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Densité entrepreneuriale (entr./1000 hab.)' } },
+                    y: { title: { display: true, text: 'Score bien-être subjectif (1–5)' }, min: 1, max: 5 }
+                }
+            }
+        });
+    }
+
+    // Carte des résidus (B-E observé − attendu selon densité)
+    const panelSubjDens = document.getElementById('map-subjectif-dens-panel');
+    if (panelSubjDens) panelSubjDens.style.display = 'block';
+    const carteSubjDens = L.map(document.getElementById('map-subjectif-dens'), {
+        center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
+    });
+    if (panelSubjDens) panelSubjDens.style.display = 'none';
+    cartes['subjectif-dens'] = carteSubjDens;
+    carteSubjDens.getContainer().style.backgroundColor = '#ffffff';
+
+    const scoreMap = Object.fromEntries(points.map(p => [p.nom, p]));
+    const maxAbsRes = r !== null ? Math.max(...points.map(p => Math.abs(p.residual))) : 1;
+
+    const getColorSubjDens = (p) => {
+        if (!p) return '#e0e0e0';
+        if (r === null) {
+            // Pas de régression, colorier par score brut
+            const t = Math.max(0, Math.min(1, (p.subjScore - 1) / 4));
+            if (t < 0.5) {
+                const i = t * 2;
+                return `rgb(220,${Math.round(80 + 140 * i)},${Math.round(50 * i)})`;
+            } else {
+                const i = (t - 0.5) * 2;
+                return `rgb(${Math.round(220 * (1 - i))},${Math.round(180 + 40 * i)},${Math.round(50 * (1 - i))})`;
+            }
+        }
+        const t = Math.max(0, Math.min(1, (p.residual + maxAbsRes) / (2 * maxAbsRes)));
+        if (t >= 0.5) {
+            const intensity = (t - 0.5) * 2;
+            return `rgb(${Math.round(220*(1-intensity))},${Math.round(100 + 100*intensity)},${Math.round(50*(1-intensity))})`;
+        } else {
+            const intensity = (0.5 - t) * 2;
+            return `rgb(${Math.round(180+40*intensity)},${Math.round(80*(1-intensity))},${Math.round(80*(1-intensity))})`;
+        }
+    };
+
+    L.geoJSON(communeJson, {
+        style: feature => {
+            const nom = feature.properties.nom;
+            const p = scoreMap[nom];
+            return {
+                fillColor: getColorSubjDens(p),
+                color: p ? '#333' : '#bbb',
+                weight: p ? 1 : 0.5,
+                fillOpacity: p ? 0.85 : 0.3
+            };
+        },
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            const p = scoreMap[nom];
+            const dens = _densiteEntrepreneuriale[nom];
+            if (p) {
+                const attendu = r !== null ? (slope * p.dens + intercept).toFixed(3) : 'N/A';
+                const residuTxt = r !== null
+                    ? `Résidu : <strong>${(p.residual > 0 ? '+' : '') + p.residual.toFixed(3)}</strong><br>`
+                    : '';
+                layer.bindPopup(`<strong>${nom}</strong><br>
+                    Densité : ${p.dens.toFixed(1)} entr./1000 hab.<br>
+                    B-E subjectif : <strong>${p.subjScore.toFixed(3)}</strong> (n=${p.n})<br>
+                    B-E attendu : ${attendu}<br>
+                    ${residuTxt}`);
+            } else {
+                layer.bindPopup(`<strong>${nom}</strong><br>
+                    Densité : ${dens !== undefined ? dens.toFixed(1) + ' entr./1000 hab.' : 'N/A'}<br>
+                    <em style="color:#888;">Pas de données bien-être subjectif</em>`);
+            }
+        }
+    }).addTo(carteSubjDens);
+
+    // Légende
+    const legendSubjDens = L.control({ position: 'bottomright' });
+    legendSubjDens.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        const legendBody = r !== null
+            ? `<strong>Résidu bien-être subjectif</strong><br>
+               <small style="color:#666;">B-E observé − attendu selon densité<br>${points.length} communes avec données</small><br><br>
+               <i style="background:#1e7c1e;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>B-E &gt; attendu<br>
+               <i style="background:#aaa;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Proche tendance<br>
+               <i style="background:#c05050;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>B-E &lt; attendu<br>`
+            : `<strong>Score bien-être subjectif</strong><br>
+               <small style="color:#666;">${points.length} communes avec données</small><br><br>
+               <i style="background:#1e7c1e;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Élevé (≥ 4)<br>
+               <i style="background:#e8c820;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Moyen (≈ 3)<br>
+               <i style="background:#c05050;width:18px;height:18px;display:inline-block;margin-right:5px;"></i>Faible (≤ 2)<br>`;
+        div.innerHTML = `<strong style="font-size:14px;">Légende</strong><br>
+            <hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">
+            ${legendBody}
+            <i style="background:#e0e0e0;width:18px;height:18px;display:inline-block;margin-right:5px;border:1px solid #bbb;"></i>Pas de données<br>`;
+        _makeDraggable(div, carteSubjDens);
+        return div;
+    };
+    legendSubjDens.addTo(carteSubjDens);
+
+    ajouterVillesPrincipales(carteSubjDens);
+    ajouterCopyright(carteSubjDens);
+    ajouterBoutonTelechargement(carteSubjDens, 'subjectif-dens');
+    setTimeout(() => carteSubjDens.invalidateSize(), 150);
+}
+
+// ==============================================================================
+// ONGLET ENTREPRISES
+// ==============================================================================
+
+let entreprisesInitialise = false;
+let _densiteEntrepreneuriale = null; // données chargées depuis JSON
+
+async function initialiserOngletEntreprises() {
+    if (entreprisesInitialise) {
+        setTimeout(() => { if (cartes['entreprises']) cartes['entreprises'].invalidateSize(); }, 100);
+        return;
+    }
+    if (!communeJson || !communeJson.features) {
+        console.warn('Entreprises: GeoJSON communes non prêt');
+        return;
+    }
+
+    // Charger les données de densité entrepreneuriale
+    if (!_densiteEntrepreneuriale) {
+        try {
+            const resp = await fetch(BASE_PATH + 'densite_entrepreneuriale.json');
+            _densiteEntrepreneuriale = await resp.json();
+        } catch (e) {
+            console.error('Erreur chargement densite_entrepreneuriale.json', e);
+            return;
+        }
+    }
+
+    entreprisesInitialise = true;
+
+    // Calcul des seuils Jenks sur les valeurs de densité
+    const valeurs = Object.values(_densiteEntrepreneuriale).filter(v => v > 0);
+    const breaks = calculerJenksBreaks(valeurs, 5);
+    const seuilsEnt = [0, ...breaks, Math.ceil(Math.max(...valeurs))];
+    const labelsEnt = genererLabelsJenks(seuilsEnt);
+
+    // Palette dégradé vert (5 classes)
+    const couleursEnt = ['#c8e6c9', '#81c784', '#388e3c', '#1b5e20', '#0a2e0f'];
+
+    const getColorEnt = (val) => {
+        if (val === undefined || val === null) return '#ccc';
+        for (let i = 1; i < seuilsEnt.length; i++) {
+            if (val <= seuilsEnt[i]) return couleursEnt[i - 1];
+        }
+        return couleursEnt[couleursEnt.length - 1];
+    };
+
+    // Initialiser la carte Leaflet
+    const carte = L.map(document.getElementById('map-entreprises'), {
+        center: [42.0, 9.0],
+        zoom: 8,
+        zoomSnap: 0.1,
+        zoomDelta: 0.1
+    });
+    cartes['entreprises'] = carte;
+    carte.getContainer().style.backgroundColor = '#ffffff';
+
+    // Couche GeoJSON
+    const layer = L.geoJSON(communeJson, {
+        style: feature => ({
+            fillColor: getColorEnt(_densiteEntrepreneuriale[feature.properties.nom]),
+            color: '#333',
+            weight: 0.8,
+            fillOpacity: 0.75
+        }),
+        onEachFeature: (feature, l) => {
+            const nom = feature.properties.nom;
+            const val = _densiteEntrepreneuriale[nom];
+            l.bindPopup(`<strong>${nom}</strong><br>Densité : ${val !== undefined ? val.toFixed(1) + ' entr./1000 hab.' : 'N/A'}`);
+        }
+    }).addTo(carte);
+
+    // Légende identique aux autres cartes
+    const legendControl = L.control({ position: 'bottomright' });
+    legendControl.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.setAttribute('data-carte-type', 'entreprises');
+        div.innerHTML += `<strong class="legende-titre-principal" style="font-size:14px;">Légende</strong><br>`;
+        div.innerHTML += `<hr style="margin:8px 0;border:none;border-top:1px solid #ddd;">`;
+        div.innerHTML += `<strong>Densité entrepreneuriale</strong><br>`;
+        div.innerHTML += `<small style="color:#666;">Entreprises pour 1 000 hab.</small><br><br>`;
+        for (let i = couleursEnt.length - 1; i >= 0; i--) {
+            div.innerHTML += `<i style="background:${couleursEnt[i]};width:18px;height:18px;display:inline-block;margin-right:5px;"></i>${labelsEnt[i]}<br>`;
+        }
+        div.innerHTML += `<hr style="margin:10px 0;border:none;border-top:1px solid #ddd;">`;
+        div.innerHTML += `
+            <div style="display:flex;align-items:center;margin:5px 0;">
+                <svg width="30" height="2" style="margin-right:8px;">
+                    <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5"/>
+                </svg>
+                <span style="font-size:11px;">Limites communales</span>
+            </div>`;
+        _makeDraggable(div, carte);
+        return div;
+    };
+    legendControl.addTo(carte);
+    legendControls['entreprises'] = legendControl;
+
+    // Villes, rose des vents, copyright personnalisé, bouton téléchargement PNG
+    ajouterVillesPrincipales(carte);
+    ajouterRoseDesVents(carte);
+    const copyrightEnt = L.control({ position: 'bottomleft' });
+    copyrightEnt.onAdd = function() {
+        const div = L.DomUtil.create('div', 'copyright-control');
+        div.style.cssText = 'background:rgba(255,255,255,0.9);padding:6px 10px;border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,0.2);font-size:9px;color:#666;font-family:Arial,sans-serif;line-height:1.3;text-align:center;';
+        div.innerHTML = '© Ghinevra Comiti 2025 — Tous droits réservés';
+        return div;
+    };
+    copyrightEnt.addTo(carte);
+    ajouterBoutonTelechargement(carte, 'entreprises');
+
+    // Sync zoom avec les autres cartes
+    carte.on('zoomend moveend', function() {
+        if (isSyncing) return;
+        const size = carte.getSize();
+        if (!size || size.x === 0 || size.y === 0) return;
+        isSyncing = true;
+        const z = carte.getZoom(), c = carte.getCenter();
+        for (const k in cartes) {
+            if (cartes[k] && k !== 'entreprises') {
+                const s = cartes[k].getSize();
+                if (s && s.x > 0) cartes[k].setView(c, z, { animate: false });
+            }
+        }
+        setTimeout(() => { isSyncing = false; }, 100);
+    });
+
+    setTimeout(() => carte.invalidateSize(), 150);
+}
+
 // ONGLET PARANGONS
 // ==============================================================================
 
@@ -3262,6 +4332,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 initialiserCartesCAH();
             }
 
+            // Si on clique sur l'onglet Entreprises, initialiser (lazy loading)
+            if (targetTab === 'entreprisestab') {
+                initialiserOngletEntreprises();
+            }
+
+            // Si on clique sur l'onglet Corrélation, initialiser (lazy loading)
+            if (targetTab === 'correlationtab') {
+                initialiserOngletCorrelation();
+            }
+
             // Si on clique sur l'onglet Parangons, initialiser (lazy loading)
             if (targetTab === 'parangonstab') {
                 initialiserOngletParangons();
@@ -3372,6 +4452,28 @@ document.addEventListener('DOMContentLoaded', function() {
             // Ajouter la classe active au bouton cliqué et au contenu correspondant
             this.classList.add('active');
             document.getElementById('datavis-' + targetDatavisTab).classList.add('active');
+        });
+    });
+
+    // Gestion des sous-onglets Corrélation
+    document.querySelectorAll('.corr-subtab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetCorr = this.getAttribute('data-corr');
+            document.querySelectorAll('.corr-subtab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.corr-subtab-content').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById(targetCorr).classList.add('active');
+
+            if (targetCorr === 'corr-entr-occ') {
+                // Sous-onglet 1 déjà initialisé, juste invalider la carte
+                setTimeout(() => { if (cartes['correlation']) cartes['correlation'].invalidateSize(); }, 100);
+            } else if (targetCorr === 'corr-occ-entr') {
+                initialiserCorrInverse();
+            } else if (targetCorr === 'corr-subjectif') {
+                initialiserCorrSubjectif();
+            } else if (targetCorr === 'corr-subjectif-dens') {
+                initialiserCorrSubjectifDens();
+            }
         });
     });
 
