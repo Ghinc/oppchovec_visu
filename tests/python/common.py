@@ -4,6 +4,7 @@ import json
 import math
 import os
 import re
+import sys
 import unittest
 from pathlib import Path
 
@@ -191,3 +192,30 @@ def differences(a, b, tol=1e-9, chemin="", max_diff=10):
 
     rec(a, b, chemin)
     return sortie
+
+
+# --------------------------------------------------------------------------------------------------
+# Rejeu des scripts de la racine (gen_*.py) sur une copie : chemins.py honore OPPCHOVEC_RACINE
+# --------------------------------------------------------------------------------------------------
+SCRIPTS_RACINE = ("gen_excel_010.py", "gen_comparaison.py", "gen_top5_betti.py", "gen_appendix2.py", "gen_lisa_knn5.py", "gen_lisa_betti.py")
+
+
+def copie_du_projet(destination):
+    """Copie minimale (scripts de la racine + données qu'ils lisent) ; avec OPPCHOVEC_RACINE, ils écrivent DANS cette copie."""
+    import shutil
+    destination = Path(destination)
+    for nom in ("chemins.py", *SCRIPTS_RACINE):
+        shutil.copy(RACINE / nom, destination / nom)
+    web = destination / "stage_ambroise" / "Code" / "WEB"
+    web.mkdir(parents=True)
+    for nom in ("data_scores_0_10.json", "cah_5_clusters.json"):
+        shutil.copy(WEB / nom, web / nom)
+    (destination / "stage_ambroise" / "Données").mkdir()
+    shutil.copy(GEOJSON, destination / "stage_ambroise" / "Données" / "Commune_Corse.geojson")
+
+
+def lancer_script_racine(copie, script, *args, timeout=900):
+    import subprocess
+    env = {**os.environ, "OPPCHOVEC_RACINE": str(copie), "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1", "MPLBACKEND": "Agg"}
+    return subprocess.run([sys.executable, "-X", "utf8", str(Path(copie) / script), *args], cwd=copie, env=env,
+                          capture_output=True, text=True, encoding="utf-8", timeout=timeout)

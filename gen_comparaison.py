@@ -3,8 +3,9 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 sys.stdout.reconfigure(encoding='utf-8')
+from chemins import WEB, SORTIE, dossier   # tout est relatif au dépôt (voir chemins.py)
 
-with open('c:/These/oppchovec_visu/stage_ambroise/Code/WEB/data_scores_0_10.json', encoding='utf-8') as f:
+with open(WEB / 'data_scores_0_10.json', encoding='utf-8') as f:
     data = json.load(f)
 
 communes = list(data.keys())
@@ -98,7 +99,7 @@ rows.append(stats_row('Score_Vec',      [data[c]['Score_Vec'] for c in communes]
 
 df = pd.DataFrame(rows).set_index('Indicateur')
 
-out = 'C:/Users/comiti_g/Downloads/comparaison_egal_vs_betti_0_10.xlsx'
+out = dossier(SORTIE) / 'comparaison_egal_vs_betti_0_10.xlsx'
 with pd.ExcelWriter(out, engine='openpyxl') as writer:
     df.to_excel(writer, sheet_name='Comparaison')
 

@@ -104,20 +104,26 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
 
 ## 🔁 Procédure de régénération
 
-À lancer depuis `stage_ambroise/Code/Python/` (sauf l'étape 4). Les sources brutes (xlsx/csv par indicateur) ne sont pas dans le
+À lancer depuis `stage_ambroise/Code/Python/` (sauf les étapes 4 et 7, qui se lancent depuis la racine du dépôt). Les sources brutes (xlsx/csv par indicateur) ne sont pas dans le
 dépôt : `<sources>` désigne le dossier contenant `Données/Corse_Commune/`.
 
 1. **Scores et indice** : `python regenerer_data_scores.py "<sources>"` recalcule Vec3 depuis ses sous-composantes puis tous les
    scores. Il refuse d'écrire s'il ne retrouve pas d'abord le fichier actuel à partir des indicateurs.
 2. **Seuils de Jenks** : `python calculer_jenks_5_classes.py`
 3. **Données sous-jacentes aux curseurs** : `python exporter_sous_composantes.py "<sources>"`
-4. **LISA** (depuis la racine du dépôt) : `python gen_lisa_knn5.py` (**attention : les chemins `WEB_DIR` et `GEOJSON` en tête de ce
-   script sont absolus, à adapter à votre machine**)
+4. **LISA** (depuis la racine du dépôt) : `python gen_lisa_knn5.py`. Les scripts `gen_*.py` de la racine prennent leurs chemins dans
+   `chemins.py` (relatifs au dépôt, rien n'est codé en dur). `gen_lisa_betti.py` (voisinage Queen) est **obsolète** : il refuse de tourner
+   sans `--ancienne-methode`, car il écraserait les mêmes fichiers avec une autre méthode.
 5. **CAH** : `python graphique_ecarts_types_cah.py` (graphiques à 3, 4 et 5 classes), puis `python preparer_donnees_cah_web_complet.py`,
    puis `python generer_cah_data_js_complet.py`
 6. **Assistant** : `python generer_donnees_communes_chatbot.py`
-7. **Documentation et repli** : reporter les nouveaux seuils dans les tableaux ci-dessus et dans `let seuilsJenks` de `script.js`.
-8. **Contrôle** : `python tests/run_tests.py` (depuis la racine du dépôt).
+7. **Tableaux Excel** (depuis la racine du dépôt) : `python gen_excel_010.py`, puis si besoin `gen_comparaison.py`, `gen_top5_betti.py` et
+   `gen_appendix2.py`. `gen_excel_010.py` écrit les deux fichiers **proposés au téléchargement par le site** dans `downloads/`
+   (`oppchovec_betti_0_10_trie.xlsx`, `stats_descriptives_betti_0_10.xlsx`, versionnés) et ses fichiers « égal » dans
+   `stage_ambroise/Code/OUTPUT/`, où vont aussi les tableaux de l'article (ignorés par git comme tous les `.xlsx`). Les fichiers de
+   `downloads/` doivent être régénérés à chaque changement de données : un test le vérifie.
+8. **Documentation et repli** : reporter les nouveaux seuils dans les tableaux ci-dessus et dans `let seuilsJenks` de `script.js`.
+9. **Contrôle** : `python tests/run_tests.py` (depuis la racine du dépôt).
 
 ⚠️ La chaîne *complète* depuis les fichiers bruts n'est pas encore entièrement scriptée : `oppchovec.py` n'est pas synchronisé avec
 `data_scores_0_10.json` pour Opp4 (la fibre, `fibre_corse.csv`, y manque) et Cho2 (le script lit `Cho2.xlsx`, les données viennent

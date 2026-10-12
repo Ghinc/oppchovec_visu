@@ -5,6 +5,12 @@ Produit : lisa_data_betti.js et lisa_data_betti_1pct.js
 import json, math, sys, numpy as np
 sys.stdout.reconfigure(encoding='utf-8')
 
+# OBSOLÈTE : voisinage Queen, remplacé par gen_lisa_knn5.py (KNN k=5, 9999 permutations) qui produit ces MÊMES fichiers.
+# Le relancer écraserait lisa_data_betti*.js avec une méthode différente de celle documentée.
+if '--ancienne-methode' not in sys.argv:
+    sys.exit("gen_lisa_betti.py est obsolète (voisinage Queen) : utiliser gen_lisa_knn5.py. "
+             "Pour le relancer malgré tout : --ancienne-methode (il écrasera lisa_data_betti*.js).")
+
 import geopandas as gpd
 from libpysal.weights import Queen
 from esda.moran import Moran_Local, Moran
@@ -12,8 +18,9 @@ from esda.moran import Moran_Local, Moran
 SEED = 42
 np.random.seed(SEED)
 
-WEB_DIR = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/'
-GEOJSON  = 'c:/These/oppchovec_visu/stage_ambroise/Données/Commune_Corse.geojson'
+from chemins import WEB, GEOJSON as GEOJSON_FICHIER   # chemins relatifs au dépôt (voir chemins.py)
+WEB_DIR = str(WEB) + '/'
+GEOJSON  = str(GEOJSON_FICHIER)
 DATA_JSON = WEB_DIR + 'data_scores_0_10.json'
 
 # === Charger données ===

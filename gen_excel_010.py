@@ -1,7 +1,8 @@
 import json, math, sys, pandas as pd
 sys.stdout.reconfigure(encoding='utf-8')
+from chemins import WEB, SORTIE, DOWNLOADS, dossier   # tout est relatif au dépôt (voir chemins.py)
 
-with open('c:/These/oppchovec_visu/stage_ambroise/Code/WEB/data_scores_0_10.json', encoding='utf-8') as f:
+with open(WEB / 'data_scores_0_10.json', encoding='utf-8') as f:
     data = json.load(f)
 
 communes = list(data.keys())
@@ -109,15 +110,15 @@ def build_vec_stats():
 
 # Fichiers stats
 for fname, occ_010, raw_occ in [
-    ('C:/Users/comiti_g/Downloads/stats_descriptives_egal_0_10.xlsx',  occ_egal_010,  raw_egal),
-    ('C:/Users/comiti_g/Downloads/stats_descriptives_betti_0_10.xlsx', occ_betti_010, raw_betti),
+    (dossier(SORTIE)    / 'stats_descriptives_egal_0_10.xlsx',  occ_egal_010,  raw_egal),
+    (dossier(DOWNLOADS) / 'stats_descriptives_betti_0_10.xlsx', occ_betti_010, raw_betti),   # servi par le site
 ]:
     with pd.ExcelWriter(fname, engine='openpyxl') as w:
         pd.DataFrame(build_synth_stats(occ_010, raw_occ)).set_index('').to_excel(w, sheet_name='Synthese')
         pd.DataFrame(build_opp_stats()).set_index('').to_excel(w, sheet_name='Opp')
         pd.DataFrame(build_cho_stats()).set_index('').to_excel(w, sheet_name='Cho')
         pd.DataFrame(build_vec_stats()).set_index('').to_excel(w, sheet_name='Vec')
-    print(f"OK {fname.split('/')[-1]}")
+    print(f"OK {fname}")
 
 # Fichiers classements triés
 def build_synthese_trie(occ_010, raw_occ):
@@ -165,15 +166,15 @@ def build_vec_trie():
     return rows
 
 for fname, occ_010, raw_occ in [
-    ('C:/Users/comiti_g/Downloads/oppchovec_egal_0_10_trie.xlsx',  occ_egal_010,  raw_egal),
-    ('C:/Users/comiti_g/Downloads/oppchovec_betti_0_10_trie.xlsx', occ_betti_010, raw_betti),
+    (dossier(SORTIE)    / 'oppchovec_egal_0_10_trie.xlsx',  occ_egal_010,  raw_egal),
+    (dossier(DOWNLOADS) / 'oppchovec_betti_0_10_trie.xlsx', occ_betti_010, raw_betti),   # servi par le site
 ]:
     with pd.ExcelWriter(fname, engine='openpyxl') as w:
         pd.DataFrame(build_synthese_trie(occ_010, raw_occ)).to_excel(w, sheet_name='Synthese', index=False)
         pd.DataFrame(build_opp_trie()).to_excel(w, sheet_name='Opp', index=False)
         pd.DataFrame(build_cho_trie()).to_excel(w, sheet_name='Cho', index=False)
         pd.DataFrame(build_vec_trie()).to_excel(w, sheet_name='Vec', index=False)
-    print(f"OK {fname.split('/')[-1]}")
+    print(f"OK {fname}")
 
 print("\nStats OppChoVec_0_10 :")
 for label, vals in [('Egal ', list(occ_egal_010.values())), ('Betti', list(occ_betti_010.values()))]:

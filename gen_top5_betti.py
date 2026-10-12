@@ -6,9 +6,10 @@ import json, math, sys, pandas as pd
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 sys.stdout.reconfigure(encoding='utf-8')
+from chemins import WEB, SORTIE, dossier   # tout est relatif au dépôt (voir chemins.py)
 
-DATA_JSON = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/data_scores_0_10.json'
-OUT       = 'C:/Users/comiti_g/Downloads/top5_bottom5_betti.xlsx'
+DATA_JSON = WEB / 'data_scores_0_10.json'
+OUT       = dossier(SORTIE) / 'top5_bottom5_betti.xlsx'
 
 with open(DATA_JSON, encoding='utf-8') as f:
     data = json.load(f)

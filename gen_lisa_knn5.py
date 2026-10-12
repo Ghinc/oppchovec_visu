@@ -19,8 +19,9 @@ from esda.moran import Moran_Local, Moran
 SEED = 42
 np.random.seed(SEED)
 
-WEB_DIR  = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/'
-GEOJSON  = 'c:/These/oppchovec_visu/stage_ambroise/Données/Commune_Corse.geojson'
+from chemins import WEB, GEOJSON as GEOJSON_FICHIER   # chemins relatifs au dépôt (voir chemins.py)
+WEB_DIR  = str(WEB) + '/'
+GEOJSON  = str(GEOJSON_FICHIER)
 DATA_JSON = WEB_DIR + 'data_scores_0_10.json'
 
 # === Charger données ===

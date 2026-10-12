@@ -16,7 +16,7 @@ from pathlib import Path
 from unittest import mock
 
 from common import (ALIAS_NOMS_ANCIENS, GEOJSON, INDICATEURS, PYDIR, RACINE, WEB, charger_const_js, charger_json,
-                    differences, donnees_actuelles, dossier_sources, exige_libs, exige_sources, lent)
+                    copie_du_projet, differences, donnees_actuelles, dossier_sources, exige_libs, exige_sources, lancer_script_racine, lent)
 
 ALIAS_MAPPING = {"La Porta": "Porta", "L'Île-Rousse": "Île-Rousse"}   # noms du mapping INSEE -> noms des données
 PYTHON = sys.executable
@@ -279,23 +279,19 @@ class GardeFousDesScriptsDeRegeneration(unittest.TestCase):
 @lent()
 @exige_libs("pandas", "numpy", "geopandas", "libpysal", "esda")
 class RejeuLisa(unittest.TestCase):
-    """gen_lisa_knn5.py (à la racine du dépôt) rejoué sur une copie : 4 fichiers LISA identiques (9999 permutations)."""
+    """gen_lisa_knn5.py (racine du dépôt) rejoué sur une copie via OPPCHOVEC_RACINE : 4 fichiers LISA identiques (9999 permutations)."""
 
     def test_les_quatre_fichiers_lisa_sont_reproduits(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            code = construire_miroir(tmp)
-            script = (RACINE / "gen_lisa_knn5.py").read_text(encoding="utf-8")
-            # ce script contient des chemins absolus vers un autre clone du projet : on les redirige vers la copie
-            script, n1 = re.subn(r"WEB_DIR\s*=\s*'[^']*'", f"WEB_DIR  = {str(code / 'WEB').replace(chr(92), '/') + '/'!r}", script)
-            script, n2 = re.subn(r"GEOJSON\s*=\s*'[^']*'", f"GEOJSON  = {str(code / 'WEB' / 'Commune_Corse.geojson').replace(chr(92), '/')!r}", script)
-            self.assertEqual((n1, n2), (1, 1), "chemins du script non reconnus")
-            (code / "Python" / "gen_lisa_knn5.py").write_text(script, encoding="utf-8")
-            r = lancer(code, "gen_lisa_knn5.py", timeout=3000)
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+            copie = Path(tmp)
+            copie_du_projet(copie)
+            r = lancer_script_racine(copie, "gen_lisa_knn5.py", timeout=3000)
             self.assertEqual(r.returncode, 0, r.stderr[-1500:])
             for f, nom in (("lisa_data.js", "LISA_DATA"), ("lisa_data_1pct.js", "LISA_DATA_1PCT"),
                            ("lisa_data_betti.js", "LISA_DATA_BETTI"), ("lisa_data_betti_1pct.js", "LISA_DATA_BETTI_1PCT")):
                 with self.subTest(fichier=f):
-                    self.assertEqual(differences(charger_const_js(code / "WEB" / f, nom), charger_const_js(WEB / f, nom)), [])
+                    produit = copie / "stage_ambroise" / "Code" / "WEB" / f
+                    self.assertEqual(differences(charger_const_js(produit, nom), charger_const_js(WEB / f, nom)), [])
 
 
 if __name__ == "__main__":

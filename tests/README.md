@@ -35,6 +35,7 @@ Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénérat
 | `python/test_06_documentation.py` | Les `.md` disent-ils vrai (fichiers cités, tableaux de seuils, échelles, exemples, procédure) ? |
 | `python/test_07_coherence_du_code.py` | Poids et constantes dupliqués (Python / JS / scripts) identiques ? Fichiers et identifiants du DOM référencés existants ? |
 | `python/test_08_js_vs_python.py` | L'appli (script.js réel) contre un recalcul Python indépendant : état de base, seuils de Jenks, et 30 scénarios de modification aléatoires |
+| `python/test_09_tableaux_excel.py` | Les fichiers Excel proposés par le site (`downloads/`) reflètent-ils les données actuelles ? Les scripts `gen_*.py` rejoués sur une copie y écrivent-ils (et nulle part ailleurs) ? |
 | `js/*.test.js` | La logique de `script.js` dans un bac à sable Node : chargement, curseurs, recalcul, bascule p_k, sous-composantes |
 | `e2e/*.e2e.test.js` | Dans un vrai navigateur : cartes (couleur de chaque commune), histogramme, top 10, panneau commune, tous les onglets, coefficients de corrélation |
 
@@ -70,7 +71,6 @@ corrigé le test le signale (« succès inattendu ») pour qu'on retire la marqu
 | Dette | Où |
 |---|---|
 | `oppchovec.py` n'est pas synchronisé avec le JSON pour **Opp4** (fibre absente) et **Cho2** (lit `Cho2.xlsx` au lieu de `Cho2_francais_18plus.xlsx`) | `test_05`, 2 tests |
-| `gen_lisa_knn5.py` contient des chemins absolus vers un **autre** clone (`c:/These/oppchovec_visu/`) : le lancer écrit là-bas | `test_07` |
 | `stage_ambroise/Code/WEB/index.html` est une copie plus ancienne de `index.html` (il lui manque 3 onglets) | `test_07` |
 
 Dettes corrigées le 2026-10-12, conservées comme tests de non-régression :
@@ -79,6 +79,10 @@ Dettes corrigées le 2026-10-12, conservées comme tests de non-régression :
 - code mort de l'onglet « Numbered » (erreur console à chaque chargement) supprimé : la page se charge désormais **sans aucune erreur**, l'e2e n'en tolère plus
   aucune, et `test_07` vérifie que tout `[data-tab="x"]` de `script.js` existe dans `index.html` ;
 - `graphique_ecarts_types_cah.py` produit désormais le graphique à 5 classes par défaut.
+- **chemins absolus** : les 6 scripts `gen_*.py` de la racine lisaient et écrivaient dans un autre clone (`c:/These/oppchovec_visu/`) et dans Téléchargements ;
+  ils passent maintenant par `chemins.py` (relatif au dépôt, `OPPCHOVEC_RACINE` pour les rejouer sur une copie). Les tableaux Excel ont été régénérés :
+  `downloads/` (servi par le site) avait gardé l'ancien classement d'avant la correction Vec3, ce que `test_09` détecte maintenant ; `gen_lisa_betti.py`
+  (Queen, obsolète) refuse de tourner sans `--ancienne-methode` ;
 
 Autres points d'attention, sans test qui échoue :
 - `FICHIERS_A_SUPPRIMER.md` et `README_OSRM_LOCAL.md` sont des documents historiques dont les affirmations ne sont pas vérifiées.
@@ -89,7 +93,7 @@ Autres points d'attention, sans test qui échoue :
 Une suite qui passe ne prouve rien tant qu'on n'a pas vu qu'elle sait échouer. `tests/mutations.py` copie le projet, y introduit **une faute à la
 fois** (donnée altérée, constante modifiée, formule inversée, ancien défaut réintroduit, document périmé, tri inversé…) et vérifie que la suite devient
 rouge, en indiquant quelle couche a détecté la faute. Une mutation *non détectée* est une lacune à combler. Voir `python tests/mutations.py --liste`.
-Résultat au 2026-10-12 : **35 mutations sur 35 détectées** (dont 4 qui réintroduisent les défauts corrigés ce jour-là). La première campagne avait révélé deux lacunes, comblées depuis : un test JS qui ne dépassait
+Résultat au 2026-10-12 : **37 mutations sur 37 détectées** (dont 6 qui réintroduisent des défauts corrigés ce jour-là). La première campagne avait révélé deux lacunes, comblées depuis : un test JS qui ne dépassait
 jamais l'échelle corse (donc incapable de voir des bornes recalculées) et un test de valeur de curseur trop peu sensible. Une mutation « non concluante »
 signifie que la suite a été interrompue (ce n'est pas une absence de détection) : relancer avec `--seulement`.
 

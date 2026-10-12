@@ -7,10 +7,11 @@ import json, math, sys, pandas as pd
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 sys.stdout.reconfigure(encoding='utf-8')
+from chemins import WEB, SORTIE, dossier   # tout est relatif au dépôt (voir chemins.py)
 
-CAH_JSON  = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/cah_5_clusters.json'
-DATA_JSON = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/data_scores_0_10.json'
-OUT       = 'C:/Users/comiti_g/Downloads/appendix2_cah5_classes.xlsx'
+CAH_JSON  = WEB / 'cah_5_clusters.json'
+DATA_JSON = WEB / 'data_scores_0_10.json'
+OUT       = dossier(SORTIE) / 'appendix2_cah5_classes.xlsx'
 
 # === Charger données ===
 with open(CAH_JSON,  encoding='utf-8') as f: cah  = json.load(f)

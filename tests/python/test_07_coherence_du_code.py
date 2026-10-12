@@ -168,11 +168,17 @@ class ScriptsDeLaChaine(unittest.TestCase):
         for nom in CHAINE_DE_REGENERATION:
             self.assertEqual(chemins_absolus((PYDIR / nom).read_text(encoding="utf-8")), [], f"{nom} contient un chemin absolu")
 
-    @unittest.expectedFailure
-    def test_gen_lisa_knn5_sans_chemin_absolu(self):
-        """DETTE CONNUE : gen_lisa_knn5.py écrit dans c:/These/oppchovec_visu/ (un AUTRE clone du projet).
-        Il faut le lancer sur une copie aux chemins adaptés (c'est ce que fait test_05). À corriger par des chemins relatifs."""
-        self.assertEqual(chemins_absolus((RACINE / "gen_lisa_knn5.py").read_text(encoding="utf-8")), [])
+    def test_scripts_de_la_racine_sans_chemin_absolu(self):
+        """Ces scripts écrivaient dans un AUTRE clone du projet (c:/These/oppchovec_visu/) et dans Téléchargements : tout passe
+        maintenant par chemins.py, relatif au dépôt."""
+        for nom in ("chemins.py", "gen_lisa_knn5.py", "gen_lisa_betti.py", "gen_excel_010.py", "gen_appendix2.py",
+                    "gen_comparaison.py", "gen_top5_betti.py"):
+            texte = (RACINE / nom).read_text(encoding="utf-8")
+            self.assertEqual(chemins_absolus(texte), [], f"{nom} contient un chemin absolu")
+            self.assertNotIn("oppchovec_visu", texte, f"{nom} vise l'autre clone du projet")
+            self.assertNotIn("Downloads", texte, f"{nom} écrit dans Téléchargements")
+            if nom != "chemins.py":
+                self.assertIn("chemins", texte, f"{nom} doit prendre ses chemins dans chemins.py")
 
     @unittest.expectedFailure
     def test_les_deux_index_html_exposent_les_memes_onglets(self):

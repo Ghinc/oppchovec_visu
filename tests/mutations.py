@@ -25,7 +25,8 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parent.parent
 WEB = "stage_ambroise/Code/WEB"
 PY = "stage_ambroise/Code/Python"
-A_COPIER = ["tests", "index.html", "gen_lisa_knn5.py", "gen_lisa_betti.py", WEB, PY, "stage_ambroise/Données",
+A_COPIER = ["tests", "index.html", "chemins.py", "gen_lisa_knn5.py", "gen_lisa_betti.py", "gen_excel_010.py", "gen_comparaison.py",
+            "gen_top5_betti.py", "gen_appendix2.py", "downloads", WEB, PY, "stage_ambroise/Données",
             "stage_ambroise/Code/VERIFICATION_COHERENCE_DONNEES.md"]
 IGNORER = shutil.ignore_patterns("__pycache__", "*.pyc", "captures")
 
@@ -137,6 +138,10 @@ MUTATIONS = [
              suites=("python", "e2e"), attendu=("python", "e2e")),
     Mutation("graphique_cah_sans_5_classes", "liste par défaut [3, 4] : plus de graphique à 5 classes", f"{PY}/graphique_ecarts_types_cah.py",
              remplacer("n_clusters_list = [3, 4, 5]", "n_clusters_list = [3, 4]")),
+    Mutation("chemin_absolu_reintroduit", "un script de la racine vise de nouveau l'autre clone du projet", "gen_top5_betti.py",
+             remplacer("DATA_JSON = WEB / 'data_scores_0_10.json'", "DATA_JSON = 'c:/These/oppchovec_visu/stage_ambroise/Code/WEB/data_scores_0_10.json'")),
+    Mutation("garde_gen_lisa_betti_retiree", "gen_lisa_betti.py (Queen, obsolète) peut de nouveau écraser les fichiers LISA", "gen_lisa_betti.py",
+             remplacer("if '--ancienne-methode' not in sys.argv:", "if False:")),
     Mutation("correlation_r_biaisee", "coefficient de corrélation faussé", f"{WEB}/script.js",
              remplacer("const r = ss_xy / Math.sqrt(ss_xx * ss_yy);", "const r = 0.97 * ss_xy / Math.sqrt(ss_xx * ss_yy);"), suites=("e2e",), attendu=("e2e",)),
 ]
