@@ -4870,10 +4870,10 @@ async function sendMessage() {
 }
 
 // Gestion de l'envoi par bouton
-document.getElementById('chatbotSend').addEventListener('click', sendMessage);
+document.getElementById('chatbotSend')?.addEventListener('click', sendMessage);
 
 // Gestion de l'envoi par touche Entrée (Shift+Entrée pour nouvelle ligne)
-document.getElementById('chatbotInput').addEventListener('keydown', function(e) {
+document.getElementById('chatbotInput')?.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
