@@ -57,29 +57,16 @@
         </div>
       </div>
 
-      <!-- Contrôle de la langue -->
-      <div class="section">
-        <h2>4. Language</h2>
-        <label style="display: flex; align-items: center; cursor: pointer;">
-          <input type="checkbox" id="checkbox-english" checked>
-          <span style="margin-left: 0.5em;">English labels</span>
-        </label>
-        <label style="display: flex; align-items: center; cursor: pointer; margin-top: 0.5em;">
-          <input type="checkbox" id="checkbox-copyright" checked onchange="document.querySelectorAll('.copyright-control').forEach(el => el.style.display = this.checked ? '' : 'none')">
-          <span style="margin-left: 0.5em;">Afficher le copyright</span>
-        </label>
-      </div>
-
       <!-- Pondérations p_k (OppChoVec) -->
       <div class="section">
-        <h2>5. Pondérations p_k</h2>
-        <button id="btn-toggle-pk" onclick="toggleModePk()">p_k : égal [1,1,1]</button>
-        <div id="pk-values-display" style="margin-top: 6px; font-size: 12px; color: #555; font-style: italic;">Pondérations égales (p_k = 1/3 chacun)</div>
+        <h2>3. Pondérations p_k</h2>
+        <div style="font-size: 12px; color: #555;">Pondérations de Betti et al. (2008)</div>
+        <div id="pk-values-display" style="margin-top: 6px; font-size: 12px; color: #555; font-style: italic;"></div>
       </div>
 
       <!-- Téléchargements -->
       <div class="section">
-        <h2>6. Téléchargements</h2>
+        <h2>4. Téléchargements</h2>
         <a href="downloads/stats_descriptives_betti_0_10.xlsx" download>
           <button style="width:100%; margin-bottom:6px;">📥 Stats descriptives (Betti, 0-10)</button>
         </a>
@@ -95,6 +82,7 @@
           <button class="tab-button" data-tab="opptab" id="tab-opp">Opp</button>
           <button class="tab-button" data-tab="chotab" id="tab-cho">Cho</button>
           <button class="tab-button" data-tab="vectab" id="tab-vec">Vec</button>
+          <button class="tab-button" data-tab="dominancetab">Dominance</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
           <div id="map-oppchovec" class="map"></div>
@@ -108,6 +96,30 @@
         <div class="tab-content" id="vectab">
           <div id="map-vec" class="map"></div>
         </div>
+
+        <!-- Onglet Dominance -->
+        <div class="tab-content" id="dominancetab">
+          <div class="dominance-intro">
+            <p>Une commune en domine une autre lorsqu'elle fait au moins aussi bien sur les trois dimensions (opportunités, choix, vécu) et mieux sur au moins une. Cette lecture ne dépend d'aucune pondération : si une commune en domine une autre, elle passera toujours devant elle, quelle que soit l'importance accordée à chaque dimension.</p>
+            <p>Deux communes qui ne se dominent pas ne peuvent pas être départagées sans décider laquelle des dimensions compte le plus. Leur ordre dans le score OppChoVec dépend alors de ce choix.</p>
+            <p>La première couche regroupe les communes qu'aucune autre ne dépasse sur les trois dimensions à la fois. Elle ne désigne pas les « meilleures » communes : une commune peut y figurer parce qu'elle est en tête sur une seule dimension.</p>
+          </div>
+          <div class="dominance-layout">
+            <div class="dominance-map-col">
+              <div id="map-dominance" class="map"></div>
+            </div>
+            <div class="dominance-panel-col">
+              <div class="dominance-panel">
+                <h3 class="dominance-title">Couches de dominance</h3>
+                <div id="dominance-legend" class="dominance-legend"></div>
+                <div id="dominance-excluded" class="dominance-excluded"></div>
+                <div id="dominance-fiche" class="dominance-fiche">
+                  <p class="dominance-hint">Cliquez sur une commune de la carte pour afficher sa fiche.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -117,6 +129,7 @@
   <script src="stage_ambroise/Code/WEB/lisa_data_betti.js"></script>
   <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js"></script>
   <script src="stage_ambroise/Code/WEB/cah_data.js"></script>
+  <script src="stage_ambroise/Code/WEB/dominance.js"></script>
   <script src="stage_ambroise/Code/WEB/script.js"></script>
 </body>
 </html>

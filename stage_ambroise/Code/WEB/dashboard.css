@@ -2328,3 +2328,97 @@ tr:nth-child(even) {
 .correlation-layout { display: none; }
 .correlation-scatter-col { display: none; }
 .correlation-map-col { display: none; }
+
+
+/* ============================================
+   ONGLET DOMINANCE
+   ============================================ */
+
+#dominancetab {
+  display: none;
+  height: 100%;
+  overflow: hidden;
+}
+#dominancetab.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.dominance-intro {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #333;
+  max-height: 32%;
+  overflow-y: auto;
+}
+.dominance-intro p { margin: 0 0 5px 0; }
+.dominance-intro p:last-child { margin-bottom: 0; }
+
+.dominance-layout {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+.dominance-map-col {
+  flex: 1 1 60%;
+  min-width: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.dominance-panel-col {
+  flex: 0 0 380px;
+  height: 100%;
+  border-left: 1px solid #ddd;
+  background: #fafafa;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.dominance-panel { padding: 12px; }
+.dominance-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  border-bottom: 2px solid #ddd;
+}
+
+.dominance-legend { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
+.dominance-legend-row { display: flex; align-items: center; font-size: 12px; }
+.dominance-swatch {
+  width: 22px;
+  height: 12px;
+  margin-right: 8px;
+  border: 1px solid #666;
+  flex: 0 0 auto;
+}
+.dominance-excluded { font-size: 11.5px; color: #555; margin-bottom: 10px; font-style: italic; }
+
+.dominance-fiche { font-size: 12.5px; }
+.dominance-hint { color: #666; font-style: italic; }
+.dominance-fiche h4 { margin: 0 0 6px 0; font-size: 15px; }
+.dominance-fiche h5 { margin: 10px 0 4px 0; font-size: 12.5px; }
+.dominance-fiche table { border-collapse: collapse; margin: 4px 0; }
+.dominance-fiche td { padding: 1px 12px 1px 0; }
+.dominance-liste {
+  max-height: 140px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 6px;
+  line-height: 1.5;
+}
+.dominance-lien {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #0b5ea8;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+}

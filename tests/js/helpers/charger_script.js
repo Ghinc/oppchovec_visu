@@ -127,10 +127,13 @@ function executer(ctx, fichier) {
 async function chargerApp({ chargementAuto = true } = {}) {
   const base = creerContexte();
   const { ctx } = base;
-  for (const f of ['cah_data.js', 'lisa_data.js', 'lisa_data_1pct.js', 'lisa_data_betti.js', 'lisa_data_betti_1pct.js', 'script.js']) {
+  for (const f of ['cah_data.js', 'lisa_data.js', 'lisa_data_1pct.js', 'lisa_data_betti.js', 'lisa_data_betti_1pct.js', 'dominance.js', 'script.js']) {
     executer(ctx, f);
   }
   const ev = (expr) => vm.runInContext(expr, ctx);
+  // Cale de test : la version démo n'a plus de bouton de bascule p_k (Betti seul), mais le chemin « égal » existe encore dans
+  // script.js et sert de vérification croisée avec les fichiers de données (OppChoVec_0_10 est calculé avec p_k égaux).
+  vm.runInContext("function toggleModePk() { modeCalculPk = (modeCalculPk === 'egal') ? 'betti' : 'egal'; recalculerCarteOppChoVec(); }", ctx);
   if (chargementAuto) await ev('chargerFichiersAutomatiquement()');
   return { ...base, ev, executer: (f) => executer(ctx, f), RACINE, WEB };
 }

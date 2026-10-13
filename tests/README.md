@@ -23,6 +23,12 @@ Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénérat
 | Navigateur | `cd tests && npm install` (playwright-core) et un Chromium (cache Playwright, ou variable `CHROME_PATH`). Sans cela, les tests e2e sont ignorés. Les bibliothèques Leaflet et Chart.js sont chargées depuis leur CDN : il faut un accès réseau. |
 | Sources brutes | Les fichiers xlsx/csv par indicateur ne sont pas dans le dépôt. Définir `OPPCHOVEC_SOURCES` = dossier « Stage Ambroise » contenant `Données/Corse_Commune/` (par défaut, `C:\These\Données2\visualisation_oppchovec_1111\Stage Ambroise`). Sans elles, les tests de recalcul depuis les sources sont ignorés. |
 
+## Branche `démo_outil`
+
+Cette branche ne garde que les cartes OppChoVec / Opp / Cho / Vec et l'onglet Dominance (Betti seul, français seul). Les tests des
+onglets retirés ont été supprimés. **Non-régression par rapport à la branche de recherche** : voir `tests/demo/PROTOCOLE.md` et
+`node tests/demo/comparer_branches.js` (comparaison A/B automatique : données, couleurs, bulles, légendes, images, fiches, téléchargements).
+
 ## Ce qui est vérifié
 
 | Fichier | Question posée |
@@ -36,6 +42,7 @@ Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénérat
 | `python/test_07_coherence_du_code.py` | Poids et constantes dupliqués (Python / JS / scripts) identiques ? Fichiers et identifiants du DOM référencés existants ? |
 | `python/test_08_js_vs_python.py` | L'appli (script.js réel) contre un recalcul Python indépendant : état de base, seuils de Jenks, et 30 scénarios de modification aléatoires |
 | `python/test_09_tableaux_excel.py` | Les fichiers Excel proposés par le site (`downloads/`) reflètent-ils les données actuelles ? Les scripts `gen_*.py` rejoués sur une copie y écrivent-ils (et nulle part ailleurs) ? |
+| `python/test_10_dominance.py` | Onglet Dominance : couches recalculées en Python, identiques à `dominance.js` ; si A domine B, score(A) ≥ score(B) (p_k égaux, Betti, fichier) |
 | `js/*.test.js` | La logique de `script.js` dans un bac à sable Node : chargement, curseurs, recalcul, bascule p_k, sous-composantes |
 | `e2e/*.e2e.test.js` | Dans un vrai navigateur : cartes (couleur de chaque commune), histogramme, top 10, panneau commune, tous les onglets, coefficients de corrélation |
 

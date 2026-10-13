@@ -119,7 +119,11 @@ class FichiersEtIdentifiantsReferences(unittest.TestCase):
         ids_html = set(re.findall(r'\bid="([^"]+)"', html))
         ids_dynamiques = set(re.findall(r'\bid="([\w\-]+)"', src)) | set(re.findall(r"\.id\s*=\s*'([\w\-]+)'", src))
         utilises = set(re.findall(r"getElementById\(\s*['\"]([\w\-]+)['\"]\s*\)", src))
-        manquants = sorted(utilises - ids_html - ids_dynamiques)
+        # Version « démo » : le code des onglets retirés (LISA, CAH, Parangons, Corrélation, Entreprises, Data Visualisation, chatbot)
+        # et le choix de langue sont encore dans script.js, mais plus dans index.html ; leurs identifiants sont attendus absents.
+        retires = re.compile(r"^(cah\d|toggleCAH|chatbot|checkbox-english|correlation|scatter-chart|map-(correlation|subjectif|entreprises|parangons|lisa)"
+                             r"|parangons-|histogram-chart|top10-)")
+        manquants = sorted(i for i in utilises - ids_html - ids_dynamiques if not retires.match(i))
         self.assertEqual(manquants, [], f"identifiants utilisés par script.js mais absents de index.html : {manquants}")
 
     def test_onglets_cibles_par_script_js_existent_dans_index_html(self):

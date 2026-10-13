@@ -18,7 +18,7 @@ let data_indicateursOriginaux = {}
     let scoresParCommune = {}
     let indicateursCommune = {}
     let communeJson = {}
-    let modeCalculPk = 'betti'; // 'egal' | 'betti'
+    let modeCalculPk = 'betti'; // toujours 'betti' dans cette version (plus de bascule)
     let scoresParCommuneRaw01 = {}; // scores 0-1 (pour calcul p_k Betti)
     // Référence figée sur les données d'origine : modifier une commune via les sliders ne déplace pas les autres
     let indicateursOrigine = {}  // indicateurs bruts d'origine (jamais modifiés)
@@ -40,7 +40,7 @@ let data_indicateursOriginaux = {}
         toutes: null
     }  // Données GeoJSON du réseau routier par type
     let routesLayers = {}  // Couches de routes pour chaque carte et type
-    let langueFrancais = false  // Langue par défaut : anglais (checkbox cochée)
+    let langueFrancais = true   // Interface en français uniquement (plus de choix de langue)
 
 // Traductions
 const traductions = {
@@ -61,11 +61,11 @@ const traductions = {
             vec: "Score Vec"
         },
         ui: {
-            "commune-title": "2. Sélection commune",
+            "commune-title": "1. Sélection commune",
             "commune-select": "-- Sélectionner une commune --",
             "commune-validate": "Valider",
             "commune-info": "Informations de la commune sélectionnée :",
-            "routes-title": "3. Affichage des routes",
+            "routes-title": "2. Affichage des routes",
             "routes-national": "Routes nationales (647)",
             "routes-departmental": "Routes départementales (2654)",
             "routes-municipal": "Routes communales (3686)",
@@ -2931,12 +2931,6 @@ function calculerJenksBreaks(values, nClasses) {
     return breaks; // nClasses-1 seuils internes
 }
 
-// === Bascule mode p_k ===
-function toggleModePk() {
-    modeCalculPk = (modeCalculPk === 'egal') ? 'betti' : 'egal';
-    recalculerCarteOppChoVec();
-}
-
 // Scores de dimension 0-1 à partir des indicateurs bruts (min-max sur les bornes figées)
 function calculerScores01(indicateurs) {
     return calculerScoresParCommune(normaliserDonnees(indicateurs, bornesRef.min, bornesRef.max));
@@ -3034,6 +3028,12 @@ function recalculerCarteOppChoVec() {
         initialiserOngletParangons();
     }
 
+    // Mettre à jour la dominance si déjà initialisée
+    if (dominanceInitialise) {
+        dominanceInitialise = false;
+        initialiserOngletDominance();
+    }
+
     // Mettre à jour la corrélation si déjà initialisée
     if (correlationInitialise) {
         correlationInitialise = false;
@@ -3071,18 +3071,9 @@ function recalculerCarteOppChoVec() {
 }
 
 function majAffichagePk(pkValues) {
-    const btn = document.getElementById('btn-toggle-pk');
     const info = document.getElementById('pk-values-display');
-    if (!btn || !info) return;
-    if (modeCalculPk === 'betti') {
-        btn.textContent = 'p_k : Betti et al. ✓';
-        btn.classList.add('active');
-        info.textContent = `Opp=${pkValues[0].toFixed(3)} | Cho=${pkValues[1].toFixed(3)} | Vec=${pkValues[2].toFixed(3)}`;
-    } else {
-        btn.textContent = 'p_k : égal [1,1,1]';
-        btn.classList.remove('active');
-        info.textContent = 'Pondérations égales (p_k = 1/3 chacun)';
-    }
+    if (!info) return;
+    info.textContent = `Opp=${pkValues[0].toFixed(3)} | Cho=${pkValues[1].toFixed(3)} | Vec=${pkValues[2].toFixed(3)}`;
 }
 
 // fonction de calcul des valeurs des dimensions de OppChoVec
@@ -4507,6 +4498,125 @@ function _parangonsSelectionnerCommune(nom, carte, layer, getColor) {
     });
 }
 
+// ONGLET DOMINANCE
+// ==============================================================================
+// Couches de non-dominance sur les scores de dimension (voir dominance.js). Indépendant des pondérations.
+
+let dominanceInitialise = false;
+let _carteDominance = null;        // carte Leaflet dominance (hors sync)
+let dominanceLayerRef = null;
+let dominanceResultat = null;
+let dominanceSelection = null;
+
+// Rampe séquentielle (YlGnBu, ColorBrewer) : couche 1 = teinte la plus foncée
+const DOMINANCE_RAMPE = ['#081d58', '#253494', '#225ea8', '#1d91c0', '#41b6c4', '#7fcdbb', '#c7e9b4', '#edf8b1', '#ffffd9'];
+
+function couleurCouche(couche, nbCouches) {
+    const t = nbCouches <= 1 ? 0 : (couche - 1) / (nbCouches - 1) * (DOMINANCE_RAMPE.length - 1);
+    const i = Math.min(Math.floor(t), DOMINANCE_RAMPE.length - 2), f = t - i;
+    const hex = (c, k) => parseInt(c.slice(1 + 2 * k, 3 + 2 * k), 16);
+    const mix = k => Math.round(hex(DOMINANCE_RAMPE[i], k) * (1 - f) + hex(DOMINANCE_RAMPE[i + 1], k) * f);
+    return `rgb(${mix(0)},${mix(1)},${mix(2)})`;
+}
+
+function echapperHtmlDominance(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function initialiserOngletDominance() {
+    if (dominanceInitialise) {
+        setTimeout(() => { if (_carteDominance) _carteDominance.invalidateSize(); }, 100);
+        return;
+    }
+    if (_carteDominance) {
+        _carteDominance.remove();
+        _carteDominance = null;
+        dominanceLayerRef = null;
+        document.getElementById('map-dominance').innerHTML = '';
+    }
+    if (!communeJson || !communeJson.features || !scoresParCommune || Object.keys(scoresParCommune).length === 0) {
+        console.warn('Dominance: données non prêtes');
+        return;
+    }
+    dominanceInitialise = true;
+    dominanceSelection = null;
+
+    const res = calculerDominance(scoresParCommune);
+    dominanceResultat = res;
+    const nb = res.nbCouches;
+    const exclues = new Map(res.exclues.map(e => [e.commune, e.manquantes]));
+    const nomDimension = { Score_Opp: 'Opp', Score_Cho: 'Cho', Score_Vec: 'Vec' };
+
+    // Légende : une ligne par couche, avec son effectif
+    document.getElementById('dominance-legend').innerHTML =
+        res.effectifs.map((n, i) => `<div class="dominance-legend-row"><span class="dominance-swatch" style="background:${couleurCouche(i + 1, nb)}"></span>Couche ${i + 1} — ${n} commune${n > 1 ? 's' : ''}</div>`).join('') +
+        (exclues.size ? '<div class="dominance-legend-row"><span class="dominance-swatch" style="background:#ccc"></span>Sans couche (valeur manquante)</div>' : '');
+    document.getElementById('dominance-excluded').innerHTML = exclues.size
+        ? `${exclues.size} commune${exclues.size > 1 ? 's' : ''} exclue${exclues.size > 1 ? 's' : ''} du calcul (valeur manquante, aucune couche) : ` +
+          res.exclues.map(e => `${echapperHtmlDominance(e.commune)} (${e.manquantes.map(d => nomDimension[d]).join(', ')})`).join(' ; ')
+        : 'Aucune commune exclue : les 3 scores sont renseignés pour toutes les communes.';
+    document.getElementById('dominance-fiche').innerHTML = '<p class="dominance-hint">Cliquez sur une commune de la carte pour afficher sa fiche.</p>';
+
+    const carte = L.map(document.getElementById('map-dominance'), {
+        center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
+    });
+    _carteDominance = carte;   // pas dans cartes[] : pas de synchronisation avec les autres cartes
+    carte.getContainer().style.backgroundColor = '#ffffff';
+    ajouterCopyright(carte);
+
+    const style = nom => ({
+        fillColor: res.couches[nom] ? couleurCouche(res.couches[nom], nb) : '#ccc',
+        color: nom === dominanceSelection ? '#d00000' : '#333',
+        weight: nom === dominanceSelection ? 2.5 : 0.8,
+        fillOpacity: 0.85
+    });
+    dominanceLayerRef = L.geoJSON(communeJson, {
+        style: feature => style(feature.properties.nom),
+        onEachFeature: (feature, layer) => {
+            const nom = feature.properties.nom;
+            layer._dominanceNom = nom;
+            layer.on('click', () => dominanceAfficherFiche(nom));
+            layer.bindTooltip(`<strong>${echapperHtmlDominance(nom)}</strong><br>${res.couches[nom] ? 'Couche ' + res.couches[nom] : 'Sans couche (valeur manquante)'}`);
+        }
+    }).addTo(carte);
+    dominanceLayerRef._style = style;
+    invaliderTailleApres(carte);
+}
+
+function dominanceAfficherFiche(nom) {
+    const res = dominanceResultat;
+    if (!res) return;
+    dominanceSelection = nom;
+    if (dominanceLayerRef) {
+        dominanceLayerRef.eachLayer(l => {
+            l.setStyle(dominanceLayerRef._style(l._dominanceNom));
+            if (l._dominanceNom === nom) l.bringToFront();
+        });
+    }
+    const s = scoresParCommune[nom] || {};
+    const fmt = v => (typeof v === 'number' && Number.isFinite(v)) ? v.toFixed(2) : 'manquant';
+    const scoresHtml = `<table>
+        <tr><td>Opportunités (Opp)</td><td><strong>${fmt(s.Score_Opp)}</strong></td></tr>
+        <tr><td>Choix (Cho)</td><td><strong>${fmt(s.Score_Cho)}</strong></td></tr>
+        <tr><td>Vécu (Vec)</td><td><strong>${fmt(s.Score_Vec)}</strong></td></tr></table>`;
+    const liste = noms => noms.length
+        ? `<div class="dominance-liste">${[...noms].sort((a, b) => a.localeCompare(b, 'fr')).map(n => `<button type="button" class="dominance-lien" data-commune="${echapperHtmlDominance(n)}">${echapperHtmlDominance(n)}</button>`).join(', ')}</div>`
+        : '<div class="dominance-liste">—</div>';
+    let html = `<h4>${echapperHtmlDominance(nom)}</h4>`;
+    if (!res.couches[nom]) {
+        const e = res.exclues.find(x => x.commune === nom);
+        html += `<p>Aucune couche : valeur manquante sur ${e ? e.manquantes.join(', ') : 'au moins une dimension'}. Commune exclue du calcul.</p>${scoresHtml}`;
+    } else {
+        const dom = res.dominants[nom], dos = res.domines[nom];
+        html += `<p>Couche <strong>${res.couches[nom]}</strong> sur ${res.nbCouches}</p>${scoresHtml}
+            <h5>Communes qui la dominent (${dom.length})</h5>${liste(dom)}
+            <h5>Communes qu'elle domine (${dos.length})</h5>${liste(dos)}`;
+    }
+    const fiche = document.getElementById('dominance-fiche');
+    fiche.innerHTML = html;
+    fiche.querySelectorAll('.dominance-lien').forEach(b => b.addEventListener('click', () => dominanceAfficherFiche(b.dataset.commune)));
+}
+
 // Gestion des onglets
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -4553,6 +4663,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Si on clique sur l'onglet Parangons, initialiser (lazy loading)
             if (targetTab === 'parangonstab') {
                 initialiserOngletParangons();
+            }
+
+            // Si on clique sur l'onglet Dominance, initialiser (lazy loading)
+            if (targetTab === 'dominancetab') {
+                initialiserOngletDominance();
             }
 
             // Invalider la taille de la carte pour forcer le redimensionnement
