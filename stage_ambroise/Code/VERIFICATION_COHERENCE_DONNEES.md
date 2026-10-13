@@ -45,8 +45,8 @@ scores de dimension (mode « Betti », mode par défaut de l'appli).
 
 | Champ | Valeur dans `data_scores_0_10.json` | Recalcul indépendant (tests) | Différence |
 |------------|---------------|-------------|------------|
-| **OppChoVec** | 0.531550 | 0.531550 | **0.000000** |
-| **Score_Opp** | 0.709504 | 0.709504 | **0.000000** |
+| **OppChoVec** | 0.504193 | 0.504193 | **0.000000** |
+| **Score_Opp** | 0.676436 | 0.676436 | **0.000000** |
 | **Score_Cho** | 0.429369 | 0.429369 | **0.000000** |
 | **Score_Vec** | 0.582122 | 0.582122 | **0.000000** |
 
@@ -86,10 +86,43 @@ console.log(indiceFinale["Ajaccio"]);
 console.log(scoresParCommune["Ajaccio"]);
 ```
 
+## Opp1 — niveau d'éducation (recensement INSEE 2020)
+
+**Définition.** Niveau de diplôme moyen des personnes de **18 ans ou plus non scolarisées** de la commune, sur une échelle de 1 à 7 :
+1 aucun diplôme ou CEP, 2 BEPC (brevet des collèges), 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus.
+`Opp1 = Σ niveau × effectif du niveau / Σ effectifs`. Valeurs observées : 2,00 (Popolasca) à 4,57 (Pigna), moyenne 3,40.
+
+**Source.** INSEE, Recensement de la population 2020, base infracommunale « Diplômes - Formation »
+(`base-ic-diplomes-formation-2020`, géographie au 01/01/2022). Les 404 IRIS de Corse sont additionnés par commune : on retrouve les
+360 communes de l'appli. Le résultat est versionné dans `stage_ambroise/Données/education_communes_opp1.json` (effectifs par niveau
+et provenance de chaque commune) ; il est calculé par `Code/Python/calculer_education_opp1.py` puis injecté dans
+`data_scores_0_10.json` par `Code/Python/regenerer_opp1.py`.
+
+**Pourquoi 18 ans et plus.** L'INSEE publie les diplômes de la population de 15 ans ou plus non scolarisée, sans âge individuel. Pour
+ne garder que les majeurs on retire un **effectif** : les 15-17 ans non scolarisés (population des 15-17 ans moins population
+scolarisée des 15-17 ans, deux colonnes du même fichier). **Hypothèse** : ils n'ont aucun diplôme ou seulement le CEP (niveau 1) ; on
+les retire de cette catégorie. Ils représentent 500 personnes en Corse, 0,19 % de l'effectif (2,1 % au maximum dans une commune) :
+quelle que soit l'hypothèse (niveau 1, 2 ou 3), le niveau d'une commune varie d'au plus 0,055 point sur 7 et le classement des communes
+ne change pratiquement pas (corrélation de rang ≥ 0,9998).
+
+**Limites.**
+- La population de référence exclut les personnes encore scolarisées (étudiants de 18 ans ou plus) : définition de l'INSEE.
+- 146 communes comptent moins de 100 personnes concernées : leur valeur est bruitée (le recensement est une enquête par sondage dans
+  les petites communes).
+- Millésime 2020, plus ancien que certains autres indicateurs.
+
+**Historique.** Jusqu'au 2026-10-13, Opp1 venait de `Opp1.xlsx`, qui contenait en réalité une **suite artificielle** (5,75 ; 5,76 ; …
+5,99 ; 5,1 ; 5,101 ; … 5,434, dans l'ordre des codes communes) sans rapport avec l'éducation (corrélation de 0,01 avec le niveau de
+diplôme INSEE). Le rapport de stage prévoyait Σ (niveau de diplôme de la tranche d'âge × part de la tranche dans la population), avec
+un niveau de diplôme connu seulement à l'échelle régionale ; la donnée communale directe de l'INSEE remplace cette approximation.
+Conséquences du remplacement : Score_Opp (corrélation de rang 0,76 avec l'ancien), indice OppChoVec (0,93 en mode égal, 0,84 en mode
+Betti), p_k de Betti (Opp 0,534 -> 0,458), seuils de Jenks, LISA (20 / 5 / 30 / 15 communes changent de cluster), CAH, classement
+Excel. La commune la mieux classée (Afa) reste la même ; la moins bien classée passe d'Érone à Aghione.
+
 ## Échelles utilisées
 
 ### Indicateurs bruts (NON normalisés)
-- **Opp1** : 1 à 7 (niveau d'éducation)
+- **Opp1** : 1 à 7 (niveau de diplôme moyen des 18 ans ou plus non scolarisés, recensement INSEE 2020 ; observé 2,00 à 4,57 : voir la section « Opp1 » ci-dessous)
 - **Opp2** : 0 à 1.1 (indice de Theil ; maximum observé 1,016)
 - **Opp3** : 0 à 300 (mobilité : % de ménages avec voiture, +100 si transports en commun, +100 si réseau de bus urbain)
 - **Opp4** : 0 à 100 (connectivité : moyenne de la 4G, du haut débit et de la fibre, en %)

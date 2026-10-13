@@ -6,6 +6,7 @@ Les scripts sont exécutés sur une COPIE : aucun fichier du dépôt n'est modif
 """
 import functools
 import math
+import os
 import re
 import shutil
 import subprocess
@@ -18,6 +19,7 @@ from unittest import mock
 from common import (ALIAS_NOMS_ANCIENS, GEOJSON, INDICATEURS, PYDIR, RACINE, WEB, charger_const_js, charger_json,
                     copie_du_projet, differences, donnees_actuelles, dossier_sources, exige_libs, exige_sources, lancer_script_racine, lent)
 
+EDUCATION = RACINE / "stage_ambroise" / "Données" / "education_communes_opp1.json"
 ALIAS_MAPPING = {"La Porta": "Porta", "L'Île-Rousse": "Île-Rousse"}   # noms du mapping INSEE -> noms des données
 PYTHON = sys.executable
 
@@ -49,9 +51,6 @@ class IndicateursDepuisLesSources(unittest.TestCase):
         for code, v in valeurs_par_code.items():
             pire = max(pire, abs(v - self.data[self.code2nom[code]][indicateur]))
         self.assertLess(pire, 1e-9, f"{indicateur} : écart max {pire:.3g}")
-
-    def test_opp1_education(self):
-        self.comparer("Opp1", lire(self.d / "Opp1.xlsx")["Niveau d'education moyen"].to_dict())
 
     def test_opp2_theil(self):
         self.comparer("Opp2", lire(self.d / "Opp2.xlsx")["Indice de Theil"].to_dict())
@@ -106,13 +105,73 @@ class IndicateursDepuisLesSources(unittest.TestCase):
 
 
 # ------------------------------------------------------------------------------------------------------------
+class Opp1DepuisLeRecensement(unittest.TestCase):
+    """Opp1 = niveau de diplôme moyen (1-7) des 18 ans ou plus non scolarisés, recensement INSEE 2020 (calculer_education_opp1.py)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.data = donnees_actuelles()
+        cls.edu = charger_json(EDUCATION)
+
+    def test_le_json_de_l_appli_utilise_le_fichier_education(self):
+        self.assertEqual(set(self.edu["communes"]), set(self.data))
+        for c, d in self.edu["communes"].items():
+            self.assertEqual(self.data[c]["Opp1"], d["niveau_moyen"], c)
+
+    def test_le_fichier_education_est_coherent_avec_lui_meme(self):
+        for c, d in self.edu["communes"].items():
+            eff = {int(k): v for k, v in d["effectifs_par_niveau"].items()}
+            self.assertEqual(sorted(eff), [1, 2, 3, 4, 5, 6, 7], c)
+            self.assertTrue(all(v >= 0 for v in eff.values()), c)
+            self.assertAlmostEqual(sum(eff.values()), d["effectif_18p_non_scolarises"], places=6, msg=c)
+            # 18+ = 15+ moins les 15-17 ans non scolarisés (retirés de la catégorie « aucun diplôme ou CEP »)
+            self.assertAlmostEqual(d["effectif_15p_non_scolarises"] - d["retire_15_17_ans"], d["effectif_18p_non_scolarises"], places=6, msg=c)
+            self.assertAlmostEqual(sum(n * v for n, v in eff.items()) / sum(eff.values()), d["niveau_moyen"], places=9, msg=c)
+            self.assertGreaterEqual(d["niveau_moyen"], 1)
+            self.assertLessEqual(d["niveau_moyen"], 7)
+
+    def test_les_15_17_ans_retires_sont_marginaux(self):
+        retires = sum(d["retire_15_17_ans"] for d in self.edu["communes"].values())
+        total = sum(d["effectif_15p_non_scolarises"] for d in self.edu["communes"].values())
+        self.assertAlmostEqual(retires, 500, delta=1)                 # mesuré : 500 personnes
+        self.assertLess(retires / total, 0.0025)                      # 0,19 %
+
+    def test_opp1_n_est_plus_la_suite_artificielle_de_l_ancien_fichier(self):
+        ancien = [float("5." + str(75 + i)) for i in range(360)]     # Opp1.xlsx : 5,75 ; 5,76 ; ... (voir tests/README.md)
+        self.assertLess(max(d["Opp1"] for d in self.data.values()), 5)
+        self.assertNotIn(min(ancien), [d["Opp1"] for d in self.data.values()])
+
+    @exige_libs("pandas", "openpyxl")
+    def test_le_script_reproduit_le_fichier_depuis_le_recensement(self):
+        xlsx = os.environ.get("OPPCHOVEC_INSEE_DIPLOMES", "")
+        if not xlsx or not Path(xlsx).exists():
+            self.skipTest("définir OPPCHOVEC_INSEE_DIPLOMES = chemin de base-ic-diplomes-formation-2020.xlsx (INSEE) pour rejouer le calcul")
+        with tempfile.TemporaryDirectory() as tmp:
+            code = construire_miroir(tmp)
+            r = lancer(code, "calculer_education_opp1.py", xlsx)
+            self.assertEqual(r.returncode, 0, r.stdout[-800:] + r.stderr[-800:])
+            self.assertEqual(differences(charger_json(Path(tmp) / "Données" / "education_communes_opp1.json"), self.edu), [])
+
+
+@exige_libs("pandas", "numpy")
+class RegenererOpp1EstIdempotent(unittest.TestCase):
+    def test_relancer_ne_change_pas_un_octet(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            code = construire_miroir(tmp)
+            avant = (code / "WEB" / "data_scores_0_10.json").read_bytes()
+            r = lancer(code, "regenerer_opp1.py")
+            self.assertEqual(r.returncode, 0, r.stdout[-800:] + r.stderr[-800:])
+            self.assertEqual((code / "WEB" / "data_scores_0_10.json").read_bytes(), avant)
+
+
 @exige_sources()
 @exige_libs("pandas")
 class OppchovecPyEstSynchroniseAvecLeJson(unittest.TestCase):
     """Le script documenté (Python/README.md) doit produire les mêmes indicateurs que le JSON utilisé par l'appli.
 
-    DETTE CONNUE (2026-10-11) : oppchovec.py n'est pas encore resynchronisé pour Opp4 (fibre absente) et Cho2
-    (lit Cho2.xlsx au lieu de Cho2_francais_18plus.xlsx). Ces deux tests sont marqués « échec attendu » ; le jour où
+    DETTE CONNUE (2026-10-11, complétée le 2026-10-13) : oppchovec.py n'est pas encore resynchronisé pour Opp4 (fibre absente),
+    Cho2 (lit Cho2.xlsx au lieu de Cho2_francais_18plus.xlsx) et Opp1 (lit Opp1.xlsx, une suite artificielle, au lieu du niveau
+    de diplôme INSEE). Ces trois tests sont marqués « échec attendu » ; le jour où
     oppchovec.py est corrigé, ils passeront « par surprise » et il suffira de retirer le décorateur.
     """
 
@@ -147,9 +206,15 @@ class OppchovecPyEstSynchroniseAvecLeJson(unittest.TestCase):
             m.stop()
 
     def test_indicateurs_synchronises(self):
-        for k in ("Opp1", "Opp2", "Opp3", "Cho1", "Vec1", "Vec2", "Vec3", "Vec4"):
+        for k in ("Opp2", "Opp3", "Cho1", "Vec1", "Vec2", "Vec3", "Vec4"):
             with self.subTest(indicateur=k):
                 self.assertLess(self.ecarts[k], 1e-9)
+
+    @unittest.expectedFailure
+    def test_opp1_synchronise(self):
+        """DETTE CONNUE (2026-10-13) : oppchovec.py lit encore Opp1.xlsx (suite artificielle 5,75, 5,76...) ; les données
+        utilisent le niveau de diplôme INSEE (Données/education_communes_opp1.json, calculer_education_opp1.py)."""
+        self.assertLess(self.ecarts["Opp1"], 1e-9)
 
     @unittest.expectedFailure
     def test_opp4_synchronise(self):
@@ -161,13 +226,14 @@ class OppchovecPyEstSynchroniseAvecLeJson(unittest.TestCase):
 
 
 # ------------------------------------------------------------------------------------------------------------
-SCRIPTS_PYTHON = ["regenerer_data_scores.py", "exporter_sous_composantes.py", "calculer_jenks_5_classes.py",
+SCRIPTS_PYTHON = ["regenerer_data_scores.py", "regenerer_opp1.py", "calculer_education_opp1.py",
+                  "exporter_sous_composantes.py", "calculer_jenks_5_classes.py",
                   "graphique_ecarts_types_cah.py", "preparer_donnees_cah_web_complet.py", "generer_cah_data_js_complet.py",
                   "generer_donnees_communes_chatbot.py"]
 
 
 def construire_miroir(racine_tmp):
-    """Reproduit l'arborescence Code/{Python,WEB,OUTPUT} (les scripts utilisent des chemins relatifs ../WEB et ../OUTPUT)."""
+    """Reproduit l'arborescence {Code/{Python,WEB,OUTPUT},Données} (les scripts utilisent des chemins relatifs ../WEB, ../OUTPUT, ../../Données)."""
     code = Path(racine_tmp) / "Code"
     (code / "Python").mkdir(parents=True)
     (code / "WEB").mkdir()
@@ -175,7 +241,10 @@ def construire_miroir(racine_tmp):
     for s in SCRIPTS_PYTHON:
         shutil.copy(PYDIR / s, code / "Python" / s)
     shutil.copy(WEB / "data_scores_0_10.json", code / "WEB")
-    shutil.copy(GEOJSON, code / "WEB")
+    donnees = Path(racine_tmp) / "Données"
+    donnees.mkdir()
+    shutil.copy(GEOJSON, donnees)
+    shutil.copy(EDUCATION, donnees)
     return code
 
 
@@ -263,6 +332,13 @@ class GardeFousDesScriptsDeRegeneration(unittest.TestCase):
     def test_regeneration_refuse_un_json_dont_les_scores_ne_suivent_pas_les_indicateurs(self):
         avant = self.corrompre("Afa", "Opp1", 0.3)          # indicateur modifié sans recalcul des scores
         r = lancer(self.code, "regenerer_data_scores.py", str(self.src))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("ne reproduit pas", r.stdout + r.stderr)
+        self.assertEqual((self.code / "WEB" / "data_scores_0_10.json").read_bytes(), avant, "le fichier ne doit pas être réécrit")
+
+    def test_regenerer_opp1_refuse_un_json_dont_les_scores_ne_suivent_pas_les_indicateurs(self):
+        avant = self.corrompre("Afa", "Opp2", 0.2)
+        r = lancer(self.code, "regenerer_opp1.py")
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("ne reproduit pas", r.stdout + r.stderr)
         self.assertEqual((self.code / "WEB" / "data_scores_0_10.json").read_bytes(), avant, "le fichier ne doit pas être réécrit")

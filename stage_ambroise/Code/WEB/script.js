@@ -74,7 +74,7 @@ const traductions = {
             "language-english": "Libellés en anglais"
         },
         descriptions: {
-            Indicateur_Opp1: "Avoir une bonne éducation. Se traduit par le niveau de diplôme de la population sur une échelle de 1 à 7.",
+            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : recensement INSEE 2020. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
             Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
             Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
             Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
@@ -116,7 +116,7 @@ const traductions = {
             "language-english": "English labels"
         },
         descriptions: {
-            Indicateur_Opp1: "Having a good education. Measured by the education level of the population on a scale of 1 to 7.",
+            Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: 2020 INSEE census. Small municipalities have few people concerned: their value is less certain.",
             Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories.",
             Indicateur_Opp3: "Having the means of mobility. Score based on the proportion of households with a car and access to transport.",
             Indicateur_Opp4: "Having access to ICT. Average of 4G coverage, high-speed Internet and fiber.",
@@ -171,8 +171,8 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 2.28, 3.94, 5.13, 7.26, 10],  // 5 classes - valeurs par défaut basées sur Jenks
-    opp: [0, 2.44, 3.75, 4.95, 6.49, 10],
+    oppchovec: [0, 2.04, 4.04, 5.34, 7.31, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    opp: [0, 2.72, 4.14, 5.44, 6.88, 10],
     cho: [0, 2.35, 6.11, 8.20, 9.30, 10],
     vec: [0, 2.04, 3.37, 4.53, 6.80, 10]
 };

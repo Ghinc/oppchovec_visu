@@ -47,9 +47,10 @@ réellement produit par `afficherCommune`.
 
 ## Références de non-régression (« ce qu'on avait avant »)
 
-`tests/fixtures/` contient l'état du projet **avant la correction des poids de Vec3** (commit `4438162`, 2026-10-11) :
-`baseline_data_scores_0_10.json` (copie exacte) et `baseline_derives.json` (seuils Jenks, clusters LISA et CAH). `generer_baseline.py` les
-reconstruit depuis git.
+`tests/fixtures/` contient deux états figés de l'historique, reconstruits depuis git par `generer_baseline.py` :
+- `baseline_*` : **avant la correction des poids de Vec3** (commit `4438162`, 2026-10-11) ;
+- `avant_opp1_*` : **après Vec3 et avant le remplacement d'Opp1** par le niveau de diplôme INSEE (commit `9c8a310`, 2026-10-13).
+Chacun comprend `*_data_scores_0_10.json` (copie exacte) et `*_derives.json` (seuils Jenks, clusters LISA et CAH). `test_04` compare `baseline` -> `avant_opp1` (empreinte de la correction Vec3) puis `avant_opp1` -> état actuel (empreinte du remplacement d'Opp1 : seuls `Opp1`, `Score_Opp`, `Score_Opp_0_10`, `OppChoVec`, `OppChoVec_0_10` changent ; Cho et Vec sont identiques au bit près).
 
 Cette référence est corroborée par trois archives du dépôt qui lui sont identiques (aux noms « La Porta » / « L'Île-Rousse » près) :
 `Code/Python/data_scores_0_10.json`, `Code/WEB/data_scores_0_10_backup_20251112_204530.json` et `Code/Python/data_scores_1_10.json`.
@@ -59,8 +60,9 @@ Les fichiers plus anciens (`Code/data_scores.json`, `data_scores_normalisation_e
 `oppchovec_resultats_V.xlsx`) relèvent d'une méthode antérieure (corrélation de rang avec l'indice actuel de 0,40 à 0,74) : ils ne sont **pas**
 des références valables et ne sont pas utilisés.
 
-Les bornes de `test_04` (corrélation de rang ≥ 0,999, écart max 0,25, 0 à 3 communes LISA qui changent…) sont l'empreinte **mesurée** de la
-correction Vec3, avec une petite marge. Pour changer volontairement de référence (nouvelle correction de méthode) : relancer
+Les bornes de `test_04` sont l'empreinte **mesurée** de chaque changement, avec une petite marge : pour Vec3 corrélation de rang ≥ 0,999, écart max 0,25,
+0 à 3 communes LISA qui changent ; pour Opp1 (changement bien plus profond, voulu) corrélation de rang du Score_Opp ≥ 0,7 (mesuré 0,76), de l'indice ≥ 0,90
+(égal, mesuré 0,93) / 0,80 (Betti, 0,84), au plus 30 / 10 / 40 / 25 communes LISA qui changent (mesuré 20 / 5 / 30 / 15). Pour changer volontairement de référence (nouvelle correction de méthode) : relancer
 `fixtures/generer_baseline.py` avec le nouveau commit de référence et mettre à jour ces bornes, en le disant ici.
 
 ## Dettes connues (signalées, pas cachées)
@@ -70,8 +72,10 @@ corrigé le test le signale (« succès inattendu ») pour qu'on retire la marqu
 
 | Dette | Où |
 |---|---|
-| `oppchovec.py` n'est pas synchronisé avec le JSON pour **Opp4** (fibre absente) et **Cho2** (lit `Cho2.xlsx` au lieu de `Cho2_francais_18plus.xlsx`) | `test_05`, 2 tests |
+| `oppchovec.py` n'est pas synchronisé avec le JSON pour **Opp4** (fibre absente), **Cho2** (lit `Cho2.xlsx` au lieu de `Cho2_francais_18plus.xlsx`) et **Opp1** (lit `Opp1.xlsx`, une suite artificielle 5,75 ; 5,76… sans rapport avec l'éducation, au lieu du niveau de diplôme INSEE) | `test_05`, 3 tests |
 | `stage_ambroise/Code/WEB/index.html` est une copie plus ancienne de `index.html` (il lui manque 3 onglets) | `test_07` |
+
+Corrigé le 2026-10-13 : **Opp1** ne vient plus de `Opp1.xlsx` (suite artificielle) mais du recensement INSEE (`Données/education_communes_opp1.json`, voir `Code/VERIFICATION_COHERENCE_DONNEES.md`). Tests : `test_05` (`Opp1DepuisLeRecensement` : cohérence interne, 18+ = 15+ moins les 15-17 ans, rejeu du calcul si `OPPCHOVEC_INSEE_DIPLOMES` désigne `base-ic-diplomes-formation-2020.xlsx` ; `RegenererOpp1EstIdempotent`) et `test_04`. Au passage, les scripts CAH de la procédure documentée lisaient `../WEB/Commune_Corse.geojson`, un fichier qui n'existe pas dans le dépôt : ils lisent maintenant `../../Données/`.
 
 Dettes corrigées le 2026-10-12, conservées comme tests de non-régression :
 - course `invalidateSize` (150 ms) sur une carte détruite par la bascule p_k : fonction `invaliderTailleApres` (6 minuteries) ; test e2e sur les 3 sous-onglets de Corrélation ;
