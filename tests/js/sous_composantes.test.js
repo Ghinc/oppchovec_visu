@@ -82,8 +82,8 @@ test('déplacer un curseur de sous-composante met à jour la valeur affichée de
   inputs.Indicateur_Opp4__fibre.value = '0';
   app.ev("majSousComposante('Indicateur_Opp4', 'fibre')");
   // Bastia : 4G 100, débit 93, fibre 80 -> fibre minimale corse (0) => (100 + 93 + 0) / 3 = 64,333
-  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), /^\d+ % · 64,3 %/);
-  assert.match(normaliser(app.elements.get('Indicateur_Opp4__fibre_val').innerText), /^0 % · 0 %$/);
+  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), /^\d+ % de l'échelle corse · valeur : 64,3 %/);
+  assert.match(normaliser(app.elements.get('Indicateur_Opp4__fibre_val').innerText), /^0 % de l'échelle corse · valeur : 0 %$/);
   assert.deepEqual(photo(app), avant, 'rien ne doit changer tant que « Recalculer » n\'est pas cliqué');
   assert.equal(app.ev("sousComposantesCommune.Bastia.Indicateur_Opp4.fibre"), 80);
 });

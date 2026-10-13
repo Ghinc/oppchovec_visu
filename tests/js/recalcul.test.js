@@ -33,7 +33,7 @@ for (const mode of MODES) {
     const avant = photo(app);
     inputs.Indicateur_Vec4.value = '100';                       // services accessibles : maximum corse
     app.ev("majLibelleSlider('Indicateur_Vec4')");
-    assert.match(String(app.elements.get('Indicateur_Vec4_val').innerText).replace(/[  ]/g, ' '), /^100 % · 5 278 services$/);
+    assert.match(String(app.elements.get('Indicateur_Vec4_val').innerText).replace(/[  ]/g, ' '), /^100 % de l'échelle corse · valeur : 5 278 services$/);
     app.ev("recalculerIndice('Bastia')");
     const apres = photo(app);
     assert.equal(apres.ind.Bastia.Indicateur_Vec4, app.ev("bornesRef.max['Indicateur_Vec4']"));

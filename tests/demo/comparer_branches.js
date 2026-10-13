@@ -26,6 +26,9 @@ const { demarrerServeur, disponibilite, ouvrirAppli, RACINE } = require('../e2e/
 const REF = process.argv[2] || 'visu_corse_simple';
 const CARTES = [['oppchovectab', 'oppchovec'], ['opptab', 'opp'], ['chotab', 'cho'], ['vectab', 'vec']];
 const COMMUNES_FICHE = ['Bastia', 'Ajaccio', 'Afa', 'Érone', 'Propriano'];
+// Libellé volontairement modifié dans la démo (« 87 % · 96,4 % » -> « 87 % de l'échelle corse · valeur : 96,4 % ») : on le ramène à l'ancien format
+// avant de comparer, pour que le reste de la fiche soit vérifié à l'identique.
+const ancienLibelle = (t) => t.replace(/% de l'échelle corse · valeur :/g, '% ·');
 const git = (...args) => execFileSync('git', args, { cwd: RACINE, encoding: 'utf8', maxBuffer: 1 << 28 });
 const sha = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12);
 const resultats = [];
@@ -120,7 +123,7 @@ async function snapshot(navigateur, url, { francais }) {
   s.rendu = {}; s.images = {};
   for (const [tab, type] of CARTES) {
     await page.click(`.tab-button[data-tab="${tab}"]`);
-    await page.waitForTimeout(900);
+    await page.waitForTimeout(1600);
     await page.evaluate((t) => cartes[t].invalidateSize(), type);
     s.rendu[type] = await page.evaluate(lireRendu, type);
     const png = await page.locator(`#map-${type}`).screenshot({ animations: 'disabled' });
@@ -133,7 +136,7 @@ async function snapshot(navigateur, url, { francais }) {
     await page.selectOption('#communeSelect', c);
     await page.click('#validerCommune');
     await page.waitForSelector('#resultCommune .indicateur-row');
-    s.fiches[c] = (await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').trim();
+    s.fiches[c] = ancienLibelle((await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').trim());
   }
   // modification + recalcul sur Bastia, puis état complet
   await page.selectOption('#communeSelect', 'Bastia');
@@ -145,7 +148,7 @@ async function snapshot(navigateur, url, { francais }) {
     recalculerIndice('Bastia');
   });
   s.apresModif = await page.evaluate(lireDonnees);
-  s.fichesApresModif = (await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').trim();
+  s.fichesApresModif = ancienLibelle((await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').trim());
   s.rendu.oppchovecApresModif = await page.evaluate(lireRendu, 'oppchovec');
   s.erreursFin = appli.nouvellesErreurs();
   await page.close();

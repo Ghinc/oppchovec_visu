@@ -10,6 +10,7 @@
 | Onglets | Seulement OppChoVec, Opp, Cho, Vec, + **Dominance** (nouveau) |
 | Pondérations | Betti et al. uniquement : le bouton de choix a disparu, les valeurs p_k restent affichées |
 | Langue | Français uniquement, sans case « English labels » (la case « copyright » a disparu aussi : le copyright est toujours affiché) |
+| Libellé des curseurs | « 87 % · 96,4 % » devient « 87 % de l'échelle corse · valeur : 96,4 % » (1er % = position entre le min et le max observés en Corse, ensuite la valeur réelle). La comparaison A/B ramène ce libellé à l'ancien format avant de comparer |
 | Colonne de gauche | Sections renumérotées (1 commune, 2 routes, 3 pondérations, 4 téléchargements) |
 | Code | `script.js` garde le code des onglets retirés (inactif) ; seules modifications : langue française par défaut, bascule p_k supprimée, deux lignes de garde sur le chatbot, onglet Dominance |
 

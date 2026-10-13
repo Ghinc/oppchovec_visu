@@ -72,7 +72,7 @@ test('formats d\'affichage : valeur brute avec son unité', async () => {
   assert.equal(f('Opp4', 91), '91,0 %');
   assert.equal(f('Cho1', -8.8242), '-8,82');
   assert.equal(f('Opp3', 281.4), '281,4 pts');
-  assert.match(normaliser(app.ev("libelleSlider('Indicateur_Vec1', 20530)")), /^36 % · 20 530 €$/);
+  assert.match(normaliser(app.ev("libelleSlider('Indicateur_Vec1', 20530)")), /^36 % de l'échelle corse · valeur : 20 530 €$/);
   assert.match(normaliser(app.ev("libelleEchelle('Indicateur_Vec1')")), /^Corse : 15 600 € → 29 320 €$/);
 });
 
