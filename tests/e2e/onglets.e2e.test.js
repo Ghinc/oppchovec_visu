@@ -58,7 +58,7 @@ test('démo : plus de choix de routes (nationales seules), pondérations dans un
     await page.waitForSelector('#resultCommune .indicateur-row');
     await page.click('.info-button[data-indicator="Indicateur_Opp1"]');
     const d = await page.locator('#info-Indicateur_Opp1 p[data-indicator-desc]').innerText();
-    for (const mot of ['tranche d\'âge', 'INSEE', 'échelle de la Corse']) assert.ok(d.includes(mot), mot);
+    for (const mot of ['18 ans ou plus', 'diplôme', 'INSEE', 'bac + 5']) assert.ok(d.includes(mot), mot);
     assert.deepEqual(nouvellesErreurs(), []);
     await page.hover('.pk-info');
     await page.screenshot({ path: process.env.CAPTURE || undefined });
