@@ -20,7 +20,7 @@ def charger_donnees():
     with open('../WEB/data_scores_0_10.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    gdf = gpd.read_file('../WEB/Commune_Corse.geojson')
+    gdf = gpd.read_file('../../Données/Commune_Corse.geojson')
 
     df_scores = pd.DataFrame.from_dict(data, orient='index')
     df_scores.index.name = 'commune'

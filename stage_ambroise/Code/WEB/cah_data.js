@@ -19,2549 +19,2549 @@ const CAH_DATA_3 = {
   "clusters": {
     "Cristinacce": {
       "cluster": 3,
-      "Score_Opp": 2.7479706110665796,
+      "Score_Opp": 4.191783587724197,
       "Score_Cho": 10.0,
       "Score_Vec": 2.932877140051841,
-      "OppChoVec": 4.109229963388751
+      "OppChoVec": 4.728294399830645
     },
     "Bastelica": {
-      "cluster": 1,
-      "Score_Opp": 5.2141952383408015,
+      "cluster": 3,
+      "Score_Opp": 2.90286585132425,
       "Score_Cho": 8.376640771497454,
       "Score_Vec": 3.775282135223029,
-      "OppChoVec": 4.277709801406915
+      "OppChoVec": 3.4787752779889742
     },
     "Quenza": {
       "cluster": 3,
-      "Score_Opp": 2.528444119964963,
+      "Score_Opp": 3.0510845368294186,
       "Score_Cho": 8.151620680417894,
       "Score_Vec": 2.2949378673278646,
-      "OppChoVec": 2.5997124812624985
+      "OppChoVec": 2.7787173182308624
     },
     "Chiatra": {
       "cluster": 3,
-      "Score_Opp": 4.622578941396531,
+      "Score_Opp": 6.082715733367111,
       "Score_Cho": 7.548888293597643,
       "Score_Vec": 3.884695722553447,
-      "OppChoVec": 3.5472091928251768
+      "OppChoVec": 4.080070828239463
     },
     "Ogliastro": {
       "cluster": 3,
-      "Score_Opp": 3.906528221950152,
+      "Score_Opp": 3.8830757299924596,
       "Score_Cho": 8.690061612643985,
       "Score_Vec": 2.105351260630904,
-      "OppChoVec": 3.316168758527957
+      "OppChoVec": 3.324978712469046
     },
     "Frasseto": {
       "cluster": 3,
-      "Score_Opp": 2.658607015929088,
+      "Score_Opp": 4.845584777355764,
       "Score_Cho": 9.531208143584248,
       "Score_Vec": 3.615047522517037,
-      "OppChoVec": 4.030253409110462
+      "OppChoVec": 4.919053070439629
     },
     "Serriera": {
       "cluster": 3,
-      "Score_Opp": 1.239643817354929,
+      "Score_Opp": 2.0174409879090445,
       "Score_Cho": 8.815965711224216,
       "Score_Vec": 3.213530416281063,
-      "OppChoVec": 2.9794767199575882
+      "OppChoVec": 3.278259306606036
     },
     "Valle-di-Mezzana": {
-      "cluster": 1,
-      "Score_Opp": 3.6450342478297717,
+      "cluster": 3,
+      "Score_Opp": 5.685647490680631,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 4.700891613042591,
-      "OppChoVec": 4.853979083829078
+      "OppChoVec": 5.776939077633241
     },
     "Lozzi": {
       "cluster": 3,
-      "Score_Opp": 2.266511779145925,
+      "Score_Opp": 4.3000376401366145,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 3.0645718653930647,
-      "OppChoVec": 3.457688988993785
+      "OppChoVec": 4.21902476018826
     },
     "Sant'Andréa-di-Bozio": {
-      "cluster": 1,
-      "Score_Opp": 6.048675329714213,
+      "cluster": 2,
+      "Score_Opp": 6.172013581192263,
       "Score_Cho": 10.0,
       "Score_Vec": 4.1793553382773565,
-      "OppChoVec": 6.022719519785004
+      "OppChoVec": 6.110365411048523
     },
     "Balogna": {
       "cluster": 3,
-      "Score_Opp": 5.489241389991825,
+      "Score_Opp": 2.4736395998142138,
       "Score_Cho": 8.558799892847578,
       "Score_Vec": 1.5806699391993386,
-      "OppChoVec": 3.6526774369640025
+      "OppChoVec": 2.6112125167507716
     },
     "Campo": {
-      "cluster": 1,
-      "Score_Opp": 5.958387147683951,
+      "cluster": 3,
+      "Score_Opp": 4.344591609587257,
       "Score_Cho": 9.9464237878382,
       "Score_Vec": 3.0152671211626454,
-      "OppChoVec": 5.407857292090085
+      "OppChoVec": 4.779400420703967
     },
     "Foce": {
-      "cluster": 1,
-      "Score_Opp": 4.606632813110282,
+      "cluster": 2,
+      "Score_Opp": 7.4161297269823665,
       "Score_Cho": 8.818644521832306,
       "Score_Vec": 5.133555226465791,
-      "OppChoVec": 4.936187166539043
+      "OppChoVec": 6.20194802483851
     },
     "Pietrosella": {
-      "cluster": 1,
-      "Score_Opp": 4.070936011485005,
+      "cluster": 2,
+      "Score_Opp": 7.349498764774927,
       "Score_Cho": 9.255290650950979,
       "Score_Vec": 5.267059286099314,
-      "OppChoVec": 5.092944504351914
+      "OppChoVec": 6.597101519459713
     },
     "Propriano": {
-      "cluster": 2,
-      "Score_Opp": 4.128199426435623,
+      "cluster": 1,
+      "Score_Opp": 5.192980681537508,
       "Score_Cho": 6.3032413608357905,
       "Score_Vec": 0.0,
-      "OppChoVec": 1.3827034350237732
+      "OppChoVec": 1.5759529190767836
     },
     "Zérubia": {
       "cluster": 3,
-      "Score_Opp": 1.2670832368083664,
+      "Score_Opp": 3.6055103758146236,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5426022854556964,
-      "OppChoVec": 3.899944825820161
+      "OppChoVec": 4.791735800202544
     },
     "Linguizzetta": {
-      "cluster": 2,
-      "Score_Opp": 1.2524649781090735,
+      "cluster": 1,
+      "Score_Opp": 1.3514219991989183,
       "Score_Cho": 4.6236271095633565,
       "Score_Vec": 0.8480223095639162,
-      "OppChoVec": 0.145412208558444
+      "OppChoVec": 0.030033557730688915
     },
     "Piedicorte-di-Gaggio": {
       "cluster": 3,
-      "Score_Opp": 5.287337966013115,
+      "Score_Opp": 6.717845405447732,
       "Score_Cho": 8.001607286364857,
       "Score_Vec": 1.3564635137503456,
-      "OppChoVec": 3.1392347791525443
+      "OppChoVec": 3.596837016854297
     },
     "Brando": {
-      "cluster": 1,
-      "Score_Opp": 3.748348114668607,
+      "cluster": 2,
+      "Score_Opp": 6.5815761914055,
       "Score_Cho": 9.501741226895259,
       "Score_Vec": 5.455495773258846,
-      "OppChoVec": 5.2351801978779156
+      "OppChoVec": 6.548040566226907
     },
     "Pancheraccia": {
       "cluster": 3,
-      "Score_Opp": 2.8899289427879564,
+      "Score_Opp": 2.7174660760060516,
       "Score_Cho": 7.064023573533349,
       "Score_Vec": 1.6766753376881844,
-      "OppChoVec": 1.8871358751042935
+      "OppChoVec": 1.802751127701536
     },
     "Aiti": {
-      "cluster": 3,
-      "Score_Opp": 3.6511141051410734,
+      "cluster": 2,
+      "Score_Opp": 6.591706132673474,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 3.2794265996394807,
-      "OppChoVec": 3.8293885003927963
+      "OppChoVec": 5.008805043405571
     },
     "Bustanico": {
       "cluster": 3,
-      "Score_Opp": 2.1242007594255687,
+      "Score_Opp": 1.4236265206808774,
       "Score_Cho": 8.912402893115456,
       "Score_Vec": 3.9241218504207738,
-      "OppChoVec": 3.569857657976131
+      "OppChoVec": 3.4778585434863003
     },
     "Cagnano": {
       "cluster": 3,
-      "Score_Opp": 2.2464677131976214,
+      "Score_Opp": 3.6346199108559767,
       "Score_Cho": 9.515135279935707,
       "Score_Vec": 2.255321925923852,
-      "OppChoVec": 3.356086848126481
+      "OppChoVec": 3.8826833656304856
     },
     "Corscia": {
       "cluster": 3,
-      "Score_Opp": 2.852764907425725,
+      "Score_Opp": 3.589656924226858,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 2.3341241876469185,
-      "OppChoVec": 3.28655973131349
+      "OppChoVec": 3.5834751801382083
     },
     "Monte": {
-      "cluster": 2,
-      "Score_Opp": 4.864526799179253,
+      "cluster": 1,
+      "Score_Opp": 6.144958384295279,
       "Score_Cho": 6.113045807661398,
       "Score_Vec": 1.8823037613232017,
-      "OppChoVec": 2.0819319692637417
+      "OppChoVec": 2.3943269861214267
     },
     "Porri": {
-      "cluster": 1,
-      "Score_Opp": 3.8524747167848616,
+      "cluster": 3,
+      "Score_Opp": 5.054125960050099,
       "Score_Cho": 10.0,
       "Score_Vec": 3.984002518151659,
-      "OppChoVec": 4.960245723689335
+      "OppChoVec": 5.54562726026862
     },
     "Porta": {
       "cluster": 3,
-      "Score_Opp": 5.392394320763303,
+      "Score_Opp": 5.733439134547348,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 1.0295192620147293,
-      "OppChoVec": 4.063518618647114
+      "OppChoVec": 4.166523371607863
     },
     "Speloncato": {
       "cluster": 3,
-      "Score_Opp": 3.248331881096198,
+      "Score_Opp": 4.047546879438515,
       "Score_Cho": 8.880257165818376,
       "Score_Vec": 2.232436210032955,
-      "OppChoVec": 3.2556319434212533
+      "OppChoVec": 3.5607685372387925
     },
     "Cognocoli-Monticchi": {
       "cluster": 3,
-      "Score_Opp": 2.065972912829275,
+      "Score_Opp": 3.4685484964060547,
       "Score_Cho": 7.950709884811143,
       "Score_Vec": 2.9107107236530334,
-      "OppChoVec": 2.565156397838238
+      "OppChoVec": 3.0151269214470737
     },
     "Villanova": {
-      "cluster": 1,
-      "Score_Opp": 2.9390779700395626,
+      "cluster": 3,
+      "Score_Opp": 5.624724193912045,
       "Score_Cho": 9.82587731047415,
       "Score_Vec": 6.683051163964807,
-      "OppChoVec": 5.785502325769021
+      "OppChoVec": 7.086614144272802
     },
     "Mausoléo": {
       "cluster": 3,
-      "Score_Opp": 2.0313711228156093,
+      "Score_Opp": 2.5493940567046063,
       "Score_Cho": 7.733726225555852,
       "Score_Vec": 4.315924196477347,
-      "OppChoVec": 2.958962925100979
+      "OppChoVec": 3.1757593024734976
     },
     "Osani": {
       "cluster": 3,
-      "Score_Opp": 2.955834207355246,
+      "Score_Opp": 4.137514673217046,
       "Score_Cho": 9.024912938655236,
       "Score_Vec": 3.050626615362498,
-      "OppChoVec": 3.5604441471095747
+      "OppChoVec": 4.030879986016541
     },
     "Aghione": {
-      "cluster": 2,
-      "Score_Opp": 1.7309441118820776,
+      "cluster": 1,
+      "Score_Opp": 2.3818602839549747,
       "Score_Cho": 3.329761585855879,
       "Score_Vec": 1.8938228387506704,
-      "OppChoVec": 0.017342863160258324
+      "OppChoVec": 0.0
     },
     "Casabianca": {
       "cluster": 3,
-      "Score_Opp": 4.438630548983461,
+      "Score_Opp": 7.27288411281945,
       "Score_Cho": 8.569515135279936,
       "Score_Vec": 2.039238062712551,
-      "OppChoVec": 3.4104810129475407
+      "OppChoVec": 4.491575765671151
     },
     "Focicchia": {
       "cluster": 3,
-      "Score_Opp": 1.6029525971502132,
+      "Score_Opp": 2.180744646435689,
       "Score_Cho": 10.0,
       "Score_Vec": 2.9742047363734754,
-      "OppChoVec": 3.7664165358586037
+      "OppChoVec": 4.072468161280994
     },
     "Luri": {
       "cluster": 3,
-      "Score_Opp": 4.071246685064429,
+      "Score_Opp": 5.503063842925791,
       "Score_Cho": 9.22850254487008,
       "Score_Vec": 1.9067907789378558,
-      "OppChoVec": 3.655973866353342
+      "OppChoVec": 4.204402170923692
     },
     "Nocario": {
       "cluster": 3,
-      "Score_Opp": 3.599911641363746,
+      "Score_Opp": 4.4471585718400375,
       "Score_Cho": 9.330297347977497,
       "Score_Vec": 3.4558410351024547,
-      "OppChoVec": 4.156134306415736
+      "OppChoVec": 4.544101391417178
     },
     "San-Nicolao": {
-      "cluster": 3,
-      "Score_Opp": 6.2106940462521445,
+      "cluster": 1,
+      "Score_Opp": 6.2658029253291,
       "Score_Cho": 7.337262255558532,
       "Score_Vec": 0.4777497802062851,
-      "OppChoVec": 2.821896455292787
+      "OppChoVec": 2.685717273179811
     },
     "Serra-di-Ferro": {
       "cluster": 3,
-      "Score_Opp": 3.3099084815532653,
+      "Score_Opp": 6.121884656948681,
       "Score_Cho": 7.181891240289313,
       "Score_Vec": 4.127550243397723,
-      "OppChoVec": 2.951941003459653
+      "OppChoVec": 3.955692206176188
     },
     "Sorbollano": {
       "cluster": 3,
-      "Score_Opp": 2.1798325775252474,
+      "Score_Opp": 4.2437840233439825,
       "Score_Cho": 9.876774712027864,
       "Score_Vec": 3.965232821873466,
-      "OppChoVec": 4.263286044132561
+      "OppChoVec": 5.124382891327849
     },
     "Felce": {
-      "cluster": 1,
-      "Score_Opp": 4.580318321144776,
+      "cluster": 2,
+      "Score_Opp": 6.7251598261944725,
       "Score_Cho": 9.426734529868737,
       "Score_Vec": 3.728095883099407,
-      "OppChoVec": 4.723521993152009
+      "OppChoVec": 5.664272180805009
     },
     "Pioggiola": {
       "cluster": 3,
-      "Score_Opp": 3.5679801587041124,
+      "Score_Opp": 4.802856231869541,
       "Score_Cho": 9.90356281810876,
       "Score_Vec": 3.0174374123443553,
-      "OppChoVec": 4.366777627473898
+      "OppChoVec": 4.919474375651108
     },
     "Valle-d'Alesani": {
       "cluster": 3,
-      "Score_Opp": 3.688502701797256,
+      "Score_Opp": 3.6651734280027055,
       "Score_Cho": 8.877578355210286,
       "Score_Vec": 2.7749621439158267,
-      "OppChoVec": 3.610375317856626
+      "OppChoVec": 3.6496495706297525
     },
     "Palneca": {
       "cluster": 3,
-      "Score_Opp": 4.402624106395915,
+      "Score_Opp": 6.060075101327716,
       "Score_Cho": 9.461559067773909,
       "Score_Vec": 0.48722369930245596,
-      "OppChoVec": 3.441362871738348
+      "OppChoVec": 4.0469841969321765
     },
     "Peri": {
-      "cluster": 1,
-      "Score_Opp": 3.2576653515609664,
+      "cluster": 3,
+      "Score_Opp": 5.30090893534345,
       "Score_Cho": 9.458880257165818,
       "Score_Vec": 5.818457229393848,
-      "OppChoVec": 5.19011680084629
+      "OppChoVec": 6.151696867696234
     },
     "Rosazia": {
       "cluster": 3,
-      "Score_Opp": 1.6891061104664704,
+      "Score_Opp": 3.352625304080814,
       "Score_Cho": 10.0,
       "Score_Vec": 4.196392855815988,
-      "OppChoVec": 4.297951659557816
+      "OppChoVec": 5.0086108546653705
     },
     "Sollacaro": {
       "cluster": 3,
-      "Score_Opp": 4.235640810204538,
+      "Score_Opp": 5.626775051729302,
       "Score_Cho": 8.50790249129387,
       "Score_Vec": 3.218386199806213,
-      "OppChoVec": 3.743606576276941
+      "OppChoVec": 4.280417797106188
     },
     "Aregno": {
       "cluster": 3,
-      "Score_Opp": 0.8971650075309244,
+      "Score_Opp": 1.591182903295946,
       "Score_Cho": 9.450843825341549,
       "Score_Vec": 2.6840463714820872,
-      "OppChoVec": 3.0995667784594123
+      "OppChoVec": 3.3829324832686396
     },
     "Castellare-di-Casinca": {
-      "cluster": 1,
-      "Score_Opp": 4.530067281083501,
+      "cluster": 2,
+      "Score_Opp": 6.253903413198239,
       "Score_Cho": 8.532011786766676,
       "Score_Vec": 4.389090204946122,
-      "OppChoVec": 4.3659207146084045
+      "OppChoVec": 5.089828971457634
     },
     "Castineta": {
-      "cluster": 1,
-      "Score_Opp": 5.2531226642948035,
+      "cluster": 2,
+      "Score_Opp": 6.314022534415678,
       "Score_Cho": 10.0,
       "Score_Vec": 2.8040486536060967,
-      "OppChoVec": 5.035215250983977
+      "OppChoVec": 5.511989859942825
     },
     "Pietra-di-Verde": {
       "cluster": 3,
-      "Score_Opp": 3.168669846651857,
+      "Score_Opp": 3.261137602855206,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 2.301256463743782,
-      "OppChoVec": 3.8734070978971764
+      "OppChoVec": 3.993043040848867
     },
     "Calcatoggio": {
-      "cluster": 1,
-      "Score_Opp": 6.48814829389083,
+      "cluster": 3,
+      "Score_Opp": 4.959260364542149,
       "Score_Cho": 8.590945620144655,
       "Score_Vec": 3.6793067613417922,
-      "OppChoVec": 4.956489979354966
+      "OppChoVec": 4.290370158310436
     },
     "Moca-Croce": {
       "cluster": 3,
-      "Score_Opp": 3.4178635638082673,
+      "Score_Opp": 5.144027905055438,
       "Score_Cho": 8.963300294669166,
       "Score_Vec": 3.59631488366716,
-      "OppChoVec": 3.8976144270434476
+      "OppChoVec": 4.595326011996334
     },
     "Albertacce": {
       "cluster": 3,
-      "Score_Opp": 4.057668222878843,
+      "Score_Opp": 5.424911746930893,
       "Score_Cho": 9.030270559871417,
       "Score_Vec": 1.624567381974358,
-      "OppChoVec": 3.418154946758217
+      "OppChoVec": 3.9192150330714917
     },
     "Pie-d'Orezza": {
-      "cluster": 2,
-      "Score_Opp": 2.014486833101803,
+      "cluster": 1,
+      "Score_Opp": 1.6998390304527102,
       "Score_Cho": 4.564693276185376,
       "Score_Vec": 4.007207348977946,
-      "OppChoVec": 1.188347999635642
+      "OppChoVec": 1.0505877828328472
     },
     "Poggio-Mezzana": {
       "cluster": 3,
-      "Score_Opp": 3.7146382361416515,
+      "Score_Opp": 3.862211931758328,
       "Score_Cho": 7.972140369675866,
       "Score_Vec": 3.4677491525335395,
-      "OppChoVec": 3.309247738549901
+      "OppChoVec": 3.3835015643680193
     },
     "Quercitello": {
       "cluster": 3,
-      "Score_Opp": 2.3736478283662663,
+      "Score_Opp": 3.2040661082509647,
       "Score_Cho": 9.8660594695955,
       "Score_Vec": 3.040752953124392,
-      "OppChoVec": 3.935118607947565
+      "OppChoVec": 4.32752230512505
     },
     "Vallecalle": {
-      "cluster": 1,
-      "Score_Opp": 4.800369520148714,
+      "cluster": 3,
+      "Score_Opp": 5.837879401649887,
       "Score_Cho": 9.622287704259309,
       "Score_Vec": 4.978656292979987,
-      "OppChoVec": 5.535103957582404
+      "OppChoVec": 6.0649112328918235
     },
     "Olivese": {
-      "cluster": 3,
-      "Score_Opp": 4.1648526128956505,
+      "cluster": 2,
+      "Score_Opp": 5.888429506644379,
       "Score_Cho": 10.0,
       "Score_Vec": 2.8998138826474533,
-      "OppChoVec": 4.617925228045252
+      "OppChoVec": 5.3761053671809345
     },
     "Sampolo": {
       "cluster": 3,
-      "Score_Opp": 2.4751188135961923,
+      "Score_Opp": 3.6069601455715,
       "Score_Cho": 9.582105545137958,
       "Score_Vec": 4.882009525435709,
-      "OppChoVec": 4.555694568844569
+      "OppChoVec": 5.105723632321041
     },
     "Pietraserena": {
-      "cluster": 3,
-      "Score_Opp": 5.538910896781123,
+      "cluster": 1,
+      "Score_Opp": 5.550640055960301,
       "Score_Cho": 7.321189391909993,
       "Score_Vec": 1.4481444291256904,
-      "OppChoVec": 2.8594157818945805
+      "OppChoVec": 2.7553629726750914
     },
     "Poggio-di-Nazza": {
       "cluster": 3,
-      "Score_Opp": 3.4088547820592363,
+      "Score_Opp": 3.1835855106144217,
       "Score_Cho": 8.84275381730512,
       "Score_Vec": 2.1869767488072673,
-      "OppChoVec": 3.2694402210667524
+      "OppChoVec": 3.2360909680485332
     },
     "Sant'Antonino": {
       "cluster": 3,
-      "Score_Opp": 4.317499094809614,
+      "Score_Opp": 4.557364301811853,
       "Score_Cho": 10.0,
       "Score_Vec": 3.1322783848959004,
-      "OppChoVec": 4.776564376374386
+      "OppChoVec": 4.9531271683801465
     },
     "Santa-Reparata-di-Moriani": {
-      "cluster": 1,
-      "Score_Opp": 5.481723106905604,
+      "cluster": 2,
+      "Score_Opp": 5.289832696279744,
       "Score_Cho": 9.418698098044468,
       "Score_Vec": 3.373190210166194,
-      "OppChoVec": 4.951829833053986
+      "OppChoVec": 4.89412815659311
     },
     "Coti-Chiavari": {
-      "cluster": 1,
-      "Score_Opp": 4.083161863829347,
+      "cluster": 2,
+      "Score_Opp": 6.7373287181644494,
       "Score_Cho": 9.346370211626038,
       "Score_Vec": 4.804051838728086,
-      "OppChoVec": 4.946121217015124
+      "OppChoVec": 6.144105983688805
     },
     "Figari": {
       "cluster": 3,
-      "Score_Opp": 3.801123674193451,
+      "Score_Opp": 6.108881531557837,
       "Score_Cho": 7.463166354138763,
       "Score_Vec": 2.6413960384799813,
-      "OppChoVec": 2.721642287728621
+      "OppChoVec": 3.5033373275374684
     },
     "Altiani": {
-      "cluster": 1,
-      "Score_Opp": 7.0036174541996346,
+      "cluster": 2,
+      "Score_Opp": 9.593299302157575,
       "Score_Cho": 10.0,
       "Score_Vec": 4.426971809580805,
-      "OppChoVec": 6.631555221865306
+      "OppChoVec": 7.919328941787649
     },
     "San-Gavino-di-Tenda": {
       "cluster": 3,
-      "Score_Opp": 2.8742486594118826,
+      "Score_Opp": 2.8244955157423766,
       "Score_Cho": 10.0,
       "Score_Vec": 2.7925512642815695,
-      "OppChoVec": 4.096104622741521
+      "OppChoVec": 4.197085046905433
     },
     "Santo-Pietro-di-Tenda": {
       "cluster": 3,
-      "Score_Opp": 2.586703249490075,
+      "Score_Opp": 1.5149284481795036,
       "Score_Cho": 9.927672113581568,
       "Score_Vec": 2.8579653602152275,
-      "OppChoVec": 3.9746170908048355
+      "OppChoVec": 3.7748190621944437
     },
     "Santo-Pietro-di-Venaco": {
-      "cluster": 3,
-      "Score_Opp": 4.45915654680956,
+      "cluster": 2,
+      "Score_Opp": 6.67078050814141,
       "Score_Cho": 7.974819180283953,
       "Score_Vec": 3.315879550879826,
-      "OppChoVec": 3.5239576767924308
+      "OppChoVec": 4.3593956493769435
     },
     "Santa-Maria-Poggio": {
-      "cluster": 1,
-      "Score_Opp": 5.695501243221326,
+      "cluster": 2,
+      "Score_Opp": 5.9699637274103425,
       "Score_Cho": 9.239217787302437,
       "Score_Vec": 2.9518278407565335,
-      "OppChoVec": 4.738998997854235
+      "OppChoVec": 4.83941017294798
     },
     "Granace": {
       "cluster": 3,
-      "Score_Opp": 2.3902564731781544,
+      "Score_Opp": 4.923334782965961,
       "Score_Cho": 10.0,
       "Score_Vec": 4.691464503716525,
-      "OppChoVec": 4.74273901717628
+      "OppChoVec": 5.8453074051002405
     },
     "Parata": {
       "cluster": 3,
-      "Score_Opp": 3.6505448407575907,
+      "Score_Opp": 2.1145848842257955,
       "Score_Cho": 10.0,
       "Score_Vec": 3.174251896314018,
-      "OppChoVec": 4.532127316288118
+      "OppChoVec": 4.138247354270556
     },
     "Silvareccio": {
-      "cluster": 1,
-      "Score_Opp": 6.083681236629306,
+      "cluster": 2,
+      "Score_Opp": 7.07219353465145,
       "Score_Cho": 9.14010179480311,
       "Score_Vec": 3.502298799679251,
-      "OppChoVec": 5.081090323659514
+      "OppChoVec": 5.483270490796591
     },
     "Bastelicaccia": {
-      "cluster": 1,
-      "Score_Opp": 8.412428072827655,
+      "cluster": 2,
+      "Score_Opp": 7.421326790177441,
       "Score_Cho": 8.936512188588265,
       "Score_Vec": 9.502876577149946,
-      "OppChoVec": 9.53367483189963
+      "OppChoVec": 8.972682225718863
     },
     "Porto-Vecchio": {
-      "cluster": 2,
-      "Score_Opp": 5.278350045569907,
+      "cluster": 1,
+      "Score_Opp": 7.556559850984988,
       "Score_Cho": 0.6641784956028947,
       "Score_Vec": 3.5728927795598926,
-      "OppChoVec": 0.4711001147358783
+      "OppChoVec": 0.911676364906398
     },
     "Favalello": {
       "cluster": 3,
-      "Score_Opp": 1.4989138442427792,
+      "Score_Opp": 2.8921321669067024,
       "Score_Cho": 9.279399946423787,
       "Score_Vec": 3.120159684166527,
-      "OppChoVec": 3.3098211334861705
+      "OppChoVec": 3.8278106825509903
     },
     "Prunelli-di-Fiumorbo": {
       "cluster": 3,
-      "Score_Opp": 4.63813278404132,
+      "Score_Opp": 4.887782336727789,
       "Score_Cho": 7.514063755692472,
       "Score_Vec": 2.2303997134466265,
-      "OppChoVec": 2.9014495993321283
+      "OppChoVec": 2.935622784493483
     },
     "Ambiegna": {
       "cluster": 3,
-      "Score_Opp": 4.13119759650605,
+      "Score_Opp": 2.7725625161613694,
       "Score_Cho": 8.609697294401284,
       "Score_Vec": 3.839312107816824,
-      "OppChoVec": 4.025235660484644
+      "OppChoVec": 3.62604273291499
     },
     "Cauro": {
-      "cluster": 1,
-      "Score_Opp": 4.9413738914794525,
+      "cluster": 2,
+      "Score_Opp": 7.734667881551665,
       "Score_Cho": 9.507098848111438,
       "Score_Vec": 8.731079077907903,
-      "OppChoVec": 7.561611143218978
+      "OppChoVec": 9.122555256522151
     },
     "Letia": {
       "cluster": 3,
-      "Score_Opp": 3.3955798453701416,
+      "Score_Opp": 5.661417408363124,
       "Score_Cho": 8.97669434770962,
       "Score_Vec": 2.4668956019494948,
-      "OppChoVec": 3.4549664026952644
+      "OppChoVec": 4.311572382731381
     },
     "Santa-Lucia-di-Moriani": {
       "cluster": 3,
-      "Score_Opp": 5.379862591905328,
+      "Score_Opp": 5.694069384132643,
       "Score_Cho": 7.886418430216983,
       "Score_Vec": 2.3967808786972316,
-      "OppChoVec": 3.476705241357017
+      "OppChoVec": 3.5309445504024977
     },
     "Eccica-Suarella": {
-      "cluster": 1,
-      "Score_Opp": 4.744308630053454,
+      "cluster": 2,
+      "Score_Opp": 8.015220930938124,
       "Score_Cho": 9.13206536297884,
       "Score_Vec": 9.845153980097866,
-      "OppChoVec": 7.855736391062576
+      "OppChoVec": 9.707921364888222
     },
     "Soveria": {
       "cluster": 3,
-      "Score_Opp": 2.283860787548075,
+      "Score_Opp": 2.0784664033940303,
       "Score_Cho": 7.907848915081703,
       "Score_Vec": 3.5543805607206034,
-      "OppChoVec": 2.8404388417025634
+      "OppChoVec": 2.8338565146127532
     },
     "San-Damiano": {
       "cluster": 3,
-      "Score_Opp": 2.914521873218896,
+      "Score_Opp": 2.162173170397753,
       "Score_Cho": 9.75622823466381,
       "Score_Vec": 3.232265712389081,
-      "OppChoVec": 4.116063951624048
+      "OppChoVec": 3.996419790015504
     },
     "Crocicchia": {
-      "cluster": 1,
-      "Score_Opp": 5.612861661534354,
+      "cluster": 3,
+      "Score_Opp": 5.928669021255281,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 2.7936222151625474,
-      "OppChoVec": 4.418449955653567
+      "OppChoVec": 4.520588486489345
     },
     "Cargiaca": {
       "cluster": 3,
-      "Score_Opp": 1.9608499650104245,
+      "Score_Opp": 4.528421300222042,
       "Score_Cho": 6.868470399142781,
       "Score_Vec": 3.310111171347241,
-      "OppChoVec": 2.0681731022584477
+      "OppChoVec": 2.83245884554441
     },
     "Grossa": {
       "cluster": 3,
-      "Score_Opp": 3.093897776282772,
+      "Score_Opp": 5.631214753361132,
       "Score_Cho": 9.193678006964907,
       "Score_Vec": 1.5689638334424492,
-      "OppChoVec": 3.1696939377199698
+      "OppChoVec": 4.093671089325629
     },
     "Guargualé": {
       "cluster": 3,
-      "Score_Opp": 1.6219878923473234,
+      "Score_Opp": 3.4901056849265855,
       "Score_Cho": 8.588266809536568,
       "Score_Vec": 3.57107118065551,
-      "OppChoVec": 3.0755970387739455
+      "OppChoVec": 3.724744519084566
     },
     "Olmiccia": {
       "cluster": 3,
-      "Score_Opp": 1.965891761138938,
+      "Score_Opp": 4.069065071558788,
       "Score_Cho": 8.406107688186445,
       "Score_Vec": 3.2022018782249493,
-      "OppChoVec": 2.9180584457021554
+      "OppChoVec": 3.635405948384252
     },
     "Salice": {
-      "cluster": 1,
-      "Score_Opp": 4.009008253953915,
+      "cluster": 3,
+      "Score_Opp": 5.518888022136853,
       "Score_Cho": 9.035628181087601,
       "Score_Vec": 4.426737456198642,
-      "OppChoVec": 4.523633336434615
+      "OppChoVec": 5.188579636145948
     },
     "Ersa": {
       "cluster": 3,
-      "Score_Opp": 2.65482782641996,
+      "Score_Opp": 2.9903106107558175,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 2.1444257058841414,
-      "OppChoVec": 3.3986438501662253
+      "OppChoVec": 3.580602878536927
     },
     "Muracciole": {
-      "cluster": 2,
-      "Score_Opp": 1.9629982808037045,
+      "cluster": 1,
+      "Score_Opp": 3.709629158049675,
       "Score_Cho": 4.012858290918834,
       "Score_Vec": 4.604125286267971,
-      "OppChoVec": 1.1361402032936005
+      "OppChoVec": 1.5240453984359827
     },
     "Piano": {
-      "cluster": 1,
-      "Score_Opp": 4.711014635933512,
+      "cluster": 3,
+      "Score_Opp": 5.662854648616423,
       "Score_Cho": 10.0,
       "Score_Vec": 4.693716080851916,
-      "OppChoVec": 5.646804202719499
+      "OppChoVec": 6.1532470863469175
     },
     "Pino": {
       "cluster": 3,
-      "Score_Opp": 3.2098347040194093,
+      "Score_Opp": 3.1423559019202845,
       "Score_Cho": 9.584784355746049,
       "Score_Vec": 3.0784286806786727,
-      "OppChoVec": 4.037198776592158
+      "OppChoVec": 4.113347922816169
     },
     "Santa-Reparata-di-Balagna": {
-      "cluster": 1,
-      "Score_Opp": 6.204190239384497,
+      "cluster": 2,
+      "Score_Opp": 7.117864415194834,
       "Score_Cho": 8.794535226359496,
       "Score_Vec": 3.2974353387356703,
-      "OppChoVec": 4.801256647650122
+      "OppChoVec": 5.141418116256375
     },
     "Aullène": {
-      "cluster": 2,
-      "Score_Opp": 6.196228937348893,
+      "cluster": 1,
+      "Score_Opp": 3.5055486381399255,
       "Score_Cho": 5.4888829359764255,
       "Score_Vec": 0.8068786412882232,
-      "OppChoVec": 1.9122825474962566
+      "OppChoVec": 0.906743251220966
     },
     "Azilone-Ampaza": {
-      "cluster": 1,
-      "Score_Opp": 6.860202127859402,
+      "cluster": 2,
+      "Score_Opp": 5.814074920080898,
       "Score_Cho": 9.429413340476831,
       "Score_Vec": 2.6338522654021794,
-      "OppChoVec": 5.2932859512921695
+      "OppChoVec": 4.7813850775885385
     },
     "Santa-Maria-di-Lota": {
-      "cluster": 1,
-      "Score_Opp": 6.611401750498452,
+      "cluster": 2,
+      "Score_Opp": 8.608867430916444,
       "Score_Cho": 9.667827484596842,
       "Score_Vec": 5.704149513870712,
-      "OppChoVec": 6.811120110752801
+      "OppChoVec": 7.8199593675489885
     },
     "Petreto-Bicchisano": {
-      "cluster": 1,
-      "Score_Opp": 4.734962236271735,
+      "cluster": 2,
+      "Score_Opp": 6.812358805239551,
       "Score_Cho": 9.472274310206268,
       "Score_Vec": 3.576630799774401,
-      "OppChoVec": 4.755037463219097
+      "OppChoVec": 5.666202349272967
     },
     "Vero": {
-      "cluster": 1,
-      "Score_Opp": 3.8061708839773676,
+      "cluster": 2,
+      "Score_Opp": 6.170231895984214,
       "Score_Cho": 9.324939726761318,
       "Score_Vec": 5.258602569579392,
-      "OppChoVec": 5.033611885566031
+      "OppChoVec": 6.1138793335556665
     },
     "Bastia": {
-      "cluster": 2,
-      "Score_Opp": 7.511615547650489,
+      "cluster": 1,
+      "Score_Opp": 10.0,
       "Score_Cho": 0.0,
       "Score_Vec": 3.2503563518280334,
-      "OppChoVec": 0.904435619258232
+      "OppChoVec": 1.4225753615655534
     },
     "Érone": {
-      "cluster": 2,
-      "Score_Opp": 0.0,
+      "cluster": 1,
+      "Score_Opp": 1.8630840124987282,
       "Score_Cho": 2.346638092686849,
       "Score_Vec": 4.201707677408594,
-      "OppChoVec": 0.0
+      "OppChoVec": 0.20794002483061724
     },
     "Ville-di-Paraso": {
       "cluster": 3,
-      "Score_Opp": 3.6539487497386443,
+      "Score_Opp": 4.3233991458731955,
       "Score_Cho": 9.603536030002678,
       "Score_Vec": 3.717758097422876,
-      "OppChoVec": 4.478664999141974
+      "OppChoVec": 4.825339158341667
     },
     "Sartène": {
-      "cluster": 3,
-      "Score_Opp": 3.8658775047243306,
+      "cluster": 1,
+      "Score_Opp": 6.047921494296902,
       "Score_Cho": 7.594428073935173,
       "Score_Vec": 0.9144306028649919,
-      "OppChoVec": 2.242846745765045
+      "OppChoVec": 2.916639333578967
     },
     "Sant'Andréa-d'Orcino": {
       "cluster": 3,
-      "Score_Opp": 1.209269395202763,
+      "Score_Opp": 3.1324496020156594,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 5.062401780106633,
-      "OppChoVec": 4.180019795266258
+      "OppChoVec": 4.95585865585623
     },
     "Algajola": {
       "cluster": 3,
-      "Score_Opp": 3.0099768350288096,
+      "Score_Opp": 4.981638945900766,
       "Score_Cho": 8.398071256362176,
       "Score_Vec": 2.8347230629960873,
-      "OppChoVec": 3.093981072069675
+      "OppChoVec": 3.7971558558427216
     },
     "Azzana": {
-      "cluster": 1,
-      "Score_Opp": 5.673418842494184,
+      "cluster": 3,
+      "Score_Opp": 1.6116478620915287,
       "Score_Cho": 10.0,
       "Score_Vec": 4.822380789052009,
-      "OppChoVec": 6.152346064555026
+      "OppChoVec": 4.742808107130259
     },
     "Cargèse": {
       "cluster": 3,
-      "Score_Opp": 1.4262423811415492,
+      "Score_Opp": 3.6966583482495183,
       "Score_Cho": 8.135547816769357,
       "Score_Vec": 2.1829198869370483,
-      "OppChoVec": 2.2500817547306595
+      "OppChoVec": 2.925047111531822
     },
     "Serra-di-Scopamène": {
-      "cluster": 2,
-      "Score_Opp": 3.7672372782944095,
+      "cluster": 1,
+      "Score_Opp": 5.826836800383281,
       "Score_Cho": 4.682560942941337,
       "Score_Vec": 3.3452851192177127,
-      "OppChoVec": 1.500902950556299
+      "OppChoVec": 2.036282033204313
     },
     "Borgo": {
-      "cluster": 1,
-      "Score_Opp": 4.912349513384563,
+      "cluster": 2,
+      "Score_Opp": 6.862599416480118,
       "Score_Cho": 8.156978301634076,
       "Score_Vec": 5.944047178706338,
-      "OppChoVec": 4.988968697112852
+      "OppChoVec": 5.863720504654591
     },
     "Pero-Casevecchie": {
       "cluster": 3,
-      "Score_Opp": 4.185171033150984,
+      "Score_Opp": 3.931886659132084,
       "Score_Cho": 10.0,
       "Score_Vec": 2.602669576161121,
-      "OppChoVec": 4.50451388050861
+      "OppChoVec": 4.491342102933803
     },
     "Venzolasca": {
-      "cluster": 1,
-      "Score_Opp": 5.09278682143357,
+      "cluster": 3,
+      "Score_Opp": 5.11299086270597,
       "Score_Cho": 7.875703187784623,
       "Score_Vec": 4.391833456967953,
-      "OppChoVec": 4.1583296551863125
+      "OppChoVec": 4.164800204953993
     },
     "Vico": {
-      "cluster": 3,
-      "Score_Opp": 4.057477400913949,
+      "cluster": 2,
+      "Score_Opp": 5.858376126542465,
       "Score_Cho": 8.904366461291186,
       "Score_Vec": 3.7013678497041713,
-      "OppChoVec": 4.138151229923229
+      "OppChoVec": 4.88110462813807
     },
     "Casamaccioli": {
       "cluster": 3,
-      "Score_Opp": 2.5376855660934785,
+      "Score_Opp": 2.1426434151424925,
       "Score_Cho": 9.531208143584248,
       "Score_Vec": 3.524892402604798,
-      "OppChoVec": 3.953036102325771
+      "OppChoVec": 3.9521365850273398
     },
     "Corte": {
-      "cluster": 2,
-      "Score_Opp": 6.340088810209553,
+      "cluster": 1,
+      "Score_Opp": 8.649644527568249,
       "Score_Cho": 5.869274042325206,
       "Score_Vec": 0.19698021951009084,
-      "OppChoVec": 1.9822549280011716
+      "OppChoVec": 2.620546965337447
     },
     "Lumio": {
       "cluster": 3,
-      "Score_Opp": 4.536459262939686,
+      "Score_Opp": 5.651610159901259,
       "Score_Cho": 7.128315028127511,
       "Score_Vec": 4.486481173978431,
-      "OppChoVec": 3.5029149928959473
+      "OppChoVec": 3.901597540044431
     },
     "Urtaca": {
-      "cluster": 1,
-      "Score_Opp": 6.055505949504754,
+      "cluster": 2,
+      "Score_Opp": 7.989893115336535,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 4.51040716916821,
-      "OppChoVec": 5.232558767695684
+      "OppChoVec": 6.083420662477321
     },
     "Giuncheto": {
       "cluster": 3,
-      "Score_Opp": 1.4385359574753631,
+      "Score_Opp": 3.7344681080180924,
       "Score_Cho": 9.646396999732122,
       "Score_Vec": 3.9930846054032045,
-      "OppChoVec": 3.8899387274345965
+      "OppChoVec": 4.7725896181085234
     },
     "Olmo": {
-      "cluster": 2,
-      "Score_Opp": 3.8527275141764834,
+      "cluster": 1,
+      "Score_Opp": 3.338910359248316,
       "Score_Cho": 4.412001071524244,
       "Score_Vec": 3.4953923280033923,
-      "OppChoVec": 1.4529549327867706
+      "OppChoVec": 1.2055197433821243
     },
     "Palasca": {
       "cluster": 3,
-      "Score_Opp": 0.644971958760081,
+      "Score_Opp": 1.598367849518808,
       "Score_Cho": 7.248861505491563,
       "Score_Vec": 1.9715408257271003,
-      "OppChoVec": 1.5182358836741239
+      "OppChoVec": 1.7196812967822337
     },
     "Piedigriggio": {
       "cluster": 3,
-      "Score_Opp": 2.4212501300336156,
+      "Score_Opp": 2.6421915094151887,
       "Score_Cho": 8.971336726493437,
       "Score_Vec": 4.243549951856436,
-      "OppChoVec": 3.8346899018961516
+      "OppChoVec": 4.020123891601141
     },
     "Coggia": {
-      "cluster": 3,
-      "Score_Opp": 3.829994798474885,
+      "cluster": 2,
+      "Score_Opp": 7.163446570151436,
       "Score_Cho": 8.615054915617465,
       "Score_Vec": 4.145107843841794,
-      "OppChoVec": 4.044164390034171
+      "OppChoVec": 5.425846408612163
     },
     "Forciolo": {
-      "cluster": 1,
-      "Score_Opp": 3.4223731950243397,
+      "cluster": 2,
+      "Score_Opp": 6.511389164738668,
       "Score_Cho": 9.97053308331101,
       "Score_Vec": 4.749958536851767,
-      "OppChoVec": 5.1206581386145125
+      "OppChoVec": 6.530707627072887
     },
     "Loreto-di-Tallano": {
-      "cluster": 1,
-      "Score_Opp": 4.128434199844336,
+      "cluster": 3,
+      "Score_Opp": 5.013478050831802,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 4.42100402367634,
-      "OppChoVec": 4.891548927423192
+      "OppChoVec": 5.335378163436304
     },
     "Cambia": {
       "cluster": 3,
-      "Score_Opp": 4.052855563496878,
+      "Score_Opp": 6.3176088318574575,
       "Score_Cho": 7.650683096705064,
       "Score_Vec": 4.105526830535831,
-      "OppChoVec": 3.4864215664068103
+      "OppChoVec": 4.343857336666716
     },
     "Arbellara": {
       "cluster": 3,
-      "Score_Opp": 6.254609746385259,
+      "Score_Opp": 4.062242363523657,
       "Score_Cho": 8.290918832038578,
       "Score_Vec": 2.6989217709712072,
-      "OppChoVec": 4.2304085815088355
+      "OppChoVec": 3.3479305118956
     },
     "Bocognano": {
-      "cluster": 1,
-      "Score_Opp": 7.14387215934271,
+      "cluster": 3,
+      "Score_Opp": 4.825300350044432,
       "Score_Cho": 9.515135279935707,
       "Score_Vec": 4.173985893193802,
-      "OppChoVec": 6.198530722961168
+      "OppChoVec": 5.162455494453263
     },
     "Renno": {
-      "cluster": 1,
-      "Score_Opp": 5.466428322750367,
+      "cluster": 2,
+      "Score_Opp": 7.231197945227472,
       "Score_Cho": 9.914278060541124,
       "Score_Vec": 4.295972657299137,
-      "OppChoVec": 5.733293648879707
+      "OppChoVec": 6.57776974610522
     },
     "Campile": {
       "cluster": 3,
-      "Score_Opp": 3.2061454748094924,
+      "Score_Opp": 4.427717557918184,
       "Score_Cho": 8.652558264130725,
       "Score_Vec": 3.447488691839174,
-      "OppChoVec": 3.557851909852366
+      "OppChoVec": 4.037988623596005
     },
     "Gavignano": {
-      "cluster": 3,
-      "Score_Opp": 3.850198182801562,
+      "cluster": 2,
+      "Score_Opp": 6.109454884741932,
       "Score_Cho": 8.502544870077685,
       "Score_Vec": 3.641576860911264,
-      "OppChoVec": 3.7668734233864942
+      "OppChoVec": 4.656836718952284
     },
     "Casaglione": {
       "cluster": 3,
-      "Score_Opp": 3.437812106287668,
+      "Score_Opp": 5.415745610588278,
       "Score_Cho": 7.897133672649347,
       "Score_Vec": 3.3179536478785088,
-      "OppChoVec": 3.109144301130626
+      "OppChoVec": 3.815437244400135
     },
     "Bigorno": {
       "cluster": 3,
-      "Score_Opp": 3.522181216155401,
+      "Score_Opp": 4.135726534334314,
       "Score_Cho": 10.0,
       "Score_Vec": 2.7427944374300086,
-      "OppChoVec": 4.307091348297611
+      "OppChoVec": 4.624734782407344
     },
     "Carcheto-Brustico": {
       "cluster": 3,
-      "Score_Opp": 2.157885243696435,
+      "Score_Opp": 3.248084194847844,
       "Score_Cho": 9.482989552638628,
       "Score_Vec": 3.8423065059877364,
-      "OppChoVec": 3.9295596913607906
+      "OppChoVec": 4.410764617963542
     },
     "Castirla": {
-      "cluster": 1,
-      "Score_Opp": 5.872875548373778,
+      "cluster": 2,
+      "Score_Opp": 6.6475636163909755,
       "Score_Cho": 9.611572461826949,
       "Score_Vec": 2.7456060642099773,
-      "OppChoVec": 5.002943946424966
+      "OppChoVec": 5.318972052979836
     },
     "Scolca": {
-      "cluster": 1,
-      "Score_Opp": 5.282440563125467,
+      "cluster": 2,
+      "Score_Opp": 5.82995253574688,
       "Score_Cho": 9.424055719260648,
       "Score_Vec": 3.186778482518032,
-      "OppChoVec": 4.7877601313443465
+      "OppChoVec": 5.029583844262051
     },
     "Tallone": {
       "cluster": 3,
-      "Score_Opp": 2.618829023160936,
+      "Score_Opp": 2.3809727715422877,
       "Score_Cho": 7.803375301366192,
       "Score_Vec": 3.664460779772841,
-      "OppChoVec": 2.9206111906951984
+      "OppChoVec": 2.8973884943240824
     },
     "Bilia": {
-      "cluster": 1,
-      "Score_Opp": 7.5195096560845816,
+      "cluster": 2,
+      "Score_Opp": 7.1213465983398985,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 2.6294389527520283,
-      "OppChoVec": 5.361884707155732
+      "OppChoVec": 5.054276526423412
     },
     "Marignana": {
       "cluster": 3,
-      "Score_Opp": 2.5133739632867282,
+      "Score_Opp": 4.051447077693608,
       "Score_Cho": 9.367800696490757,
       "Score_Vec": 3.324428033802122,
-      "OppChoVec": 3.7523128759645314
+      "OppChoVec": 4.3706274127036
     },
     "Piana": {
       "cluster": 3,
-      "Score_Opp": 4.541943433451684,
+      "Score_Opp": 5.752712369656653,
       "Score_Cho": 7.088132869006161,
       "Score_Vec": 2.3922295534180154,
-      "OppChoVec": 2.6748701062359896
+      "OppChoVec": 3.03176666753368
     },
     "Rospigliani": {
       "cluster": 3,
-      "Score_Opp": 3.2860789832300474,
+      "Score_Opp": 3.603125132343879,
       "Score_Cho": 6.777390838467721,
       "Score_Vec": 2.955304670799606,
-      "OppChoVec": 2.2768698091268678
+      "OppChoVec": 2.34622167292976
     },
     "Talasani": {
-      "cluster": 1,
-      "Score_Opp": 6.344450439168528,
+      "cluster": 2,
+      "Score_Opp": 7.0139464718380555,
       "Score_Cho": 8.607018483793196,
       "Score_Vec": 4.243179954589268,
-      "OppChoVec": 5.152159311530463
+      "OppChoVec": 5.401509797535117
     },
     "Valle-di-Campoloro": {
-      "cluster": 1,
-      "Score_Opp": 4.519762913315034,
+      "cluster": 3,
+      "Score_Opp": 5.443957468346148,
       "Score_Cho": 8.695419233860166,
       "Score_Vec": 4.657156592080836,
-      "OppChoVec": 4.593776883817286
+      "OppChoVec": 5.012442460521321
     },
     "Rezza": {
       "cluster": 3,
-      "Score_Opp": 3.5155958099296076,
+      "Score_Opp": 5.084016048041725,
       "Score_Cho": 9.74015537101527,
       "Score_Vec": 3.1871229755639154,
-      "OppChoVec": 4.300867621284939
+      "OppChoVec": 4.97725948623993
     },
     "Poggio-Marinaccio": {
       "cluster": 3,
-      "Score_Opp": 3.195558714256653,
+      "Score_Opp": 3.4070860829816323,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 2.256177146208154,
-      "OppChoVec": 3.4519517925331455
+      "OppChoVec": 3.5796143514329932
     },
     "Lecci": {
       "cluster": 3,
-      "Score_Opp": 2.9811764359422743,
+      "Score_Opp": 5.928569143933142,
       "Score_Cho": 7.623894990624162,
       "Score_Vec": 4.950871241079605,
-      "OppChoVec": 3.4481565847713287
+      "OppChoVec": 4.567688363882514
     },
     "Viggianello": {
-      "cluster": 1,
-      "Score_Opp": 4.739015156024887,
+      "cluster": 2,
+      "Score_Opp": 7.11648641419373,
       "Score_Cho": 8.93115456737209,
       "Score_Vec": 4.7165301326196625,
-      "OppChoVec": 4.877885510274129
+      "OppChoVec": 5.936780582214345
     },
     "San-Gavino-d'Ampugnani": {
-      "cluster": 1,
-      "Score_Opp": 5.719953890899546,
+      "cluster": 2,
+      "Score_Opp": 5.704502714347427,
       "Score_Cho": 9.311545673720872,
       "Score_Vec": 3.256126169044929,
-      "OppChoVec": 4.930913754700783
+      "OppChoVec": 4.923794687816528
     },
     "San-Lorenzo": {
       "cluster": 3,
-      "Score_Opp": 2.8874279281905273,
+      "Score_Opp": 3.7022844977479186,
       "Score_Cho": 9.517814090543798,
       "Score_Vec": 3.8053972134880274,
-      "OppChoVec": 4.178336705048386
+      "OppChoVec": 4.576368435598173
     },
     "Valle-d'Orezza": {
       "cluster": 3,
-      "Score_Opp": 3.268055262053586,
+      "Score_Opp": 2.438009376869401,
       "Score_Cho": 10.0,
       "Score_Vec": 3.4505323536001824,
-      "OppChoVec": 4.505915087138658
+      "OppChoVec": 4.359694472265313
     },
     "Zoza": {
-      "cluster": 3,
-      "Score_Opp": 3.3089765007836274,
+      "cluster": 2,
+      "Score_Opp": 5.788303420972078,
       "Score_Cho": 10.0,
       "Score_Vec": 3.900828564291958,
-      "OppChoVec": 4.715058611411682
+      "OppChoVec": 5.807184073162057
     },
     "Lano": {
-      "cluster": 1,
-      "Score_Opp": 3.5165510455419016,
+      "cluster": 3,
+      "Score_Opp": 3.233062265398443,
       "Score_Cho": 9.6517546209483,
       "Score_Vec": 4.45902680617694,
-      "OppChoVec": 4.78785010056986
+      "OppChoVec": 4.8218999598440755
     },
     "Mazzola": {
       "cluster": 3,
-      "Score_Opp": 3.7958756658931474,
+      "Score_Opp": 4.573135270823034,
       "Score_Cho": 7.564961157246183,
       "Score_Vec": 4.175027616604267,
-      "OppChoVec": 3.3687510932665825
+      "OppChoVec": 3.6589939366639888
     },
     "Scata": {
       "cluster": 3,
-      "Score_Opp": 3.132173209892384,
+      "Score_Opp": 3.1280589415635314,
       "Score_Cho": 10.0,
       "Score_Vec": 3.3741800687739265,
-      "OppChoVec": 4.424510510382381
+      "OppChoVec": 4.550924739437991
     },
     "Grosseto-Prugna": {
-      "cluster": 1,
-      "Score_Opp": 4.359847686800967,
+      "cluster": 2,
+      "Score_Opp": 7.250038319601711,
       "Score_Cho": 8.917760514331636,
       "Score_Vec": 5.128081653672375,
-      "OppChoVec": 4.901736328218818
+      "OppChoVec": 6.201491090627825
     },
     "Ucciani": {
       "cluster": 3,
-      "Score_Opp": 1.398588946244541,
+      "Score_Opp": 2.9263475663080407,
       "Score_Cho": 9.373158317706938,
       "Score_Vec": 3.7032075748550004,
-      "OppChoVec": 3.5741912265184403
+      "OppChoVec": 4.160226648383668
     },
     "Campi": {
-      "cluster": 1,
-      "Score_Opp": 3.4751744861571727,
+      "cluster": 3,
+      "Score_Opp": 5.197296860838637,
       "Score_Cho": 10.0,
       "Score_Vec": 5.0846055314871395,
-      "OppChoVec": 5.321685377903456
+      "OppChoVec": 6.161296056730526
     },
     "Monacia-d'Orezza": {
       "cluster": 3,
-      "Score_Opp": 2.0468056620811916,
+      "Score_Opp": 3.7367286141241065,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 2.595638111203228,
-      "OppChoVec": 3.04220063604497
+      "OppChoVec": 3.6358455292348326
     },
     "Pianello": {
       "cluster": 3,
-      "Score_Opp": 4.571332541817893,
+      "Score_Opp": 4.881523345115811,
       "Score_Cho": 9.72676131797482,
       "Score_Vec": 2.2615962408418087,
-      "OppChoVec": 4.327681378559007
+      "OppChoVec": 4.4859138984919715
     },
     "Argiusta-Moriccio": {
-      "cluster": 1,
-      "Score_Opp": 5.7628176444134525,
+      "cluster": 3,
+      "Score_Opp": 3.322623188022191,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7651136862107952,
-      "OppChoVec": 5.691353647846185
+      "OppChoVec": 4.795273664195764
     },
     "Bonifacio": {
       "cluster": 3,
-      "Score_Opp": 7.170602734809419,
+      "Score_Opp": 4.755540374038284,
       "Score_Cho": 7.168497187248865,
       "Score_Vec": 2.4481082885132697,
-      "OppChoVec": 3.823301986120504
+      "OppChoVec": 2.756818983567246
     },
     "San-Gavino-di-Carbini": {
       "cluster": 3,
-      "Score_Opp": 3.356504921278711,
+      "Score_Opp": 5.339885632624264,
       "Score_Cho": 6.255022769890168,
       "Score_Vec": 4.517555578735715,
-      "OppChoVec": 2.5925511664878487
+      "OppChoVec": 3.2406658196941605
     },
     "Tolla": {
       "cluster": 3,
-      "Score_Opp": 2.4363708250610423,
+      "Score_Opp": 4.6882094919798085,
       "Score_Cho": 9.533886954192342,
       "Score_Vec": 3.9352991063191873,
-      "OppChoVec": 4.092896502730884
+      "OppChoVec": 5.010453345344611
     },
     "Centuri": {
       "cluster": 3,
-      "Score_Opp": 2.3730040522082154,
+      "Score_Opp": 3.0269437006006483,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 1.727825451315316,
-      "OppChoVec": 2.8891850466426883
+      "OppChoVec": 3.135520831996534
     },
     "Piazzole": {
-      "cluster": 1,
-      "Score_Opp": 4.005456584186933,
+      "cluster": 3,
+      "Score_Opp": 5.40584809946473,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 4.172723348986184,
-      "OppChoVec": 4.5228083939136985
+      "OppChoVec": 5.143716343101748
     },
     "Tasso": {
       "cluster": 3,
-      "Score_Opp": 3.9512359349673147,
+      "Score_Opp": 4.407568319846642,
       "Score_Cho": 9.847307795338873,
       "Score_Vec": 3.148660806671057,
-      "OppChoVec": 4.526662630147664
+      "OppChoVec": 4.7854825764757125
     },
     "Moïta": {
       "cluster": 3,
-      "Score_Opp": 4.710381871613204,
+      "Score_Opp": 4.42833352528332,
       "Score_Cho": 9.876774712027864,
       "Score_Vec": 0.4803429566471967,
-      "OppChoVec": 3.839145706463547
+      "OppChoVec": 3.743347613329458
     },
     "Stazzona": {
       "cluster": 3,
-      "Score_Opp": 2.6246043269573875,
+      "Score_Opp": 3.464100603007867,
       "Score_Cho": 6.927404232520761,
       "Score_Vec": 4.254058002049806,
-      "OppChoVec": 2.6377049279693128
+      "OppChoVec": 2.91501451125519
     },
     "Cannelle": {
-      "cluster": 1,
-      "Score_Opp": 5.413953385293584,
+      "cluster": 3,
+      "Score_Opp": 4.7484795258144405,
       "Score_Cho": 9.501741226895259,
       "Score_Vec": 4.108178776884632,
-      "OppChoVec": 5.309553264699648
+      "OppChoVec": 5.090767409349704
     },
     "Olmeto": {
-      "cluster": 3,
-      "Score_Opp": 3.5738566517044235,
+      "cluster": 2,
+      "Score_Opp": 5.550715118101133,
       "Score_Cho": 8.757031877846236,
       "Score_Vec": 3.7265776223646756,
-      "OppChoVec": 3.8692381070150654
+      "OppChoVec": 4.659924620243928
     },
     "Cervione": {
       "cluster": 3,
-      "Score_Opp": 4.331890867992664,
+      "Score_Opp": 6.025882330051388,
       "Score_Cho": 9.003482453790516,
       "Score_Vec": 2.636678939856263,
-      "OppChoVec": 3.880089307897131
+      "OppChoVec": 4.547317439833838
     },
     "Giuncaggio": {
       "cluster": 3,
-      "Score_Opp": 3.4797117371103243,
+      "Score_Opp": 4.117644403141846,
       "Score_Cho": 8.687382802035895,
       "Score_Vec": 2.725189929548486,
-      "OppChoVec": 3.3938645208528917
+      "OppChoVec": 3.6487182886433605
     },
     "Nessa": {
       "cluster": 3,
-      "Score_Opp": 2.165959271372923,
+      "Score_Opp": 3.9951248564658757,
       "Score_Cho": 9.244575408518621,
       "Score_Vec": 3.5549361869531375,
-      "OppChoVec": 3.652750027650586
+      "OppChoVec": 4.361683635053721
     },
     "Novella": {
-      "cluster": 1,
-      "Score_Opp": 6.9330509220987455,
+      "cluster": 2,
+      "Score_Opp": 7.841836110336278,
       "Score_Cho": 9.209750870613448,
       "Score_Vec": 3.114444952703205,
-      "OppChoVec": 5.373460516784252
+      "OppChoVec": 5.7043370141817356
     },
     "Levie": {
       "cluster": 3,
-      "Score_Opp": 4.811411718702877,
+      "Score_Opp": 6.762443464816853,
       "Score_Cho": 8.593624430752746,
       "Score_Vec": 1.51174066490324,
-      "OppChoVec": 3.3795403653515055
+      "OppChoVec": 4.08518025797986
     },
     "Castiglione": {
       "cluster": 3,
-      "Score_Opp": 3.823661233568989,
+      "Score_Opp": 5.0794797210894425,
       "Score_Cho": 9.587463166354139,
       "Score_Vec": 1.677953780599723,
-      "OppChoVec": 3.722752862292835
+      "OppChoVec": 4.217344090608049
     },
     "Rogliano": {
       "cluster": 3,
-      "Score_Opp": 5.0388501700950705,
+      "Score_Opp": 5.87108350064328,
       "Score_Cho": 8.572193945888024,
       "Score_Vec": 2.0112452371891667,
-      "OppChoVec": 3.6351294474333558
+      "OppChoVec": 3.915531812860636
     },
     "Vignale": {
-      "cluster": 1,
-      "Score_Opp": 6.5743327818071755,
+      "cluster": 2,
+      "Score_Opp": 6.804655663420797,
       "Score_Cho": 9.608893651218862,
       "Score_Vec": 4.803539143874296,
-      "OppChoVec": 6.283245739384899
+      "OppChoVec": 6.389722364334189
     },
     "Partinello": {
       "cluster": 3,
-      "Score_Opp": 2.1376298327382006,
+      "Score_Opp": 3.301934245814036,
       "Score_Cho": 7.6587195285293355,
       "Score_Vec": 4.709003209741654,
-      "OppChoVec": 3.1037566838221538
+      "OppChoVec": 3.5321682645281802
     },
     "Ghisonaccia": {
-      "cluster": 2,
-      "Score_Opp": 2.5104929850479056,
+      "cluster": 1,
+      "Score_Opp": 2.5935130102310087,
       "Score_Cho": 4.781676935440664,
       "Score_Vec": 2.1306385902381915,
-      "OppChoVec": 0.8226464095495206
+      "OppChoVec": 0.7378895109900073
     },
     "Tox": {
-      "cluster": 1,
-      "Score_Opp": 6.703587606258468,
+      "cluster": 2,
+      "Score_Opp": 7.121382399658582,
       "Score_Cho": 9.582105545137958,
       "Score_Vec": 4.158154162548353,
-      "OppChoVec": 6.01476335379011
+      "OppChoVec": 6.18005507053759
     },
     "Volpajola": {
-      "cluster": 1,
-      "Score_Opp": 5.155545561041324,
+      "cluster": 2,
+      "Score_Opp": 5.577003290960314,
       "Score_Cho": 9.541923386016611,
       "Score_Vec": 3.1464257041407633,
-      "OppChoVec": 4.800593382688089
+      "OppChoVec": 5.000106168645074
     },
     "Zicavo": {
       "cluster": 3,
-      "Score_Opp": 3.924943436497175,
+      "Score_Opp": 4.480329464790739,
       "Score_Cho": 9.85534422716314,
       "Score_Vec": 2.3842762041465146,
-      "OppChoVec": 4.213061516655087
+      "OppChoVec": 4.4861360969860185
     },
     "Alando": {
       "cluster": 3,
-      "Score_Opp": 3.43472834866285,
+      "Score_Opp": 6.399726777909547,
       "Score_Cho": 10.0,
       "Score_Vec": 1.3032861221798955,
-      "OppChoVec": 3.730367777719609
+      "OppChoVec": 4.903868364864512
     },
     "Croce": {
       "cluster": 3,
-      "Score_Opp": 3.544152997228909,
+      "Score_Opp": 3.6373837751978866,
       "Score_Cho": 9.373158317706938,
       "Score_Vec": 3.758210849646848,
-      "OppChoVec": 4.292245392348889
+      "OppChoVec": 4.42355203590146
     },
     "Feliceto": {
       "cluster": 3,
-      "Score_Opp": 0.6033737548538952,
+      "Score_Opp": 1.4482742504455681,
       "Score_Cho": 9.070452718992767,
       "Score_Vec": 2.0339293278924373,
-      "OppChoVec": 2.559731739810505
+      "OppChoVec": 2.8319430599482267
     },
     "Vezzani": {
       "cluster": 3,
-      "Score_Opp": 4.815275062471787,
+      "Score_Opp": 4.559769199885941,
       "Score_Cho": 7.259576747923921,
       "Score_Vec": 1.990196144707459,
-      "OppChoVec": 2.733171029670954
+      "OppChoVec": 2.577843111112876
     },
     "Afa": {
-      "cluster": 1,
-      "Score_Opp": 8.151024620808922,
+      "cluster": 2,
+      "Score_Opp": 8.111773474442481,
       "Score_Cho": 9.268684703991427,
       "Score_Vec": 10.0,
       "OppChoVec": 10.0
     },
     "Cardo-Torgia": {
       "cluster": 3,
-      "Score_Opp": 1.1798516858293266,
+      "Score_Opp": 1.1909956151845738,
       "Score_Cho": 10.0,
       "Score_Vec": 5.478426874323315,
-      "OppChoVec": 4.729020511396034
+      "OppChoVec": 4.943312117637559
     },
     "Tavaco": {
       "cluster": 3,
-      "Score_Opp": 2.107417577017658,
+      "Score_Opp": 4.163780279743153,
       "Score_Cho": 9.619608893651218,
       "Score_Vec": 4.7913458524074874,
-      "OppChoVec": 4.420293651473611
+      "OppChoVec": 5.294342471206303
     },
     "Biguglia": {
-      "cluster": 1,
-      "Score_Opp": 5.561883629584323,
+      "cluster": 2,
+      "Score_Opp": 7.841625981341736,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 7.229780463426438,
-      "OppChoVec": 6.378588729433712
+      "OppChoVec": 7.5336092493466476
     },
     "Carticasi": {
       "cluster": 3,
-      "Score_Opp": 2.9226737500543,
+      "Score_Opp": 3.58069410938508,
       "Score_Cho": 10.0,
       "Score_Vec": 2.2810929051462954,
-      "OppChoVec": 3.913002304851425
+      "OppChoVec": 4.233905766070689
     },
     "Cateri": {
       "cluster": 3,
-      "Score_Opp": 0.24168938551159563,
+      "Score_Opp": 0.9562623781873809,
       "Score_Cho": 9.673185105813019,
       "Score_Vec": 3.620061306022779,
-      "OppChoVec": 3.451917886372952
+      "OppChoVec": 3.7598059038589255
     },
     "Giocatojo": {
       "cluster": 3,
-      "Score_Opp": 5.15921438865711,
+      "Score_Opp": 4.591526793260514,
       "Score_Cho": 8.955263862844896,
       "Score_Vec": 3.08000559804627,
-      "OppChoVec": 4.359036275146248
+      "OppChoVec": 4.154921365874879
     },
     "Morosaglia": {
       "cluster": 3,
-      "Score_Opp": 5.391353412789101,
+      "Score_Opp": 6.024797904377025,
       "Score_Cho": 8.751674256630055,
       "Score_Vec": 2.3435881308587456,
-      "OppChoVec": 4.024229478976776
+      "OppChoVec": 4.238719888311235
     },
     "Quasquara": {
       "cluster": 3,
-      "Score_Opp": 1.3847475519646804,
+      "Score_Opp": 3.187441088268144,
       "Score_Cho": 9.592820787570318,
       "Score_Vec": 3.844639115573015,
-      "OppChoVec": 3.776337218877057
+      "OppChoVec": 4.473902346394684
     },
     "Barbaggio": {
       "cluster": 3,
-      "Score_Opp": 1.2714953576683652,
+      "Score_Opp": 2.2990947649101177,
       "Score_Cho": 9.4910259844629,
       "Score_Vec": 4.011896041836555,
-      "OppChoVec": 3.7450480897384706
+      "OppChoVec": 4.1868747131390895
     },
     "Popolasca": {
       "cluster": 3,
-      "Score_Opp": 3.476652433105236,
+      "Score_Opp": 1.3268346216485147,
       "Score_Cho": 10.0,
       "Score_Vec": 3.9833720810825213,
-      "OppChoVec": 4.814377067767406
+      "OppChoVec": 4.265064573087656
     },
     "Orto": {
-      "cluster": 1,
-      "Score_Opp": 3.620199852320893,
+      "cluster": 3,
+      "Score_Opp": 4.907970324754614,
       "Score_Cho": 10.0,
       "Score_Vec": 5.427749717074059,
-      "OppChoVec": 5.545734167185731
+      "OppChoVec": 6.224214152356703
     },
     "Pianottoli-Caldarello": {
       "cluster": 3,
-      "Score_Opp": 1.3642688025894683,
+      "Score_Opp": 3.4159771176625577,
       "Score_Cho": 9.389231181355477,
       "Score_Vec": 3.2648988182766363,
-      "OppChoVec": 3.401234564224148
+      "OppChoVec": 4.140852290954976
     },
     "Urbalacone": {
-      "cluster": 1,
-      "Score_Opp": 6.216465683453876,
+      "cluster": 2,
+      "Score_Opp": 7.345803762175405,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7337273855702446,
-      "OppChoVec": 5.895897019443668
+      "OppChoVec": 6.41789115690345
     },
     "Canari": {
       "cluster": 3,
-      "Score_Opp": 4.576000130507993,
+      "Score_Opp": 5.330681175401274,
       "Score_Cho": 9.10259844628985,
       "Score_Vec": 0.7896970313271211,
-      "OppChoVec": 3.37093264756607
+      "OppChoVec": 3.6223333832984905
     },
     "Tralonca": {
       "cluster": 3,
-      "Score_Opp": 2.5856480837356246,
+      "Score_Opp": 2.634298312068817,
       "Score_Cho": 9.34101259040986,
       "Score_Vec": 2.678613459178107,
-      "OppChoVec": 3.505065528786374
+      "OppChoVec": 3.6078515349720015
     },
     "Vescovato": {
-      "cluster": 1,
-      "Score_Opp": 6.323576245318524,
+      "cluster": 2,
+      "Score_Opp": 6.840453791887269,
       "Score_Cho": 7.709616930083042,
       "Score_Vec": 4.3151271410920025,
-      "OppChoVec": 4.554060156246839
+      "OppChoVec": 4.698415379494149
     },
     "Lopigna": {
-      "cluster": 1,
-      "Score_Opp": 3.197743549837077,
+      "cluster": 3,
+      "Score_Opp": 3.7889409721825684,
       "Score_Cho": 9.71604607554246,
       "Score_Vec": 4.903106419397352,
-      "OppChoVec": 4.918753879227064
+      "OppChoVec": 5.287298092643028
     },
     "Matra": {
-      "cluster": 1,
-      "Score_Opp": 3.785043222444088,
+      "cluster": 3,
+      "Score_Opp": 4.366398276851838,
       "Score_Cho": 9.713367264934373,
       "Score_Vec": 4.012077695621036,
-      "OppChoVec": 4.735928208587069
+      "OppChoVec": 5.064444114237817
     },
     "Penta-Acquatella": {
       "cluster": 3,
-      "Score_Opp": 2.534306968328103,
+      "Score_Opp": 3.4712061295026424,
       "Score_Cho": 10.0,
       "Score_Vec": 4.028290163735701,
-      "OppChoVec": 4.495657575273423
+      "OppChoVec": 4.970354724511234
     },
     "Pietralba": {
-      "cluster": 1,
-      "Score_Opp": 5.910954185762741,
+      "cluster": 2,
+      "Score_Opp": 6.498229291111209,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 4.225321732183447,
-      "OppChoVec": 5.610852928516631
+      "OppChoVec": 5.886092935481312
     },
     "Prunelli-di-Casacconi": {
       "cluster": 3,
-      "Score_Opp": 2.5755790332319424,
+      "Score_Opp": 2.8755215276093873,
       "Score_Cho": 9.399946423787842,
       "Score_Vec": 3.0939163510884793,
-      "OppChoVec": 3.7023338667949424
+      "OppChoVec": 3.8983855286004774
     },
     "Ventiseri": {
-      "cluster": 1,
-      "Score_Opp": 4.612987282702213,
+      "cluster": 3,
+      "Score_Opp": 5.229150846274752,
       "Score_Cho": 9.268684703991427,
       "Score_Vec": 4.091934950757199,
-      "OppChoVec": 4.783647796701848
+      "OppChoVec": 5.090372319273442
     },
     "Arro": {
-      "cluster": 1,
-      "Score_Opp": 6.870903952642474,
+      "cluster": 3,
+      "Score_Opp": 4.311645964664881,
       "Score_Cho": 9.801768015001343,
       "Score_Vec": 3.9268584373384217,
-      "OppChoVec": 6.1619137512515145
+      "OppChoVec": 5.072649494589049
     },
     "Carbuccia": {
       "cluster": 3,
-      "Score_Opp": 3.2415698505932844,
+      "Score_Opp": 5.0346375098124945,
       "Score_Cho": 9.212429681221538,
       "Score_Vec": 3.9914206858697,
-      "OppChoVec": 4.169808235015013
+      "OppChoVec": 4.923344181613026
     },
     "Sari-Solenzara": {
       "cluster": 3,
-      "Score_Opp": 4.065870252452134,
+      "Score_Opp": 6.378396615303224,
       "Score_Cho": 8.628448968657915,
       "Score_Vec": 1.1207664581289947,
-      "OppChoVec": 2.9915019055731396
+      "OppChoVec": 3.8074118101978245
     },
     "Ajaccio": {
-      "cluster": 2,
-      "Score_Opp": 10.0,
+      "cluster": 1,
+      "Score_Opp": 9.97347561583261,
       "Score_Cho": 1.265508925067117,
       "Score_Vec": 4.808445320602226,
-      "OppChoVec": 3.004529059105458
+      "OppChoVec": 2.524808911297458
     },
     "Mela": {
-      "cluster": 1,
-      "Score_Opp": 3.4976525289415665,
+      "cluster": 3,
+      "Score_Opp": 4.449887473890534,
       "Score_Cho": 9.276721135815698,
       "Score_Vec": 5.023626346510939,
-      "OppChoVec": 4.768864888260748
+      "OppChoVec": 5.250729940160408
     },
     "Calenzana": {
-      "cluster": 3,
-      "Score_Opp": 4.577671256060972,
+      "cluster": 2,
+      "Score_Opp": 6.56602802010182,
       "Score_Cho": 8.197160460755423,
       "Score_Vec": 3.312313387736579,
-      "OppChoVec": 3.710302664462724
+      "OppChoVec": 4.473271042591195
     },
     "Manso": {
       "cluster": 3,
-      "Score_Opp": 3.071337377689487,
+      "Score_Opp": 3.7424937266329286,
       "Score_Cho": 9.95446021966247,
       "Score_Vec": 4.024501345800688,
-      "OppChoVec": 4.649034675359902
+      "OppChoVec": 5.029547855461399
     },
     "Montegrosso": {
       "cluster": 3,
-      "Score_Opp": 3.007688996945137,
+      "Score_Opp": 4.3065255817235375,
       "Score_Cho": 8.90972408250737,
       "Score_Vec": 4.387033434847134,
-      "OppChoVec": 4.050240345733858
+      "OppChoVec": 4.608027210536032
     },
     "Nonza": {
-      "cluster": 1,
-      "Score_Opp": 5.981090290154542,
+      "cluster": 2,
+      "Score_Opp": 8.296201755354517,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 3.2083085356533076,
-      "OppChoVec": 5.130088433006129
+      "OppChoVec": 6.155244726992218
     },
     "Vallica": {
       "cluster": 3,
-      "Score_Opp": 4.35176026832424,
+      "Score_Opp": 5.695207141290472,
       "Score_Cho": 7.894454862041252,
       "Score_Vec": 2.3825611306715104,
-      "OppChoVec": 3.080226928045247
+      "OppChoVec": 3.5310884295281237
     },
     "Velone-Orneto": {
-      "cluster": 1,
-      "Score_Opp": 5.61072147317361,
+      "cluster": 3,
+      "Score_Opp": 5.248196471773266,
       "Score_Cho": 9.94910259844629,
       "Score_Vec": 4.57075347810365,
-      "OppChoVec": 5.959448096922535
+      "OppChoVec": 5.874576606791894
     },
     "San-Gavino-di-Fiumorbo": {
       "cluster": 3,
-      "Score_Opp": 3.3638269320687315,
+      "Score_Opp": 2.350351937202389,
       "Score_Cho": 9.83659255290651,
       "Score_Vec": 2.8338209040211026,
-      "OppChoVec": 4.1698150979325685
+      "OppChoVec": 3.9436339771927775
     },
     "Conca": {
       "cluster": 3,
-      "Score_Opp": 3.0930131300774417,
+      "Score_Opp": 5.237936468933286,
       "Score_Cho": 7.023841414412001,
       "Score_Vec": 2.526363027236158,
-      "OppChoVec": 2.2040862369242293
+      "OppChoVec": 2.861332703478064
     },
     "Verdèse": {
       "cluster": 3,
-      "Score_Opp": 4.821188519845308,
+      "Score_Opp": 6.880069541272822,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 1.7516457354921158,
-      "OppChoVec": 4.291877323471288
+      "OppChoVec": 5.142872251338164
     },
     "Monacia-d'Aullène": {
       "cluster": 3,
-      "Score_Opp": 1.8079069278089308,
+      "Score_Opp": 3.83750585594972,
       "Score_Cho": 9.263327082775248,
       "Score_Vec": 2.9804306658262796,
-      "OppChoVec": 3.3327002749563714
+      "OppChoVec": 4.069589034864432
     },
     "Pruno": {
       "cluster": 3,
-      "Score_Opp": 3.665713739857162,
+      "Score_Opp": 4.02724827465455,
       "Score_Cho": 9.223144923653898,
       "Score_Vec": 1.0957592049814,
-      "OppChoVec": 3.2204748408447803
+      "OppChoVec": 3.361482308245343
     },
     "Solaro": {
-      "cluster": 1,
-      "Score_Opp": 5.559882403149739,
+      "cluster": 2,
+      "Score_Opp": 6.808470128362209,
       "Score_Cho": 9.930350924189659,
       "Score_Vec": 4.407684865592142,
-      "OppChoVec": 5.842478601107901
+      "OppChoVec": 6.45329223205624
     },
     "Taglio-Isolaccio": {
-      "cluster": 1,
-      "Score_Opp": 3.8734139419722293,
+      "cluster": 3,
+      "Score_Opp": 4.347410023932861,
       "Score_Cho": 8.987409590141977,
       "Score_Vec": 4.29022537280569,
-      "OppChoVec": 4.3772573290565315
+      "OppChoVec": 4.635090774621012
     },
     "Zuani": {
       "cluster": 3,
-      "Score_Opp": 4.147158518682575,
+      "Score_Opp": 5.132584292973909,
       "Score_Cho": 8.288240021430484,
       "Score_Vec": 3.1434923127102,
-      "OppChoVec": 3.5384644888631307
+      "OppChoVec": 3.905931199503513
     },
     "Casanova": {
       "cluster": 3,
-      "Score_Opp": 1.918478092748685,
+      "Score_Opp": 4.08780405999794,
       "Score_Cho": 9.584784355746049,
       "Score_Vec": 4.410035063291544,
-      "OppChoVec": 4.167518584394314
+      "OppChoVec": 5.051388135726591
     },
     "Poggio-d'Oletta": {
-      "cluster": 1,
-      "Score_Opp": 3.2113155006219167,
+      "cluster": 3,
+      "Score_Opp": 5.082023832360204,
       "Score_Cho": 9.359764264666488,
       "Score_Vec": 6.746557921455601,
-      "OppChoVec": 5.568445547227693
+      "OppChoVec": 6.496915584269796
     },
     "Zonza": {
       "cluster": 3,
-      "Score_Opp": 3.610490810594833,
+      "Score_Opp": 5.101885431926386,
       "Score_Cho": 7.621216180016075,
       "Score_Vec": 3.0544886258629926,
-      "OppChoVec": 2.9012686930174167
+      "OppChoVec": 3.405417341849632
     },
     "Erbajolo": {
-      "cluster": 1,
-      "Score_Opp": 5.295102357819385,
+      "cluster": 2,
+      "Score_Opp": 7.014208615786468,
       "Score_Cho": 9.56335387088133,
       "Score_Vec": 5.078895184570145,
-      "OppChoVec": 5.761786199771403
+      "OppChoVec": 6.5945186420607005
     },
     "Rapaggio": {
       "cluster": 3,
-      "Score_Opp": 2.7707110457058133,
+      "Score_Opp": 5.12829069267529,
       "Score_Cho": 9.48031074203054,
       "Score_Vec": 2.298310610468596,
-      "OppChoVec": 3.514299070334282
+      "OppChoVec": 4.408860845202049
     },
     "Rapale": {
       "cluster": 3,
-      "Score_Opp": 2.3915968609999156,
+      "Score_Opp": 3.5481919654707887,
       "Score_Cho": 8.015001339405307,
       "Score_Vec": 4.360725129190344,
-      "OppChoVec": 3.256460982871932
+      "OppChoVec": 3.695809542358613
     },
     "Serra-di-Fiumorbo": {
       "cluster": 3,
-      "Score_Opp": 2.41660096299728,
+      "Score_Opp": 2.6454879291991364,
       "Score_Cho": 9.247254219126708,
       "Score_Vec": 4.064501348279914,
-      "OppChoVec": 3.943951612008572
+      "OppChoVec": 4.140063906983677
     },
     "Arbori": {
-      "cluster": 1,
-      "Score_Opp": 4.317904202414213,
+      "cluster": 3,
+      "Score_Opp": 2.0462851981616206,
       "Score_Cho": 9.85266541655505,
       "Score_Vec": 4.008986039590433,
-      "OppChoVec": 5.050229453816285
+      "OppChoVec": 4.378143470337407
     },
     "Piedicroce": {
-      "cluster": 3,
-      "Score_Opp": 3.941087457207476,
+      "cluster": 2,
+      "Score_Opp": 5.764065441840595,
       "Score_Cho": 9.608893651218862,
       "Score_Vec": 3.442067387090967,
-      "OppChoVec": 4.47509142126023
+      "OppChoVec": 5.264159026947403
     },
     "Pila-Canale": {
       "cluster": 3,
-      "Score_Opp": 3.475939459928383,
+      "Score_Opp": 4.698184883802487,
       "Score_Cho": 7.342619876774712,
       "Score_Vec": 2.671907765497035,
-      "OppChoVec": 2.5545153713067483
+      "OppChoVec": 2.932478741185776
     },
     "Noceta": {
       "cluster": 3,
-      "Score_Opp": 2.916319279433414,
+      "Score_Opp": 4.384015721778967,
       "Score_Cho": 10.0,
       "Score_Vec": 3.811107657493646,
-      "OppChoVec": 4.533668092731842
+      "OppChoVec": 5.201480033662914
     },
     "Cozzano": {
       "cluster": 3,
-      "Score_Opp": 1.4598986883054563,
+      "Score_Opp": 2.5137203545331497,
       "Score_Cho": 9.26600589338334,
       "Score_Vec": 2.8028382860108043,
-      "OppChoVec": 3.1699596447063354
+      "OppChoVec": 3.5686435178278515
     },
     "Cuttoli-Corticchiato": {
-      "cluster": 1,
-      "Score_Opp": 4.808559117647398,
+      "cluster": 2,
+      "Score_Opp": 7.049504727358399,
       "Score_Cho": 10.0,
       "Score_Vec": 5.667002437233601,
-      "OppChoVec": 6.173207133849935
+      "OppChoVec": 7.308337065181645
     },
     "Barrettali": {
-      "cluster": 3,
-      "Score_Opp": 3.697736627143722,
+      "cluster": 2,
+      "Score_Opp": 6.136585879758201,
       "Score_Cho": 9.568711492097508,
       "Score_Vec": 3.0029169382769605,
-      "OppChoVec": 4.172567101352104
+      "OppChoVec": 5.1849494176344635
     },
     "Monticello": {
-      "cluster": 1,
-      "Score_Opp": 5.855687432318391,
+      "cluster": 2,
+      "Score_Opp": 7.623723304699088,
       "Score_Cho": 8.874899544602195,
       "Score_Vec": 3.54885252709241,
-      "OppChoVec": 4.806107356504085
+      "OppChoVec": 5.54625329720846
     },
     "Ota": {
       "cluster": 3,
-      "Score_Opp": 2.3334386717709417,
+      "Score_Opp": 3.259707969183472,
       "Score_Cho": 7.894454862041252,
       "Score_Vec": 0.17935397450034174,
-      "OppChoVec": 1.736340471052922
+      "OppChoVec": 1.9585160362715006
     },
     "Pastricciola": {
       "cluster": 3,
-      "Score_Opp": 1.9238479095584302,
+      "Score_Opp": 2.3498197276272927,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 3.3480887790600518,
-      "OppChoVec": 3.351431894956531
+      "OppChoVec": 3.5743176727263353
     },
     "Sari-d'Orcino": {
-      "cluster": 3,
-      "Score_Opp": 3.564768153768804,
+      "cluster": 2,
+      "Score_Opp": 5.927929524729408,
       "Score_Cho": 9.255290650950979,
       "Score_Vec": 3.14803945684461,
-      "OppChoVec": 3.9658711017482413
+      "OppChoVec": 4.92237631934347
     },
     "Aléria": {
       "cluster": 3,
-      "Score_Opp": 2.0072097421129405,
+      "Score_Opp": 3.3679156446542198,
       "Score_Cho": 6.571122421644791,
       "Score_Vec": 1.5858021201673322,
-      "OppChoVec": 1.3673583844584993
+      "OppChoVec": 1.6745347136467592
     },
     "Antisanti": {
-      "cluster": 2,
-      "Score_Opp": 3.3282465972926567,
+      "cluster": 1,
+      "Score_Opp": 4.983290075794219,
       "Score_Cho": 4.939726761317974,
       "Score_Vec": 3.0255379252152426,
-      "OppChoVec": 1.3852299417619942
+      "OppChoVec": 1.778234056813219
     },
     "Isolaccio-di-Fiumorbo": {
       "cluster": 3,
-      "Score_Opp": 5.677492255268431,
+      "Score_Opp": 6.009276035030448,
       "Score_Cho": 9.081167961425127,
       "Score_Vec": 1.5033561250543523,
-      "OppChoVec": 4.052354917732978
+      "OppChoVec": 4.132578734369923
     },
     "Canale-di-Verde": {
       "cluster": 3,
-      "Score_Opp": 3.510000432379956,
+      "Score_Opp": 4.0428476899120085,
       "Score_Cho": 8.430216983659255,
       "Score_Vec": 3.562106034905785,
-      "OppChoVec": 3.5651516582206355
+      "OppChoVec": 3.796647849447173
     },
     "Furiani": {
-      "cluster": 1,
-      "Score_Opp": 5.6464108221379385,
+      "cluster": 2,
+      "Score_Opp": 7.861988538180177,
       "Score_Cho": 8.620412536833646,
       "Score_Vec": 7.294058618816438,
-      "OppChoVec": 6.365245552237779
+      "OppChoVec": 7.483926217445375
     },
     "Oletta": {
       "cluster": 3,
-      "Score_Opp": 3.717964344800097,
+      "Score_Opp": 4.9779148906719195,
       "Score_Cho": 8.75971068845433,
       "Score_Vec": 2.701489616099513,
-      "OppChoVec": 3.51561938402641
+      "OppChoVec": 3.9948273207114426
     },
     "Sorio": {
       "cluster": 3,
-      "Score_Opp": 1.6341677533016385,
+      "Score_Opp": 1.3354418651686824,
       "Score_Cho": 9.84998660594696,
       "Score_Vec": 3.519991031290388,
-      "OppChoVec": 3.8909082842583413
+      "OppChoVec": 3.94925350619701
     },
     "Carpineto": {
       "cluster": 3,
-      "Score_Opp": 2.7435809246954372,
+      "Score_Opp": 2.980859353049594,
       "Score_Cho": 9.587463166354139,
       "Score_Vec": 3.1092689050470175,
-      "OppChoVec": 3.891257258907082
+      "OppChoVec": 4.075825771668685
     },
     "Castellare-di-Mercurio": {
       "cluster": 3,
-      "Score_Opp": 1.6109440407513345,
+      "Score_Opp": 2.691763422512194,
       "Score_Cho": 10.0,
       "Score_Vec": 2.9344398279563038,
-      "OppChoVec": 3.753074868117652
+      "OppChoVec": 4.215005469543134
     },
     "Lucciana": {
       "cluster": 3,
-      "Score_Opp": 4.293289812669489,
+      "Score_Opp": 5.723996240847002,
       "Score_Cho": 7.859630324136086,
       "Score_Vec": 4.560745660506051,
-      "OppChoVec": 3.9009450957192353
+      "OppChoVec": 4.466704026315082
     },
     "Poggio-di-Venaco": {
       "cluster": 3,
-      "Score_Opp": 2.469842395102283,
+      "Score_Opp": 3.9641533839308996,
       "Score_Cho": 7.937315831770693,
       "Score_Vec": 3.840512777528422,
-      "OppChoVec": 3.0244568433512065
+      "OppChoVec": 3.5529267043135975
     },
     "Corbara": {
-      "cluster": 1,
-      "Score_Opp": 5.589484592017062,
+      "cluster": 2,
+      "Score_Opp": 7.703632117754749,
       "Score_Cho": 8.936512188588265,
       "Score_Vec": 4.575029096474028,
-      "OppChoVec": 5.189882410682129
+      "OppChoVec": 6.139404389303497
     },
     "Muro": {
       "cluster": 3,
-      "Score_Opp": 2.0368072278611855,
+      "Score_Opp": 2.437969851028158,
       "Score_Cho": 9.298151620680418,
       "Score_Vec": 2.636914943452917,
-      "OppChoVec": 3.2922156140121093
+      "OppChoVec": 3.500987828297001
     },
     "Olmeta-di-Tuda": {
       "cluster": 3,
-      "Score_Opp": 2.2440767259732173,
+      "Score_Opp": 2.804851609685487,
       "Score_Cho": 9.507098848111438,
       "Score_Vec": 5.090508736689355,
-      "OppChoVec": 4.520572245701476
+      "OppChoVec": 4.873046039923353
     },
     "Belvédère-Campomoro": {
-      "cluster": 1,
-      "Score_Opp": 4.873488059344458,
+      "cluster": 3,
+      "Score_Opp": 3.7015497105237167,
       "Score_Cho": 8.325743369943744,
       "Score_Vec": 4.030619193379784,
-      "OppChoVec": 4.21058904432369
+      "OppChoVec": 3.8134498778327828
     },
     "Murzo": {
       "cluster": 3,
-      "Score_Opp": 1.4339050771681159,
+      "Score_Opp": 2.6835170019918615,
       "Score_Cho": 9.442807393517278,
       "Score_Vec": 4.533555542507697,
-      "OppChoVec": 3.978804408688567
+      "OppChoVec": 4.51452277502534
     },
     "Murato": {
-      "cluster": 1,
-      "Score_Opp": 4.310508594263775,
+      "cluster": 3,
+      "Score_Opp": 5.049783727436533,
       "Score_Cho": 9.4910259844629,
       "Score_Vec": 4.823625528292529,
-      "OppChoVec": 5.154018910034376
+      "OppChoVec": 5.552736568339617
     },
     "Saint-Florent": {
       "cluster": 3,
-      "Score_Opp": 3.9938805588017363,
+      "Score_Opp": 4.7165525683206795,
       "Score_Cho": 8.325743369943744,
       "Score_Vec": 1.4302113548750741,
-      "OppChoVec": 2.8827176408954736
+      "OppChoVec": 3.10611654253059
     },
     "San-Giuliano": {
-      "cluster": 2,
-      "Score_Opp": 4.5455658721660805,
+      "cluster": 1,
+      "Score_Opp": 4.218676950753807,
       "Score_Cho": 4.784355746048755,
       "Score_Vec": 2.2917444664866404,
-      "OppChoVec": 1.450565024882763
+      "OppChoVec": 1.2173271243810238
     },
     "Olcani": {
       "cluster": 3,
-      "Score_Opp": 2.98504533429754,
+      "Score_Opp": 3.2991377387978273,
       "Score_Cho": 9.279399946423787,
       "Score_Vec": 1.82683391123346,
-      "OppChoVec": 3.2801835544570674
+      "OppChoVec": 3.4358763953531204
     },
     "Carbini": {
-      "cluster": 1,
-      "Score_Opp": 7.449584785850769,
+      "cluster": 3,
+      "Score_Opp": 5.175786341656295,
       "Score_Cho": 10.0,
       "Score_Vec": 3.201392029438703,
-      "OppChoVec": 6.285625700129617
+      "OppChoVec": 5.224291140964576
     },
     "Calacuccia": {
       "cluster": 3,
-      "Score_Opp": 4.522274781834387,
+      "Score_Opp": 5.392372710081328,
       "Score_Cho": 9.201714438789176,
       "Score_Vec": 0.9403628839784323,
-      "OppChoVec": 3.4662309549879886
+      "OppChoVec": 3.7703759060368065
     },
     "Ficaja": {
       "cluster": 3,
-      "Score_Opp": 6.158102977719945,
+      "Score_Opp": 7.774847635934105,
       "Score_Cho": 9.568711492097508,
       "Score_Vec": 1.5847321837303094,
-      "OppChoVec": 4.637583613258095
+      "OppChoVec": 5.278855312921605
     },
     "Ortale": {
       "cluster": 3,
-      "Score_Opp": 3.33900465757663,
+      "Score_Opp": 5.075101970248016,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 3.0973890524390892,
-      "OppChoVec": 3.742002597694115
+      "OppChoVec": 4.427935264646324
     },
     "Patrimonio": {
       "cluster": 3,
-      "Score_Opp": 2.8320954318863434,
+      "Score_Opp": 3.449632859246679,
       "Score_Cho": 8.317706938119475,
       "Score_Vec": 3.2273799364911455,
-      "OppChoVec": 3.134867496197116
+      "OppChoVec": 3.3807249260093513
     },
     "Casalta": {
-      "cluster": 1,
-      "Score_Opp": 5.0718133494088,
+      "cluster": 3,
+      "Score_Opp": 5.684824033638919,
       "Score_Cho": 9.89552638628449,
       "Score_Vec": 4.478302374322781,
-      "OppChoVec": 5.624460275213571
+      "OppChoVec": 5.965919421302938
     },
     "Farinole": {
-      "cluster": 1,
-      "Score_Opp": 4.6804656678902,
+      "cluster": 2,
+      "Score_Opp": 7.516481158532484,
       "Score_Cho": 9.003482453790516,
       "Score_Vec": 4.300273483715148,
-      "OppChoVec": 4.715749147790428
+      "OppChoVec": 5.965906660667804
     },
     "Ghisoni": {
       "cluster": 3,
-      "Score_Opp": 5.227717501906849,
+      "Score_Opp": 6.016673468780072,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 1.479126719864918,
-      "OppChoVec": 4.3591710338076615
+      "OppChoVec": 4.6702311546124955
     },
     "Sermano": {
       "cluster": 3,
-      "Score_Opp": 3.1179945188749896,
+      "Score_Opp": 4.211405714058526,
       "Score_Cho": 9.8124832574337,
       "Score_Vec": 4.034515472066886,
-      "OppChoVec": 4.567417539033534
+      "OppChoVec": 5.0947156898012755
     },
     "Altagène": {
-      "cluster": 1,
-      "Score_Opp": 4.033552993444881,
+      "cluster": 3,
+      "Score_Opp": 2.555014410846791,
       "Score_Cho": 10.0,
       "Score_Vec": 4.516447950573409,
-      "OppChoVec": 5.275957607435181
+      "OppChoVec": 4.891500969674858
     },
     "Sainte-Lucie-de-Tallano": {
       "cluster": 3,
-      "Score_Opp": 3.6082165772377204,
+      "Score_Opp": 4.490157975622243,
       "Score_Cho": 8.607018483793196,
       "Score_Vec": 2.5504231284609027,
-      "OppChoVec": 3.321374384950349
+      "OppChoVec": 3.650358001790321
     },
     "Tavera": {
-      "cluster": 1,
-      "Score_Opp": 4.806018406266382,
+      "cluster": 2,
+      "Score_Opp": 6.86963525857128,
       "Score_Cho": 9.482989552638628,
       "Score_Vec": 4.427767826043486,
-      "OppChoVec": 5.173494869030543
+      "OppChoVec": 6.121203388426143
     },
     "Belgodère": {
       "cluster": 3,
-      "Score_Opp": 1.522099093651058,
+      "Score_Opp": 2.966062061792754,
       "Score_Cho": 8.781141173319046,
       "Score_Vec": 3.0661494598548815,
-      "OppChoVec": 2.976805558486352
+      "OppChoVec": 3.4773706209800483
     },
     "Chisa": {
-      "cluster": 1,
-      "Score_Opp": 5.855383024983427,
+      "cluster": 2,
+      "Score_Opp": 7.74425441940808,
       "Score_Cho": 8.97669434770962,
       "Score_Vec": 4.033032692239729,
-      "OppChoVec": 5.092714961058178
+      "OppChoVec": 5.916801695856037
     },
     "Fozzano": {
       "cluster": 3,
-      "Score_Opp": 2.4347977045146116,
+      "Score_Opp": 4.374502037113108,
       "Score_Cho": 9.236538976694352,
       "Score_Vec": 1.810704134421092,
-      "OppChoVec": 3.072542734156456
+      "OppChoVec": 3.7588223835492722
     },
     "Zévaco": {
       "cluster": 3,
-      "Score_Opp": 2.0765376933869875,
+      "Score_Opp": 2.9966893944220456,
       "Score_Cho": 7.270291990356281,
       "Score_Vec": 4.012831769862154,
-      "OppChoVec": 2.581153146655453
+      "OppChoVec": 2.884409944916997
     },
     "Piobetta": {
       "cluster": 3,
-      "Score_Opp": 2.188072275569541,
+      "Score_Opp": 2.3188405795699936,
       "Score_Cho": 8.781141173319046,
       "Score_Vec": 3.200151465326999,
-      "OppChoVec": 3.217162825524489
+      "OppChoVec": 3.3363575541677557
     },
     "San-Giovanni-di-Moriani": {
       "cluster": 3,
-      "Score_Opp": 3.5232180617032673,
+      "Score_Opp": 3.8895918458591856,
       "Score_Cho": 10.0,
       "Score_Vec": 3.1311836313749684,
-      "OppChoVec": 4.4662780033079335
+      "OppChoVec": 4.706943473287649
     },
     "Sarrola-Carcopino": {
-      "cluster": 1,
-      "Score_Opp": 4.862139542564087,
+      "cluster": 2,
+      "Score_Opp": 6.799981017296676,
       "Score_Cho": 8.690061612643985,
       "Score_Vec": 6.156422463378753,
-      "OppChoVec": 5.452634111268543
+      "OppChoVec": 6.370520781779389
     },
     "Castello-di-Rostino": {
       "cluster": 3,
-      "Score_Opp": 5.042378389008443,
+      "Score_Opp": 5.917653920028208,
       "Score_Cho": 8.907045271899277,
       "Score_Vec": 2.589193244125676,
-      "OppChoVec": 4.079717429709181
+      "OppChoVec": 4.412726551621552
     },
     "Lugo-di-Nazza": {
       "cluster": 3,
-      "Score_Opp": 1.929406895323732,
+      "Score_Opp": 3.6524333923593493,
       "Score_Cho": 9.26600589338334,
       "Score_Vec": 3.611244554127238,
-      "OppChoVec": 3.618094666870109
+      "OppChoVec": 4.28312679004483
     },
     "Saliceto": {
       "cluster": 3,
-      "Score_Opp": 3.2412474383631675,
+      "Score_Opp": 4.688599557437329,
       "Score_Cho": 10.0,
       "Score_Vec": 2.569017921860067,
-      "OppChoVec": 4.135834906937557
+      "OppChoVec": 4.753700342308616
     },
     "Sorbo-Ocagnano": {
       "cluster": 3,
-      "Score_Opp": 3.275937103469908,
+      "Score_Opp": 4.314446041468209,
       "Score_Cho": 8.079292793999464,
       "Score_Vec": 5.334194088079115,
-      "OppChoVec": 4.00790637905836
+      "OppChoVec": 4.462000474802959
     },
     "Soccia": {
-      "cluster": 1,
-      "Score_Opp": 4.158594135193568,
+      "cluster": 2,
+      "Score_Opp": 6.3892189134297634,
       "Score_Cho": 9.536565764800429,
       "Score_Vec": 3.808998920509756,
-      "OppChoVec": 4.666237548662836
+      "OppChoVec": 5.644599079748648
     },
     "Rusio": {
       "cluster": 3,
-      "Score_Opp": 0.9438233220145548,
+      "Score_Opp": 0.0,
       "Score_Cho": 9.504420037503351,
       "Score_Vec": 3.4818355576205646,
-      "OppChoVec": 3.452145299305513
+      "OppChoVec": 3.342253845924623
     },
     "Sisco": {
-      "cluster": 1,
-      "Score_Opp": 4.73068418887273,
+      "cluster": 2,
+      "Score_Opp": 5.578643016062905,
       "Score_Cho": 9.397267613179748,
       "Score_Vec": 3.4081578560024224,
-      "OppChoVec": 4.6271941021989615
+      "OppChoVec": 5.008408788875683
     },
     "Valle-di-Rostino": {
-      "cluster": 1,
-      "Score_Opp": 5.235342489325213,
+      "cluster": 2,
+      "Score_Opp": 6.450051050216467,
       "Score_Cho": 9.107956067506027,
       "Score_Vec": 3.9459828764115716,
-      "OppChoVec": 4.869398991994877
+      "OppChoVec": 5.398928605003777
     },
     "Albitreccia": {
-      "cluster": 1,
-      "Score_Opp": 7.216019127912363,
+      "cluster": 2,
+      "Score_Opp": 7.1123335549005535,
       "Score_Cho": 9.517814090543798,
       "Score_Vec": 5.071427245404021,
-      "OppChoVec": 6.6842227631721585
+      "OppChoVec": 6.598219786470764
     },
     "Ciamannacce": {
-      "cluster": 1,
-      "Score_Opp": 4.94943104299397,
+      "cluster": 2,
+      "Score_Opp": 6.608644044950553,
       "Score_Cho": 10.0,
       "Score_Vec": 3.881920491814472,
-      "OppChoVec": 5.372904648817601
+      "OppChoVec": 6.154435988156774
     },
     "Corrano": {
       "cluster": 3,
-      "Score_Opp": 2.0978259855989663,
+      "Score_Opp": 4.235572549537529,
       "Score_Cho": 9.225823734261988,
       "Score_Vec": 4.04329425767226,
-      "OppChoVec": 3.819791884380731
+      "OppChoVec": 4.656966415754045
     },
     "Île-Rousse": {
-      "cluster": 2,
-      "Score_Opp": 4.390162075707648,
+      "cluster": 1,
+      "Score_Opp": 5.090664674712125,
       "Score_Cho": 5.780873292258236,
       "Score_Vec": 0.10954661748492045,
-      "OppChoVec": 1.2402069074552557
+      "OppChoVec": 1.2996974034223405
     },
     "Olmi-Cappella": {
       "cluster": 3,
-      "Score_Opp": 3.3436792344854034,
+      "Score_Opp": 4.85583093102995,
       "Score_Cho": 9.233860166086258,
       "Score_Vec": 1.249185920951454,
-      "OppChoVec": 3.1689521725855716
+      "OppChoVec": 3.712392096226777
     },
     "Penta-di-Casinca": {
       "cluster": 3,
-      "Score_Opp": 4.83876679375615,
+      "Score_Opp": 5.2239420298646335,
       "Score_Cho": 8.510581301901954,
       "Score_Vec": 2.61074825660962,
-      "OppChoVec": 3.7413063028920375
+      "OppChoVec": 3.8717050732268725
     },
     "Novale": {
-      "cluster": 1,
-      "Score_Opp": 4.721717544187899,
+      "cluster": 3,
+      "Score_Opp": 5.111474455855385,
       "Score_Cho": 9.075810340208948,
       "Score_Vec": 3.5579331295650047,
-      "OppChoVec": 4.460081838804355
+      "OppChoVec": 4.649253011352056
     },
     "Olmeta-di-Capocorso": {
       "cluster": 3,
-      "Score_Opp": 3.1158135431105327,
+      "Score_Opp": 2.2306573610010134,
       "Score_Cho": 9.314224484328959,
       "Score_Vec": 2.989820719973324,
-      "OppChoVec": 3.783880217857798
+      "OppChoVec": 3.5948223275825204
     },
     "Ortiporio": {
       "cluster": 3,
-      "Score_Opp": 2.710431841155492,
+      "Score_Opp": 2.138056885477332,
       "Score_Cho": 9.783016340744709,
       "Score_Vec": 2.6773943366176063,
-      "OppChoVec": 3.8442067294276487
+      "OppChoVec": 3.7751715276675495
     },
     "Piève": {
       "cluster": 3,
-      "Score_Opp": 3.2764016300591328,
+      "Score_Opp": 4.323914999458512,
       "Score_Cho": 8.890972408250736,
       "Score_Vec": 3.612865058420592,
-      "OppChoVec": 3.8059409336181194
+      "OppChoVec": 4.245256709934004
     },
     "Prato-di-Giovellina": {
-      "cluster": 1,
-      "Score_Opp": 6.333673595915247,
+      "cluster": 2,
+      "Score_Opp": 7.994505083917018,
       "Score_Cho": 9.84195017412269,
       "Score_Vec": 4.492440051519242,
-      "OppChoVec": 6.190953523383621
+      "OppChoVec": 6.986428078110989
     },
     "Tarrano": {
       "cluster": 3,
-      "Score_Opp": 3.5440296554698767,
+      "Score_Opp": 4.20715043546074,
       "Score_Cho": 10.0,
       "Score_Vec": 3.0018776751525063,
-      "OppChoVec": 4.42061456431479
+      "OppChoVec": 4.764442193428557
     },
     "Tomino": {
       "cluster": 3,
-      "Score_Opp": 3.1846238224932537,
+      "Score_Opp": 3.2827296251224465,
       "Score_Cho": 9.174926332708278,
       "Score_Vec": 3.3699809801265026,
-      "OppChoVec": 3.8656587184628193
+      "OppChoVec": 3.985933507469779
     },
     "Zalana": {
       "cluster": 3,
-      "Score_Opp": 4.821740048790631,
+      "Score_Opp": 4.361921572704394,
       "Score_Cho": 9.156174658451647,
       "Score_Vec": 2.9222318896866852,
-      "OppChoVec": 4.293106728024668
+      "OppChoVec": 4.150629892951255
     },
     "Guitera-les-Bains": {
-      "cluster": 1,
-      "Score_Opp": 4.127579905430398,
+      "cluster": 2,
+      "Score_Opp": 6.237222950829974,
       "Score_Cho": 9.750870613447628,
       "Score_Vec": 3.981074455164939,
-      "OppChoVec": 4.885045391562191
+      "OppChoVec": 5.835523265248561
     },
     "Poggiolo": {
-      "cluster": 1,
-      "Score_Opp": 6.107369466090541,
+      "cluster": 2,
+      "Score_Opp": 6.99839126535704,
       "Score_Cho": 8.202518081971608,
       "Score_Vec": 4.883425876018088,
-      "OppChoVec": 5.050105173510292
+      "OppChoVec": 5.405402205486779
     },
     "Canavaggia": {
       "cluster": 3,
-      "Score_Opp": 2.8914501330609217,
+      "Score_Opp": 4.744908279028398,
       "Score_Cho": 8.888293597642646,
       "Score_Vec": 3.871211056711173,
-      "OppChoVec": 3.7781873636255927
+      "OppChoVec": 4.514102744302225
     },
     "Riventosa": {
       "cluster": 3,
-      "Score_Opp": 4.254788292996756,
+      "Score_Opp": 5.579031128769366,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 2.793945029681833,
-      "OppChoVec": 3.924660869232934
+      "OppChoVec": 4.452141004010618
     },
     "Santa-Lucia-di-Mercurio": {
       "cluster": 3,
-      "Score_Opp": 3.384428745663659,
+      "Score_Opp": 4.7920959851555,
       "Score_Cho": 8.882935976426467,
       "Score_Vec": 2.9229359485960504,
-      "OppChoVec": 3.563596943347955
+      "OppChoVec": 4.108435153890076
     },
     "Alata": {
-      "cluster": 1,
-      "Score_Opp": 7.880766346640566,
+      "cluster": 2,
+      "Score_Opp": 7.915096813535968,
       "Score_Cho": 9.466916688990091,
       "Score_Vec": 9.61117378719409,
-      "OppChoVec": 9.736719848097547
+      "OppChoVec": 9.796625751276407
     },
     "Campana": {
       "cluster": 3,
-      "Score_Opp": 3.636263260767815,
+      "Score_Opp": 4.123704500479303,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7672452125305043,
-      "OppChoVec": 4.780197473240997
+      "OppChoVec": 5.083264158888154
     },
     "Sant'Andréa-di-Cotone": {
-      "cluster": 1,
-      "Score_Opp": 5.5041344741592955,
+      "cluster": 2,
+      "Score_Opp": 6.394299207181811,
       "Score_Cho": 8.984730779533887,
       "Score_Vec": 3.3599584879299735,
-      "OppChoVec": 4.6454305652790095
+      "OppChoVec": 5.005254943505224
     },
     "Appietto": {
-      "cluster": 1,
-      "Score_Opp": 7.971720280812233,
+      "cluster": 2,
+      "Score_Opp": 7.260444646793157,
       "Score_Cho": 9.504420037503351,
       "Score_Vec": 9.441593161338833,
-      "OppChoVec": 9.712117081851474
+      "OppChoVec": 9.362587190152725
     },
     "Santa-Maria-Siché": {
       "cluster": 3,
-      "Score_Opp": 2.7402882597102667,
+      "Score_Opp": 4.40292502749536,
       "Score_Cho": 9.402625234395929,
       "Score_Vec": 3.5360504227285605,
-      "OppChoVec": 3.9364821719318535
+      "OppChoVec": 4.618460196232083
     },
     "Zigliara": {
-      "cluster": 1,
-      "Score_Opp": 2.6201413193918284,
+      "cluster": 3,
+      "Score_Opp": 5.012462071816607,
       "Score_Cho": 9.622287704259309,
       "Score_Vec": 5.40098903043247,
-      "OppChoVec": 4.875923373513296
+      "OppChoVec": 5.941857160135621
     },
     "Meria": {
       "cluster": 3,
-      "Score_Opp": 2.5274017325081966,
+      "Score_Opp": 3.4258679706887474,
       "Score_Cho": 9.469595499598178,
       "Score_Vec": 3.2138958984044526,
-      "OppChoVec": 3.7815286247596958
+      "OppChoVec": 4.1812081911008345
     },
     "Pietracorbara": {
       "cluster": 3,
-      "Score_Opp": 4.188317140424709,
+      "Score_Opp": 5.276650671661845,
       "Score_Cho": 8.84275381730512,
       "Score_Vec": 2.935491407391846,
-      "OppChoVec": 3.834678799599878
+      "OppChoVec": 4.265342259943793
     },
     "Pietroso": {
       "cluster": 3,
-      "Score_Opp": 3.780853743712027,
+      "Score_Opp": 3.5720189956123782,
       "Score_Cho": 8.593624430752746,
       "Score_Vec": 3.7054740591493656,
-      "OppChoVec": 3.8275338989996066
+      "OppChoVec": 3.8139062146661766
     },
     "Pigna": {
       "cluster": 3,
-      "Score_Opp": 2.5200451440616867,
+      "Score_Opp": 5.314097409977903,
       "Score_Cho": 8.69274042325208,
       "Score_Vec": 3.1022086533499973,
-      "OppChoVec": 3.2247111236035937
+      "OppChoVec": 4.24297440493586
     },
     "Guagno": {
-      "cluster": 1,
-      "Score_Opp": 4.470738752490767,
+      "cluster": 2,
+      "Score_Opp": 6.541248159463469,
       "Score_Cho": 8.687382802035895,
       "Score_Vec": 4.871234151309343,
-      "OppChoVec": 4.6655311614549415
+      "OppChoVec": 5.569667279314791
     },
     "Sotta": {
-      "cluster": 3,
-      "Score_Opp": 4.240792281241931,
+      "cluster": 2,
+      "Score_Opp": 6.502716908022478,
       "Score_Cho": 7.985534422716317,
       "Score_Vec": 4.637322628391958,
-      "OppChoVec": 3.9956718732304157
+      "OppChoVec": 4.910041370457222
     },
     "Ampriani": {
       "cluster": 3,
-      "Score_Opp": 2.0483611887104827,
+      "Score_Opp": 4.036378436336652,
       "Score_Cho": 9.035628181087601,
       "Score_Vec": 3.6906640154366377,
-      "OppChoVec": 3.5331320299208184
+      "OppChoVec": 4.283208216131159
     },
     "Asco": {
       "cluster": 3,
-      "Score_Opp": 0.2787437825329621,
+      "Score_Opp": 0.7416293406625454,
       "Score_Cho": 10.0,
       "Score_Vec": 4.314295722879401,
-      "OppChoVec": 3.971068849233534
+      "OppChoVec": 4.254809779764907
     },
     "Lento": {
-      "cluster": 1,
-      "Score_Opp": 6.181047732196888,
+      "cluster": 2,
+      "Score_Opp": 8.479368778211391,
       "Score_Cho": 9.440128582909189,
       "Score_Vec": 3.3647317410983635,
-      "OppChoVec": 5.286656643235328
+      "OppChoVec": 6.313304951351066
     },
     "Omessa": {
       "cluster": 3,
-      "Score_Opp": 4.254770839983464,
+      "Score_Opp": 4.926205523175701,
       "Score_Cho": 8.277524778998124,
       "Score_Vec": 2.091330894539711,
-      "OppChoVec": 3.17626501220861
+      "OppChoVec": 3.395765530921797
     },
     "Pietricaggio": {
-      "cluster": 1,
-      "Score_Opp": 5.682430675125981,
+      "cluster": 3,
+      "Score_Opp": 6.233446084673574,
       "Score_Cho": 7.564961157246183,
       "Score_Vec": 4.14867360605699,
-      "OppChoVec": 4.1004393239189625
+      "OppChoVec": 4.270306186216606
     },
     "Ville-di-Pietrabugno": {
-      "cluster": 1,
-      "Score_Opp": 6.656211536077146,
+      "cluster": 2,
+      "Score_Opp": 9.470610576104425,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 6.802506945650086,
-      "OppChoVec": 7.257745645983977
+      "OppChoVec": 8.75248181863366
     },
     "Loreto-di-Casinca": {
       "cluster": 3,
-      "Score_Opp": 4.104316759070396,
+      "Score_Opp": 4.505600786159431,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 1.119468815761833,
-      "OppChoVec": 3.561012430579495
+      "OppChoVec": 3.7217066721501526
     },
     "Venaco": {
       "cluster": 3,
-      "Score_Opp": 4.6249296800305215,
+      "Score_Opp": 5.964781085864171,
       "Score_Cho": 7.875703187784623,
       "Score_Vec": 3.2538679944538074,
-      "OppChoVec": 3.500383265735891
+      "OppChoVec": 3.981778980869869
     },
     "Casalabriva": {
       "cluster": 3,
-      "Score_Opp": 3.395408743956574,
+      "Score_Opp": 4.9613912793410755,
       "Score_Cho": 6.8872220733994105,
       "Score_Vec": 3.1578268887389225,
-      "OppChoVec": 2.444361843382626
+      "OppChoVec": 2.9290787542434393
     },
     "Calvi": {
-      "cluster": 2,
-      "Score_Opp": 3.793367468388831,
+      "cluster": 1,
+      "Score_Opp": 4.597606284773565,
       "Score_Cho": 4.428073935172784,
       "Score_Vec": 0.2375464016623589,
-      "OppChoVec": 0.5062996099762547
+      "OppChoVec": 0.5439879275992857
     },
     "Campitello": {
       "cluster": 3,
-      "Score_Opp": 3.4759880966435865,
+      "Score_Opp": 4.121325190511346,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5369900131167142,
-      "OppChoVec": 4.619724800376983
+      "OppChoVec": 4.975148003689023
     },
     "Castifao": {
       "cluster": 3,
-      "Score_Opp": 2.251347309612311,
+      "Score_Opp": 2.4783177586970844,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 3.4470526026821386,
-      "OppChoVec": 3.3046078721236523
+      "OppChoVec": 3.4572248765159737
     },
     "Costa": {
-      "cluster": 1,
-      "Score_Opp": 4.204494129252556,
+      "cluster": 2,
+      "Score_Opp": 6.145871764564792,
       "Score_Cho": 10.0,
       "Score_Vec": 3.693514738591496,
-      "OppChoVec": 4.972758690326462
+      "OppChoVec": 5.858602364502447
     },
     "Lama": {
-      "cluster": 3,
-      "Score_Opp": 4.130845512248784,
+      "cluster": 2,
+      "Score_Opp": 6.415925290629456,
       "Score_Cho": 8.379319582105545,
       "Score_Vec": 3.023030943233758,
-      "OppChoVec": 3.543848762748763
+      "OppChoVec": 4.415671553673064
     },
     "Ocana": {
-      "cluster": 3,
-      "Score_Opp": 4.222927517827665,
+      "cluster": 2,
+      "Score_Opp": 6.113877123906349,
       "Score_Cho": 8.974015537101526,
       "Score_Vec": 3.537155100699117,
-      "OppChoVec": 4.1809941950565275
+      "OppChoVec": 4.962124257983525
     },
     "Bisinchi": {
-      "cluster": 3,
-      "Score_Opp": 3.711357130244561,
+      "cluster": 2,
+      "Score_Opp": 5.826569850243385,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5362521208631787,
-      "OppChoVec": 4.708879268272936
+      "OppChoVec": 5.646981191328693
     },
     "Morsiglia": {
       "cluster": 3,
-      "Score_Opp": 4.85803848476239,
+      "Score_Opp": 5.77171471560071,
       "Score_Cho": 9.686579158853469,
       "Score_Vec": 2.1106097058996154,
-      "OppChoVec": 4.357453557547569
+      "OppChoVec": 4.737208515110959
     },
     "Santa-Maria-Figaniella": {
       "cluster": 3,
-      "Score_Opp": 3.1237638237567915,
+      "Score_Opp": 3.580416603297932,
       "Score_Cho": 8.044468256094294,
       "Score_Vec": 2.886213732487157,
-      "OppChoVec": 2.9323539621301835
+      "OppChoVec": 3.101964693386029
     },
     "Perelli": {
       "cluster": 3,
-      "Score_Opp": 4.0858413287005995,
+      "Score_Opp": 4.158759849208836,
       "Score_Cho": 9.14010179480311,
       "Score_Vec": 3.197783766353221,
-      "OppChoVec": 4.101864284029508
+      "OppChoVec": 4.1853215816998
     },
     "Polveroso": {
       "cluster": 3,
-      "Score_Opp": 1.629698984504869,
+      "Score_Opp": 0.9622341286387136,
       "Score_Cho": 10.0,
       "Score_Vec": 2.2210576145747574,
-      "OppChoVec": 3.486272833598092
+      "OppChoVec": 3.4199422045920835
     },
     "Zilia": {
       "cluster": 3,
-      "Score_Opp": 4.788138367267903,
+      "Score_Opp": 4.57818538384705,
       "Score_Cho": 8.457005089740155,
       "Score_Vec": 1.6704959186005004,
-      "OppChoVec": 3.3393280597777517
+      "OppChoVec": 3.235246026238847
     },
     "Casevecchie": {
-      "cluster": 1,
-      "Score_Opp": 5.5995170317382446,
+      "cluster": 2,
+      "Score_Opp": 7.088156362942513,
       "Score_Cho": 9.161532279667831,
       "Score_Vec": 3.767493675416385,
-      "OppChoVec": 4.990796647523947
+      "OppChoVec": 5.6338833867443245
     },
     "Galéria": {
       "cluster": 3,
-      "Score_Opp": 4.083697333387902,
+      "Score_Opp": 5.508902660128489,
       "Score_Cho": 9.284757567639968,
       "Score_Vec": 2.25530604581619,
-      "OppChoVec": 3.82862160256346
+      "OppChoVec": 4.391016974063854
     },
     "Lavatoggio": {
       "cluster": 3,
-      "Score_Opp": 1.7667976771338227,
+      "Score_Opp": 2.8222417255351813,
       "Score_Cho": 8.93919099919636,
       "Score_Vec": 2.4033243571540757,
-      "OppChoVec": 2.8997274065321217
+      "OppChoVec": 3.274763996445062
     },
     "Moltifao": {
       "cluster": 3,
-      "Score_Opp": 2.563897648478504,
+      "Score_Opp": 3.599907958749035,
       "Score_Cho": 9.456201446557728,
       "Score_Vec": 3.6334775134953823,
-      "OppChoVec": 3.9548287055298497
+      "OppChoVec": 4.416272903169653
     },
     "Piazzali": {
-      "cluster": 2,
-      "Score_Opp": 3.594581630709592,
+      "cluster": 1,
+      "Score_Opp": 6.394417054616771,
       "Score_Cho": 5.346905973747655,
       "Score_Vec": 0.14053641968055028,
-      "OppChoVec": 0.8167829341657671
+      "OppChoVec": 1.496018046594375
     },
     "Rutali": {
-      "cluster": 1,
-      "Score_Opp": 5.280287611920493,
+      "cluster": 2,
+      "Score_Opp": 7.077260324748274,
       "Score_Cho": 9.793731583177069,
       "Score_Vec": 4.406257956568459,
-      "OppChoVec": 5.607141396641426
+      "OppChoVec": 6.4617863055822635
     },
     "San-Martino-di-Lota": {
-      "cluster": 1,
-      "Score_Opp": 6.628553739808465,
+      "cluster": 2,
+      "Score_Opp": 8.47491546759496,
       "Score_Cho": 9.525850522368069,
       "Score_Vec": 5.936606206944571,
-      "OppChoVec": 6.829938195896615
+      "OppChoVec": 7.7608988136777874
     },
     "Piedipartino": {
       "cluster": 3,
-      "Score_Opp": 1.6064872424768686,
+      "Score_Opp": 2.2155378267687156,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 3.935413308824452,
-      "OppChoVec": 3.609367294309149
+      "OppChoVec": 3.911973574971814
     },
     "Alzi": {
       "cluster": 3,
-      "Score_Opp": 2.640922043004953,
+      "Score_Opp": 4.683016516748003,
       "Score_Cho": 10.0,
       "Score_Vec": 3.0006664300127928,
-      "OppChoVec": 4.100484180405382
+      "OppChoVec": 4.941618719258564
     },
     "Avapessa": {
       "cluster": 3,
-      "Score_Opp": 1.372588907887182,
+      "Score_Opp": 1.5124926147735378,
       "Score_Cho": 7.690865255826412,
       "Score_Vec": 3.3658714852841483,
-      "OppChoVec": 2.3940333196511228
+      "OppChoVec": 2.470295331032309
     },
     "Occhiatana": {
-      "cluster": 1,
-      "Score_Opp": 6.039398336382222,
+      "cluster": 2,
+      "Score_Opp": 7.924633496214051,
       "Score_Cho": 9.673185105813019,
       "Score_Vec": 3.4214531288237797,
-      "OppChoVec": 5.418405174451212
+      "OppChoVec": 6.264951571210872
     },
     "Évisa": {
       "cluster": 3,
-      "Score_Opp": 3.146734577517209,
+      "Score_Opp": 4.267127434215251,
       "Score_Cho": 8.73024377176534,
       "Score_Vec": 3.0616226411888157,
-      "OppChoVec": 3.4364243040615916
+      "OppChoVec": 3.870548014066066
     },
     "Moncale": {
-      "cluster": 3,
-      "Score_Opp": 4.207569204015174,
+      "cluster": 2,
+      "Score_Opp": 5.496894827579689,
       "Score_Cho": 9.142780605411197,
       "Score_Vec": 3.2395935107081875,
-      "OppChoVec": 4.167806174626449
+      "OppChoVec": 4.705707498959864
     },
     "Vivario": {
       "cluster": 3,
-      "Score_Opp": 3.6836359156559224,
+      "Score_Opp": 3.626748131725621,
       "Score_Cho": 8.874899544602195,
       "Score_Vec": 2.7180276947168047,
-      "OppChoVec": 3.5849664939156245
+      "OppChoVec": 3.6117312728864777
     }
   },
   "stats": [
     {
       "cluster": 1,
-      "n_communes": 109,
-      "opp_moyen": 5.261682293191638,
-      "cho_moyen": 9.343888010970836,
-      "vec_moyen": 4.654216576344749,
-      "oppchovec_moyen": 5.455252576090469
+      "n_communes": 23,
+      "opp_moyen": 5.0842296464614325,
+      "cho_moyen": 4.608294100110195,
+      "vec_moyen": 2.073447618055076,
+      "oppchovec_moyen": 1.4713875195294228
     },
     {
       "cluster": 2,
-      "n_communes": 20,
-      "opp_moyen": 4.0531142596037,
-      "cho_moyen": 4.18689422905654,
-      "vec_moyen": 2.2424485201534887,
-      "oppchovec_moyen": 1.1701034829333543
+      "n_communes": 87,
+      "opp_moyen": 6.899218584110214,
+      "cho_moyen": 9.24303586219213,
+      "vec_moyen": 4.517632394905717,
+      "oppchovec_moyen": 6.064252106782303
     },
     {
       "cluster": 3,
-      "n_communes": 231,
-      "opp_moyen": 3.2038377885801568,
-      "cho_moyen": 8.932140276903203,
-      "vec_moyen": 3.016294873405859,
-      "oppchovec_moyen": 3.6269884799674883
+      "n_communes": 250,
+      "opp_moyen": 4.1120045851171785,
+      "cho_moyen": 9.021644789713365,
+      "vec_moyen": 3.2327975176373465,
+      "oppchovec_moyen": 4.162499992094837
     }
   ]
 };
@@ -2582,2566 +2582,2566 @@ const CAH_DATA_5 = {
   },
   "clusters": {
     "Cristinacce": {
-      "cluster": 5,
-      "Score_Opp": 2.7479706110665796,
+      "cluster": 4,
+      "Score_Opp": 4.191783587724197,
       "Score_Cho": 10.0,
       "Score_Vec": 2.932877140051841,
-      "OppChoVec": 4.109229963388751
+      "OppChoVec": 4.728294399830645
     },
     "Bastelica": {
-      "cluster": 2,
-      "Score_Opp": 5.2141952383408015,
+      "cluster": 4,
+      "Score_Opp": 2.90286585132425,
       "Score_Cho": 8.376640771497454,
       "Score_Vec": 3.775282135223029,
-      "OppChoVec": 4.277709801406915
+      "OppChoVec": 3.4787752779889742
     },
     "Quenza": {
-      "cluster": 5,
-      "Score_Opp": 2.528444119964963,
+      "cluster": 4,
+      "Score_Opp": 3.0510845368294186,
       "Score_Cho": 8.151620680417894,
       "Score_Vec": 2.2949378673278646,
-      "OppChoVec": 2.5997124812624985
+      "OppChoVec": 2.7787173182308624
     },
     "Chiatra": {
-      "cluster": 5,
-      "Score_Opp": 4.622578941396531,
+      "cluster": 4,
+      "Score_Opp": 6.082715733367111,
       "Score_Cho": 7.548888293597643,
       "Score_Vec": 3.884695722553447,
-      "OppChoVec": 3.5472091928251768
+      "OppChoVec": 4.080070828239463
     },
     "Ogliastro": {
       "cluster": 4,
-      "Score_Opp": 3.906528221950152,
+      "Score_Opp": 3.8830757299924596,
       "Score_Cho": 8.690061612643985,
       "Score_Vec": 2.105351260630904,
-      "OppChoVec": 3.316168758527957
+      "OppChoVec": 3.324978712469046
     },
     "Frasseto": {
       "cluster": 5,
-      "Score_Opp": 2.658607015929088,
+      "Score_Opp": 4.845584777355764,
       "Score_Cho": 9.531208143584248,
       "Score_Vec": 3.615047522517037,
-      "OppChoVec": 4.030253409110462
+      "OppChoVec": 4.919053070439629
     },
     "Serriera": {
       "cluster": 5,
-      "Score_Opp": 1.239643817354929,
+      "Score_Opp": 2.0174409879090445,
       "Score_Cho": 8.815965711224216,
       "Score_Vec": 3.213530416281063,
-      "OppChoVec": 2.9794767199575882
+      "OppChoVec": 3.278259306606036
     },
     "Valle-di-Mezzana": {
-      "cluster": 2,
-      "Score_Opp": 3.6450342478297717,
+      "cluster": 5,
+      "Score_Opp": 5.685647490680631,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 4.700891613042591,
-      "OppChoVec": 4.853979083829078
+      "OppChoVec": 5.776939077633241
     },
     "Lozzi": {
-      "cluster": 5,
-      "Score_Opp": 2.266511779145925,
+      "cluster": 4,
+      "Score_Opp": 4.3000376401366145,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 3.0645718653930647,
-      "OppChoVec": 3.457688988993785
+      "OppChoVec": 4.21902476018826
     },
     "Sant'Andréa-di-Bozio": {
       "cluster": 2,
-      "Score_Opp": 6.048675329714213,
+      "Score_Opp": 6.172013581192263,
       "Score_Cho": 10.0,
       "Score_Vec": 4.1793553382773565,
-      "OppChoVec": 6.022719519785004
+      "OppChoVec": 6.110365411048523
     },
     "Balogna": {
-      "cluster": 4,
-      "Score_Opp": 5.489241389991825,
+      "cluster": 5,
+      "Score_Opp": 2.4736395998142138,
       "Score_Cho": 8.558799892847578,
       "Score_Vec": 1.5806699391993386,
-      "OppChoVec": 3.6526774369640025
+      "OppChoVec": 2.6112125167507716
     },
     "Campo": {
-      "cluster": 2,
-      "Score_Opp": 5.958387147683951,
+      "cluster": 4,
+      "Score_Opp": 4.344591609587257,
       "Score_Cho": 9.9464237878382,
       "Score_Vec": 3.0152671211626454,
-      "OppChoVec": 5.407857292090085
+      "OppChoVec": 4.779400420703967
     },
     "Foce": {
       "cluster": 2,
-      "Score_Opp": 4.606632813110282,
+      "Score_Opp": 7.4161297269823665,
       "Score_Cho": 8.818644521832306,
       "Score_Vec": 5.133555226465791,
-      "OppChoVec": 4.936187166539043
+      "OppChoVec": 6.20194802483851
     },
     "Pietrosella": {
       "cluster": 2,
-      "Score_Opp": 4.070936011485005,
+      "Score_Opp": 7.349498764774927,
       "Score_Cho": 9.255290650950979,
       "Score_Vec": 5.267059286099314,
-      "OppChoVec": 5.092944504351914
+      "OppChoVec": 6.597101519459713
     },
     "Propriano": {
-      "cluster": 3,
-      "Score_Opp": 4.128199426435623,
+      "cluster": 1,
+      "Score_Opp": 5.192980681537508,
       "Score_Cho": 6.3032413608357905,
       "Score_Vec": 0.0,
-      "OppChoVec": 1.3827034350237732
+      "OppChoVec": 1.5759529190767836
     },
     "Zérubia": {
       "cluster": 5,
-      "Score_Opp": 1.2670832368083664,
+      "Score_Opp": 3.6055103758146236,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5426022854556964,
-      "OppChoVec": 3.899944825820161
+      "OppChoVec": 4.791735800202544
     },
     "Linguizzetta": {
-      "cluster": 3,
-      "Score_Opp": 1.2524649781090735,
+      "cluster": 1,
+      "Score_Opp": 1.3514219991989183,
       "Score_Cho": 4.6236271095633565,
       "Score_Vec": 0.8480223095639162,
-      "OppChoVec": 0.145412208558444
+      "OppChoVec": 0.030033557730688915
     },
     "Piedicorte-di-Gaggio": {
       "cluster": 4,
-      "Score_Opp": 5.287337966013115,
+      "Score_Opp": 6.717845405447732,
       "Score_Cho": 8.001607286364857,
       "Score_Vec": 1.3564635137503456,
-      "OppChoVec": 3.1392347791525443
+      "OppChoVec": 3.596837016854297
     },
     "Brando": {
       "cluster": 2,
-      "Score_Opp": 3.748348114668607,
+      "Score_Opp": 6.5815761914055,
       "Score_Cho": 9.501741226895259,
       "Score_Vec": 5.455495773258846,
-      "OppChoVec": 5.2351801978779156
+      "OppChoVec": 6.548040566226907
     },
     "Pancheraccia": {
-      "cluster": 5,
-      "Score_Opp": 2.8899289427879564,
+      "cluster": 4,
+      "Score_Opp": 2.7174660760060516,
       "Score_Cho": 7.064023573533349,
       "Score_Vec": 1.6766753376881844,
-      "OppChoVec": 1.8871358751042935
+      "OppChoVec": 1.802751127701536
     },
     "Aiti": {
-      "cluster": 5,
-      "Score_Opp": 3.6511141051410734,
+      "cluster": 2,
+      "Score_Opp": 6.591706132673474,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 3.2794265996394807,
-      "OppChoVec": 3.8293885003927963
+      "OppChoVec": 5.008805043405571
     },
     "Bustanico": {
       "cluster": 5,
-      "Score_Opp": 2.1242007594255687,
+      "Score_Opp": 1.4236265206808774,
       "Score_Cho": 8.912402893115456,
       "Score_Vec": 3.9241218504207738,
-      "OppChoVec": 3.569857657976131
+      "OppChoVec": 3.4778585434863003
     },
     "Cagnano": {
       "cluster": 5,
-      "Score_Opp": 2.2464677131976214,
+      "Score_Opp": 3.6346199108559767,
       "Score_Cho": 9.515135279935707,
       "Score_Vec": 2.255321925923852,
-      "OppChoVec": 3.356086848126481
+      "OppChoVec": 3.8826833656304856
     },
     "Corscia": {
       "cluster": 5,
-      "Score_Opp": 2.852764907425725,
+      "Score_Opp": 3.589656924226858,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 2.3341241876469185,
-      "OppChoVec": 3.28655973131349
+      "OppChoVec": 3.5834751801382083
     },
     "Monte": {
-      "cluster": 3,
-      "Score_Opp": 4.864526799179253,
+      "cluster": 1,
+      "Score_Opp": 6.144958384295279,
       "Score_Cho": 6.113045807661398,
       "Score_Vec": 1.8823037613232017,
-      "OppChoVec": 2.0819319692637417
+      "OppChoVec": 2.3943269861214267
     },
     "Porri": {
-      "cluster": 2,
-      "Score_Opp": 3.8524747167848616,
+      "cluster": 5,
+      "Score_Opp": 5.054125960050099,
       "Score_Cho": 10.0,
       "Score_Vec": 3.984002518151659,
-      "OppChoVec": 4.960245723689335
+      "OppChoVec": 5.54562726026862
     },
     "Porta": {
       "cluster": 4,
-      "Score_Opp": 5.392394320763303,
+      "Score_Opp": 5.733439134547348,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 1.0295192620147293,
-      "OppChoVec": 4.063518618647114
+      "OppChoVec": 4.166523371607863
     },
     "Speloncato": {
-      "cluster": 5,
-      "Score_Opp": 3.248331881096198,
+      "cluster": 4,
+      "Score_Opp": 4.047546879438515,
       "Score_Cho": 8.880257165818376,
       "Score_Vec": 2.232436210032955,
-      "OppChoVec": 3.2556319434212533
+      "OppChoVec": 3.5607685372387925
     },
     "Cognocoli-Monticchi": {
-      "cluster": 5,
-      "Score_Opp": 2.065972912829275,
+      "cluster": 4,
+      "Score_Opp": 3.4685484964060547,
       "Score_Cho": 7.950709884811143,
       "Score_Vec": 2.9107107236530334,
-      "OppChoVec": 2.565156397838238
+      "OppChoVec": 3.0151269214470737
     },
     "Villanova": {
-      "cluster": 2,
-      "Score_Opp": 2.9390779700395626,
+      "cluster": 5,
+      "Score_Opp": 5.624724193912045,
       "Score_Cho": 9.82587731047415,
       "Score_Vec": 6.683051163964807,
-      "OppChoVec": 5.785502325769021
+      "OppChoVec": 7.086614144272802
     },
     "Mausoléo": {
-      "cluster": 5,
-      "Score_Opp": 2.0313711228156093,
+      "cluster": 4,
+      "Score_Opp": 2.5493940567046063,
       "Score_Cho": 7.733726225555852,
       "Score_Vec": 4.315924196477347,
-      "OppChoVec": 2.958962925100979
+      "OppChoVec": 3.1757593024734976
     },
     "Osani": {
-      "cluster": 5,
-      "Score_Opp": 2.955834207355246,
+      "cluster": 4,
+      "Score_Opp": 4.137514673217046,
       "Score_Cho": 9.024912938655236,
       "Score_Vec": 3.050626615362498,
-      "OppChoVec": 3.5604441471095747
+      "OppChoVec": 4.030879986016541
     },
     "Aghione": {
-      "cluster": 3,
-      "Score_Opp": 1.7309441118820776,
+      "cluster": 1,
+      "Score_Opp": 2.3818602839549747,
       "Score_Cho": 3.329761585855879,
       "Score_Vec": 1.8938228387506704,
-      "OppChoVec": 0.017342863160258324
+      "OppChoVec": 0.0
     },
     "Casabianca": {
       "cluster": 4,
-      "Score_Opp": 4.438630548983461,
+      "Score_Opp": 7.27288411281945,
       "Score_Cho": 8.569515135279936,
       "Score_Vec": 2.039238062712551,
-      "OppChoVec": 3.4104810129475407
+      "OppChoVec": 4.491575765671151
     },
     "Focicchia": {
       "cluster": 5,
-      "Score_Opp": 1.6029525971502132,
+      "Score_Opp": 2.180744646435689,
       "Score_Cho": 10.0,
       "Score_Vec": 2.9742047363734754,
-      "OppChoVec": 3.7664165358586037
+      "OppChoVec": 4.072468161280994
     },
     "Luri": {
       "cluster": 4,
-      "Score_Opp": 4.071246685064429,
+      "Score_Opp": 5.503063842925791,
       "Score_Cho": 9.22850254487008,
       "Score_Vec": 1.9067907789378558,
-      "OppChoVec": 3.655973866353342
+      "OppChoVec": 4.204402170923692
     },
     "Nocario": {
       "cluster": 5,
-      "Score_Opp": 3.599911641363746,
+      "Score_Opp": 4.4471585718400375,
       "Score_Cho": 9.330297347977497,
       "Score_Vec": 3.4558410351024547,
-      "OppChoVec": 4.156134306415736
+      "OppChoVec": 4.544101391417178
     },
     "San-Nicolao": {
-      "cluster": 4,
-      "Score_Opp": 6.2106940462521445,
+      "cluster": 1,
+      "Score_Opp": 6.2658029253291,
       "Score_Cho": 7.337262255558532,
       "Score_Vec": 0.4777497802062851,
-      "OppChoVec": 2.821896455292787
+      "OppChoVec": 2.685717273179811
     },
     "Serra-di-Ferro": {
-      "cluster": 5,
-      "Score_Opp": 3.3099084815532653,
+      "cluster": 4,
+      "Score_Opp": 6.121884656948681,
       "Score_Cho": 7.181891240289313,
       "Score_Vec": 4.127550243397723,
-      "OppChoVec": 2.951941003459653
+      "OppChoVec": 3.955692206176188
     },
     "Sorbollano": {
       "cluster": 5,
-      "Score_Opp": 2.1798325775252474,
+      "Score_Opp": 4.2437840233439825,
       "Score_Cho": 9.876774712027864,
       "Score_Vec": 3.965232821873466,
-      "OppChoVec": 4.263286044132561
+      "OppChoVec": 5.124382891327849
     },
     "Felce": {
       "cluster": 2,
-      "Score_Opp": 4.580318321144776,
+      "Score_Opp": 6.7251598261944725,
       "Score_Cho": 9.426734529868737,
       "Score_Vec": 3.728095883099407,
-      "OppChoVec": 4.723521993152009
+      "OppChoVec": 5.664272180805009
     },
     "Pioggiola": {
-      "cluster": 5,
-      "Score_Opp": 3.5679801587041124,
+      "cluster": 4,
+      "Score_Opp": 4.802856231869541,
       "Score_Cho": 9.90356281810876,
       "Score_Vec": 3.0174374123443553,
-      "OppChoVec": 4.366777627473898
+      "OppChoVec": 4.919474375651108
     },
     "Valle-d'Alesani": {
-      "cluster": 5,
-      "Score_Opp": 3.688502701797256,
+      "cluster": 4,
+      "Score_Opp": 3.6651734280027055,
       "Score_Cho": 8.877578355210286,
       "Score_Vec": 2.7749621439158267,
-      "OppChoVec": 3.610375317856626
+      "OppChoVec": 3.6496495706297525
     },
     "Palneca": {
       "cluster": 4,
-      "Score_Opp": 4.402624106395915,
+      "Score_Opp": 6.060075101327716,
       "Score_Cho": 9.461559067773909,
       "Score_Vec": 0.48722369930245596,
-      "OppChoVec": 3.441362871738348
+      "OppChoVec": 4.0469841969321765
     },
     "Peri": {
-      "cluster": 2,
-      "Score_Opp": 3.2576653515609664,
+      "cluster": 5,
+      "Score_Opp": 5.30090893534345,
       "Score_Cho": 9.458880257165818,
       "Score_Vec": 5.818457229393848,
-      "OppChoVec": 5.19011680084629
+      "OppChoVec": 6.151696867696234
     },
     "Rosazia": {
       "cluster": 5,
-      "Score_Opp": 1.6891061104664704,
+      "Score_Opp": 3.352625304080814,
       "Score_Cho": 10.0,
       "Score_Vec": 4.196392855815988,
-      "OppChoVec": 4.297951659557816
+      "OppChoVec": 5.0086108546653705
     },
     "Sollacaro": {
       "cluster": 4,
-      "Score_Opp": 4.235640810204538,
+      "Score_Opp": 5.626775051729302,
       "Score_Cho": 8.50790249129387,
       "Score_Vec": 3.218386199806213,
-      "OppChoVec": 3.743606576276941
+      "OppChoVec": 4.280417797106188
     },
     "Aregno": {
       "cluster": 5,
-      "Score_Opp": 0.8971650075309244,
+      "Score_Opp": 1.591182903295946,
       "Score_Cho": 9.450843825341549,
       "Score_Vec": 2.6840463714820872,
-      "OppChoVec": 3.0995667784594123
+      "OppChoVec": 3.3829324832686396
     },
     "Castellare-di-Casinca": {
       "cluster": 2,
-      "Score_Opp": 4.530067281083501,
+      "Score_Opp": 6.253903413198239,
       "Score_Cho": 8.532011786766676,
       "Score_Vec": 4.389090204946122,
-      "OppChoVec": 4.3659207146084045
+      "OppChoVec": 5.089828971457634
     },
     "Castineta": {
       "cluster": 2,
-      "Score_Opp": 5.2531226642948035,
+      "Score_Opp": 6.314022534415678,
       "Score_Cho": 10.0,
       "Score_Vec": 2.8040486536060967,
-      "OppChoVec": 5.035215250983977
+      "OppChoVec": 5.511989859942825
     },
     "Pietra-di-Verde": {
       "cluster": 5,
-      "Score_Opp": 3.168669846651857,
+      "Score_Opp": 3.261137602855206,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 2.301256463743782,
-      "OppChoVec": 3.8734070978971764
+      "OppChoVec": 3.993043040848867
     },
     "Calcatoggio": {
-      "cluster": 2,
-      "Score_Opp": 6.48814829389083,
+      "cluster": 5,
+      "Score_Opp": 4.959260364542149,
       "Score_Cho": 8.590945620144655,
       "Score_Vec": 3.6793067613417922,
-      "OppChoVec": 4.956489979354966
+      "OppChoVec": 4.290370158310436
     },
     "Moca-Croce": {
       "cluster": 5,
-      "Score_Opp": 3.4178635638082673,
+      "Score_Opp": 5.144027905055438,
       "Score_Cho": 8.963300294669166,
       "Score_Vec": 3.59631488366716,
-      "OppChoVec": 3.8976144270434476
+      "OppChoVec": 4.595326011996334
     },
     "Albertacce": {
       "cluster": 4,
-      "Score_Opp": 4.057668222878843,
+      "Score_Opp": 5.424911746930893,
       "Score_Cho": 9.030270559871417,
       "Score_Vec": 1.624567381974358,
-      "OppChoVec": 3.418154946758217
+      "OppChoVec": 3.9192150330714917
     },
     "Pie-d'Orezza": {
-      "cluster": 3,
-      "Score_Opp": 2.014486833101803,
+      "cluster": 1,
+      "Score_Opp": 1.6998390304527102,
       "Score_Cho": 4.564693276185376,
       "Score_Vec": 4.007207348977946,
-      "OppChoVec": 1.188347999635642
+      "OppChoVec": 1.0505877828328472
     },
     "Poggio-Mezzana": {
-      "cluster": 5,
-      "Score_Opp": 3.7146382361416515,
+      "cluster": 4,
+      "Score_Opp": 3.862211931758328,
       "Score_Cho": 7.972140369675866,
       "Score_Vec": 3.4677491525335395,
-      "OppChoVec": 3.309247738549901
+      "OppChoVec": 3.3835015643680193
     },
     "Quercitello": {
       "cluster": 5,
-      "Score_Opp": 2.3736478283662663,
+      "Score_Opp": 3.2040661082509647,
       "Score_Cho": 9.8660594695955,
       "Score_Vec": 3.040752953124392,
-      "OppChoVec": 3.935118607947565
+      "OppChoVec": 4.32752230512505
     },
     "Vallecalle": {
-      "cluster": 2,
-      "Score_Opp": 4.800369520148714,
+      "cluster": 5,
+      "Score_Opp": 5.837879401649887,
       "Score_Cho": 9.622287704259309,
       "Score_Vec": 4.978656292979987,
-      "OppChoVec": 5.535103957582404
+      "OppChoVec": 6.0649112328918235
     },
     "Olivese": {
-      "cluster": 5,
-      "Score_Opp": 4.1648526128956505,
+      "cluster": 2,
+      "Score_Opp": 5.888429506644379,
       "Score_Cho": 10.0,
       "Score_Vec": 2.8998138826474533,
-      "OppChoVec": 4.617925228045252
+      "OppChoVec": 5.3761053671809345
     },
     "Sampolo": {
       "cluster": 5,
-      "Score_Opp": 2.4751188135961923,
+      "Score_Opp": 3.6069601455715,
       "Score_Cho": 9.582105545137958,
       "Score_Vec": 4.882009525435709,
-      "OppChoVec": 4.555694568844569
+      "OppChoVec": 5.105723632321041
     },
     "Pietraserena": {
-      "cluster": 4,
-      "Score_Opp": 5.538910896781123,
+      "cluster": 1,
+      "Score_Opp": 5.550640055960301,
       "Score_Cho": 7.321189391909993,
       "Score_Vec": 1.4481444291256904,
-      "OppChoVec": 2.8594157818945805
+      "OppChoVec": 2.7553629726750914
     },
     "Poggio-di-Nazza": {
       "cluster": 5,
-      "Score_Opp": 3.4088547820592363,
+      "Score_Opp": 3.1835855106144217,
       "Score_Cho": 8.84275381730512,
       "Score_Vec": 2.1869767488072673,
-      "OppChoVec": 3.2694402210667524
+      "OppChoVec": 3.2360909680485332
     },
     "Sant'Antonino": {
-      "cluster": 5,
-      "Score_Opp": 4.317499094809614,
+      "cluster": 4,
+      "Score_Opp": 4.557364301811853,
       "Score_Cho": 10.0,
       "Score_Vec": 3.1322783848959004,
-      "OppChoVec": 4.776564376374386
+      "OppChoVec": 4.9531271683801465
     },
     "Santa-Reparata-di-Moriani": {
       "cluster": 2,
-      "Score_Opp": 5.481723106905604,
+      "Score_Opp": 5.289832696279744,
       "Score_Cho": 9.418698098044468,
       "Score_Vec": 3.373190210166194,
-      "OppChoVec": 4.951829833053986
+      "OppChoVec": 4.89412815659311
     },
     "Coti-Chiavari": {
       "cluster": 2,
-      "Score_Opp": 4.083161863829347,
+      "Score_Opp": 6.7373287181644494,
       "Score_Cho": 9.346370211626038,
       "Score_Vec": 4.804051838728086,
-      "OppChoVec": 4.946121217015124
+      "OppChoVec": 6.144105983688805
     },
     "Figari": {
-      "cluster": 5,
-      "Score_Opp": 3.801123674193451,
+      "cluster": 4,
+      "Score_Opp": 6.108881531557837,
       "Score_Cho": 7.463166354138763,
       "Score_Vec": 2.6413960384799813,
-      "OppChoVec": 2.721642287728621
+      "OppChoVec": 3.5033373275374684
     },
     "Altiani": {
       "cluster": 2,
-      "Score_Opp": 7.0036174541996346,
+      "Score_Opp": 9.593299302157575,
       "Score_Cho": 10.0,
       "Score_Vec": 4.426971809580805,
-      "OppChoVec": 6.631555221865306
+      "OppChoVec": 7.919328941787649
     },
     "San-Gavino-di-Tenda": {
       "cluster": 5,
-      "Score_Opp": 2.8742486594118826,
+      "Score_Opp": 2.8244955157423766,
       "Score_Cho": 10.0,
       "Score_Vec": 2.7925512642815695,
-      "OppChoVec": 4.096104622741521
+      "OppChoVec": 4.197085046905433
     },
     "Santo-Pietro-di-Tenda": {
       "cluster": 5,
-      "Score_Opp": 2.586703249490075,
+      "Score_Opp": 1.5149284481795036,
       "Score_Cho": 9.927672113581568,
       "Score_Vec": 2.8579653602152275,
-      "OppChoVec": 3.9746170908048355
+      "OppChoVec": 3.7748190621944437
     },
     "Santo-Pietro-di-Venaco": {
-      "cluster": 4,
-      "Score_Opp": 4.45915654680956,
+      "cluster": 2,
+      "Score_Opp": 6.67078050814141,
       "Score_Cho": 7.974819180283953,
       "Score_Vec": 3.315879550879826,
-      "OppChoVec": 3.5239576767924308
+      "OppChoVec": 4.3593956493769435
     },
     "Santa-Maria-Poggio": {
       "cluster": 2,
-      "Score_Opp": 5.695501243221326,
+      "Score_Opp": 5.9699637274103425,
       "Score_Cho": 9.239217787302437,
       "Score_Vec": 2.9518278407565335,
-      "OppChoVec": 4.738998997854235
+      "OppChoVec": 4.83941017294798
     },
     "Granace": {
       "cluster": 5,
-      "Score_Opp": 2.3902564731781544,
+      "Score_Opp": 4.923334782965961,
       "Score_Cho": 10.0,
       "Score_Vec": 4.691464503716525,
-      "OppChoVec": 4.74273901717628
+      "OppChoVec": 5.8453074051002405
     },
     "Parata": {
       "cluster": 5,
-      "Score_Opp": 3.6505448407575907,
+      "Score_Opp": 2.1145848842257955,
       "Score_Cho": 10.0,
       "Score_Vec": 3.174251896314018,
-      "OppChoVec": 4.532127316288118
+      "OppChoVec": 4.138247354270556
     },
     "Silvareccio": {
       "cluster": 2,
-      "Score_Opp": 6.083681236629306,
+      "Score_Opp": 7.07219353465145,
       "Score_Cho": 9.14010179480311,
       "Score_Vec": 3.502298799679251,
-      "OppChoVec": 5.081090323659514
+      "OppChoVec": 5.483270490796591
     },
     "Bastelicaccia": {
-      "cluster": 1,
-      "Score_Opp": 8.412428072827655,
+      "cluster": 3,
+      "Score_Opp": 7.421326790177441,
       "Score_Cho": 8.936512188588265,
       "Score_Vec": 9.502876577149946,
-      "OppChoVec": 9.53367483189963
+      "OppChoVec": 8.972682225718863
     },
     "Porto-Vecchio": {
-      "cluster": 3,
-      "Score_Opp": 5.278350045569907,
+      "cluster": 1,
+      "Score_Opp": 7.556559850984988,
       "Score_Cho": 0.6641784956028947,
       "Score_Vec": 3.5728927795598926,
-      "OppChoVec": 0.4711001147358783
+      "OppChoVec": 0.911676364906398
     },
     "Favalello": {
       "cluster": 5,
-      "Score_Opp": 1.4989138442427792,
+      "Score_Opp": 2.8921321669067024,
       "Score_Cho": 9.279399946423787,
       "Score_Vec": 3.120159684166527,
-      "OppChoVec": 3.3098211334861705
+      "OppChoVec": 3.8278106825509903
     },
     "Prunelli-di-Fiumorbo": {
       "cluster": 4,
-      "Score_Opp": 4.63813278404132,
+      "Score_Opp": 4.887782336727789,
       "Score_Cho": 7.514063755692472,
       "Score_Vec": 2.2303997134466265,
-      "OppChoVec": 2.9014495993321283
+      "OppChoVec": 2.935622784493483
     },
     "Ambiegna": {
-      "cluster": 5,
-      "Score_Opp": 4.13119759650605,
+      "cluster": 4,
+      "Score_Opp": 2.7725625161613694,
       "Score_Cho": 8.609697294401284,
       "Score_Vec": 3.839312107816824,
-      "OppChoVec": 4.025235660484644
+      "OppChoVec": 3.62604273291499
     },
     "Cauro": {
-      "cluster": 1,
-      "Score_Opp": 4.9413738914794525,
+      "cluster": 3,
+      "Score_Opp": 7.734667881551665,
       "Score_Cho": 9.507098848111438,
       "Score_Vec": 8.731079077907903,
-      "OppChoVec": 7.561611143218978
+      "OppChoVec": 9.122555256522151
     },
     "Letia": {
-      "cluster": 5,
-      "Score_Opp": 3.3955798453701416,
+      "cluster": 4,
+      "Score_Opp": 5.661417408363124,
       "Score_Cho": 8.97669434770962,
       "Score_Vec": 2.4668956019494948,
-      "OppChoVec": 3.4549664026952644
+      "OppChoVec": 4.311572382731381
     },
     "Santa-Lucia-di-Moriani": {
       "cluster": 4,
-      "Score_Opp": 5.379862591905328,
+      "Score_Opp": 5.694069384132643,
       "Score_Cho": 7.886418430216983,
       "Score_Vec": 2.3967808786972316,
-      "OppChoVec": 3.476705241357017
+      "OppChoVec": 3.5309445504024977
     },
     "Eccica-Suarella": {
-      "cluster": 1,
-      "Score_Opp": 4.744308630053454,
+      "cluster": 3,
+      "Score_Opp": 8.015220930938124,
       "Score_Cho": 9.13206536297884,
       "Score_Vec": 9.845153980097866,
-      "OppChoVec": 7.855736391062576
+      "OppChoVec": 9.707921364888222
     },
     "Soveria": {
-      "cluster": 5,
-      "Score_Opp": 2.283860787548075,
+      "cluster": 4,
+      "Score_Opp": 2.0784664033940303,
       "Score_Cho": 7.907848915081703,
       "Score_Vec": 3.5543805607206034,
-      "OppChoVec": 2.8404388417025634
+      "OppChoVec": 2.8338565146127532
     },
     "San-Damiano": {
       "cluster": 5,
-      "Score_Opp": 2.914521873218896,
+      "Score_Opp": 2.162173170397753,
       "Score_Cho": 9.75622823466381,
       "Score_Vec": 3.232265712389081,
-      "OppChoVec": 4.116063951624048
+      "OppChoVec": 3.996419790015504
     },
     "Crocicchia": {
-      "cluster": 2,
-      "Score_Opp": 5.612861661534354,
+      "cluster": 4,
+      "Score_Opp": 5.928669021255281,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 2.7936222151625474,
-      "OppChoVec": 4.418449955653567
+      "OppChoVec": 4.520588486489345
     },
     "Cargiaca": {
-      "cluster": 5,
-      "Score_Opp": 1.9608499650104245,
+      "cluster": 4,
+      "Score_Opp": 4.528421300222042,
       "Score_Cho": 6.868470399142781,
       "Score_Vec": 3.310111171347241,
-      "OppChoVec": 2.0681731022584477
+      "OppChoVec": 2.83245884554441
     },
     "Grossa": {
-      "cluster": 5,
-      "Score_Opp": 3.093897776282772,
+      "cluster": 4,
+      "Score_Opp": 5.631214753361132,
       "Score_Cho": 9.193678006964907,
       "Score_Vec": 1.5689638334424492,
-      "OppChoVec": 3.1696939377199698
+      "OppChoVec": 4.093671089325629
     },
     "Guargualé": {
-      "cluster": 5,
-      "Score_Opp": 1.6219878923473234,
+      "cluster": 4,
+      "Score_Opp": 3.4901056849265855,
       "Score_Cho": 8.588266809536568,
       "Score_Vec": 3.57107118065551,
-      "OppChoVec": 3.0755970387739455
+      "OppChoVec": 3.724744519084566
     },
     "Olmiccia": {
-      "cluster": 5,
-      "Score_Opp": 1.965891761138938,
+      "cluster": 4,
+      "Score_Opp": 4.069065071558788,
       "Score_Cho": 8.406107688186445,
       "Score_Vec": 3.2022018782249493,
-      "OppChoVec": 2.9180584457021554
+      "OppChoVec": 3.635405948384252
     },
     "Salice": {
-      "cluster": 2,
-      "Score_Opp": 4.009008253953915,
+      "cluster": 5,
+      "Score_Opp": 5.518888022136853,
       "Score_Cho": 9.035628181087601,
       "Score_Vec": 4.426737456198642,
-      "OppChoVec": 4.523633336434615
+      "OppChoVec": 5.188579636145948
     },
     "Ersa": {
       "cluster": 5,
-      "Score_Opp": 2.65482782641996,
+      "Score_Opp": 2.9903106107558175,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 2.1444257058841414,
-      "OppChoVec": 3.3986438501662253
+      "OppChoVec": 3.580602878536927
     },
     "Muracciole": {
-      "cluster": 3,
-      "Score_Opp": 1.9629982808037045,
+      "cluster": 1,
+      "Score_Opp": 3.709629158049675,
       "Score_Cho": 4.012858290918834,
       "Score_Vec": 4.604125286267971,
-      "OppChoVec": 1.1361402032936005
+      "OppChoVec": 1.5240453984359827
     },
     "Piano": {
-      "cluster": 2,
-      "Score_Opp": 4.711014635933512,
+      "cluster": 5,
+      "Score_Opp": 5.662854648616423,
       "Score_Cho": 10.0,
       "Score_Vec": 4.693716080851916,
-      "OppChoVec": 5.646804202719499
+      "OppChoVec": 6.1532470863469175
     },
     "Pino": {
       "cluster": 5,
-      "Score_Opp": 3.2098347040194093,
+      "Score_Opp": 3.1423559019202845,
       "Score_Cho": 9.584784355746049,
       "Score_Vec": 3.0784286806786727,
-      "OppChoVec": 4.037198776592158
+      "OppChoVec": 4.113347922816169
     },
     "Santa-Reparata-di-Balagna": {
       "cluster": 2,
-      "Score_Opp": 6.204190239384497,
+      "Score_Opp": 7.117864415194834,
       "Score_Cho": 8.794535226359496,
       "Score_Vec": 3.2974353387356703,
-      "OppChoVec": 4.801256647650122
+      "OppChoVec": 5.141418116256375
     },
     "Aullène": {
-      "cluster": 3,
-      "Score_Opp": 6.196228937348893,
+      "cluster": 1,
+      "Score_Opp": 3.5055486381399255,
       "Score_Cho": 5.4888829359764255,
       "Score_Vec": 0.8068786412882232,
-      "OppChoVec": 1.9122825474962566
+      "OppChoVec": 0.906743251220966
     },
     "Azilone-Ampaza": {
       "cluster": 2,
-      "Score_Opp": 6.860202127859402,
+      "Score_Opp": 5.814074920080898,
       "Score_Cho": 9.429413340476831,
       "Score_Vec": 2.6338522654021794,
-      "OppChoVec": 5.2932859512921695
+      "OppChoVec": 4.7813850775885385
     },
     "Santa-Maria-di-Lota": {
-      "cluster": 1,
-      "Score_Opp": 6.611401750498452,
+      "cluster": 3,
+      "Score_Opp": 8.608867430916444,
       "Score_Cho": 9.667827484596842,
       "Score_Vec": 5.704149513870712,
-      "OppChoVec": 6.811120110752801
+      "OppChoVec": 7.8199593675489885
     },
     "Petreto-Bicchisano": {
       "cluster": 2,
-      "Score_Opp": 4.734962236271735,
+      "Score_Opp": 6.812358805239551,
       "Score_Cho": 9.472274310206268,
       "Score_Vec": 3.576630799774401,
-      "OppChoVec": 4.755037463219097
+      "OppChoVec": 5.666202349272967
     },
     "Vero": {
       "cluster": 2,
-      "Score_Opp": 3.8061708839773676,
+      "Score_Opp": 6.170231895984214,
       "Score_Cho": 9.324939726761318,
       "Score_Vec": 5.258602569579392,
-      "OppChoVec": 5.033611885566031
+      "OppChoVec": 6.1138793335556665
     },
     "Bastia": {
-      "cluster": 3,
-      "Score_Opp": 7.511615547650489,
+      "cluster": 1,
+      "Score_Opp": 10.0,
       "Score_Cho": 0.0,
       "Score_Vec": 3.2503563518280334,
-      "OppChoVec": 0.904435619258232
+      "OppChoVec": 1.4225753615655534
     },
     "Érone": {
-      "cluster": 3,
-      "Score_Opp": 0.0,
+      "cluster": 1,
+      "Score_Opp": 1.8630840124987282,
       "Score_Cho": 2.346638092686849,
       "Score_Vec": 4.201707677408594,
-      "OppChoVec": 0.0
+      "OppChoVec": 0.20794002483061724
     },
     "Ville-di-Paraso": {
       "cluster": 5,
-      "Score_Opp": 3.6539487497386443,
+      "Score_Opp": 4.3233991458731955,
       "Score_Cho": 9.603536030002678,
       "Score_Vec": 3.717758097422876,
-      "OppChoVec": 4.478664999141974
+      "OppChoVec": 4.825339158341667
     },
     "Sartène": {
-      "cluster": 4,
-      "Score_Opp": 3.8658775047243306,
+      "cluster": 1,
+      "Score_Opp": 6.047921494296902,
       "Score_Cho": 7.594428073935173,
       "Score_Vec": 0.9144306028649919,
-      "OppChoVec": 2.242846745765045
+      "OppChoVec": 2.916639333578967
     },
     "Sant'Andréa-d'Orcino": {
       "cluster": 5,
-      "Score_Opp": 1.209269395202763,
+      "Score_Opp": 3.1324496020156594,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 5.062401780106633,
-      "OppChoVec": 4.180019795266258
+      "OppChoVec": 4.95585865585623
     },
     "Algajola": {
-      "cluster": 5,
-      "Score_Opp": 3.0099768350288096,
+      "cluster": 4,
+      "Score_Opp": 4.981638945900766,
       "Score_Cho": 8.398071256362176,
       "Score_Vec": 2.8347230629960873,
-      "OppChoVec": 3.093981072069675
+      "OppChoVec": 3.7971558558427216
     },
     "Azzana": {
-      "cluster": 2,
-      "Score_Opp": 5.673418842494184,
+      "cluster": 5,
+      "Score_Opp": 1.6116478620915287,
       "Score_Cho": 10.0,
       "Score_Vec": 4.822380789052009,
-      "OppChoVec": 6.152346064555026
+      "OppChoVec": 4.742808107130259
     },
     "Cargèse": {
-      "cluster": 5,
-      "Score_Opp": 1.4262423811415492,
+      "cluster": 4,
+      "Score_Opp": 3.6966583482495183,
       "Score_Cho": 8.135547816769357,
       "Score_Vec": 2.1829198869370483,
-      "OppChoVec": 2.2500817547306595
+      "OppChoVec": 2.925047111531822
     },
     "Serra-di-Scopamène": {
-      "cluster": 3,
-      "Score_Opp": 3.7672372782944095,
+      "cluster": 1,
+      "Score_Opp": 5.826836800383281,
       "Score_Cho": 4.682560942941337,
       "Score_Vec": 3.3452851192177127,
-      "OppChoVec": 1.500902950556299
+      "OppChoVec": 2.036282033204313
     },
     "Borgo": {
-      "cluster": 1,
-      "Score_Opp": 4.912349513384563,
+      "cluster": 3,
+      "Score_Opp": 6.862599416480118,
       "Score_Cho": 8.156978301634076,
       "Score_Vec": 5.944047178706338,
-      "OppChoVec": 4.988968697112852
+      "OppChoVec": 5.863720504654591
     },
     "Pero-Casevecchie": {
-      "cluster": 5,
-      "Score_Opp": 4.185171033150984,
+      "cluster": 4,
+      "Score_Opp": 3.931886659132084,
       "Score_Cho": 10.0,
       "Score_Vec": 2.602669576161121,
-      "OppChoVec": 4.50451388050861
+      "OppChoVec": 4.491342102933803
     },
     "Venzolasca": {
-      "cluster": 2,
-      "Score_Opp": 5.09278682143357,
+      "cluster": 4,
+      "Score_Opp": 5.11299086270597,
       "Score_Cho": 7.875703187784623,
       "Score_Vec": 4.391833456967953,
-      "OppChoVec": 4.1583296551863125
+      "OppChoVec": 4.164800204953993
     },
     "Vico": {
-      "cluster": 4,
-      "Score_Opp": 4.057477400913949,
+      "cluster": 2,
+      "Score_Opp": 5.858376126542465,
       "Score_Cho": 8.904366461291186,
       "Score_Vec": 3.7013678497041713,
-      "OppChoVec": 4.138151229923229
+      "OppChoVec": 4.88110462813807
     },
     "Casamaccioli": {
       "cluster": 5,
-      "Score_Opp": 2.5376855660934785,
+      "Score_Opp": 2.1426434151424925,
       "Score_Cho": 9.531208143584248,
       "Score_Vec": 3.524892402604798,
-      "OppChoVec": 3.953036102325771
+      "OppChoVec": 3.9521365850273398
     },
     "Corte": {
-      "cluster": 3,
-      "Score_Opp": 6.340088810209553,
+      "cluster": 1,
+      "Score_Opp": 8.649644527568249,
       "Score_Cho": 5.869274042325206,
       "Score_Vec": 0.19698021951009084,
-      "OppChoVec": 1.9822549280011716
+      "OppChoVec": 2.620546965337447
     },
     "Lumio": {
-      "cluster": 5,
-      "Score_Opp": 4.536459262939686,
+      "cluster": 4,
+      "Score_Opp": 5.651610159901259,
       "Score_Cho": 7.128315028127511,
       "Score_Vec": 4.486481173978431,
-      "OppChoVec": 3.5029149928959473
+      "OppChoVec": 3.901597540044431
     },
     "Urtaca": {
       "cluster": 2,
-      "Score_Opp": 6.055505949504754,
+      "Score_Opp": 7.989893115336535,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 4.51040716916821,
-      "OppChoVec": 5.232558767695684
+      "OppChoVec": 6.083420662477321
     },
     "Giuncheto": {
       "cluster": 5,
-      "Score_Opp": 1.4385359574753631,
+      "Score_Opp": 3.7344681080180924,
       "Score_Cho": 9.646396999732122,
       "Score_Vec": 3.9930846054032045,
-      "OppChoVec": 3.8899387274345965
+      "OppChoVec": 4.7725896181085234
     },
     "Olmo": {
-      "cluster": 3,
-      "Score_Opp": 3.8527275141764834,
+      "cluster": 1,
+      "Score_Opp": 3.338910359248316,
       "Score_Cho": 4.412001071524244,
       "Score_Vec": 3.4953923280033923,
-      "OppChoVec": 1.4529549327867706
+      "OppChoVec": 1.2055197433821243
     },
     "Palasca": {
-      "cluster": 5,
-      "Score_Opp": 0.644971958760081,
+      "cluster": 4,
+      "Score_Opp": 1.598367849518808,
       "Score_Cho": 7.248861505491563,
       "Score_Vec": 1.9715408257271003,
-      "OppChoVec": 1.5182358836741239
+      "OppChoVec": 1.7196812967822337
     },
     "Piedigriggio": {
       "cluster": 5,
-      "Score_Opp": 2.4212501300336156,
+      "Score_Opp": 2.6421915094151887,
       "Score_Cho": 8.971336726493437,
       "Score_Vec": 4.243549951856436,
-      "OppChoVec": 3.8346899018961516
+      "OppChoVec": 4.020123891601141
     },
     "Coggia": {
-      "cluster": 5,
-      "Score_Opp": 3.829994798474885,
+      "cluster": 2,
+      "Score_Opp": 7.163446570151436,
       "Score_Cho": 8.615054915617465,
       "Score_Vec": 4.145107843841794,
-      "OppChoVec": 4.044164390034171
+      "OppChoVec": 5.425846408612163
     },
     "Forciolo": {
       "cluster": 2,
-      "Score_Opp": 3.4223731950243397,
+      "Score_Opp": 6.511389164738668,
       "Score_Cho": 9.97053308331101,
       "Score_Vec": 4.749958536851767,
-      "OppChoVec": 5.1206581386145125
+      "OppChoVec": 6.530707627072887
     },
     "Loreto-di-Tallano": {
-      "cluster": 2,
-      "Score_Opp": 4.128434199844336,
+      "cluster": 5,
+      "Score_Opp": 5.013478050831802,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 4.42100402367634,
-      "OppChoVec": 4.891548927423192
+      "OppChoVec": 5.335378163436304
     },
     "Cambia": {
-      "cluster": 5,
-      "Score_Opp": 4.052855563496878,
+      "cluster": 4,
+      "Score_Opp": 6.3176088318574575,
       "Score_Cho": 7.650683096705064,
       "Score_Vec": 4.105526830535831,
-      "OppChoVec": 3.4864215664068103
+      "OppChoVec": 4.343857336666716
     },
     "Arbellara": {
       "cluster": 4,
-      "Score_Opp": 6.254609746385259,
+      "Score_Opp": 4.062242363523657,
       "Score_Cho": 8.290918832038578,
       "Score_Vec": 2.6989217709712072,
-      "OppChoVec": 4.2304085815088355
+      "OppChoVec": 3.3479305118956
     },
     "Bocognano": {
-      "cluster": 2,
-      "Score_Opp": 7.14387215934271,
+      "cluster": 5,
+      "Score_Opp": 4.825300350044432,
       "Score_Cho": 9.515135279935707,
       "Score_Vec": 4.173985893193802,
-      "OppChoVec": 6.198530722961168
+      "OppChoVec": 5.162455494453263
     },
     "Renno": {
       "cluster": 2,
-      "Score_Opp": 5.466428322750367,
+      "Score_Opp": 7.231197945227472,
       "Score_Cho": 9.914278060541124,
       "Score_Vec": 4.295972657299137,
-      "OppChoVec": 5.733293648879707
+      "OppChoVec": 6.57776974610522
     },
     "Campile": {
-      "cluster": 5,
-      "Score_Opp": 3.2061454748094924,
+      "cluster": 4,
+      "Score_Opp": 4.427717557918184,
       "Score_Cho": 8.652558264130725,
       "Score_Vec": 3.447488691839174,
-      "OppChoVec": 3.557851909852366
+      "OppChoVec": 4.037988623596005
     },
     "Gavignano": {
-      "cluster": 5,
-      "Score_Opp": 3.850198182801562,
+      "cluster": 2,
+      "Score_Opp": 6.109454884741932,
       "Score_Cho": 8.502544870077685,
       "Score_Vec": 3.641576860911264,
-      "OppChoVec": 3.7668734233864942
+      "OppChoVec": 4.656836718952284
     },
     "Casaglione": {
-      "cluster": 5,
-      "Score_Opp": 3.437812106287668,
+      "cluster": 4,
+      "Score_Opp": 5.415745610588278,
       "Score_Cho": 7.897133672649347,
       "Score_Vec": 3.3179536478785088,
-      "OppChoVec": 3.109144301130626
+      "OppChoVec": 3.815437244400135
     },
     "Bigorno": {
-      "cluster": 5,
-      "Score_Opp": 3.522181216155401,
+      "cluster": 4,
+      "Score_Opp": 4.135726534334314,
       "Score_Cho": 10.0,
       "Score_Vec": 2.7427944374300086,
-      "OppChoVec": 4.307091348297611
+      "OppChoVec": 4.624734782407344
     },
     "Carcheto-Brustico": {
       "cluster": 5,
-      "Score_Opp": 2.157885243696435,
+      "Score_Opp": 3.248084194847844,
       "Score_Cho": 9.482989552638628,
       "Score_Vec": 3.8423065059877364,
-      "OppChoVec": 3.9295596913607906
+      "OppChoVec": 4.410764617963542
     },
     "Castirla": {
       "cluster": 2,
-      "Score_Opp": 5.872875548373778,
+      "Score_Opp": 6.6475636163909755,
       "Score_Cho": 9.611572461826949,
       "Score_Vec": 2.7456060642099773,
-      "OppChoVec": 5.002943946424966
+      "OppChoVec": 5.318972052979836
     },
     "Scolca": {
       "cluster": 2,
-      "Score_Opp": 5.282440563125467,
+      "Score_Opp": 5.82995253574688,
       "Score_Cho": 9.424055719260648,
       "Score_Vec": 3.186778482518032,
-      "OppChoVec": 4.7877601313443465
+      "OppChoVec": 5.029583844262051
     },
     "Tallone": {
-      "cluster": 5,
-      "Score_Opp": 2.618829023160936,
+      "cluster": 4,
+      "Score_Opp": 2.3809727715422877,
       "Score_Cho": 7.803375301366192,
       "Score_Vec": 3.664460779772841,
-      "OppChoVec": 2.9206111906951984
+      "OppChoVec": 2.8973884943240824
     },
     "Bilia": {
       "cluster": 2,
-      "Score_Opp": 7.5195096560845816,
+      "Score_Opp": 7.1213465983398985,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 2.6294389527520283,
-      "OppChoVec": 5.361884707155732
+      "OppChoVec": 5.054276526423412
     },
     "Marignana": {
-      "cluster": 5,
-      "Score_Opp": 2.5133739632867282,
+      "cluster": 4,
+      "Score_Opp": 4.051447077693608,
       "Score_Cho": 9.367800696490757,
       "Score_Vec": 3.324428033802122,
-      "OppChoVec": 3.7523128759645314
+      "OppChoVec": 4.3706274127036
     },
     "Piana": {
       "cluster": 4,
-      "Score_Opp": 4.541943433451684,
+      "Score_Opp": 5.752712369656653,
       "Score_Cho": 7.088132869006161,
       "Score_Vec": 2.3922295534180154,
-      "OppChoVec": 2.6748701062359896
+      "OppChoVec": 3.03176666753368
     },
     "Rospigliani": {
-      "cluster": 5,
-      "Score_Opp": 3.2860789832300474,
+      "cluster": 4,
+      "Score_Opp": 3.603125132343879,
       "Score_Cho": 6.777390838467721,
       "Score_Vec": 2.955304670799606,
-      "OppChoVec": 2.2768698091268678
+      "OppChoVec": 2.34622167292976
     },
     "Talasani": {
       "cluster": 2,
-      "Score_Opp": 6.344450439168528,
+      "Score_Opp": 7.0139464718380555,
       "Score_Cho": 8.607018483793196,
       "Score_Vec": 4.243179954589268,
-      "OppChoVec": 5.152159311530463
+      "OppChoVec": 5.401509797535117
     },
     "Valle-di-Campoloro": {
-      "cluster": 2,
-      "Score_Opp": 4.519762913315034,
+      "cluster": 5,
+      "Score_Opp": 5.443957468346148,
       "Score_Cho": 8.695419233860166,
       "Score_Vec": 4.657156592080836,
-      "OppChoVec": 4.593776883817286
+      "OppChoVec": 5.012442460521321
     },
     "Rezza": {
-      "cluster": 5,
-      "Score_Opp": 3.5155958099296076,
+      "cluster": 4,
+      "Score_Opp": 5.084016048041725,
       "Score_Cho": 9.74015537101527,
       "Score_Vec": 3.1871229755639154,
-      "OppChoVec": 4.300867621284939
+      "OppChoVec": 4.97725948623993
     },
     "Poggio-Marinaccio": {
       "cluster": 5,
-      "Score_Opp": 3.195558714256653,
+      "Score_Opp": 3.4070860829816323,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 2.256177146208154,
-      "OppChoVec": 3.4519517925331455
+      "OppChoVec": 3.5796143514329932
     },
     "Lecci": {
-      "cluster": 5,
-      "Score_Opp": 2.9811764359422743,
+      "cluster": 4,
+      "Score_Opp": 5.928569143933142,
       "Score_Cho": 7.623894990624162,
       "Score_Vec": 4.950871241079605,
-      "OppChoVec": 3.4481565847713287
+      "OppChoVec": 4.567688363882514
     },
     "Viggianello": {
       "cluster": 2,
-      "Score_Opp": 4.739015156024887,
+      "Score_Opp": 7.11648641419373,
       "Score_Cho": 8.93115456737209,
       "Score_Vec": 4.7165301326196625,
-      "OppChoVec": 4.877885510274129
+      "OppChoVec": 5.936780582214345
     },
     "San-Gavino-d'Ampugnani": {
       "cluster": 2,
-      "Score_Opp": 5.719953890899546,
+      "Score_Opp": 5.704502714347427,
       "Score_Cho": 9.311545673720872,
       "Score_Vec": 3.256126169044929,
-      "OppChoVec": 4.930913754700783
+      "OppChoVec": 4.923794687816528
     },
     "San-Lorenzo": {
       "cluster": 5,
-      "Score_Opp": 2.8874279281905273,
+      "Score_Opp": 3.7022844977479186,
       "Score_Cho": 9.517814090543798,
       "Score_Vec": 3.8053972134880274,
-      "OppChoVec": 4.178336705048386
+      "OppChoVec": 4.576368435598173
     },
     "Valle-d'Orezza": {
       "cluster": 5,
-      "Score_Opp": 3.268055262053586,
+      "Score_Opp": 2.438009376869401,
       "Score_Cho": 10.0,
       "Score_Vec": 3.4505323536001824,
-      "OppChoVec": 4.505915087138658
+      "OppChoVec": 4.359694472265313
     },
     "Zoza": {
-      "cluster": 5,
-      "Score_Opp": 3.3089765007836274,
+      "cluster": 2,
+      "Score_Opp": 5.788303420972078,
       "Score_Cho": 10.0,
       "Score_Vec": 3.900828564291958,
-      "OppChoVec": 4.715058611411682
+      "OppChoVec": 5.807184073162057
     },
     "Lano": {
-      "cluster": 2,
-      "Score_Opp": 3.5165510455419016,
+      "cluster": 5,
+      "Score_Opp": 3.233062265398443,
       "Score_Cho": 9.6517546209483,
       "Score_Vec": 4.45902680617694,
-      "OppChoVec": 4.78785010056986
+      "OppChoVec": 4.8218999598440755
     },
     "Mazzola": {
-      "cluster": 5,
-      "Score_Opp": 3.7958756658931474,
+      "cluster": 4,
+      "Score_Opp": 4.573135270823034,
       "Score_Cho": 7.564961157246183,
       "Score_Vec": 4.175027616604267,
-      "OppChoVec": 3.3687510932665825
+      "OppChoVec": 3.6589939366639888
     },
     "Scata": {
       "cluster": 5,
-      "Score_Opp": 3.132173209892384,
+      "Score_Opp": 3.1280589415635314,
       "Score_Cho": 10.0,
       "Score_Vec": 3.3741800687739265,
-      "OppChoVec": 4.424510510382381
+      "OppChoVec": 4.550924739437991
     },
     "Grosseto-Prugna": {
       "cluster": 2,
-      "Score_Opp": 4.359847686800967,
+      "Score_Opp": 7.250038319601711,
       "Score_Cho": 8.917760514331636,
       "Score_Vec": 5.128081653672375,
-      "OppChoVec": 4.901736328218818
+      "OppChoVec": 6.201491090627825
     },
     "Ucciani": {
       "cluster": 5,
-      "Score_Opp": 1.398588946244541,
+      "Score_Opp": 2.9263475663080407,
       "Score_Cho": 9.373158317706938,
       "Score_Vec": 3.7032075748550004,
-      "OppChoVec": 3.5741912265184403
+      "OppChoVec": 4.160226648383668
     },
     "Campi": {
-      "cluster": 2,
-      "Score_Opp": 3.4751744861571727,
+      "cluster": 5,
+      "Score_Opp": 5.197296860838637,
       "Score_Cho": 10.0,
       "Score_Vec": 5.0846055314871395,
-      "OppChoVec": 5.321685377903456
+      "OppChoVec": 6.161296056730526
     },
     "Monacia-d'Orezza": {
-      "cluster": 5,
-      "Score_Opp": 2.0468056620811916,
+      "cluster": 4,
+      "Score_Opp": 3.7367286141241065,
       "Score_Cho": 8.928475756763996,
       "Score_Vec": 2.595638111203228,
-      "OppChoVec": 3.04220063604497
+      "OppChoVec": 3.6358455292348326
     },
     "Pianello": {
-      "cluster": 5,
-      "Score_Opp": 4.571332541817893,
+      "cluster": 4,
+      "Score_Opp": 4.881523345115811,
       "Score_Cho": 9.72676131797482,
       "Score_Vec": 2.2615962408418087,
-      "OppChoVec": 4.327681378559007
+      "OppChoVec": 4.4859138984919715
     },
     "Argiusta-Moriccio": {
-      "cluster": 2,
-      "Score_Opp": 5.7628176444134525,
+      "cluster": 5,
+      "Score_Opp": 3.322623188022191,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7651136862107952,
-      "OppChoVec": 5.691353647846185
+      "OppChoVec": 4.795273664195764
     },
     "Bonifacio": {
       "cluster": 4,
-      "Score_Opp": 7.170602734809419,
+      "Score_Opp": 4.755540374038284,
       "Score_Cho": 7.168497187248865,
       "Score_Vec": 2.4481082885132697,
-      "OppChoVec": 3.823301986120504
+      "OppChoVec": 2.756818983567246
     },
     "San-Gavino-di-Carbini": {
-      "cluster": 5,
-      "Score_Opp": 3.356504921278711,
+      "cluster": 4,
+      "Score_Opp": 5.339885632624264,
       "Score_Cho": 6.255022769890168,
       "Score_Vec": 4.517555578735715,
-      "OppChoVec": 2.5925511664878487
+      "OppChoVec": 3.2406658196941605
     },
     "Tolla": {
       "cluster": 5,
-      "Score_Opp": 2.4363708250610423,
+      "Score_Opp": 4.6882094919798085,
       "Score_Cho": 9.533886954192342,
       "Score_Vec": 3.9352991063191873,
-      "OppChoVec": 4.092896502730884
+      "OppChoVec": 5.010453345344611
     },
     "Centuri": {
       "cluster": 5,
-      "Score_Opp": 2.3730040522082154,
+      "Score_Opp": 3.0269437006006483,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 1.727825451315316,
-      "OppChoVec": 2.8891850466426883
+      "OppChoVec": 3.135520831996534
     },
     "Piazzole": {
-      "cluster": 2,
-      "Score_Opp": 4.005456584186933,
+      "cluster": 5,
+      "Score_Opp": 5.40584809946473,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 4.172723348986184,
-      "OppChoVec": 4.5228083939136985
+      "OppChoVec": 5.143716343101748
     },
     "Tasso": {
-      "cluster": 5,
-      "Score_Opp": 3.9512359349673147,
+      "cluster": 4,
+      "Score_Opp": 4.407568319846642,
       "Score_Cho": 9.847307795338873,
       "Score_Vec": 3.148660806671057,
-      "OppChoVec": 4.526662630147664
+      "OppChoVec": 4.7854825764757125
     },
     "Moïta": {
       "cluster": 4,
-      "Score_Opp": 4.710381871613204,
+      "Score_Opp": 4.42833352528332,
       "Score_Cho": 9.876774712027864,
       "Score_Vec": 0.4803429566471967,
-      "OppChoVec": 3.839145706463547
+      "OppChoVec": 3.743347613329458
     },
     "Stazzona": {
-      "cluster": 5,
-      "Score_Opp": 2.6246043269573875,
+      "cluster": 4,
+      "Score_Opp": 3.464100603007867,
       "Score_Cho": 6.927404232520761,
       "Score_Vec": 4.254058002049806,
-      "OppChoVec": 2.6377049279693128
+      "OppChoVec": 2.91501451125519
     },
     "Cannelle": {
-      "cluster": 2,
-      "Score_Opp": 5.413953385293584,
+      "cluster": 5,
+      "Score_Opp": 4.7484795258144405,
       "Score_Cho": 9.501741226895259,
       "Score_Vec": 4.108178776884632,
-      "OppChoVec": 5.309553264699648
+      "OppChoVec": 5.090767409349704
     },
     "Olmeto": {
-      "cluster": 5,
-      "Score_Opp": 3.5738566517044235,
+      "cluster": 2,
+      "Score_Opp": 5.550715118101133,
       "Score_Cho": 8.757031877846236,
       "Score_Vec": 3.7265776223646756,
-      "OppChoVec": 3.8692381070150654
+      "OppChoVec": 4.659924620243928
     },
     "Cervione": {
       "cluster": 4,
-      "Score_Opp": 4.331890867992664,
+      "Score_Opp": 6.025882330051388,
       "Score_Cho": 9.003482453790516,
       "Score_Vec": 2.636678939856263,
-      "OppChoVec": 3.880089307897131
+      "OppChoVec": 4.547317439833838
     },
     "Giuncaggio": {
-      "cluster": 5,
-      "Score_Opp": 3.4797117371103243,
+      "cluster": 4,
+      "Score_Opp": 4.117644403141846,
       "Score_Cho": 8.687382802035895,
       "Score_Vec": 2.725189929548486,
-      "OppChoVec": 3.3938645208528917
+      "OppChoVec": 3.6487182886433605
     },
     "Nessa": {
       "cluster": 5,
-      "Score_Opp": 2.165959271372923,
+      "Score_Opp": 3.9951248564658757,
       "Score_Cho": 9.244575408518621,
       "Score_Vec": 3.5549361869531375,
-      "OppChoVec": 3.652750027650586
+      "OppChoVec": 4.361683635053721
     },
     "Novella": {
       "cluster": 2,
-      "Score_Opp": 6.9330509220987455,
+      "Score_Opp": 7.841836110336278,
       "Score_Cho": 9.209750870613448,
       "Score_Vec": 3.114444952703205,
-      "OppChoVec": 5.373460516784252
+      "OppChoVec": 5.7043370141817356
     },
     "Levie": {
       "cluster": 4,
-      "Score_Opp": 4.811411718702877,
+      "Score_Opp": 6.762443464816853,
       "Score_Cho": 8.593624430752746,
       "Score_Vec": 1.51174066490324,
-      "OppChoVec": 3.3795403653515055
+      "OppChoVec": 4.08518025797986
     },
     "Castiglione": {
       "cluster": 4,
-      "Score_Opp": 3.823661233568989,
+      "Score_Opp": 5.0794797210894425,
       "Score_Cho": 9.587463166354139,
       "Score_Vec": 1.677953780599723,
-      "OppChoVec": 3.722752862292835
+      "OppChoVec": 4.217344090608049
     },
     "Rogliano": {
       "cluster": 4,
-      "Score_Opp": 5.0388501700950705,
+      "Score_Opp": 5.87108350064328,
       "Score_Cho": 8.572193945888024,
       "Score_Vec": 2.0112452371891667,
-      "OppChoVec": 3.6351294474333558
+      "OppChoVec": 3.915531812860636
     },
     "Vignale": {
       "cluster": 2,
-      "Score_Opp": 6.5743327818071755,
+      "Score_Opp": 6.804655663420797,
       "Score_Cho": 9.608893651218862,
       "Score_Vec": 4.803539143874296,
-      "OppChoVec": 6.283245739384899
+      "OppChoVec": 6.389722364334189
     },
     "Partinello": {
-      "cluster": 5,
-      "Score_Opp": 2.1376298327382006,
+      "cluster": 4,
+      "Score_Opp": 3.301934245814036,
       "Score_Cho": 7.6587195285293355,
       "Score_Vec": 4.709003209741654,
-      "OppChoVec": 3.1037566838221538
+      "OppChoVec": 3.5321682645281802
     },
     "Ghisonaccia": {
-      "cluster": 3,
-      "Score_Opp": 2.5104929850479056,
+      "cluster": 1,
+      "Score_Opp": 2.5935130102310087,
       "Score_Cho": 4.781676935440664,
       "Score_Vec": 2.1306385902381915,
-      "OppChoVec": 0.8226464095495206
+      "OppChoVec": 0.7378895109900073
     },
     "Tox": {
       "cluster": 2,
-      "Score_Opp": 6.703587606258468,
+      "Score_Opp": 7.121382399658582,
       "Score_Cho": 9.582105545137958,
       "Score_Vec": 4.158154162548353,
-      "OppChoVec": 6.01476335379011
+      "OppChoVec": 6.18005507053759
     },
     "Volpajola": {
       "cluster": 2,
-      "Score_Opp": 5.155545561041324,
+      "Score_Opp": 5.577003290960314,
       "Score_Cho": 9.541923386016611,
       "Score_Vec": 3.1464257041407633,
-      "OppChoVec": 4.800593382688089
+      "OppChoVec": 5.000106168645074
     },
     "Zicavo": {
-      "cluster": 5,
-      "Score_Opp": 3.924943436497175,
+      "cluster": 4,
+      "Score_Opp": 4.480329464790739,
       "Score_Cho": 9.85534422716314,
       "Score_Vec": 2.3842762041465146,
-      "OppChoVec": 4.213061516655087
+      "OppChoVec": 4.4861360969860185
     },
     "Alando": {
       "cluster": 4,
-      "Score_Opp": 3.43472834866285,
+      "Score_Opp": 6.399726777909547,
       "Score_Cho": 10.0,
       "Score_Vec": 1.3032861221798955,
-      "OppChoVec": 3.730367777719609
+      "OppChoVec": 4.903868364864512
     },
     "Croce": {
       "cluster": 5,
-      "Score_Opp": 3.544152997228909,
+      "Score_Opp": 3.6373837751978866,
       "Score_Cho": 9.373158317706938,
       "Score_Vec": 3.758210849646848,
-      "OppChoVec": 4.292245392348889
+      "OppChoVec": 4.42355203590146
     },
     "Feliceto": {
       "cluster": 5,
-      "Score_Opp": 0.6033737548538952,
+      "Score_Opp": 1.4482742504455681,
       "Score_Cho": 9.070452718992767,
       "Score_Vec": 2.0339293278924373,
-      "OppChoVec": 2.559731739810505
+      "OppChoVec": 2.8319430599482267
     },
     "Vezzani": {
       "cluster": 4,
-      "Score_Opp": 4.815275062471787,
+      "Score_Opp": 4.559769199885941,
       "Score_Cho": 7.259576747923921,
       "Score_Vec": 1.990196144707459,
-      "OppChoVec": 2.733171029670954
+      "OppChoVec": 2.577843111112876
     },
     "Afa": {
-      "cluster": 1,
-      "Score_Opp": 8.151024620808922,
+      "cluster": 3,
+      "Score_Opp": 8.111773474442481,
       "Score_Cho": 9.268684703991427,
       "Score_Vec": 10.0,
       "OppChoVec": 10.0
     },
     "Cardo-Torgia": {
       "cluster": 5,
-      "Score_Opp": 1.1798516858293266,
+      "Score_Opp": 1.1909956151845738,
       "Score_Cho": 10.0,
       "Score_Vec": 5.478426874323315,
-      "OppChoVec": 4.729020511396034
+      "OppChoVec": 4.943312117637559
     },
     "Tavaco": {
       "cluster": 5,
-      "Score_Opp": 2.107417577017658,
+      "Score_Opp": 4.163780279743153,
       "Score_Cho": 9.619608893651218,
       "Score_Vec": 4.7913458524074874,
-      "OppChoVec": 4.420293651473611
+      "OppChoVec": 5.294342471206303
     },
     "Biguglia": {
-      "cluster": 1,
-      "Score_Opp": 5.561883629584323,
+      "cluster": 3,
+      "Score_Opp": 7.841625981341736,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 7.229780463426438,
-      "OppChoVec": 6.378588729433712
+      "OppChoVec": 7.5336092493466476
     },
     "Carticasi": {
       "cluster": 5,
-      "Score_Opp": 2.9226737500543,
+      "Score_Opp": 3.58069410938508,
       "Score_Cho": 10.0,
       "Score_Vec": 2.2810929051462954,
-      "OppChoVec": 3.913002304851425
+      "OppChoVec": 4.233905766070689
     },
     "Cateri": {
       "cluster": 5,
-      "Score_Opp": 0.24168938551159563,
+      "Score_Opp": 0.9562623781873809,
       "Score_Cho": 9.673185105813019,
       "Score_Vec": 3.620061306022779,
-      "OppChoVec": 3.451917886372952
+      "OppChoVec": 3.7598059038589255
     },
     "Giocatojo": {
       "cluster": 4,
-      "Score_Opp": 5.15921438865711,
+      "Score_Opp": 4.591526793260514,
       "Score_Cho": 8.955263862844896,
       "Score_Vec": 3.08000559804627,
-      "OppChoVec": 4.359036275146248
+      "OppChoVec": 4.154921365874879
     },
     "Morosaglia": {
       "cluster": 4,
-      "Score_Opp": 5.391353412789101,
+      "Score_Opp": 6.024797904377025,
       "Score_Cho": 8.751674256630055,
       "Score_Vec": 2.3435881308587456,
-      "OppChoVec": 4.024229478976776
+      "OppChoVec": 4.238719888311235
     },
     "Quasquara": {
       "cluster": 5,
-      "Score_Opp": 1.3847475519646804,
+      "Score_Opp": 3.187441088268144,
       "Score_Cho": 9.592820787570318,
       "Score_Vec": 3.844639115573015,
-      "OppChoVec": 3.776337218877057
+      "OppChoVec": 4.473902346394684
     },
     "Barbaggio": {
       "cluster": 5,
-      "Score_Opp": 1.2714953576683652,
+      "Score_Opp": 2.2990947649101177,
       "Score_Cho": 9.4910259844629,
       "Score_Vec": 4.011896041836555,
-      "OppChoVec": 3.7450480897384706
+      "OppChoVec": 4.1868747131390895
     },
     "Popolasca": {
       "cluster": 5,
-      "Score_Opp": 3.476652433105236,
+      "Score_Opp": 1.3268346216485147,
       "Score_Cho": 10.0,
       "Score_Vec": 3.9833720810825213,
-      "OppChoVec": 4.814377067767406
+      "OppChoVec": 4.265064573087656
     },
     "Orto": {
-      "cluster": 2,
-      "Score_Opp": 3.620199852320893,
+      "cluster": 5,
+      "Score_Opp": 4.907970324754614,
       "Score_Cho": 10.0,
       "Score_Vec": 5.427749717074059,
-      "OppChoVec": 5.545734167185731
+      "OppChoVec": 6.224214152356703
     },
     "Pianottoli-Caldarello": {
       "cluster": 5,
-      "Score_Opp": 1.3642688025894683,
+      "Score_Opp": 3.4159771176625577,
       "Score_Cho": 9.389231181355477,
       "Score_Vec": 3.2648988182766363,
-      "OppChoVec": 3.401234564224148
+      "OppChoVec": 4.140852290954976
     },
     "Urbalacone": {
       "cluster": 2,
-      "Score_Opp": 6.216465683453876,
+      "Score_Opp": 7.345803762175405,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7337273855702446,
-      "OppChoVec": 5.895897019443668
+      "OppChoVec": 6.41789115690345
     },
     "Canari": {
       "cluster": 4,
-      "Score_Opp": 4.576000130507993,
+      "Score_Opp": 5.330681175401274,
       "Score_Cho": 9.10259844628985,
       "Score_Vec": 0.7896970313271211,
-      "OppChoVec": 3.37093264756607
+      "OppChoVec": 3.6223333832984905
     },
     "Tralonca": {
       "cluster": 5,
-      "Score_Opp": 2.5856480837356246,
+      "Score_Opp": 2.634298312068817,
       "Score_Cho": 9.34101259040986,
       "Score_Vec": 2.678613459178107,
-      "OppChoVec": 3.505065528786374
+      "OppChoVec": 3.6078515349720015
     },
     "Vescovato": {
       "cluster": 2,
-      "Score_Opp": 6.323576245318524,
+      "Score_Opp": 6.840453791887269,
       "Score_Cho": 7.709616930083042,
       "Score_Vec": 4.3151271410920025,
-      "OppChoVec": 4.554060156246839
+      "OppChoVec": 4.698415379494149
     },
     "Lopigna": {
-      "cluster": 2,
-      "Score_Opp": 3.197743549837077,
+      "cluster": 5,
+      "Score_Opp": 3.7889409721825684,
       "Score_Cho": 9.71604607554246,
       "Score_Vec": 4.903106419397352,
-      "OppChoVec": 4.918753879227064
+      "OppChoVec": 5.287298092643028
     },
     "Matra": {
-      "cluster": 2,
-      "Score_Opp": 3.785043222444088,
+      "cluster": 5,
+      "Score_Opp": 4.366398276851838,
       "Score_Cho": 9.713367264934373,
       "Score_Vec": 4.012077695621036,
-      "OppChoVec": 4.735928208587069
+      "OppChoVec": 5.064444114237817
     },
     "Penta-Acquatella": {
       "cluster": 5,
-      "Score_Opp": 2.534306968328103,
+      "Score_Opp": 3.4712061295026424,
       "Score_Cho": 10.0,
       "Score_Vec": 4.028290163735701,
-      "OppChoVec": 4.495657575273423
+      "OppChoVec": 4.970354724511234
     },
     "Pietralba": {
       "cluster": 2,
-      "Score_Opp": 5.910954185762741,
+      "Score_Opp": 6.498229291111209,
       "Score_Cho": 9.523171711759979,
       "Score_Vec": 4.225321732183447,
-      "OppChoVec": 5.610852928516631
+      "OppChoVec": 5.886092935481312
     },
     "Prunelli-di-Casacconi": {
       "cluster": 5,
-      "Score_Opp": 2.5755790332319424,
+      "Score_Opp": 2.8755215276093873,
       "Score_Cho": 9.399946423787842,
       "Score_Vec": 3.0939163510884793,
-      "OppChoVec": 3.7023338667949424
+      "OppChoVec": 3.8983855286004774
     },
     "Ventiseri": {
-      "cluster": 2,
-      "Score_Opp": 4.612987282702213,
+      "cluster": 5,
+      "Score_Opp": 5.229150846274752,
       "Score_Cho": 9.268684703991427,
       "Score_Vec": 4.091934950757199,
-      "OppChoVec": 4.783647796701848
+      "OppChoVec": 5.090372319273442
     },
     "Arro": {
-      "cluster": 2,
-      "Score_Opp": 6.870903952642474,
+      "cluster": 5,
+      "Score_Opp": 4.311645964664881,
       "Score_Cho": 9.801768015001343,
       "Score_Vec": 3.9268584373384217,
-      "OppChoVec": 6.1619137512515145
+      "OppChoVec": 5.072649494589049
     },
     "Carbuccia": {
       "cluster": 5,
-      "Score_Opp": 3.2415698505932844,
+      "Score_Opp": 5.0346375098124945,
       "Score_Cho": 9.212429681221538,
       "Score_Vec": 3.9914206858697,
-      "OppChoVec": 4.169808235015013
+      "OppChoVec": 4.923344181613026
     },
     "Sari-Solenzara": {
       "cluster": 4,
-      "Score_Opp": 4.065870252452134,
+      "Score_Opp": 6.378396615303224,
       "Score_Cho": 8.628448968657915,
       "Score_Vec": 1.1207664581289947,
-      "OppChoVec": 2.9915019055731396
+      "OppChoVec": 3.8074118101978245
     },
     "Ajaccio": {
-      "cluster": 3,
-      "Score_Opp": 10.0,
+      "cluster": 1,
+      "Score_Opp": 9.97347561583261,
       "Score_Cho": 1.265508925067117,
       "Score_Vec": 4.808445320602226,
-      "OppChoVec": 3.004529059105458
+      "OppChoVec": 2.524808911297458
     },
     "Mela": {
-      "cluster": 2,
-      "Score_Opp": 3.4976525289415665,
+      "cluster": 5,
+      "Score_Opp": 4.449887473890534,
       "Score_Cho": 9.276721135815698,
       "Score_Vec": 5.023626346510939,
-      "OppChoVec": 4.768864888260748
+      "OppChoVec": 5.250729940160408
     },
     "Calenzana": {
-      "cluster": 4,
-      "Score_Opp": 4.577671256060972,
+      "cluster": 2,
+      "Score_Opp": 6.56602802010182,
       "Score_Cho": 8.197160460755423,
       "Score_Vec": 3.312313387736579,
-      "OppChoVec": 3.710302664462724
+      "OppChoVec": 4.473271042591195
     },
     "Manso": {
       "cluster": 5,
-      "Score_Opp": 3.071337377689487,
+      "Score_Opp": 3.7424937266329286,
       "Score_Cho": 9.95446021966247,
       "Score_Vec": 4.024501345800688,
-      "OppChoVec": 4.649034675359902
+      "OppChoVec": 5.029547855461399
     },
     "Montegrosso": {
       "cluster": 5,
-      "Score_Opp": 3.007688996945137,
+      "Score_Opp": 4.3065255817235375,
       "Score_Cho": 8.90972408250737,
       "Score_Vec": 4.387033434847134,
-      "OppChoVec": 4.050240345733858
+      "OppChoVec": 4.608027210536032
     },
     "Nonza": {
       "cluster": 2,
-      "Score_Opp": 5.981090290154542,
+      "Score_Opp": 8.296201755354517,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 3.2083085356533076,
-      "OppChoVec": 5.130088433006129
+      "OppChoVec": 6.155244726992218
     },
     "Vallica": {
       "cluster": 4,
-      "Score_Opp": 4.35176026832424,
+      "Score_Opp": 5.695207141290472,
       "Score_Cho": 7.894454862041252,
       "Score_Vec": 2.3825611306715104,
-      "OppChoVec": 3.080226928045247
+      "OppChoVec": 3.5310884295281237
     },
     "Velone-Orneto": {
-      "cluster": 2,
-      "Score_Opp": 5.61072147317361,
+      "cluster": 5,
+      "Score_Opp": 5.248196471773266,
       "Score_Cho": 9.94910259844629,
       "Score_Vec": 4.57075347810365,
-      "OppChoVec": 5.959448096922535
+      "OppChoVec": 5.874576606791894
     },
     "San-Gavino-di-Fiumorbo": {
       "cluster": 5,
-      "Score_Opp": 3.3638269320687315,
+      "Score_Opp": 2.350351937202389,
       "Score_Cho": 9.83659255290651,
       "Score_Vec": 2.8338209040211026,
-      "OppChoVec": 4.1698150979325685
+      "OppChoVec": 3.9436339771927775
     },
     "Conca": {
-      "cluster": 5,
-      "Score_Opp": 3.0930131300774417,
+      "cluster": 4,
+      "Score_Opp": 5.237936468933286,
       "Score_Cho": 7.023841414412001,
       "Score_Vec": 2.526363027236158,
-      "OppChoVec": 2.2040862369242293
+      "OppChoVec": 2.861332703478064
     },
     "Verdèse": {
       "cluster": 4,
-      "Score_Opp": 4.821188519845308,
+      "Score_Opp": 6.880069541272822,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 1.7516457354921158,
-      "OppChoVec": 4.291877323471288
+      "OppChoVec": 5.142872251338164
     },
     "Monacia-d'Aullène": {
-      "cluster": 5,
-      "Score_Opp": 1.8079069278089308,
+      "cluster": 4,
+      "Score_Opp": 3.83750585594972,
       "Score_Cho": 9.263327082775248,
       "Score_Vec": 2.9804306658262796,
-      "OppChoVec": 3.3327002749563714
+      "OppChoVec": 4.069589034864432
     },
     "Pruno": {
       "cluster": 4,
-      "Score_Opp": 3.665713739857162,
+      "Score_Opp": 4.02724827465455,
       "Score_Cho": 9.223144923653898,
       "Score_Vec": 1.0957592049814,
-      "OppChoVec": 3.2204748408447803
+      "OppChoVec": 3.361482308245343
     },
     "Solaro": {
       "cluster": 2,
-      "Score_Opp": 5.559882403149739,
+      "Score_Opp": 6.808470128362209,
       "Score_Cho": 9.930350924189659,
       "Score_Vec": 4.407684865592142,
-      "OppChoVec": 5.842478601107901
+      "OppChoVec": 6.45329223205624
     },
     "Taglio-Isolaccio": {
-      "cluster": 2,
-      "Score_Opp": 3.8734139419722293,
+      "cluster": 5,
+      "Score_Opp": 4.347410023932861,
       "Score_Cho": 8.987409590141977,
       "Score_Vec": 4.29022537280569,
-      "OppChoVec": 4.3772573290565315
+      "OppChoVec": 4.635090774621012
     },
     "Zuani": {
       "cluster": 4,
-      "Score_Opp": 4.147158518682575,
+      "Score_Opp": 5.132584292973909,
       "Score_Cho": 8.288240021430484,
       "Score_Vec": 3.1434923127102,
-      "OppChoVec": 3.5384644888631307
+      "OppChoVec": 3.905931199503513
     },
     "Casanova": {
       "cluster": 5,
-      "Score_Opp": 1.918478092748685,
+      "Score_Opp": 4.08780405999794,
       "Score_Cho": 9.584784355746049,
       "Score_Vec": 4.410035063291544,
-      "OppChoVec": 4.167518584394314
+      "OppChoVec": 5.051388135726591
     },
     "Poggio-d'Oletta": {
-      "cluster": 2,
-      "Score_Opp": 3.2113155006219167,
+      "cluster": 5,
+      "Score_Opp": 5.082023832360204,
       "Score_Cho": 9.359764264666488,
       "Score_Vec": 6.746557921455601,
-      "OppChoVec": 5.568445547227693
+      "OppChoVec": 6.496915584269796
     },
     "Zonza": {
-      "cluster": 5,
-      "Score_Opp": 3.610490810594833,
+      "cluster": 4,
+      "Score_Opp": 5.101885431926386,
       "Score_Cho": 7.621216180016075,
       "Score_Vec": 3.0544886258629926,
-      "OppChoVec": 2.9012686930174167
+      "OppChoVec": 3.405417341849632
     },
     "Erbajolo": {
       "cluster": 2,
-      "Score_Opp": 5.295102357819385,
+      "Score_Opp": 7.014208615786468,
       "Score_Cho": 9.56335387088133,
       "Score_Vec": 5.078895184570145,
-      "OppChoVec": 5.761786199771403
+      "OppChoVec": 6.5945186420607005
     },
     "Rapaggio": {
-      "cluster": 5,
-      "Score_Opp": 2.7707110457058133,
+      "cluster": 4,
+      "Score_Opp": 5.12829069267529,
       "Score_Cho": 9.48031074203054,
       "Score_Vec": 2.298310610468596,
-      "OppChoVec": 3.514299070334282
+      "OppChoVec": 4.408860845202049
     },
     "Rapale": {
-      "cluster": 5,
-      "Score_Opp": 2.3915968609999156,
+      "cluster": 4,
+      "Score_Opp": 3.5481919654707887,
       "Score_Cho": 8.015001339405307,
       "Score_Vec": 4.360725129190344,
-      "OppChoVec": 3.256460982871932
+      "OppChoVec": 3.695809542358613
     },
     "Serra-di-Fiumorbo": {
       "cluster": 5,
-      "Score_Opp": 2.41660096299728,
+      "Score_Opp": 2.6454879291991364,
       "Score_Cho": 9.247254219126708,
       "Score_Vec": 4.064501348279914,
-      "OppChoVec": 3.943951612008572
+      "OppChoVec": 4.140063906983677
     },
     "Arbori": {
-      "cluster": 2,
-      "Score_Opp": 4.317904202414213,
+      "cluster": 5,
+      "Score_Opp": 2.0462851981616206,
       "Score_Cho": 9.85266541655505,
       "Score_Vec": 4.008986039590433,
-      "OppChoVec": 5.050229453816285
+      "OppChoVec": 4.378143470337407
     },
     "Piedicroce": {
-      "cluster": 5,
-      "Score_Opp": 3.941087457207476,
+      "cluster": 2,
+      "Score_Opp": 5.764065441840595,
       "Score_Cho": 9.608893651218862,
       "Score_Vec": 3.442067387090967,
-      "OppChoVec": 4.47509142126023
+      "OppChoVec": 5.264159026947403
     },
     "Pila-Canale": {
-      "cluster": 5,
-      "Score_Opp": 3.475939459928383,
+      "cluster": 4,
+      "Score_Opp": 4.698184883802487,
       "Score_Cho": 7.342619876774712,
       "Score_Vec": 2.671907765497035,
-      "OppChoVec": 2.5545153713067483
+      "OppChoVec": 2.932478741185776
     },
     "Noceta": {
       "cluster": 5,
-      "Score_Opp": 2.916319279433414,
+      "Score_Opp": 4.384015721778967,
       "Score_Cho": 10.0,
       "Score_Vec": 3.811107657493646,
-      "OppChoVec": 4.533668092731842
+      "OppChoVec": 5.201480033662914
     },
     "Cozzano": {
       "cluster": 5,
-      "Score_Opp": 1.4598986883054563,
+      "Score_Opp": 2.5137203545331497,
       "Score_Cho": 9.26600589338334,
       "Score_Vec": 2.8028382860108043,
-      "OppChoVec": 3.1699596447063354
+      "OppChoVec": 3.5686435178278515
     },
     "Cuttoli-Corticchiato": {
       "cluster": 2,
-      "Score_Opp": 4.808559117647398,
+      "Score_Opp": 7.049504727358399,
       "Score_Cho": 10.0,
       "Score_Vec": 5.667002437233601,
-      "OppChoVec": 6.173207133849935
+      "OppChoVec": 7.308337065181645
     },
     "Barrettali": {
-      "cluster": 5,
-      "Score_Opp": 3.697736627143722,
+      "cluster": 2,
+      "Score_Opp": 6.136585879758201,
       "Score_Cho": 9.568711492097508,
       "Score_Vec": 3.0029169382769605,
-      "OppChoVec": 4.172567101352104
+      "OppChoVec": 5.1849494176344635
     },
     "Monticello": {
       "cluster": 2,
-      "Score_Opp": 5.855687432318391,
+      "Score_Opp": 7.623723304699088,
       "Score_Cho": 8.874899544602195,
       "Score_Vec": 3.54885252709241,
-      "OppChoVec": 4.806107356504085
+      "OppChoVec": 5.54625329720846
     },
     "Ota": {
-      "cluster": 5,
-      "Score_Opp": 2.3334386717709417,
+      "cluster": 4,
+      "Score_Opp": 3.259707969183472,
       "Score_Cho": 7.894454862041252,
       "Score_Vec": 0.17935397450034174,
-      "OppChoVec": 1.736340471052922
+      "OppChoVec": 1.9585160362715006
     },
     "Pastricciola": {
       "cluster": 5,
-      "Score_Opp": 1.9238479095584302,
+      "Score_Opp": 2.3498197276272927,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 3.3480887790600518,
-      "OppChoVec": 3.351431894956531
+      "OppChoVec": 3.5743176727263353
     },
     "Sari-d'Orcino": {
-      "cluster": 5,
-      "Score_Opp": 3.564768153768804,
+      "cluster": 2,
+      "Score_Opp": 5.927929524729408,
       "Score_Cho": 9.255290650950979,
       "Score_Vec": 3.14803945684461,
-      "OppChoVec": 3.9658711017482413
+      "OppChoVec": 4.92237631934347
     },
     "Aléria": {
-      "cluster": 5,
-      "Score_Opp": 2.0072097421129405,
+      "cluster": 4,
+      "Score_Opp": 3.3679156446542198,
       "Score_Cho": 6.571122421644791,
       "Score_Vec": 1.5858021201673322,
-      "OppChoVec": 1.3673583844584993
+      "OppChoVec": 1.6745347136467592
     },
     "Antisanti": {
-      "cluster": 3,
-      "Score_Opp": 3.3282465972926567,
+      "cluster": 1,
+      "Score_Opp": 4.983290075794219,
       "Score_Cho": 4.939726761317974,
       "Score_Vec": 3.0255379252152426,
-      "OppChoVec": 1.3852299417619942
+      "OppChoVec": 1.778234056813219
     },
     "Isolaccio-di-Fiumorbo": {
       "cluster": 4,
-      "Score_Opp": 5.677492255268431,
+      "Score_Opp": 6.009276035030448,
       "Score_Cho": 9.081167961425127,
       "Score_Vec": 1.5033561250543523,
-      "OppChoVec": 4.052354917732978
+      "OppChoVec": 4.132578734369923
     },
     "Canale-di-Verde": {
-      "cluster": 5,
-      "Score_Opp": 3.510000432379956,
+      "cluster": 4,
+      "Score_Opp": 4.0428476899120085,
       "Score_Cho": 8.430216983659255,
       "Score_Vec": 3.562106034905785,
-      "OppChoVec": 3.5651516582206355
+      "OppChoVec": 3.796647849447173
     },
     "Furiani": {
-      "cluster": 1,
-      "Score_Opp": 5.6464108221379385,
+      "cluster": 3,
+      "Score_Opp": 7.861988538180177,
       "Score_Cho": 8.620412536833646,
       "Score_Vec": 7.294058618816438,
-      "OppChoVec": 6.365245552237779
+      "OppChoVec": 7.483926217445375
     },
     "Oletta": {
-      "cluster": 5,
-      "Score_Opp": 3.717964344800097,
+      "cluster": 4,
+      "Score_Opp": 4.9779148906719195,
       "Score_Cho": 8.75971068845433,
       "Score_Vec": 2.701489616099513,
-      "OppChoVec": 3.51561938402641
+      "OppChoVec": 3.9948273207114426
     },
     "Sorio": {
       "cluster": 5,
-      "Score_Opp": 1.6341677533016385,
+      "Score_Opp": 1.3354418651686824,
       "Score_Cho": 9.84998660594696,
       "Score_Vec": 3.519991031290388,
-      "OppChoVec": 3.8909082842583413
+      "OppChoVec": 3.94925350619701
     },
     "Carpineto": {
       "cluster": 5,
-      "Score_Opp": 2.7435809246954372,
+      "Score_Opp": 2.980859353049594,
       "Score_Cho": 9.587463166354139,
       "Score_Vec": 3.1092689050470175,
-      "OppChoVec": 3.891257258907082
+      "OppChoVec": 4.075825771668685
     },
     "Castellare-di-Mercurio": {
       "cluster": 5,
-      "Score_Opp": 1.6109440407513345,
+      "Score_Opp": 2.691763422512194,
       "Score_Cho": 10.0,
       "Score_Vec": 2.9344398279563038,
-      "OppChoVec": 3.753074868117652
+      "OppChoVec": 4.215005469543134
     },
     "Lucciana": {
-      "cluster": 5,
-      "Score_Opp": 4.293289812669489,
+      "cluster": 4,
+      "Score_Opp": 5.723996240847002,
       "Score_Cho": 7.859630324136086,
       "Score_Vec": 4.560745660506051,
-      "OppChoVec": 3.9009450957192353
+      "OppChoVec": 4.466704026315082
     },
     "Poggio-di-Venaco": {
-      "cluster": 5,
-      "Score_Opp": 2.469842395102283,
+      "cluster": 4,
+      "Score_Opp": 3.9641533839308996,
       "Score_Cho": 7.937315831770693,
       "Score_Vec": 3.840512777528422,
-      "OppChoVec": 3.0244568433512065
+      "OppChoVec": 3.5529267043135975
     },
     "Corbara": {
       "cluster": 2,
-      "Score_Opp": 5.589484592017062,
+      "Score_Opp": 7.703632117754749,
       "Score_Cho": 8.936512188588265,
       "Score_Vec": 4.575029096474028,
-      "OppChoVec": 5.189882410682129
+      "OppChoVec": 6.139404389303497
     },
     "Muro": {
       "cluster": 5,
-      "Score_Opp": 2.0368072278611855,
+      "Score_Opp": 2.437969851028158,
       "Score_Cho": 9.298151620680418,
       "Score_Vec": 2.636914943452917,
-      "OppChoVec": 3.2922156140121093
+      "OppChoVec": 3.500987828297001
     },
     "Olmeta-di-Tuda": {
       "cluster": 5,
-      "Score_Opp": 2.2440767259732173,
+      "Score_Opp": 2.804851609685487,
       "Score_Cho": 9.507098848111438,
       "Score_Vec": 5.090508736689355,
-      "OppChoVec": 4.520572245701476
+      "OppChoVec": 4.873046039923353
     },
     "Belvédère-Campomoro": {
-      "cluster": 2,
-      "Score_Opp": 4.873488059344458,
+      "cluster": 4,
+      "Score_Opp": 3.7015497105237167,
       "Score_Cho": 8.325743369943744,
       "Score_Vec": 4.030619193379784,
-      "OppChoVec": 4.21058904432369
+      "OppChoVec": 3.8134498778327828
     },
     "Murzo": {
       "cluster": 5,
-      "Score_Opp": 1.4339050771681159,
+      "Score_Opp": 2.6835170019918615,
       "Score_Cho": 9.442807393517278,
       "Score_Vec": 4.533555542507697,
-      "OppChoVec": 3.978804408688567
+      "OppChoVec": 4.51452277502534
     },
     "Murato": {
-      "cluster": 2,
-      "Score_Opp": 4.310508594263775,
+      "cluster": 5,
+      "Score_Opp": 5.049783727436533,
       "Score_Cho": 9.4910259844629,
       "Score_Vec": 4.823625528292529,
-      "OppChoVec": 5.154018910034376
+      "OppChoVec": 5.552736568339617
     },
     "Saint-Florent": {
       "cluster": 4,
-      "Score_Opp": 3.9938805588017363,
+      "Score_Opp": 4.7165525683206795,
       "Score_Cho": 8.325743369943744,
       "Score_Vec": 1.4302113548750741,
-      "OppChoVec": 2.8827176408954736
+      "OppChoVec": 3.10611654253059
     },
     "San-Giuliano": {
-      "cluster": 3,
-      "Score_Opp": 4.5455658721660805,
+      "cluster": 1,
+      "Score_Opp": 4.218676950753807,
       "Score_Cho": 4.784355746048755,
       "Score_Vec": 2.2917444664866404,
-      "OppChoVec": 1.450565024882763
+      "OppChoVec": 1.2173271243810238
     },
     "Olcani": {
       "cluster": 5,
-      "Score_Opp": 2.98504533429754,
+      "Score_Opp": 3.2991377387978273,
       "Score_Cho": 9.279399946423787,
       "Score_Vec": 1.82683391123346,
-      "OppChoVec": 3.2801835544570674
+      "OppChoVec": 3.4358763953531204
     },
     "Carbini": {
-      "cluster": 2,
-      "Score_Opp": 7.449584785850769,
+      "cluster": 4,
+      "Score_Opp": 5.175786341656295,
       "Score_Cho": 10.0,
       "Score_Vec": 3.201392029438703,
-      "OppChoVec": 6.285625700129617
+      "OppChoVec": 5.224291140964576
     },
     "Calacuccia": {
       "cluster": 4,
-      "Score_Opp": 4.522274781834387,
+      "Score_Opp": 5.392372710081328,
       "Score_Cho": 9.201714438789176,
       "Score_Vec": 0.9403628839784323,
-      "OppChoVec": 3.4662309549879886
+      "OppChoVec": 3.7703759060368065
     },
     "Ficaja": {
       "cluster": 4,
-      "Score_Opp": 6.158102977719945,
+      "Score_Opp": 7.774847635934105,
       "Score_Cho": 9.568711492097508,
       "Score_Vec": 1.5847321837303094,
-      "OppChoVec": 4.637583613258095
+      "OppChoVec": 5.278855312921605
     },
     "Ortale": {
-      "cluster": 5,
-      "Score_Opp": 3.33900465757663,
+      "cluster": 4,
+      "Score_Opp": 5.075101970248016,
       "Score_Cho": 9.073131529600861,
       "Score_Vec": 3.0973890524390892,
-      "OppChoVec": 3.742002597694115
+      "OppChoVec": 4.427935264646324
     },
     "Patrimonio": {
-      "cluster": 5,
-      "Score_Opp": 2.8320954318863434,
+      "cluster": 4,
+      "Score_Opp": 3.449632859246679,
       "Score_Cho": 8.317706938119475,
       "Score_Vec": 3.2273799364911455,
-      "OppChoVec": 3.134867496197116
+      "OppChoVec": 3.3807249260093513
     },
     "Casalta": {
-      "cluster": 2,
-      "Score_Opp": 5.0718133494088,
+      "cluster": 5,
+      "Score_Opp": 5.684824033638919,
       "Score_Cho": 9.89552638628449,
       "Score_Vec": 4.478302374322781,
-      "OppChoVec": 5.624460275213571
+      "OppChoVec": 5.965919421302938
     },
     "Farinole": {
       "cluster": 2,
-      "Score_Opp": 4.6804656678902,
+      "Score_Opp": 7.516481158532484,
       "Score_Cho": 9.003482453790516,
       "Score_Vec": 4.300273483715148,
-      "OppChoVec": 4.715749147790428
+      "OppChoVec": 5.965906660667804
     },
     "Ghisoni": {
       "cluster": 4,
-      "Score_Opp": 5.227717501906849,
+      "Score_Opp": 6.016673468780072,
       "Score_Cho": 9.809804446825613,
       "Score_Vec": 1.479126719864918,
-      "OppChoVec": 4.3591710338076615
+      "OppChoVec": 4.6702311546124955
     },
     "Sermano": {
       "cluster": 5,
-      "Score_Opp": 3.1179945188749896,
+      "Score_Opp": 4.211405714058526,
       "Score_Cho": 9.8124832574337,
       "Score_Vec": 4.034515472066886,
-      "OppChoVec": 4.567417539033534
+      "OppChoVec": 5.0947156898012755
     },
     "Altagène": {
-      "cluster": 2,
-      "Score_Opp": 4.033552993444881,
+      "cluster": 5,
+      "Score_Opp": 2.555014410846791,
       "Score_Cho": 10.0,
       "Score_Vec": 4.516447950573409,
-      "OppChoVec": 5.275957607435181
+      "OppChoVec": 4.891500969674858
     },
     "Sainte-Lucie-de-Tallano": {
-      "cluster": 5,
-      "Score_Opp": 3.6082165772377204,
+      "cluster": 4,
+      "Score_Opp": 4.490157975622243,
       "Score_Cho": 8.607018483793196,
       "Score_Vec": 2.5504231284609027,
-      "OppChoVec": 3.321374384950349
+      "OppChoVec": 3.650358001790321
     },
     "Tavera": {
       "cluster": 2,
-      "Score_Opp": 4.806018406266382,
+      "Score_Opp": 6.86963525857128,
       "Score_Cho": 9.482989552638628,
       "Score_Vec": 4.427767826043486,
-      "OppChoVec": 5.173494869030543
+      "OppChoVec": 6.121203388426143
     },
     "Belgodère": {
       "cluster": 5,
-      "Score_Opp": 1.522099093651058,
+      "Score_Opp": 2.966062061792754,
       "Score_Cho": 8.781141173319046,
       "Score_Vec": 3.0661494598548815,
-      "OppChoVec": 2.976805558486352
+      "OppChoVec": 3.4773706209800483
     },
     "Chisa": {
       "cluster": 2,
-      "Score_Opp": 5.855383024983427,
+      "Score_Opp": 7.74425441940808,
       "Score_Cho": 8.97669434770962,
       "Score_Vec": 4.033032692239729,
-      "OppChoVec": 5.092714961058178
+      "OppChoVec": 5.916801695856037
     },
     "Fozzano": {
-      "cluster": 5,
-      "Score_Opp": 2.4347977045146116,
+      "cluster": 4,
+      "Score_Opp": 4.374502037113108,
       "Score_Cho": 9.236538976694352,
       "Score_Vec": 1.810704134421092,
-      "OppChoVec": 3.072542734156456
+      "OppChoVec": 3.7588223835492722
     },
     "Zévaco": {
-      "cluster": 5,
-      "Score_Opp": 2.0765376933869875,
+      "cluster": 4,
+      "Score_Opp": 2.9966893944220456,
       "Score_Cho": 7.270291990356281,
       "Score_Vec": 4.012831769862154,
-      "OppChoVec": 2.581153146655453
+      "OppChoVec": 2.884409944916997
     },
     "Piobetta": {
       "cluster": 5,
-      "Score_Opp": 2.188072275569541,
+      "Score_Opp": 2.3188405795699936,
       "Score_Cho": 8.781141173319046,
       "Score_Vec": 3.200151465326999,
-      "OppChoVec": 3.217162825524489
+      "OppChoVec": 3.3363575541677557
     },
     "San-Giovanni-di-Moriani": {
-      "cluster": 5,
-      "Score_Opp": 3.5232180617032673,
+      "cluster": 4,
+      "Score_Opp": 3.8895918458591856,
       "Score_Cho": 10.0,
       "Score_Vec": 3.1311836313749684,
-      "OppChoVec": 4.4662780033079335
+      "OppChoVec": 4.706943473287649
     },
     "Sarrola-Carcopino": {
-      "cluster": 1,
-      "Score_Opp": 4.862139542564087,
+      "cluster": 3,
+      "Score_Opp": 6.799981017296676,
       "Score_Cho": 8.690061612643985,
       "Score_Vec": 6.156422463378753,
-      "OppChoVec": 5.452634111268543
+      "OppChoVec": 6.370520781779389
     },
     "Castello-di-Rostino": {
       "cluster": 4,
-      "Score_Opp": 5.042378389008443,
+      "Score_Opp": 5.917653920028208,
       "Score_Cho": 8.907045271899277,
       "Score_Vec": 2.589193244125676,
-      "OppChoVec": 4.079717429709181
+      "OppChoVec": 4.412726551621552
     },
     "Lugo-di-Nazza": {
       "cluster": 5,
-      "Score_Opp": 1.929406895323732,
+      "Score_Opp": 3.6524333923593493,
       "Score_Cho": 9.26600589338334,
       "Score_Vec": 3.611244554127238,
-      "OppChoVec": 3.618094666870109
+      "OppChoVec": 4.28312679004483
     },
     "Saliceto": {
-      "cluster": 5,
-      "Score_Opp": 3.2412474383631675,
+      "cluster": 4,
+      "Score_Opp": 4.688599557437329,
       "Score_Cho": 10.0,
       "Score_Vec": 2.569017921860067,
-      "OppChoVec": 4.135834906937557
+      "OppChoVec": 4.753700342308616
     },
     "Sorbo-Ocagnano": {
-      "cluster": 5,
-      "Score_Opp": 3.275937103469908,
+      "cluster": 4,
+      "Score_Opp": 4.314446041468209,
       "Score_Cho": 8.079292793999464,
       "Score_Vec": 5.334194088079115,
-      "OppChoVec": 4.00790637905836
+      "OppChoVec": 4.462000474802959
     },
     "Soccia": {
       "cluster": 2,
-      "Score_Opp": 4.158594135193568,
+      "Score_Opp": 6.3892189134297634,
       "Score_Cho": 9.536565764800429,
       "Score_Vec": 3.808998920509756,
-      "OppChoVec": 4.666237548662836
+      "OppChoVec": 5.644599079748648
     },
     "Rusio": {
       "cluster": 5,
-      "Score_Opp": 0.9438233220145548,
+      "Score_Opp": 0.0,
       "Score_Cho": 9.504420037503351,
       "Score_Vec": 3.4818355576205646,
-      "OppChoVec": 3.452145299305513
+      "OppChoVec": 3.342253845924623
     },
     "Sisco": {
       "cluster": 2,
-      "Score_Opp": 4.73068418887273,
+      "Score_Opp": 5.578643016062905,
       "Score_Cho": 9.397267613179748,
       "Score_Vec": 3.4081578560024224,
-      "OppChoVec": 4.6271941021989615
+      "OppChoVec": 5.008408788875683
     },
     "Valle-di-Rostino": {
       "cluster": 2,
-      "Score_Opp": 5.235342489325213,
+      "Score_Opp": 6.450051050216467,
       "Score_Cho": 9.107956067506027,
       "Score_Vec": 3.9459828764115716,
-      "OppChoVec": 4.869398991994877
+      "OppChoVec": 5.398928605003777
     },
     "Albitreccia": {
       "cluster": 2,
-      "Score_Opp": 7.216019127912363,
+      "Score_Opp": 7.1123335549005535,
       "Score_Cho": 9.517814090543798,
       "Score_Vec": 5.071427245404021,
-      "OppChoVec": 6.6842227631721585
+      "OppChoVec": 6.598219786470764
     },
     "Ciamannacce": {
       "cluster": 2,
-      "Score_Opp": 4.94943104299397,
+      "Score_Opp": 6.608644044950553,
       "Score_Cho": 10.0,
       "Score_Vec": 3.881920491814472,
-      "OppChoVec": 5.372904648817601
+      "OppChoVec": 6.154435988156774
     },
     "Corrano": {
       "cluster": 5,
-      "Score_Opp": 2.0978259855989663,
+      "Score_Opp": 4.235572549537529,
       "Score_Cho": 9.225823734261988,
       "Score_Vec": 4.04329425767226,
-      "OppChoVec": 3.819791884380731
+      "OppChoVec": 4.656966415754045
     },
     "Île-Rousse": {
-      "cluster": 3,
-      "Score_Opp": 4.390162075707648,
+      "cluster": 1,
+      "Score_Opp": 5.090664674712125,
       "Score_Cho": 5.780873292258236,
       "Score_Vec": 0.10954661748492045,
-      "OppChoVec": 1.2402069074552557
+      "OppChoVec": 1.2996974034223405
     },
     "Olmi-Cappella": {
       "cluster": 4,
-      "Score_Opp": 3.3436792344854034,
+      "Score_Opp": 4.85583093102995,
       "Score_Cho": 9.233860166086258,
       "Score_Vec": 1.249185920951454,
-      "OppChoVec": 3.1689521725855716
+      "OppChoVec": 3.712392096226777
     },
     "Penta-di-Casinca": {
       "cluster": 4,
-      "Score_Opp": 4.83876679375615,
+      "Score_Opp": 5.2239420298646335,
       "Score_Cho": 8.510581301901954,
       "Score_Vec": 2.61074825660962,
-      "OppChoVec": 3.7413063028920375
+      "OppChoVec": 3.8717050732268725
     },
     "Novale": {
-      "cluster": 2,
-      "Score_Opp": 4.721717544187899,
+      "cluster": 5,
+      "Score_Opp": 5.111474455855385,
       "Score_Cho": 9.075810340208948,
       "Score_Vec": 3.5579331295650047,
-      "OppChoVec": 4.460081838804355
+      "OppChoVec": 4.649253011352056
     },
     "Olmeta-di-Capocorso": {
       "cluster": 5,
-      "Score_Opp": 3.1158135431105327,
+      "Score_Opp": 2.2306573610010134,
       "Score_Cho": 9.314224484328959,
       "Score_Vec": 2.989820719973324,
-      "OppChoVec": 3.783880217857798
+      "OppChoVec": 3.5948223275825204
     },
     "Ortiporio": {
       "cluster": 5,
-      "Score_Opp": 2.710431841155492,
+      "Score_Opp": 2.138056885477332,
       "Score_Cho": 9.783016340744709,
       "Score_Vec": 2.6773943366176063,
-      "OppChoVec": 3.8442067294276487
+      "OppChoVec": 3.7751715276675495
     },
     "Piève": {
-      "cluster": 5,
-      "Score_Opp": 3.2764016300591328,
+      "cluster": 4,
+      "Score_Opp": 4.323914999458512,
       "Score_Cho": 8.890972408250736,
       "Score_Vec": 3.612865058420592,
-      "OppChoVec": 3.8059409336181194
+      "OppChoVec": 4.245256709934004
     },
     "Prato-di-Giovellina": {
       "cluster": 2,
-      "Score_Opp": 6.333673595915247,
+      "Score_Opp": 7.994505083917018,
       "Score_Cho": 9.84195017412269,
       "Score_Vec": 4.492440051519242,
-      "OppChoVec": 6.190953523383621
+      "OppChoVec": 6.986428078110989
     },
     "Tarrano": {
-      "cluster": 5,
-      "Score_Opp": 3.5440296554698767,
+      "cluster": 4,
+      "Score_Opp": 4.20715043546074,
       "Score_Cho": 10.0,
       "Score_Vec": 3.0018776751525063,
-      "OppChoVec": 4.42061456431479
+      "OppChoVec": 4.764442193428557
     },
     "Tomino": {
       "cluster": 5,
-      "Score_Opp": 3.1846238224932537,
+      "Score_Opp": 3.2827296251224465,
       "Score_Cho": 9.174926332708278,
       "Score_Vec": 3.3699809801265026,
-      "OppChoVec": 3.8656587184628193
+      "OppChoVec": 3.985933507469779
     },
     "Zalana": {
       "cluster": 4,
-      "Score_Opp": 4.821740048790631,
+      "Score_Opp": 4.361921572704394,
       "Score_Cho": 9.156174658451647,
       "Score_Vec": 2.9222318896866852,
-      "OppChoVec": 4.293106728024668
+      "OppChoVec": 4.150629892951255
     },
     "Guitera-les-Bains": {
       "cluster": 2,
-      "Score_Opp": 4.127579905430398,
+      "Score_Opp": 6.237222950829974,
       "Score_Cho": 9.750870613447628,
       "Score_Vec": 3.981074455164939,
-      "OppChoVec": 4.885045391562191
+      "OppChoVec": 5.835523265248561
     },
     "Poggiolo": {
       "cluster": 2,
-      "Score_Opp": 6.107369466090541,
+      "Score_Opp": 6.99839126535704,
       "Score_Cho": 8.202518081971608,
       "Score_Vec": 4.883425876018088,
-      "OppChoVec": 5.050105173510292
+      "OppChoVec": 5.405402205486779
     },
     "Canavaggia": {
       "cluster": 5,
-      "Score_Opp": 2.8914501330609217,
+      "Score_Opp": 4.744908279028398,
       "Score_Cho": 8.888293597642646,
       "Score_Vec": 3.871211056711173,
-      "OppChoVec": 3.7781873636255927
+      "OppChoVec": 4.514102744302225
     },
     "Riventosa": {
       "cluster": 4,
-      "Score_Opp": 4.254788292996756,
+      "Score_Opp": 5.579031128769366,
       "Score_Cho": 9.022234128047145,
       "Score_Vec": 2.793945029681833,
-      "OppChoVec": 3.924660869232934
+      "OppChoVec": 4.452141004010618
     },
     "Santa-Lucia-di-Mercurio": {
-      "cluster": 5,
-      "Score_Opp": 3.384428745663659,
+      "cluster": 4,
+      "Score_Opp": 4.7920959851555,
       "Score_Cho": 8.882935976426467,
       "Score_Vec": 2.9229359485960504,
-      "OppChoVec": 3.563596943347955
+      "OppChoVec": 4.108435153890076
     },
     "Alata": {
-      "cluster": 1,
-      "Score_Opp": 7.880766346640566,
+      "cluster": 3,
+      "Score_Opp": 7.915096813535968,
       "Score_Cho": 9.466916688990091,
       "Score_Vec": 9.61117378719409,
-      "OppChoVec": 9.736719848097547
+      "OppChoVec": 9.796625751276407
     },
     "Campana": {
       "cluster": 5,
-      "Score_Opp": 3.636263260767815,
+      "Score_Opp": 4.123704500479303,
       "Score_Cho": 10.0,
       "Score_Vec": 3.7672452125305043,
-      "OppChoVec": 4.780197473240997
+      "OppChoVec": 5.083264158888154
     },
     "Sant'Andréa-di-Cotone": {
       "cluster": 2,
-      "Score_Opp": 5.5041344741592955,
+      "Score_Opp": 6.394299207181811,
       "Score_Cho": 8.984730779533887,
       "Score_Vec": 3.3599584879299735,
-      "OppChoVec": 4.6454305652790095
+      "OppChoVec": 5.005254943505224
     },
     "Appietto": {
-      "cluster": 1,
-      "Score_Opp": 7.971720280812233,
+      "cluster": 3,
+      "Score_Opp": 7.260444646793157,
       "Score_Cho": 9.504420037503351,
       "Score_Vec": 9.441593161338833,
-      "OppChoVec": 9.712117081851474
+      "OppChoVec": 9.362587190152725
     },
     "Santa-Maria-Siché": {
       "cluster": 5,
-      "Score_Opp": 2.7402882597102667,
+      "Score_Opp": 4.40292502749536,
       "Score_Cho": 9.402625234395929,
       "Score_Vec": 3.5360504227285605,
-      "OppChoVec": 3.9364821719318535
+      "OppChoVec": 4.618460196232083
     },
     "Zigliara": {
-      "cluster": 2,
-      "Score_Opp": 2.6201413193918284,
+      "cluster": 5,
+      "Score_Opp": 5.012462071816607,
       "Score_Cho": 9.622287704259309,
       "Score_Vec": 5.40098903043247,
-      "OppChoVec": 4.875923373513296
+      "OppChoVec": 5.941857160135621
     },
     "Meria": {
       "cluster": 5,
-      "Score_Opp": 2.5274017325081966,
+      "Score_Opp": 3.4258679706887474,
       "Score_Cho": 9.469595499598178,
       "Score_Vec": 3.2138958984044526,
-      "OppChoVec": 3.7815286247596958
+      "OppChoVec": 4.1812081911008345
     },
     "Pietracorbara": {
       "cluster": 4,
-      "Score_Opp": 4.188317140424709,
+      "Score_Opp": 5.276650671661845,
       "Score_Cho": 8.84275381730512,
       "Score_Vec": 2.935491407391846,
-      "OppChoVec": 3.834678799599878
+      "OppChoVec": 4.265342259943793
     },
     "Pietroso": {
-      "cluster": 5,
-      "Score_Opp": 3.780853743712027,
+      "cluster": 4,
+      "Score_Opp": 3.5720189956123782,
       "Score_Cho": 8.593624430752746,
       "Score_Vec": 3.7054740591493656,
-      "OppChoVec": 3.8275338989996066
+      "OppChoVec": 3.8139062146661766
     },
     "Pigna": {
-      "cluster": 5,
-      "Score_Opp": 2.5200451440616867,
+      "cluster": 4,
+      "Score_Opp": 5.314097409977903,
       "Score_Cho": 8.69274042325208,
       "Score_Vec": 3.1022086533499973,
-      "OppChoVec": 3.2247111236035937
+      "OppChoVec": 4.24297440493586
     },
     "Guagno": {
       "cluster": 2,
-      "Score_Opp": 4.470738752490767,
+      "Score_Opp": 6.541248159463469,
       "Score_Cho": 8.687382802035895,
       "Score_Vec": 4.871234151309343,
-      "OppChoVec": 4.6655311614549415
+      "OppChoVec": 5.569667279314791
     },
     "Sotta": {
-      "cluster": 5,
-      "Score_Opp": 4.240792281241931,
+      "cluster": 2,
+      "Score_Opp": 6.502716908022478,
       "Score_Cho": 7.985534422716317,
       "Score_Vec": 4.637322628391958,
-      "OppChoVec": 3.9956718732304157
+      "OppChoVec": 4.910041370457222
     },
     "Ampriani": {
       "cluster": 5,
-      "Score_Opp": 2.0483611887104827,
+      "Score_Opp": 4.036378436336652,
       "Score_Cho": 9.035628181087601,
       "Score_Vec": 3.6906640154366377,
-      "OppChoVec": 3.5331320299208184
+      "OppChoVec": 4.283208216131159
     },
     "Asco": {
       "cluster": 5,
-      "Score_Opp": 0.2787437825329621,
+      "Score_Opp": 0.7416293406625454,
       "Score_Cho": 10.0,
       "Score_Vec": 4.314295722879401,
-      "OppChoVec": 3.971068849233534
+      "OppChoVec": 4.254809779764907
     },
     "Lento": {
       "cluster": 2,
-      "Score_Opp": 6.181047732196888,
+      "Score_Opp": 8.479368778211391,
       "Score_Cho": 9.440128582909189,
       "Score_Vec": 3.3647317410983635,
-      "OppChoVec": 5.286656643235328
+      "OppChoVec": 6.313304951351066
     },
     "Omessa": {
       "cluster": 4,
-      "Score_Opp": 4.254770839983464,
+      "Score_Opp": 4.926205523175701,
       "Score_Cho": 8.277524778998124,
       "Score_Vec": 2.091330894539711,
-      "OppChoVec": 3.17626501220861
+      "OppChoVec": 3.395765530921797
     },
     "Pietricaggio": {
-      "cluster": 2,
-      "Score_Opp": 5.682430675125981,
+      "cluster": 4,
+      "Score_Opp": 6.233446084673574,
       "Score_Cho": 7.564961157246183,
       "Score_Vec": 4.14867360605699,
-      "OppChoVec": 4.1004393239189625
+      "OppChoVec": 4.270306186216606
     },
     "Ville-di-Pietrabugno": {
-      "cluster": 1,
-      "Score_Opp": 6.656211536077146,
+      "cluster": 3,
+      "Score_Opp": 9.470610576104425,
       "Score_Cho": 9.448165014733458,
       "Score_Vec": 6.802506945650086,
-      "OppChoVec": 7.257745645983977
+      "OppChoVec": 8.75248181863366
     },
     "Loreto-di-Casinca": {
       "cluster": 4,
-      "Score_Opp": 4.104316759070396,
+      "Score_Opp": 4.505600786159431,
       "Score_Cho": 9.488347173854809,
       "Score_Vec": 1.119468815761833,
-      "OppChoVec": 3.561012430579495
+      "OppChoVec": 3.7217066721501526
     },
     "Venaco": {
       "cluster": 4,
-      "Score_Opp": 4.6249296800305215,
+      "Score_Opp": 5.964781085864171,
       "Score_Cho": 7.875703187784623,
       "Score_Vec": 3.2538679944538074,
-      "OppChoVec": 3.500383265735891
+      "OppChoVec": 3.981778980869869
     },
     "Casalabriva": {
-      "cluster": 5,
-      "Score_Opp": 3.395408743956574,
+      "cluster": 4,
+      "Score_Opp": 4.9613912793410755,
       "Score_Cho": 6.8872220733994105,
       "Score_Vec": 3.1578268887389225,
-      "OppChoVec": 2.444361843382626
+      "OppChoVec": 2.9290787542434393
     },
     "Calvi": {
-      "cluster": 3,
-      "Score_Opp": 3.793367468388831,
+      "cluster": 1,
+      "Score_Opp": 4.597606284773565,
       "Score_Cho": 4.428073935172784,
       "Score_Vec": 0.2375464016623589,
-      "OppChoVec": 0.5062996099762547
+      "OppChoVec": 0.5439879275992857
     },
     "Campitello": {
       "cluster": 5,
-      "Score_Opp": 3.4759880966435865,
+      "Score_Opp": 4.121325190511346,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5369900131167142,
-      "OppChoVec": 4.619724800376983
+      "OppChoVec": 4.975148003689023
     },
     "Castifao": {
       "cluster": 5,
-      "Score_Opp": 2.251347309612311,
+      "Score_Opp": 2.4783177586970844,
       "Score_Cho": 8.738280203589609,
       "Score_Vec": 3.4470526026821386,
-      "OppChoVec": 3.3046078721236523
+      "OppChoVec": 3.4572248765159737
     },
     "Costa": {
       "cluster": 2,
-      "Score_Opp": 4.204494129252556,
+      "Score_Opp": 6.145871764564792,
       "Score_Cho": 10.0,
       "Score_Vec": 3.693514738591496,
-      "OppChoVec": 4.972758690326462
+      "OppChoVec": 5.858602364502447
     },
     "Lama": {
-      "cluster": 4,
-      "Score_Opp": 4.130845512248784,
+      "cluster": 2,
+      "Score_Opp": 6.415925290629456,
       "Score_Cho": 8.379319582105545,
       "Score_Vec": 3.023030943233758,
-      "OppChoVec": 3.543848762748763
+      "OppChoVec": 4.415671553673064
     },
     "Ocana": {
-      "cluster": 4,
-      "Score_Opp": 4.222927517827665,
+      "cluster": 2,
+      "Score_Opp": 6.113877123906349,
       "Score_Cho": 8.974015537101526,
       "Score_Vec": 3.537155100699117,
-      "OppChoVec": 4.1809941950565275
+      "OppChoVec": 4.962124257983525
     },
     "Bisinchi": {
-      "cluster": 5,
-      "Score_Opp": 3.711357130244561,
+      "cluster": 2,
+      "Score_Opp": 5.826569850243385,
       "Score_Cho": 10.0,
       "Score_Vec": 3.5362521208631787,
-      "OppChoVec": 4.708879268272936
+      "OppChoVec": 5.646981191328693
     },
     "Morsiglia": {
-      "cluster": 5,
-      "Score_Opp": 4.85803848476239,
+      "cluster": 4,
+      "Score_Opp": 5.77171471560071,
       "Score_Cho": 9.686579158853469,
       "Score_Vec": 2.1106097058996154,
-      "OppChoVec": 4.357453557547569
+      "OppChoVec": 4.737208515110959
     },
     "Santa-Maria-Figaniella": {
-      "cluster": 5,
-      "Score_Opp": 3.1237638237567915,
+      "cluster": 4,
+      "Score_Opp": 3.580416603297932,
       "Score_Cho": 8.044468256094294,
       "Score_Vec": 2.886213732487157,
-      "OppChoVec": 2.9323539621301835
+      "OppChoVec": 3.101964693386029
     },
     "Perelli": {
       "cluster": 4,
-      "Score_Opp": 4.0858413287005995,
+      "Score_Opp": 4.158759849208836,
       "Score_Cho": 9.14010179480311,
       "Score_Vec": 3.197783766353221,
-      "OppChoVec": 4.101864284029508
+      "OppChoVec": 4.1853215816998
     },
     "Polveroso": {
       "cluster": 5,
-      "Score_Opp": 1.629698984504869,
+      "Score_Opp": 0.9622341286387136,
       "Score_Cho": 10.0,
       "Score_Vec": 2.2210576145747574,
-      "OppChoVec": 3.486272833598092
+      "OppChoVec": 3.4199422045920835
     },
     "Zilia": {
       "cluster": 4,
-      "Score_Opp": 4.788138367267903,
+      "Score_Opp": 4.57818538384705,
       "Score_Cho": 8.457005089740155,
       "Score_Vec": 1.6704959186005004,
-      "OppChoVec": 3.3393280597777517
+      "OppChoVec": 3.235246026238847
     },
     "Casevecchie": {
       "cluster": 2,
-      "Score_Opp": 5.5995170317382446,
+      "Score_Opp": 7.088156362942513,
       "Score_Cho": 9.161532279667831,
       "Score_Vec": 3.767493675416385,
-      "OppChoVec": 4.990796647523947
+      "OppChoVec": 5.6338833867443245
     },
     "Galéria": {
       "cluster": 4,
-      "Score_Opp": 4.083697333387902,
+      "Score_Opp": 5.508902660128489,
       "Score_Cho": 9.284757567639968,
       "Score_Vec": 2.25530604581619,
-      "OppChoVec": 3.82862160256346
+      "OppChoVec": 4.391016974063854
     },
     "Lavatoggio": {
       "cluster": 5,
-      "Score_Opp": 1.7667976771338227,
+      "Score_Opp": 2.8222417255351813,
       "Score_Cho": 8.93919099919636,
       "Score_Vec": 2.4033243571540757,
-      "OppChoVec": 2.8997274065321217
+      "OppChoVec": 3.274763996445062
     },
     "Moltifao": {
       "cluster": 5,
-      "Score_Opp": 2.563897648478504,
+      "Score_Opp": 3.599907958749035,
       "Score_Cho": 9.456201446557728,
       "Score_Vec": 3.6334775134953823,
-      "OppChoVec": 3.9548287055298497
+      "OppChoVec": 4.416272903169653
     },
     "Piazzali": {
-      "cluster": 3,
-      "Score_Opp": 3.594581630709592,
+      "cluster": 1,
+      "Score_Opp": 6.394417054616771,
       "Score_Cho": 5.346905973747655,
       "Score_Vec": 0.14053641968055028,
-      "OppChoVec": 0.8167829341657671
+      "OppChoVec": 1.496018046594375
     },
     "Rutali": {
       "cluster": 2,
-      "Score_Opp": 5.280287611920493,
+      "Score_Opp": 7.077260324748274,
       "Score_Cho": 9.793731583177069,
       "Score_Vec": 4.406257956568459,
-      "OppChoVec": 5.607141396641426
+      "OppChoVec": 6.4617863055822635
     },
     "San-Martino-di-Lota": {
-      "cluster": 1,
-      "Score_Opp": 6.628553739808465,
+      "cluster": 3,
+      "Score_Opp": 8.47491546759496,
       "Score_Cho": 9.525850522368069,
       "Score_Vec": 5.936606206944571,
-      "OppChoVec": 6.829938195896615
+      "OppChoVec": 7.7608988136777874
     },
     "Piedipartino": {
       "cluster": 5,
-      "Score_Opp": 1.6064872424768686,
+      "Score_Opp": 2.2155378267687156,
       "Score_Cho": 9.196356817572997,
       "Score_Vec": 3.935413308824452,
-      "OppChoVec": 3.609367294309149
+      "OppChoVec": 3.911973574971814
     },
     "Alzi": {
-      "cluster": 5,
-      "Score_Opp": 2.640922043004953,
+      "cluster": 4,
+      "Score_Opp": 4.683016516748003,
       "Score_Cho": 10.0,
       "Score_Vec": 3.0006664300127928,
-      "OppChoVec": 4.100484180405382
+      "OppChoVec": 4.941618719258564
     },
     "Avapessa": {
-      "cluster": 5,
-      "Score_Opp": 1.372588907887182,
+      "cluster": 4,
+      "Score_Opp": 1.5124926147735378,
       "Score_Cho": 7.690865255826412,
       "Score_Vec": 3.3658714852841483,
-      "OppChoVec": 2.3940333196511228
+      "OppChoVec": 2.470295331032309
     },
     "Occhiatana": {
       "cluster": 2,
-      "Score_Opp": 6.039398336382222,
+      "Score_Opp": 7.924633496214051,
       "Score_Cho": 9.673185105813019,
       "Score_Vec": 3.4214531288237797,
-      "OppChoVec": 5.418405174451212
+      "OppChoVec": 6.264951571210872
     },
     "Évisa": {
-      "cluster": 5,
-      "Score_Opp": 3.146734577517209,
+      "cluster": 4,
+      "Score_Opp": 4.267127434215251,
       "Score_Cho": 8.73024377176534,
       "Score_Vec": 3.0616226411888157,
-      "OppChoVec": 3.4364243040615916
+      "OppChoVec": 3.870548014066066
     },
     "Moncale": {
-      "cluster": 4,
-      "Score_Opp": 4.207569204015174,
+      "cluster": 2,
+      "Score_Opp": 5.496894827579689,
       "Score_Cho": 9.142780605411197,
       "Score_Vec": 3.2395935107081875,
-      "OppChoVec": 4.167806174626449
+      "OppChoVec": 4.705707498959864
     },
     "Vivario": {
-      "cluster": 5,
-      "Score_Opp": 3.6836359156559224,
+      "cluster": 4,
+      "Score_Opp": 3.626748131725621,
       "Score_Cho": 8.874899544602195,
       "Score_Vec": 2.7180276947168047,
-      "OppChoVec": 3.5849664939156245
+      "OppChoVec": 3.6117312728864777
     }
   },
   "stats": [
     {
       "cluster": 1,
-      "n_communes": 13,
-      "opp_moyen": 6.3831209520520975,
-      "cho_moyen": 9.12794411588947,
-      "vec_moyen": 7.861495998037075,
-      "oppchovec_moyen": 7.575700026062806
+      "n_communes": 23,
+      "opp_moyen": 5.0842296464614325,
+      "cho_moyen": 4.608294100110195,
+      "vec_moyen": 2.073447618055076,
+      "oppchovec_moyen": 1.4713875195294228
     },
     {
       "cluster": 2,
-      "n_communes": 96,
-      "opp_moyen": 5.109820808137617,
-      "cho_moyen": 9.37313041342977,
-      "vec_moyen": 4.219897487990578,
-      "oppchovec_moyen": 5.168108650573383
+      "n_communes": 74,
+      "opp_moyen": 6.7277418628680445,
+      "cho_moyen": 9.263254682488542,
+      "vec_moyen": 3.930196897058316,
+      "oppchovec_moyen": 5.662735739843451
     },
     {
       "cluster": 3,
-      "n_communes": 20,
-      "opp_moyen": 4.0531142596037,
-      "cho_moyen": 4.18689422905654,
-      "vec_moyen": 2.2424485201534887,
-      "oppchovec_moyen": 1.1701034829333543
+      "n_communes": 13,
+      "opp_moyen": 7.87531684348872,
+      "cho_moyen": 9.12794411588947,
+      "vec_moyen": 7.861495998037075,
+      "oppchovec_moyen": 8.349806810895753
     },
     {
       "cluster": 4,
-      "n_communes": 55,
-      "opp_moyen": 4.648961531565993,
-      "cho_moyen": 8.674086160290287,
-      "vec_moyen": 2.0623656974237905,
-      "oppchovec_moyen": 3.597855083116723
+      "n_communes": 129,
+      "opp_moyen": 4.7047428685665045,
+      "cho_moyen": 8.564655897432704,
+      "vec_moyen": 2.7482254619180226,
+      "oppchovec_moyen": 3.8300282643389307
     },
     {
       "cluster": 5,
-      "n_communes": 176,
-      "opp_moyen": 2.7522366188970824,
-      "cho_moyen": 9.012782188344739,
-      "vec_moyen": 3.314397740900255,
-      "oppchovec_moyen": 3.6360926664833526
+      "n_communes": 121,
+      "opp_moyen": 3.4800769936712035,
+      "cho_moyen": 9.508847823632422,
+      "vec_moyen": 3.749407395222411,
+      "oppchovec_moyen": 4.516953321685844
     }
   ]
 };

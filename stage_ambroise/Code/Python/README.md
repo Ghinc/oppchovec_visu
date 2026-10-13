@@ -19,6 +19,8 @@ Le script réalise les étapes suivantes :
 
 ### 2. 🧮 Calcul des indicateurs
 - Application de fonctions spécifiques pour chaque indicateur (`calc_opp1()`, `calc_opp2()`, …).
+  ⚠ Opp1 (éducation) n'est plus lu dans `Opp1.xlsx` (suite artificielle) : il vient du recensement INSEE, voir `calculer_education_opp1.py`,
+  `regenerer_opp1.py` et `Code/VERIFICATION_COHERENCE_DONNEES.md` (section « Opp1 »).
 - Calcul d’indicateurs intermédiaires à partir des données brutes (données collectées sur les différents sites).
 - Génération d’un fichier `df_indicateur.xlsx` listant tous les indicateurs agrégés par commune.
 
