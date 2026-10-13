@@ -125,3 +125,13 @@ test('calculerJenksBreaks : propriétés (4 seuils croissants, valeurs observée
   assert.deepEqual([...breaks], [3, 12, 52, 102]);                 // les 5 paquets évidents, borne haute incluse
   assert.deepEqual([...app.ev('calculerJenksBreaks([1,2,3], 5)')], [2, 3]);   // moins de valeurs que de classes : pas de crash
 });
+
+test('au chargement, les cartes ne sont dessinées qu\'une fois, directement avec les indices de Betti (pas de « flash » de couleurs)', async () => {
+  const app = await chargerApp({ chargementAuto: false });
+  app.ev('globalThis.__dessins = []; const _orig = afficherToutesLesCartes; afficherToutesLesCartes = function (g, indice, scores) { __dessins.push(JSON.stringify(indice)); return _orig.apply(this, arguments); }');
+  await app.ev('chargerFichiersAutomatiquement()');
+  const dessins = app.ev('__dessins');
+  assert.equal(dessins.length, 1, `nombre de dessins des cartes : ${dessins.length}`);
+  assert.equal(dessins[0], JSON.stringify(app.ev('indiceFinale')), 'le dessin utilise l\'indice final (Betti)');
+  assert.equal(app.ev('modeCalculPk'), 'betti');
+});

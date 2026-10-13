@@ -2089,7 +2089,7 @@ async function chargerFichiersAutomatiquement() {
     console.log("✅ Clusters LISA 5% et 1% chargés");
 
     // 6. Suite du traitement
-    const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs);
+    const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs, false);
     populateCommuneSelect(data_indicateurs_dict);
     await chargerSousComposantes();
 
@@ -2731,7 +2731,9 @@ html += `
 
 
 
-    function calculerIndicateurs(data_indicateurs) {
+    // dessiner = false : l'appelant enchaîne sur recalculerCarteOppChoVec(), qui dessine les cartes avec les bons indices (évite un premier
+    // dessin avec les valeurs du fichier, calculées à p_k égaux, aussitôt remplacé : « flash » de couleurs au chargement)
+    function calculerIndicateurs(data_indicateurs, dessiner = true) {
       // Les données sont déjà calculées dans le JSON avec valeurs normalisées 0-10
       console.log("Chargement des données précalculées (normalisées 0-10)...");
 
@@ -2802,7 +2804,7 @@ html += `
       bornesScoresRef = minmax(calculerScores01(indicateursOrigine));
       refParModePk = {};
 
-      afficherToutesLesCartes(communeJson, indiceFinale, scoresParCommune);
+      if (dessiner) afficherToutesLesCartes(communeJson, indiceFinale, scoresParCommune);
 
       // Générer les visualisations de données
       genererDataVisualisations(indiceFinale);

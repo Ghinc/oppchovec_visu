@@ -8,10 +8,11 @@
 | Changement | Détail |
 |---|---|
 | Onglets | Seulement OppChoVec, Opp, Cho, Vec, + **Dominance** (nouveau) |
-| Pondérations | Betti et al. uniquement : le bouton de choix a disparu, les valeurs p_k restent affichées |
+| Pondérations | Betti et al. uniquement, non mentionné dans l'interface : le bouton de choix a disparu, les valeurs p_k restent affichées |
 | Langue | Français uniquement, sans case « English labels » (la case « copyright » a disparu aussi : le copyright est toujours affiché) |
+| Chargement des cartes | La référence dessine les cartes **deux fois** au chargement (d'abord avec les valeurs du fichier à p_k égaux, d'où un « flash » violet, puis avec Betti) et laisse les premières couches sous les secondes (routes nationales et étiquettes de villes en double, polygones empilés : l'oppchovec de référence est teinté de ≤ 2/255 par la couche du dessous). La démo dessine une seule fois. Conséquence : routes un peu moins intenses visuellement ; couleurs, bulles et données inchangées |
 | Libellé des curseurs | « 87 % · 96,4 % » devient « 87 % de l'échelle corse · valeur : 96,4 % » (1er % = position entre le min et le max observés en Corse, ensuite la valeur réelle). La comparaison A/B ramène ce libellé à l'ancien format avant de comparer |
-| Colonne de gauche | Sections renumérotées (1 commune, 2 routes, 3 pondérations, 4 téléchargements) |
+| Colonne de gauche | Sections renumérotées (1 commune, 2 routes, 3 pondérations, 4 téléchargement) ; un seul téléchargement : le classement OppChoVec (les statistiques descriptives ne sont plus proposées) |
 | Code | `script.js` garde le code des onglets retirés (inactif) ; seules modifications : langue française par défaut, bascule p_k supprimée, deux lignes de garde sur le chatbot, onglet Dominance |
 
 Tout le reste (données, calculs, couleurs, bulles, légendes, fiche commune, curseurs, téléchargements) doit être **identique**.
@@ -29,14 +30,14 @@ versions dans Chromium et compare :
 | # | Vérification | Critère |
 |---|---|---|
 | 1 | Fichiers modifiés entre les branches | seuls `index.html`, `script.js`, `dashboard.css`, `dominance.js`, `tests/` : aucun fichier de données ni de téléchargement |
-| 2 | Téléchargements | octet pour octet |
+| 2 | Téléchargement (le classement) | octet pour octet |
 | 3 | Chargement | aucune erreur de console, aucune requête en échec, p_k = Betti |
 | 4 | Données calculées | indicateurs, scores Opp/Cho/Vec, indice OppChoVec, seuils de Jenks, couleurs, p_k : **identiques** (comparaison exacte) |
-| 5 | Chaque carte (4) | 360 communes ; couleur et style de chacune ; contenu de chaque bulle ; légendes ; image de la carte (≤ 0,01 % de pixels différents, écart ≤ 8/255 : crénelage des traits d'étiquettes) |
+| 5 | Chaque carte (4) | 360 communes ; couleur et style de chacune ; contenu de chaque bulle ; légendes ; image de la carte une fois routes, villes et étiquettes retirées (≤ 0,01 % de pixels différents, ou écart ≤ 3/255 partout) |
 | 6 | Fiche commune | texte identique pour 5 communes (Bastia, Ajaccio, Afa, Érone, Propriano) ; après modification de deux curseurs et « Recalculer » sur Bastia : état complet, fiche et carte identiques |
 
-Résultat attendu : `Bilan : 41/41 vérifications identiques`, code de sortie 0. Chaque écart est détaillé (premier élément différent).
-*Contrôle du contrôle* : changer une couleur ou un poids dans `script.js` fait échouer 22 des 41 vérifications.
+Résultat attendu : `Bilan : 40/40 vérifications identiques`, code de sortie 0. Chaque écart est détaillé (premier élément différent).
+*Contrôle du contrôle* : changer une couleur ou un poids dans `script.js` fait échouer plus de la moitié des vérifications.
 
 ## Étape 2 — Suite de tests du dépôt
 
@@ -61,7 +62,8 @@ Lancer `python -m http.server 8000` à la racine, ouvrir `http://localhost:8000/
 - [ ] Cases « routes » (nationales, départementales, communales, toutes) : mêmes tracés sur chaque carte.
 - [ ] Boutons d'export (appareil photo, flèche) en haut à droite des cartes : mêmes fichiers produits.
 - [ ] Liste de communes + « Valider » : fiche identique ; curseurs, sous-curseurs, « Recalculer », « Réinitialiser » : mêmes valeurs.
-- [ ] Téléchargements : les deux fichiers Excel s'ouvrent et contiennent 360 communes.
+- [ ] Téléchargement : le classement Excel s'ouvre et contient 360 communes.
+- [ ] Au chargement, les cartes apparaissent directement dans leurs couleurs finales (pas de flash violet).
 - [ ] Aucun texte anglais résiduel dans l'interface (colonne de gauche, légendes, bulles, fiche).
 - [ ] Onglet Dominance : texte explicatif en haut, légende « Couche n — effectif », clic sur une commune → fiche (couche, dominants, dominés, 3 scores).
 - [ ] Console du navigateur (F12) vide au chargement et après ouverture de chaque onglet.

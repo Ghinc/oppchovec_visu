@@ -41,7 +41,8 @@ class DownloadsCoherentsAvecLesDonnees(unittest.TestCase):
     def test_liens_de_telechargement_de_index_html_existent(self):
         html = (RACINE / "index.html").read_text(encoding="utf-8")
         liens = re.findall(r'href="(downloads/[^"]+)"', html)
-        self.assertEqual(len(liens), 2)
+        # version démo : seul le classement est proposé au téléchargement (les statistiques descriptives restent dans le dépôt)
+        self.assertEqual(liens, ["downloads/oppchovec_betti_0_10_trie.xlsx"])
         for lien in liens:
             self.assertTrue((RACINE / lien).exists(), lien)
 

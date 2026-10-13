@@ -120,12 +120,20 @@ async function snapshot(navigateur, url, { francais }) {
   }
   const s = { erreurs: appli.nouvellesErreurs(), requetes: appli.requetesEchouees };
   s.donnees = await page.evaluate(lireDonnees);
-  s.rendu = {}; s.images = {};
+  s.rendu = {}; s.images = {}; s.imagesAvecRoutes = {};
   for (const [tab, type] of CARTES) {
     await page.click(`.tab-button[data-tab="${tab}"]`);
     await page.waitForTimeout(1600);
     await page.evaluate((t) => cartes[t].invalidateSize(), type);
     s.rendu[type] = await page.evaluate(lireRendu, type);
+    // capture AVEC les routes (informative) puis SANS (comparée) : la référence empile les routes nationales et les étiquettes de villes en double
+    s.imagesAvecRoutes[type] = await page.locator(`#map-${type}`).screenshot({ animations: 'disabled' });
+    await page.evaluate((t) => {           // retire routes, villes et étiquettes : il ne reste que les polygones des communes, la légende et les contrôles
+      const aRetirer = [];
+      cartes[t].eachLayer((l) => { if (l instanceof L.Marker || l instanceof L.CircleMarker || (l instanceof L.Polyline && !(l instanceof L.Polygon))) aRetirer.push(l); });
+      aRetirer.forEach((l) => cartes[t].removeLayer(l));
+    }, type);
+    await page.waitForTimeout(500);
     const png = await page.locator(`#map-${type}`).screenshot({ animations: 'disabled' });
     s.images[type] = png;
     if (process.env.IMG_DIR) fs.writeFileSync(path.join(process.env.IMG_DIR, `${francais ? 'ref' : 'demo'}_${type}.png`), png);
@@ -213,9 +221,11 @@ async function main() {
       verifier(`${type} : légendes`, JSON.stringify(r.legendes) === JSON.stringify(d.legendes), premierEcart(r.legendes, d.legendes));
       const im = comparerImages(r.imageBrute, d.imageBrute);
       // tolérance : crénelage des traits d'étiquettes (quelques pixels, écart de 3 sur un canal) ; au-delà, c'est une vraie différence
-      verifier(`${type} : image de la carte (tolérance 0,01 % des pixels, écart ≤ 8/255)`, im.tailles && im.differents <= im.pixels * 1e-4 && im.max <= 8,
+      verifier(`${type} : image de la carte, hors routes et étiquettes (tolérance : ≤ 0,01 % des pixels différents, ou écart ≤ 3/255 partout)`, im.tailles && ((im.differents <= im.pixels * 1e-4 && im.max <= 8) || im.max <= 3),
         im.tailles ? `${im.differents} pixels différents sur ${im.pixels}, écart max ${im.max}` : 'tailles différentes');
       if (im.tailles) console.log(`          (${type} : ${im.differents} pixel(s) différent(s) sur ${im.pixels})`);
+      const ir = comparerImages(ref.imagesAvecRoutes[type], demo.imagesAvecRoutes[type]);
+      console.log(`          (${type} avec routes, à titre informatif : ${ir.differents} pixel(s) différent(s) — la référence superpose deux fois les routes nationales et les étiquettes de villes)`);
     }
 
     console.log('\n6. Fiche commune');
