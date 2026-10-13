@@ -107,8 +107,9 @@ ne change pratiquement pas (corrélation de rang ≥ 0,9998).
 
 **Limites.**
 - La population de référence exclut les personnes encore scolarisées (étudiants de 18 ans ou plus) : définition de l'INSEE.
-- 146 communes comptent moins de 100 personnes concernées : leur valeur est bruitée (le recensement est une enquête par sondage dans
-  les petites communes).
+- 146 communes comptent moins de 100 personnes concernées : leur valeur est instable, car quelques diplômes de plus ou de moins déplacent
+  nettement la moyenne. (Dans les communes de moins de 10 000 habitants le recensement est exhaustif mais étalé sur cinq ans : un
+  millésime regroupe les enquêtes de N-2 à N+2 ; ce n'est pas un sondage.)
 - Millésime 2020, plus ancien que certains autres indicateurs.
 
 **Historique.** Jusqu'au 2026-10-13, Opp1 venait de `Opp1.xlsx`, qui contenait en réalité une **suite artificielle** (5,75 ; 5,76 ; …
