@@ -36,6 +36,7 @@ Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénérat
 | `python/test_07_coherence_du_code.py` | Poids et constantes dupliqués (Python / JS / scripts) identiques ? Fichiers et identifiants du DOM référencés existants ? |
 | `python/test_08_js_vs_python.py` | L'appli (script.js réel) contre un recalcul Python indépendant : état de base, seuils de Jenks, et 30 scénarios de modification aléatoires |
 | `python/test_09_tableaux_excel.py` | Les fichiers Excel proposés par le site (`downloads/`) reflètent-ils les données actuelles ? Les scripts `gen_*.py` rejoués sur une copie y écrivent-ils (et nulle part ailleurs) ? |
+| `python/test_11_variante_vec1.py` | Variante de Vec1 (revenu fiscal moyen, IRCOM) : indice et corrélations recalculés en Python (scipy) = ceux du JS ; 154 communes à valeur départementale dans Vec1 actuel ; rejeu du script si `OPPCHOVEC_IRCOM` désigne `ircom_communes_complet_revenus_2021.xlsx` |
 | `js/*.test.js` | La logique de `script.js` dans un bac à sable Node : chargement, curseurs, recalcul, bascule p_k, sous-composantes |
 | `e2e/*.e2e.test.js` | Dans un vrai navigateur : cartes (couleur de chaque commune), histogramme, top 10, panneau commune, tous les onglets, coefficients de corrélation |
 

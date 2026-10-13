@@ -127,7 +127,7 @@ function executer(ctx, fichier) {
 async function chargerApp({ chargementAuto = true } = {}) {
   const base = creerContexte();
   const { ctx } = base;
-  for (const f of ['cah_data.js', 'lisa_data.js', 'lisa_data_1pct.js', 'lisa_data_betti.js', 'lisa_data_betti_1pct.js', 'script.js']) {
+  for (const f of ['cah_data.js', 'lisa_data.js', 'lisa_data_1pct.js', 'lisa_data_betti.js', 'lisa_data_betti_1pct.js', 'vec1_variante.js', 'script.js']) {
     executer(ctx, f);
   }
   const ev = (expr) => vm.runInContext(expr, ctx);

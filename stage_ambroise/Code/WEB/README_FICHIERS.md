@@ -100,6 +100,9 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
   commune). Il est vérifié à la génération : chaque recomposition doit redonner exactement l'indicateur de `data_scores_0_10.json`.
 - **`../../Données/education_communes_opp1.json`** : source d'`Opp1` (effectifs par niveau de diplôme et niveau moyen de chaque commune, avec la
   provenance INSEE et l'hypothèse sur les 15-17 ans). Produit par `calculer_education_opp1.py`, injecté par `regenerer_opp1.py`.
+- **vec1_revenu_fiscal.json** et **vec1_variante.js** : variante de Vec1 (revenu fiscal moyen par foyer, DGFiP IRCOM 2021) à la place de la médiane du
+  niveau de vie, et case à cocher qui bascule l'appli ; voir `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Vec1 ». Produit par
+  `calculer_revenu_fiscal_vec1.py "<chemin>/ircom_communes_complet_revenus_2021.xlsx"` (non nécessaire à l'indice actuel).
 - **densite_entrepreneuriale.json**, **bien_etre_subjectif.json** : données de l'onglet Corrélation (le second ne couvre que
   les communes de l'enquête).
 

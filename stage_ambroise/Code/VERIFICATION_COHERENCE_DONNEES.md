@@ -120,6 +120,42 @@ Conséquences du remplacement : Score_Opp (corrélation de rang 0,76 avec l'anci
 Betti), p_k de Betti (Opp 0,534 -> 0,458), seuils de Jenks, LISA (20 / 5 / 30 / 15 communes changent de cluster), CAH, classement
 Excel. La commune la mieux classée (Afa) reste la même ; la moins bien classée passe d'Érone à Aghione.
 
+## Vec1 — revenu : limite actuelle et variante « revenu fiscal moyen »
+
+**Vec1 actuel.** Médiane du niveau de vie par commune, Filosofi 2021 (INSEE). Cette médiane n'est pas diffusée pour les petites communes (le fichier
+« niveau de vie médian » de data.gouv.fr, qui reprend Filosofi, a une valeur vide pour exactement les mêmes 154 communes). Ces 154 communes (108 en
+Haute-Corse, 46 en Corse-du-Sud, 10 à 147 personnes de 15 ans ou plus, 38 foyers fiscaux au médian) ont reçu **la valeur de leur département** :
+21 460 € (Haute-Corse) et 23 420 € (Corse-du-Sud). Soit 43 % des communes avec un Vec1 qui ne les distingue pas. Un test le fige
+(`test_11_variante_vec1.py`).
+
+**Variante.** `Vec1 = revenu fiscal moyen par foyer fiscal` = revenu fiscal de référence total de la commune / nombre de foyers fiscaux, DGFiP, IRCOM, revenus
+2021 (même année que Filosofi 2021). Fichier : `Code/WEB/vec1_revenu_fiscal.json`, produit par `Code/Python/calculer_revenu_fiscal_vec1.py` depuis
+`ircom_communes_complet_revenus_2021.xlsx` (data.gouv.fr, « L'impôt sur le revenu par collectivité territoriale », un fichier par année de 2014 à 2024).
+La DGFiP ne communique pas les données de 12 communes (secret statistique) : elles reçoivent la valeur de leur département (marquées
+`estime_departement`). Dans l'appli (version recherche), la case « 6. Variante de Vec1 » remplace Vec1 par cette valeur partout (cartes, seuils, fiche
+commune, bornes des curseurs) ; LISA et CAH ne sont pas recalculés ; les modifications de curseurs sont abandonnées à chaque bascule.
+
+**Ce que ça change** (mesuré le 2026-10-13, 360 communes) :
+
+| | p_k de Betti | p_k égaux |
+|---|---|---|
+| Indice OppChoVec, corrélation de Pearson / de rang | 0,986 / 0,975 | 0,983 / 0,973 |
+| Score Vec, corrélation de rang | 0,85 | 0,85 |
+| Vec1 seul, Pearson / rang | 0,45 / 0,35 | 0,45 / 0,35 |
+| Communes qui changent de classe de couleur (Jenks) | 41 | 43 |
+| Écart de rang médian | 11 | 11 |
+
+L'indice final change donc peu (Vec1 pèse 1/4 de Vec, lui-même 1/3 de l'indice), mais les deux Vec1 se ressemblent peu (rang 0,35) : la médiane du niveau
+de vie de 154 communes n'est pas une mesure. Sur les 206 communes où Filosofi est diffusé, la corrélation de rang avec le revenu fiscal moyen est de 0,67 (concepts
+différents : moyenne et non médiane, par foyer fiscal et non par unité de consommation, foyers non imposés inclus).
+
+**Limites de la variante.** Les communes concernées ont en médiane 38 foyers fiscaux : un seul gros revenu déplace la moyenne (valeurs extrêmes
+observées : 7 325 € à 66 166 €). Le revenu moyen n'est pas la médiane (il est tiré par les hauts revenus). À ne pas présenter aux décideurs avant arbitrage.
+
+**Précision d'une prédiction de la médiane.** Pour mémoire, une régression de la médiane Filosofi sur le revenu moyen DGFiP (et le département), évaluée en
+laissant chaque commune de côté, fait une erreur typique de 1 810 € (1 675 € pour les communes de moins de 400 foyers) contre 2 260 € pour la valeur
+départementale ; l'écart réel entre communes est de 2 390 €. Cette estimation n'est pas utilisée dans l'appli.
+
 ## Échelles utilisées
 
 ### Indicateurs bruts (NON normalisés)

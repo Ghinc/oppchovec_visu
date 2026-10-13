@@ -2096,6 +2096,9 @@ async function chargerFichiersAutomatiquement() {
     // 7. Appliquer le mode Betti par défaut
     recalculerCarteOppChoVec();
 
+    // 7 bis. Variante Vec1 (revenu fiscal moyen, case à cocher) : chargée APRÈS le recalcul pour ne pas retarder l'état final des cartes
+    if (typeof chargerVec1Variante === 'function') await chargerVec1Variante();
+
     // 8. Générer les visualisations de données
     if (indiceFinale && Object.keys(indiceFinale).length > 0) {
         genererDataVisualisations(indiceFinale);
@@ -3018,6 +3021,7 @@ function recalculerCarteOppChoVec() {
     afficherToutesLesCartes(communeJson, indiceNorm, scoresParCommune);
 
     majAffichagePk(pkValues);
+    if (typeof rafraichirComparaisonVec1 === 'function') rafraichirComparaisonVec1();   // comparaison des deux sources de Vec1 (suit le mode p_k)
 
     // Mettre à jour le tableau top 10 et l'histogramme
     genererDataVisualisations(indiceNorm);

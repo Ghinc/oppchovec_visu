@@ -2328,3 +2328,10 @@ tr:nth-child(even) {
 .correlation-layout { display: none; }
 .correlation-scatter-col { display: none; }
 .correlation-map-col { display: none; }
+
+
+/* Variante de Vec1 (revenu fiscal moyen) : panneau de comparaison */
+.vec1-comparaison { font-size: 12px; margin-top: 8px; line-height: 1.45; }
+.vec1-table { border-collapse: collapse; margin: 4px 0; }
+.vec1-table td { padding: 1px 10px 1px 0; }
+.vec1-petit { font-size: 11px; color: #555; margin-top: 4px; line-height: 1.4; }
