@@ -121,6 +121,7 @@ main {
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 
 /* Barre d'onglets */
@@ -2422,3 +2423,34 @@ tr:nth-child(even) {
   font: inherit;
   text-decoration: underline;
 }
+
+
+/* Infobulle des pondérations (coin supérieur droit, au-dessus des cartes) */
+.pk-info {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  z-index: 1200;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: help;
+  outline: none;
+}
+.pk-info-bulle {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  min-width: 250px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  color: #333;
+  line-height: 1.5;
+}
+.pk-info:hover .pk-info-bulle,
+.pk-info:focus .pk-info-bulle,
+.pk-info:focus-within .pk-info-bulle { display: block; }

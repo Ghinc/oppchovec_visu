@@ -34,38 +34,9 @@
         <div id="resultCommune" style="background: #f8f8f8; padding: 1em; border-radius: 8px;"></div>
       </div>
 
-      <!-- Contrôle du réseau routier -->
-      <div class="section">
-        <h2 data-translate="routes-title">3. Affichage des routes</h2>
-        <div style="display: flex; flex-direction: column; gap: 0.5em;">
-          <label style="display: flex; align-items: center; cursor: pointer;">
-            <input type="checkbox" id="checkbox-nationales" class="route-checkbox" checked>
-            <span style="margin-left: 0.5em;" data-translate="routes-national">Routes nationales (647)</span>
-          </label>
-          <label style="display: flex; align-items: center; cursor: pointer;">
-            <input type="checkbox" id="checkbox-departementales" class="route-checkbox">
-            <span style="margin-left: 0.5em;" data-translate="routes-departmental">Routes départementales (2654)</span>
-          </label>
-          <label style="display: flex; align-items: center; cursor: pointer;">
-            <input type="checkbox" id="checkbox-communales" class="route-checkbox">
-            <span style="margin-left: 0.5em;" data-translate="routes-municipal">Routes communales (3686)</span>
-          </label>
-          <label style="display: flex; align-items: center; cursor: pointer;">
-            <input type="checkbox" id="checkbox-toutes" class="route-checkbox">
-            <span style="margin-left: 0.5em;" data-translate="routes-all">Toutes les routes (7002)</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Pondérations p_k (OppChoVec) -->
-      <div class="section">
-        <h2>3. Pondérations p_k</h2>
-        <div id="pk-values-display" style="margin-top: 6px; font-size: 12px; color: #555; font-style: italic;"></div>
-      </div>
-
       <!-- Téléchargements -->
       <div class="section">
-        <h2>4. Téléchargement</h2>
+        <h2>2. Téléchargement</h2>
         <a href="downloads/oppchovec_betti_0_10_trie.xlsx" download>
           <button style="width:100%;">📥 Classement OppChoVec (0-10)</button>
         </a>
@@ -73,6 +44,14 @@
     </aside>
     <main>
       <div class="tabs-container">
+        <!-- Infobulle des pondérations (valeurs renseignées par majAffichagePk) -->
+        <div class="pk-info" tabindex="0" aria-label="Pondérations des dimensions dans le score OppChoVec">
+          <span class="pk-info-icone">🛈 Pondérations</span>
+          <div class="pk-info-bulle" role="tooltip">
+            <strong>Poids de chaque dimension dans le score OppChoVec</strong>
+            <div id="pk-values-display"></div>
+          </div>
+        </div>
         <div class="tabs">
           <button class="tab-button active" data-tab="oppchovectab" id="tab-oppchovec">OppChoVec</button>
           <button class="tab-button" data-tab="opptab" id="tab-opp">Opp</button>

@@ -8,11 +8,13 @@
 | Changement | Détail |
 |---|---|
 | Onglets | Seulement OppChoVec, Opp, Cho, Vec, + **Dominance** (nouveau) |
-| Pondérations | Betti et al. uniquement, non mentionné dans l'interface : le bouton de choix a disparu, les valeurs p_k restent affichées |
+| Pondérations | Betti et al. uniquement, non mentionné dans l'interface : le bouton de choix et l'encart ont disparu ; les poids (en %) sont dans une infobulle « 🛈 Pondérations » en haut à droite des cartes |
+| Routes | Plus de choix : seules les routes nationales sont affichées (comme par défaut dans la référence) |
+| Description d'Opp1 (éducation) | Texte réécrit : méthode, sources, limite (niveau de diplôme connu seulement à l'échelle de la Corse) |
 | Langue | Français uniquement, sans case « English labels » (la case « copyright » a disparu aussi : le copyright est toujours affiché) |
 | Chargement des cartes | La référence dessine les cartes **deux fois** au chargement (d'abord avec les valeurs du fichier à p_k égaux, d'où un « flash » violet, puis avec Betti) et laisse les premières couches sous les secondes (routes nationales et étiquettes de villes en double, polygones empilés : l'oppchovec de référence est teinté de ≤ 2/255 par la couche du dessous). La démo dessine une seule fois. Conséquence : routes un peu moins intenses visuellement ; couleurs, bulles et données inchangées |
 | Libellé des curseurs | « 87 % · 96,4 % » devient « 87 % de l'échelle corse · valeur : 96,4 % » (1er % = position entre le min et le max observés en Corse, ensuite la valeur réelle). La comparaison A/B ramène ce libellé à l'ancien format avant de comparer |
-| Colonne de gauche | Sections renumérotées (1 commune, 2 routes, 3 pondérations, 4 téléchargement) ; un seul téléchargement : le classement OppChoVec (les statistiques descriptives ne sont plus proposées) |
+| Colonne de gauche | Deux sections : 1 commune, 2 téléchargement ; un seul téléchargement : le classement OppChoVec (les statistiques descriptives ne sont plus proposées) |
 | Code | `script.js` garde le code des onglets retirés (inactif) ; seules modifications : langue française par défaut, bascule p_k supprimée, deux lignes de garde sur le chatbot, onglet Dominance |
 
 Tout le reste (données, calculs, couleurs, bulles, légendes, fiche commune, curseurs, téléchargements) doit être **identique**.
@@ -59,7 +61,8 @@ Lancer `python -m http.server 8000` à la racine, ouvrir `http://localhost:8000/
 
 - [ ] Les 4 onglets de cartes s'affichent comme dans la référence (zoom, étiquettes Bastia/Calvi/Corte/Ajaccio/Porto-Vecchio, boussole, échelle).
 - [ ] Survol / clic d'une commune : bulle identique (valeur et libellé).
-- [ ] Cases « routes » (nationales, départementales, communales, toutes) : mêmes tracés sur chaque carte.
+- [ ] Routes : seules les nationales sont tracées, comme sur la référence avec ses réglages par défaut ; aucune case de choix.
+- [ ] Infobulle « 🛈 Pondérations » : s'affiche au survol, 3 pourcentages (≈ 100 %).
 - [ ] Boutons d'export (appareil photo, flèche) en haut à droite des cartes : mêmes fichiers produits.
 - [ ] Liste de communes + « Valider » : fiche identique ; curseurs, sous-curseurs, « Recalculer », « Réinitialiser » : mêmes valeurs.
 - [ ] Téléchargement : le classement Excel s'ouvre et contient 360 communes.

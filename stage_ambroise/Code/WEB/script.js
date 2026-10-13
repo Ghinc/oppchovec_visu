@@ -74,7 +74,7 @@ const traductions = {
             "language-english": "Libellés en anglais"
         },
         descriptions: {
-            Indicateur_Opp1: "Avoir une bonne éducation. Se traduit par le niveau de diplôme de la population sur une échelle de 1 à 7.",
+            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen de la population, sur une échelle de 1 à 7 (plus la valeur est haute, plus la population est diplômée). Calcul : pour chaque tranche d'âge, on prend son niveau de diplôme moyen et on le pondère par le poids de cette tranche dans la population ; la somme donne le niveau moyen. Sources : structure par âge de la population (INSEE) et niveaux de diplôme par tranche d'âge (« Chiffres clés de l'apprentissage en Corse »). Limite : le niveau de diplôme par tranche d'âge n'est connu qu'à l'échelle de la Corse, pas de la commune. Les écarts entre communes sont donc faibles : à interpréter avec prudence.",
             Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
             Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
             Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
@@ -1066,7 +1066,6 @@ function mettreAJourAffichageRoutes(carte, mapType) {
     const types = ['nationales', 'departementales', 'communales', 'toutes'];
 
     types.forEach(type => {
-        const checkbox = document.getElementById(`checkbox-${type}`);
         const layer = routesLayers[mapType][type];
 
         if (!layer) return;
@@ -1076,8 +1075,8 @@ function mettreAJourAffichageRoutes(carte, mapType) {
             carte.removeLayer(layer);
         }
 
-        // L'ajouter si la checkbox est cochée
-        if (checkbox && checkbox.checked) {
+        // Version démo : seules les routes nationales sont affichées (plus de choix)
+        if (type === 'nationales') {
             layer.addTo(carte);
         }
     });
@@ -3079,7 +3078,8 @@ function recalculerCarteOppChoVec() {
 function majAffichagePk(pkValues) {
     const info = document.getElementById('pk-values-display');
     if (!info) return;
-    info.textContent = `Opp=${pkValues[0].toFixed(3)} | Cho=${pkValues[1].toFixed(3)} | Vec=${pkValues[2].toFixed(3)}`;
+    const pct = v => (v * 100).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %';
+    info.innerHTML = `Opportunités : <strong>${pct(pkValues[0])}</strong><br>Choix : <strong>${pct(pkValues[1])}</strong><br>Vécu : <strong>${pct(pkValues[2])}</strong>`;
 }
 
 // fonction de calcul des valeurs des dimensions de OppChoVec
@@ -4829,19 +4829,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Event listeners pour les checkboxes de contrôle des routes
-    const routeCheckboxes = document.querySelectorAll('.route-checkbox');
-    routeCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            // Mettre à jour l'affichage des routes sur toutes les cartes
-            Object.keys(cartes).forEach(mapType => {
-                if (cartes[mapType]) {
-                    mettreAJourAffichageRoutes(cartes[mapType], mapType);
-                }
-            });
-        });
-    });
 
     // Fonction pour mettre à jour les traductions de l'interface
     function mettreAJourTraductionsUI() {
