@@ -109,5 +109,38 @@ class SerieTemporelle(unittest.TestCase):
                 self.assertAlmostEqual(refait["communes"][c][a]["scores_0_10"]["OppChoVec"], self.d["communes"][c][a]["scores_0_10"]["OppChoVec"], places=6)
 
 
+class Vec4Comparable(unittest.TestCase):
+    """Vec4 comparable (BPE 2016 et 2024, mêmes types d'équipements, même réseau routier) : Données/vec4_serie_temporelle.json, produit par calculer_vec4_serie.py (serveur OSRM)."""
+
+    @classmethod
+    def setUpClass(cls):
+        from common import RACINE, donnees_actuelles
+        cls.v = charger_json(RACINE / "stage_ambroise" / "Données" / "vec4_serie_temporelle.json")
+        cls.actuel = donnees_actuelles()
+
+    def test_structure(self):
+        self.assertEqual(sorted(self.v["communes"]), sorted(self.actuel))
+        self.assertEqual(self.v["annees"], [2016, 2024])
+        for c, d in self.v["communes"].items():
+            self.assertGreaterEqual(d["2016"], 0, c)
+            self.assertGreaterEqual(d["2024"], 0, c)
+            self.assertEqual(int(d["2016"]), d["2016"])
+
+    def test_2024_restreint_ressemble_au_vec4_actuel(self):
+        a = [self.v["communes"][c]["2024"] for c in sorted(self.actuel)]
+        b = [self.actuel[c]["Vec4"] for c in sorted(self.actuel)]
+        n = len(a)
+        ma, mb = sum(a) / n, sum(b) / n
+        r = sum((x - ma) * (y - mb) for x, y in zip(a, b)) / math.sqrt(sum((x - ma) ** 2 for x in a) * sum((y - mb) ** 2 for y in b))
+        self.assertGreater(r, 0.99)                           # mesuré : 0,995 (105 types sur 212)
+        # une commune ne peut pas avoir plus de services (types restreints) que le Vec4 actuel (tous types)
+        for c in self.actuel:
+            self.assertLessEqual(self.v["communes"][c]["2024"], self.actuel[c]["Vec4"], c)
+
+    def test_types_et_effectifs_documentes(self):
+        self.assertEqual(self.v["types_communs"], 105)
+        self.assertEqual(self.v["equipements"], {"2016": 9611, "2024": 9409})
+
+
 if __name__ == "__main__":
     unittest.main()

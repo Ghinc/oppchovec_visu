@@ -181,6 +181,12 @@ Pour Opp2, Opp3 (voiture), Vec3, les effectifs retrouvent ceux des fichiers actu
 
 **Euros courants.** Vec1 est en euros de chaque année, sans correction de l'inflation (environ +6 % entre les moyennes annuelles de 2016 et 2021 d'après mes souvenirs, **non vérifié** : à confirmer sur la série INSEE de l'indice des prix). La hausse de Vec (306 communes en progression sur 360) est donc en grande partie nominale.
 
+**Vec4 (services à 20 minutes), calcul comparable fait mais pas encore dans l'indice.** `Code/Python/calculer_vec4_serie.py` refait le calcul de Vec4 avec le serveur OSRM local (même fichier OSM que le Vec4 actuel). Contrôle : avec la BPE 2024 complète,
+il retrouve **exactement** le Vec4 actuel pour les 360 communes. Pour la série, il compte, aux deux dates, uniquement les types d'équipements présents **et géolocalisés** aux deux dates (105 types : la BPE 2016 a 153 types géolocalisés, la BPE 2024 en a 212 ; 15 types, surtout des artisans du bâtiment,
+ne sont pas géolocalisés en 2016) et le réseau routier est le même (seuls les équipements changent). Résultat dans `Données/vec4_serie_temporelle.json` : 9 611 équipements en 2016, 9 409 en 2024, 208 services accessibles en moyenne aux deux dates ; corrélation de 0,998 entre les deux dates
+et de 0,995 entre la version restreinte de 2024 et le Vec4 actuel ; 163 communes en hausse, 167 en baisse, 30 inchangées (écarts de quelques dizaines à une centaine de services, sans tendance). **Seconde date = 2024**, pas 2021 : je n'ai pas trouvé de lien de téléchargement
+pour les BPE 2020 et 2021 géolocalisées, et la BPE 2021 rompt la série (la source SIRENE est remplacée par SIRUS, d'où une baisse d'effectif). À intégrer dans l'onglet Évolution après arbitrage.
+
 **Calcul.** Normalisation min-max de chaque indicateur sur les **deux années ensemble** (échelle commune), dimension = moyenne des indicateurs disponibles, p_k de Betti sur les deux années
 ensemble (Opp 0,447 ; Cho 0,338 ; Vec 0,215 : Cho n'a qu'un indicateur, donc une dispersion forte), indice `(1/3)(Σ p_k d_k^1,5)^(2,5/1,5)` ramené à 0-10 sur les deux années ensemble. Seuils de couleur : Jenks à
 5 classes sur les deux années ensemble (mêmes seuils pour les deux cartes). Carte d'évolution : 2021 moins 2016, classes à ±0,5 et ±1,5 point.
