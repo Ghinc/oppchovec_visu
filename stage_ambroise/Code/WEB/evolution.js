@@ -150,12 +150,19 @@ function evolutionRedessiner() {
     evolutionResumeHtml();
 }
 
+let evolutionEnCours = false;
+
 async function initialiserOngletEvolution() {
+    if (evolutionEnCours) return;
     if (evolutionInitialise) {
         setTimeout(() => Object.values(evolutionCartes).forEach(c => c.invalidateSize()), 100);
         return;
     }
-    if (!communeJson || !communeJson.features) { console.warn('Évolution : géométries non prêtes'); return; }
+    if (typeof communeJson === 'undefined' || !communeJson || !communeJson.features) {          // géométries pas encore chargées : on réessaie
+        setTimeout(() => { if (document.getElementById('evolutiontab').classList.contains('active')) initialiserOngletEvolution(); }, 400);
+        return;
+    }
+    evolutionEnCours = true;
     try {
         const reponse = await fetch(BASE_PATH + 'serie_temporelle.json');
         if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
@@ -163,9 +170,11 @@ async function initialiserOngletEvolution() {
     } catch (e) {
         console.warn('Évolution : serie_temporelle.json non chargé', e);
         document.getElementById('evolution-resume').textContent = 'Données de la série temporelle indisponibles.';
+        evolutionEnCours = false;
         return;
     }
     evolutionInitialise = true;
+    evolutionEnCours = false;
     const [a0, a1] = evolutionDonnees.annees;
     document.getElementById('evolution-titre-a0').textContent = a0;
     document.getElementById('evolution-titre-a1').textContent = a1;
@@ -204,6 +213,14 @@ async function initialiserOngletEvolution() {
         Object.values(evolutionCartes).forEach(c => c.invalidateSize());
         evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8] });   // les autres cartes suivent (vues liées)
     }, 150);
+}
+
+// Ouverture de l'onglet : l'initialisation est déclenchée ici (et non dans script.js), après le changement d'onglet fait par script.js
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        const bouton = document.querySelector('.tab-button[data-tab="evolutiontab"]');
+        if (bouton) bouton.addEventListener('click', () => setTimeout(initialiserOngletEvolution, 0));
+    });
 }
 
 if (typeof module !== 'undefined' && module.exports) {
