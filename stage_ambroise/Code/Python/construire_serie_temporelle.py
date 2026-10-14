@@ -5,6 +5,7 @@ Construit une version COMPARABLE dans le temps de l'indice OppChoVec pour deux a
 Principe : mêmes sources, mêmes définitions, mêmes bornes de normalisation pour les deux années. On ne garde que les indicateurs pour lesquels une
 source homogène existe aux deux dates (7 sur 10) ; Opp4 (4G, haut débit, fibre), Cho1 (quartiers prioritaires) et Vec4 (services à 20 minutes)
 sont EXCLUS de cet indice : pas de source communale homogène trouvée pour 2016. Ce n'est donc pas l'indice OppChoVec complet de l'appli.
+Opp1 est sur 4 niveaux de diplôme (le détail à 7 niveaux n'existe pas en 2016) ; le reste suit les définitions de l'indice actuel.
 
 Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux indicateurs » communales, sauf mention)
   Opp1  niveau de diplôme moyen des 18 ans et plus non scolarisés, sur 4 niveaux comparables (1 aucun diplôme ou brevet, 2 CAP-BEP, 3 bac,
@@ -12,9 +13,11 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
   Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus (formule de oppchovec.py : Σ (x/μ) ln(x/μ) / 8)
   Opp3  part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun
         + 100 pour les 3 villes ayant un réseau de bus (Ajaccio, Bastia, Porto-Vecchio ; inchangé)
-  Cho2  part des Français parmi la population de 15 ans et plus (%), tables NAT1 (population par âge, sexe, nationalité). Approximation : l'indicateur
-        actuel est calculé sur les 18 ans et plus avec une règle de proportionnalité sur la tranche 15-24 ans.
-  Vec1  revenu fiscal de référence moyen par foyer fiscal (DGFiP, IRCOM, revenus de l'année) ; communes non communiquées : moyenne de leur département
+  Cho2  part des Français parmi les 18 ans et plus (%), avec la méthode de proportion_etrangers_18plus_final.py appliquée aux deux dates : étrangers de 18 ans et plus =
+        (population de 18 à 24 ans, POP1B) - 0,7 x (Français de 15 à 24 ans, NAT1) + (étrangers de 25 ans et plus, NAT1), rapportés à la population totale ;
+        Cho2 = 100 - cette proportion, plafonné à 100 (retrouve le fichier actuel, calculé en 2022, à 0,01 point près pour 357 communes sur 360)
+  Vec1  médiane du niveau de vie (Filosofi, INSEE), comme l'indicateur actuel ; quand l'INSEE ne la diffuse pas (petites communes), médiane du département
+        de la même année, comme dans les données actuelles (154 communes en 2021)
   Vec2  (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons) / 3, avec chauffage = 1 (constant, comme dans les données actuelles)
   Vec3  stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par leurs effectifs
 
@@ -106,36 +109,40 @@ def indicateurs_recensement(dossier, an):
 
 
 def indicateur_nationalite(dossier):
-    f = trouver(dossier, "NAT1")
-    d = pd.read_csv(f, sep=";", dtype=str, encoding="latin1")
-    d = d[d["CODGEO"].str.startswith(("2A", "2B")) & (d["AGE4"] != "00")]                  # 15 ans et plus
-    d["NB"] = d["NB"].astype(float)
-    t = d.groupby("CODGEO")["NB"].sum()
-    fr = d[d["INATC"] == "1"].groupby("CODGEO")["NB"].sum()
-    return (100 * fr / t).rename("Cho2")
+    """Cho2 : part des Français parmi les 18 ans et plus, par la méthode de proportion_etrangers_18plus_final.py (tables POP1B et NAT1 de l'année)."""
+    pop = pd.read_csv(trouver(dossier, "POP1B"), sep=";", dtype={"CODGEO": str, "AGED100": str}, usecols=["CODGEO", "AGED100", "NB"], encoding="latin1")
+    pop = pop[pop["CODGEO"].str.startswith(("2A", "2B"))]
+    total = pop.groupby("CODGEO")["NB"].sum()
+    t1824 = pop[pop["AGED100"].isin([f"{i:03d}" for i in range(18, 25)])].groupby("CODGEO")["NB"].sum().reindex(total.index).fillna(0)
+    nat = pd.read_csv(trouver(dossier, "NAT1"), sep=";", dtype=str, encoding="latin1")
+    nat = nat[nat["CODGEO"].str.startswith(("2A", "2B"))].copy()
+    nat["NB"] = nat["NB"].astype(float)
+    somme = lambda m: nat.loc[m, "NB"].groupby(nat.loc[m, "CODGEO"]).sum().reindex(total.index).fillna(0)
+    francais_1524 = somme((nat["AGE4"] == "15") & (nat["INATC"] == "1"))
+    etrangers_25p = somme(nat["AGE4"].isin(["25", "55"]) & (nat["INATC"] == "2"))
+    etrangers_18p = (t1824 - 0.7 * francais_1524) + etrangers_25p          # Français 18-24 ans approchés par 0,7 x Français 15-24 ans
+    return (100 - 100 * etrangers_18p / total).clip(upper=100).rename("Cho2")
 
 
-def indicateur_revenu(dossier):
-    """Revenu fiscal de référence moyen par foyer, ligne « Total » de la commune (le fichier 2016 et le fichier 2021 n'ont pas la même mise en page)."""
-    f = trouver(dossier, "ircom_communes")
-    brut = pd.read_excel(f, sheet_name=0, header=None)
-    entete = next(i for i in range(15) if "Libell" in " ".join(brut.iloc[i].astype(str)))
-    d = brut.iloc[entete + 1:, 1:9].copy()
-    d.columns = ["dep", "com", "lib", "tranche", "nb_foyers", "rfr", "impot", "nb_imposes"]
-    d = d.dropna(subset=["dep"])
-    d["dep"] = d["dep"].astype(str).str.strip()
-    d = d[d["dep"].isin(["2A0", "2B0"]) & (d["tranche"].astype(str).str.strip().str.upper() == "TOTAL")].copy()
-    d["code"] = d["dep"].str[:2] + d["com"].astype(str).str.strip().str.replace(r"\.0$", "", regex=True).str.zfill(3)
-    d["nb_foyers"] = pd.to_numeric(d["nb_foyers"], errors="coerce")
-    d["rfr_k"] = pd.to_numeric(d["rfr"], errors="coerce")
-    t = d.set_index("code")
-    ok = t["nb_foyers"].gt(0) & t["rfr_k"].notna()
-    moy_dep = {}
-    for dep in ("2A", "2B"):
-        sel = t[ok & t.index.str.startswith(dep)]
-        moy_dep[dep] = sel["rfr_k"].sum() * 1000 / sel["nb_foyers"].sum()
-    val = pd.Series({c: (r["rfr_k"] * 1000 / r["nb_foyers"] if ok[c] else moy_dep[c[:2]]) for c, r in t.iterrows()}, name="Vec1")
-    return val, ~ok.rename("estime")
+def indicateur_mediane(dossier, an):
+    """Vec1 : médiane du niveau de vie (Filosofi) ; non diffusée -> médiane du département de la même année. Renvoie (valeur, valeur_departementale)."""
+    if an == 2021:
+        com = pd.read_csv(trouver(dossier, "mediane-niveau-vie-com"), dtype=str)
+        dep = pd.read_csv(trouver(dossier, "mediane-niveau-vie-dep"), dtype=str)
+        med = pd.to_numeric(com.set_index("code_com")["valeur"], errors="coerce")
+        med_dep = {c: float(v) for c, v in zip(dep["code_dep"], dep["valeur"]) if c in ("2A", "2B")}
+    else:                                                                       # 2016 : base-cc-filosofi-2016.xls (feuilles COM et DEP)
+        def feuille(nom):
+            brut = pd.read_excel(trouver(dossier, "filosofi"), sheet_name=nom, header=None)
+            h = next(i for i in range(15) if str(brut.iloc[i, 0]).strip() == "CODGEO")
+            d = brut.iloc[h + 1:].copy()
+            d.columns = brut.iloc[h]
+            return d.set_index("CODGEO")
+        med = pd.to_numeric(feuille("COM")["MED16"], errors="coerce")
+        med_dep = {c: float(v) for c, v in pd.to_numeric(feuille("DEP")["MED16"], errors="coerce").items() if c in ("2A", "2B")}
+    codes = [c for c in med.index if str(c).startswith(("2A", "2B"))]
+    med = med.reindex(codes)
+    return med, med_dep
 
 
 def minmax(s, lo, hi):
@@ -158,7 +165,11 @@ def calculer(source):
         dossier = source / str(an)
         t = indicateurs_recensement(dossier, an)
         t["Cho2"] = indicateur_nationalite(dossier)
-        t["Vec1"], estimees[an] = indicateur_revenu(dossier)
+        med, med_dep = indicateur_mediane(dossier, an)
+        codes = list(t.index)
+        diffusee = med.reindex(codes).notna()
+        t["Vec1"] = [med[c] if diffusee[c] else med_dep[c[:2]] for c in codes]
+        estimees[an] = ~diffusee
         t = t[INDICATEURS]
         if set(t.index) != set(noms) or t.isna().any().any():
             sys.exit(f"{an} : communes ou valeurs manquantes (écart communes {sorted(set(noms) ^ set(t.index))[:5]}, NaN {t.isna().sum().to_dict()})")
@@ -184,7 +195,7 @@ def calculer(source):
         for an in ANNEES:
             communes[nom][str(an)] = {"indicateurs": {k: float(brut[an].loc[code, k]) for k in INDICATEURS},
                                       "scores_0_10": {v: float(resultat[an].loc[code, v]) for v in ("OppChoVec", "Opp", "Cho", "Vec")},
-                                      "revenu_estime_departement": bool(estimees[an][code])}
+                                      "vec1_departementale": bool(estimees[an][code])}
     return {"annees": list(ANNEES), "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},

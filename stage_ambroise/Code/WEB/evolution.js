@@ -10,7 +10,7 @@ const EVOLUTION_VARIABLES = {
 };
 const EVOLUTION_NOMS_INDICATEURS = {
     Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
-    Cho2: 'Cho2 · part de Français (%)', Vec1: 'Vec1 · revenu fiscal moyen (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
+    Cho2: 'Cho2 · part de Français, 18 ans et plus (%)', Vec1: 'Vec1 · médiane du niveau de vie (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
 };
 // Évolution (points sur 10) : 5 classes symétriques autour de 0 ; rouge = recul, bleu = progression
 const EVOLUTION_SEUILS_VARIATION = [-1.5, -0.5, 0.5, 1.5];
@@ -131,12 +131,12 @@ function evolutionFiche(nom) {
         const v0 = evolutionValeur(d, nom, a0, v), v1 = evolutionValeur(d, nom, a1, v);
         return `<tr><td>${EVOLUTION_VARIABLES[v]}</td><td>${evolutionFmt(v0)}</td><td>${evolutionFmt(v1)}</td><td><strong>${v1 - v0 >= 0 ? '+' : ''}${evolutionFmt(v1 - v0)}</strong></td></tr>`;
     }).join('');
-    const estime = [a0, a1].filter(a => c[String(a)].revenu_estime_departement);
+    const estime = [a0, a1].filter(a => c[String(a)].vec1_departementale);
     document.getElementById('evolution-fiche').innerHTML =
         `<h4>${evolutionEchapper(nom)}</h4>` +
         `<table class="evolution-table"><tr><th></th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}</table>` +
         `<table class="evolution-table"><tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th></tr>${lignes}</table>` +
-        (estime.length ? `<div class="evolution-petit">Revenu non communiqué par la DGFiP pour ${estime.join(' et ')} : valeur moyenne du département.</div>` : '');
+        (estime.length ? `<div class="evolution-petit">Médiane du niveau de vie non diffusée par l'INSEE pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
 
 function evolutionRedessiner() {

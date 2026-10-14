@@ -171,26 +171,28 @@ recensement de l'INSEE (millésimes 2016 et 2021, qui ne se recouvrent pas : enq
 | Opp1 | niveau de diplôme moyen des 18 ans et plus non scolarisés, sur **4** niveaux (aucun diplôme ou brevet, CAP-BEP, bac, supérieur) : le millésime 2016 n'a pas le détail à 7 niveaux ; 15-17 ans non scolarisés retirés du niveau 1 | 0,91 (échelle différente) |
 | Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
 | Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia et Porto-Vecchio | 0,99 |
-| Cho2 | % de Français parmi les 15 ans et plus (tables NAT1) : approximation de l'indicateur actuel (18 ans et plus) | 0,85 |
-| Vec1 | revenu fiscal de référence moyen par foyer fiscal (DGFiP, IRCOM) ; non communiqué : moyenne du département (11 communes en 2016, 12 en 2021) | 0,45 (la médiane actuelle est départementale pour 154 communes) |
+| Cho2 | % de Français parmi les **18 ans et plus**, par la méthode de `proportion_etrangers_18plus_final.py` (population de 18-24 ans en POP1B, Français 15-24 ans × 0,7 en NAT1, étrangers 25 ans et plus en NAT1) : appliquée aux deux dates, elle retrouve le fichier actuel (calculé en 2022) à 0,01 point près pour 357 communes sur 360 | 0,89 (millésimes 2021 et 2022) |
+| Vec1 | **médiane du niveau de vie** (Filosofi, INSEE), comme l'actuel ; quand elle n'est pas diffusée, médiane du département de la même année (154 communes aux deux dates, 148 les mêmes) | 1,00 (identique pour les 360 communes en 2021) |
 | Vec2 | (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons)/3, chauffage = 1 comme dans les données actuelles | 0,96 |
 | Vec3 | stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par les effectifs | 0,999 |
 
 Pour Opp2, Opp3 (voiture), Vec3, les effectifs retrouvent ceux des fichiers actuels (arrondis à l'entier près) ; la correspondance exacte des définitions a été vérifiée commune par commune
 (Afa : 119 chômeurs, 4 emplois aidés, 21 ponctuels, 98 CDD, 1 472 stables, 1 714 actifs).
 
+**Euros courants.** Vec1 est en euros de chaque année, sans correction de l'inflation (environ +6 % entre les moyennes annuelles de 2016 et 2021 d'après mes souvenirs, **non vérifié** : à confirmer sur la série INSEE de l'indice des prix). La hausse de Vec (306 communes en progression sur 360) est donc en grande partie nominale.
+
 **Calcul.** Normalisation min-max de chaque indicateur sur les **deux années ensemble** (échelle commune), dimension = moyenne des indicateurs disponibles, p_k de Betti sur les deux années
-ensemble (Opp 0,444 ; Cho 0,357 ; Vec 0,199 : Cho n'a qu'un indicateur, donc une dispersion forte), indice `(1/3)(Σ p_k d_k^1,5)^(2,5/1,5)` ramené à 0-10 sur les deux années ensemble. Seuils de couleur : Jenks à
+ensemble (Opp 0,447 ; Cho 0,338 ; Vec 0,215 : Cho n'a qu'un indicateur, donc une dispersion forte), indice `(1/3)(Σ p_k d_k^1,5)^(2,5/1,5)` ramené à 0-10 sur les deux années ensemble. Seuils de couleur : Jenks à
 5 classes sur les deux années ensemble (mêmes seuils pour les deux cartes). Carte d'évolution : 2021 moins 2016, classes à ±0,5 et ±1,5 point.
 
-**Résultats (indice comparable).** Moyenne 5,31 en 2016, 5,53 en 2021 (+0,22) ; 122 communes en progression de plus de 0,5 point, 173 stables, 65 en recul. Les corrélations entre 2016 et 2021, par indicateur, vont de 0,33
+**Résultats (indice comparable).** Moyenne 5,10 en 2016, 5,59 en 2021 (+0,49) ; 162 communes en progression de plus de 0,5 point, 140 stables, 58 en recul. Les corrélations entre 2016 et 2021, par indicateur, vont de 0,33
 (Vec3) à 0,88 (Vec2) : **les petites communes bougent beaucoup d'une année à l'autre** (quelques personnes de plus ou de moins), et une partie de l'« évolution » est du bruit. L'indice comparable 2021 et l'indice actuel
-ont une corrélation de 0,69 : ce ne sont pas le même indice.
+ont une corrélation de 0,78 : ce ne sont pas le même indice (7 indicateurs au lieu de 10, Opp1 sur 4 niveaux, Cho2 de 2021 et non de 2022).
 
 **Fichiers à fournir** à `construire_serie_temporelle.py <dossier>` : deux sous-dossiers `2016` et `2021`, chacun avec, sous leurs noms d'origine, les fichiers CSV du recensement (INSEE, « base des principaux indicateurs » communale),
-la table NAT1 et l'IRCOM de l'année. 2016 : `base-cc-evol-struct-pop-2016`, `base_cc_logement-2016`, `base-cc-carac-emploi-2016`, `base-cc-emploi-pop-active-2016`, `base-cc-diplomes-formation-2016`, `BTT_TD_NAT1_2016.txt`,
-`ircom_communes_complet_revenus_2016.xlsx` (pages INSEE 4171334, 4171415, 4171449, 4171446, 4171395, 4171501 ; DGFiP : data.gouv.fr « L'impôt sur le revenu par collectivité territoriale (IRCOM) »). 2021 : mêmes fichiers
-en `2021` (pages 8201904, 8202349, 8200707, 8202916, 8202319, 8202752 ; IRCOM revenus 2021).
+les tables NAT1 et POP1B et la médiane du niveau de vie de l'année. 2016 : `base-cc-evol-struct-pop-2016`, `base_cc_logement-2016`, `base-cc-carac-emploi-2016`, `base-cc-emploi-pop-active-2016`, `base-cc-diplomes-formation-2016`, `BTT_TD_NAT1_2016.txt`,
+`BTT_TD_POP1B_2016.txt`, `base-cc-filosofi-2016.xls` (pages INSEE 4171334, 4171415, 4171449, 4171446, 4171395, 4171501, 4171341, 4190004 ; lecture du `.xls` : bibliothèque `xlrd`). 2021 : `base-cc-evol-struct-pop-2021`, `base-cc-logement-2021`, `base-cc-caract_emp-2021`, `base-cc-emploi-pop-active-2021`,
+`base-cc-diplomes-formation-2021`, `TD_NAT1V1_2021.csv`, `TD_POP1B_2021.csv` (pages 8201904, 8202349, 8200707, 8202916, 8202319, 8202752, 8202264) et, de data.gouv.fr (« Niveau de vie médian »), `mediane-niveau-vie-com.csv` et `mediane-niveau-vie-dep.csv`.
 
 ## Échelles utilisées
 
