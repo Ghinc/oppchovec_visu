@@ -4559,6 +4559,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 initialiserOngletParangons();
             }
 
+            // Onglet Évolution (2016 → 2021) : initialisation à la première ouverture
+            if (targetTab === 'evolutiontab' && typeof initialiserOngletEvolution === 'function') {
+                initialiserOngletEvolution();
+            }
+
             // Invalider la taille de la carte pour forcer le redimensionnement
             const mapType = targetTab.replace('tab', '');
             if (cartes[mapType]) {

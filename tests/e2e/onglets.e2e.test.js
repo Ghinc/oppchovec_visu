@@ -20,7 +20,7 @@ test('tous les onglets s\'ouvrent, affichent leur contenu, sans nouvelle erreur'
   await avecAppli(async (appli) => {
     const { page } = appli;
     const onglets = await page.$$eval('.tab-button[data-tab]', (b) => b.map((x) => x.dataset.tab));
-    assert.equal(onglets.length, 11);
+    assert.equal(onglets.length, 12);
     for (const tab of onglets) {
       await cliquerOnglet(page, tab);
       await page.waitForSelector(`#${tab}.active`, { state: 'visible', timeout: 15000 });

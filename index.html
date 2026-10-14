@@ -115,6 +115,7 @@
           <button class="tab-button" data-tab="entreprisestab">Entreprises</button>
           <button class="tab-button" data-tab="correlationtab">Corrélation</button>
           <button class="tab-button" data-tab="parangonstab">Parangons</button>
+          <button class="tab-button" data-tab="evolutiontab">Évolution</button>
           <button class="tab-button" data-tab="chatbottab">DumèGPT</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
@@ -327,6 +328,39 @@
           </div>
         </div>
 
+        <!-- Onglet Évolution (2016 → 2021) -->
+        <div class="tab-content" id="evolutiontab">
+          <div class="evolution-entete">
+            <div class="evolution-intro">
+              <strong>Évolution 2016 → 2021.</strong> Indice OppChoVec <em>comparable dans le temps</em> : mêmes sources, mêmes définitions et même échelle pour les deux années, mais
+              <strong>7 indicateurs sur 10</strong> (Opp1 à Opp3, Cho2, Vec1 à Vec3). Opp4 (4G, haut débit, fibre), Cho1 (quartiers prioritaires) et Vec4 (services à 20 minutes) sont exclus
+              faute de source homogène pour 2016 : ce n'est donc pas l'indice des autres onglets. Opp1 est ici un niveau de diplôme sur 4 niveaux et Vec1 le revenu fiscal moyen par foyer.
+              Les petites communes ont des valeurs instables d'une année à l'autre : lire leurs évolutions avec prudence.
+            </div>
+            <label class="evolution-choix">Variable affichée :
+              <select id="evolution-variable">
+                <option value="OppChoVec">Indice OppChoVec</option>
+                <option value="Opp">Opportunités (Opp)</option>
+                <option value="Cho">Choix (Cho)</option>
+                <option value="Vec">Vécu (Vec)</option>
+              </select>
+            </label>
+          </div>
+          <div class="evolution-cartes">
+            <div class="evolution-carte"><h4 id="evolution-titre-a0">2016</h4><div id="map-evolution-a0" class="map"></div></div>
+            <div class="evolution-carte"><h4 id="evolution-titre-a1">2021</h4><div id="map-evolution-a1" class="map"></div></div>
+            <div class="evolution-carte"><h4>Évolution</h4><div id="map-evolution-variation" class="map"></div></div>
+          </div>
+          <div class="evolution-bas">
+            <div class="evolution-bas-gauche">
+              <div id="evolution-legende-annees" class="evolution-legende"></div>
+              <div id="evolution-legende-variation" class="evolution-legende"></div>
+              <div id="evolution-resume" class="evolution-resume">Chargement…</div>
+            </div>
+            <div id="evolution-fiche" class="evolution-fiche"><span class="evolution-petit">Cliquez sur une commune pour voir ses valeurs en 2016 et 2021.</span></div>
+          </div>
+        </div>
+
         <!-- Onglet DumèGPT -->
         <div class="tab-content" id="chatbottab">
           <div class="chatbot-container">
@@ -376,6 +410,7 @@
   <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js"></script>
   <script src="stage_ambroise/Code/WEB/cah_data.js"></script>
   <script src="stage_ambroise/Code/WEB/vec1_variante.js"></script>
+  <script src="stage_ambroise/Code/WEB/evolution.js"></script>
   <script src="stage_ambroise/Code/WEB/script.js"></script>
 </body>
 </html>

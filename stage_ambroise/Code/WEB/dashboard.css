@@ -2335,3 +2335,31 @@ tr:nth-child(even) {
 .vec1-table { border-collapse: collapse; margin: 4px 0; }
 .vec1-table td { padding: 1px 10px 1px 0; }
 .vec1-petit { font-size: 11px; color: #555; margin-top: 4px; line-height: 1.4; }
+
+
+/* ============================================
+   ONGLET ÉVOLUTION (2016 -> 2021)
+   ============================================ */
+
+#evolutiontab { display: none; height: 100%; overflow: hidden; }
+#evolutiontab.active { display: flex; flex-direction: column; }
+.evolution-entete { flex: 0 0 auto; display: flex; gap: 16px; align-items: flex-start; padding: 8px 14px; border-bottom: 1px solid #ddd; background: #fafafa; }
+.evolution-intro { flex: 1 1 auto; font-size: 12px; line-height: 1.4; color: #333; max-height: 90px; overflow-y: auto; }
+.evolution-choix { flex: 0 0 auto; font-size: 12.5px; white-space: nowrap; }
+.evolution-choix select { margin-left: 6px; padding: 3px 6px; }
+.evolution-cartes { flex: 1 1 auto; display: flex; min-height: 0; }
+.evolution-carte { flex: 1 1 33%; min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #ddd; }
+.evolution-carte h4 { margin: 0; padding: 4px 10px; font-size: 14px; background: #f0f0f0; text-align: center; }
+.evolution-carte .map { flex: 1 1 auto; height: auto; min-height: 0; }
+.evolution-bas { flex: 0 0 auto; display: flex; gap: 16px; max-height: 38%; overflow-y: auto; padding: 8px 14px; border-top: 1px solid #ddd; background: #fafafa; }
+.evolution-bas-gauche { flex: 1 1 55%; min-width: 0; }
+.evolution-fiche { flex: 1 1 45%; min-width: 0; font-size: 12px; }
+.evolution-fiche h4 { margin: 0 0 4px 0; font-size: 14px; }
+.evolution-legende { font-size: 11.5px; margin-bottom: 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; }
+.evolution-classe { white-space: nowrap; }
+.evolution-pastille { display: inline-block; width: 14px; height: 10px; margin-right: 4px; border: 1px solid #666; vertical-align: middle; }
+.evolution-resume { font-size: 12px; line-height: 1.45; margin-top: 6px; }
+.evolution-petit { font-size: 11px; color: #555; margin-top: 3px; }
+.evolution-table { border-collapse: collapse; margin: 2px 0 6px 0; font-size: 11.5px; }
+.evolution-table th, .evolution-table td { padding: 1px 12px 1px 0; text-align: left; font-weight: normal; }
+.evolution-table th { color: #555; border-bottom: 1px solid #ccc; }

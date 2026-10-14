@@ -156,6 +156,42 @@ observées : 7 325 € à 66 166 €). Le revenu moyen n'est pas la médiane (il
 laissant chaque commune de côté, fait une erreur typique de 1 810 € (1 675 € pour les communes de moins de 400 foyers) contre 2 260 € pour la valeur
 départementale ; l'écart réel entre communes est de 2 390 €. Cette estimation n'est pas utilisée dans l'appli.
 
+## Série temporelle 2016 → 2021 (onglet « Évolution »)
+
+**But.** Comparer deux années. L'indice de l'appli mélange des sources de 2020 à 2022 et ne peut pas servir de point de départ : il faut les mêmes sources, les
+mêmes définitions et la même échelle aux deux dates. `Code/Python/construire_serie_temporelle.py` produit `Code/WEB/serie_temporelle.json` (360 communes, 2016 et 2021).
+
+**Un indice comparable, pas l'indice complet : 7 indicateurs sur 10.** Exclus faute de source communale homogène pour 2016 : **Opp4** (4G, haut débit, fibre ; l'ARCEP ne
+publie pas de série communale équivalente que j'aie pu obtenir), **Cho1** (quartiers prioritaires : géographie de 2015 puis de 2024, pas de série), **Vec4** (services à 20 minutes :
+accessibilité calculée avec le serveur d'itinéraires local et la BPE 2024). Les 7 retenus sont recalculés de la même façon aux deux dates, depuis les bases communales du
+recensement de l'INSEE (millésimes 2016 et 2021, qui ne se recouvrent pas : enquêtes 2014-2018 et 2019-2023) :
+
+| Indicateur | Définition (identique aux deux dates) | Ressemblance avec l'indicateur actuel (corrélation, 2021) |
+|---|---|---|
+| Opp1 | niveau de diplôme moyen des 18 ans et plus non scolarisés, sur **4** niveaux (aucun diplôme ou brevet, CAP-BEP, bac, supérieur) : le millésime 2016 n'a pas le détail à 7 niveaux ; 15-17 ans non scolarisés retirés du niveau 1 | 0,91 (échelle différente) |
+| Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
+| Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia et Porto-Vecchio | 0,99 |
+| Cho2 | % de Français parmi les 15 ans et plus (tables NAT1) : approximation de l'indicateur actuel (18 ans et plus) | 0,85 |
+| Vec1 | revenu fiscal de référence moyen par foyer fiscal (DGFiP, IRCOM) ; non communiqué : moyenne du département (11 communes en 2016, 12 en 2021) | 0,45 (la médiane actuelle est départementale pour 154 communes) |
+| Vec2 | (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons)/3, chauffage = 1 comme dans les données actuelles | 0,96 |
+| Vec3 | stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par les effectifs | 0,999 |
+
+Pour Opp2, Opp3 (voiture), Vec3, les effectifs retrouvent ceux des fichiers actuels (arrondis à l'entier près) ; la correspondance exacte des définitions a été vérifiée commune par commune
+(Afa : 119 chômeurs, 4 emplois aidés, 21 ponctuels, 98 CDD, 1 472 stables, 1 714 actifs).
+
+**Calcul.** Normalisation min-max de chaque indicateur sur les **deux années ensemble** (échelle commune), dimension = moyenne des indicateurs disponibles, p_k de Betti sur les deux années
+ensemble (Opp 0,444 ; Cho 0,357 ; Vec 0,199 : Cho n'a qu'un indicateur, donc une dispersion forte), indice `(1/3)(Σ p_k d_k^1,5)^(2,5/1,5)` ramené à 0-10 sur les deux années ensemble. Seuils de couleur : Jenks à
+5 classes sur les deux années ensemble (mêmes seuils pour les deux cartes). Carte d'évolution : 2021 moins 2016, classes à ±0,5 et ±1,5 point.
+
+**Résultats (indice comparable).** Moyenne 5,31 en 2016, 5,53 en 2021 (+0,22) ; 122 communes en progression de plus de 0,5 point, 173 stables, 65 en recul. Les corrélations entre 2016 et 2021, par indicateur, vont de 0,33
+(Vec3) à 0,88 (Vec2) : **les petites communes bougent beaucoup d'une année à l'autre** (quelques personnes de plus ou de moins), et une partie de l'« évolution » est du bruit. L'indice comparable 2021 et l'indice actuel
+ont une corrélation de 0,69 : ce ne sont pas le même indice.
+
+**Fichiers à fournir** à `construire_serie_temporelle.py <dossier>` : deux sous-dossiers `2016` et `2021`, chacun avec, sous leurs noms d'origine, les fichiers CSV du recensement (INSEE, « base des principaux indicateurs » communale),
+la table NAT1 et l'IRCOM de l'année. 2016 : `base-cc-evol-struct-pop-2016`, `base_cc_logement-2016`, `base-cc-carac-emploi-2016`, `base-cc-emploi-pop-active-2016`, `base-cc-diplomes-formation-2016`, `BTT_TD_NAT1_2016.txt`,
+`ircom_communes_complet_revenus_2016.xlsx` (pages INSEE 4171334, 4171415, 4171449, 4171446, 4171395, 4171501 ; DGFiP : data.gouv.fr « L'impôt sur le revenu par collectivité territoriale (IRCOM) »). 2021 : mêmes fichiers
+en `2021` (pages 8201904, 8202349, 8200707, 8202916, 8202319, 8202752 ; IRCOM revenus 2021).
+
 ## Échelles utilisées
 
 ### Indicateurs bruts (NON normalisés)

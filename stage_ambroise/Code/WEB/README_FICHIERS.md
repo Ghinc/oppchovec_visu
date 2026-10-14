@@ -103,6 +103,8 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
 - **vec1_revenu_fiscal.json** et **vec1_variante.js** : variante de Vec1 (revenu fiscal moyen par foyer, DGFiP IRCOM 2021) à la place de la médiane du
   niveau de vie, et case à cocher qui bascule l'appli ; voir `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Vec1 ». Produit par
   `calculer_revenu_fiscal_vec1.py "<chemin>/ircom_communes_complet_revenus_2021.xlsx"` (non nécessaire à l'indice actuel).
+- **serie_temporelle.json** et **evolution.js** : indice OppChoVec comparable pour 2016 et 2021 (7 indicateurs sur 10) et onglet « Évolution » (deux cartes + carte d'évolution) ; voir
+  `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Série temporelle ». Produit par `construire_serie_temporelle.py "<dossier>"` (sources INSEE et DGFiP décrites dans cette section).
 - **densite_entrepreneuriale.json**, **bien_etre_subjectif.json** : données de l'onglet Corrélation (le second ne couvre que
   les communes de l'enquête).
 
