@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opp4 : connectivité avant 2018</title>
+<style>
+:root{
+  --fond:#f6f4ef; --carte:#ffffff; --texte:#1f2a33; --discret:#5d6b77; --trait:#dcd7cc; --accent:#1f5f8b; --accent-doux:#e4eef5;
+  --ok:#1b7f5c; --ok-fond:#dff3ea; --approx:#9a6700; --approx-fond:#fbeccb; --non:#b3261e; --non-fond:#f9dedc; --code:#efece4;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --fond:#12171c; --carte:#1a2128; --texte:#e6ebef; --discret:#9aa8b4; --trait:#2d3944; --accent:#74b4e3; --accent-doux:#1d2d3a;
+    --ok:#5fd0a2; --ok-fond:#163a2d; --approx:#f0bf59; --approx-fond:#3d3015; --non:#ff8f86; --non-fond:#44201e; --code:#222b33;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+header.haut{background:linear-gradient(135deg,#17405c,#1f5f8b 60%,#3a86b5);color:#fff;padding:44px 20px 38px}
+header.haut .contenu{max-width:1100px;margin:0 auto}
+header.haut h1{margin:0 0 .35em;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.2;font-weight:700}
+header.haut p{margin:.3em 0;max-width:780px;opacity:.95}
+header.haut .meta{margin-top:1em;font-size:.88rem;opacity:.85}
+nav.sommaire{position:sticky;top:0;z-index:20;background:var(--carte);border-bottom:1px solid var(--trait)}
+nav.sommaire ul{list-style:none;margin:0 auto;padding:8px 20px;max-width:1100px;display:flex;gap:6px 18px;flex-wrap:wrap;font-size:.9rem}
+nav.sommaire a{color:var(--accent);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.sommaire a:hover{border-bottom-color:var(--accent)}
+main{max-width:1100px;margin:0 auto;padding:10px 20px 70px}
+section{margin-top:44px;scroll-margin-top:56px}
+h2{font-size:1.45rem;margin:0 0 .5em;padding-bottom:.3em;border-bottom:3px solid var(--accent)}
+h3{font-size:1.1rem;margin:1.4em 0 .3em;color:var(--accent)}
+p{margin:.65em 0}
+a{color:var(--accent)}
+code{background:var(--code);padding:.08em .35em;border-radius:4px;font:.86em ui-monospace,Consolas,monospace;word-break:break-word}
+.chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+.chiffre{background:var(--carte);border:1px solid var(--trait);border-left:5px solid var(--accent);border-radius:8px;padding:14px 16px}
+.chiffre b{display:block;font-size:1.7rem;line-height:1.15;color:var(--accent)}
+.chiffre span{font-size:.88rem;color:var(--discret)}
+.encart{background:var(--accent-doux);border-left:5px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.encart.alerte{background:var(--approx-fond);border-left-color:var(--approx)}
+.tableau{overflow-x:auto;margin:14px 0;border:1px solid var(--trait);border-radius:8px;background:var(--carte)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:.55em .75em;text-align:left;vertical-align:top;border-bottom:1px solid var(--trait)}
+thead th{background:var(--accent-doux);font-weight:600;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;white-space:nowrap}
+.pastille{display:inline-block;font-weight:600;padding:.1em .55em;border-radius:999px;font-size:.82rem;white-space:nowrap}
+.ok{background:var(--ok-fond);color:var(--ok)}
+.approx{background:var(--approx-fond);color:var(--approx)}
+.non{background:var(--non-fond);color:var(--non)}
+.matrice td{min-width:150px}
+.matrice td.l{font-weight:600;white-space:nowrap}
+.fiche{background:var(--carte);border:1px solid var(--trait);border-radius:10px;padding:6px 20px 14px;margin:18px 0}
+.fiche h3{margin-top:.9em}
+.fiche .etat{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px}
+.fiche dl{margin:.4em 0;display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:4px 14px}
+.fiche dt{color:var(--discret);font-size:.9rem}
+.fiche dd{margin:0}
+.legende span{margin-right:16px;white-space:nowrap}
+.frise{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:16px 0}
+.frise div{background:var(--carte);border:1px solid var(--trait);border-top:5px solid var(--accent);border-radius:8px;padding:12px 15px}
+.frise strong{font-size:1.15rem}
+ul.liens li{margin:.3em 0}
+footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);font-size:.85rem}
+@media (max-width:640px){main{padding:6px 14px 50px}header.haut{padding:30px 14px}.fiche dl{grid-template-columns:1fr}.fiche dt{margin-top:.5em}}
+@media print{nav.sommaire{display:none}body{background:#fff;color:#000}header.haut{background:#17405c}.fiche,.chiffre,.frise div{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="haut">
+  <div class="contenu">
+    <h1>Opp4 (connectivité) : que trouve-t-on avant 2018 ?</h1>
+    <p>Recherche de sources communales de débit fixe et de couverture mobile pour 2015-2017, et origine de l'indicateur dans la documentation d'OppChoVec.</p>
+    <p class="meta">Rapport du 15 octobre 2026 · recherche et vérifications sur fichiers téléchargés · aucun indicateur n'a été recalculé · rédigé pour la doctorante qui pilote le projet</p>
+  </div>
+</header>
+
+<nav class="sommaire" aria-label="Sommaire">
+  <ul>
+    <li><a href="#bref">En bref</a></li>
+    <li><a href="#origine">D'où vient Opp4</a></li>
+    <li><a href="#fixe">Débit fixe 2015-2016</a></li>
+    <li><a href="#mobile">Réseau mobile 2017</a></li>
+    <li><a href="#options">Options pour Opp4</a></li>
+    <li><a href="#verifie">Vérifié ou pas</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="bref">
+  <h2>En bref</h2>
+  <div class="chiffres">
+    <div class="chiffre"><b>360 / 360</b><span>communes corses dans les fichiers de débit fixe de France Très Haut Débit, pour 4 trimestres : T2 2015, T3 2015, T1 2016, T2 2016</span></div>
+    <div class="chiffre"><b>266 / 360</b><span>communes à 0 % de locaux éligibles à 30 Mbit/s ou plus au T2 2016 : l'indicateur existe mais discrimine peu</span></div>
+    <div class="chiffre"><b>569</b><span>sites 4G en Corse (775 sites au total) dans la liste de l'ARCEP de septembre 2017 : un proxy possible de la 4G, pas un taux de couverture communal</span></div>
+    <div class="chiffre"><b>0</b><span>fichier communal de couverture mobile 2G/3G/4G publié avant 2018 trouvé après recherche</span></div>
+  </div>
+  <ul>
+    <li><strong>Le débit fixe de 2015-2016 existe par commune.</strong> Les fichiers de l'Observatoire France Très Haut Débit donnent, pour chaque commune, la part des locaux éligibles à 3, 8, 30 et 100 Mbit/s, par technologie. Leurs liens d'origine sont morts : je les ai retrouvés dans les archives du web (Internet Archive) et j'ai téléchargé et lu celui du T2 2016.</li>
+    <li><strong>La couverture mobile communale de 2016 n'existe pas en fichier public trouvé.</strong> Ce que l'ARCEP a publié pour 2017 est une liste de sites d'antennes (position, 2G/3G/4G) et des cartes de couverture en polygones, pas un taux par commune.</li>
+    <li><strong>Opp4 n'existait pas en 2011.</strong> L'indice de 2011 (CAS, Bourdeau-Lepage et Tovard) n'a pas d'indicateur sur les technologies de l'information : c'est OppChoVec qui l'a ajouté, avec les données du site « Ma connexion internet » de l'ARCEP. Il n'y a donc pas de source ancienne qui aurait servi à calculer Opp4 à l'époque.</li>
+    <li><strong>Conséquence :</strong> un Opp4 comparable de 2016 à aujourd'hui est faisable pour la partie débit. Pour la partie 4G, il faut choisir entre un proxy simple (sites d'antennes) et un calcul plus lourd (cartes de couverture croisées avec la population).</li>
+  </ul>
+</section>
+
+<section id="origine">
+  <h2>D'où vient Opp4 dans la documentation</h2>
+  <p>J'ai relu le rapport de stage (<code>Rapport_Stage.pdf</code>), sections 4.1, 4.3.1 et 6.2.1.</p>
+  <ul>
+    <li><strong>Définition :</strong> Opp4 = ½ (r<sub>i</sub> + t<sub>i</sub>), avec r<sub>i</sub> la part de la population de la commune couverte par la 4G et t<sub>i</sub> la part de la population couverte par un réseau de débit de téléchargement supérieur à 30 Mbit/s.</li>
+    <li><strong>Origine de l'indicateur :</strong> le rapport dit que Opp4 a été ajouté par OppChoVec à l'indice CAS de 2011. L'indicateur est donc propre à OppChoVec et à son application à la Corse.</li>
+    <li><strong>Source déclarée :</strong> « maconnexioninternet.arcep.fr », couverture 4G et vitesse de débit, par commune. Les fichiers ouverts de ce site commencent au T3 2019.</li>
+  </ul>
+  <div class="encart"><strong>À retenir :</strong> le calcul de 2011 ne peut pas servir de guide pour Opp4. Ce qui existe de plus proche pour 2015-2016 est l'Observatoire France Très Haut Débit, c'est-à-dire un prédécesseur de « Ma connexion internet », avec les mêmes classes de débit.</div>
+</section>
+
+<section id="fixe">
+  <h2>Débit fixe : T2 2015 à T2 2016</h2>
+  <p>Fichier retrouvé : <code>FranceTHD_Open_Data_Observatoire_T2_2016.xlsx</code> (Agence du numérique, Licence ouverte). Il contient une feuille communale par trimestre, de T2 2015 à T2 2016. Pour chaque commune : département, code INSEE, nom, puis la part des locaux éligibles toutes technologies, et par technologie (cuivre, câble, fibre), pour les classes « éligibles », 3, 8, 30 et 100 Mbit/s et plus.</p>
+  <div class="tableau"><table>
+    <thead><tr><th>Trimestre</th><th class="num">Communes corses</th><th class="num">≥ 8 Mbit/s (moyenne)</th><th class="num">≥ 30 Mbit/s (moyenne)</th><th class="num">≥ 30 Mbit/s (max)</th><th class="num">Communes à 0 % à 30 Mbit/s</th></tr></thead>
+    <tbody>
+      <tr><td>T2 2015</td><td class="num">360</td><td class="num">27,9 %</td><td class="num">5,0 %</td><td class="num">79,5 %</td><td class="num">294</td></tr>
+      <tr><td>T3 2015</td><td class="num">360</td><td class="num">28,7 %</td><td class="num">5,9 %</td><td class="num">93,4 %</td><td class="num">287</td></tr>
+      <tr><td>T1 2016</td><td class="num">360</td><td class="num">28,9 %</td><td class="num">6,1 %</td><td class="num">93,4 %</td><td class="num">283</td></tr>
+      <tr><td>T2 2016</td><td class="num">360</td><td class="num">28,9 %</td><td class="num">7,7 %</td><td class="num">94,0 %</td><td class="num">266</td></tr>
+    </tbody>
+  </table></div>
+  <p>Moyennes simples sur les communes (non pondérées par le nombre de locaux). J'ai aussi téléchargé le fichier de juin 2015 (feuille « Communes ») : même structure.</p>
+  <ul>
+    <li><strong>Pour Opp4, c'est la colonne « 30 Mbit/s et + », toutes technologies</strong>, qui correspond à t<sub>i</sub>.</li>
+    <li><strong>La fibre est quasi absente en 2016 :</strong> part moyenne de locaux éligibles à la fibre d'environ 0,1 % en Corse. Le seuil de 30 Mbit/s est alors atteint surtout par le cuivre amélioré dans quelques villes, comme Ajaccio (48 % au T2 2016).</li>
+    <li><strong>Autres trimestres :</strong> T3 2015 et T1 2016 existent aussi en fichiers séparés ; je n'ai pas retrouvé de fichier pour T3 ou T4 2016 ni pour 2017 dans cette série. La série de l'ARCEP par commune prend le relais à partir de T4 2017 pour la fibre seule, puis T3 2019 pour les classes de débit.</li>
+  </ul>
+  <div class="encart alerte"><strong>Précautions :</strong> la source parle de <em>locaux</em> éligibles et non de population ; ce sont des débits théoriques calculés à partir des déclarations des opérateurs (le fichier précise que certains opérateurs n'avaient pas encore transmis leurs données). Je n'ai pas vérifié que la définition coïncide exactement avec la colonne actuelle de « Ma connexion internet ».</div>
+</section>
+
+<section id="mobile">
+  <h2>Réseau mobile : ce qui existe pour 2017</h2>
+  <ul>
+    <li><strong>Le lien « couverture 2G/3G/4G au T4 2016 » de l'ARCEP</strong> (page « Historique de l'observatoire ») est mort sur data.gouv.fr (erreur 404). Les archives du web montrent qu'il renvoyait vers <code>2017-09_Sites_mobiles_2G_3G_4G_France_metropolitaine.csv</code> : c'est donc <em>une liste de sites</em> et non un fichier de couverture par commune.</li>
+    <li><strong>Cette liste :</strong> 74 163 sites en France métropolitaine, avec opérateur, position (Lambert 93) et les technologies 2G, 3G, 4G émises. J'ai téléchargé la version Lambert 93 (shapefile) et l'ai lue : <strong>775 sites en Corse, dont 666 en 2G, 723 en 3G et 569 en 4G</strong> (un même emplacement peut compter plusieurs fois, un enregistrement par opérateur).</li>
+    <li><strong>Les cartes de couverture en polygones</strong> existent pour avril et juillet 2017 (3G et 4G ; fichiers de 155 à 194 Mo) et pour janvier 2018. Elles sont aussi dans les archives du web ; je ne les ai pas téléchargées. Elles permettraient un vrai taux de population couverte, à condition de les croiser avec une grille de population.</li>
+    <li><strong>Avant 2017 :</strong> l'ARCEP a publié en mai 2015 des taux de couverture 2G (fin 2013) et 3G (fin 2014), mais pas par commune d'après ce que j'ai trouvé. L'Observatoire des territoires reprend la part de surface couverte en 4G (T2 2015 et T1 2022) par zone d'emploi, pas par commune.</li>
+  </ul>
+  <h3>Un proxy testé avec les sites de septembre 2017</h3>
+  <ul>
+    <li>Sites 4G situés dans le périmètre d'une commune : 116 communes sur 360 en comptent au moins un (155 pour la 2G, 156 pour la 3G).</li>
+    <li>Distance du centre de la commune au site 4G le plus proche : médiane 3,6 km, maximum 14 km ; 155 communes à 3 km ou moins, 250 à 5 km ou moins, 7 à plus de 10 km.</li>
+    <li><strong>Lien avec l'Opp4 actuel : corrélation de −0,10, très faible.</strong> L'Opp4 actuel mélange 4G et débit, et ce proxy décrit autre chose : il ne reconstitue pas l'indicateur actuel.</li>
+  </ul>
+  <div class="encart alerte"><strong>Précaution :</strong> la distance à un site n'est pas une couverture ; avec le relief corse, un site à 3 km peut ne rien couvrir du village. Ce proxy dit « mieux ou moins bien équipé en 2017 », il ne reproduit pas r<sub>i</sub>.</div>
+</section>
+
+<section id="options">
+  <h2>Options pour un Opp4 comparable</h2>
+  <div class="tableau"><table>
+    <thead><tr><th>Option</th><th>Ce qu'on a en 2016</th><th>Ce qu'il faut pour la date récente</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A. Débit seul</strong> (t<sub>i</sub>)</td><td>Part des locaux à 30 Mbit/s ou plus, T2 2016, 360 communes</td><td>Même colonne dans les statistiques communales de l'ARCEP (2019 à 2026)</td><td><span class="pastille ok">faisable maintenant</span>, mais ce n'est plus tout à fait Opp4</td></tr>
+      <tr><td><strong>B. Débit + proxy 4G par les sites</strong></td><td>A + distance au site 4G le plus proche (sept. 2017)</td><td>Liste de sites ARCEP récente, même calcul de distance</td><td><span class="pastille approx">faisable</span>, mais mélange deux grandeurs différentes</td></tr>
+      <tr><td><strong>C. Débit + taux de population couverte en 4G</strong></td><td>A + cartes 4G de juillet 2017 croisées avec une grille de population</td><td>Cartes théoriques de l'ARCEP (data.arcep.fr), même grille de population</td><td><span class="pastille approx">le plus fidèle</span>, mais lourd : plus de 160 Mo à récupérer et une grille de population à trouver</td></tr>
+      <tr><td><strong>D. Exclure Opp4</strong></td><td>—</td><td>—</td><td><span class="pastille ok">état actuel</span> de la série à 7 indicateurs</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Ma lecture :</strong> A est la voie la plus solide et la plus simple, si l'on accepte de renommer l'indicateur (« accès au très haut débit »). C est la voie à retenir si l'on veut garder la 4G comme dans la définition d'OppChoVec.</li>
+    <li><strong>Pour 2000, 2005, 2010 :</strong> rien de communal n'est publié avant 2015. La première date possible est 2015-2016.</li>
+    <li><strong>Limite pour les comparaisons :</strong> avec seulement 94 communes sur 360 au-dessus de 0 % à 30 Mbit/s en 2016, l'écart entre communes est faible et dépend de quelques villes ; entre 2016 et 2021 l'évolution sera très forte (arrivée de la fibre) et dominera l'indicateur.</li>
+  </ul>
+</section>
+
+<section id="verifie">
+  <h2>Vérifié ou pas</h2>
+  <div class="tableau"><table>
+    <thead><tr><th>Point</th><th>État</th></tr></thead>
+    <tbody>
+      <tr><td>Définition d'Opp4 et origine (indice CAS de 2011 sans indicateur TIC) dans le rapport de stage</td><td><span class="pastille ok">lu dans le rapport</span></td></tr>
+      <tr><td>Fichier France THD T2 2016 (4 trimestres) : 360 communes corses, colonnes de débit</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Fichier France THD de juin 2015</td><td><span class="pastille ok">téléchargé, structure lue</span></td></tr>
+      <tr><td>Liste des sites mobiles de septembre 2017 (Lambert 93)</td><td><span class="pastille ok">téléchargée et lue</span></td></tr>
+      <tr><td>Cartes de couverture 3G/4G de 2017 (polygones)</td><td><span class="pastille approx">présence dans les archives constatée, non téléchargées</span></td></tr>
+      <tr><td>Existence de fichiers France THD pour T3 et T4 2016 ou avant juin 2015</td><td><span class="pastille non">non trouvés (liste d'archives interrogée limitée)</span></td></tr>
+      <tr><td>Définition identique entre France THD 2016 et « Ma connexion internet » 2019+</td><td><span class="pastille non">non vérifié</span></td></tr>
+      <tr><td>Grille de population pour pondérer la couverture</td><td><span class="pastille non">non cherchée</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="liens">
+    <li>Archives web (Internet Archive) de <code>francethd.fr/documents_reference/FranceTHD_Open_Data_Observatoire_T2_2016.xlsx</code> (capture du 16 mars 2017) et <code>..._Juin2015.xlsx</code> (capture du 25 juillet 2015).</li>
+    <li><a href="https://www.arcep.fr/cartes-et-donnees/nos-publications-chiffrees/couverture-et-qualite-de-service-mobile-2g-3g-4g-5g/historique-de-lobservatoire.html">ARCEP, historique de l'observatoire de la couverture mobile</a> (lien « T4 2016 » mort).</li>
+    <li>Archive de <code>static.data.gouv.fr/resources/monreseaumobile/20170918-072827/2017-09_Sites_mobiles_2G_3G_4G_France_metropolitaine.csv</code> et version Lambert 93 du 19 septembre 2017.</li>
+    <li><a href="https://data.arcep.fr/mobile/couvertures_theoriques/index.html">Open data ARCEP, couvertures théoriques</a> (à partir du T1 2018).</li>
+    <li><a href="https://www.data.gouv.fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements">data.gouv.fr, le marché du haut et très haut débit fixe (déploiements)</a>.</li>
+    <li><a href="https://www.data.gouv.fr/datasets/ma-connexion-internet">data.gouv.fr, Ma connexion internet</a> (à partir de 2019).</li>
+    <li><a href="https://www.observatoire-des-territoires.gouv.fr/part-de-la-surface-couverte-en-4g-par-minima-un-operateur">Observatoire des territoires, part de la surface couverte en 4G</a>.</li>
+    <li>Rapport de stage OppChoVec (<code>Rapport_Stage.pdf</code>), sections 4.1, 4.3.1 et 6.2.1.</li>
+  </ul>
+</section>
+
+</main>
+<footer>Rapport généré le 15 octobre 2026 · données téléchargées dans un dossier temporaire, hors dépôt.</footer>
+</body>
+</html>
