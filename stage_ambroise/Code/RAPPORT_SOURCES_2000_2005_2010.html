@@ -84,6 +84,7 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
     <li><a href="#annees">Quelles années ?</a></li>
     <li><a href="#matrice">Vue d'ensemble</a></li>
     <li><a href="#detail">Détail par indicateur</a></li>
+    <li><a href="#recensement">Fichiers de recensement</a></li>
     <li><a href="#revenu">Le revenu : médiane ou moyenne ?</a></li>
     <li><a href="#limites">Précautions</a></li>
     <li><a href="#verifie">Vérifié ou pas</a></li>
@@ -97,14 +98,15 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
 <section id="bref">
   <h2>En bref</h2>
   <div class="chiffres">
-    <div class="chiffre"><b>7 sur 10</b><span>indicateurs reconstituables en 2005 et en 2010, avec des réserves précisées plus bas</span></div>
-    <div class="chiffre"><b>5 à 6 sur 10</b><span>pour 2000 (recensement de 1999) : Vec3 manque, Vec2 est incomplet</span></div>
+    <div class="chiffre"><b>7 sur 10</b><span>indicateurs reconstituables en 2005 et en 2010 (Opp3 complet grâce aux fichiers détail), avec des réserves précisées plus bas</span></div>
+    <div class="chiffre"><b>6 sur 10</b><span>pour 2000 (recensement de 1999) : Vec3 manque, Opp3 sans transports en commun</span></div>
     <div class="chiffre"><b>3 à part</b><span>Opp4 (4G, haut débit, fibre) impossible ; Cho1 et Vec4 seulement approchés</span></div>
     <div class="chiffre"><b>360 / 360</b><span>communes présentes dans toutes les bases INSEE vérifiées, avec les mêmes codes qu'aujourd'hui</span></div>
   </div>
   <ul>
     <li><strong>Le recensement fournit l'essentiel.</strong> Les bases « fiche synthétique » de l'INSEE contiennent chacune <em>deux</em> millésimes côte à côte : un pour le recensement de 1999 et un pour 2006 ou 2010. J'ai téléchargé celles de 2010 : les 360 communes y sont, en 1999 comme en 2010, avec les mêmes codes que dans votre GeoJSON.</li>
     <li><strong>Il n'y a pas de « 2005 » ni de « 2000 » en recensement.</strong> Les années utilisables sont <strong>1999</strong> (recensement général), <strong>2006</strong> (premier millésime annuel, enquêtes 2004-2008) et <strong>2010</strong> (enquêtes 2008-2012).</li>
+    <li><strong>Certains trous se comblent dans les fichiers de recensement</strong> : les transports en commun (Opp3) via le fichier détail des mobilités professionnelles, et les personnes par pièce de 1999 (Vec2) via les séries historiques. Voir <a href="#recensement">« Compléter avec les fichiers de recensement »</a>.</li>
     <li><strong>Revenu :</strong> on obtient une <strong>médiane</strong> pour 212 communes sur 360 en 2001 et 2005, 233 en 2010 (fiscal, INSEE « RFLM »), et une <strong>moyenne</strong> par foyer fiscal pour 274 communes en 2000, 348 en 2005 et 349 en 2010 (DGFiP « IRCOM »). Le détail et la recommandation sont dans la section <a href="#revenu">Le revenu</a>.</li>
     <li><strong>Ce qui ne pourra pas se faire :</strong> la 4G n'existait pas avant 2012, il n'y a pas de données communales de débit avant la loi de 2016, et la fibre était absente ; les services (Vec4) et les quartiers (Cho1) demandent des substituts.</li>
   </ul>
@@ -130,18 +132,18 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
     <tbody>
       <tr><td class="l">Opp1 · éducation</td><td><span class="pastille ok">● 4 niveaux</span></td><td><span class="pastille ok">● 4 niveaux</span></td><td><span class="pastille ok">● 4 niveaux</span></td><td>INSEE, diplômes : 7 niveaux (2020), 4 niveaux (2016)</td></tr>
       <tr><td class="l">Opp2 · diversité sociale</td><td><span class="pastille ok">● Theil</span></td><td><span class="pastille ok">● Theil</span></td><td><span class="pastille ok">● Theil</span></td><td>INSEE, 8 catégories socioprofessionnelles</td></tr>
-      <tr><td class="l">Opp3 · mobilité</td><td><span class="pastille approx">◐ voiture seule</span></td><td><span class="pastille approx">◐ voiture seule</span></td><td><span class="pastille approx">◐ voiture seule</span></td><td>voiture + transports en commun + bus des 3 villes</td></tr>
+      <tr><td class="l">Opp3 · mobilité</td><td><span class="pastille approx">◐ voiture seule</span></td><td><span class="pastille ok">● avec fichier détail</span></td><td><span class="pastille ok">● avec fichier détail</span></td><td>voiture + transports en commun + bus des 3 villes</td></tr>
       <tr><td class="l">Opp4 · 4G, débit, fibre</td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td>ARCEP, couverture communale récente</td></tr>
       <tr><td class="l">Cho1 · quartiers prioritaires</td><td><span class="pastille approx">◐ ZUS</span></td><td><span class="pastille approx">◐ ZUS</span></td><td><span class="pastille approx">◐ ZUS / CUCS</span></td><td>Quartiers prioritaires 2015 puis 2024</td></tr>
       <tr><td class="l">Cho2 · nationalité</td><td><span class="pastille approx">◐ à confirmer</span></td><td><span class="pastille approx">◐ 15 ans et plus</span></td><td><span class="pastille approx">◐ 15 ans et plus</span></td><td>INSEE NAT1 + POP1B, 18 ans et plus</td></tr>
       <tr><td class="l">Vec1 · revenu</td><td><span class="pastille approx">◐ moyenne (274/360)</span></td><td><span class="pastille ok">● médiane (212/360)</span></td><td><span class="pastille ok">● médiane (233/360)</span></td><td>Filosofi : médiane (206/360 en 2016 et 2021)</td></tr>
-      <tr><td class="l">Vec2 · logement</td><td><span class="pastille approx">◐ sans personnes/pièce</span></td><td><span class="pastille ok">● complet</span></td><td><span class="pastille ok">● complet</span></td><td>INSEE, résidences principales</td></tr>
+      <tr><td class="l">Vec2 · logement</td><td><span class="pastille ok">● via séries historiques</span></td><td><span class="pastille ok">● complet</span></td><td><span class="pastille ok">● complet</span></td><td>INSEE, résidences principales</td></tr>
       <tr><td class="l">Vec3 · emploi</td><td><span class="pastille non">○ pas de statuts</span></td><td><span class="pastille ok">● complet</span></td><td><span class="pastille ok">● complet</span></td><td>INSEE, chômage + statuts d'emploi</td></tr>
       <tr><td class="l">Vec4 · services à 20 min</td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td><span class="pastille approx">◐ comptages communaux</span></td><td>BPE 2024 géolocalisée + temps de trajet OSRM</td></tr>
     </tbody>
   </table>
   </div>
-  <p>Lecture : pour <strong>2005</strong> et <strong>2010</strong>, on dispose de Opp1, Opp2, Opp3 (en partie), Cho2 (approché), Vec1, Vec2, Vec3, soit 7 indicateurs ; pour <strong>2000</strong>, Vec3 manque et Vec2 est incomplet, soit 5 à 6 indicateurs. Cho1 et Vec4 sont des ajouts possibles avec des substituts.</p>
+  <p>Lecture : pour <strong>2005</strong> et <strong>2010</strong>, on dispose de Opp1, Opp2, Opp3, Cho2 (approché), Vec1, Vec2, Vec3, soit 7 indicateurs ; pour <strong>2000</strong>, Vec3 manque et Opp3 n'a que la voiture, soit 6 indicateurs. Cho1 et Vec4 sont des ajouts possibles avec des substituts.</p>
 </section>
 
 <section id="detail">
@@ -169,10 +171,10 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
 
   <div class="fiche">
     <h3>Opp3 · mobilité (voiture, transports en commun, réseau de bus)</h3>
-    <div class="etat"><span class="pastille ok">● voiture</span><span class="pastille approx">◐ transports en commun</span><span class="pastille ok">● bus (constant)</span></div>
+    <div class="etat"><span class="pastille ok">● voiture</span><span class="pastille ok">● transports en commun 2006-2010 (fichier détail)</span><span class="pastille non">○ transports en commun 1999</span><span class="pastille ok">● bus (constant)</span></div>
     <dl>
       <dt>Source</dt><dd>INSEE, <em>Logement</em> (2010 + 1999 : page 2044717 ; 2006 : page 2044725). <strong>Vérifié</strong> : la part des ménages ayant au moins une voiture (<code>RP_VOIT1P</code>) est présente pour 1999 et 2010, pour les 360 communes.</dd>
-      <dt>Ce qui manque</dt><dd>Le « +100 si des actifs vont travailler en transports en commun » vient aujourd'hui d'une variable (<code>ACTOCC15P_COMMUN</code>) qui <strong>n'est pas</strong> dans la base « fiche synthétique » de 2010 (vérifié sur la liste des variables). Elle se trouve peut-être dans les tableaux détaillés « Activité des résidents et déplacement domicile/travail » (page 2399265), <em>non vérifié</em>.</dd>
+      <dt>Ce qui manque, et où le trouver</dt><dd>Le « +100 si des actifs vont travailler en transports en commun » vient aujourd'hui d'une variable (<code>ACTOCC15P_COMMUN</code>) qui <strong>n'est pas</strong> dans la base « fiche synthétique » de 2010. Elle se reconstitue à partir du <strong>fichier détail « Mobilités professionnelles des individus »</strong> (variable <code>TRANS</code> = mode de transport, une ligne par actif occupé, avec la commune de résidence) : voir la section <a href="#recensement">« Fichiers de recensement »</a>. Pour 1999, je n'ai pas trouvé d'équivalent.</dd>
       <dt>Réseau de bus</dt><dd>Le +100 des trois villes (Ajaccio, Bastia, Porto-Vecchio) est une constante de notre code : à rediscuter pour 2000 (les réseaux de bus de l'époque ne sont pas documentés ici).</dd>
     </dl>
   </div>
@@ -212,10 +214,10 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
 
   <div class="fiche">
     <h3>Vec2 · qualité du logement</h3>
-    <div class="etat"><span class="pastille approx">◐ 1999</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
+    <div class="etat"><span class="pastille ok">● 1999 (via séries historiques)</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
     <dl>
       <dt>Source</dt><dd>INSEE, <em>Logement</em> (mêmes pages que Opp3). <strong>Vérifié</strong> pour 2010 : personnes des résidences principales (<code>NPER_RP</code>), nombre de pièces, salle de bain, chauffage central collectif et individuel, chauffage électrique, maisons.</dd>
-      <dt>1999</dt><dd>La feuille 1999 de la base 2010 a le nombre de pièces, la salle de bain, le chauffage et les maisons, mais <strong>pas</strong> <code>NPER_RP</code> : sans le nombre de personnes, on ne peut pas calculer les « personnes par pièce ». Il faudrait le chercher dans une autre base (couples-familles-ménages ou séries historiques).</dd>
+      <dt>1999</dt><dd>La feuille 1999 de la base 2010 a le nombre de pièces, la salle de bain, le chauffage et les maisons, mais <strong>pas</strong> <code>NPER_RP</code>. Le nombre de personnes se récupère dans la base <em>Séries historiques</em> (<code>D99_PMEN</code>, population des ménages) : j'ai vérifié sur 2010 que <code>PMEN</code> et <code>NPER_RP</code> sont <strong>identiques</strong> pour les 360 communes. Vec2 est donc complet en 1999.</dd>
       <dt>Différence avec l'actuel</dt><dd>Même définition que la série 2016-2021 (rapport des sommes pour les personnes par pièce, chauffage constant à 1).</dd>
     </dl>
   </div>
@@ -238,6 +240,25 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
       <dt>Limite</dt><dd>Le réseau routier est celui d'aujourd'hui (OpenStreetMap 2025) : les routes ont changé depuis 2010. Et la nomenclature des équipements a évolué (seuls 120 types sur 168 de 2016 existent encore en 2024).</dd>
     </dl>
   </div>
+</section>
+
+<section id="recensement">
+  <h2>Compléter avec les fichiers de recensement</h2>
+  <p>Oui, certains manques se comblent sans sortir du recensement. Il existe, en plus des tableaux par commune, des <strong>fichiers détail</strong> : une ligne par habitant (anonymisée, avec un poids), qu'on peut agréger soi-même par commune quand la commune de résidence y figure.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Ce qui manque</th><th>Où le prendre</th><th>Résultat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Opp3 · transports en commun</strong>, 2006-2010</td><td>Fichier détail <em>Mobilités professionnelles des individus</em> (2006 : page 2407634, 91 Mo ; 2010 : page 2411532 ; 2007 à 2009 aussi), variable <code>TRANS</code></td><td><span class="pastille ok">vérifié sur 2006</span> : 83 330 lignes pour la Corse, <strong>les 360 communes</strong> présentes, 111 671 actifs occupés une fois pondérés. 2 653 utilisent les transports en commun (2,4 %), répartis dans <strong>184 communes</strong> (le test actuel donne 168 communes en 2021 : même ordre de grandeur).</td></tr>
+      <tr><td><strong>Vec2 · personnes par pièce</strong>, 1999</td><td>Base <em>Séries historiques</em> (page 4171585), variable <code>D99_PMEN</code></td><td><span class="pastille ok">vérifié</span> : <code>PMEN</code> est <strong>identique</strong> à <code>NPER_RP</code> en 2010 sur les 360 communes (écart nul).</td></tr>
+      <tr><td><strong>Cho2 · 18 ans et plus</strong>, 2006-2010</td><td>Fichier détail mobilités : nationalité (<code>INATC</code>) et âge quinquennal (<code>AGEREVQ</code>) existent, mais <strong>seulement pour les actifs occupés</strong>. Le fichier détail général des individus, lui, ne semble donner que le « canton ou ville » de résidence (d'après la documentation du fichier 2009) : pas la commune pour les petites.</td><td><span class="pastille approx">variante possible</span> : « part de Français parmi les actifs occupés de 18 ans et plus » (population différente de l'indicateur actuel, mais calculable aux mêmes dates, y compris 2016 et 2021 avec les fichiers de ces années).</td></tr>
+      <tr><td><strong>Vec3 · statuts d'emploi</strong>, 1999</td><td>Aucun fichier communal 1999 ne détaille CDI, CDD, intérim ni emplois aidés (vérifié sur la feuille 1999 ; les tableaux détaillés de 1999 ne descendent pas à la commune). Je n'ai pas trouvé de fichier détail de mobilités pour 1999.</td><td><span class="pastille non">non trouvé</span></td></tr>
+      <tr><td><strong>Cho2 · population par année d'âge</strong>, 2006-2010</td><td>Table <code>POP1B</code> : non localisée pour ces millésimes</td><td><span class="pastille non">non trouvé</span> : reste le 15 ans et plus.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="encart alerte"><strong>Limite des fichiers détail :</strong> ce sont des échantillons pondérés. Dans le fichier 2006, la moitié des communes corses ont moins de 50 actifs pondérés et 128 communes ont moins de 30 lignes : un indicateur construit dessus est <strong>bruité dans les petites communes</strong>. On peut s'en tenir à un test « au moins un utilisateur » (comme aujourd'hui pour les transports en commun), moins sensible que des taux.</div>
+  <p>Ces fichiers sont gros (91 Mo compressés, 821 Mo décompressés pour 2006) mais se lisent par morceaux ; je l'ai fait pour la Corse en quelques minutes.</p>
 </section>
 
 <section id="revenu">
@@ -291,9 +312,12 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
       <tr><td>Concordance des codes communes 1999 / 2010 / GeoJSON</td><td><span class="pastille ok">vérifiée</span></td></tr>
       <tr><td>Test de l'approximation « comptages communaux » pour Vec4 (BPE 2024, serveur OSRM local)</td><td><span class="pastille ok">calculé</span></td></tr>
       <tr><td>Comptages d'équipements par commune 2011-2012 (data.gouv.fr)</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Fichier détail <em>Mobilités professionnelles</em> 2006 : communes de résidence, mode de transport, poids</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Séries historiques : <code>D99_PMEN</code> et équivalence <code>PMEN</code> = <code>NPER_RP</code> (2010)</td><td><span class="pastille ok">téléchargé et vérifié</span></td></tr>
       <tr><td>Bases INSEE 2006 (diplômes, CSP, logement, emploi) : variables et fichiers</td><td><span class="pastille approx">décrits par les pages INSEE, non téléchargés</span></td></tr>
       <tr><td>NAT1 2006 : existence et classes d'âge</td><td><span class="pastille approx">page INSEE lue (liste des fichiers)</span></td></tr>
-      <tr><td>NAT1 2010, POP1B 2006 et 2010, nationalité 1999, transports en commun 1999-2010</td><td><span class="pastille non">non localisés</span></td></tr>
+      <tr><td>NAT1 2010, POP1B 2006 et 2010, nationalité 1999, transports en commun 1999, statuts d'emploi 1999</td><td><span class="pastille non">non localisés</span></td></tr>
+      <tr><td>Fichiers détail mobilités 2007 à 2010 (existence confirmée par les pages INSEE, non téléchargés)</td><td><span class="pastille approx">pages INSEE lues</span></td></tr>
       <tr><td>Populations en ZUS (Ajaccio, Bastia) 2006</td><td><span class="pastille approx">lues sur la page INSEE (résumé automatique), à contrôler</span></td></tr>
       <tr><td>BPE 2007-2010, inventaire communal 1998, données ADSL communales</td><td><span class="pastille non">non localisés</span></td></tr>
     </tbody>
@@ -304,8 +328,8 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
 <section id="suite">
   <h2>Suite possible</h2>
   <ol>
-    <li><strong>Série 2006 → 2010 → 2016 → 2021 avec 7 indicateurs</strong> (Opp1, Opp2, Opp3 voiture, Cho2 15+, Vec1, Vec2, Vec3) : c'est ce qui est le plus solide. Il suffit de télécharger les bases 2006 et d'étendre le script de la série temporelle.</li>
-    <li><strong>Ajouter 1999</strong> pour 5 à 6 indicateurs (sans Vec3, Vec2 partiel).</li>
+    <li><strong>Série 2006 → 2010 → 2016 → 2021 avec 7 indicateurs</strong> (Opp1, Opp2, Opp3 avec transports en commun, Cho2 15+, Vec1, Vec2, Vec3) : c'est ce qui est le plus solide. Il suffit de télécharger les bases 2006 et les fichiers détail de mobilité, et d'étendre le script de la série temporelle.</li>
+    <li><strong>Ajouter 1999</strong> pour 6 indicateurs (sans Vec3 ; Opp3 sans transports en commun).</li>
     <li><strong>Choisir le revenu</strong> : moyenne IRCOM (série continue) ou médiane RFLM puis Filosofi (rupture de concept en 2012).</li>
     <li><strong>Vec4 et Cho1 en option</strong>, avec leurs substituts (comptages communaux, ZUS) et leurs avertissements.</li>
   </ol>
@@ -323,6 +347,7 @@ footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);f
     <li><a href="https://www.insee.fr/fr/statistiques/1893279">INSEE, Revenus fiscaux localisés des ménages 2001</a> · <a href="https://www.insee.fr/fr/statistiques/1893289">2005</a> · <a href="https://www.insee.fr/fr/statistiques/1893299">2010</a></li>
     <li><a href="https://www.data.gouv.fr/datasets/limpot-sur-le-revenu-par-collectivite-territoriale-ircom">DGFiP, IRCOM (impôt sur le revenu par commune), 1992 à 2024</a></li>
     <li><a href="https://www.insee.fr/fr/statistiques/2130333">INSEE, Populations communales 2006 en ZUS</a></li>
+    <li><a href="https://insee.fr/fr/statistiques/2407634">INSEE, Mobilités professionnelles des individus en 2006 (fichier détail)</a> · <a href="https://insee.fr/fr/statistiques/2411532">2010</a> · <a href="https://www.insee.fr/fr/statistiques/4171585">Séries historiques (base communale)</a></li>
     <li><a href="https://www.insee.fr/fr/metadonnees/source/serie/s1161">INSEE, Base permanente des équipements (séries)</a> · <a href="https://www.data.gouv.fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements">ARCEP, marché du haut et très haut débit fixe</a></li>
   </ul>
 </section>
