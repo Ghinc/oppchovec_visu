@@ -52,6 +52,9 @@ test('Dominance : texte explicatif intact, carte colorée par couche, légende e
     const visible = await page.$eval('#dominancetab', (e) => e.innerText);
     assert.ok(!/\brang\b|classement/i.test(visible.replace(TEXTE[1], '').replace(/OppChoVec/g, '')), 'ni « rang » ni « classement »');
 
+    // la légende est posée sur la carte (et non dans le panneau de droite)
+    const surCarte = await page.evaluate(() => { const l = document.getElementById('dominance-legend').getBoundingClientRect(), c = document.getElementById('map-dominance').getBoundingClientRect(); return l.left >= c.left && l.right <= c.right + 1 && l.top >= c.top && l.bottom <= c.bottom + 1; });
+    assert.ok(surCarte, 'légende à l\'intérieur de la carte');
     // carte : une couleur par couche, 360 communes
     const couleurs = await page.evaluate(() => { const o = {}; dominanceLayerRef.eachLayer((l) => { o[l.feature.properties.nom] = l.options.fillColor; }); return o; });
     assert.equal(Object.keys(couleurs).length, communes.length);
