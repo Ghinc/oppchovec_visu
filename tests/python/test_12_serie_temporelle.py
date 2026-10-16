@@ -87,6 +87,18 @@ class SerieTemporelle(unittest.TestCase):
             for x, y in zip(attendu, self.d["seuils_jenks"][v]):
                 self.assertAlmostEqual(x, y, places=9, msg=v)
 
+    @exige_libs("jenkspy")
+    def test_seuils_jenks_de_la_carte_d_evolution_sur_les_variations(self):
+        import jenkspy
+        for v in ("OppChoVec", "Opp", "Cho", "Vec"):
+            var = [self.d["communes"][c][ANNEES[-1]]["scores_0_10"][v] - self.d["communes"][c][ANNEES[0]]["scores_0_10"][v] for c in self.noms]
+            attendu = jenkspy.jenks_breaks(var, 5)[1:-1]
+            donnes = self.d["seuils_jenks_variation"][v]
+            self.assertEqual(len(donnes), 4, v)
+            for x, y in zip(attendu, donnes):
+                self.assertAlmostEqual(x, y, places=9, msg=v)
+            self.assertTrue(min(var) < donnes[0] and donnes[-1] < max(var), v)
+
     def test_chaque_annee_a_ses_bornes_dans_l_echelle_commune(self):
         for k, (lo, hi) in self.d["echelle"].items():
             for a in ANNEES:

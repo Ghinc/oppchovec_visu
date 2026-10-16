@@ -88,9 +88,16 @@ test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, 
       assert.equal(c1[nom], palette[classeDe(d.communes[nom]['2021'].scores_0_10.OppChoVec, [0, ...s, 10])], `2021 ${nom}`);
     }
     const variation = (nom, v) => d.communes[nom]['2021'].scores_0_10[v] - d.communes[nom]['2016'].scores_0_10[v];
-    const classeVar = (x) => (x <= -1.5 ? 0 : x <= -0.5 ? 1 : x <= 0.5 ? 2 : x <= 1.5 ? 3 : 4);
-    const couleursVar = ['#b2182b', '#ef8a62', '#f0f0f0', '#67a9cf', '#2166ac'];
-    for (const nom of communes) assert.equal(cv[nom], couleursVar[classeVar(variation(nom, 'OppChoVec'))], `variation ${nom}`);
+    // carte d'évolution : classes de Jenks des variations ; la classe qui contient 0 est blanche
+    const sv = d.seuils_jenks_variation.OppChoVec;
+    const zero = classeDe(0, [0, ...sv, 10]);
+    const couleursVar = await page.evaluate((s) => evolutionCouleursVariation(s), sv);
+    assert.equal(couleursVar[zero], '#f0f0f0');
+    for (const nom of communes) assert.equal(cv[nom], couleursVar[classeDe(variation(nom, 'OppChoVec'), [-99, ...sv, 99])], `variation ${nom}`);
+    // la légende donne les 5 classes avec leurs bornes
+    const leg = (await page.locator('#evolution-legende-variation').innerText()).replace(/\s+/g, ' ');
+    assert.ok(leg.includes('Jenks') && leg.includes('(contient 0)'), leg);
+    for (const x of sv) assert.ok(leg.includes(Math.abs(x).toFixed(2).replace('.', ',')), `${x} dans « ${leg} »`);
 
     // résumé affiché = moyennes du fichier
     const moy = (a, v) => communes.reduce((s, n) => s + d.communes[n][a].scores_0_10[v], 0) / 360;

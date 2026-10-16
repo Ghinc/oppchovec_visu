@@ -12,10 +12,13 @@ const EVOLUTION_NOMS_INDICATEURS = {
     Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
     Cho2: 'Cho2 · part de Français, 18 ans et plus (%)', Vec1: 'Vec1 · médiane du niveau de vie (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
 };
-// Évolution (points sur 10) : 5 classes symétriques autour de 0 ; rouge = recul, bleu = progression
+// Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
+// Couleurs : la classe qui contient 0 est neutre (blanc), les classes en dessous sont rouges (recul), celles au-dessus bleues (progression) : le signe reste lisible même si les classes ne sont pas centrées sur 0.
+const EVOLUTION_NEUTRE = '#f0f0f0';
+const EVOLUTION_ROUGES = { 1: ['#ef8a62'], 2: ['#b2182b', '#ef8a62'], 3: ['#b2182b', '#ef8a62', '#f6b79a'], 4: ['#b2182b', '#d6604d', '#ef8a62', '#f6b79a'] };     // du plus négatif au moins négatif
+const EVOLUTION_BLEUS = { 1: ['#67a9cf'], 2: ['#67a9cf', '#2166ac'], 3: ['#9ecae1', '#4393c3', '#2166ac'], 4: ['#a6cee3', '#6baed6', '#3182bd', '#08519c'] };   // du moins positif au plus positif
+// Seuils de ±0,5 point : uniquement pour compter les communes « en progression / stables / en recul » dans le résumé chiffré
 const EVOLUTION_SEUILS_VARIATION = [-1.5, -0.5, 0.5, 1.5];
-const EVOLUTION_COULEURS_VARIATION = ['#b2182b', '#ef8a62', '#f0f0f0', '#67a9cf', '#2166ac'];
-const EVOLUTION_LIBELLES_VARIATION = ['recul fort (< −1,5)', 'recul (−1,5 à −0,5)', 'stable (±0,5)', 'progression (0,5 à 1,5)', 'progression forte (> 1,5)'];
 
 let evolutionDonnees = null;
 let evolutionInitialise = false;
@@ -29,6 +32,16 @@ let evolutionSelection = null;
 function evolutionClasse(valeur, seuilsInternes) {
     for (let i = 0; i < seuilsInternes.length; i++) if (valeur <= seuilsInternes[i]) return i;
     return seuilsInternes.length;
+}
+
+// Une couleur par classe de Jenks de la variation (seuilsInternes : les 4 seuils intérieurs, croissants)
+function evolutionCouleursVariation(seuilsInternes) {
+    const n = seuilsInternes.length + 1;
+    const zero = evolutionClasse(0, seuilsInternes);            // classe qui contient 0
+    const nbNeg = zero, nbPos = n - zero - 1;
+    const rouges = nbNeg ? EVOLUTION_ROUGES[Math.min(nbNeg, 4)].slice(-nbNeg) : [];
+    const bleus = nbPos ? EVOLUTION_BLEUS[Math.min(nbPos, 4)].slice(-nbPos) : [];
+    return [...rouges, EVOLUTION_NEUTRE, ...bleus];
 }
 
 // Valeur d'une variable pour une commune et une année ; variation = 2021 - 2016
@@ -69,7 +82,8 @@ function evolutionCouleurAnnee(valeur) {
     return colorsJenks[evolutionClasse(valeur, evolutionDonnees.seuils_jenks[evolutionVariable])];
 }
 function evolutionCouleurVariation(v) {
-    return EVOLUTION_COULEURS_VARIATION[evolutionClasse(v, EVOLUTION_SEUILS_VARIATION)];
+    const seuils = evolutionDonnees.seuils_jenks_variation[evolutionVariable];
+    return evolutionCouleursVariation(seuils)[evolutionClasse(v, seuils)];
 }
 
 function evolutionStyle(type, nom) {
@@ -97,9 +111,14 @@ function evolutionLegendes() {
     document.getElementById('evolution-legende-annees').innerHTML =
         `<strong>${EVOLUTION_VARIABLES[evolutionVariable]} (0-10), mêmes classes pour ${d.annees[0]} et ${d.annees[1]}</strong> ` +
         lib.map((l, i) => `<span class="evolution-classe">${pastille(colorsJenks[i])}${l}</span>`).join('');
+    const sv = d.seuils_jenks_variation[evolutionVariable];
+    const signe = x => (x > 0 ? '+' : x < 0 ? '−' : '') + evolutionFmt(Math.abs(x));
+    const zero = evolutionClasse(0, sv);
+    const libVar = [`≤ ${signe(sv[0])}`, ...sv.slice(1).map((x, i) => `${signe(sv[i])} – ${signe(x)}`), `> ${signe(sv[sv.length - 1])}`];
+    const couleursVar = evolutionCouleursVariation(sv);
     document.getElementById('evolution-legende-variation').innerHTML =
-        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]} (points sur 10)</strong> ` +
-        EVOLUTION_LIBELLES_VARIATION.map((l, i) => `<span class="evolution-classe">${pastille(EVOLUTION_COULEURS_VARIATION[i])}${l}</span>`).join('');
+        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]} (points sur 10), classes de Jenks</strong> ` +
+        libVar.map((l, i) => `<span class="evolution-classe">${pastille(couleursVar[i])}${l}${i === zero ? ' (contient 0)' : ''}</span>`).join('');
 }
 
 function evolutionResumeHtml() {
@@ -164,12 +183,23 @@ function evolutionAgrandir(type) {
         b.textContent = ouverte ? '↩' : '🔍';
         b.title = ouverte ? 'Revenir aux trois cartes' : 'Agrandir cette carte';
     });
-    setTimeout(() => {
-        const cartes = Object.entries(evolutionCartes);
-        cartes.forEach(([, c]) => c.invalidateSize());
-        if (evolutionAgrandie) cartes.forEach(([t, c]) => c.fitBounds(evolutionCouches[t].getBounds(), { padding: [8, 8], animate: false }));      // chaque carte cadre la Corse
-        else if (evolutionCartes.a0) evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8], animate: false });             // vues de nouveau liées
-    }, 150);
+    evolutionRecadrage = true;                     // les observateurs de taille (voir l'initialisation) recadrent chaque carte dès que sa taille a changé
+    evolutionRecadrer();
+    setTimeout(() => { evolutionRecadrer(); evolutionRecadrage = false; }, 600);
+}
+
+// Chaque carte s'adapte à son conteneur ; pendant un changement de disposition, elle recadre la Corse entière
+let evolutionRecadrage = false;
+function evolutionRecadrer(type) {
+    const types = type ? [type] : Object.keys(evolutionCartes);
+    for (const t of types) {
+        const c = evolutionCartes[t];
+        if (!c) continue;
+        c.stop();                                   // interrompt une animation de zoom en cours, qui écraserait le recadrage
+        c.invalidateSize({ animate: false });
+        if (!evolutionRecadrage) continue;
+        if (evolutionAgrandie || t === 'a0') c.fitBounds(evolutionCouches[t].getBounds(), { padding: [8, 8], animate: false });   // vues liées : a0 suffit quand les trois cartes sont affichées
+    }
 }
 
 function evolutionBasculerResume(ouvrir) {
@@ -221,6 +251,9 @@ async function initialiserOngletEvolution() {
             },
         }).addTo(carte);
     }
+    if (typeof ResizeObserver !== 'undefined') {
+        for (const [type, id] of Object.entries(ids)) new ResizeObserver(() => evolutionRecadrer(type)).observe(document.getElementById(id));
+    }
     // les trois cartes bougent ensemble
     let enCours = false;
     for (const [type, carte] of Object.entries(evolutionCartes)) {
@@ -239,7 +272,7 @@ async function initialiserOngletEvolution() {
     evolutionRedessiner();
     setTimeout(() => {
         Object.values(evolutionCartes).forEach(c => c.invalidateSize());
-        evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8] });   // les autres cartes suivent (vues liées)
+        if (!evolutionAgrandie) evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8], animate: false });   // les autres cartes suivent (vues liées)
     }, 150);
 }
 
@@ -267,5 +300,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { evolutionClasse, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION };
+    module.exports = { evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
 }

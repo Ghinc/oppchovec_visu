@@ -189,7 +189,7 @@ pour les BPE 2020 et 2021 géolocalisées, et la BPE 2021 rompt la série (la so
 
 **Calcul.** Normalisation min-max de chaque indicateur sur les **deux années ensemble** (échelle commune), dimension = moyenne des indicateurs disponibles, p_k de Betti sur les deux années
 ensemble (Opp 0,447 ; Cho 0,338 ; Vec 0,215 : Cho n'a qu'un indicateur, donc une dispersion forte), indice `(1/3)(Σ p_k d_k^1,5)^(2,5/1,5)` ramené à 0-10 sur les deux années ensemble. Seuils de couleur : Jenks à
-5 classes sur les deux années ensemble (mêmes seuils pour les deux cartes). Carte d'évolution : 2021 moins 2016, classes à ±0,5 et ±1,5 point.
+5 classes sur les deux années ensemble (mêmes seuils pour les deux cartes). Carte d'évolution : 2021 moins 2016, **Jenks à 5 classes calculé sur les 360 variations** de chaque variable (`seuils_jenks_variation`). Comme les classes ne sont pas centrées sur 0, la classe qui contient 0 est en blanc, les classes en dessous en rouge (recul) et celles au-dessus en bleu (progression) : le signe reste lisible. Le résumé chiffré garde un seuil de ±0,5 point pour compter les communes en progression, stables ou en recul.
 
 **Résultats (indice comparable).** Moyenne 5,10 en 2016, 5,59 en 2021 (+0,49) ; 162 communes en progression de plus de 0,5 point, 140 stables, 58 en recul. Les corrélations entre 2016 et 2021, par indicateur, vont de 0,33
 (Vec3) à 0,88 (Vec2) : **les petites communes bougent beaucoup d'une année à l'autre** (quelques personnes de plus ou de moins), et une partie de l'« évolution » est du bruit. L'indice comparable 2021 et l'indice actuel

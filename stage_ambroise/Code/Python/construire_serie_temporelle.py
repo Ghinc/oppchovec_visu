@@ -189,6 +189,8 @@ def calculer(source):
                                   **{d: minmax(dims[an][d], d_lo[d], d_hi[d]) * 10 for d in DIMENSIONS}}) for an in ANNEES}
     import jenkspy
     seuils = {v: [float(x) for x in jenkspy.jenks_breaks(pd.concat([resultat[an][v] for an in ANNEES]).tolist(), 5)[1:-1]] for v in ("OppChoVec", "Opp", "Cho", "Vec")}
+    # carte d'évolution : Jenks à 5 classes sur les 360 variations (dernière date - première date) de chaque variable
+    seuils_variation = {v: [float(x) for x in jenkspy.jenks_breaks((resultat[ANNEES[-1]][v] - resultat[ANNEES[0]][v]).tolist(), 5)[1:-1]] for v in ("OppChoVec", "Opp", "Cho", "Vec")}
     communes = {}
     for code, nom in noms.items():
         communes[nom] = {"code": code}
@@ -197,7 +199,7 @@ def calculer(source):
                                       "scores_0_10": {v: float(resultat[an].loc[code, v]) for v in ("OppChoVec", "Opp", "Cho", "Vec")},
                                       "vec1_departementale": bool(estimees[an][code])}
     return {"annees": list(ANNEES), "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
-            "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils,
+            "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},
             "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016", "Cho1": "quartiers prioritaires : géographie 2015 puis 2024, pas de série",
                        "Vec4": "services à 20 minutes : accessibilité calculée avec le réseau routier actuel (OSRM local), BPE 2016 non géolocalisée de la même façon"},

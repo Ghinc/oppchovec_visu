@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const { lireJson, WEB } = require('./helpers/outils');
-const { evolutionClasse, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION } = require(path.join(WEB, 'evolution.js'));
+const { evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE } = require(path.join(WEB, 'evolution.js'));
 
 const d = lireJson('serie_temporelle.json');
 const noms = Object.keys(d.communes);
@@ -47,6 +47,30 @@ test('résumé : effectifs cohérents et classement des plus fortes variations',
   assert.deepEqual(r.meilleures.map((e) => e.commune), tri.slice(0, 5).map((e) => e.c));
   assert.deepEqual(r.pires.map((e) => e.commune), tri.slice(-5).reverse().map((e) => e.c));
   assert.ok(r.meilleures[0].variation >= r.meilleures[4].variation);
+});
+
+test('carte d\'évolution : la classe de Jenks qui contient 0 est neutre, rouge en dessous, bleu au-dessus', () => {
+  const ROUGE = /^#(b2182b|d6604d|ef8a62|f6b79a)$/, BLEU = /^#(9ecae1|a6cee3|6baed6|3182bd|08519c|4393c3|67a9cf|2166ac)$/;
+  for (const v of ['OppChoVec', 'Opp', 'Cho', 'Vec']) {
+    const s = d.seuils_jenks_variation[v];
+    assert.equal(s.length, 4);
+    for (let i = 1; i < 4; i++) assert.ok(s[i] > s[i - 1], v);
+    const couleurs = evolutionCouleursVariation(s);
+    assert.equal(couleurs.length, 5, v);
+    const zero = evolutionClasse(0, s);
+    assert.equal(couleurs[zero], EVOLUTION_NEUTRE, `${v} : la classe de 0 est neutre`);
+    couleurs.forEach((c, i) => { if (i < zero) assert.match(c, ROUGE, `${v} classe ${i}`); if (i > zero) assert.match(c, BLEU, `${v} classe ${i}`); });
+    assert.equal(new Set(couleurs).size, 5, `${v} : 5 couleurs distinctes`);
+    // une commune qui recule n'est jamais colorée en bleu, une commune qui progresse jamais en rouge
+    for (const c of noms) {
+      const x = evolutionVariation(d, c, v), col = couleurs[evolutionClasse(x, s)];
+      if (x < 0) assert.ok(!BLEU.test(col), `${v} ${c} ${x}`);
+      if (x > 0) assert.ok(!ROUGE.test(col), `${v} ${c} ${x}`);
+    }
+  }
+  // cas général : zéro dans la 1re ou la dernière classe, ou dans la classe du milieu
+  assert.deepEqual(evolutionCouleursVariation([1, 2, 3, 4]).slice(0, 1), [EVOLUTION_NEUTRE]);
+  assert.equal(evolutionCouleursVariation([-4, -3, -2, -1]).at(-1), EVOLUTION_NEUTRE);
 });
 
 test('seuils de Jenks : 4 seuils croissants par variable', () => {
