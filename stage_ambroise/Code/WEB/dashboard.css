@@ -2400,3 +2400,4 @@ body.mode-evolution aside { display: none; }
 .evolution-egal { color: #777; }
 
 .evolution-bas.avec-detail { max-height: 62%; }
+.evolution-table-detail td:nth-child(1) { max-width: 330px; }

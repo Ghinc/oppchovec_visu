@@ -122,6 +122,72 @@ function evolutionDetails(donnees, commune) {
     return { indice: { somme0: c0.somme, somme1: c1.somme, brut0: c0.brut, brut1: c1.brut, score0: sur10(c0.brut, 'OppChoVec'), score1: sur10(c1.brut, 'OppChoVec') }, dimensions };
 }
 
+// Composantes d'un indicateur brut (donnees.communes[c][année].composantes, produites par construire_serie_temporelle.py) :
+// pour chaque sous-quantité, sa valeur aux deux dates et sa contribution à l'écart de l'indicateur ; la somme des contributions est exactement l'écart de l'indicateur.
+const EVOLUTION_NIVEAUX = ['Niveau 1 · aucun diplôme ou brevet', 'Niveau 2 · CAP, BEP', 'Niveau 3 · baccalauréat', 'Niveau 4 · enseignement supérieur'];
+const EVOLUTION_CSP = ['Agriculteurs exploitants', 'Artisans, commerçants, chefs d\'entreprise', 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
+    'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'];
+const EVOLUTION_STATUTS = [['chom', 'Chômeurs (15-64 ans)', 0], ['aide', 'Emplois aidés', 0.25], ['ponctuel', 'Intérim et apprentis', 0.5], ['cdd', 'CDD', 0.75], ['stable', 'CDI et non-salariés', 1]];
+
+function evolutionComposantes(donnees, commune, cle) {
+    const [a0, a1] = donnees.annees;
+    const c = [donnees.communes[commune][String(a0)], donnees.communes[commune][String(a1)]];
+    const k = c.map(x => x.composantes[cle] || {});
+    const ind = c.map(x => x.indicateurs[cle]);
+    const somme = o => Object.values(o).reduce((t, v) => t + v, 0);
+    const lignes = [];
+    const ligne = (libelle, v0, v1, dec, contribution, decContribution = 3, unite = '') => lignes.push({ libelle, v0, v1, dec, unite, contribution, decContribution });
+    let intro = '', note = '', colonne = 'Valeur';
+    if (cle === 'Opp1') {
+        intro = 'Opp1 = niveau de diplôme moyen des 18 ans et plus non scolarisés = Σ niveau × part du niveau (1 à 4). Contribution d\'un niveau = niveau × écart de sa part.';
+        colonne = 'Part des 18 ans et plus (%)';
+        EVOLUTION_NIVEAUX.forEach((lib, i) => {
+            const p = k.map(o => 100 * o['niveau' + (i + 1)] / somme(o));
+            ligne(lib, p[0], p[1], 1, (i + 1) * (p[1] - p[0]) / 100, 3, '%');
+        });
+        note = 'Le détail à 7 niveaux n\'existe pas en 2016 : les niveaux sont regroupés en 4 pour les deux dates.';
+    } else if (cle === 'Opp2') {
+        intro = 'Opp2 = indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus = Σ (x/μ) ln(x/μ) / 8, où x est l\'effectif d\'une catégorie et μ la moyenne des 8 effectifs. Plus l\'indice est élevé, plus la répartition est inégale. Contribution d\'une catégorie = écart de son terme (x/μ) ln(x/μ) / 8.';
+        colonne = 'Part des 15 ans et plus (%)';
+        const terme = (o, i) => { const x = o['cs' + (i + 1)], mu = somme(o) / 8; return x > 0 ? (x / mu) * Math.log(x / mu) / 8 : 0; };
+        EVOLUTION_CSP.forEach((lib, i) => {
+            const p = k.map(o => 100 * o['cs' + (i + 1)] / somme(o));
+            ligne(lib, p[0], p[1], 1, terme(k[1], i) - terme(k[0], i), 4, '%');
+        });
+        note = 'Une catégorie dont la part s\'éloigne de la moyenne (12,5 %) fait monter l\'indice ; un rapprochement le fait baisser.';
+    } else if (cle === 'Opp3') {
+        intro = 'Opp3 = part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun + 100 pour les trois villes qui ont un réseau de bus (Ajaccio, Bastia, Porto-Vecchio).';
+        ligne('Ménages ayant au moins une voiture (%)', k[0].part_voiture, k[1].part_voiture, 1, k[1].part_voiture - k[0].part_voiture, 1, '%');
+        ligne('Actifs occupés allant travailler en transports en commun (+100 si oui)', k[0].transport_commun, k[1].transport_commun, 0, k[1].transport_commun - k[0].transport_commun, 0);
+        ligne('Ville dotée d\'un réseau de bus (+100 si oui, inchangé)', k[0].reseau_bus, k[1].reseau_bus, 0, k[1].reseau_bus - k[0].reseau_bus, 0);
+    } else if (cle === 'Cho2') {
+        intro = 'Cho2 = part des Français parmi les 18 ans et plus = 100 − part des étrangers de 18 ans et plus (plafonné à 100). C\'est un proxy du droit de vote : il ne tient compte ni de l\'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales.';
+        ligne('Population totale', k[0].population, k[1].population, 0, null);
+        ligne('Étrangers de 18 ans et plus (estimés)', k[0].etrangers_18p, k[1].etrangers_18p, 0, null);
+        const part = k.map(o => 100 * o.etrangers_18p / o.population);
+        ligne('Part d\'étrangers parmi la population (%)', part[0], part[1], 2, ind[1] - ind[0], 2, '%');
+        note = 'Étrangers de 18 ans et plus = population de 18 à 24 ans − 0,7 × Français de 15 à 24 ans + étrangers de 25 ans et plus (tables INSEE POP1B et NAT1). Une hausse de cette part fait baisser Cho2.';
+    } else if (cle === 'Vec1') {
+        intro = 'Vec1 = médiane du niveau de vie (Filosofi, INSEE), en euros courants (non corrigés de l\'inflation). C\'est un indicateur direct : il n\'a pas de sous-composantes.';
+        note = [a0, a1].filter((a, i) => c[i].vec1_departementale).length
+            ? `La médiane n'est pas diffusée pour cette commune en ${[a0, a1].filter((a, i) => c[i].vec1_departementale).join(' et ')} : valeur du département.` : 'Médiane propre à la commune aux deux dates.';
+    } else if (cle === 'Vec2') {
+        intro = 'Vec2 = [ exp(−personnes par pièce) + (part de logements avec salle de bain + chauffage) / 2 + part de maisons ] / 3, avec chauffage = 1 (constant, comme dans les données actuelles). Contribution = écart du terme correspondant dans cette formule.';
+        ligne('Personnes par pièce (terme exp(−x) / 3)', k[0].personnes_par_piece, k[1].personnes_par_piece, 2, (Math.exp(-k[1].personnes_par_piece) - Math.exp(-k[0].personnes_par_piece)) / 3, 4);
+        ligne('Résidences principales avec salle de bain (%, terme / 6)', 100 * k[0].part_sdb, 100 * k[1].part_sdb, 1, (k[1].part_sdb - k[0].part_sdb) / 6, 4, '%');
+        ligne('Maisons parmi les résidences principales (%, terme / 3)', 100 * k[0].part_maisons, 100 * k[1].part_maisons, 1, (k[1].part_maisons - k[0].part_maisons) / 3, 4, '%');
+        note = 'Moins de personnes par pièce (plus d\'espace) fait monter l\'indice.';
+    } else if (cle === 'Vec3') {
+        intro = 'Vec3 = stabilité de l\'emploi = Σ poids × part du statut : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1. Contribution d\'un statut = poids × écart de sa part.';
+        colonne = 'Part des actifs (%)';
+        EVOLUTION_STATUTS.forEach(([cl, lib, poids]) => {
+            const p = k.map(o => 100 * o[cl] / somme(o));
+            ligne(`${lib} (poids ${evolutionFmt(poids, 2)})`, p[0], p[1], 1, poids * (p[1] - p[0]) / 100, 4, '%');
+        });
+    }
+    return { cle, intro, note, colonne, lignes, total: { v0: ind[0], v1: ind[1], dec: EVOLUTION_DECIMALES[cle] ?? (cle === 'Opp2' || cle === 'Vec2' || cle === 'Vec3' ? 3 : 2) } };
+}
+
 // ---------- Affichage ----------
 
 function evolutionEchapper(s) {
@@ -187,7 +253,7 @@ function evolutionResumeHtml() {
 const evolutionDetailsOuverts = new Set();     // scores dont le détail est déplié (conservé quand on change de commune)
 
 const EVOLUTION_DECIMALES = { Opp3: 0, Vec1: 0 };
-const evolutionSigne = (x, dec) => (Number(x.toFixed(dec)) > 0 ? '+' : '') + evolutionFmt(x, dec);       // « + » seulement si l'écart arrondi est positif
+const evolutionSigne = (x, dec) => { const r = Number(x.toFixed(dec)); return (r > 0 ? '+' : '') + evolutionFmt(r === 0 ? 0 : x, dec); };   // jamais de « −0,00 »       // « + » seulement si l'écart arrondi est positif
 function evolutionFleche(x, dec) {
     const r = Number(x.toFixed(dec));
     return r > 0 ? '<span class="evolution-hausse" title="en hausse">▲</span>' : r < 0 ? '<span class="evolution-baisse" title="en baisse">▼</span>' : '<span class="evolution-egal" title="inchangé">＝</span>';
@@ -227,6 +293,26 @@ function evolutionDetailHtml(variable, nom) {
         (variable === 'Cho' ? `<div class="evolution-petit">Cho2 est un proxy du droit de vote : la part de Français parmi les 18 ans et plus approche la part des personnes qui peuvent voter dans la commune (elle ne tient compte ni de l'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales).</div>` : '');
 }
 
+// Détail d'un indicateur brut : formule, valeur de chaque composante aux deux dates et contribution à l'écart
+function evolutionIndicateurHtml(cle, nom) {
+    const d = evolutionDonnees;
+    const [a0, a1] = d.annees;
+    const x = evolutionComposantes(d, nom, cle);
+    const dim = Object.entries(d.dimensions).find(([, ks]) => ks.includes(cle))[0];
+    const part = evolutionDetails(d, nom).dimensions.find(z => z.nom === dim).indicateurs.find(i => i.cle === cle).contributionPoints;
+    const f = (v, dec) => evolutionFmt(v, dec);
+    const lignes = x.lignes.map(l => `<tr><td>${l.contribution === null ? '' : evolutionFleche(l.contribution, l.decContribution) + ' '}${l.libelle}</td><td>${f(l.v0, l.dec)}</td><td>${f(l.v1, l.dec)}</td>` +
+        `<td>${evolutionSigne(l.v1 - l.v0, l.dec)}</td><td>${l.contribution === null ? '' : `<strong>${evolutionSigne(l.contribution, l.decContribution)}</strong>`}</td></tr>`).join('');
+    const t = x.total;
+    const entete = x.lignes.length ? `<tr><th>Composante</th><th>${a0}</th><th>${a1}</th><th>Écart</th><th>Contribution</th></tr>` : '';
+    return `<div class="evolution-petit">${x.intro}</div>` +
+        `<table class="evolution-table evolution-table-detail">${entete}${lignes}` +
+        `<tr class="evolution-total"><td>${EVOLUTION_NOMS_INDICATEURS[cle]}</td><td>${f(t.v0, t.dec)}</td><td>${f(t.v1, t.dec)}</td><td><strong>${evolutionSigne(t.v1 - t.v0, t.dec)}</strong></td><td>${x.lignes.length ? 'somme des contributions' : ''}</td></tr></table>` +
+        (x.lignes.length ? `<div class="evolution-petit">${x.colonne === 'Valeur' ? '' : `Colonnes 2016 et 2021 : ${x.colonne.charAt(0).toLowerCase() + x.colonne.slice(1)}. `}▲ composante qui fait monter l'indicateur, ▼ qui le fait baisser.</div>` : '') +
+        (x.note ? `<div class="evolution-petit">${x.note}</div>` : '') +
+        `<div class="evolution-petit">Dans la dimension ${EVOLUTION_VARIABLES[dim]}, cet indicateur contribue pour <strong>${evolutionSigne(part, 2)} point</strong> (sur 10) à l'évolution du score.</div>`;
+}
+
 function evolutionFicheContenu(nom) {
     const d = evolutionDonnees;
     const [a0, a1] = d.annees;
@@ -234,7 +320,9 @@ function evolutionFicheContenu(nom) {
     const lignes = Object.keys(EVOLUTION_NOMS_INDICATEURS).map(k => {
         const x0 = c[String(a0)].indicateurs[k], x1 = c[String(a1)].indicateurs[k];
         const dec = EVOLUTION_DECIMALES[k] ?? 2;
-        return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>`;
+        const ouvert = evolutionDetailsOuverts.has(k);
+        return `<tr class="evolution-ligne-score" data-variable="${k}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>` +
+            (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionIndicateurHtml(k, nom)}</td></tr>` : '');
     }).join('');
     const scores = Object.keys(EVOLUTION_VARIABLES).map(v => {
         const v0 = evolutionValeur(d, nom, a0, v), v1 = evolutionValeur(d, nom, a1, v);
@@ -246,7 +334,7 @@ function evolutionFicheContenu(nom) {
     return `<h4>${evolutionEchapper(nom)}</h4>` +
         `<table class="evolution-table"><tr><th>Scores (0-10)</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}` +
         `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
-        `<div class="evolution-petit">Cliquez sur un score pour voir le détail du calcul et ce qui l'a fait monter ou baisser.</div>` +
+        `<div class="evolution-petit">Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l'a fait monter ou baisser.</div>` +
         (estime.length ? `<div class="evolution-petit">Médiane du niveau de vie non diffusée par l'INSEE pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
 
@@ -416,5 +504,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { evolutionCalcul, evolutionDetails, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
+    module.exports = { evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
 }

@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const { lireJson, WEB } = require('./helpers/outils');
-const { evolutionCalcul, evolutionDetails, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE } = require(path.join(WEB, 'evolution.js'));
+const { evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE } = require(path.join(WEB, 'evolution.js'));
 
 const d = lireJson('serie_temporelle.json');
 const noms = Object.keys(d.communes);
@@ -101,4 +101,20 @@ test('détail du calcul : retrouve exactement les scores du fichier, et les cont
   }
   const x = evolutionCalcul(d, noms[0], 2016);
   for (const k of d.indicateurs) assert.ok(x.norm[k] >= -1e-12 && x.norm[k] <= 1 + 1e-12, k);
+});
+
+test('composantes d\'un indicateur : les contributions s\'additionnent à l\'écart de l\'indicateur et retrouvent sa valeur', () => {
+  for (const c of noms) {
+    for (const k of d.indicateurs) {
+      const x = evolutionComposantes(d, c, k);
+      const ecart = d.communes[c]['2021'].indicateurs[k] - d.communes[c]['2016'].indicateurs[k];
+      assert.ok(Math.abs(x.total.v0 - d.communes[c]['2016'].indicateurs[k]) < 1e-12 && Math.abs(x.total.v1 - d.communes[c]['2021'].indicateurs[k]) < 1e-12, `${c} ${k} valeurs`);
+      if (x.lignes.length) {
+        const somme = x.lignes.reduce((t, l) => t + (l.contribution ?? 0), 0);
+        const tol = Math.max(1e-4, 1e-5 * Math.abs(ecart));      // composantes arrondies à 6 décimales dans le fichier
+        assert.ok(Math.abs(somme - ecart) < tol, `${c} ${k} : somme des contributions ${somme} ≠ écart ${ecart}`);
+      }
+      assert.ok(x.intro.length > 20, k);
+    }
+  }
 });

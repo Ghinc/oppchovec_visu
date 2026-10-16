@@ -21,6 +21,9 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
   Vec2  (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons) / 3, avec chauffage = 1 (constant, comme dans les données actuelles)
   Vec3  stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par leurs effectifs
 
+Pour chaque indicateur, le fichier de sortie garde aussi ses COMPOSANTES (effectifs par niveau de diplôme, par catégorie socioprofessionnelle, par statut d'emploi,
+etc.) : l'onglet « Évolution » s'en sert pour montrer, au clic sur un indicateur, ce qui l'a fait monter ou baisser (clé « composantes » de chaque commune et année).
+
 Normalisation : min-max de chaque indicateur sur les deux années ensemble (échelle commune) ; dimension = moyenne des indicateurs disponibles ;
 OppChoVec = (1/3) (Σ p_k d_k^1,5)^(2,5/1,5), p_k de Betti et al. calculés sur les deux années ensemble ; mise à l'échelle 0-10 sur les deux années ensemble.
 Seuils de couleur : Jenks à 5 classes sur les valeurs des deux années ensemble (mêmes seuils pour les deux cartes).
@@ -75,8 +78,10 @@ def theil(x):
 
 
 def indicateurs_recensement(dossier, an):
+    """Renvoie (indicateurs, composantes) : DataFrame des indicateurs et dictionnaire {indicateur: DataFrame de ses composantes, une ligne par commune}."""
     a = str(an)[2:]
     P = lambda s: f"P{a}_{s}"
+    comp = {}
     # --- Opp1 : diplômes
     f = trouver(dossier, "dipl")
     niveaux2021 = [P("NSCOL15P_DIPLMIN"), P("NSCOL15P_BEPC"), P("NSCOL15P_CAPBEP"), P("NSCOL15P_BAC"), P("NSCOL15P_SUP2"), P("NSCOL15P_SUP34"), P("NSCOL15P_SUP5")]
@@ -89,27 +94,34 @@ def indicateurs_recensement(dossier, an):
     effectifs = pd.concat([n1, d[P("NSCOL15P_CAPBEP")], d[P("NSCOL15P_BAC")], n4], axis=1)
     out = pd.DataFrame(index=d.index)
     out["Opp1"] = (effectifs * [1, 2, 3, 4]).sum(axis=1) / effectifs.sum(axis=1)
+    comp["Opp1"] = pd.DataFrame(effectifs.to_numpy(), index=d.index, columns=["niveau1", "niveau2", "niveau3", "niveau4"])
     # --- Opp2 : Theil sur les CSP
     d = lire_base_cc(trouver(dossier, "evol-struct"), [f"C{a}_POP15P_CS{i}" for i in range(1, 9)])
     out["Opp2"] = theil(d)
+    comp["Opp2"] = pd.DataFrame(d.to_numpy(), index=d.index, columns=[f"cs{i}" for i in range(1, 9)])
     # --- Opp3 : voiture + transports en commun + réseau de bus
     d = lire_base_cc(trouver(dossier, "log"), [P("RP"), P("NPER_RP"), P("NBPI_RP"), P("RP_SDB"), P("RPMAISON"), P("RP_VOIT1P")])
     ce = lire_base_cc(trouver(dossier, "carac"), [P("ACTOCC15P_COMMUN"), P("NSAL15P")] + [f"P{a}_{s}SAL15P_{k}" for s in "HF" for k in ("CDI", "CDD", "INTERIM", "EMPAID", "APPR")])
     out["Opp3"] = 100 * d[P("RP_VOIT1P")] / d[P("RP")] + 100 * (ce[P("ACTOCC15P_COMMUN")] > 0) + 100 * out.index.isin(VILLES_RESEAU_BUS)
+    comp["Opp3"] = pd.DataFrame({"part_voiture": 100 * d[P("RP_VOIT1P")] / d[P("RP")], "transport_commun": 100.0 * (ce[P("ACTOCC15P_COMMUN")] > 0),
+                                 "reseau_bus": 100.0 * out.index.isin(VILLES_RESEAU_BUS)}, index=d.index)
     # --- Vec2
     ppp = d[P("NPER_RP")] / d[P("NBPI_RP")]
     out["Vec2"] = (np.exp(-ppp) + (d[P("RP_SDB")] / d[P("RP")] + 1.0) / 2 + d[P("RPMAISON")] / d[P("RP")]) / 3
+    comp["Vec2"] = pd.DataFrame({"personnes_par_piece": ppp, "part_sdb": d[P("RP_SDB")] / d[P("RP")], "part_maisons": d[P("RPMAISON")] / d[P("RP")]})
     # --- Vec3
     act = lire_base_cc(trouver(dossier, "emploi-pop"), [P("CHOM1564"), P("ACT1564")])
     H = lambda k: ce[f"P{a}_HSAL15P_{k}"] + ce[f"P{a}_FSAL15P_{k}"]
     comptes = pd.DataFrame({"chom": act[P("CHOM1564")], "aide": H("EMPAID"), "ponctuel": H("INTERIM") + H("APPR"), "cdd": H("CDD"),
                             "stable": H("CDI") + ce[P("NSAL15P")]})
     out["Vec3"] = (comptes * [0, 0.25, 0.5, 0.75, 1]).sum(axis=1) / comptes.sum(axis=1)
-    return out
+    comp["Vec3"] = comptes
+    return out, comp
 
 
 def indicateur_nationalite(dossier):
-    """Cho2 : part des Français parmi les 18 ans et plus, par la méthode de proportion_etrangers_18plus_final.py (tables POP1B et NAT1 de l'année)."""
+    """Cho2 : part des Français parmi les 18 ans et plus (proxy du droit de vote), par la méthode de proportion_etrangers_18plus_final.py (tables POP1B et NAT1 de l'année).
+    Renvoie (Cho2, composantes : population totale et étrangers de 18 ans et plus estimés)."""
     pop = pd.read_csv(trouver(dossier, "POP1B"), sep=";", dtype={"CODGEO": str, "AGED100": str}, usecols=["CODGEO", "AGED100", "NB"], encoding="latin1")
     pop = pop[pop["CODGEO"].str.startswith(("2A", "2B"))]
     total = pop.groupby("CODGEO")["NB"].sum()
@@ -121,7 +133,7 @@ def indicateur_nationalite(dossier):
     francais_1524 = somme((nat["AGE4"] == "15") & (nat["INATC"] == "1"))
     etrangers_25p = somme(nat["AGE4"].isin(["25", "55"]) & (nat["INATC"] == "2"))
     etrangers_18p = (t1824 - 0.7 * francais_1524) + etrangers_25p          # Français 18-24 ans approchés par 0,7 x Français 15-24 ans
-    return (100 - 100 * etrangers_18p / total).clip(upper=100).rename("Cho2")
+    return (100 - 100 * etrangers_18p / total).clip(upper=100).rename("Cho2"), pd.DataFrame({"population": total, "etrangers_18p": etrangers_18p})
 
 
 def indicateur_mediane(dossier, an):
@@ -160,11 +172,11 @@ def pk_betti(scores):
 def calculer(source):
     source = Path(source)
     noms = {f["properties"]["code"]: f["properties"]["nom"] for f in json.loads(GEOJSON.read_text(encoding="utf-8"))["features"]}
-    brut, estimees = {}, {}
+    brut, estimees, composantes = {}, {}, {}
     for an in ANNEES:
         dossier = source / str(an)
-        t = indicateurs_recensement(dossier, an)
-        t["Cho2"] = indicateur_nationalite(dossier)
+        t, comp = indicateurs_recensement(dossier, an)
+        t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
         med, med_dep = indicateur_mediane(dossier, an)
         codes = list(t.index)
         diffusee = med.reindex(codes).notna()
@@ -174,6 +186,7 @@ def calculer(source):
         if set(t.index) != set(noms) or t.isna().any().any():
             sys.exit(f"{an} : communes ou valeurs manquantes (écart communes {sorted(set(noms) ^ set(t.index))[:5]}, NaN {t.isna().sum().to_dict()})")
         brut[an] = t.loc[list(noms)]
+        composantes[an] = {k: v.loc[list(noms)] for k, v in comp.items()}
     # normalisation commune aux deux années
     tout = pd.concat(brut.values())
     lo, hi = tout.min(), tout.max()
@@ -197,7 +210,8 @@ def calculer(source):
         for an in ANNEES:
             communes[nom][str(an)] = {"indicateurs": {k: float(brut[an].loc[code, k]) for k in INDICATEURS},
                                       "scores_0_10": {v: float(resultat[an].loc[code, v]) for v in ("OppChoVec", "Opp", "Cho", "Vec")},
-                                      "vec1_departementale": bool(estimees[an][code])}
+                                      "vec1_departementale": bool(estimees[an][code]),
+                                      "composantes": {k: {col: round(float(v.loc[code, col]), 6) for col in v.columns} for k, v in composantes[an].items()}}
     return {"annees": list(ANNEES), "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},

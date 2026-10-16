@@ -93,6 +93,17 @@ test('Évolution : détail du calcul au clic sur un score (dimensions puis indic
     t = await texte();
     for (const mot of ['Vec1 · médiane', 'Vec2 · logement', 'Vec3 · stabilité', 'Contribution (points)', 'Normalisé 2016']) assert.ok(t.includes(mot), mot);
     assert.equal(await page.locator('.evolution-detail').count(), 2);
+    // indicateur brut : lignes cliquables avec leurs composantes
+    await page.click('.evolution-ligne-score[data-variable="Opp1"]');
+    t = await texte();
+    for (const mot of ['Niveau 1 · aucun diplôme', 'Niveau 4 · enseignement supérieur', 'somme des contributions']) assert.ok(t.includes(mot), mot);
+    await page.click('.evolution-ligne-score[data-variable="Vec3"]');
+    t = await texte();
+    for (const mot of ['Chômeurs (15-64 ans)', 'CDI et non-salariés']) assert.ok(t.includes(mot), mot);
+    await page.click('.evolution-ligne-score[data-variable="Cho2"]');
+    assert.ok((await texte()).includes('Population totale'));
+    for (const k of ['Opp1', 'Vec3', 'Cho2']) await page.click(`.evolution-ligne-score[data-variable="${k}"]`);
+    assert.equal(await page.locator('.evolution-detail').count(), 2, 'seuls les deux scores restent ouverts');
     // le détail reste ouvert quand on change de commune ; un second clic le referme
     await page.evaluate(() => evolutionFiche('Ajaccio'));
     assert.equal(await page.locator('.evolution-detail').count(), 2);
