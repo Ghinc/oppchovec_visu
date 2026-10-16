@@ -61,3 +61,38 @@ test('EPCI : 19 polygones colorés par les classes de Jenks, case pro rata / moy
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('EPCI : clic sur une commune = détail de la commune dans l\'agrégation de son EPCI (valeurs, poids, écart)', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="epcitab"]');
+    await page.waitForFunction(() => typeof epciCoucheCommunes !== 'undefined' && epciCoucheCommunes && document.querySelectorAll('#epci-tableau .epci-ligne').length === 19);
+    const texte = async () => (await page.locator('#epci-fiche').textContent()).replace(/\s+/g, ' ');
+    assert.ok(!(await texte()).includes('Commune : '), 'pas de détail commune au départ');
+
+    // clic réel sur la commune (événement Leaflet)
+    await page.evaluate(() => { epciCoucheCommunes.eachLayer((l) => { if (l._epciCommune === 'Ajaccio') l.fire('click'); }); });
+    let t = await texte();
+    const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
+    for (const mot of ['Commune : Ajaccio', e.nom, 'EPCI pro rata', 'EPCI simple', 'Poids pro rata', 'Poids simple', 'Opp1', 'Vec4', 'en moyenne simple (1 commune sur 10)']) assert.ok(t.includes(mot), mot);
+    const poids = await page.evaluate(() => Math.round(1000 * epciPoids(epciDonnees.epci.find((x) => x.communes.Ajaccio), 'Cho2', true).Ajaccio) / 10);
+    assert.ok(t.includes(String(poids).replace('.', ',')) , `poids ${poids} % affiché`);
+    assert.ok(poids > 80, 'Ajaccio pèse plus de 80 % de son agglomération');
+    assert.equal(await page.evaluate(() => epciSelection), e.siren, 'l\'EPCI de la commune est sélectionné');
+    // la ligne du tableau de l'EPCI est surlignée, la commune a un contour épais
+    assert.equal(await page.locator('#epci-tableau .epci-ligne.selectionne').count(), 1);
+    assert.equal(await page.evaluate(() => { let w = 0; epciCoucheCommunes.eachLayer((l) => { if (l._epciCommune === 'Ajaccio') w = l.options.weight; }); return w; }), 3);
+
+    // la valeur affichée de la commune est celle de l'appli ; la case à cocher ne change pas le détail commune mais l'EPCI
+    const v = await page.evaluate(() => indicateursCommune.Ajaccio.Indicateur_Vec1);
+    assert.ok(t.replace(/\s/g, '').includes(String(Math.round(v))), 'Vec1 de la commune');        // séparateur de milliers (espace insécable) ignoré
+
+    // une autre commune du même EPCI, depuis la liste de la fiche
+    await page.click('#epci-fiche .epci-lien-commune[data-commune="Alata"]');
+    t = await texte();
+    assert.ok(t.includes('Commune : Alata') && !t.includes('Commune : Ajaccio'));
+    // clic sur un EPCI du tableau : le détail commune disparaît
+    await page.click('#epci-tableau .epci-ligne >> nth=0');
+    assert.ok(!(await texte()).includes('Commune : '));
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});

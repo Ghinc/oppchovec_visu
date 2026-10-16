@@ -2438,3 +2438,10 @@ body.mode-epci aside { display: none; }
 .epci-fiche { font-size: 12px; }
 .epci-fiche h4 { margin: 8px 0 2px 0; font-size: 14px; }
 .epci-choix { white-space: nowrap; }
+.epci-commune { background: #fff; border: 1px solid #cfd8e3; border-left: 4px solid #0b3d91; border-radius: 6px; padding: 4px 10px 8px 10px; margin-bottom: 10px; }
+.epci-commune h4 { margin-top: 4px; }
+.epci-hausse { color: #2166ac; }
+.epci-baisse { color: #b2182b; }
+.epci-lien-commune { color: #0b3d91; text-decoration: none; }
+.epci-lien-commune:hover { text-decoration: underline; }
+.epci-commune .epci-table td, .epci-commune .epci-table th { white-space: nowrap; }

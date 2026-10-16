@@ -21,6 +21,9 @@ let epciInitialise = false;
 let epciEnCours = false;
 let epciVariable = 'oppchovec';
 let epciSelection = null;          // siren
+let epciCommune = null;            // commune cliquée (nom), dans l'EPCI sélectionné
+let epciCoucheCommunes = null;
+let epciDe = {};                   // { commune: siren }
 let epciResultats = { prorata: {}, simple: {} };
 
 // ---------- Calculs purs ----------
@@ -44,6 +47,15 @@ function epciAgreger(indicateurs, epcis, prorata) {
         }
         sortie[e.siren] = agg;
     }
+    return sortie;
+}
+
+// Poids de chaque commune d'un EPCI dans l'agrégation d'un indicateur : { commune: part entre 0 et 1 } (somme = 1)
+// pro rata : population de la commune au millésime de l'indicateur / population de l'EPCI à ce millésime ; simple : 1 / nombre de communes
+function epciPoids(e, k, prorata) {
+    const total = Object.values(e.communes).reduce((t, c) => t + (prorata ? c.pop[k] : 1), 0);
+    const sortie = {};
+    for (const [nom, c] of Object.entries(e.communes)) sortie[nom] = (prorata ? c.pop[k] : 1) / total;
     return sortie;
 }
 
@@ -86,12 +98,24 @@ function epciStyle(siren) {
     return { fillColor: epciCouleur(siren), color: siren === epciSelection ? '#d00000' : '#222', weight: siren === epciSelection ? 3 : 1.4, fillOpacity: 0.85 };
 }
 
+function epciStyleCommune(nom) {
+    const choisie = nom === epciCommune;
+    const dansEpci = epciSelection && epciDe[nom] === epciSelection;
+    return { fill: true, fillColor: '#ffffff', fillOpacity: 0, color: choisie ? '#0b3d91' : '#666', weight: choisie ? 3 : dansEpci ? 0.9 : 0.4, interactive: true };
+}
+
 function epciNom(siren) { return epciDonnees.epci.find(e => e.siren === siren).nom; }
 
 function epciInfobulle(siren) {
     const e = epciDonnees.epci.find(x => x.siren === siren);
     const r = epciResultats[epciMethode()][siren];
     return `<strong>${epciEch(e.nom)}</strong><br>${EPCI_VARIABLES[epciVariable]} : <strong>${epciFmt(r[epciVariable])}</strong><br>${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants`;
+}
+
+function epciInfobulleCommune(nom) {
+    const e = epciDonnees.epci.find(x => x.siren === epciDe[nom]);
+    const r = epciResultats[epciMethode()][e.siren];
+    return `<strong>${epciEch(nom)}</strong> · ${epciFmt(e.communes[nom].pop.Cho2, 0)} hab.<br>${epciEch(e.nom)} : ${EPCI_VARIABLES[epciVariable]} <strong>${epciFmt(r[epciVariable])}</strong>`;
 }
 
 function epciLegende() {
@@ -113,6 +137,27 @@ function epciTableau() {
         `</table>`;
 }
 
+// Détail d'une commune dans l'agrégation de son EPCI : ses valeurs, son poids selon chaque méthode et l'écart avec l'EPCI
+function epciCommuneHtml(e, nom) {
+    const v = indicateursCommune[nom] || {}, sc = scoresParCommune[nom], occ = indiceFinale[nom];
+    const p = epciResultats.prorata[e.siren], s = epciResultats.simple[e.siren];
+    const pct = x => epciFmt(100 * x, 1) + ' %';
+    const fleche = (a, b) => (a > b ? '<span class="epci-hausse" title="au-dessus de l\'EPCI">▲</span>' : a < b ? '<span class="epci-baisse" title="en dessous de l\'EPCI">▼</span>' : '＝');
+    const scores = [['Indice OppChoVec', occ, p.oppchovec, s.oppchovec], ['Opportunités (Opp)', sc.Score_Opp, p.opp, s.opp], ['Choix (Cho)', sc.Score_Cho, p.cho, s.cho], ['Vécu (Vec)', sc.Score_Vec, p.vec, s.vec]]
+        .map(([lib, a, b, c]) => `<tr><td>${lib}</td><td><strong>${epciFmt(a)}</strong></td><td>${epciFmt(b)}</td><td>${epciFmt(c)}</td></tr>`).join('');
+    const lignes = EPCI_INDICATEURS.map(k => {
+        const val = Number(v['Indicateur_' + k]), dec = (k === 'Opp3' || k === 'Vec1' || k === 'Vec4') ? 0 : 2;
+        const a = p.agregats['Indicateur_' + k], b = s.agregats['Indicateur_' + k];
+        return `<tr><td>${k}</td><td><strong>${epciFmt(val, dec)}</strong></td><td>${epciFmt(a, dec)} ${fleche(val, a)}</td><td>${epciFmt(b, dec)} ${fleche(val, b)}</td><td>${pct(epciPoids(e, k, true)[nom])}</td><td>${pct(epciPoids(e, k, false)[nom])}</td></tr>`;
+    }).join('');
+    const poidsPop = epciPoids(e, 'Cho2', true)[nom];
+    return `<div class="epci-commune"><h4>Commune : ${epciEch(nom)}</h4>` +
+        `<div class="epci-petit">${epciFmt(e.communes[nom].pop.Cho2, 0)} habitants (2022), soit <strong>${pct(poidsPop)}</strong> de la population de ${epciEch(e.nom)} : en pro rata elle pèse ce poids dans chaque moyenne, contre ${pct(1 / e.nb_communes)} en moyenne simple (1 commune sur ${e.nb_communes}).</div>` +
+        `<table class="epci-table"><tr><th>Scores (0-10)</th><th>Commune</th><th>EPCI pro rata</th><th>EPCI simple</th></tr>${scores}</table>` +
+        `<table class="epci-table"><tr><th>Indicateurs</th><th>Commune</th><th>EPCI pro rata</th><th>EPCI simple</th><th>Poids pro rata</th><th>Poids simple</th></tr>${lignes}</table>` +
+        `<div class="epci-petit">▲ ▼ : la commune est au-dessus ou en dessous de la valeur de l'EPCI. Le poids pro rata est la part de la population de l'EPCI, au millésime de l'indicateur. Les valeurs de la commune sont celles de l'appli (curseurs compris).</div></div>`;
+}
+
 function epciFiche() {
     const el = document.getElementById('epci-fiche');
     if (!epciSelection) { el.innerHTML = '<span class="epci-petit">Cliquez sur un EPCI (carte ou tableau) pour voir ses indicateurs et ses communes.</span>'; return; }
@@ -124,8 +169,8 @@ function epciFiche() {
         const dec = (k === 'Opp3' || k === 'Vec1' || k === 'Vec4') ? 0 : 2;
         return `<tr><td>${k}</td><td>${epciFmt(a, dec)}</td><td>${epciFmt(b, dec)}</td><td class="epci-petit">pop. ${epciDonnees.millesimes[k]}${epciDonnees.millesime_approche[k] ? ' *' : ''}</td></tr>`;
     }).join('');
-    const communes = Object.entries(e.communes).sort((a, b) => b[1].pop.Cho2 - a[1].pop.Cho2).map(([nom, c]) => `${epciEch(nom)} (${epciFmt(c.pop.Cho2, 0)})`).join(', ');
-    el.innerHTML = `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (2023)</div>` +
+    const communes = Object.entries(e.communes).sort((a, b) => b[1].pop.Cho2 - a[1].pop.Cho2).map(([nom, c]) => `<a href="#" class="epci-lien-commune" data-commune="${epciEch(nom)}">${epciEch(nom)}</a> (${epciFmt(c.pop.Cho2, 0)})`).join(', ');
+    el.innerHTML = (epciCommune && e.communes[epciCommune] ? epciCommuneHtml(e, epciCommune) : '') + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (2023)</div>` +
         `<table class="epci-table"><tr><th>Scores (0-10)</th><th>Pro rata</th><th>Simple</th><th>Écart</th></tr>${scores}<tr><th>Indicateurs agrégés</th><th>Pro rata</th><th>Simple</th><th>Pondération</th></tr>${brut}</table>` +
         `<div class="epci-petit">* population la plus récente publiée (2023) : millésime de la source non daté ou plus récent que les populations disponibles.</div>` +
         `<div class="epci-petit"><strong>Communes</strong> (habitants 2022) : ${communes}</div>`;
@@ -135,6 +180,7 @@ function epciRedessiner() {
     if (!epciInitialise) return;
     epciResultats = { prorata: epciCalculer(true), simple: epciCalculer(false) };
     epciCouche.eachLayer(l => { l.setStyle(epciStyle(l._epciSiren)); l.setTooltipContent(epciInfobulle(l._epciSiren)); });
+    epciCoucheCommunes.eachLayer(l => { l.setStyle(epciStyleCommune(l._epciCommune)); l.setTooltipContent(epciInfobulleCommune(l._epciCommune)); });
     epciLegende();
     epciTableau();
     epciFiche();
@@ -143,11 +189,23 @@ function epciRedessiner() {
 
 function rafraichirEPCI() { epciRedessiner(); }       // appelé par script.js quand p_k ou les indicateurs changent
 
-function epciSelectionner(siren) {
-    epciSelection = siren;
-    epciCouche.eachLayer(l => { l.setStyle(epciStyle(l._epciSiren)); if (l._epciSiren === siren) l.bringToFront(); });
+function epciRestyler() {
+    epciCouche.eachLayer(l => { l.setStyle(epciStyle(l._epciSiren)); if (l._epciSiren === epciSelection) l.bringToFront(); });
+    epciCoucheCommunes.eachLayer(l => { l.setStyle(epciStyleCommune(l._epciCommune)); if (l._epciCommune === epciCommune) l.bringToFront(); });
     epciTableau();
     epciFiche();
+}
+
+function epciSelectionner(siren) {            // clic sur un EPCI (tableau)
+    epciSelection = siren;
+    epciCommune = null;
+    epciRestyler();
+}
+
+function epciSelectionnerCommune(nom) {        // clic sur une commune (carte ou liste) : son EPCI est sélectionné et son détail s'affiche
+    epciSelection = epciDe[nom];
+    epciCommune = nom;
+    epciRestyler();
 }
 
 async function initialiserOngletEPCI() {
@@ -174,7 +232,7 @@ async function initialiserOngletEPCI() {
     epciEnCours = false;
     epciCarte = L.map(document.getElementById('map-epci'), { center: [42.0, 9.0], zoom: 7.4, zoomSnap: 0.1, zoomDelta: 0.1, attributionControl: false });
     epciCarte.getContainer().style.backgroundColor = '#ffffff';
-    L.geoJSON(communeJson, { style: { fill: false, color: '#999', weight: 0.4 }, interactive: false }).addTo(epciCarte);        // communes en filigrane
+    for (const e of epciDonnees.epci) for (const nom of Object.keys(e.communes)) epciDe[nom] = e.siren;
     epciResultats = { prorata: epciCalculer(true), simple: epciCalculer(false) };
     epciCouche = L.geoJSON(epciContours, {
         style: f => epciStyle(f.properties.siren),
@@ -184,6 +242,16 @@ async function initialiserOngletEPCI() {
             layer.on('click', () => epciSelectionner(f.properties.siren));
         },
     }).addTo(epciCarte);
+    epciCoucheCommunes = L.geoJSON(communeJson, {          // communes au-dessus des EPCI : le clic ouvre le détail de la commune
+        style: f => epciStyleCommune(f.properties.nom),
+        onEachFeature: (f, layer) => {
+            const nom = f.properties.nom;
+            layer._epciCommune = nom;
+            layer.bindTooltip(epciInfobulleCommune(nom), { sticky: true });
+            layer.on('click', () => epciSelectionnerCommune(nom));
+        },
+    }).addTo(epciCarte);
+    document.getElementById('epci-fiche').addEventListener('click', e => { const a = e.target.closest('.epci-lien-commune'); if (a) { e.preventDefault(); epciSelectionnerCommune(a.dataset.commune); } });
     document.getElementById('epci-prorata').addEventListener('change', epciRedessiner);
     document.getElementById('epci-variable').addEventListener('change', function () { epciVariable = this.value; epciRedessiner(); });
     document.getElementById('epci-tableau').addEventListener('click', e => { const l = e.target.closest('.epci-ligne'); if (l) epciSelectionner(l.dataset.siren); });
@@ -204,5 +272,5 @@ if (typeof document !== 'undefined' && typeof document.addEventListener === 'fun
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { epciAgreger, epciClasse, EPCI_INDICATEURS };
+    module.exports = { epciAgreger, epciPoids, epciClasse, EPCI_INDICATEURS };
 }

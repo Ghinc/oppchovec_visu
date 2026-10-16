@@ -86,3 +86,30 @@ test('EPCI réels : scores finis dans l\'échelle des communes, deux méthodes d
   const w = Object.entries(e.communes).reduce((t, [c, v]) => t + v.pop.Opp2 * data[c].Opp2, 0) / Object.values(e.communes).reduce((t, v) => t + v.pop.Opp2, 0);
   assert.ok(proche(p[e.siren].agregats.Indicateur_Opp2, w), 'Opp2 pro rata = moyenne pondérée par la population 2021');
 });
+
+test('poids d\'une commune dans l\'agrégation : somme = 1 ; pro rata = part de la population du millésime ; simple = 1 / nombre de communes', () => {
+  const { epciPoids } = require(path.join(WEB, 'epci.js'));
+  for (const e of agreg.epci) {
+    for (const k of EPCI_INDICATEURS) {
+      const p = epciPoids(e, k, true), s = epciPoids(e, k, false);
+      assert.ok(proche(Object.values(p).reduce((t, x) => t + x, 0), 1) && proche(Object.values(s).reduce((t, x) => t + x, 0), 1), `${e.nom} ${k}`);
+      const total = Object.values(e.communes).reduce((t, c) => t + c.pop[k], 0);
+      for (const [nom, c] of Object.entries(e.communes)) {
+        assert.ok(proche(p[nom], c.pop[k] / total), `${e.nom} ${nom} ${k}`);
+        assert.ok(proche(s[nom], 1 / e.nb_communes));
+      }
+    }
+  }
+  // la valeur agrégée est bien la somme poids x valeur : cohérence avec epciAgreger
+  const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
+  const indic = Object.fromEntries(Object.keys(e.communes).map((c) => [c, Object.fromEntries(EPCI_INDICATEURS.map((k) => ['Indicateur_' + k, data[c][k]]))]));
+  for (const prorata of [true, false]) {
+    const agg = epciAgreger(indic, [e], prorata)[e.siren];
+    for (const k of EPCI_INDICATEURS) {
+      const w = epciPoids(e, k, prorata);
+      assert.ok(proche(agg['Indicateur_' + k], Object.keys(e.communes).reduce((t, c) => t + w[c] * data[c][k], 0), 1e-9), k);
+    }
+  }
+  // Ajaccio pèse plus de 80 % de son agglomération en pro rata
+  assert.ok(epciPoids(e, 'Cho2', true).Ajaccio > 0.8 && proche(epciPoids(e, 'Cho2', false).Ajaccio, 0.1));
+});
