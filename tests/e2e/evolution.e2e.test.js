@@ -73,6 +73,37 @@ test('Évolution : résumé repliable (bouton, clic extérieur, Échap) et loupe
   });
 });
 
+test('Évolution : détail du calcul au clic sur un score (dimensions puis indicateurs), conservé d\'une commune à l\'autre', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    await page.evaluate(() => evolutionFiche('Bastia'));
+    assert.equal(await page.locator('.evolution-detail').count(), 0, 'aucun détail au départ');
+    const texte = async () => (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');     // textContent : les en-têtes sont affichés en majuscules par le CSS
+    assert.ok((await texte()).includes('proxy'), 'Cho2 annoncé comme proxy du droit de vote');
+    // indice : trois dimensions avec poids et contributions
+    await page.click('.evolution-ligne-score[data-variable="OppChoVec"]');
+    let t = await texte();
+    for (const mot of ['Somme S', 'Indice brut', 'Contribution à ΔS', 'Opportunités (Opp)', 'Choix (Cho)', 'Vécu (Vec)', '▲']) assert.ok(t.includes(mot), mot);
+    const det = await page.evaluate(() => evolutionDetails(evolutionDonnees, 'Bastia'));
+    const cho = det.dimensions.find((x) => x.nom === 'Cho');
+    assert.ok(t.includes(cho.poids.toFixed(3).replace('.', ',')), 'poids p_k affiché');
+    // dimension Vec : ses trois indicateurs, normalisés, avec leur contribution
+    await page.click('.evolution-ligne-score[data-variable="Vec"]');
+    t = await texte();
+    for (const mot of ['Vec1 · médiane', 'Vec2 · logement', 'Vec3 · stabilité', 'Contribution (points)', 'Normalisé 2016']) assert.ok(t.includes(mot), mot);
+    assert.equal(await page.locator('.evolution-detail').count(), 2);
+    // le détail reste ouvert quand on change de commune ; un second clic le referme
+    await page.evaluate(() => evolutionFiche('Ajaccio'));
+    assert.equal(await page.locator('.evolution-detail').count(), 2);
+    assert.ok((await texte()).includes('Ajaccio'));
+    await page.click('.evolution-ligne-score[data-variable="Vec"]');
+    await page.click('.evolution-ligne-score[data-variable="OppChoVec"]');
+    assert.equal(await page.locator('.evolution-detail').count(), 0);
+    assert.deepEqual(nouvellesErreurs().filter((e) => !/404/.test(e)), []);
+  });
+});
+
 test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, changement de variable', { skip: sauter }, async () => {
   await avecAppli(async ({ page, nouvellesErreurs }) => {
     await page.click('.tab-button[data-tab="evolutiontab"]');

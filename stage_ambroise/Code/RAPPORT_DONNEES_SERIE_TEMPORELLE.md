@@ -35,7 +35,7 @@ Corrélations de Pearson et de rang sur les 360 communes ; écart moyen absolu a
 | Opp1 éducation | INSEE diplômes IRIS **2020**, 7 niveaux, 18 ans et plus | diplômes commune 2016 et 2021, **4 niveaux** (le détail à 7 niveaux n'existe pas en 2016), 18 ans et plus | 3,40 (sur 7) / 2,41 (sur 4) / 2,30 | 0,041 | 0,91 | 0,91 |
 | Opp2 diversité sociale | INSEE statistiques locales, CSP 2021, effectifs entiers | base-cc CSP, effectifs non arrondis | 0,338 / 0,364 / 0,388 | 0,038 | 0,92 | 0,95 |
 | Opp3 mobilité | voiture 2021 (INSEE) + accès transports en commun (0/100) + 100 pour 3 villes | base-cc logement et emploi | 135,7 / 136,3 / 136,3 | 0,003 | 0,99 | 0,99 |
-| **Cho2 droit de vote** | Français 18 ans et plus, **2022** (TD_NAT1 + TD_POP1B, règle 15-24 ans × 0,7) | **même méthode**, tables 2016 et 2021 | 95,7 / 95,8 / 96,0 | 0,051 | 0,89 | 0,91 |
+| **Cho2 droit de vote (proxy)** | Français 18 ans et plus (approximation des personnes qui ont le droit de vote), **2022** (TD_NAT1 + TD_POP1B, règle 15-24 ans × 0,7) | **même méthode**, tables 2016 et 2021 | 95,7 / 95,8 / 96,0 | 0,051 | 0,89 | 0,91 |
 | **Vec1 revenu** | médiane du niveau de vie Filosofi 2021, **valeur départementale pour 154 communes** | **identique** pour 2021 ; Filosofi 2016 construit de la même façon | 21 942 € / 21 942 € / 19 176 € | 0,000 | 1,000 | 1,000 |
 | Vec2 logement | RP **2022** microdonnées (parquet), personnes par pièce moyennées par logement | base-cc logement, rapport des sommes | 0,791 / 0,793 / 0,788 | 0,026 | 0,96 | 0,94 |
 | Vec3 emploi | RP 2021 (statistiques locales), effectifs entiers | base-cc emploi et population active | 0,858 / 0,858 / 0,834 | 0,003 | 0,999 | 0,998 |

@@ -171,7 +171,7 @@ recensement de l'INSEE (millésimes 2016 et 2021, qui ne se recouvrent pas : enq
 | Opp1 | niveau de diplôme moyen des 18 ans et plus non scolarisés, sur **4** niveaux (aucun diplôme ou brevet, CAP-BEP, bac, supérieur) : le millésime 2016 n'a pas le détail à 7 niveaux ; 15-17 ans non scolarisés retirés du niveau 1 | 0,91 (échelle différente) |
 | Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
 | Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia et Porto-Vecchio | 0,99 |
-| Cho2 | % de Français parmi les **18 ans et plus**, par la méthode de `proportion_etrangers_18plus_final.py` (population de 18-24 ans en POP1B, Français 15-24 ans × 0,7 en NAT1, étrangers 25 ans et plus en NAT1) : appliquée aux deux dates, elle retrouve le fichier actuel (calculé en 2022) à 0,01 point près pour 357 communes sur 360 | 0,89 (millésimes 2021 et 2022) |
+| Cho2 | % de Français parmi les **18 ans et plus**, utilisé comme **proxy du droit de vote** (il ne tient compte ni de l'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales), par la méthode de `proportion_etrangers_18plus_final.py` (population de 18-24 ans en POP1B, Français 15-24 ans × 0,7 en NAT1, étrangers 25 ans et plus en NAT1) : appliquée aux deux dates, elle retrouve le fichier actuel (calculé en 2022) à 0,01 point près pour 357 communes sur 360 | 0,89 (millésimes 2021 et 2022) |
 | Vec1 | **médiane du niveau de vie** (Filosofi, INSEE), comme l'actuel ; quand elle n'est pas diffusée, médiane du département de la même année (154 communes aux deux dates, 148 les mêmes) | 1,00 (identique pour les 360 communes en 2021) |
 | Vec2 | (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons)/3, chauffage = 1 comme dans les données actuelles | 0,96 |
 | Vec3 | stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par les effectifs | 0,999 |
@@ -208,7 +208,7 @@ les tables NAT1 et POP1B et la médiane du niveau de vie de l'année. 2016 : `ba
 - **Opp3** : 0 à 300 (mobilité : % de ménages avec voiture, +100 si transports en commun, +100 si réseau de bus urbain)
 - **Opp4** : 0 à 100 (connectivité : moyenne de la 4G, du haut débit et de la fibre, en %)
 - **Cho1** : -10 à 0 (-log du nombre de personnes en quartier prioritaire ; 0 si aucune)
-- **Cho2** : 0 à 100 (droit de vote, en %)
+- **Cho2** : 0 à 100 (proxy du droit de vote : part de Français parmi les 18 ans et plus, en %)
 - **Vec1** : 15000 à 30000 (revenu médian, en €)
 - **Vec2** : 0 à 1 (qualité du logement)
 - **Vec3** : 0 à 1 (stabilité de l'emploi : moyenne pondérée des parts d'actifs par type de contrat)

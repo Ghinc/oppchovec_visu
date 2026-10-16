@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const { lireJson, WEB } = require('./helpers/outils');
-const { evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE } = require(path.join(WEB, 'evolution.js'));
+const { evolutionCalcul, evolutionDetails, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE } = require(path.join(WEB, 'evolution.js'));
 
 const d = lireJson('serie_temporelle.json');
 const noms = Object.keys(d.communes);
@@ -79,4 +79,26 @@ test('seuils de Jenks : 4 seuils croissants par variable', () => {
     assert.equal(s.length, 4);
     for (let i = 1; i < 4; i++) assert.ok(s[i] > s[i - 1], v);
   }
+});
+
+test('détail du calcul : retrouve exactement les scores du fichier, et les contributions s\'additionnent à l\'évolution', () => {
+  for (const c of noms) {
+    const det = evolutionDetails(d, c);
+    const s16 = d.communes[c]['2016'].scores_0_10, s21 = d.communes[c]['2021'].scores_0_10;
+    assert.ok(Math.abs(det.indice.score0 - s16.OppChoVec) < 1e-9, `${c} indice 2016`);
+    assert.ok(Math.abs(det.indice.score1 - s21.OppChoVec) < 1e-9, `${c} indice 2021`);
+    let sommeContrib = 0;
+    for (const dim of det.dimensions) {
+      assert.ok(Math.abs(dim.score0 - s16[dim.nom]) < 1e-9, `${c} ${dim.nom} 2016`);
+      assert.ok(Math.abs(dim.score1 - s21[dim.nom]) < 1e-9, `${c} ${dim.nom} 2021`);
+      // dimension : somme des contributions des indicateurs = variation du score de la dimension (points sur 10)
+      const somme = dim.indicateurs.reduce((t, i) => t + i.contributionPoints, 0);
+      assert.ok(Math.abs(somme - (dim.score1 - dim.score0)) < 1e-9, `${c} ${dim.nom} contributions`);
+      sommeContrib += dim.contributionSomme;
+    }
+    // indice : somme des contributions des dimensions = variation de S
+    assert.ok(Math.abs(sommeContrib - (det.indice.somme1 - det.indice.somme0)) < 1e-12, `${c} variation de S`);
+  }
+  const x = evolutionCalcul(d, noms[0], 2016);
+  for (const k of d.indicateurs) assert.ok(x.norm[k] >= -1e-12 && x.norm[k] <= 1 + 1e-12, k);
 });

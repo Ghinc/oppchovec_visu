@@ -2384,3 +2384,19 @@ body.mode-evolution aside { display: none; }
 .evolution-table th { color: #fff; border-bottom: 1px solid #ccc; padding-top: 6px; }
 .evolution-table tr:first-child th { padding-top: 1px; }
 .evolution-table td:nth-child(n+2), .evolution-table th:nth-child(n+2) { text-align: right; min-width: 54px; }
+
+/* Détail du calcul d'un score dans la fiche commune (onglet Évolution) */
+.evolution-ligne-score { cursor: pointer; }
+.evolution-ligne-score:hover td, .evolution-ligne-score:focus td { background: #e8f1fb; }
+.evolution-ligne-score:focus { outline: none; }
+.evolution-detail > td { padding: 4px 0 8px 14px; background: #f7f9fc; border-left: 3px solid #4a90d9; }
+.evolution-table-detail { width: 100%; margin: 4px 0; font-size: 11px; }
+.evolution-table-detail th { font-size: 10.5px; padding-top: 2px; }
+.evolution-table-detail td:first-child { text-align: left; }
+.evolution-table-detail td, .evolution-table-detail th { padding: 1px 6px; }
+.evolution-total td { border-top: 1px solid #ccc; }
+.evolution-hausse { color: #2166ac; }
+.evolution-baisse { color: #b2182b; }
+.evolution-egal { color: #777; }
+
+.evolution-bas.avec-detail { max-height: 62%; }
