@@ -101,13 +101,14 @@ class FichiersEtIdentifiantsReferences(unittest.TestCase):
             for ref in re.findall(r'<(?:script|link)[^>]*(?:src|href)="([^"]+)"', texte):
                 if ref.startswith(("http://", "https://", "//")):
                     continue
+                chemin = ref.split("?")[0]          # « ?v=… » : version ajoutée aux liens pour éviter les anciens fichiers en cache
                 with self.subTest(index=index.name, ref=ref):
-                    self.assertTrue((index.parent / ref).exists(), f"{ref} introuvable depuis {index.parent}")
+                    self.assertTrue((index.parent / chemin).exists(), f"{ref} introuvable depuis {index.parent}")
 
     def test_index_html_charge_tous_les_fichiers_de_donnees_js(self):
         texte = INDEX.read_text(encoding="utf-8")
         for f in ("cah_data.js", "lisa_data.js", "lisa_data_1pct.js", "lisa_data_betti.js", "lisa_data_betti_1pct.js", "script.js"):
-            self.assertRegex(texte, rf'src="[^"]*{f}"')
+            self.assertRegex(texte, rf'src="[^"]*{f}(\?v=[\w.-]+)?"')
         # script.js doit venir après les fichiers de données qu'il lit au chargement
         self.assertLess(texte.index("lisa_data_betti_1pct.js"), texte.index("script.js"))
         self.assertLess(texte.index("cah_data.js"), texte.index("script.js"))
