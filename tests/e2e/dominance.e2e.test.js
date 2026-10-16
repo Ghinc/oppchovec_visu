@@ -21,6 +21,11 @@ test('Dominance : texte explicatif intact, carte colorée par couche, légende e
     // texte explicatif : paragraphes identiques au libellé demandé
     const paragraphes = await page.$$eval('#dominancetab .dominance-intro p', (p) => p.map((x) => x.textContent.trim()));
     assert.deepEqual(paragraphes, TEXTE);
+    // ce texte est dans une infobulle : caché au repos, visible au survol de « Comment lire cette carte »
+    assert.ok(!(await page.locator('#dominancetab .dominance-intro').isVisible()), 'texte caché au repos');
+    await page.hover('#dominancetab .dominance-info');
+    assert.ok(await page.locator('#dominancetab .dominance-intro').isVisible(), 'texte visible au survol');
+    await page.mouse.move(5, 500);
 
     // légende : « couches », jamais « rang » ou « classement »
     const legende = await page.$$eval('#dominance-legend .dominance-legend-row', (r) => r.map((x) => x.textContent.trim()));
