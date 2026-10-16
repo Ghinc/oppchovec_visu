@@ -103,6 +103,12 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
 - **vec1_revenu_fiscal.json** et **vec1_variante.js** : variante de Vec1 (revenu fiscal moyen par foyer, DGFiP IRCOM 2021) à la place de la médiane du
   niveau de vie, et case à cocher qui bascule l'appli ; voir `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Vec1 ». Produit par
   `calculer_revenu_fiscal_vec1.py "<chemin>/ircom_communes_complet_revenus_2021.xlsx"` (non nécessaire à l'indice actuel).
+- **epci_agregation.json**, **epci_corse.geojson** et **epci.js** : onglet « EPCI » (indice OppChoVec agrégé par intercommunalité, 19 EPCI de Corse). `epci_agregation.json` donne, pour chaque EPCI, ses
+  communes (noms de l'appli) et la population de chaque commune **au millésime de chaque indicateur** (Opp1 2020 ; Opp2, Opp3, Vec1, Vec3 2021 ; Cho2, Vec2 2022 ; Opp4, Cho1, Vec4 2023 = dernière population publiée) ;
+  `epci_corse.geojson` contient les contours. Produits par `Code/Python/construire_epci_agregation.py` (qui lit `Données/epci_corse_2026.json`, produit par `construire_epci_corse.py`, et les séries historiques de population de l'INSEE).
+  Deux méthodes d'agrégation d'un indicateur, au choix par une case à cocher : **pro rata du nombre d'habitants** (moyenne pondérée) ou **moyenne simple**. Les indicateurs agrégés passent ensuite par la chaîne de calcul de l'appli
+  (mêmes bornes figées, mêmes p_k, même échelle 0-10, mêmes classes de Jenks que les communes : un EPCI est comparable à une commune ; un « EPCI » d'une seule commune retrouve exactement ses scores, vérifié par un test).
+  Limite : la moyenne de valeurs communales n'est exacte que pour les indicateurs additifs ; Opp2 (Theil), Vec1 (médiane), Opp3 et Cho1 (−log du nombre de personnes en quartier prioritaire) sont approchés.
 - **serie_temporelle.json** et **evolution.js** : indice OppChoVec comparable pour 2016 et 2021 (7 indicateurs sur 10 ; Vec1 = médiane du niveau de vie, Cho2 sur les 18 ans et plus) et onglet « Évolution » (deux cartes + carte d'évolution) ; voir
   `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Série temporelle ». Produit par `construire_serie_temporelle.py "<dossier>"` (sources INSEE et DGFiP décrites dans cette section).
 - **densite_entrepreneuriale.json**, **bien_etre_subjectif.json** : données de l'onglet Corrélation (le second ne couvre que

@@ -116,6 +116,7 @@
           <button class="tab-button" data-tab="correlationtab">Corrélation</button>
           <button class="tab-button" data-tab="parangonstab">Parangons</button>
           <button class="tab-button" data-tab="evolutiontab">Évolution</button>
+          <button class="tab-button" data-tab="epcitab">EPCI</button>
           <button class="tab-button" data-tab="chatbottab">DumèGPT</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
@@ -367,6 +368,41 @@
           </div>
         </div>
 
+        <!-- Onglet EPCI : indice OppChoVec agrégé par intercommunalité -->
+        <div class="tab-content" id="epcitab">
+          <div class="epci-entete">
+            <strong class="epci-titre">Indice par intercommunalité (EPCI)</strong>
+            <span class="epci-info" tabindex="0" role="button" aria-label="Comment sont agrégés les EPCI">ⓘ
+              <span class="epci-info-texte" role="tooltip">
+                Chaque indicateur est agrégé par EPCI, puis passe par la même chaîne de calcul que les communes (mêmes bornes, mêmes pondérations p<sub>k</sub>, même échelle 0-10, mêmes classes de Jenks) : un EPCI est directement comparable à une commune.
+                <strong>Pro rata du nombre d'habitants</strong> : moyenne des communes pondérée par leur population <em>au millésime de chaque indicateur</em> (2020 pour Opp1, 2021 pour Opp2, Opp3, Vec1 et Vec3, 2022 pour Cho2 et Vec2, 2023 pour Opp4, Cho1 et Vec4).
+                <strong>Moyenne simple</strong> : chaque commune compte pour 1, quelle que soit sa taille.
+                Précaution : une moyenne de valeurs communales n'est exacte que pour les indicateurs additifs ; pour Opp2 (indice de Theil), Vec1 (médiane du niveau de vie), Opp3 (somme de composantes et d'indicatrices) et Cho1 (logarithme du nombre de personnes en quartier prioritaire) c'est une approximation ; l'écart entre les deux méthodes est surtout visible sur Cho1 dans les agglomérations.
+              </span>
+            </span>
+            <label class="epci-choix"><input type="checkbox" id="epci-prorata" checked> Pro rata du nombre d'habitants <span class="epci-petit">(décoché : moyenne simple)</span></label>
+            <label class="epci-choix">Variable :
+              <select id="epci-variable">
+                <option value="oppchovec">Indice OppChoVec</option>
+                <option value="opp">Opportunités (Opp)</option>
+                <option value="cho">Choix (Cho)</option>
+                <option value="vec">Vécu (Vec)</option>
+              </select>
+            </label>
+            <span class="epci-petit">Méthode : <strong id="epci-methode">pro rata du nombre d'habitants</strong></span>
+          </div>
+          <div class="epci-layout">
+            <div class="epci-carte-col">
+              <div id="map-epci" class="map"></div>
+              <div id="epci-legende" class="epci-legende"></div>
+            </div>
+            <div class="epci-panneau">
+              <div id="epci-tableau" class="epci-tableau"></div>
+              <div id="epci-fiche" class="epci-fiche"><span class="epci-petit">Chargement…</span></div>
+            </div>
+          </div>
+        </div>
+
         <!-- Onglet DumèGPT -->
         <div class="tab-content" id="chatbottab">
           <div class="chatbot-container">
@@ -417,6 +453,7 @@
   <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261016a"></script>
   <script src="stage_ambroise/Code/WEB/vec1_variante.js?v=20261016a"></script>
   <script src="stage_ambroise/Code/WEB/evolution.js?v=20261016a"></script>
+  <script src="stage_ambroise/Code/WEB/epci.js?v=20261016b"></script>
   <script src="stage_ambroise/Code/WEB/script.js?v=20261016a"></script>
 </body>
 </html>

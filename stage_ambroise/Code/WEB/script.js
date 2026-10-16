@@ -3022,6 +3022,7 @@ function recalculerCarteOppChoVec() {
 
     majAffichagePk(pkValues);
     if (typeof rafraichirComparaisonVec1 === 'function') rafraichirComparaisonVec1();   // comparaison des deux sources de Vec1 (suit le mode p_k)
+    if (typeof rafraichirEPCI === 'function') rafraichirEPCI();   // onglet EPCI (suit le mode p_k et les indicateurs courants)
 
     // Mettre à jour le tableau top 10 et l'histogramme
     genererDataVisualisations(indiceNorm);
