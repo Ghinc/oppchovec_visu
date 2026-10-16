@@ -141,20 +141,21 @@ function evolutionFiche(nom) {
     }
     const [a0, a1] = d.annees;
     const c = d.communes[nom];
+    const signe = (x, dec) => (Number(x.toFixed(dec)) > 0 ? '+' : '') + evolutionFmt(x, dec);    // « + » seulement si l'écart arrondi est positif
     const lignes = Object.keys(EVOLUTION_NOMS_INDICATEURS).map(k => {
         const x0 = c[String(a0)].indicateurs[k], x1 = c[String(a1)].indicateurs[k];
         const dec = k === 'Opp3' || k === 'Vec1' ? 0 : 2;
-        return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td></tr>`;
+        return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${signe(x1 - x0, dec)}</strong></td></tr>`;
     }).join('');
     const scores = Object.keys(EVOLUTION_VARIABLES).map(v => {
         const v0 = evolutionValeur(d, nom, a0, v), v1 = evolutionValeur(d, nom, a1, v);
-        return `<tr><td>${EVOLUTION_VARIABLES[v]}</td><td>${evolutionFmt(v0)}</td><td>${evolutionFmt(v1)}</td><td><strong>${v1 - v0 >= 0 ? '+' : ''}${evolutionFmt(v1 - v0)}</strong></td></tr>`;
+        return `<tr><td>${EVOLUTION_VARIABLES[v]}</td><td>${evolutionFmt(v0)}</td><td>${evolutionFmt(v1)}</td><td><strong>${signe(v1 - v0, 2)}</strong></td></tr>`;
     }).join('');
     const estime = [a0, a1].filter(a => c[String(a)].vec1_departementale);
     document.getElementById('evolution-fiche').innerHTML =
         `<h4>${evolutionEchapper(nom)}</h4>` +
-        `<table class="evolution-table"><tr><th></th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}</table>` +
-        `<table class="evolution-table"><tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th></tr>${lignes}</table>` +
+        `<table class="evolution-table"><tr><th>Scores (0-10)</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}` +
+        `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
         (estime.length ? `<div class="evolution-petit">Médiane du niveau de vie non diffusée par l'INSEE pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
 
