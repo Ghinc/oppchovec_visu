@@ -1,0 +1,2739 @@
+{
+ "source": "DGCL, composition communale des EPCI à fiscalité propre au 1er janvier 2026 (populations de référence 2023 de l'INSEE, en vigueur au 1er janvier 2026) ; appartenance et populations recoupées avec les fichiers de l'INSEE",
+ "date_geographie": "2026-01-01",
+ "nb_epci": 19,
+ "nb_communes": 360,
+ "epci": [
+  {
+   "siren": "242010056",
+   "nom": "CA du Pays Ajaccien",
+   "nature": "CA",
+   "fiscalite": "FPU",
+   "nb_communes": 10,
+   "population_municipale": 93835,
+   "population_totale": 94947,
+   "communes": [
+    "2A001",
+    "2A004",
+    "2A006",
+    "2A017",
+    "2A103",
+    "2A209",
+    "2A271",
+    "2A323",
+    "2A336",
+    "2A351"
+   ]
+  },
+  {
+   "siren": "242000354",
+   "nom": "CA de Bastia",
+   "nature": "CA",
+   "fiscalite": "FPU",
+   "nb_communes": 5,
+   "population_municipale": 61696,
+   "population_totale": 62490,
+   "communes": [
+    "2B033",
+    "2B120",
+    "2B305",
+    "2B309",
+    "2B353"
+   ]
+  },
+  {
+   "siren": "200036499",
+   "nom": "CC de Marana-Golo",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 10,
+   "population_municipale": 26299,
+   "population_totale": 26740,
+   "communes": [
+    "2B036",
+    "2B037",
+    "2B042",
+    "2B055",
+    "2B140",
+    "2B148",
+    "2B166",
+    "2B192",
+    "2B274",
+    "2B350"
+   ]
+  },
+  {
+   "siren": "200040764",
+   "nom": "CC du Sud Corse",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 7,
+   "population_municipale": 21630,
+   "population_totale": 22000,
+   "communes": [
+    "2A041",
+    "2A114",
+    "2A139",
+    "2A163",
+    "2A215",
+    "2A247",
+    "2A288"
+   ]
+  },
+  {
+   "siren": "200038958",
+   "nom": "CC de la Pieve de l'Ornano et du Taravo",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 28,
+   "population_municipale": 13963,
+   "population_totale": 14136,
+   "communes": [
+    "2A008",
+    "2A026",
+    "2A056",
+    "2A064",
+    "2A085",
+    "2A089",
+    "2A091",
+    "2A094",
+    "2A098",
+    "2A099",
+    "2A117",
+    "2A119",
+    "2A130",
+    "2A132",
+    "2A133",
+    "2A186",
+    "2A200",
+    "2A228",
+    "2A232",
+    "2A253",
+    "2A268",
+    "2A276",
+    "2A312",
+    "2A322",
+    "2A331",
+    "2A358",
+    "2A359",
+    "2A360"
+   ]
+  },
+  {
+   "siren": "200033827",
+   "nom": "CC de Fium'Orbu Castellu",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 13,
+   "population_municipale": 13605,
+   "population_totale": 13801,
+   "communes": [
+    "2B123",
+    "2B124",
+    "2B135",
+    "2B149",
+    "2B229",
+    "2B236",
+    "2B251",
+    "2B277",
+    "2B283",
+    "2B342",
+    "2B347",
+    "2B365",
+    "2B366"
+   ]
+  },
+  {
+   "siren": "200073252",
+   "nom": "CC de la Castagniccia-Casinca",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 42,
+   "population_municipale": 13514,
+   "population_totale": 13644,
+   "communes": [
+    "2B052",
+    "2B054",
+    "2B063",
+    "2B067",
+    "2B069",
+    "2B072",
+    "2B077",
+    "2B101",
+    "2B102",
+    "2B113",
+    "2B125",
+    "2B145",
+    "2B164",
+    "2B176",
+    "2B195",
+    "2B202",
+    "2B206",
+    "2B207",
+    "2B214",
+    "2B217",
+    "2B219",
+    "2B221",
+    "2B222",
+    "2B241",
+    "2B243",
+    "2B245",
+    "2B246",
+    "2B250",
+    "2B252",
+    "2B255",
+    "2B256",
+    "2B273",
+    "2B280",
+    "2B286",
+    "2B291",
+    "2B297",
+    "2B299",
+    "2B338",
+    "2B343",
+    "2B344",
+    "2B346",
+    "2B355"
+   ]
+  },
+  {
+   "siren": "242020105",
+   "nom": "CC de Calvi Balagne",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 14,
+   "population_municipale": 12847,
+   "population_totale": 13027,
+   "communes": [
+    "2B010",
+    "2B020",
+    "2B025",
+    "2B049",
+    "2B050",
+    "2B084",
+    "2B121",
+    "2B138",
+    "2B150",
+    "2B153",
+    "2B165",
+    "2B167",
+    "2B296",
+    "2B361"
+   ]
+  },
+  {
+   "siren": "242010130",
+   "nom": "CC du Sartenais Valinco Taravo",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 18,
+   "population_municipale": 12573,
+   "population_totale": 12759,
+   "communes": [
+    "2A018",
+    "2A021",
+    "2A035",
+    "2A038",
+    "2A071",
+    "2A115",
+    "2A118",
+    "2A127",
+    "2A128",
+    "2A129",
+    "2A160",
+    "2A189",
+    "2A211",
+    "2A249",
+    "2A272",
+    "2A284",
+    "2A310",
+    "2A349"
+   ]
+  },
+  {
+   "siren": "200073104",
+   "nom": "CC de l'Ile-Rousse - Balagne",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 22,
+   "population_municipale": 11149,
+   "population_totale": 11362,
+   "communes": [
+    "2B034",
+    "2B093",
+    "2B097",
+    "2B112",
+    "2B134",
+    "2B136",
+    "2B156",
+    "2B168",
+    "2B173",
+    "2B175",
+    "2B180",
+    "2B182",
+    "2B190",
+    "2B199",
+    "2B223",
+    "2B231",
+    "2B235",
+    "2B290",
+    "2B316",
+    "2B332",
+    "2B339",
+    "2B352"
+   ]
+  },
+  {
+   "siren": "200034205",
+   "nom": "CC de la Costa Verde",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 23,
+   "population_municipale": 11048,
+   "population_totale": 11165,
+   "communes": [
+    "2B087",
+    "2B111",
+    "2B179",
+    "2B194",
+    "2B208",
+    "2B210",
+    "2B216",
+    "2B227",
+    "2B234",
+    "2B242",
+    "2B293",
+    "2B302",
+    "2B303",
+    "2B307",
+    "2B311",
+    "2B313",
+    "2B317",
+    "2B318",
+    "2B319",
+    "2B321",
+    "2B334",
+    "2B335",
+    "2B340"
+   ]
+  },
+  {
+   "siren": "242020071",
+   "nom": "CC du Centre Corse",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 10,
+   "population_municipale": 10093,
+   "population_totale": 10224,
+   "communes": [
+    "2B074",
+    "2B096",
+    "2B171",
+    "2B177",
+    "2B238",
+    "2B260",
+    "2B263",
+    "2B315",
+    "2B341",
+    "2B354"
+   ]
+  },
+  {
+   "siren": "242000503",
+   "nom": "CC Celavu-Prunelli",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 10,
+   "population_municipale": 9494,
+   "population_totale": 9659,
+   "communes": [
+    "2A031",
+    "2A032",
+    "2A040",
+    "2A062",
+    "2A104",
+    "2A181",
+    "2A324",
+    "2A326",
+    "2A330",
+    "2A345"
+   ]
+  },
+  {
+   "siren": "242000495",
+   "nom": "CC de l'Alta Rocca",
+   "nature": "CC",
+   "fiscalite": "FPU",
+   "nb_communes": 18,
+   "population_municipale": 8983,
+   "population_totale": 9113,
+   "communes": [
+    "2A011",
+    "2A024",
+    "2A061",
+    "2A066",
+    "2A092",
+    "2A142",
+    "2A146",
+    "2A158",
+    "2A191",
+    "2A254",
+    "2A269",
+    "2A278",
+    "2A285",
+    "2A300",
+    "2A308",
+    "2A357",
+    "2A362",
+    "2A363"
+   ]
+  },
+  {
+   "siren": "200067049",
+   "nom": "CC Spelunca-Liamone",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 33,
+   "population_municipale": 7828,
+   "population_totale": 7934,
+   "communes": [
+    "2A014",
+    "2A019",
+    "2A022",
+    "2A027",
+    "2A028",
+    "2A048",
+    "2A060",
+    "2A065",
+    "2A070",
+    "2A090",
+    "2A100",
+    "2A108",
+    "2A131",
+    "2A141",
+    "2A144",
+    "2A154",
+    "2A174",
+    "2A196",
+    "2A197",
+    "2A198",
+    "2A203",
+    "2A204",
+    "2A212",
+    "2A240",
+    "2A258",
+    "2A259",
+    "2A262",
+    "2A266",
+    "2A270",
+    "2A279",
+    "2A282",
+    "2A295",
+    "2A348"
+   ]
+  },
+  {
+   "siren": "200073120",
+   "nom": "CC Nebbiu - Conca d'Oro",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 15,
+   "population_municipale": 7827,
+   "population_totale": 7939,
+   "communes": [
+    "2B029",
+    "2B109",
+    "2B172",
+    "2B185",
+    "2B188",
+    "2B205",
+    "2B230",
+    "2B239",
+    "2B257",
+    "2B265",
+    "2B287",
+    "2B298",
+    "2B301",
+    "2B314",
+    "2B333"
+   ]
+  },
+  {
+   "siren": "200042943",
+   "nom": "CC du Cap Corse",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 18,
+   "population_municipale": 6639,
+   "population_totale": 6738,
+   "communes": [
+    "2B030",
+    "2B043",
+    "2B046",
+    "2B058",
+    "2B086",
+    "2B107",
+    "2B152",
+    "2B159",
+    "2B170",
+    "2B178",
+    "2B183",
+    "2B184",
+    "2B187",
+    "2B224",
+    "2B233",
+    "2B261",
+    "2B281",
+    "2B327"
+   ]
+  },
+  {
+   "siren": "200015162",
+   "nom": "CC de l'Oriente",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 22,
+   "population_municipale": 6286,
+   "population_totale": 6346,
+   "communes": [
+    "2B002",
+    "2B009",
+    "2B012",
+    "2B015",
+    "2B016",
+    "2B053",
+    "2B057",
+    "2B075",
+    "2B088",
+    "2B126",
+    "2B143",
+    "2B155",
+    "2B161",
+    "2B201",
+    "2B213",
+    "2B218",
+    "2B225",
+    "2B226",
+    "2B320",
+    "2B328",
+    "2B356",
+    "2B364"
+   ]
+  },
+  {
+   "siren": "200073138",
+   "nom": "CC Pasquale Paoli",
+   "nature": "CC",
+   "fiscalite": "FA",
+   "nb_communes": 42,
+   "population_municipale": 6177,
+   "population_totale": 6246,
+   "communes": [
+    "2B003",
+    "2B005",
+    "2B007",
+    "2B013",
+    "2B023",
+    "2B039",
+    "2B045",
+    "2B047",
+    "2B051",
+    "2B059",
+    "2B068",
+    "2B073",
+    "2B078",
+    "2B079",
+    "2B080",
+    "2B081",
+    "2B082",
+    "2B083",
+    "2B095",
+    "2B105",
+    "2B106",
+    "2B110",
+    "2B116",
+    "2B122",
+    "2B137",
+    "2B147",
+    "2B157",
+    "2B162",
+    "2B169",
+    "2B193",
+    "2B220",
+    "2B244",
+    "2B248",
+    "2B264",
+    "2B267",
+    "2B275",
+    "2B289",
+    "2B292",
+    "2B304",
+    "2B306",
+    "2B329",
+    "2B337"
+   ]
+  }
+ ],
+ "communes": {
+  "2A001": {
+   "nom": "Afa",
+   "epci": "242010056",
+   "population_municipale": 3350,
+   "population_totale": 3406
+  },
+  "2A004": {
+   "nom": "Ajaccio",
+   "epci": "242010056",
+   "population_municipale": 76320,
+   "population_totale": 77132
+  },
+  "2A006": {
+   "nom": "Alata",
+   "epci": "242010056",
+   "population_municipale": 3681,
+   "population_totale": 3752
+  },
+  "2A008": {
+   "nom": "Albitreccia",
+   "epci": "200038958",
+   "population_municipale": 1833,
+   "population_totale": 1866
+  },
+  "2A011": {
+   "nom": "Altagène",
+   "epci": "242000495",
+   "population_municipale": 52,
+   "population_totale": 52
+  },
+  "2A014": {
+   "nom": "Ambiegna",
+   "epci": "200067049",
+   "population_municipale": 79,
+   "population_totale": 79
+  },
+  "2A017": {
+   "nom": "Appietto",
+   "epci": "242010056",
+   "population_municipale": 1749,
+   "population_totale": 1786
+  },
+  "2A018": {
+   "nom": "Arbellara",
+   "epci": "242010130",
+   "population_municipale": 165,
+   "population_totale": 171
+  },
+  "2A019": {
+   "nom": "Arbori",
+   "epci": "200067049",
+   "population_municipale": 53,
+   "population_totale": 53
+  },
+  "2A021": {
+   "nom": "Argiusta-Moriccio",
+   "epci": "242010130",
+   "population_municipale": 75,
+   "population_totale": 76
+  },
+  "2A022": {
+   "nom": "Arro",
+   "epci": "200067049",
+   "population_municipale": 80,
+   "population_totale": 80
+  },
+  "2A024": {
+   "nom": "Aullène",
+   "epci": "242000495",
+   "population_municipale": 184,
+   "population_totale": 186
+  },
+  "2A026": {
+   "nom": "Azilone-Ampaza",
+   "epci": "200038958",
+   "population_municipale": 208,
+   "population_totale": 212
+  },
+  "2A027": {
+   "nom": "Azzana",
+   "epci": "200067049",
+   "population_municipale": 49,
+   "population_totale": 49
+  },
+  "2A028": {
+   "nom": "Balogna",
+   "epci": "200067049",
+   "population_municipale": 135,
+   "population_totale": 138
+  },
+  "2A031": {
+   "nom": "Bastelica",
+   "epci": "242000503",
+   "population_municipale": 522,
+   "population_totale": 528
+  },
+  "2A032": {
+   "nom": "Bastelicaccia",
+   "epci": "242000503",
+   "population_municipale": 4411,
+   "population_totale": 4489
+  },
+  "2A035": {
+   "nom": "Belvédère-Campomoro",
+   "epci": "242010130",
+   "population_municipale": 213,
+   "population_totale": 215
+  },
+  "2A038": {
+   "nom": "Bilia",
+   "epci": "242010130",
+   "population_municipale": 54,
+   "population_totale": 55
+  },
+  "2A040": {
+   "nom": "Bocognano",
+   "epci": "242000503",
+   "population_municipale": 419,
+   "population_totale": 422
+  },
+  "2A041": {
+   "nom": "Bonifacio",
+   "epci": "200040764",
+   "population_municipale": 3344,
+   "population_totale": 3404
+  },
+  "2A048": {
+   "nom": "Calcatoggio",
+   "epci": "200067049",
+   "population_municipale": 516,
+   "population_totale": 524
+  },
+  "2A056": {
+   "nom": "Campo",
+   "epci": "200038958",
+   "population_municipale": 102,
+   "population_totale": 104
+  },
+  "2A060": {
+   "nom": "Cannelle",
+   "epci": "200067049",
+   "population_municipale": 70,
+   "population_totale": 70
+  },
+  "2A061": {
+   "nom": "Carbini",
+   "epci": "242000495",
+   "population_municipale": 117,
+   "population_totale": 121
+  },
+  "2A062": {
+   "nom": "Carbuccia",
+   "epci": "242000503",
+   "population_municipale": 379,
+   "population_totale": 385
+  },
+  "2A064": {
+   "nom": "Cardo-Torgia",
+   "epci": "200038958",
+   "population_municipale": 32,
+   "population_totale": 32
+  },
+  "2A065": {
+   "nom": "Cargèse",
+   "epci": "200067049",
+   "population_municipale": 1150,
+   "population_totale": 1168
+  },
+  "2A066": {
+   "nom": "Cargiaca",
+   "epci": "242000495",
+   "population_municipale": 64,
+   "population_totale": 64
+  },
+  "2A070": {
+   "nom": "Casaglione",
+   "epci": "200067049",
+   "population_municipale": 571,
+   "population_totale": 575
+  },
+  "2A071": {
+   "nom": "Casalabriva",
+   "epci": "242010130",
+   "population_municipale": 235,
+   "population_totale": 238
+  },
+  "2A085": {
+   "nom": "Cauro",
+   "epci": "200038958",
+   "population_municipale": 1486,
+   "population_totale": 1510
+  },
+  "2A089": {
+   "nom": "Ciamannacce",
+   "epci": "200038958",
+   "population_municipale": 129,
+   "population_totale": 131
+  },
+  "2A090": {
+   "nom": "Coggia",
+   "epci": "200067049",
+   "population_municipale": 818,
+   "population_totale": 832
+  },
+  "2A091": {
+   "nom": "Cognocoli-Monticchi",
+   "epci": "200038958",
+   "population_municipale": 172,
+   "population_totale": 174
+  },
+  "2A092": {
+   "nom": "Conca",
+   "epci": "242000495",
+   "population_municipale": 1175,
+   "population_totale": 1193
+  },
+  "2A094": {
+   "nom": "Corrano",
+   "epci": "200038958",
+   "population_municipale": 75,
+   "population_totale": 76
+  },
+  "2A098": {
+   "nom": "Coti-Chiavari",
+   "epci": "200038958",
+   "population_municipale": 737,
+   "population_totale": 750
+  },
+  "2A099": {
+   "nom": "Cozzano",
+   "epci": "200038958",
+   "population_municipale": 282,
+   "population_totale": 283
+  },
+  "2A100": {
+   "nom": "Cristinacce",
+   "epci": "200067049",
+   "population_municipale": 77,
+   "population_totale": 77
+  },
+  "2A103": {
+   "nom": "Cuttoli-Corticchiato",
+   "epci": "242010056",
+   "population_municipale": 2060,
+   "population_totale": 2087
+  },
+  "2A104": {
+   "nom": "Eccica-Suarella",
+   "epci": "242000503",
+   "population_municipale": 1389,
+   "population_totale": 1425
+  },
+  "2A108": {
+   "nom": "Évisa",
+   "epci": "200067049",
+   "population_municipale": 231,
+   "population_totale": 234
+  },
+  "2A114": {
+   "nom": "Figari",
+   "epci": "200040764",
+   "population_municipale": 1772,
+   "population_totale": 1806
+  },
+  "2A115": {
+   "nom": "Foce",
+   "epci": "242010130",
+   "population_municipale": 151,
+   "population_totale": 153
+  },
+  "2A117": {
+   "nom": "Forciolo",
+   "epci": "200038958",
+   "population_municipale": 93,
+   "population_totale": 96
+  },
+  "2A118": {
+   "nom": "Fozzano",
+   "epci": "242010130",
+   "population_municipale": 210,
+   "population_totale": 212
+  },
+  "2A119": {
+   "nom": "Frasseto",
+   "epci": "200038958",
+   "population_municipale": 134,
+   "population_totale": 134
+  },
+  "2A127": {
+   "nom": "Giuncheto",
+   "epci": "242010130",
+   "population_municipale": 106,
+   "population_totale": 110
+  },
+  "2A128": {
+   "nom": "Granace",
+   "epci": "242010130",
+   "population_municipale": 92,
+   "population_totale": 94
+  },
+  "2A129": {
+   "nom": "Grossa",
+   "epci": "242010130",
+   "population_municipale": 74,
+   "population_totale": 75
+  },
+  "2A130": {
+   "nom": "Grosseto-Prugna",
+   "epci": "200038958",
+   "population_municipale": 3900,
+   "population_totale": 3926
+  },
+  "2A131": {
+   "nom": "Guagno",
+   "epci": "200067049",
+   "population_municipale": 145,
+   "population_totale": 147
+  },
+  "2A132": {
+   "nom": "Guargualé",
+   "epci": "200038958",
+   "population_municipale": 146,
+   "population_totale": 146
+  },
+  "2A133": {
+   "nom": "Guitera-les-Bains",
+   "epci": "200038958",
+   "population_municipale": 154,
+   "population_totale": 155
+  },
+  "2A139": {
+   "nom": "Lecci",
+   "epci": "200040764",
+   "population_municipale": 2134,
+   "population_totale": 2166
+  },
+  "2A141": {
+   "nom": "Letia",
+   "epci": "200067049",
+   "population_municipale": 111,
+   "population_totale": 112
+  },
+  "2A142": {
+   "nom": "Levie",
+   "epci": "242000495",
+   "population_municipale": 674,
+   "population_totale": 682
+  },
+  "2A144": {
+   "nom": "Lopigna",
+   "epci": "200067049",
+   "population_municipale": 113,
+   "population_totale": 114
+  },
+  "2A146": {
+   "nom": "Loreto-di-Tallano",
+   "epci": "242000495",
+   "population_municipale": 47,
+   "population_totale": 51
+  },
+  "2A154": {
+   "nom": "Marignana",
+   "epci": "200067049",
+   "population_municipale": 100,
+   "population_totale": 104
+  },
+  "2A158": {
+   "nom": "Mela",
+   "epci": "242000495",
+   "population_municipale": 37,
+   "population_totale": 37
+  },
+  "2A160": {
+   "nom": "Moca-Croce",
+   "epci": "242010130",
+   "population_municipale": 221,
+   "population_totale": 223
+  },
+  "2A163": {
+   "nom": "Monacia-d'Aullène",
+   "epci": "200040764",
+   "population_municipale": 540,
+   "population_totale": 553
+  },
+  "2A174": {
+   "nom": "Murzo",
+   "epci": "200067049",
+   "population_municipale": 98,
+   "population_totale": 100
+  },
+  "2A181": {
+   "nom": "Ocana",
+   "epci": "242000503",
+   "population_municipale": 657,
+   "population_totale": 668
+  },
+  "2A186": {
+   "nom": "Olivese",
+   "epci": "200038958",
+   "population_municipale": 221,
+   "population_totale": 222
+  },
+  "2A189": {
+   "nom": "Olmeto",
+   "epci": "242010130",
+   "population_municipale": 1289,
+   "population_totale": 1313
+  },
+  "2A191": {
+   "nom": "Olmiccia",
+   "epci": "242000495",
+   "population_municipale": 120,
+   "population_totale": 124
+  },
+  "2A196": {
+   "nom": "Orto",
+   "epci": "200067049",
+   "population_municipale": 81,
+   "population_totale": 81
+  },
+  "2A197": {
+   "nom": "Osani",
+   "epci": "200067049",
+   "population_municipale": 96,
+   "population_totale": 99
+  },
+  "2A198": {
+   "nom": "Ota",
+   "epci": "200067049",
+   "population_municipale": 470,
+   "population_totale": 475
+  },
+  "2A200": {
+   "nom": "Palneca",
+   "epci": "200038958",
+   "population_municipale": 133,
+   "population_totale": 134
+  },
+  "2A203": {
+   "nom": "Partinello",
+   "epci": "200067049",
+   "population_municipale": 94,
+   "population_totale": 95
+  },
+  "2A204": {
+   "nom": "Pastricciola",
+   "epci": "200067049",
+   "population_municipale": 90,
+   "population_totale": 90
+  },
+  "2A209": {
+   "nom": "Peri",
+   "epci": "242010056",
+   "population_municipale": 2044,
+   "population_totale": 2088
+  },
+  "2A211": {
+   "nom": "Petreto-Bicchisano",
+   "epci": "242010130",
+   "population_municipale": 572,
+   "population_totale": 581
+  },
+  "2A212": {
+   "nom": "Piana",
+   "epci": "200067049",
+   "population_municipale": 452,
+   "population_totale": 462
+  },
+  "2A215": {
+   "nom": "Pianottoli-Caldarello",
+   "epci": "200040764",
+   "population_municipale": 749,
+   "population_totale": 764
+  },
+  "2A228": {
+   "nom": "Pietrosella",
+   "epci": "200038958",
+   "population_municipale": 2074,
+   "population_totale": 2094
+  },
+  "2A232": {
+   "nom": "Pila-Canale",
+   "epci": "200038958",
+   "population_municipale": 271,
+   "population_totale": 277
+  },
+  "2A240": {
+   "nom": "Poggiolo",
+   "epci": "200067049",
+   "population_municipale": 104,
+   "population_totale": 104
+  },
+  "2A247": {
+   "nom": "Porto-Vecchio",
+   "epci": "200040764",
+   "population_municipale": 11198,
+   "population_totale": 11387
+  },
+  "2A249": {
+   "nom": "Propriano",
+   "epci": "242010130",
+   "population_municipale": 3996,
+   "population_totale": 4028
+  },
+  "2A253": {
+   "nom": "Quasquara",
+   "epci": "200038958",
+   "population_municipale": 66,
+   "population_totale": 69
+  },
+  "2A254": {
+   "nom": "Quenza",
+   "epci": "242000495",
+   "population_municipale": 200,
+   "population_totale": 204
+  },
+  "2A258": {
+   "nom": "Renno",
+   "epci": "200067049",
+   "population_municipale": 62,
+   "population_totale": 64
+  },
+  "2A259": {
+   "nom": "Rezza",
+   "epci": "200067049",
+   "population_municipale": 61,
+   "population_totale": 62
+  },
+  "2A262": {
+   "nom": "Rosazia",
+   "epci": "200067049",
+   "population_municipale": 53,
+   "population_totale": 53
+  },
+  "2A266": {
+   "nom": "Salice",
+   "epci": "200067049",
+   "population_municipale": 102,
+   "population_totale": 104
+  },
+  "2A268": {
+   "nom": "Sampolo",
+   "epci": "200038958",
+   "population_municipale": 90,
+   "population_totale": 91
+  },
+  "2A269": {
+   "nom": "Sari-Solenzara",
+   "epci": "242000495",
+   "population_municipale": 1445,
+   "population_totale": 1466
+  },
+  "2A270": {
+   "nom": "Sari-d'Orcino",
+   "epci": "200067049",
+   "population_municipale": 351,
+   "population_totale": 354
+  },
+  "2A271": {
+   "nom": "Sarrola-Carcopino",
+   "epci": "242010056",
+   "population_municipale": 3278,
+   "population_totale": 3324
+  },
+  "2A272": {
+   "nom": "Sartène",
+   "epci": "242010130",
+   "population_municipale": 3742,
+   "population_totale": 3824
+  },
+  "2A276": {
+   "nom": "Serra-di-Ferro",
+   "epci": "200038958",
+   "population_municipale": 727,
+   "population_totale": 739
+  },
+  "2A278": {
+   "nom": "Serra-di-Scopamène",
+   "epci": "242000495",
+   "population_municipale": 135,
+   "population_totale": 136
+  },
+  "2A279": {
+   "nom": "Serriera",
+   "epci": "200067049",
+   "population_municipale": 113,
+   "population_totale": 113
+  },
+  "2A282": {
+   "nom": "Soccia",
+   "epci": "200067049",
+   "population_municipale": 160,
+   "population_totale": 161
+  },
+  "2A284": {
+   "nom": "Sollacaro",
+   "epci": "242010130",
+   "population_municipale": 396,
+   "population_totale": 402
+  },
+  "2A285": {
+   "nom": "Sorbollano",
+   "epci": "242000495",
+   "population_municipale": 65,
+   "population_totale": 65
+  },
+  "2A288": {
+   "nom": "Sotta",
+   "epci": "200040764",
+   "population_municipale": 1893,
+   "population_totale": 1920
+  },
+  "2A295": {
+   "nom": "Sant'Andréa-d'Orcino",
+   "epci": "200067049",
+   "population_municipale": 144,
+   "population_totale": 148
+  },
+  "2A300": {
+   "nom": "San-Gavino-di-Carbini",
+   "epci": "242000495",
+   "population_municipale": 1204,
+   "population_totale": 1229
+  },
+  "2A308": {
+   "nom": "Sainte-Lucie-de-Tallano",
+   "epci": "242000495",
+   "population_municipale": 363,
+   "population_totale": 365
+  },
+  "2A310": {
+   "nom": "Santa-Maria-Figaniella",
+   "epci": "242010130",
+   "population_municipale": 74,
+   "population_totale": 74
+  },
+  "2A312": {
+   "nom": "Santa-Maria-Siché",
+   "epci": "200038958",
+   "population_municipale": 364,
+   "population_totale": 373
+  },
+  "2A322": {
+   "nom": "Tasso",
+   "epci": "200038958",
+   "population_municipale": 89,
+   "population_totale": 89
+  },
+  "2A323": {
+   "nom": "Tavaco",
+   "epci": "242010056",
+   "population_municipale": 414,
+   "population_totale": 420
+  },
+  "2A324": {
+   "nom": "Tavera",
+   "epci": "242000503",
+   "population_municipale": 453,
+   "population_totale": 455
+  },
+  "2A326": {
+   "nom": "Tolla",
+   "epci": "242000503",
+   "population_municipale": 120,
+   "population_totale": 122
+  },
+  "2A330": {
+   "nom": "Ucciani",
+   "epci": "242000503",
+   "population_municipale": 504,
+   "population_totale": 510
+  },
+  "2A331": {
+   "nom": "Urbalacone",
+   "epci": "200038958",
+   "population_municipale": 65,
+   "population_totale": 65
+  },
+  "2A336": {
+   "nom": "Valle-di-Mezzana",
+   "epci": "242010056",
+   "population_municipale": 537,
+   "population_totale": 545
+  },
+  "2A345": {
+   "nom": "Vero",
+   "epci": "242000503",
+   "population_municipale": 640,
+   "population_totale": 655
+  },
+  "2A348": {
+   "nom": "Vico",
+   "epci": "200067049",
+   "population_municipale": 999,
+   "population_totale": 1013
+  },
+  "2A349": {
+   "nom": "Viggianello",
+   "epci": "242010130",
+   "population_municipale": 908,
+   "population_totale": 915
+  },
+  "2A351": {
+   "nom": "Villanova",
+   "epci": "242010056",
+   "population_municipale": 402,
+   "population_totale": 407
+  },
+  "2A357": {
+   "nom": "Zérubia",
+   "epci": "242000495",
+   "population_municipale": 46,
+   "population_totale": 46
+  },
+  "2A358": {
+   "nom": "Zévaco",
+   "epci": "200038958",
+   "population_municipale": 50,
+   "population_totale": 51
+  },
+  "2A359": {
+   "nom": "Zicavo",
+   "epci": "200038958",
+   "population_municipale": 203,
+   "population_totale": 205
+  },
+  "2A360": {
+   "nom": "Zigliara",
+   "epci": "200038958",
+   "population_municipale": 127,
+   "population_totale": 132
+  },
+  "2A362": {
+   "nom": "Zonza",
+   "epci": "242000495",
+   "population_municipale": 2989,
+   "population_totale": 3026
+  },
+  "2A363": {
+   "nom": "Zoza",
+   "epci": "242000495",
+   "population_municipale": 66,
+   "population_totale": 66
+  },
+  "2B002": {
+   "nom": "Aghione",
+   "epci": "200015162",
+   "population_municipale": 258,
+   "population_totale": 261
+  },
+  "2B003": {
+   "nom": "Aiti",
+   "epci": "200073138",
+   "population_municipale": 27,
+   "population_totale": 29
+  },
+  "2B005": {
+   "nom": "Alando",
+   "epci": "200073138",
+   "population_municipale": 30,
+   "population_totale": 30
+  },
+  "2B007": {
+   "nom": "Albertacce",
+   "epci": "200073138",
+   "population_municipale": 196,
+   "population_totale": 200
+  },
+  "2B009": {
+   "nom": "Aléria",
+   "epci": "200015162",
+   "population_municipale": 2267,
+   "population_totale": 2297
+  },
+  "2B010": {
+   "nom": "Algajola",
+   "epci": "242020105",
+   "population_municipale": 363,
+   "population_totale": 371
+  },
+  "2B012": {
+   "nom": "Altiani",
+   "epci": "200015162",
+   "population_municipale": 53,
+   "population_totale": 54
+  },
+  "2B013": {
+   "nom": "Alzi",
+   "epci": "200073138",
+   "population_municipale": 27,
+   "population_totale": 27
+  },
+  "2B015": {
+   "nom": "Ampriani",
+   "epci": "200015162",
+   "population_municipale": 23,
+   "population_totale": 23
+  },
+  "2B016": {
+   "nom": "Antisanti",
+   "epci": "200015162",
+   "population_municipale": 591,
+   "population_totale": 596
+  },
+  "2B020": {
+   "nom": "Aregno",
+   "epci": "242020105",
+   "population_municipale": 588,
+   "population_totale": 600
+  },
+  "2B023": {
+   "nom": "Asco",
+   "epci": "200073138",
+   "population_municipale": 116,
+   "population_totale": 119
+  },
+  "2B025": {
+   "nom": "Avapessa",
+   "epci": "242020105",
+   "population_municipale": 80,
+   "population_totale": 80
+  },
+  "2B029": {
+   "nom": "Barbaggio",
+   "epci": "200073120",
+   "population_municipale": 362,
+   "population_totale": 368
+  },
+  "2B030": {
+   "nom": "Barrettali",
+   "epci": "200042943",
+   "population_municipale": 174,
+   "population_totale": 175
+  },
+  "2B033": {
+   "nom": "Bastia",
+   "epci": "242000354",
+   "population_municipale": 46867,
+   "population_totale": 47374
+  },
+  "2B034": {
+   "nom": "Belgodère",
+   "epci": "200073104",
+   "population_municipale": 835,
+   "population_totale": 849
+  },
+  "2B036": {
+   "nom": "Bigorno",
+   "epci": "200036499",
+   "population_municipale": 97,
+   "population_totale": 97
+  },
+  "2B037": {
+   "nom": "Biguglia",
+   "epci": "200036499",
+   "population_municipale": 7642,
+   "population_totale": 7780
+  },
+  "2B039": {
+   "nom": "Bisinchi",
+   "epci": "200073138",
+   "population_municipale": 183,
+   "population_totale": 184
+  },
+  "2B042": {
+   "nom": "Borgo",
+   "epci": "200036499",
+   "population_municipale": 10311,
+   "population_totale": 10507
+  },
+  "2B043": {
+   "nom": "Brando",
+   "epci": "200042943",
+   "population_municipale": 1584,
+   "population_totale": 1622
+  },
+  "2B045": {
+   "nom": "Bustanico",
+   "epci": "200073138",
+   "population_municipale": 65,
+   "population_totale": 66
+  },
+  "2B046": {
+   "nom": "Cagnano",
+   "epci": "200042943",
+   "population_municipale": 148,
+   "population_totale": 151
+  },
+  "2B047": {
+   "nom": "Calacuccia",
+   "epci": "200073138",
+   "population_municipale": 272,
+   "population_totale": 275
+  },
+  "2B049": {
+   "nom": "Calenzana",
+   "epci": "242020105",
+   "population_municipale": 2684,
+   "population_totale": 2714
+  },
+  "2B050": {
+   "nom": "Calvi",
+   "epci": "242020105",
+   "population_municipale": 5788,
+   "population_totale": 5869
+  },
+  "2B051": {
+   "nom": "Cambia",
+   "epci": "200073138",
+   "population_municipale": 61,
+   "population_totale": 61
+  },
+  "2B052": {
+   "nom": "Campana",
+   "epci": "200073252",
+   "population_municipale": 22,
+   "population_totale": 22
+  },
+  "2B053": {
+   "nom": "Campi",
+   "epci": "200015162",
+   "population_municipale": 19,
+   "population_totale": 19
+  },
+  "2B054": {
+   "nom": "Campile",
+   "epci": "200073252",
+   "population_municipale": 181,
+   "population_totale": 184
+  },
+  "2B055": {
+   "nom": "Campitello",
+   "epci": "200036499",
+   "population_municipale": 107,
+   "population_totale": 109
+  },
+  "2B057": {
+   "nom": "Canale-di-Verde",
+   "epci": "200015162",
+   "population_municipale": 302,
+   "population_totale": 305
+  },
+  "2B058": {
+   "nom": "Canari",
+   "epci": "200042943",
+   "population_municipale": 305,
+   "population_totale": 310
+  },
+  "2B059": {
+   "nom": "Canavaggia",
+   "epci": "200073138",
+   "population_municipale": 123,
+   "population_totale": 123
+  },
+  "2B063": {
+   "nom": "Carcheto-Brustico",
+   "epci": "200073252",
+   "population_municipale": 57,
+   "population_totale": 57
+  },
+  "2B067": {
+   "nom": "Carpineto",
+   "epci": "200073252",
+   "population_municipale": 38,
+   "population_totale": 39
+  },
+  "2B068": {
+   "nom": "Carticasi",
+   "epci": "200073138",
+   "population_municipale": 25,
+   "population_totale": 25
+  },
+  "2B069": {
+   "nom": "Casabianca",
+   "epci": "200073252",
+   "population_municipale": 123,
+   "population_totale": 124
+  },
+  "2B072": {
+   "nom": "Casalta",
+   "epci": "200073252",
+   "population_municipale": 51,
+   "population_totale": 53
+  },
+  "2B073": {
+   "nom": "Casamaccioli",
+   "epci": "200073138",
+   "population_municipale": 115,
+   "population_totale": 118
+  },
+  "2B074": {
+   "nom": "Casanova",
+   "epci": "242020071",
+   "population_municipale": 384,
+   "population_totale": 387
+  },
+  "2B075": {
+   "nom": "Casevecchie",
+   "epci": "200015162",
+   "population_municipale": 69,
+   "population_totale": 69
+  },
+  "2B077": {
+   "nom": "Castellare-di-Casinca",
+   "epci": "200073252",
+   "population_municipale": 701,
+   "population_totale": 707
+  },
+  "2B078": {
+   "nom": "Castellare-di-Mercurio",
+   "epci": "200073138",
+   "population_municipale": 31,
+   "population_totale": 31
+  },
+  "2B079": {
+   "nom": "Castello-di-Rostino",
+   "epci": "200073138",
+   "population_municipale": 522,
+   "population_totale": 522
+  },
+  "2B080": {
+   "nom": "Castifao",
+   "epci": "200073138",
+   "population_municipale": 168,
+   "population_totale": 169
+  },
+  "2B081": {
+   "nom": "Castiglione",
+   "epci": "200073138",
+   "population_municipale": 40,
+   "population_totale": 40
+  },
+  "2B082": {
+   "nom": "Castineta",
+   "epci": "200073138",
+   "population_municipale": 34,
+   "population_totale": 34
+  },
+  "2B083": {
+   "nom": "Castirla",
+   "epci": "200073138",
+   "population_municipale": 166,
+   "population_totale": 166
+  },
+  "2B084": {
+   "nom": "Cateri",
+   "epci": "242020105",
+   "population_municipale": 247,
+   "population_totale": 249
+  },
+  "2B086": {
+   "nom": "Centuri",
+   "epci": "200042943",
+   "population_municipale": 175,
+   "population_totale": 175
+  },
+  "2B087": {
+   "nom": "Cervione",
+   "epci": "200034205",
+   "population_municipale": 2149,
+   "population_totale": 2171
+  },
+  "2B088": {
+   "nom": "Chiatra",
+   "epci": "200015162",
+   "population_municipale": 231,
+   "population_totale": 233
+  },
+  "2B093": {
+   "nom": "Corbara",
+   "epci": "200073104",
+   "population_municipale": 962,
+   "population_totale": 980
+  },
+  "2B095": {
+   "nom": "Corscia",
+   "epci": "200073138",
+   "population_municipale": 123,
+   "population_totale": 126
+  },
+  "2B096": {
+   "nom": "Corte",
+   "epci": "242020071",
+   "population_municipale": 7819,
+   "population_totale": 7931
+  },
+  "2B097": {
+   "nom": "Costa",
+   "epci": "200073104",
+   "population_municipale": 49,
+   "population_totale": 49
+  },
+  "2B101": {
+   "nom": "Croce",
+   "epci": "200073252",
+   "population_municipale": 78,
+   "population_totale": 81
+  },
+  "2B102": {
+   "nom": "Crocicchia",
+   "epci": "200073252",
+   "population_municipale": 81,
+   "population_totale": 81
+  },
+  "2B105": {
+   "nom": "Erbajolo",
+   "epci": "200073138",
+   "population_municipale": 90,
+   "population_totale": 90
+  },
+  "2B106": {
+   "nom": "Érone",
+   "epci": "200073138",
+   "population_municipale": 9,
+   "population_totale": 10
+  },
+  "2B107": {
+   "nom": "Ersa",
+   "epci": "200042943",
+   "population_municipale": 124,
+   "population_totale": 124
+  },
+  "2B109": {
+   "nom": "Farinole",
+   "epci": "200073120",
+   "population_municipale": 236,
+   "population_totale": 241
+  },
+  "2B110": {
+   "nom": "Favalello",
+   "epci": "200073138",
+   "population_municipale": 71,
+   "population_totale": 72
+  },
+  "2B111": {
+   "nom": "Felce",
+   "epci": "200034205",
+   "population_municipale": 54,
+   "population_totale": 54
+  },
+  "2B112": {
+   "nom": "Feliceto",
+   "epci": "200073104",
+   "population_municipale": 232,
+   "population_totale": 236
+  },
+  "2B113": {
+   "nom": "Ficaja",
+   "epci": "200073252",
+   "population_municipale": 54,
+   "population_totale": 54
+  },
+  "2B116": {
+   "nom": "Focicchia",
+   "epci": "200073138",
+   "population_municipale": 36,
+   "population_totale": 36
+  },
+  "2B120": {
+   "nom": "Furiani",
+   "epci": "242000354",
+   "population_municipale": 6585,
+   "population_totale": 6684
+  },
+  "2B121": {
+   "nom": "Galéria",
+   "epci": "242020105",
+   "population_municipale": 395,
+   "population_totale": 401
+  },
+  "2B122": {
+   "nom": "Gavignano",
+   "epci": "200073138",
+   "population_municipale": 61,
+   "population_totale": 61
+  },
+  "2B123": {
+   "nom": "Ghisonaccia",
+   "epci": "200033827",
+   "population_municipale": 4405,
+   "population_totale": 4460
+  },
+  "2B124": {
+   "nom": "Ghisoni",
+   "epci": "200033827",
+   "population_municipale": 182,
+   "population_totale": 185
+  },
+  "2B125": {
+   "nom": "Giocatojo",
+   "epci": "200073252",
+   "population_municipale": 46,
+   "population_totale": 46
+  },
+  "2B126": {
+   "nom": "Giuncaggio",
+   "epci": "200015162",
+   "population_municipale": 91,
+   "population_totale": 92
+  },
+  "2B134": {
+   "nom": "L'Île-Rousse",
+   "epci": "200073104",
+   "population_municipale": 3231,
+   "population_totale": 3293
+  },
+  "2B135": {
+   "nom": "Isolaccio-di-Fiumorbo",
+   "epci": "200033827",
+   "population_municipale": 330,
+   "population_totale": 334
+  },
+  "2B136": {
+   "nom": "Lama",
+   "epci": "200073104",
+   "population_municipale": 155,
+   "population_totale": 159
+  },
+  "2B137": {
+   "nom": "Lano",
+   "epci": "200073138",
+   "population_municipale": 21,
+   "population_totale": 21
+  },
+  "2B138": {
+   "nom": "Lavatoggio",
+   "epci": "242020105",
+   "population_municipale": 154,
+   "population_totale": 156
+  },
+  "2B140": {
+   "nom": "Lento",
+   "epci": "200036499",
+   "population_municipale": 117,
+   "population_totale": 118
+  },
+  "2B143": {
+   "nom": "Linguizzetta",
+   "epci": "200015162",
+   "population_municipale": 1166,
+   "population_totale": 1170
+  },
+  "2B145": {
+   "nom": "Loreto-di-Casinca",
+   "epci": "200073252",
+   "population_municipale": 188,
+   "population_totale": 190
+  },
+  "2B147": {
+   "nom": "Lozzi",
+   "epci": "200073138",
+   "population_municipale": 110,
+   "population_totale": 111
+  },
+  "2B148": {
+   "nom": "Lucciana",
+   "epci": "200036499",
+   "population_municipale": 6923,
+   "population_totale": 7012
+  },
+  "2B149": {
+   "nom": "Lugo-di-Nazza",
+   "epci": "200033827",
+   "population_municipale": 85,
+   "population_totale": 86
+  },
+  "2B150": {
+   "nom": "Lumio",
+   "epci": "242020105",
+   "population_municipale": 1224,
+   "population_totale": 1239
+  },
+  "2B152": {
+   "nom": "Luri",
+   "epci": "200042943",
+   "population_municipale": 872,
+   "population_totale": 889
+  },
+  "2B153": {
+   "nom": "Manso",
+   "epci": "242020105",
+   "population_municipale": 116,
+   "population_totale": 119
+  },
+  "2B155": {
+   "nom": "Matra",
+   "epci": "200015162",
+   "population_municipale": 54,
+   "population_totale": 54
+  },
+  "2B156": {
+   "nom": "Mausoléo",
+   "epci": "200073104",
+   "population_municipale": 24,
+   "population_totale": 24
+  },
+  "2B157": {
+   "nom": "Mazzola",
+   "epci": "200073138",
+   "population_municipale": 22,
+   "population_totale": 22
+  },
+  "2B159": {
+   "nom": "Meria",
+   "epci": "200042943",
+   "population_municipale": 81,
+   "population_totale": 83
+  },
+  "2B161": {
+   "nom": "Moïta",
+   "epci": "200015162",
+   "population_municipale": 59,
+   "population_totale": 59
+  },
+  "2B162": {
+   "nom": "Moltifao",
+   "epci": "200073138",
+   "population_municipale": 735,
+   "population_totale": 749
+  },
+  "2B164": {
+   "nom": "Monacia-d'Orezza",
+   "epci": "200073252",
+   "population_municipale": 25,
+   "population_totale": 26
+  },
+  "2B165": {
+   "nom": "Moncale",
+   "epci": "242020105",
+   "population_municipale": 348,
+   "population_totale": 351
+  },
+  "2B166": {
+   "nom": "Monte",
+   "epci": "200036499",
+   "population_municipale": 650,
+   "population_totale": 655
+  },
+  "2B167": {
+   "nom": "Montegrosso",
+   "epci": "242020105",
+   "population_municipale": 413,
+   "population_totale": 427
+  },
+  "2B168": {
+   "nom": "Monticello",
+   "epci": "200073104",
+   "population_municipale": 2065,
+   "population_totale": 2110
+  },
+  "2B169": {
+   "nom": "Morosaglia",
+   "epci": "200073138",
+   "population_municipale": 961,
+   "population_totale": 971
+  },
+  "2B170": {
+   "nom": "Morsiglia",
+   "epci": "200042943",
+   "population_municipale": 109,
+   "population_totale": 113
+  },
+  "2B171": {
+   "nom": "Muracciole",
+   "epci": "242020071",
+   "population_municipale": 33,
+   "population_totale": 33
+  },
+  "2B172": {
+   "nom": "Murato",
+   "epci": "200073120",
+   "population_municipale": 560,
+   "population_totale": 566
+  },
+  "2B173": {
+   "nom": "Muro",
+   "epci": "200073104",
+   "population_municipale": 243,
+   "population_totale": 244
+  },
+  "2B175": {
+   "nom": "Nessa",
+   "epci": "200073104",
+   "population_municipale": 122,
+   "population_totale": 124
+  },
+  "2B176": {
+   "nom": "Nocario",
+   "epci": "200073252",
+   "population_municipale": 74,
+   "population_totale": 76
+  },
+  "2B177": {
+   "nom": "Noceta",
+   "epci": "242020071",
+   "population_municipale": 73,
+   "population_totale": 73
+  },
+  "2B178": {
+   "nom": "Nonza",
+   "epci": "200042943",
+   "population_municipale": 62,
+   "population_totale": 62
+  },
+  "2B179": {
+   "nom": "Novale",
+   "epci": "200034205",
+   "population_municipale": 57,
+   "population_totale": 58
+  },
+  "2B180": {
+   "nom": "Novella",
+   "epci": "200073104",
+   "population_municipale": 80,
+   "population_totale": 83
+  },
+  "2B182": {
+   "nom": "Occhiatana",
+   "epci": "200073104",
+   "population_municipale": 235,
+   "population_totale": 240
+  },
+  "2B183": {
+   "nom": "Ogliastro",
+   "epci": "200042943",
+   "population_municipale": 90,
+   "population_totale": 90
+  },
+  "2B184": {
+   "nom": "Olcani",
+   "epci": "200042943",
+   "population_municipale": 96,
+   "population_totale": 96
+  },
+  "2B185": {
+   "nom": "Oletta",
+   "epci": "200073120",
+   "population_municipale": 1780,
+   "population_totale": 1807
+  },
+  "2B187": {
+   "nom": "Olmeta-di-Capocorso",
+   "epci": "200042943",
+   "population_municipale": 123,
+   "population_totale": 125
+  },
+  "2B188": {
+   "nom": "Olmeta-di-Tuda",
+   "epci": "200073120",
+   "population_municipale": 583,
+   "population_totale": 587
+  },
+  "2B190": {
+   "nom": "Olmi-Cappella",
+   "epci": "200073104",
+   "population_municipale": 190,
+   "population_totale": 192
+  },
+  "2B192": {
+   "nom": "Olmo",
+   "epci": "200036499",
+   "population_municipale": 138,
+   "population_totale": 141
+  },
+  "2B193": {
+   "nom": "Omessa",
+   "epci": "200073138",
+   "population_municipale": 595,
+   "population_totale": 599
+  },
+  "2B194": {
+   "nom": "Ortale",
+   "epci": "200034205",
+   "population_municipale": 25,
+   "population_totale": 25
+  },
+  "2B195": {
+   "nom": "Ortiporio",
+   "epci": "200073252",
+   "population_municipale": 139,
+   "population_totale": 142
+  },
+  "2B199": {
+   "nom": "Palasca",
+   "epci": "200073104",
+   "population_municipale": 222,
+   "population_totale": 228
+  },
+  "2B201": {
+   "nom": "Pancheraccia",
+   "epci": "200015162",
+   "population_municipale": 198,
+   "population_totale": 200
+  },
+  "2B202": {
+   "nom": "Parata",
+   "epci": "200073252",
+   "population_municipale": 22,
+   "population_totale": 22
+  },
+  "2B205": {
+   "nom": "Patrimonio",
+   "epci": "200073120",
+   "population_municipale": 897,
+   "population_totale": 921
+  },
+  "2B206": {
+   "nom": "Penta-Acquatella",
+   "epci": "200073252",
+   "population_municipale": 41,
+   "population_totale": 41
+  },
+  "2B207": {
+   "nom": "Penta-di-Casinca",
+   "epci": "200073252",
+   "population_municipale": 3671,
+   "population_totale": 3706
+  },
+  "2B208": {
+   "nom": "Perelli",
+   "epci": "200034205",
+   "population_municipale": 109,
+   "population_totale": 110
+  },
+  "2B210": {
+   "nom": "Pero-Casevecchie",
+   "epci": "200034205",
+   "population_municipale": 109,
+   "population_totale": 109
+  },
+  "2B213": {
+   "nom": "Pianello",
+   "epci": "200015162",
+   "population_municipale": 53,
+   "population_totale": 54
+  },
+  "2B214": {
+   "nom": "Piano",
+   "epci": "200073252",
+   "population_municipale": 17,
+   "population_totale": 18
+  },
+  "2B216": {
+   "nom": "Piazzali",
+   "epci": "200034205",
+   "population_municipale": 19,
+   "population_totale": 19
+  },
+  "2B217": {
+   "nom": "Piazzole",
+   "epci": "200073252",
+   "population_municipale": 50,
+   "population_totale": 50
+  },
+  "2B218": {
+   "nom": "Piedicorte-di-Gaggio",
+   "epci": "200015162",
+   "population_municipale": 114,
+   "population_totale": 115
+  },
+  "2B219": {
+   "nom": "Piedicroce",
+   "epci": "200073252",
+   "population_municipale": 81,
+   "population_totale": 83
+  },
+  "2B220": {
+   "nom": "Piedigriggio",
+   "epci": "200073138",
+   "population_municipale": 164,
+   "population_totale": 165
+  },
+  "2B221": {
+   "nom": "Piedipartino",
+   "epci": "200073252",
+   "population_municipale": 19,
+   "population_totale": 19
+  },
+  "2B222": {
+   "nom": "Pie-d'Orezza",
+   "epci": "200073252",
+   "population_municipale": 35,
+   "population_totale": 35
+  },
+  "2B223": {
+   "nom": "Pietralba",
+   "epci": "200073104",
+   "population_municipale": 507,
+   "population_totale": 515
+  },
+  "2B224": {
+   "nom": "Pietracorbara",
+   "epci": "200042943",
+   "population_municipale": 652,
+   "population_totale": 661
+  },
+  "2B225": {
+   "nom": "Pietra-di-Verde",
+   "epci": "200015162",
+   "population_municipale": 102,
+   "population_totale": 103
+  },
+  "2B226": {
+   "nom": "Pietraserena",
+   "epci": "200015162",
+   "population_municipale": 62,
+   "population_totale": 62
+  },
+  "2B227": {
+   "nom": "Pietricaggio",
+   "epci": "200034205",
+   "population_municipale": 32,
+   "population_totale": 33
+  },
+  "2B229": {
+   "nom": "Pietroso",
+   "epci": "200033827",
+   "population_municipale": 334,
+   "population_totale": 340
+  },
+  "2B230": {
+   "nom": "Piève",
+   "epci": "200073120",
+   "population_municipale": 115,
+   "population_totale": 115
+  },
+  "2B231": {
+   "nom": "Pigna",
+   "epci": "200073104",
+   "population_municipale": 128,
+   "population_totale": 130
+  },
+  "2B233": {
+   "nom": "Pino",
+   "epci": "200042943",
+   "population_municipale": 148,
+   "population_totale": 148
+  },
+  "2B234": {
+   "nom": "Piobetta",
+   "epci": "200034205",
+   "population_municipale": 20,
+   "population_totale": 20
+  },
+  "2B235": {
+   "nom": "Pioggiola",
+   "epci": "200073104",
+   "population_municipale": 87,
+   "population_totale": 88
+  },
+  "2B236": {
+   "nom": "Poggio-di-Nazza",
+   "epci": "200033827",
+   "population_municipale": 187,
+   "population_totale": 190
+  },
+  "2B238": {
+   "nom": "Poggio-di-Venaco",
+   "epci": "242020071",
+   "population_municipale": 211,
+   "population_totale": 217
+  },
+  "2B239": {
+   "nom": "Poggio-d'Oletta",
+   "epci": "200073120",
+   "population_municipale": 215,
+   "population_totale": 224
+  },
+  "2B241": {
+   "nom": "Poggio-Marinaccio",
+   "epci": "200073252",
+   "population_municipale": 38,
+   "population_totale": 39
+  },
+  "2B242": {
+   "nom": "Poggio-Mezzana",
+   "epci": "200034205",
+   "population_municipale": 885,
+   "population_totale": 892
+  },
+  "2B243": {
+   "nom": "Polveroso",
+   "epci": "200073252",
+   "population_municipale": 31,
+   "population_totale": 32
+  },
+  "2B244": {
+   "nom": "Popolasca",
+   "epci": "200073138",
+   "population_municipale": 41,
+   "population_totale": 41
+  },
+  "2B245": {
+   "nom": "Porri",
+   "epci": "200073252",
+   "population_municipale": 44,
+   "population_totale": 45
+  },
+  "2B246": {
+   "nom": "La Porta",
+   "epci": "200073252",
+   "population_municipale": 187,
+   "population_totale": 189
+  },
+  "2B248": {
+   "nom": "Prato-di-Giovellina",
+   "epci": "200073138",
+   "population_municipale": 52,
+   "population_totale": 54
+  },
+  "2B250": {
+   "nom": "Prunelli-di-Casacconi",
+   "epci": "200073252",
+   "population_municipale": 151,
+   "population_totale": 151
+  },
+  "2B251": {
+   "nom": "Prunelli-di-Fiumorbo",
+   "epci": "200033827",
+   "population_municipale": 3880,
+   "population_totale": 3945
+  },
+  "2B252": {
+   "nom": "Pruno",
+   "epci": "200073252",
+   "population_municipale": 180,
+   "population_totale": 182
+  },
+  "2B255": {
+   "nom": "Quercitello",
+   "epci": "200073252",
+   "population_municipale": 53,
+   "population_totale": 54
+  },
+  "2B256": {
+   "nom": "Rapaggio",
+   "epci": "200073252",
+   "population_municipale": 32,
+   "population_totale": 33
+  },
+  "2B257": {
+   "nom": "Rapale",
+   "epci": "200073120",
+   "population_municipale": 162,
+   "population_totale": 166
+  },
+  "2B260": {
+   "nom": "Riventosa",
+   "epci": "242020071",
+   "population_municipale": 145,
+   "population_totale": 148
+  },
+  "2B261": {
+   "nom": "Rogliano",
+   "epci": "200042943",
+   "population_municipale": 530,
+   "population_totale": 536
+  },
+  "2B263": {
+   "nom": "Rospigliani",
+   "epci": "242020071",
+   "population_municipale": 70,
+   "population_totale": 70
+  },
+  "2B264": {
+   "nom": "Rusio",
+   "epci": "200073138",
+   "population_municipale": 65,
+   "population_totale": 65
+  },
+  "2B265": {
+   "nom": "Rutali",
+   "epci": "200073120",
+   "population_municipale": 531,
+   "population_totale": 536
+  },
+  "2B267": {
+   "nom": "Saliceto",
+   "epci": "200073138",
+   "population_municipale": 46,
+   "population_totale": 47
+  },
+  "2B273": {
+   "nom": "Scata",
+   "epci": "200073252",
+   "population_municipale": 41,
+   "population_totale": 41
+  },
+  "2B274": {
+   "nom": "Scolca",
+   "epci": "200036499",
+   "population_municipale": 92,
+   "population_totale": 95
+  },
+  "2B275": {
+   "nom": "Sermano",
+   "epci": "200073138",
+   "population_municipale": 72,
+   "population_totale": 73
+  },
+  "2B277": {
+   "nom": "Serra-di-Fiumorbo",
+   "epci": "200033827",
+   "population_municipale": 365,
+   "population_totale": 371
+  },
+  "2B280": {
+   "nom": "Silvareccio",
+   "epci": "200073252",
+   "population_municipale": 99,
+   "population_totale": 100
+  },
+  "2B281": {
+   "nom": "Sisco",
+   "epci": "200042943",
+   "population_municipale": 1182,
+   "population_totale": 1192
+  },
+  "2B283": {
+   "nom": "Solaro",
+   "epci": "200033827",
+   "population_municipale": 736,
+   "population_totale": 746
+  },
+  "2B286": {
+   "nom": "Sorbo-Ocagnano",
+   "epci": "200073252",
+   "population_municipale": 904,
+   "population_totale": 922
+  },
+  "2B287": {
+   "nom": "Sorio",
+   "epci": "200073120",
+   "population_municipale": 118,
+   "population_totale": 118
+  },
+  "2B289": {
+   "nom": "Soveria",
+   "epci": "200073138",
+   "population_municipale": 109,
+   "population_totale": 111
+  },
+  "2B290": {
+   "nom": "Speloncato",
+   "epci": "200073104",
+   "population_municipale": 261,
+   "population_totale": 268
+  },
+  "2B291": {
+   "nom": "Stazzona",
+   "epci": "200073252",
+   "population_municipale": 38,
+   "population_totale": 38
+  },
+  "2B292": {
+   "nom": "Sant'Andréa-di-Bozio",
+   "epci": "200073138",
+   "population_municipale": 55,
+   "population_totale": 56
+  },
+  "2B293": {
+   "nom": "Sant'Andréa-di-Cotone",
+   "epci": "200034205",
+   "population_municipale": 193,
+   "population_totale": 195
+  },
+  "2B296": {
+   "nom": "Sant'Antonino",
+   "epci": "242020105",
+   "population_municipale": 127,
+   "population_totale": 128
+  },
+  "2B297": {
+   "nom": "San-Damiano",
+   "epci": "200073252",
+   "population_municipale": 54,
+   "population_totale": 54
+  },
+  "2B298": {
+   "nom": "Saint-Florent",
+   "epci": "200073120",
+   "population_municipale": 1694,
+   "population_totale": 1707
+  },
+  "2B299": {
+   "nom": "San-Gavino-d'Ampugnani",
+   "epci": "200073252",
+   "population_municipale": 103,
+   "population_totale": 104
+  },
+  "2B301": {
+   "nom": "San-Gavino-di-Tenda",
+   "epci": "200073120",
+   "population_municipale": 64,
+   "population_totale": 65
+  },
+  "2B302": {
+   "nom": "San-Giovanni-di-Moriani",
+   "epci": "200034205",
+   "population_municipale": 102,
+   "population_totale": 102
+  },
+  "2B303": {
+   "nom": "San-Giuliano",
+   "epci": "200034205",
+   "population_municipale": 812,
+   "population_totale": 815
+  },
+  "2B304": {
+   "nom": "San-Lorenzo",
+   "epci": "200073138",
+   "population_municipale": 138,
+   "population_totale": 141
+  },
+  "2B305": {
+   "nom": "San-Martino-di-Lota",
+   "epci": "242000354",
+   "population_municipale": 3056,
+   "population_totale": 3084
+  },
+  "2B306": {
+   "nom": "Santa-Lucia-di-Mercurio",
+   "epci": "200073138",
+   "population_municipale": 115,
+   "population_totale": 117
+  },
+  "2B307": {
+   "nom": "Santa-Lucia-di-Moriani",
+   "epci": "200034205",
+   "population_municipale": 1514,
+   "population_totale": 1542
+  },
+  "2B309": {
+   "nom": "Santa-Maria-di-Lota",
+   "epci": "242000354",
+   "population_municipale": 1973,
+   "population_totale": 2074
+  },
+  "2B311": {
+   "nom": "Santa-Maria-Poggio",
+   "epci": "200034205",
+   "population_municipale": 807,
+   "population_totale": 816
+  },
+  "2B313": {
+   "nom": "San-Nicolao",
+   "epci": "200034205",
+   "population_municipale": 2062,
+   "population_totale": 2084
+  },
+  "2B314": {
+   "nom": "Santo-Pietro-di-Tenda",
+   "epci": "200073120",
+   "population_municipale": 341,
+   "population_totale": 343
+  },
+  "2B315": {
+   "nom": "Santo-Pietro-di-Venaco",
+   "epci": "242020071",
+   "population_municipale": 305,
+   "population_totale": 305
+  },
+  "2B316": {
+   "nom": "Santa-Reparata-di-Balagna",
+   "epci": "200073104",
+   "population_municipale": 1024,
+   "population_totale": 1043
+  },
+  "2B317": {
+   "nom": "Santa-Reparata-di-Moriani",
+   "epci": "200034205",
+   "population_municipale": 52,
+   "population_totale": 52
+  },
+  "2B318": {
+   "nom": "Taglio-Isolaccio",
+   "epci": "200034205",
+   "population_municipale": 623,
+   "population_totale": 630
+  },
+  "2B319": {
+   "nom": "Talasani",
+   "epci": "200034205",
+   "population_municipale": 847,
+   "population_totale": 853
+  },
+  "2B320": {
+   "nom": "Tallone",
+   "epci": "200015162",
+   "population_municipale": 288,
+   "population_totale": 291
+  },
+  "2B321": {
+   "nom": "Tarrano",
+   "epci": "200034205",
+   "population_municipale": 16,
+   "population_totale": 16
+  },
+  "2B327": {
+   "nom": "Tomino",
+   "epci": "200042943",
+   "population_municipale": 184,
+   "population_totale": 186
+  },
+  "2B328": {
+   "nom": "Tox",
+   "epci": "200015162",
+   "population_municipale": 96,
+   "population_totale": 97
+  },
+  "2B329": {
+   "nom": "Tralonca",
+   "epci": "200073138",
+   "population_municipale": 118,
+   "population_totale": 120
+  },
+  "2B332": {
+   "nom": "Urtaca",
+   "epci": "200073104",
+   "population_municipale": 263,
+   "population_totale": 268
+  },
+  "2B333": {
+   "nom": "Vallecalle",
+   "epci": "200073120",
+   "population_municipale": 169,
+   "population_totale": 175
+  },
+  "2B334": {
+   "nom": "Valle-d'Alesani",
+   "epci": "200034205",
+   "population_municipale": 124,
+   "population_totale": 124
+  },
+  "2B335": {
+   "nom": "Valle-di-Campoloro",
+   "epci": "200034205",
+   "population_municipale": 336,
+   "population_totale": 342
+  },
+  "2B337": {
+   "nom": "Valle-di-Rostino",
+   "epci": "200073138",
+   "population_municipale": 167,
+   "population_totale": 169
+  },
+  "2B338": {
+   "nom": "Valle-d'Orezza",
+   "epci": "200073252",
+   "population_municipale": 25,
+   "population_totale": 25
+  },
+  "2B339": {
+   "nom": "Vallica",
+   "epci": "200073104",
+   "population_municipale": 29,
+   "population_totale": 29
+  },
+  "2B340": {
+   "nom": "Velone-Orneto",
+   "epci": "200034205",
+   "population_municipale": 101,
+   "population_totale": 103
+  },
+  "2B341": {
+   "nom": "Venaco",
+   "epci": "242020071",
+   "population_municipale": 644,
+   "population_totale": 649
+  },
+  "2B342": {
+   "nom": "Ventiseri",
+   "epci": "200033827",
+   "population_municipale": 2629,
+   "population_totale": 2670
+  },
+  "2B343": {
+   "nom": "Venzolasca",
+   "epci": "200073252",
+   "population_municipale": 1874,
+   "population_totale": 1891
+  },
+  "2B344": {
+   "nom": "Verdèse",
+   "epci": "200073252",
+   "population_municipale": 42,
+   "population_totale": 42
+  },
+  "2B346": {
+   "nom": "Vescovato",
+   "epci": "200073252",
+   "population_municipale": 3406,
+   "population_totale": 3426
+  },
+  "2B347": {
+   "nom": "Vezzani",
+   "epci": "200033827",
+   "population_municipale": 269,
+   "population_totale": 270
+  },
+  "2B350": {
+   "nom": "Vignale",
+   "epci": "200036499",
+   "population_municipale": 222,
+   "population_totale": 226
+  },
+  "2B352": {
+   "nom": "Ville-di-Paraso",
+   "epci": "200073104",
+   "population_municipale": 205,
+   "population_totale": 210
+  },
+  "2B353": {
+   "nom": "Ville-di-Pietrabugno",
+   "epci": "242000354",
+   "population_municipale": 3215,
+   "population_totale": 3274
+  },
+  "2B354": {
+   "nom": "Vivario",
+   "epci": "242020071",
+   "population_municipale": 409,
+   "population_totale": 411
+  },
+  "2B355": {
+   "nom": "Volpajola",
+   "epci": "200073252",
+   "population_municipale": 418,
+   "population_totale": 420
+  },
+  "2B356": {
+   "nom": "Zalana",
+   "epci": "200015162",
+   "population_municipale": 153,
+   "population_totale": 155
+  },
+  "2B361": {
+   "nom": "Zilia",
+   "epci": "242020105",
+   "population_municipale": 320,
+   "population_totale": 323
+  },
+  "2B364": {
+   "nom": "Zuani",
+   "epci": "200015162",
+   "population_municipale": 37,
+   "population_totale": 37
+  },
+  "2B365": {
+   "nom": "San-Gavino-di-Fiumorbo",
+   "epci": "200033827",
+   "population_municipale": 99,
+   "population_totale": 99
+  },
+  "2B366": {
+   "nom": "Chisa",
+   "epci": "200033827",
+   "population_municipale": 104,
+   "population_totale": 105
+  }
+ }
+}
