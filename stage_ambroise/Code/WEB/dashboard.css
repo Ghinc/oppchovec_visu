@@ -2343,8 +2343,14 @@ tr:nth-child(even) {
 
 #evolutiontab { display: none; height: 100%; overflow: hidden; }
 #evolutiontab.active { display: flex; flex-direction: column; }
-.evolution-entete { flex: 0 0 auto; display: flex; gap: 16px; align-items: flex-start; padding: 8px 14px; border-bottom: 1px solid #ddd; background: #fafafa; }
-.evolution-intro { flex: 1 1 auto; font-size: 12px; line-height: 1.4; color: #333; max-height: 90px; overflow-y: auto; }
+.evolution-entete { flex: 0 0 auto; display: flex; gap: 14px; align-items: center; padding: 6px 14px; border-bottom: 1px solid #ddd; background: #fafafa; }
+.evolution-titre-onglet { font-size: 14px; }
+.evolution-info { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border: 1px solid #888; border-radius: 50%; font-size: 14px; line-height: 1; color: #444; background: #fff; cursor: help; flex: 0 0 auto; }
+.evolution-info:focus { outline: 2px solid #4a90d9; outline-offset: 1px; }
+.evolution-info-texte { display: none; position: absolute; top: 28px; left: 0; z-index: 2000; width: min(560px, 80vw); padding: 10px 12px; background: #fff; color: #222; border: 1px solid #aaa; border-radius: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); font-size: 12px; line-height: 1.45; cursor: default; }
+.evolution-info:hover .evolution-info-texte, .evolution-info:focus .evolution-info-texte, .evolution-info:focus-within .evolution-info-texte { display: block; }
+/* Dans l'onglet Évolution, le panneau latéral ne sert à rien : les cartes prennent toute la largeur */
+body.mode-evolution aside { display: none; }
 .evolution-choix { flex: 0 0 auto; font-size: 12.5px; white-space: nowrap; }
 .evolution-choix select { margin-left: 6px; padding: 3px 6px; }
 .evolution-cartes { flex: 1 1 auto; display: flex; min-height: 0; }

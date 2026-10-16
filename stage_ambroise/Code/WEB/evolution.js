@@ -220,6 +220,14 @@ if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         const bouton = document.querySelector('.tab-button[data-tab="evolutiontab"]');
         if (bouton) bouton.addEventListener('click', () => setTimeout(initialiserOngletEvolution, 0));
+        // panneau latéral masqué dans l'onglet Évolution (classe sur <body>), restauré dans les autres ; les cartes se redimensionnent
+        document.querySelectorAll('.tab-button').forEach(b => b.addEventListener('click', () => {
+            document.body.classList.toggle('mode-evolution', b.getAttribute('data-tab') === 'evolutiontab');
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+                Object.values(evolutionCartes).forEach(c => c.invalidateSize());
+            }, 150);
+        }));
     });
 }
 

@@ -5,6 +5,32 @@ const { test, avecAppli, sauter, lireJson, communes, classeDe } = require('./hel
 
 const d = lireJson('serie_temporelle.json');
 
+test('Évolution : panneau latéral masqué dans l\'onglet, restauré ailleurs ; texte d\'introduction en infobulle', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    assert.ok(await page.locator('aside').isVisible(), 'panneau visible au départ');
+    const largeurAvant = await page.evaluate(() => document.querySelector('main').getBoundingClientRect().width);
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation);
+    assert.ok(!(await page.locator('aside').isVisible()), 'panneau masqué dans Évolution');
+    await page.waitForTimeout(400);
+    const largeurApres = await page.evaluate(() => document.querySelector('main').getBoundingClientRect().width);
+    assert.ok(largeurApres > largeurAvant + 100, `cartes plus larges : ${largeurAvant} -> ${largeurApres}`);
+    // la carte de gauche remplit bien son conteneur
+    const carte = await page.evaluate(() => { const c = document.getElementById('map-evolution-a0'); return [c.getBoundingClientRect().width, c.querySelector('.leaflet-pane') ? c.clientWidth : 0]; });
+    assert.ok(carte[0] > 300 && carte[1] > 300, `carte a0 : ${carte}`);
+    // texte d'introduction : caché, visible au survol de l'icône
+    assert.ok(!(await page.locator('.evolution-info-texte').isVisible()), 'infobulle cachée au repos');
+    await page.hover('.evolution-info');
+    assert.ok(await page.locator('.evolution-info-texte').isVisible(), 'infobulle visible au survol');
+    assert.ok((await page.locator('.evolution-info-texte').innerText()).includes('7 indicateurs sur 10'));
+    await page.mouse.move(5, 400);
+    // retour à un autre onglet : le panneau revient
+    await page.click('.tab-button[data-tab="oppchovectab"]');
+    assert.ok(await page.locator('aside').isVisible(), 'panneau restauré hors Évolution');
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
+
 test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, changement de variable', { skip: sauter }, async () => {
   await avecAppli(async ({ page, nouvellesErreurs }) => {
     await page.click('.tab-button[data-tab="evolutiontab"]');
