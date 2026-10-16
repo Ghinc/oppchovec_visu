@@ -31,6 +31,48 @@ test('Évolution : panneau latéral masqué dans l\'onglet, restauré ailleurs ;
   });
 });
 
+test('Évolution : résumé repliable (bouton, clic extérieur, Échap) et loupe qui agrandit une carte', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    const largeurs = () => page.evaluate(() => ['a0', 'a1', 'variation'].map((t) => document.querySelector(`.evolution-carte[data-carte="${t}"]`).getBoundingClientRect().width));
+    // résumé : fermé, ouvert, refermé par clic extérieur, rouvert puis fermé par Échap
+    assert.ok(!(await page.locator('#evolution-resume').isVisible()));
+    await page.click('#evolution-bouton-resume');
+    assert.ok(await page.locator('#evolution-resume').isVisible());
+    await page.mouse.click(400, 500);
+    assert.ok(!(await page.locator('#evolution-resume').isVisible()), 'clic extérieur');
+    await page.click('#evolution-bouton-resume');
+    await page.keyboard.press('Escape');
+    assert.ok(!(await page.locator('#evolution-resume').isVisible()), 'Échap');
+
+    // loupe sur la carte de 2021 : elle devient la plus grande, les deux autres rétrécissent
+    const [l0, l1, lv] = await largeurs();
+    assert.ok(Math.abs(l0 - l1) < 5 && Math.abs(l1 - lv) < 5, 'trois cartes égales au départ');
+    await page.click('.evolution-loupe[data-carte="a1"]');
+    await page.waitForTimeout(400);
+    const [g0, g1, gv] = await largeurs();
+    assert.ok(g1 > 2 * g0 && g1 > 2 * gv, `carte agrandie : ${[g0, g1, gv]}`);
+    assert.ok(g0 > 100 && gv > 100, 'les autres cartes restent visibles');
+    // chaque carte garde un cadrage de la Corse entière (360 communes visibles dans la vue)
+    const visibles = await page.evaluate(() => Object.fromEntries(Object.entries(evolutionCartes).map(([t, c]) => [t, c.getBounds().contains(evolutionCouches[t].getBounds())])));
+    assert.deepEqual(visibles, { a0: true, a1: true, variation: true });
+    // un clic sur une commune de la grande carte donne la fiche
+    await page.evaluate(() => evolutionFiche('Bastia'));
+    assert.ok((await page.locator('#evolution-fiche').innerText()).includes('Bastia'));
+    // on peut agrandir une autre carte directement, puis revenir aux trois
+    await page.click('.evolution-loupe[data-carte="variation"]');
+    await page.waitForTimeout(300);
+    const [h0, h1, hv] = await largeurs();
+    assert.ok(hv > 2 * h0 && hv > 2 * h1, `autre carte agrandie : ${[h0, h1, hv]}`);
+    await page.click('.evolution-loupe[data-carte="variation"]');
+    await page.waitForTimeout(300);
+    const [r0, r1, rv] = await largeurs();
+    assert.ok(Math.abs(r0 - r1) < 5 && Math.abs(r1 - rv) < 5, `retour aux trois cartes : ${[r0, r1, rv]}`);
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
+
 test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, changement de variable', { skip: sauter }, async () => {
   await avecAppli(async ({ page, nouvellesErreurs }) => {
     await page.click('.tab-button[data-tab="evolutiontab"]');
@@ -52,6 +94,9 @@ test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, 
 
     // résumé affiché = moyennes du fichier
     const moy = (a, v) => communes.reduce((s, n) => s + d.communes[n][a].scores_0_10[v], 0) / 360;
+    assert.ok(!(await page.locator('#evolution-resume').isVisible()), 'résumé replié au départ');
+    await page.click('#evolution-bouton-resume');
+    assert.ok(await page.locator('#evolution-resume').isVisible(), 'résumé ouvert par le bouton');
     const resume = (await page.locator('#evolution-resume').innerText()).replace(/\s+/g, ' ');
     assert.ok(resume.includes(moy('2016', 'OppChoVec').toFixed(2).replace('.', ',')), resume);
     assert.ok(resume.includes(moy('2021', 'OppChoVec').toFixed(2).replace('.', ',')), resume);

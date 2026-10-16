@@ -151,6 +151,34 @@ function evolutionRedessiner() {
 }
 
 let evolutionEnCours = false;
+let evolutionAgrandie = null;      // 'a0' | 'a1' | 'variation' quand une carte est agrandie, sinon null
+
+// Loupe : la carte choisie prend la grande colonne, les deux autres sont rangées en petit à droite ; un second clic sur la loupe de la carte agrandie rétablit les trois cartes.
+function evolutionAgrandir(type) {
+    const conteneur = document.getElementById('evolution-cartes');
+    evolutionAgrandie = evolutionAgrandie === type ? null : type;
+    conteneur.classList.toggle('zoom', evolutionAgrandie !== null);
+    conteneur.querySelectorAll('.evolution-carte').forEach(c => c.classList.toggle('agrandie', c.dataset.carte === evolutionAgrandie));
+    conteneur.querySelectorAll('.evolution-loupe').forEach(b => {
+        const ouverte = b.dataset.carte === evolutionAgrandie;
+        b.textContent = ouverte ? '↩' : '🔍';
+        b.title = ouverte ? 'Revenir aux trois cartes' : 'Agrandir cette carte';
+    });
+    setTimeout(() => {
+        const cartes = Object.entries(evolutionCartes);
+        cartes.forEach(([, c]) => c.invalidateSize());
+        if (evolutionAgrandie) cartes.forEach(([t, c]) => c.fitBounds(evolutionCouches[t].getBounds(), { padding: [8, 8], animate: false }));      // chaque carte cadre la Corse
+        else if (evolutionCartes.a0) evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8], animate: false });             // vues de nouveau liées
+    }, 150);
+}
+
+function evolutionBasculerResume(ouvrir) {
+    const panneau = document.getElementById('evolution-resume'), bouton = document.getElementById('evolution-bouton-resume');
+    const afficher = ouvrir === undefined ? panneau.hidden : ouvrir;
+    panneau.hidden = !afficher;
+    bouton.setAttribute('aria-expanded', String(afficher));
+    bouton.textContent = afficher ? 'Résumé chiffré ▴' : 'Résumé chiffré ▾';
+}
 
 async function initialiserOngletEvolution() {
     if (evolutionEnCours) return;
@@ -197,7 +225,7 @@ async function initialiserOngletEvolution() {
     let enCours = false;
     for (const [type, carte] of Object.entries(evolutionCartes)) {
         carte.on('move', () => {
-            if (enCours) return;
+            if (enCours || evolutionAgrandie) return;       // vues indépendantes quand une carte est agrandie
             enCours = true;
             for (const [autre, c] of Object.entries(evolutionCartes)) if (autre !== type) c.setView(carte.getCenter(), carte.getZoom(), { animate: false });
             enCours = false;
@@ -220,6 +248,13 @@ if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         const bouton = document.querySelector('.tab-button[data-tab="evolutiontab"]');
         if (bouton) bouton.addEventListener('click', () => setTimeout(initialiserOngletEvolution, 0));
+        document.querySelectorAll('.evolution-loupe').forEach(b => b.addEventListener('click', () => { if (evolutionInitialise) evolutionAgrandir(b.dataset.carte); }));
+        const boutonResume = document.getElementById('evolution-bouton-resume');
+        if (boutonResume) {
+            boutonResume.addEventListener('click', e => { e.stopPropagation(); evolutionBasculerResume(); });
+            document.addEventListener('click', e => { if (!e.target.closest('.evolution-resume-zone')) evolutionBasculerResume(false); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') evolutionBasculerResume(false); });
+        }
         // panneau latéral masqué dans l'onglet Évolution (classe sur <body>), restauré dans les autres ; les cartes se redimensionnent
         document.querySelectorAll('.tab-button').forEach(b => b.addEventListener('click', () => {
             document.body.classList.toggle('mode-evolution', b.getAttribute('data-tab') === 'evolutiontab');

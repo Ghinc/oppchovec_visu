@@ -2355,7 +2355,20 @@ body.mode-evolution aside { display: none; }
 .evolution-choix select { margin-left: 6px; padding: 3px 6px; }
 .evolution-cartes { flex: 1 1 auto; display: flex; min-height: 0; }
 .evolution-carte { flex: 1 1 33%; min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #ddd; }
-.evolution-carte h4 { margin: 0; padding: 4px 10px; font-size: 14px; background: #f0f0f0; text-align: center; }
+.evolution-carte h4 { margin: 0; padding: 4px 10px; font-size: 14px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
+.evolution-loupe, .evolution-bouton { border: 1px solid #aaa; background: #fff; color: #222; border-radius: 4px; cursor: pointer; margin-top: 0; box-shadow: none; font-weight: normal; }
+.evolution-loupe { font-size: 13px; line-height: 1; padding: 2px 6px; }
+.evolution-loupe:hover, .evolution-bouton:hover { background: #e8f1fb; border-color: #4a90d9; box-shadow: none; transform: none; }
+/* Une carte agrandie : elle prend la grande colonne de gauche, les deux autres sont rangées en petit à droite */
+.evolution-cartes.zoom { display: grid; grid-template-columns: minmax(0, 1fr) 27%; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+.evolution-cartes.zoom .evolution-carte { grid-column: 2; border-right: none; border-bottom: 1px solid #ddd; }
+.evolution-cartes.zoom .evolution-carte.agrandie { grid-column: 1; grid-row: 1 / span 2; border-right: 2px solid #4a90d9; border-bottom: none; }
+.evolution-cartes.zoom .evolution-carte:not(.agrandie) h4 { font-size: 12px; padding: 2px 8px; }
+.evolution-resume-zone { position: relative; margin-left: auto; flex: 0 0 auto; }
+.evolution-bouton { font-size: 12.5px; padding: 4px 10px; }
+.evolution-bouton[aria-expanded="true"] { background: #e8f1fb; border-color: #4a90d9; }
+.evolution-popover { position: absolute; top: 32px; right: 0; z-index: 2000; width: min(560px, 85vw); padding: 10px 12px; background: #fff; border: 1px solid #aaa; border-radius: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); margin-top: 0; }
+.evolution-popover[hidden] { display: none; }
 .evolution-carte .map { flex: 1 1 auto; height: auto; min-height: 0; }
 .evolution-bas { flex: 0 0 auto; display: flex; gap: 16px; max-height: 38%; overflow-y: auto; padding: 8px 14px; border-top: 1px solid #ddd; background: #fafafa; }
 .evolution-bas-gauche { flex: 1 1 55%; min-width: 0; }
