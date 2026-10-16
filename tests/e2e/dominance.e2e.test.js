@@ -11,6 +11,24 @@ const TEXTE = [
   'La première couche regroupe les communes qu\'aucune autre ne dépasse sur les trois dimensions à la fois. Elle ne désigne pas les « meilleures » communes : une commune peut y figurer parce qu\'elle est en tête sur une seule dimension.',
 ];
 
+test('Dominance : panneau latéral masqué dans l\'onglet, restauré ailleurs, carte plus large', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    assert.ok(await page.locator('aside').isVisible(), 'panneau visible au départ');
+    await page.click('.tab-button[data-tab="dominancetab"]');
+    await page.waitForSelector('#dominancetab.active #dominance-legend .dominance-legend-row');
+    assert.ok(!(await page.locator('aside').isVisible()), 'panneau masqué dans Dominance');
+    await page.waitForTimeout(500);
+    const l = await page.evaluate(() => document.getElementById('map-dominance').getBoundingClientRect().width);
+    const principal = await page.evaluate(() => document.querySelector('main').getBoundingClientRect().width);
+    assert.ok(l > 0.55 * principal, `carte large : ${l} sur ${principal}`);
+    const ok = await page.evaluate(() => { const c = document.getElementById('map-dominance'); return c.clientWidth > 300 && c.querySelectorAll('.leaflet-interactive').length === 360; });
+    assert.ok(ok, 'carte redimensionnée et dessinée');
+    await page.click('.tab-button[data-tab="opptab"]');
+    assert.ok(await page.locator('aside').isVisible(), 'panneau restauré dans les autres onglets');
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
+
 test('Dominance : texte explicatif intact, carte colorée par couche, légende en « couches », fiche au clic', { skip: sauter }, async () => {
   await avecAppli(async ({ page, nouvellesErreurs }) => {
     const scores = await page.evaluate(() => JSON.parse(JSON.stringify(scoresParCommune)));

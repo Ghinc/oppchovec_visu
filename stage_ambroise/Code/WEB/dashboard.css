@@ -2487,3 +2487,6 @@ tr:nth-child(even) {
 .pk-info:hover .pk-info-bulle,
 .pk-info:focus .pk-info-bulle,
 .pk-info:focus-within .pk-info-bulle { display: block; }
+
+/* Onglet Dominance : pas de panneau latéral, les cartes prennent toute la largeur */
+body.mode-dominance aside { display: none; }

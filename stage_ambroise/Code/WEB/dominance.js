@@ -86,6 +86,24 @@ function calculerDominance(scores, dimensions = DOMINANCE_DIMENSIONS) {
     return { couches, dominants, domines, exclues, effectifs, nbCouches: effectifs.length };
 }
 
+// Dans l'onglet Dominance le panneau latéral ne sert à rien : classe sur <body> (voir dashboard.css), les cartes prennent toute la largeur
+if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.tab-button').forEach(b => b.addEventListener('click', () => {
+            document.body.classList.toggle('mode-dominance', b.getAttribute('data-tab') === 'dominancetab');
+            setTimeout(() => {                       // les cartes se redimensionnent une fois la disposition changée
+                window.dispatchEvent(new Event('resize'));
+                try {
+                    if (typeof _carteDominance !== 'undefined' && _carteDominance) {
+                        _carteDominance.invalidateSize();
+                        if (b.getAttribute('data-tab') === 'dominancetab' && typeof dominanceLayerRef !== 'undefined' && dominanceLayerRef) _carteDominance.fitBounds(dominanceLayerRef.getBounds(), { padding: [8, 8], animate: false });      // la Corse remplit la carte
+                    }
+                } catch (e) { /* carte détruite entre-temps */ }
+            }, 150);
+        }));
+    });
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { calculerDominance, dominanceDomine, DOMINANCE_DIMENSIONS };
 }
