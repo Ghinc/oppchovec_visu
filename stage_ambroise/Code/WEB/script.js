@@ -663,7 +663,8 @@ function ajouterBoutonTelechargement(carte, mapType) {
 
 // Exporter le GeoJSON enrichi avec les classes Jenks
 function exporterGeoJSONAvecJenks(type) {
-    if (!communeJson || !communeJson.features) {
+    const geoUnitesExport = (typeof geoUnites === 'function') ? geoUnites() : communeJson;
+    if (!geoUnitesExport || !geoUnitesExport.features) {
         alert("GeoJSON des communes non chargé.");
         return;
     }
@@ -689,7 +690,7 @@ function exporterGeoJSONAvecJenks(type) {
     };
 
     // Enrichir les features
-    const features = communeJson.features.map(f => {
+    const features = geoUnitesExport.features.map(f => {
         const nom = f.properties.nom;
         const valeur = getValeur(nom);
         let classeJenks = null, labelJenks = null, couleur = '#ccc';
@@ -1236,6 +1237,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         cartes[type].removeControl(legendControls[type]);
     }
 
+    communeLayers[type] = {};        // les unités changent avec l'échelle (communes / EPCI)
+
     // Créer la couche GeoJSON
     geojsonLayers[type] = L.geoJSON(geojsonData, {
         style: feature => {
@@ -1309,7 +1312,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 <svg width="30" height="2" style="margin-right: 8px;">
                     <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
                 </svg>
-                <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+                <span class="legende-limites" style="font-size: 11px;">${(typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'Limites des EPCI' : traductions[lang].limitesCommunes}</span>
             </div>
         `;
 
@@ -1346,7 +1349,7 @@ function afficherToutesLesCartes(geojsonData, indiceFinal, scores) {
     afficherCarteUnique('map-vec', 'vec', geojsonData, scoresVec, 'Score Vec');
 
     // Si les cartes LISA ont déjà été initialisées, les mettre à jour
-    if (lisaCartesInitialisees) {
+    if (lisaCartesInitialisees && !(typeof echelleEstEPCI === 'function' && echelleEstEPCI())) {
         afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', geojsonData, indiceFinal, clustersLISA5pct, '5%');
         afficherCarteLISA('map-lisa-1pct', 'lisa-1pct', geojsonData, indiceFinal, clustersLISA1pct, '1%');
     }
@@ -1927,6 +1930,10 @@ function readFileAsText(file) {
 // Fonction pour générer les visualisations de données (top 10 et histogramme)
 function genererDataVisualisations(indiceFinale) {
     console.log("📊 Génération des visualisations de données...");
+    const unite = (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'EPCI' : 'commune';          // unités affichées
+    const titreTop = document.getElementById('datavis-top10-titre'), colTop = document.getElementById('datavis-top10-col');
+    if (titreTop) titreTop.textContent = unite === 'EPCI' ? 'Top 10 des EPCI' : 'Top 10 des communes';
+    if (colTop) colTop.textContent = unite === 'EPCI' ? 'EPCI' : 'Commune';
 
     // Créer un tableau de [commune, score] et trier par score décroissant
     const communesScores = Object.entries(indiceFinale).map(([commune, score]) => ({
@@ -2015,7 +2022,7 @@ function genererDataVisualisations(indiceFinale) {
                         },
                         title: {
                             display: true,
-                            text: 'Nombre de communes',
+                            text: unite === 'EPCI' ? 'Nombre d\'EPCI' : 'Nombre de communes',
                             font: {
                                 size: 13,
                                 weight: 'bold'
@@ -2436,6 +2443,10 @@ function estDecompose(indicateur, communeNom) {
 
 // fonction pour afficher le detail d'une commune
 function afficherCommune(communeNom) {
+  if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
+    epciAfficherDansPanneau(communeNom);
+    return;
+  }
 
   for (const commune of Dejasurligner){
        reinitialiserStyleCommune(commune, indicateursCommune);
@@ -2997,8 +3008,19 @@ function recalculerCarteOppChoVec() {
     seuilsJenks['oppchovec'] = ref.jenks;
     console.log('[Jenks oppchovec]', seuilsJenks['oppchovec'].map(v => v.toFixed(3)).join(' | '));
 
+    // Échelle EPCI (case « EPCI » de la barre du haut) : les unités affichées deviennent les EPCI ; les communes restent la base du calcul (epci.js)
+    let geoAffichee = communeJson, indiceAffiche = indiceNorm, scoresAffiches = scoresParCommune;
+    if (typeof echelleEstEPCI === 'function') {
+        epciMemoriserBase(indiceNorm, scoresParCommune);
+        if (echelleEstEPCI() && epciDonnees) {
+            const vue = epciVue();
+            geoAffichee = vue.geo; indiceAffiche = vue.indice; scoresAffiches = vue.scores;
+        }
+    }
+
     // Mettre à jour indiceFinale pour que les popups LISA montrent les bonnes valeurs
-    indiceFinale = indiceNorm;
+    indiceFinale = indiceAffiche;
+    scoresParCommune = scoresAffiches;
 
     // Switcher les clusters LISA selon le mode
     if (modeCalculPk === 'betti' && typeof LISA_DATA_BETTI !== 'undefined' && typeof LISA_DATA_BETTI_1PCT !== 'undefined') {
@@ -3018,14 +3040,14 @@ function recalculerCarteOppChoVec() {
     }
 
     // Cartes OppChoVec, dimensions et LISA (si déjà initialisées)
-    afficherToutesLesCartes(communeJson, indiceNorm, scoresParCommune);
+    afficherToutesLesCartes(geoAffichee, indiceAffiche, scoresAffiches);
 
     majAffichagePk(pkValues);
     if (typeof rafraichirComparaisonVec1 === 'function') rafraichirComparaisonVec1();   // comparaison des deux sources de Vec1 (suit le mode p_k)
     if (typeof rafraichirEPCI === 'function') rafraichirEPCI();   // onglet EPCI (suit le mode p_k et les indicateurs courants)
 
     // Mettre à jour le tableau top 10 et l'histogramme
-    genererDataVisualisations(indiceNorm);
+    genererDataVisualisations(indiceAffiche);
 
     // Mettre à jour l'affichage de la commune sélectionnée si présent
     const communeSelectEl = document.getElementById('communeSelect');
@@ -3033,11 +3055,14 @@ function recalculerCarteOppChoVec() {
         afficherCommune(communeSelectEl.value);
     }
 
-    // Mettre à jour les parangons si déjà initialisés
-    if (parangonsInitialise) {
+    // Mettre à jour les parangons si déjà initialisés ET si l'indice des communes a changé (les parangons restent à l'échelle des communes, même quand la case « EPCI » est cochée)
+    if (parangonsInitialise && signatureIndiceCommunes() !== parangonsSignature) {
         parangonsInitialise = false;
         initialiserOngletParangons();
     }
+
+    // Les corrélations reposent sur des données communales : pas de recalcul à l'échelle EPCI (elles se recalculent au retour aux communes)
+    if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) return;
 
     // Mettre à jour la corrélation si déjà initialisée
     if (correlationInitialise) {
@@ -4264,6 +4289,15 @@ let parangonsLayerRef = null;      // couche GeoJSON de la carte parangons
 let parangonsSelectedCommune = null;
 let parangonsCurrentCluster = null;
 
+// Indice des COMMUNES : indiceFinale porte les EPCI quand la case « EPCI » est cochée (epci.js) ; les parangons restent communaux
+function indiceCommunes() {
+    return (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? epciBase.indice : indiceFinale;
+}
+let parangonsSignature = '';
+function signatureIndiceCommunes() {
+    return JSON.stringify(Object.values(indiceCommunes()).map(v => Math.round(v * 1e6)));
+}
+
 function initialiserOngletParangons() {
     if (parangonsInitialise) {
         setTimeout(() => { if (_carteParangons) _carteParangons.invalidateSize(); }, 100);
@@ -4271,17 +4305,20 @@ function initialiserOngletParangons() {
     }
     // Détruire la carte précédente si elle existe (recalcul après bascule p_k)
     if (_carteParangons) {
+        try { _carteParangons.stop(); } catch (e) { /* aucune animation en cours */ }          // une animation de zoom en cours se terminerait sur une carte détruite
         _carteParangons.remove();
         _carteParangons = null;
         parangonsLayerRef = null;
         document.getElementById('map-parangons').innerHTML = '';
     }
-    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+    const indiceP = indiceCommunes();
+    if (!communeJson || !communeJson.features || !indiceP || Object.keys(indiceP).length === 0) {
         console.warn('Parangons: données non prêtes');
         return;
     }
 
     parangonsInitialise = true;
+    parangonsSignature = signatureIndiceCommunes();
 
     const seuils = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
     const labels = genererLabelsJenks(seuils);
@@ -4294,7 +4331,7 @@ function initialiserOngletParangons() {
         clusters.push({ communes: [], mean: 0, label: labels[i], couleur: colorsJenks[i] });
     }
 
-    for (const [nom, score] of Object.entries(indiceFinale)) {
+    for (const [nom, score] of Object.entries(indiceP)) {
         let classe = nbClasses - 1;
         for (let i = 1; i < seuils.length; i++) {
             if (score <= seuils[i]) { classe = i - 1; break; }
@@ -4335,7 +4372,7 @@ function initialiserOngletParangons() {
 
     parangonsLayerRef = L.geoJSON(communeJson, {
         style: feature => {
-            const val = indiceFinale[feature.properties.nom];
+            const val = indiceP[feature.properties.nom];
             return {
                 fillColor: getColor(val),
                 color: '#333',
@@ -4345,7 +4382,7 @@ function initialiserOngletParangons() {
         },
         onEachFeature: (feature, layer) => {
             const nom = feature.properties.nom;
-            const val = indiceFinale[nom];
+            const val = indiceP[nom];
             layer._parangonsNom = nom;
             layer.on('click', () => {
                 // Trouver le cluster de cette commune
@@ -4489,7 +4526,7 @@ function _parangonsSelectionnerCommune(nom, carte, layer, getColor) {
 
     // Réinitialiser tous les styles
     layer.eachLayer(l => {
-        const val = indiceFinale[l._parangonsNom];
+        const val = indiceCommunes()[l._parangonsNom];
         l.setStyle({
             fillColor: l._parangonsNom === nom ? '#ff0000' : getColor(val),
             color: l._parangonsNom === nom ? '#cc0000' : '#333',
@@ -4536,22 +4573,22 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(targetTab).classList.add('active');
 
             // Si on clique sur l'onglet LISA, initialiser les cartes LISA (lazy loading)
-            if (targetTab === 'lisatab') {
+            if (targetTab === 'lisatab' && !echelleEstEPCI()) {
                 initialiserCartesLISA();
             }
 
             // Si on clique sur l'onglet CAH, initialiser les cartes CAH (lazy loading)
-            if (targetTab === 'cahtab') {
+            if (targetTab === 'cahtab' && !echelleEstEPCI()) {
                 initialiserCartesCAH();
             }
 
             // Si on clique sur l'onglet Entreprises, initialiser (lazy loading)
-            if (targetTab === 'entreprisestab') {
+            if (targetTab === 'entreprisestab' && !echelleEstEPCI()) {
                 initialiserOngletEntreprises();
             }
 
             // Si on clique sur l'onglet Corrélation, initialiser (lazy loading)
-            if (targetTab === 'correlationtab') {
+            if (targetTab === 'correlationtab' && !echelleEstEPCI()) {
                 initialiserOngletCorrelation();
             }
 

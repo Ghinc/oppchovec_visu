@@ -2445,3 +2445,26 @@ body.mode-epci aside { display: none; }
 .epci-lien-commune { color: #0b3d91; text-decoration: none; }
 .epci-lien-commune:hover { text-decoration: underline; }
 .epci-commune .epci-table td, .epci-commune .epci-table th { white-space: nowrap; }
+
+
+/* ============================================
+   CASE « EPCI » (barre du haut) : échelle d'analyse de toute l'appli
+   ============================================ */
+.echelle-epci { flex: 0 0 auto; display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 3px 14px; font-size: 13px; white-space: nowrap; background: #f6f8fb; border-bottom: 1px solid var(--border-light); }
+.echelle-epci-titre { color: #555; }
+.echelle-epci-etat { color: #555; font-style: italic; min-width: 70px; }
+.echelle-epci label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+.echelle-epci input { cursor: pointer; }
+.echelle-epci-modes { display: inline-flex; align-items: center; gap: 10px; padding-left: 10px; border-left: 1px solid #ccc; }
+.echelle-epci-modes[hidden] { display: none; }
+body.mode-echelle-epci .echelle-epci { background: #e1edfa; }
+body.mode-echelle-epci .echelle-epci-etat { color: #0b3d91; font-style: normal; font-weight: 600; }
+aside { flex-shrink: 0; }
+main { min-width: 0; }
+.epci-indisponible { display: none; margin: 16px; padding: 14px 18px; background: #fff4d6; border: 1px solid #e0b84c; border-radius: 8px; font-size: 14px; }
+body.mode-echelle-epci .epci-indisponible { display: block; }
+body.mode-echelle-epci #lisatab > :not(.epci-indisponible),
+body.mode-echelle-epci #cahtab > :not(.epci-indisponible),
+body.mode-echelle-epci #entreprisestab > :not(.epci-indisponible),
+body.mode-echelle-epci #correlationtab > :not(.epci-indisponible),
+body.mode-echelle-epci #evolutiontab > :not(.epci-indisponible) { display: none !important; }

@@ -6,7 +6,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261016a">
+  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261017a">
 </head>
 <body>
   <div id="app">
@@ -104,6 +104,15 @@
     </aside>
     <main>
       <div class="tabs-container">
+        <div class="echelle-epci" title="Passe toutes les analyses à l'échelle des intercommunalités (EPCI)">
+          <span class="echelle-epci-titre">Échelle d'analyse :</span>
+          <label class="echelle-epci-case"><input type="checkbox" id="echelle-epci-case"> <strong>EPCI</strong></label>
+          <span id="echelle-epci-modes" class="echelle-epci-modes" hidden>
+            <label title="Moyenne pondérée par la population de chaque commune (au millésime de chaque indicateur)"><input type="radio" name="echelle-epci-mode" value="epci-pop" checked> EPCI population</label>
+            <label title="Moyenne simple : chaque commune compte pour 1"><input type="radio" name="echelle-epci-mode" value="epci-commune"> EPCI commune</label>
+          </span>
+          <span class="echelle-epci-etat" id="echelle-epci-etat">communes</span>
+        </div>
         <div class="tabs">
           <button class="tab-button active" data-tab="oppchovectab" id="tab-oppchovec">OppChoVec</button>
           <button class="tab-button" data-tab="opptab" id="tab-opp">Opp</button>
@@ -208,12 +217,12 @@
           <div class="datavis-subtab-content active" id="datavis-top10">
             <div style="padding: 2rem; display: flex; justify-content: center; align-items: center; height: 100%;">
               <div style="max-width: 700px; width: 100%;">
-                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text-primary); font-size: 1.3rem;">🏆 Top 10 des communes avec le meilleur score OppChoVec</h3>
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--text-primary); font-size: 1.3rem;">🏆 <span id="datavis-top10-titre">Top 10 des communes</span> avec le meilleur score OppChoVec</h3>
                 <table id="top10-table" class="datavis-table">
                   <thead>
                     <tr>
                       <th>Rang</th>
-                      <th>Commune</th>
+                      <th id="datavis-top10-col">Commune</th>
                       <th>Score OppChoVec</th>
                     </tr>
                   </thead>
@@ -446,14 +455,14 @@
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_1pct.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_betti.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/vec1_variante.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/evolution.js?v=20261016a"></script>
-  <script src="stage_ambroise/Code/WEB/epci.js?v=20261016b"></script>
-  <script src="stage_ambroise/Code/WEB/script.js?v=20261016a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_1pct.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_betti.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/vec1_variante.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/evolution.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/epci.js?v=20261017a"></script>
+  <script src="stage_ambroise/Code/WEB/script.js?v=20261017a"></script>
 </body>
 </html>

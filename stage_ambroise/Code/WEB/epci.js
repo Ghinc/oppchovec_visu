@@ -24,6 +24,12 @@ let epciSelection = null;          // siren
 let epciCommune = null;            // commune cliquée (nom), dans l'EPCI sélectionné
 let epciCoucheCommunes = null;
 let epciDe = {};                   // { commune: siren }
+let epciChargement = null;         // promesse de chargement en cours (partagée par l'onglet et la case « EPCI »)
+
+// Échelle d'analyse de toute l'appli (case « EPCI » de la barre du haut) : 'commune' | 'epci-pop' (pro rata du nombre d'habitants) | 'epci-commune' (moyenne simple)
+let echelleEpci = 'commune';
+let epciBase = { indice: {}, scores: {} };     // indice et scores 0-10 des COMMUNES : restent disponibles quand les variables de l'appli (indiceFinale, scoresParCommune) portent les EPCI
+let epciGeoVue = null;                         // contours des EPCI au format attendu par les cartes de l'appli (properties.nom = nom de l'EPCI)
 let epciResultats = { prorata: {}, simple: {} };
 
 // ---------- Calculs purs ----------
@@ -139,7 +145,7 @@ function epciTableau() {
 
 // Détail d'une commune dans l'agrégation de son EPCI : ses valeurs, son poids selon chaque méthode et l'écart avec l'EPCI
 function epciCommuneHtml(e, nom) {
-    const v = indicateursCommune[nom] || {}, sc = scoresParCommune[nom], occ = indiceFinale[nom];
+    const v = indicateursCommune[nom] || {}, sc = epciBase.scores[nom] || scoresParCommune[nom], occ = epciBase.indice[nom] !== undefined ? epciBase.indice[nom] : indiceFinale[nom];
     const p = epciResultats.prorata[e.siren], s = epciResultats.simple[e.siren];
     const pct = x => epciFmt(100 * x, 1) + ' %';
     const fleche = (a, b) => (a > b ? '<span class="epci-hausse" title="au-dessus de l\'EPCI">▲</span>' : a < b ? '<span class="epci-baisse" title="en dessous de l\'EPCI">▼</span>' : '＝');
@@ -158,10 +164,8 @@ function epciCommuneHtml(e, nom) {
         `<div class="epci-petit">▲ ▼ : la commune est au-dessus ou en dessous de la valeur de l'EPCI. Le poids pro rata est la part de la population de l'EPCI, au millésime de l'indicateur. Les valeurs de la commune sont celles de l'appli (curseurs compris).</div></div>`;
 }
 
-function epciFiche() {
-    const el = document.getElementById('epci-fiche');
-    if (!epciSelection) { el.innerHTML = '<span class="epci-petit">Cliquez sur un EPCI (carte ou tableau) pour voir ses indicateurs et ses communes.</span>'; return; }
-    const e = epciDonnees.epci.find(x => x.siren === epciSelection);
+// HTML de la fiche d'un EPCI (scores et indicateurs agrégés selon les deux méthodes, communes membres) ; commune : détail d'une commune de l'EPCI, ou null
+function epciFicheHtml(e, commune) {
     const p = epciResultats.prorata[e.siren], s = epciResultats.simple[e.siren];
     const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => `<tr><td>${lib}</td><td>${epciFmt(p[k])}</td><td>${epciFmt(s[k])}</td><td>${(p[k] - s[k] >= 0 ? '+' : '') + epciFmt(p[k] - s[k])}</td></tr>`).join('');
     const brut = EPCI_INDICATEURS.map(k => {
@@ -170,10 +174,16 @@ function epciFiche() {
         return `<tr><td>${k}</td><td>${epciFmt(a, dec)}</td><td>${epciFmt(b, dec)}</td><td class="epci-petit">pop. ${epciDonnees.millesimes[k]}${epciDonnees.millesime_approche[k] ? ' *' : ''}</td></tr>`;
     }).join('');
     const communes = Object.entries(e.communes).sort((a, b) => b[1].pop.Cho2 - a[1].pop.Cho2).map(([nom, c]) => `<a href="#" class="epci-lien-commune" data-commune="${epciEch(nom)}">${epciEch(nom)}</a> (${epciFmt(c.pop.Cho2, 0)})`).join(', ');
-    el.innerHTML = (epciCommune && e.communes[epciCommune] ? epciCommuneHtml(e, epciCommune) : '') + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (2023)</div>` +
+    return (commune && e.communes[commune] ? epciCommuneHtml(e, commune) : '') + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (2023)</div>` +
         `<table class="epci-table"><tr><th>Scores (0-10)</th><th>Pro rata</th><th>Simple</th><th>Écart</th></tr>${scores}<tr><th>Indicateurs agrégés</th><th>Pro rata</th><th>Simple</th><th>Pondération</th></tr>${brut}</table>` +
         `<div class="epci-petit">* population la plus récente publiée (2023) : millésime de la source non daté ou plus récent que les populations disponibles.</div>` +
         `<div class="epci-petit"><strong>Communes</strong> (habitants 2022) : ${communes}</div>`;
+}
+
+function epciFiche() {
+    const el = document.getElementById('epci-fiche');
+    if (!epciSelection) { el.innerHTML = '<span class="epci-petit">Cliquez sur un EPCI (carte ou tableau) pour voir ses indicateurs et ses communes.</span>'; return; }
+    el.innerHTML = epciFicheHtml(epciDonnees.epci.find(x => x.siren === epciSelection), epciCommune);
 }
 
 function epciRedessiner() {
@@ -208,6 +218,30 @@ function epciSelectionnerCommune(nom) {        // clic sur une commune (carte ou
     epciRestyler();
 }
 
+// Charge epci_agregation.json et epci_corse.geojson (une seule fois, même si l'onglet et la case « EPCI » le demandent en même temps)
+async function epciChargerDonnees() {
+    if (epciDonnees && epciContours) return true;
+    if (!epciChargement) {
+        epciChargement = (async () => {
+            try {
+                const v = '?v=20261017a';
+                const [r1, r2] = await Promise.all([fetch(BASE_PATH + 'epci_agregation.json' + v), fetch(BASE_PATH + 'epci_corse.geojson' + v)]);
+                if (!r1.ok || !r2.ok) throw new Error(`HTTP ${r1.status} / ${r2.status}`);
+                epciDonnees = await r1.json();
+                epciContours = await r2.json();
+                for (const e of epciDonnees.epci) for (const nom of Object.keys(e.communes)) epciDe[nom] = e.siren;
+                return true;
+            } catch (e) {
+                console.warn('EPCI : données non chargées', e);
+                return false;
+            } finally {
+                epciChargement = null;
+            }
+        })();
+    }
+    return epciChargement;
+}
+
 async function initialiserOngletEPCI() {
     if (epciEnCours) return;
     if (epciInitialise) { setTimeout(() => { epciCarte.invalidateSize(); epciCarte.fitBounds(epciCouche.getBounds(), { padding: [8, 8], animate: false }); }, 150); return; }
@@ -216,14 +250,7 @@ async function initialiserOngletEPCI() {
         return;
     }
     epciEnCours = true;
-    try {
-        const v = '?v=20261016b';
-        const [r1, r2] = await Promise.all([fetch(BASE_PATH + 'epci_agregation.json' + v), fetch(BASE_PATH + 'epci_corse.geojson' + v)]);
-        if (!r1.ok || !r2.ok) throw new Error(`HTTP ${r1.status} / ${r2.status}`);
-        epciDonnees = await r1.json();
-        epciContours = await r2.json();
-    } catch (e) {
-        console.warn('EPCI : données non chargées', e);
+    if (!(await epciChargerDonnees())) {
         document.getElementById('epci-fiche').textContent = 'Données des EPCI indisponibles.';
         epciEnCours = false;
         return;
@@ -232,7 +259,6 @@ async function initialiserOngletEPCI() {
     epciEnCours = false;
     epciCarte = L.map(document.getElementById('map-epci'), { center: [42.0, 9.0], zoom: 7.4, zoomSnap: 0.1, zoomDelta: 0.1, attributionControl: false });
     epciCarte.getContainer().style.backgroundColor = '#ffffff';
-    for (const e of epciDonnees.epci) for (const nom of Object.keys(e.communes)) epciDe[nom] = e.siren;
     epciResultats = { prorata: epciCalculer(true), simple: epciCalculer(false) };
     epciCouche = L.geoJSON(epciContours, {
         style: f => epciStyle(f.properties.siren),
@@ -260,9 +286,103 @@ async function initialiserOngletEPCI() {
     setTimeout(() => { epciCarte.invalidateSize(); epciCarte.fitBounds(epciCouche.getBounds(), { padding: [8, 8], animate: false }); }, 150);
 }
 
+// ---------- Échelle d'analyse de toute l'appli : case « EPCI » ----------
+// Quand elle est cochée, les unités affichées par l'appli deviennent les EPCI : les cartes OppChoVec / Opp / Cho / Vec, le top 10 et l'histogramme, le panneau de sélection et les parangons.
+// Les communes restent la base du calcul (indicateurs, bornes figées, p_k). Les analyses qui reposent sur des données communales (LISA, CAH, Entreprises, Corrélation, Évolution) affichent un bandeau.
+const echelleEstEPCI = () => echelleEpci !== 'commune';
+
+function epciMemoriserBase(indice, scores) { epciBase = { indice, scores }; }      // appelé par script.js avant de remplacer les unités affichées
+
+function epciConstruireGeoVue() {
+    epciGeoVue = { type: 'FeatureCollection', features: epciContours.features.map(f => ({ type: 'Feature', geometry: f.geometry, properties: { nom: f.properties.nom, siren: f.properties.siren } })) };
+}
+
+// Unités affichées : communes ou EPCI (contours, indice 0-10 et scores 0-10 par nom d'unité)
+function epciVue() {
+    epciResultats = { prorata: epciCalculer(true), simple: epciCalculer(false) };         // les deux méthodes : la fiche d'un EPCI les compare
+    const r = epciResultats[echelleEpci === 'epci-pop' ? 'prorata' : 'simple'];
+    const indice = {}, scores = {};
+    for (const e of epciDonnees.epci) {
+        indice[e.nom] = r[e.siren].oppchovec;
+        scores[e.nom] = { Score_Opp: r[e.siren].opp, Score_Cho: r[e.siren].cho, Score_Vec: r[e.siren].vec };
+    }
+    return { geo: epciGeoVue, indice, scores };
+}
+
+function geoUnites() { return echelleEstEPCI() && epciGeoVue ? epciGeoVue : communeJson; }
+
+function epciAfficherDansPanneau(nom) {         // panneau « sélection » de la barre latérale : fiche de l'EPCI choisi
+    for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
+    surlignerCommune(nom, 'red');
+    const e = epciDonnees.epci.find(x => x.nom === nom);
+    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+}
+
+const EPCI_ONGLETS_NON_DISPONIBLES = {
+    lisatab: 'L\'autocorrélation spatiale (LISA) est calculée par commune.',
+    cahtab: 'La classification (CAH) est calculée par commune.',
+    entreprisestab: 'La densité entrepreneuriale est une donnée communale.',
+    correlationtab: 'Les corrélations s\'appuient sur des données communales (densité d\'entreprises, enquête de bien-être).',
+    evolutiontab: 'La série 2016-2021 est calculée par commune.',
+};
+
+function epciInstallerBandeaux() {
+    for (const [id, raison] of Object.entries(EPCI_ONGLETS_NON_DISPONIBLES)) {
+        const onglet = document.getElementById(id);
+        if (!onglet || onglet.querySelector('.epci-indisponible')) continue;
+        const b = document.createElement('div');
+        b.className = 'epci-indisponible';
+        b.innerHTML = `<strong>Analyse non disponible à l'échelle de l'EPCI.</strong> ${raison} Décochez « EPCI » dans la barre du haut pour revenir aux communes.`;
+        onglet.insertBefore(b, onglet.firstChild);
+    }
+}
+
+function epciMajControle() {
+    const case_ = document.getElementById('echelle-epci-case');
+    if (!case_) return;
+    case_.checked = echelleEstEPCI();
+    document.getElementById('echelle-epci-modes').hidden = !echelleEstEPCI();
+    for (const r of document.querySelectorAll('input[name="echelle-epci-mode"]')) r.checked = r.value === (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune');
+    document.body.classList.toggle('mode-echelle-epci', echelleEstEPCI());
+    const etat = document.getElementById('echelle-epci-etat');
+    if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'EPCI · pro rata du nombre d\'habitants' : echelleEpci === 'epci-commune' ? 'EPCI · moyenne simple (1 commune = 1)' : 'communes';
+}
+
+// Change l'échelle d'analyse de toute l'appli ('commune' | 'epci-pop' | 'epci-commune') ; renvoie false si elle n'a pas pu être changée
+async function changerEchelle(mode) {
+    if (mode !== 'commune') {
+        const pret = typeof bornesRef !== 'undefined' && bornesRef;
+        if (!pret || !(await epciChargerDonnees())) { epciMajControle(); return false; }
+        document.getElementById('epci-prorata').checked = mode === 'epci-pop';
+    }
+    echelleEpci = mode;
+    if (mode !== 'commune') epciConstruireGeoVue();
+    epciMajControle();
+    const noms = mode === 'commune' ? Object.keys(indicateursCommune) : epciDonnees.epci.map(e => e.nom);
+    populateCommuneSelect(Object.fromEntries(noms.map(n => [n, 1])));
+    document.getElementById('resultCommune').innerHTML = '';
+    for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
+    recalculerCarteOppChoVec();                 // redessine toutes les analyses avec les unités de la nouvelle échelle
+    return true;
+}
+
 // Ouverture de l'onglet : initialisation ici (après le changement d'onglet fait par script.js) ; panneau latéral masqué dans cet onglet
 if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
     document.addEventListener('DOMContentLoaded', () => {
+        epciInstallerBandeaux();
+        const caseEpci = document.getElementById('echelle-epci-case');
+        if (caseEpci) {
+            caseEpci.addEventListener('change', () => changerEchelle(caseEpci.checked ? (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune') : 'commune'));
+            document.querySelectorAll('input[name="echelle-epci-mode"]').forEach(r => r.addEventListener('change', () => {
+                if (!r.checked) return;
+                document.getElementById('epci-prorata').checked = r.value === 'epci-pop';
+                if (echelleEstEPCI()) changerEchelle(r.value); else epciMajControle();
+                if (epciInitialise) epciRedessiner();
+            }));
+            document.getElementById('epci-prorata').addEventListener('change', () => {       // même méthode que l'onglet EPCI : la case de l'onglet et les boutons du haut restent synchronisés
+                if (echelleEstEPCI()) changerEchelle(document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune'); else epciMajControle();
+            });
+        }
         document.querySelectorAll('.tab-button').forEach(b => b.addEventListener('click', () => {
             document.body.classList.toggle('mode-epci', b.getAttribute('data-tab') === 'epcitab');
             if (b.getAttribute('data-tab') === 'epcitab') setTimeout(initialiserOngletEPCI, 0);
@@ -272,5 +392,5 @@ if (typeof document !== 'undefined' && typeof document.addEventListener === 'fun
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { epciAgreger, epciPoids, epciClasse, EPCI_INDICATEURS };
+    module.exports = { epciAgreger, epciPoids, epciClasse, EPCI_INDICATEURS, EPCI_ONGLETS_NON_DISPONIBLES };
 }

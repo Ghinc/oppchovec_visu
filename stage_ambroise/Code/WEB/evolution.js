@@ -423,7 +423,7 @@ async function initialiserOngletEvolution() {
     }
     evolutionEnCours = true;
     try {
-        const reponse = await fetch(BASE_PATH + 'serie_temporelle.json?v=20261016a');
+        const reponse = await fetch(BASE_PATH + 'serie_temporelle.json?v=20261017a');
         if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
         evolutionDonnees = await reponse.json();
     } catch (e) {
