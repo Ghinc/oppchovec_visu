@@ -2466,8 +2466,7 @@ body.mode-echelle-epci .epci-indisponible { display: block; }
 body.mode-echelle-epci #lisatab > :not(.epci-indisponible),
 body.mode-echelle-epci #cahtab > :not(.epci-indisponible),
 body.mode-echelle-epci #entreprisestab > :not(.epci-indisponible),
-body.mode-echelle-epci #correlationtab > :not(.epci-indisponible),
-body.mode-echelle-epci #evolutiontab > :not(.epci-indisponible) { display: none !important; }
+body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: none !important; }
 
 /* Évolution : fiabilité des petites communes et variante Opp3 */
 .evolution-option { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; cursor: pointer; white-space: nowrap; }

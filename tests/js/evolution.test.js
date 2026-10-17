@@ -152,3 +152,43 @@ test('Opp3 : le détail montre le drapeau, son critère (seuil) et l\'effectif b
   assert.match(evolutionComposantes(d, fragile, 'Opp3').note, /très fragile/);
   assert.doesNotMatch(evolutionComposantes(rob, fragile, 'Opp3').note, /très fragile/);
 });
+
+test('série EPCI : un « EPCI » d\'une seule commune retrouve exactement les scores de la commune (mêmes bornes, mêmes p_k) ; moyenne simple et pro rata à la main', () => {
+  const { evolutionSerieEPCI, evolutionEchellesScores } = require(path.join(WEB, 'evolution.js'));
+  const agreg = lireJson('epci_agregation.json');
+  const un = (nom) => [{ siren: 'X', nom: 'Seul', communes: { [nom]: {} } }];
+  for (const prorata of [true, false]) {
+    for (const commune of ['Afa', 'Ajaccio', 'Piazzali']) {
+      const e = evolutionSerieEPCI(d, un(commune), prorata).communes.Seul;
+      for (const a of ['2016', '2021']) {
+        for (const v of ['OppChoVec', 'Opp', 'Cho', 'Vec']) assert.ok(Math.abs(e[a].scores_0_10[v] - d.communes[commune][a].scores_0_10[v]) < 1e-9, `${commune} ${a} ${v}`);
+        for (const k of d.indicateurs) assert.ok(Math.abs(e[a].indicateurs[k] - d.communes[commune][a].indicateurs[k]) < 1e-9);
+      }
+    }
+  }
+  // EPCI réels : 19, scores finis, population de l'année en pondération, bornes des communes conservées
+  const pop = evolutionSerieEPCI(d, agreg.epci, true), sim = evolutionSerieEPCI(d, agreg.epci, false);
+  assert.equal(Object.keys(pop.communes).length, 19);
+  assert.deepEqual(pop.echelles_scores, evolutionEchellesScores(d));
+  assert.equal(pop.unite, 'epci');
+  const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
+  for (const a of ['2016', '2021']) {
+    const h = Object.keys(e.communes).map((n) => d.communes[n][a].composantes.Cho2.population);
+    const tot = h.reduce((t, x) => t + x, 0);
+    const attenduPop = Object.keys(e.communes).reduce((t, n, i) => t + h[i] * d.communes[n][a].indicateurs.Vec2, 0) / tot;       // population DE L'ANNÉE
+    const attenduSimple = Object.keys(e.communes).reduce((t, n) => t + d.communes[n][a].indicateurs.Vec2, 0) / Object.keys(e.communes).length;
+    assert.ok(Math.abs(pop.communes[e.nom][a].indicateurs.Vec2 - attenduPop) < 1e-12, `pro rata ${a}`);
+    assert.ok(Math.abs(sim.communes[e.nom][a].indicateurs.Vec2 - attenduSimple) < 1e-12, `simple ${a}`);
+    assert.ok(Math.abs(pop.communes[e.nom][a].composantes.Cho2.population - tot) < 1e-9);
+  }
+  for (const s of [pop, sim]) for (const c of Object.values(s.communes)) for (const a of ['2016', '2021']) for (const v of ['OppChoVec', 'Opp', 'Cho', 'Vec']) assert.ok(Number.isFinite(c[a].scores_0_10[v]), v);
+  // le détail du calcul fonctionne sur la série EPCI : les contributions des indicateurs somment l'évolution de la dimension
+  for (const nom of Object.keys(pop.communes)) {
+    const det = evolutionDetails(pop, nom);
+    for (const dim of det.dimensions) assert.ok(Math.abs(dim.indicateurs.reduce((t, i) => t + i.contributionPoints, 0) - (dim.score1 - dim.score0)) < 1e-9, `${nom} ${dim.nom}`);
+    assert.ok(Math.abs(det.indice.score1 - pop.communes[nom]['2021'].scores_0_10.OppChoVec) < 1e-9 && Math.abs(det.indice.score0 - pop.communes[nom]['2016'].scores_0_10.OppChoVec) < 1e-9);
+  }
+  // les évolutions des EPCI sont plus faibles que celles des communes (moyennes) mais gardent le signe de l'ensemble
+  const ecart = (s) => Object.values(s.communes).map((c) => c['2021'].scores_0_10.OppChoVec - c['2016'].scores_0_10.OppChoVec);
+  assert.ok(Math.max(...ecart(pop).map(Math.abs)) < 2.5);
+});

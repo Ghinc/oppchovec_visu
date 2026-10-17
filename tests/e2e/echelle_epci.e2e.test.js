@@ -45,7 +45,7 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     assert.equal(await page.locator('#top10-tbody tr').count(), 10);
 
     // bandeau sur les analyses communales, pas de contenu
-    for (const t of ['lisatab', 'cahtab', 'entreprisestab', 'correlationtab', 'evolutiontab']) {
+    for (const t of ['lisatab', 'cahtab', 'entreprisestab', 'correlationtab']) {
       await page.click(`.tab-button[data-tab="${t}"]`);
       assert.ok(await page.locator(`#${t} .epci-indisponible`).isVisible(), `bandeau ${t}`);
     }
@@ -89,6 +89,59 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     await page.click('.tab-button[data-tab="lisatab"]');
     assert.ok(!(await page.locator('#lisatab .epci-indisponible').isVisible()), 'plus de bandeau');
     assert.ok(await page.evaluate(() => lisaCartesInitialisees), 'LISA de nouveau disponible');
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
+
+test('Échelle EPCI : l\'onglet Évolution passe aux EPCI (19 polygones, série EPCI, fiche avec communes membres), puis revient aux communes', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    const unites = (type) => page.evaluate((t) => evolutionCouches[t].getLayers().length, type);
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    assert.equal(await unites('a0'), 360);
+    assert.equal(await page.locator('#evolution-griser').isDisabled(), false);
+
+    await page.check('#echelle-epci-case');
+    await page.waitForFunction(() => evolutionCouches.a1.getLayers().length === 19);
+    for (const t of ['a0', 'a1', 'variation']) assert.equal(await unites(t), 19, t);
+    assert.equal(await page.locator('#evolutiontab .epci-indisponible').isVisible(), false, 'pas de bandeau : l\'évolution existe à l\'échelle EPCI');
+    assert.ok((await page.locator('.evolution-titre-onglet').innerText()).includes('EPCI (population)'));
+    assert.equal(await page.locator('#evolution-griser').isDisabled(), true, 'rien à griser : les EPCI sont grands');
+    // couleurs des niveaux = classes de Jenks des communes ; variation = classes de Jenks des EPCI
+    const verif = await page.evaluate(() => {
+      const d = evolutionDonnees, palette = colorsJenks, ok = { niveaux: true, variation: true };
+      evolutionCouches.a1.eachLayer((l) => { const v = d.communes[l._evolutionNom]['2021'].scores_0_10.OppChoVec; if (l.options.fillColor !== palette[evolutionClasse(v, d.seuils_jenks.OppChoVec)]) ok.niveaux = false; });
+      evolutionCouches.variation.eachLayer((l) => { const c = d.communes[l._evolutionNom]; const v = c['2021'].scores_0_10.OppChoVec - c['2016'].scores_0_10.OppChoVec; if (l.options.fillColor !== evolutionCouleursVariation(d.seuils_jenks_variation.OppChoVec)[evolutionClasse(v, d.seuils_jenks_variation.OppChoVec)]) ok.variation = false; });
+      return ok;
+    });
+    assert.deepEqual(verif, { niveaux: true, variation: true });
+
+    // fiche d'un EPCI : scores, détail du calcul, indicateurs non cliquables, communes membres
+    const nom = agreg.epci.find((e) => e.nom.includes('Pays Ajaccien')).nom;
+    await page.evaluate((n) => evolutionFiche(n), nom);
+    let t = (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');
+    for (const mot of [nom, 'Indice OppChoVec', 'Ajaccio (', 'Communes']) assert.ok(t.includes(mot), mot);
+    assert.equal(await page.locator('#evolution-fiche .evolution-alerte').count(), 0);
+    assert.equal(await page.locator('#evolution-fiche .evolution-ligne-score[data-variable="Opp1"]').count(), 0, 'indicateurs non cliquables à l\'échelle EPCI');
+    await page.click('.evolution-ligne-score[data-variable="OppChoVec"]');
+    t = (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');
+    for (const mot of ['Somme S', 'Contribution à ΔS']) assert.ok(t.includes(mot), mot);
+    await page.click('#evolution-bouton-resume');
+    const resume = (await page.locator('#evolution-resume').innerText()).replace(/\s+/g, ' ');
+    assert.ok(resume.includes('EPCI en progression') && resume.includes('Échelle EPCI'), resume);
+    await page.mouse.click(400, 500);
+
+    // moyenne simple : les valeurs changent
+    const avant = await page.evaluate((n) => evolutionDonnees.communes[n]['2021'].scores_0_10.OppChoVec, nom);
+    await page.check('input[name="echelle-epci-mode"][value="epci-commune"]');
+    await page.waitForFunction(() => evolutionDonnees.prorata === false);
+    assert.notEqual(await page.evaluate((n) => evolutionDonnees.communes[n]['2021'].scores_0_10.OppChoVec, nom), avant);
+
+    // case décochée : retour aux 360 communes
+    await page.uncheck('#echelle-epci-case');
+    await page.waitForFunction(() => evolutionCouches.a1.getLayers().length === 360);
+    assert.equal(await page.locator('#evolution-griser').isDisabled(), false);
+    assert.ok(!(await page.locator('.evolution-titre-onglet').innerText()).includes('EPCI'));
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });

@@ -33,6 +33,14 @@ let evolutionGriser = false;             // griser les communes sous le seuil su
 let evolutionRobuste = false;            // variante « Opp3 robuste » (drapeau transports en commun levé à partir de 5 personnes)
 const evolutionDonneesParVariante = {};  // { standard, robuste } : fichiers chargés
 
+// Série communale de la variante courante ; série affichée (evolutionDonnees) = série communale, ou série EPCI quand la case « EPCI » est cochée (epci.js)
+function evolutionDonneesCommunes() { return evolutionDonneesParVariante[evolutionRobuste ? 'robuste' : 'standard']; }
+const evolutionEstEpci = () => typeof echelleEstEPCI === 'function' && echelleEstEPCI();
+function evolutionMajDonnees() {
+    const base = evolutionDonneesCommunes();
+    evolutionDonnees = evolutionEstEpci() && typeof epciDonnees !== 'undefined' && epciDonnees ? evolutionSerieEPCI(base, epciDonnees.epci, echelleEpci === 'epci-pop') : base;
+}
+
 // ---------- Calculs purs ----------
 
 function evolutionClasse(valeur, seuilsInternes) {
@@ -88,8 +96,8 @@ function evolutionResume(donnees, variable, minHab = 0) {
 //   S = Σ p_k × dimension_k^β ; indice brut = (1/3) × S^(α/β) ; score 0-10 = (valeur - min) / (max - min) × 10, min et max pris sur toutes les communes des deux années.
 const EVOLUTION_ALPHA = 2.5, EVOLUTION_BETA = 1.5;
 
-function evolutionCalcul(donnees, commune, annee) {
-    const ind = donnees.communes[commune][String(annee)].indicateurs;
+// Normalisation, dimensions, somme S et indice brut à partir d'un dictionnaire d'indicateurs (commune, ou EPCI agrégé)
+function evolutionCalculDepuis(donnees, ind) {
     const norm = {};
     for (const k of donnees.indicateurs) {
         const [lo, hi] = donnees.echelle[k];
@@ -101,8 +109,13 @@ function evolutionCalcul(donnees, commune, annee) {
     return { norm, dim, somme, brut: (1 / 3) * somme ** (EVOLUTION_ALPHA / EVOLUTION_BETA) };
 }
 
+function evolutionCalcul(donnees, commune, annee) {
+    return evolutionCalculDepuis(donnees, donnees.communes[commune][String(annee)].indicateurs);
+}
+
 const evolutionCacheEchelles = new WeakMap();
 function evolutionEchellesScores(donnees) {                     // min et max de l'indice brut et de chaque dimension, toutes communes et toutes années
+    if (donnees.echelles_scores) return donnees.echelles_scores;      // série EPCI : mêmes bornes que les communes
     if (evolutionCacheEchelles.has(donnees)) return evolutionCacheEchelles.get(donnees);
     const e = { OppChoVec: [Infinity, -Infinity] };
     for (const nom of Object.keys(donnees.dimensions)) e[nom] = [Infinity, -Infinity];
@@ -113,6 +126,42 @@ function evolutionEchellesScores(donnees) {                     // min et max de
     }
     evolutionCacheEchelles.set(donnees, e);
     return e;
+}
+
+// Série à l'échelle des EPCI, au même format que la série communale : indicateurs agrégés pour chaque année (pro rata : pondération par la population de l'année ; simple : moyenne arithmétique),
+// puis MÊMES bornes min-max, mêmes p_k et même passage à 0-10 que les communes (un EPCI est comparable à une commune). epcis : liste de epci_agregation.json.
+function evolutionSerieEPCI(donnees, epcis, prorata) {
+    const ech = evolutionEchellesScores(donnees);
+    const sur10 = (x, cle) => (ech[cle][1] === ech[cle][0] ? 5 : (x - ech[cle][0]) / (ech[cle][1] - ech[cle][0]) * 10);
+    const communes = {};
+    for (const e of epcis) {
+        const noms = Object.keys(e.communes).filter(n => donnees.communes[n]);
+        const sortie = { code: e.siren };
+        for (const a of donnees.annees) {
+            const cle = String(a);
+            const hab = Object.fromEntries(noms.map(n => [n, donnees.communes[n][cle].composantes.Cho2.population]));
+            const indicateurs = {};
+            for (const k of donnees.indicateurs) {
+                let somme = 0, poids = 0;
+                for (const n of noms) { const w = prorata ? hab[n] : 1; somme += w * donnees.communes[n][cle].indicateurs[k]; poids += w; }
+                indicateurs[k] = somme / poids;
+            }
+            const calc = evolutionCalculDepuis(donnees, indicateurs);
+            const scores = { OppChoVec: sur10(calc.brut, 'OppChoVec') };
+            for (const dim of Object.keys(donnees.dimensions)) scores[dim] = sur10(calc.dim[dim], dim);
+            sortie[cle] = { indicateurs, scores_0_10: scores, vec1_departementale: false, composantes: { Cho2: { population: noms.reduce((t, n) => t + hab[n], 0) } } };
+        }
+        communes[e.nom] = sortie;
+    }
+    // carte d'évolution : classes de Jenks sur les variations des EPCI (les EPCI bougent peu : avec les classes des communes presque tous seraient « stables ») ; cartes des niveaux : classes des communes
+    const seuilsVariation = { ...donnees.seuils_jenks_variation };
+    if (typeof calculerJenksBreaks === 'function') {
+        for (const v of Object.keys(seuilsVariation)) {
+            const variations = Object.values(communes).map(c => c[String(donnees.annees[donnees.annees.length - 1])].scores_0_10[v] - c[String(donnees.annees[0])].scores_0_10[v]);
+            seuilsVariation[v] = calculerJenksBreaks(variations, 5);
+        }
+    }
+    return { ...donnees, communes, echelles_scores: ech, seuils_jenks_variation: seuilsVariation, unite: 'epci', prorata };
 }
 
 function evolutionDetails(donnees, commune) {
@@ -254,21 +303,23 @@ function evolutionLegendes() {
     const libVar = [`≤ ${signe(sv[0])}`, ...sv.slice(1).map((x, i) => `${signe(sv[i])} – ${signe(x)}`), `> ${signe(sv[sv.length - 1])}`];
     const couleursVar = evolutionCouleursVariation(sv);
     document.getElementById('evolution-legende-variation').innerHTML =
-        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]} (points sur 10), classes de Jenks</strong> ` +
+        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]} (points sur 10), classes de Jenks${d.unite === 'epci' ? ' des variations des EPCI' : ''}</strong> ` +
         libVar.map((l, i) => `<span class="evolution-classe">${pastille(couleursVar[i])}${l}${i === zero ? ' (contient 0)' : ''}</span>`).join('');
 }
 
 function evolutionResumeHtml() {
     const d = evolutionDonnees;
-    const r = evolutionResume(d, evolutionVariable, EVOLUTION_SEUIL_FIABLE);
+    const epci = evolutionEstEpci();
+    const r = evolutionResume(d, evolutionVariable, epci ? 0 : EVOLUTION_SEUIL_FIABLE);
     const [a0, a1] = d.annees;
     const ligne = e => `${evolutionEchapper(e.commune)} (${e.variation >= 0 ? '+' : ''}${evolutionFmt(e.variation)})`;
     document.getElementById('evolution-resume').innerHTML =
         `<div><strong>${EVOLUTION_VARIABLES[evolutionVariable]}</strong> : moyenne ${a0} <strong>${evolutionFmt(r.moyenne0)}</strong> → ${a1} <strong>${evolutionFmt(r.moyenne1)}</strong> ` +
         `(${r.variationMoyenne >= 0 ? '+' : ''}${evolutionFmt(r.variationMoyenne)}).</div>` +
-        `<div>${r.progressions} communes en progression, ${r.stables} stables, ${r.reculs} en recul (seuil ±0,5 point).</div>` +
+        `<div>${r.progressions} ${epci ? 'EPCI' : 'communes'} en progression, ${r.stables} stables, ${r.reculs} en recul (seuil ±0,5 point).</div>` +
         `<div class="evolution-petit">Plus fortes progressions : ${r.meilleures.map(ligne).join(' ; ')}<br>Plus forts reculs : ${r.pires.map(ligne).join(' ; ')}</div>` +
-        `<div class="evolution-petit">Classements limités aux communes d'au moins ${EVOLUTION_SEUIL_FIABLE} habitants : les ${r.nbExclues} communes plus petites ont des évolutions qui dépendent de quelques personnes (écart-type de la variation de l'indice 1,4 à 1,8 point, contre 0,6 au-delà de 1 000 habitants) et dominaient auparavant ces listes.</div>`;
+        (epci ? `<div class="evolution-petit">Échelle EPCI (${d.prorata ? 'pro rata de la population de chaque année' : 'moyenne simple, chaque commune compte pour 1'}) : indicateurs agrégés par EPCI puis mêmes bornes, mêmes p<sub>k</sub> et mêmes classes que les communes.</div>`
+              : `<div class="evolution-petit">Classements limités aux communes d'au moins ${EVOLUTION_SEUIL_FIABLE} habitants : les ${r.nbExclues} communes plus petites ont des évolutions qui dépendent de quelques personnes (écart-type de la variation de l'indice 1,4 à 1,8 point, contre 0,6 au-delà de 1 000 habitants) et dominaient auparavant ces listes.</div>`);
 }
 
 const evolutionDetailsOuverts = new Set();     // scores dont le détail est déplié (conservé quand on change de commune)
@@ -334,14 +385,25 @@ function evolutionIndicateurHtml(cle, nom) {
         `<div class="evolution-petit">Dans la dimension ${EVOLUTION_VARIABLES[dim]}, cet indicateur contribue pour <strong>${evolutionSigne(part, 2)} point</strong> (sur 10) à l'évolution du score.</div>`;
 }
 
+// Communes membres d'un EPCI : habitants de la dernière année et évolution de leur indice (série communale)
+function evolutionCommunesMembresHtml(nomEpci) {
+    const e = epciDonnees.epci.find(x => x.nom === nomEpci), base = evolutionDonneesCommunes();
+    if (!e) return '';
+    const liste = Object.keys(e.communes).filter(n => base.communes[n]).map(n => ({ n, hab: evolutionHabitants(base, n), dv: evolutionVariation(base, n, 'OppChoVec') })).sort((a, b) => b.hab - a.hab)
+        .map(x => `${evolutionEchapper(x.n)} (${evolutionFmt(x.hab, 0)} hab. ; ${x.dv >= 0 ? '+' : ''}${evolutionFmt(x.dv)})`).join(', ');
+    return `<div class="evolution-petit"><strong>Communes</strong> (habitants ${base.annees[base.annees.length - 1]} ; évolution de l'indice) : ${liste}</div>`;
+}
+
 function evolutionFicheContenu(nom) {
     const d = evolutionDonnees;
     const [a0, a1] = d.annees;
     const c = d.communes[nom];
+    const epci = evolutionEstEpci();
     const lignes = Object.keys(EVOLUTION_NOMS_INDICATEURS).map(k => {
         const x0 = c[String(a0)].indicateurs[k], x1 = c[String(a1)].indicateurs[k];
         const dec = EVOLUTION_DECIMALES[k] ?? 2;
-        const ouvert = evolutionDetailsOuverts.has(k);
+        const ouvert = !epci && evolutionDetailsOuverts.has(k);
+        if (epci) return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>`;       // le détail des composantes est communal
         return `<tr class="evolution-ligne-score" data-variable="${k}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>` +
             (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionIndicateurHtml(k, nom)}</td></tr>` : '');
     }).join('');
@@ -353,12 +415,13 @@ function evolutionFicheContenu(nom) {
     }).join('');
     const estime = [a0, a1].filter(a => c[String(a)].vec1_departementale);
     const hab = evolutionHabitants(d, nom);
-    const alerte = hab < EVOLUTION_SEUIL_FIABLE
+    const alerte = !epci && hab < EVOLUTION_SEUIL_FIABLE
         ? `<div class="evolution-alerte">⚠ Commune de ${evolutionFmt(hab, 0)} habitants : les évolutions sont très sensibles au hasard du recensement (quelques personnes de plus ou de moins suffisent). À lire avec prudence.</div>` : '';
     return `<h4>${evolutionEchapper(nom)}</h4>${alerte}` +
         `<table class="evolution-table"><tr><th>Scores (0-10)</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}` +
         `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
-        `<div class="evolution-petit">Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l'a fait monter ou baisser.</div>` +
+        `<div class="evolution-petit">${epci ? 'Cliquez sur un score pour voir le détail du calcul et ce qui l\'a fait monter ou baisser ; les indicateurs de l\'EPCI sont des moyennes de ceux des communes.' : 'Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l\'a fait monter ou baisser.'}</div>` +
+        (epci ? evolutionCommunesMembresHtml(nom) : '') +
         (estime.length ? `<div class="evolution-petit">Médiane du niveau de vie non diffusée par l'INSEE pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
 
@@ -398,10 +461,44 @@ async function evolutionBasculerVariante(robuste) {
         }
     }
     evolutionRobuste = robuste;
-    evolutionDonnees = evolutionDonneesParVariante[cle];
+    evolutionMajDonnees();
     evolutionRedessiner();
     if (evolutionSelection) evolutionFiche(evolutionSelection);
     return true;
+}
+
+// Couches des trois cartes : communes ou EPCI selon l'échelle (geoUnites, epci.js)
+function evolutionConstruireCouches() {
+    const geo = typeof geoUnites === 'function' ? geoUnites() : communeJson;
+    for (const [type, carte] of Object.entries(evolutionCartes)) {
+        if (evolutionCouches[type]) carte.removeLayer(evolutionCouches[type]);
+        evolutionCouches[type] = L.geoJSON(geo, {
+            style: f => evolutionStyle(type, f.properties.nom),
+            onEachFeature: (f, layer) => {
+                const nom = f.properties.nom;
+                layer._evolutionNom = nom;
+                layer.bindTooltip(evolutionInfobulle(type, nom));
+                layer.on('click', () => evolutionFiche(nom));
+            },
+        }).addTo(carte);
+    }
+}
+
+// Appelé par epci.js quand la case « EPCI » change : série, couches, titre et fiche suivent l'échelle
+function evolutionAppliquerEchelle() {
+    if (!evolutionInitialise) return;
+    const epci = evolutionEstEpci();
+    evolutionSelection = null;
+    evolutionMajDonnees();
+    evolutionConstruireCouches();
+    const [a0, a1] = evolutionDonnees.annees;
+    document.querySelector('.evolution-titre-onglet').textContent = `Évolution ${a0} → ${a1}` + (epci ? ` · EPCI (${echelleEpci === 'epci-pop' ? 'population' : 'commune'})` : '');
+    document.getElementById('evolution-griser').disabled = epci;           // les EPCI sont tous grands : pas de commune à griser
+    evolutionRedessiner();
+    document.getElementById('evolution-fiche').innerHTML = `<span class="evolution-petit">Cliquez sur ${epci ? 'un EPCI' : 'une commune'} pour voir ses valeurs en ${a0} et ${a1}.</span>`;
+    evolutionRecadrage = true;
+    evolutionRecadrer();
+    setTimeout(() => { evolutionRecadrer(); evolutionRecadrage = false; }, 600);
 }
 
 function evolutionRedessiner() {
@@ -470,8 +567,8 @@ async function initialiserOngletEvolution() {
     try {
         const reponse = await fetch(BASE_PATH + 'serie_temporelle.json?v=20261017b');
         if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
-        evolutionDonnees = await reponse.json();
-        evolutionDonneesParVariante.standard = evolutionDonnees;
+        evolutionDonneesParVariante.standard = await reponse.json();
+        evolutionMajDonnees();
     } catch (e) {
         console.warn('Évolution : serie_temporelle.json non chargé', e);
         document.getElementById('evolution-resume').textContent = 'Données de la série temporelle indisponibles.';
@@ -488,16 +585,8 @@ async function initialiserOngletEvolution() {
         const carte = L.map(document.getElementById(id), { center: [42.0, 9.0], zoom: 7.4, zoomSnap: 0.1, zoomDelta: 0.1, attributionControl: false });
         carte.getContainer().style.backgroundColor = '#ffffff';
         evolutionCartes[type] = carte;
-        evolutionCouches[type] = L.geoJSON(communeJson, {
-            style: f => evolutionStyle(type, f.properties.nom),
-            onEachFeature: (f, layer) => {
-                const nom = f.properties.nom;
-                layer._evolutionNom = nom;
-                layer.bindTooltip(evolutionInfobulle(type, nom));
-                layer.on('click', () => evolutionFiche(nom));
-            },
-        }).addTo(carte);
     }
+    evolutionConstruireCouches();
     const fiche = document.getElementById('evolution-fiche');
     fiche.addEventListener('click', e => { const l = e.target.closest('.evolution-ligne-score'); if (l) evolutionBasculerDetail(l.dataset.variable); });
     fiche.addEventListener('keydown', e => { const l = e.target.closest('.evolution-ligne-score'); if (l && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); evolutionBasculerDetail(l.dataset.variable); } });
@@ -521,7 +610,7 @@ async function initialiserOngletEvolution() {
         evolutionRedessiner();
         if (evolutionSelection) evolutionFiche(evolutionSelection);
     });
-    evolutionRedessiner();
+    if (evolutionEstEpci()) evolutionAppliquerEchelle(); else evolutionRedessiner();
     setTimeout(() => {
         Object.values(evolutionCartes).forEach(c => c.invalidateSize());
         if (!evolutionAgrandie) evolutionCartes.a0.fitBounds(evolutionCouches.a0.getBounds(), { padding: [8, 8], animate: false });   // les autres cartes suivent (vues liées)
@@ -552,5 +641,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { evolutionHabitants, EVOLUTION_SEUIL_FIABLE, evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
+    module.exports = { evolutionSerieEPCI, evolutionCalculDepuis, evolutionEchellesScores, evolutionHabitants, EVOLUTION_SEUIL_FIABLE, evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
 }

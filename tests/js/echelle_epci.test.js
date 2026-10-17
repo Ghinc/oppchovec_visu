@@ -84,9 +84,9 @@ test('échelle EPCI : panneau de sélection = fiche de l\'EPCI ; histogramme et 
   assert.equal(app.ev('document.getElementById("datavis-top10-col").textContent'), 'Commune');
 });
 
-test('échelle EPCI : les analyses communales (LISA, CAH, Entreprises, Corrélation, Évolution) ont un bandeau et ne s\'initialisent pas', async () => {
+test('échelle EPCI : les analyses communales (LISA, CAH, Entreprises, Corrélation) ont un bandeau et ne s\'initialisent pas', async () => {
   const { EPCI_ONGLETS_NON_DISPONIBLES } = require('../../stage_ambroise/Code/WEB/epci.js');
-  assert.deepEqual(Object.keys(EPCI_ONGLETS_NON_DISPONIBLES).sort(), ['cahtab', 'correlationtab', 'entreprisestab', 'evolutiontab', 'lisatab']);
+  assert.deepEqual(Object.keys(EPCI_ONGLETS_NON_DISPONIBLES).sort(), ['cahtab', 'correlationtab', 'entreprisestab', 'lisatab']);
   const app = await chargerApp();
   await app.ev("changerEchelle('epci-pop')");
   // l'appel direct d'initialisation de ces onglets ne doit pas être déclenché par les clics à l'échelle EPCI (garde dans le gestionnaire d'onglets de script.js)
@@ -99,4 +99,31 @@ test('échelle EPCI : les analyses communales (LISA, CAH, Entreprises, Corrélat
 test('contours des EPCI : 19 polygones nommés comme dans epci_agregation.json', () => {
   assert.deepEqual(contours.features.map((f) => f.properties.nom).sort(), noms);
   assert.equal(communes.length, 360);
+});
+
+test('échelle EPCI : la série d\'évolution suit (série EPCI, classes de Jenks des variations des 19 EPCI), puis revient à la série communale', async () => {
+  const app = await chargerApp();
+  app.ev(`evolutionDonneesParVariante.standard = ${JSON.stringify(lireJson('serie_temporelle.json'))};`);
+  app.ev('evolutionMajDonnees()');
+  assert.equal(app.ev('evolutionDonnees.unite'), undefined, 'communes au départ');
+  assert.equal(app.ev('Object.keys(evolutionDonnees.communes).length'), 360);
+  await app.ev("changerEchelle('epci-pop')");
+  app.ev('evolutionMajDonnees()');
+  assert.equal(app.ev('evolutionDonnees.unite'), 'epci');
+  assert.equal(app.ev('Object.keys(evolutionDonnees.communes).length'), 19);
+  assert.equal(app.ev('evolutionDonnees.prorata'), true);
+  for (const v of ['OppChoVec', 'Opp', 'Cho', 'Vec']) {
+    const sv = json(app, `evolutionDonnees.seuils_jenks_variation.${v}`);
+    assert.equal(sv.length, 4);
+    for (let i = 1; i < 4; i++) assert.ok(sv[i] > sv[i - 1], v);
+    const variations = json(app, `Object.values(evolutionDonnees.communes).map(c => c['2021'].scores_0_10.${v} - c['2016'].scores_0_10.${v})`);
+    assert.ok(sv[0] > Math.min(...variations) - 1e-9 && sv[3] < Math.max(...variations) + 1e-9, `${v} : classes dans l'étendue des variations des EPCI`);
+  }
+  await app.ev("changerEchelle('epci-commune')");
+  app.ev('evolutionMajDonnees()');
+  assert.equal(app.ev('evolutionDonnees.prorata'), false);
+  await app.ev("changerEchelle('commune')");
+  app.ev('evolutionMajDonnees()');
+  assert.equal(app.ev('evolutionDonnees.unite'), undefined);
+  assert.equal(app.ev('Object.keys(evolutionDonnees.communes).length'), 360);
 });

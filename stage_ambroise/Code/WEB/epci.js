@@ -318,12 +318,11 @@ function epciAfficherDansPanneau(nom) {         // panneau « sélection » de l
     document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
 }
 
-const EPCI_ONGLETS_NON_DISPONIBLES = {
+const EPCI_ONGLETS_NON_DISPONIBLES = {       // analyses qui reposent sur des données communales (l'Évolution a sa version EPCI : evolution.js)
     lisatab: 'L\'autocorrélation spatiale (LISA) est calculée par commune.',
     cahtab: 'La classification (CAH) est calculée par commune.',
     entreprisestab: 'La densité entrepreneuriale est une donnée communale.',
     correlationtab: 'Les corrélations s\'appuient sur des données communales (densité d\'entreprises, enquête de bien-être).',
-    evolutiontab: 'La série 2016-2021 est calculée par commune.',
 };
 
 function epciInstallerBandeaux() {
@@ -363,6 +362,7 @@ async function changerEchelle(mode) {
     document.getElementById('resultCommune').innerHTML = '';
     for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
     recalculerCarteOppChoVec();                 // redessine toutes les analyses avec les unités de la nouvelle échelle
+    if (typeof evolutionAppliquerEchelle === 'function') evolutionAppliquerEchelle();          // la série d'évolution suit aussi (série EPCI ou communale)
     return true;
 }
 
