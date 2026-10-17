@@ -26,6 +26,12 @@ let evolutionCartes = {};          // { 2016, 2021, variation } : cartes Leaflet
 let evolutionCouches = {};         // couches GeoJSON
 let evolutionVariable = 'OppChoVec';
 let evolutionSelection = null;
+// Fiabilité : l'évolution d'une très petite commune est surtout du hasard du recensement (quelques personnes de plus ou de moins). Mesuré sur la série : écart-type de la variation de l'indice
+// de 1,8 point sous 50 habitants, 1,4 entre 50 et 99, 1,0 à 1,2 entre 100 et 999, 0,6 à partir de 1 000 (voir RAPPORT_AUDIT_EVOLUTION).
+const EVOLUTION_SEUIL_FIABLE = 100;      // habitants
+let evolutionGriser = false;             // griser les communes sous le seuil sur les trois cartes
+let evolutionRobuste = false;            // variante « Opp3 robuste » (drapeau transports en commun levé à partir de 5 personnes)
+const evolutionDonneesParVariante = {};  // { standard, robuste } : fichiers chargés
 
 // ---------- Calculs purs ----------
 
@@ -54,20 +60,26 @@ function evolutionVariation(donnees, commune, variable) {
     return evolutionValeur(donnees, commune, a1, variable) - evolutionValeur(donnees, commune, a0, variable);
 }
 
-function evolutionResume(donnees, variable) {
+// Population de la commune (table INSEE POP1B, égale à la population municipale) à la dernière date de la série
+function evolutionHabitants(donnees, commune) {
+    return donnees.communes[commune][String(donnees.annees[donnees.annees.length - 1])].composantes.Cho2.population;
+}
+
+// minHab : les classements « plus fortes progressions / reculs » ne retiennent que les communes d'au moins minHab habitants (0 = toutes) ; les moyennes et effectifs portent toujours sur les 360 communes
+function evolutionResume(donnees, variable, minHab = 0) {
     const noms = Object.keys(donnees.communes);
     const [a0, a1] = donnees.annees;
     const v0 = noms.map(c => evolutionValeur(donnees, c, a0, variable));
     const v1 = noms.map(c => evolutionValeur(donnees, c, a1, variable));
     const var_ = noms.map((c, i) => v1[i] - v0[i]);
-    const tri = noms.map((c, i) => ({ commune: c, variation: var_[i] })).sort((x, y) => y.variation - x.variation);
+    const tri = noms.map((c, i) => ({ commune: c, variation: var_[i] })).filter(e => evolutionHabitants(donnees, e.commune) >= minHab).sort((x, y) => y.variation - x.variation);
     const moyenne = t => t.reduce((s, x) => s + x, 0) / t.length;
     return {
         n: noms.length, moyenne0: moyenne(v0), moyenne1: moyenne(v1), variationMoyenne: moyenne(var_),
         progressions: var_.filter(x => x > EVOLUTION_SEUILS_VARIATION[2]).length,
         reculs: var_.filter(x => x < EVOLUTION_SEUILS_VARIATION[1]).length,
         stables: var_.filter(x => x >= EVOLUTION_SEUILS_VARIATION[1] && x <= EVOLUTION_SEUILS_VARIATION[2]).length,
-        meilleures: tri.slice(0, 5), pires: tri.slice(-5).reverse(),
+        meilleures: tri.slice(0, 5), pires: tri.slice(-5).reverse(), nbExclues: noms.length - tri.length,
     };
 }
 
@@ -156,10 +168,16 @@ function evolutionComposantes(donnees, commune, cle) {
         });
         note = 'Une catégorie dont la part s\'éloigne de la moyenne (12,5 %) fait monter l\'indice ; un rapprochement le fait baisser.';
     } else if (cle === 'Opp3') {
-        intro = 'Opp3 = part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun + 100 pour les trois villes qui ont un réseau de bus (Ajaccio, Bastia, Porto-Vecchio).';
+        const seuilTc = donnees.opp3_seuil_transports || 0;
+        const critereTc = seuilTc > 0 ? `au moins ${seuilTc} personnes` : 'au moins une personne';
+        intro = `Opp3 = part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun (${critereTc}) + 100 pour les trois villes qui ont un réseau de bus (Ajaccio, Bastia, Porto-Vecchio).`;
         ligne('Ménages ayant au moins une voiture (%)', k[0].part_voiture, k[1].part_voiture, 1, k[1].part_voiture - k[0].part_voiture, 1, '%');
-        ligne('Actifs occupés allant travailler en transports en commun (+100 si oui)', k[0].transport_commun, k[1].transport_commun, 0, k[1].transport_commun - k[0].transport_commun, 0);
+        ligne(`Drapeau « transports en commun » (+100 si ${critereTc})`, k[0].transport_commun, k[1].transport_commun, 0, k[1].transport_commun - k[0].transport_commun, 0);
+        if (k[0].actifs_transports !== undefined) ligne('   dont effectif estimé d\'actifs occupés en transports en commun', k[0].actifs_transports, k[1].actifs_transports, 1, null);
         ligne('Ville dotée d\'un réseau de bus (+100 si oui, inchangé)', k[0].reseau_bus, k[1].reseau_bus, 0, k[1].reseau_bus - k[0].reseau_bus, 0);
+        const faible = [k[0].actifs_transports, k[1].actifs_transports].some(x => x !== undefined && x > 0 && x < 5);
+        note = 'Le drapeau « transports en commun » vaut ±100 points d\'Opp3 (0,41 sur l\'échelle 0-1) : c\'est lui qui fait l\'essentiel des évolutions d\'Opp (99 % de la variance). ' +
+            'L\'effectif est une estimation du recensement, de l\'ordre d\'une personne dans la plupart des petites communes' + (faible && seuilTc === 0 ? ' : ici il est inférieur à 5 personnes, donc le drapeau est très fragile. La variante « Opp3 robuste » le lève à partir de 5 personnes.' : '.');
     } else if (cle === 'Cho2') {
         intro = 'Cho2 = part des Français parmi les 18 ans et plus = 100 − part des étrangers de 18 ans et plus (plafonné à 100). C\'est un proxy du droit de vote : il ne tient compte ni de l\'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales.';
         ligne('Population totale', k[0].population, k[1].population, 0, null);
@@ -209,14 +227,16 @@ function evolutionStyle(type, nom) {
     const fill = type === 'variation'
         ? evolutionCouleurVariation(evolutionVariation(d, nom, evolutionVariable))
         : evolutionCouleurAnnee(evolutionValeur(d, nom, type === 'a0' ? a0 : a1, evolutionVariable));
-    return { fillColor: fill, color: nom === evolutionSelection ? '#d00000' : '#333', weight: nom === evolutionSelection ? 2.5 : 0.7, fillOpacity: 0.85 };
+    const grise = evolutionGriser && evolutionHabitants(d, nom) < EVOLUTION_SEUIL_FIABLE;       // commune trop petite : évolution peu fiable
+    return { fillColor: grise ? '#d9d9d9' : fill, color: nom === evolutionSelection ? '#d00000' : '#333', weight: nom === evolutionSelection ? 2.5 : 0.7, fillOpacity: grise ? 0.55 : 0.85 };
 }
 
 function evolutionInfobulle(type, nom) {
     const d = evolutionDonnees;
     const [a0, a1] = d.annees;
     const v0 = evolutionValeur(d, nom, a0, evolutionVariable), v1 = evolutionValeur(d, nom, a1, evolutionVariable);
-    const base = `<strong>${evolutionEchapper(nom)}</strong><br>${a0} : ${evolutionFmt(v0)} · ${a1} : ${evolutionFmt(v1)}`;
+    const hab = evolutionHabitants(d, nom);
+    const base = `<strong>${evolutionEchapper(nom)}</strong> · ${evolutionFmt(hab, 0)} hab.${hab < EVOLUTION_SEUIL_FIABLE ? ' <em>(évolution peu fiable)</em>' : ''}<br>${a0} : ${evolutionFmt(v0)} · ${a1} : ${evolutionFmt(v1)}`;
     return type === 'variation' ? `${base}<br>Évolution : ${v1 - v0 >= 0 ? '+' : ''}${evolutionFmt(v1 - v0)}` : base;
 }
 
@@ -240,14 +260,15 @@ function evolutionLegendes() {
 
 function evolutionResumeHtml() {
     const d = evolutionDonnees;
-    const r = evolutionResume(d, evolutionVariable);
+    const r = evolutionResume(d, evolutionVariable, EVOLUTION_SEUIL_FIABLE);
     const [a0, a1] = d.annees;
     const ligne = e => `${evolutionEchapper(e.commune)} (${e.variation >= 0 ? '+' : ''}${evolutionFmt(e.variation)})`;
     document.getElementById('evolution-resume').innerHTML =
         `<div><strong>${EVOLUTION_VARIABLES[evolutionVariable]}</strong> : moyenne ${a0} <strong>${evolutionFmt(r.moyenne0)}</strong> → ${a1} <strong>${evolutionFmt(r.moyenne1)}</strong> ` +
         `(${r.variationMoyenne >= 0 ? '+' : ''}${evolutionFmt(r.variationMoyenne)}).</div>` +
         `<div>${r.progressions} communes en progression, ${r.stables} stables, ${r.reculs} en recul (seuil ±0,5 point).</div>` +
-        `<div class="evolution-petit">Plus fortes progressions : ${r.meilleures.map(ligne).join(' ; ')}<br>Plus forts reculs : ${r.pires.map(ligne).join(' ; ')}</div>`;
+        `<div class="evolution-petit">Plus fortes progressions : ${r.meilleures.map(ligne).join(' ; ')}<br>Plus forts reculs : ${r.pires.map(ligne).join(' ; ')}</div>` +
+        `<div class="evolution-petit">Classements limités aux communes d'au moins ${EVOLUTION_SEUIL_FIABLE} habitants : les ${r.nbExclues} communes plus petites ont des évolutions qui dépendent de quelques personnes (écart-type de la variation de l'indice 1,4 à 1,8 point, contre 0,6 au-delà de 1 000 habitants) et dominaient auparavant ces listes.</div>`;
 }
 
 const evolutionDetailsOuverts = new Set();     // scores dont le détail est déplié (conservé quand on change de commune)
@@ -331,7 +352,10 @@ function evolutionFicheContenu(nom) {
             (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionDetailHtml(v, nom)}</td></tr>` : '');
     }).join('');
     const estime = [a0, a1].filter(a => c[String(a)].vec1_departementale);
-    return `<h4>${evolutionEchapper(nom)}</h4>` +
+    const hab = evolutionHabitants(d, nom);
+    const alerte = hab < EVOLUTION_SEUIL_FIABLE
+        ? `<div class="evolution-alerte">⚠ Commune de ${evolutionFmt(hab, 0)} habitants : les évolutions sont très sensibles au hasard du recensement (quelques personnes de plus ou de moins suffisent). À lire avec prudence.</div>` : '';
+    return `<h4>${evolutionEchapper(nom)}</h4>${alerte}` +
         `<table class="evolution-table"><tr><th>Scores (0-10)</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}` +
         `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
         `<div class="evolution-petit">Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l'a fait monter ou baisser.</div>` +
@@ -357,6 +381,27 @@ function evolutionBasculerDetail(variable) {
     evolutionAfficherFiche();
     const ligne = document.querySelector(`#evolution-fiche .evolution-ligne-score[data-variable="${variable}"]`);
     if (ligne) ligne.focus();
+}
+
+// Variante « Opp3 robuste » : autre fichier (mêmes indicateurs, drapeau transports en commun levé à partir de 5 personnes) ; les scores, p_k et classes de Jenks sont ceux de ce fichier
+async function evolutionBasculerVariante(robuste) {
+    const cle = robuste ? 'robuste' : 'standard';
+    if (!evolutionDonneesParVariante[cle]) {
+        try {
+            const r = await fetch(BASE_PATH + (robuste ? 'serie_temporelle_robuste.json' : 'serie_temporelle.json') + '?v=20261017b');
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            evolutionDonneesParVariante[cle] = await r.json();
+        } catch (e) {
+            console.warn('Évolution : variante non chargée', e);
+            document.getElementById('evolution-robuste').checked = evolutionRobuste;
+            return false;
+        }
+    }
+    evolutionRobuste = robuste;
+    evolutionDonnees = evolutionDonneesParVariante[cle];
+    evolutionRedessiner();
+    if (evolutionSelection) evolutionFiche(evolutionSelection);
+    return true;
 }
 
 function evolutionRedessiner() {
@@ -423,9 +468,10 @@ async function initialiserOngletEvolution() {
     }
     evolutionEnCours = true;
     try {
-        const reponse = await fetch(BASE_PATH + 'serie_temporelle.json?v=20261017a');
+        const reponse = await fetch(BASE_PATH + 'serie_temporelle.json?v=20261017b');
         if (!reponse.ok) throw new Error(`HTTP ${reponse.status}`);
         evolutionDonnees = await reponse.json();
+        evolutionDonneesParVariante.standard = evolutionDonnees;
     } catch (e) {
         console.warn('Évolution : serie_temporelle.json non chargé', e);
         document.getElementById('evolution-resume').textContent = 'Données de la série temporelle indisponibles.';
@@ -468,6 +514,8 @@ async function initialiserOngletEvolution() {
             enCours = false;
         });
     }
+    document.getElementById('evolution-griser').addEventListener('change', function () { evolutionGriser = this.checked; evolutionRedessiner(); });
+    document.getElementById('evolution-robuste').addEventListener('change', function () { evolutionBasculerVariante(this.checked); });
     document.getElementById('evolution-variable').addEventListener('change', function () {
         evolutionVariable = this.value;
         evolutionRedessiner();
@@ -504,5 +552,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
+    module.exports = { evolutionHabitants, EVOLUTION_SEUIL_FIABLE, evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
 }

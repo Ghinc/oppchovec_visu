@@ -3,6 +3,7 @@
   2016,
   2021
  ],
+ "opp3_seuil_transports": 0,
  "indicateurs": [
   "Opp1",
   "Opp2",
@@ -159,7 +160,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.489051,
@@ -216,7 +218,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.489051,
@@ -276,7 +279,8 @@
      "Opp3": {
       "part_voiture": 87.360595,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.440436,
@@ -333,7 +337,8 @@
      "Opp3": {
       "part_voiture": 87.044737,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.430976,
@@ -393,7 +398,8 @@
      "Opp3": {
       "part_voiture": 89.690722,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.566766,
@@ -450,7 +456,8 @@
      "Opp3": {
       "part_voiture": 83.668735,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.464957,
@@ -510,7 +517,8 @@
      "Opp3": {
       "part_voiture": 90.265487,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.478723,
@@ -567,7 +575,8 @@
      "Opp3": {
       "part_voiture": 90.116646,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.959952
      },
      "Vec2": {
       "personnes_par_piece": 0.456499,
@@ -627,7 +636,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.481481,
@@ -684,7 +694,8 @@
      "Opp3": {
       "part_voiture": 82.978723,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.445498,
@@ -744,7 +755,8 @@
      "Opp3": {
       "part_voiture": 78.378378,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.885246
      },
      "Vec2": {
       "personnes_par_piece": 0.435714,
@@ -801,7 +813,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.058394
      },
      "Vec2": {
       "personnes_par_piece": 0.503676,
@@ -861,7 +874,8 @@
      "Opp3": {
       "part_voiture": 87.301587,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.01626
      },
      "Vec2": {
       "personnes_par_piece": 0.488095,
@@ -918,7 +932,8 @@
      "Opp3": {
       "part_voiture": 85.074627,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47619,
@@ -978,7 +993,8 @@
      "Opp3": {
       "part_voiture": 97.674419,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.367089
      },
      "Vec2": {
       "personnes_par_piece": 0.645777,
@@ -1035,7 +1051,8 @@
      "Opp3": {
       "part_voiture": 97.882353,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.621994
      },
      "Vec2": {
       "personnes_par_piece": 0.663914,
@@ -1095,7 +1112,8 @@
      "Opp3": {
       "part_voiture": 81.967213,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.453846,
@@ -1152,7 +1170,8 @@
      "Opp3": {
       "part_voiture": 85.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.388693,
@@ -1212,7 +1231,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.421965,
@@ -1269,7 +1289,8 @@
      "Opp3": {
       "part_voiture": 81.578947,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.312849,
@@ -1329,7 +1350,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451713,
@@ -1386,7 +1408,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451713,
@@ -1446,7 +1469,8 @@
      "Opp3": {
       "part_voiture": 91.37931,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.474138,
@@ -1503,7 +1527,8 @@
      "Opp3": {
       "part_voiture": 92.982456,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.401575,
@@ -1563,7 +1588,8 @@
      "Opp3": {
       "part_voiture": 93.846154,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.553506,
@@ -1620,7 +1646,8 @@
      "Opp3": {
       "part_voiture": 95.714286,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.986842
      },
      "Vec2": {
       "personnes_par_piece": 0.537102,
@@ -1680,7 +1707,8 @@
      "Opp3": {
       "part_voiture": 95.778375,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 19.69503
      },
      "Vec2": {
       "personnes_par_piece": 0.566502,
@@ -1737,7 +1765,8 @@
      "Opp3": {
       "part_voiture": 96.955355,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 13.147587
      },
      "Vec2": {
       "personnes_par_piece": 0.595259,
@@ -1797,7 +1826,8 @@
      "Opp3": {
       "part_voiture": 83.439123,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.163345
      },
      "Vec2": {
       "personnes_par_piece": 0.638355,
@@ -1854,7 +1884,8 @@
      "Opp3": {
       "part_voiture": 83.147333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.95161
      },
      "Vec2": {
       "personnes_par_piece": 0.629767,
@@ -1914,7 +1945,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.62069,
@@ -1971,7 +2003,8 @@
      "Opp3": {
       "part_voiture": 92.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.568182,
@@ -2031,7 +2064,8 @@
      "Opp3": {
       "part_voiture": 91.88641,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.593665,
@@ -2088,7 +2122,8 @@
      "Opp3": {
       "part_voiture": 91.859169,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.591886,
@@ -2148,7 +2183,8 @@
      "Opp3": {
       "part_voiture": 84.615385,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.020619
      },
      "Vec2": {
       "personnes_par_piece": 0.466346,
@@ -2205,7 +2241,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.912281
      },
      "Vec2": {
       "personnes_par_piece": 0.426966,
@@ -2265,7 +2302,8 @@
      "Opp3": {
       "part_voiture": 88.466413,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.0
      },
      "Vec2": {
       "personnes_par_piece": 0.497684,
@@ -2322,7 +2360,8 @@
      "Opp3": {
       "part_voiture": 91.438915,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 12.170988
      },
      "Vec2": {
       "personnes_par_piece": 0.484136,
@@ -2382,7 +2421,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.457672,
@@ -2439,7 +2479,8 @@
      "Opp3": {
       "part_voiture": 86.021505,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.471292,
@@ -2499,7 +2540,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.419753,
@@ -2556,7 +2598,8 @@
      "Opp3": {
       "part_voiture": 84.615385,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.423729,
@@ -2616,7 +2659,8 @@
      "Opp3": {
       "part_voiture": 75.862069,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503876,
@@ -2673,7 +2717,8 @@
      "Opp3": {
       "part_voiture": 75.862069,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503876,
@@ -2733,7 +2778,8 @@
      "Opp3": {
       "part_voiture": 86.956522,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.437018,
@@ -2790,7 +2836,8 @@
      "Opp3": {
       "part_voiture": 91.861935,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.392586,
@@ -2850,7 +2897,8 @@
      "Opp3": {
       "part_voiture": 88.405797,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.505703,
@@ -2907,7 +2955,8 @@
      "Opp3": {
       "part_voiture": 78.571429,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451957,
@@ -2967,7 +3016,8 @@
      "Opp3": {
       "part_voiture": 89.241338,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.00921
      },
      "Vec2": {
       "personnes_par_piece": 0.62094,
@@ -3024,7 +3074,8 @@
      "Opp3": {
       "part_voiture": 91.576102,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.759432
      },
      "Vec2": {
       "personnes_par_piece": 0.531053,
@@ -3084,7 +3135,8 @@
      "Opp3": {
       "part_voiture": 90.47619,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.571429,
@@ -3141,7 +3193,8 @@
      "Opp3": {
       "part_voiture": 95.833333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.977273
      },
      "Vec2": {
       "personnes_par_piece": 0.44898,
@@ -3201,7 +3254,8 @@
      "Opp3": {
       "part_voiture": 77.894737,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.53168,
@@ -3258,7 +3312,8 @@
      "Opp3": {
       "part_voiture": 85.358035,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.468995,
@@ -3318,7 +3373,8 @@
      "Opp3": {
       "part_voiture": 89.62963,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.4903,
@@ -3375,7 +3431,8 @@
      "Opp3": {
       "part_voiture": 90.996481,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.470828,
@@ -3435,7 +3492,8 @@
      "Opp3": {
       "part_voiture": 92.134831,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.504425,
@@ -3492,7 +3550,8 @@
      "Opp3": {
       "part_voiture": 92.134831,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.504425,
@@ -3552,7 +3611,8 @@
      "Opp3": {
       "part_voiture": 95.944175,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.929517
      },
      "Vec2": {
       "personnes_par_piece": 0.547815,
@@ -3609,7 +3669,8 @@
      "Opp3": {
       "part_voiture": 96.141638,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.474037,
@@ -3669,7 +3730,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.377778,
@@ -3726,7 +3788,8 @@
      "Opp3": {
       "part_voiture": 92.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.412698,
@@ -3786,7 +3849,8 @@
      "Opp3": {
       "part_voiture": 85.964912,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.512953,
@@ -3843,7 +3907,8 @@
      "Opp3": {
       "part_voiture": 90.322581,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466981,
@@ -3903,7 +3968,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.591241,
@@ -3960,7 +4026,8 @@
      "Opp3": {
       "part_voiture": 87.818415,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.560359,
@@ -4020,7 +4087,8 @@
      "Opp3": {
       "part_voiture": 92.682927,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.529412,
@@ -4077,7 +4145,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.051724
      },
      "Vec2": {
       "personnes_par_piece": 0.610526,
@@ -4137,7 +4206,8 @@
      "Opp3": {
       "part_voiture": 76.923077,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.490196,
@@ -4194,7 +4264,8 @@
      "Opp3": {
       "part_voiture": 75.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.528302,
@@ -4254,7 +4325,8 @@
      "Opp3": {
       "part_voiture": 87.306117,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.904596
      },
      "Vec2": {
       "personnes_par_piece": 0.489252,
@@ -4311,7 +4383,8 @@
      "Opp3": {
       "part_voiture": 88.113996,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 8.055596
      },
      "Vec2": {
       "personnes_par_piece": 0.517382,
@@ -4371,7 +4444,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.496241,
@@ -4428,7 +4502,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.444444,
@@ -4488,7 +4563,8 @@
      "Opp3": {
       "part_voiture": 80.86225,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.735525
      },
      "Vec2": {
       "personnes_par_piece": 0.626307,
@@ -4545,7 +4621,8 @@
      "Opp3": {
       "part_voiture": 80.627333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.007289
      },
      "Vec2": {
       "personnes_par_piece": 0.620882,
@@ -4605,7 +4682,8 @@
      "Opp3": {
       "part_voiture": 90.212766,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.0
      },
      "Vec2": {
       "personnes_par_piece": 0.557377,
@@ -4662,7 +4740,8 @@
      "Opp3": {
       "part_voiture": 91.586627,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.91755
      },
      "Vec2": {
       "personnes_par_piece": 0.523442,
@@ -4722,7 +4801,8 @@
      "Opp3": {
       "part_voiture": 95.652174,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.458824,
@@ -4779,7 +4859,8 @@
      "Opp3": {
       "part_voiture": 94.594595,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.481481,
@@ -4839,7 +4920,8 @@
      "Opp3": {
       "part_voiture": 74.285714,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.342105,
@@ -4896,7 +4978,8 @@
      "Opp3": {
       "part_voiture": 74.285714,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.342105,
@@ -4956,7 +5039,8 @@
      "Opp3": {
       "part_voiture": 82.978723,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.386667,
@@ -5013,7 +5097,8 @@
      "Opp3": {
       "part_voiture": 97.7263,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428352,
@@ -5073,7 +5158,8 @@
      "Opp3": {
       "part_voiture": 75.438596,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.275229
      },
      "Vec2": {
       "personnes_par_piece": 0.414449,
@@ -5130,7 +5216,8 @@
      "Opp3": {
       "part_voiture": 75.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.394904,
@@ -5190,7 +5277,8 @@
      "Opp3": {
       "part_voiture": 72.619048,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.993865
      },
      "Vec2": {
       "personnes_par_piece": 0.480826,
@@ -5247,7 +5335,8 @@
      "Opp3": {
       "part_voiture": 69.444444,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.992537
      },
      "Vec2": {
       "personnes_par_piece": 0.503759,
@@ -5307,7 +5396,8 @@
      "Opp3": {
       "part_voiture": 93.652695,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 18.467734
      },
      "Vec2": {
       "personnes_par_piece": 0.565488,
@@ -5364,7 +5454,8 @@
      "Opp3": {
       "part_voiture": 96.23231,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 26.062818
      },
      "Vec2": {
       "personnes_par_piece": 0.549509,
@@ -5424,7 +5515,8 @@
      "Opp3": {
       "part_voiture": 84.615385,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.480769,
@@ -5481,7 +5573,8 @@
      "Opp3": {
       "part_voiture": 76.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.597701,
@@ -5541,7 +5634,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.910569
      },
      "Vec2": {
       "personnes_par_piece": 0.468869,
@@ -5598,7 +5692,8 @@
      "Opp3": {
       "part_voiture": 85.363309,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.851584
      },
      "Vec2": {
       "personnes_par_piece": 0.458773,
@@ -5658,7 +5753,8 @@
      "Opp3": {
       "part_voiture": 89.198606,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.548948,
@@ -5715,7 +5811,8 @@
      "Opp3": {
       "part_voiture": 93.415944,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.515336,
@@ -5775,7 +5872,8 @@
      "Opp3": {
       "part_voiture": 91.401081,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.252329
      },
      "Vec2": {
       "personnes_par_piece": 0.538373,
@@ -5832,7 +5930,8 @@
      "Opp3": {
       "part_voiture": 93.127633,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.008695
      },
      "Vec2": {
       "personnes_par_piece": 0.562914,
@@ -5892,7 +5991,8 @@
      "Opp3": {
       "part_voiture": 84.210526,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -5949,7 +6049,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.057143
      },
      "Vec2": {
       "personnes_par_piece": 0.315315,
@@ -6009,7 +6110,8 @@
      "Opp3": {
       "part_voiture": 73.015873,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.971963
      },
      "Vec2": {
       "personnes_par_piece": 0.355482,
@@ -6066,7 +6168,8 @@
      "Opp3": {
       "part_voiture": 85.964912,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.409091,
@@ -6126,7 +6229,8 @@
      "Opp3": {
       "part_voiture": 92.913308,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.988984
      },
      "Vec2": {
       "personnes_par_piece": 0.531152,
@@ -6183,7 +6287,8 @@
      "Opp3": {
       "part_voiture": 95.052891,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.108877
      },
      "Vec2": {
       "personnes_par_piece": 0.547749,
@@ -6243,7 +6348,8 @@
      "Opp3": {
       "part_voiture": 82.8125,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.916667
      },
      "Vec2": {
       "personnes_par_piece": 0.471028,
@@ -6300,7 +6406,8 @@
      "Opp3": {
       "part_voiture": 88.496637,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.133752
      },
      "Vec2": {
       "personnes_par_piece": 0.435647,
@@ -6360,7 +6467,8 @@
      "Opp3": {
       "part_voiture": 82.474227,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.483951,
@@ -6417,7 +6525,8 @@
      "Opp3": {
       "part_voiture": 93.061209,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.056028
      },
      "Vec2": {
       "personnes_par_piece": 0.472693,
@@ -6477,7 +6586,8 @@
      "Opp3": {
       "part_voiture": 77.777778,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.457831,
@@ -6534,7 +6644,8 @@
      "Opp3": {
       "part_voiture": 77.777778,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.457831,
@@ -6594,7 +6705,8 @@
      "Opp3": {
       "part_voiture": 90.828402,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.85
      },
      "Vec2": {
       "personnes_par_piece": 0.536701,
@@ -6651,7 +6763,8 @@
      "Opp3": {
       "part_voiture": 93.253686,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.871418
      },
      "Vec2": {
       "personnes_par_piece": 0.548605,
@@ -6711,7 +6824,8 @@
      "Opp3": {
       "part_voiture": 79.166667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.401869,
@@ -6768,7 +6882,8 @@
      "Opp3": {
       "part_voiture": 79.166667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.401869,
@@ -6828,7 +6943,8 @@
      "Opp3": {
       "part_voiture": 91.780822,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.449511,
@@ -6885,7 +7001,8 @@
      "Opp3": {
       "part_voiture": 96.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.95092
      },
      "Vec2": {
       "personnes_par_piece": 0.482249,
@@ -6945,7 +7062,8 @@
      "Opp3": {
       "part_voiture": 78.813559,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.00885
      },
      "Vec2": {
       "personnes_par_piece": 0.501109,
@@ -7002,7 +7120,8 @@
      "Opp3": {
       "part_voiture": 78.656432,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.487049,
@@ -7062,7 +7181,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.465116,
@@ -7119,7 +7239,8 @@
      "Opp3": {
       "part_voiture": 84.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44335,
@@ -7179,7 +7300,8 @@
      "Opp3": {
       "part_voiture": 72.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.388889,
@@ -7236,7 +7358,8 @@
      "Opp3": {
       "part_voiture": 77.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.375796,
@@ -7296,7 +7419,8 @@
      "Opp3": {
       "part_voiture": 84.848485,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.450739,
@@ -7353,7 +7477,8 @@
      "Opp3": {
       "part_voiture": 88.541667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.450739,
@@ -7413,7 +7538,8 @@
      "Opp3": {
       "part_voiture": 91.22807,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.953846
      },
      "Vec2": {
       "personnes_par_piece": 0.532787,
@@ -7470,7 +7596,8 @@
      "Opp3": {
       "part_voiture": 91.22807,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.061538
      },
      "Vec2": {
       "personnes_par_piece": 0.532787,
@@ -7530,7 +7657,8 @@
      "Opp3": {
       "part_voiture": 67.857143,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.02
      },
      "Vec2": {
       "personnes_par_piece": 0.416667,
@@ -7587,7 +7715,8 @@
      "Opp3": {
       "part_voiture": 73.684211,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.444444,
@@ -7647,7 +7776,8 @@
      "Opp3": {
       "part_voiture": 95.294118,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.347949
      },
      "Vec2": {
       "personnes_par_piece": 0.493371,
@@ -7704,7 +7834,8 @@
      "Opp3": {
       "part_voiture": 95.297318,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.153974
      },
      "Vec2": {
       "personnes_par_piece": 0.493645,
@@ -7764,7 +7895,8 @@
      "Opp3": {
       "part_voiture": 91.588785,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.0
      },
      "Vec2": {
       "personnes_par_piece": 0.601925,
@@ -7821,7 +7953,8 @@
      "Opp3": {
       "part_voiture": 94.600806,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.788303
      },
      "Vec2": {
       "personnes_par_piece": 0.585542,
@@ -7881,7 +8014,8 @@
      "Opp3": {
       "part_voiture": 84.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.443396,
@@ -7938,7 +8072,8 @@
      "Opp3": {
       "part_voiture": 93.75,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.981481
      },
      "Vec2": {
       "personnes_par_piece": 0.432,
@@ -7998,7 +8133,8 @@
      "Opp3": {
       "part_voiture": 86.206897,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.515873,
@@ -8055,7 +8191,8 @@
      "Opp3": {
       "part_voiture": 72.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.017544
      },
      "Vec2": {
       "personnes_par_piece": 0.491379,
@@ -8115,7 +8252,8 @@
      "Opp3": {
       "part_voiture": 79.815042,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.494194,
@@ -8172,7 +8310,8 @@
      "Opp3": {
       "part_voiture": 84.806102,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.557662,
@@ -8232,7 +8371,8 @@
      "Opp3": {
       "part_voiture": 88.799441,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.007243
      },
      "Vec2": {
       "personnes_par_piece": 0.583152,
@@ -8289,7 +8429,8 @@
      "Opp3": {
       "part_voiture": 89.078424,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.01075
      },
      "Vec2": {
       "personnes_par_piece": 0.539043,
@@ -8349,7 +8490,8 @@
      "Opp3": {
       "part_voiture": 90.379009,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.937907
      },
      "Vec2": {
       "personnes_par_piece": 0.561573,
@@ -8406,7 +8548,8 @@
      "Opp3": {
       "part_voiture": 90.484586,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.009958
      },
      "Vec2": {
       "personnes_par_piece": 0.564878,
@@ -8466,7 +8609,8 @@
      "Opp3": {
       "part_voiture": 97.619048,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.497175,
@@ -8523,7 +8667,8 @@
      "Opp3": {
       "part_voiture": 95.454545,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.021739
      },
      "Vec2": {
       "personnes_par_piece": 0.541176,
@@ -8583,7 +8728,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.528302,
@@ -8640,7 +8786,8 @@
      "Opp3": {
       "part_voiture": 90.909091,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.621622,
@@ -8700,7 +8847,8 @@
      "Opp3": {
       "part_voiture": 88.333333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.039683
      },
      "Vec2": {
       "personnes_par_piece": 0.479087,
@@ -8757,7 +8905,8 @@
      "Opp3": {
       "part_voiture": 86.206897,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.971698
      },
      "Vec2": {
       "personnes_par_piece": 0.392593,
@@ -8817,7 +8966,8 @@
      "Opp3": {
       "part_voiture": 95.908874,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 18.034484
      },
      "Vec2": {
       "personnes_par_piece": 0.562376,
@@ -8874,7 +9024,8 @@
      "Opp3": {
       "part_voiture": 96.086149,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 23.805739
      },
      "Vec2": {
       "personnes_par_piece": 0.540483,
@@ -8934,7 +9085,8 @@
      "Opp3": {
       "part_voiture": 91.961777,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 53.860118
      },
      "Vec2": {
       "personnes_par_piece": 0.618166,
@@ -8991,7 +9143,8 @@
      "Opp3": {
       "part_voiture": 94.038827,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 29.78633
      },
      "Vec2": {
       "personnes_par_piece": 0.602165,
@@ -9051,7 +9204,8 @@
      "Opp3": {
       "part_voiture": 96.774194,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.564885,
@@ -9108,7 +9262,8 @@
      "Opp3": {
       "part_voiture": 92.592593,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.587719,
@@ -9168,7 +9323,8 @@
      "Opp3": {
       "part_voiture": 89.732113,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.211267
      },
      "Vec2": {
       "personnes_par_piece": 0.567894,
@@ -9225,7 +9381,8 @@
      "Opp3": {
       "part_voiture": 91.193443,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.101298
      },
      "Vec2": {
       "personnes_par_piece": 0.583651,
@@ -9285,7 +9442,8 @@
      "Opp3": {
       "part_voiture": 92.307692,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.623853,
@@ -9342,7 +9500,8 @@
      "Opp3": {
       "part_voiture": 90.322581,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.663866,
@@ -9402,7 +9561,8 @@
      "Opp3": {
       "part_voiture": 95.047923,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.777983
      },
      "Vec2": {
       "personnes_par_piece": 0.543319,
@@ -9459,7 +9619,8 @@
      "Opp3": {
       "part_voiture": 94.810095,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.857786
      },
      "Vec2": {
       "personnes_par_piece": 0.528697,
@@ -9519,7 +9680,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466418,
@@ -9576,7 +9738,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466418,
@@ -9636,7 +9799,8 @@
      "Opp3": {
       "part_voiture": 92.169169,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.997725
      },
      "Vec2": {
       "personnes_par_piece": 0.613158,
@@ -9693,7 +9857,8 @@
      "Opp3": {
       "part_voiture": 89.696065,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.967451
      },
      "Vec2": {
       "personnes_par_piece": 0.570702,
@@ -9753,7 +9918,8 @@
      "Opp3": {
       "part_voiture": 96.540758,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.097021
      },
      "Vec2": {
       "personnes_par_piece": 0.556912,
@@ -9810,7 +9976,8 @@
      "Opp3": {
       "part_voiture": 96.696902,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.006693
      },
      "Vec2": {
       "personnes_par_piece": 0.558906,
@@ -9870,7 +10037,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.579208,
@@ -9927,7 +10095,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.579208,
@@ -9987,7 +10156,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.504274,
@@ -10044,7 +10214,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.504274,
@@ -10104,7 +10275,8 @@
      "Opp3": {
       "part_voiture": 82.352941,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.986111
      },
      "Vec2": {
       "personnes_par_piece": 0.5625,
@@ -10161,7 +10333,8 @@
      "Opp3": {
       "part_voiture": 92.105263,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.547945,
@@ -10221,7 +10394,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -10278,7 +10452,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -10338,7 +10513,8 @@
      "Opp3": {
       "part_voiture": 86.363636,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.551282,
@@ -10395,7 +10571,8 @@
      "Opp3": {
       "part_voiture": 94.594595,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503448,
@@ -10455,7 +10632,8 @@
      "Opp3": {
       "part_voiture": 86.30137,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.862069
      },
      "Vec2": {
       "personnes_par_piece": 0.391892,
@@ -10512,7 +10690,8 @@
      "Opp3": {
       "part_voiture": 97.222222,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466454,
@@ -10572,7 +10751,8 @@
      "Opp3": {
       "part_voiture": 98.333333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.525862,
@@ -10629,7 +10809,8 @@
      "Opp3": {
       "part_voiture": 94.642857,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.017241
      },
      "Vec2": {
       "personnes_par_piece": 0.555024,
@@ -10689,7 +10870,8 @@
      "Opp3": {
       "part_voiture": 76.086957,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.488889,
@@ -10746,7 +10928,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.494444,
@@ -10806,7 +10989,8 @@
      "Opp3": {
       "part_voiture": 80.722892,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503311,
@@ -10863,7 +11047,8 @@
      "Opp3": {
       "part_voiture": 82.278481,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -10923,7 +11108,8 @@
      "Opp3": {
       "part_voiture": 95.454545,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.387755,
@@ -10980,7 +11166,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.425,
@@ -11040,7 +11227,8 @@
      "Opp3": {
       "part_voiture": 93.75,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.037037
      },
      "Vec2": {
       "personnes_par_piece": 0.364865,
@@ -11097,7 +11285,8 @@
      "Opp3": {
       "part_voiture": 78.571429,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.38,
@@ -11157,7 +11346,8 @@
      "Opp3": {
       "part_voiture": 86.746988,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.963415
      },
      "Vec2": {
       "personnes_par_piece": 0.459384,
@@ -11214,7 +11404,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.448485,
@@ -11274,7 +11465,8 @@
      "Opp3": {
       "part_voiture": 88.409202,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.009037
      },
      "Vec2": {
       "personnes_par_piece": 0.505048,
@@ -11331,7 +11523,8 @@
      "Opp3": {
       "part_voiture": 87.886422,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.043887
      },
      "Vec2": {
       "personnes_par_piece": 0.548807,
@@ -11391,7 +11584,8 @@
      "Opp3": {
       "part_voiture": 83.72093,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.01087
      },
      "Vec2": {
       "personnes_par_piece": 0.522727,
@@ -11448,7 +11642,8 @@
      "Opp3": {
       "part_voiture": 86.813187,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.983957
      },
      "Vec2": {
       "personnes_par_piece": 0.589905,
@@ -11508,7 +11703,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.972826
      },
      "Vec2": {
       "personnes_par_piece": 0.59164,
@@ -11565,7 +11761,8 @@
      "Opp3": {
       "part_voiture": 95.226238,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.830846
      },
      "Vec2": {
       "personnes_par_piece": 0.539984,
@@ -11625,7 +11822,8 @@
      "Opp3": {
       "part_voiture": 91.231749,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 11.978169
      },
      "Vec2": {
       "personnes_par_piece": 0.520872,
@@ -11682,7 +11880,8 @@
      "Opp3": {
       "part_voiture": 92.057537,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 17.959566
      },
      "Vec2": {
       "personnes_par_piece": 0.521125,
@@ -11742,7 +11941,8 @@
      "Opp3": {
       "part_voiture": 84.181438,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.069854
      },
      "Vec2": {
       "personnes_par_piece": 0.515736,
@@ -11799,7 +11999,8 @@
      "Opp3": {
       "part_voiture": 89.281394,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.001357
      },
      "Vec2": {
       "personnes_par_piece": 0.493589,
@@ -11859,7 +12060,8 @@
      "Opp3": {
       "part_voiture": 94.420601,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.827288
      },
      "Vec2": {
       "personnes_par_piece": 0.612051,
@@ -11916,7 +12118,8 @@
      "Opp3": {
       "part_voiture": 95.810604,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.865637
      },
      "Vec2": {
       "personnes_par_piece": 0.585788,
@@ -11976,7 +12179,8 @@
      "Opp3": {
       "part_voiture": 79.514894,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 865.250806
      },
      "Vec2": {
       "personnes_par_piece": 0.65006,
@@ -12033,7 +12237,8 @@
      "Opp3": {
       "part_voiture": 81.377213,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 1021.130799
      },
      "Vec2": {
       "personnes_par_piece": 0.674914,
@@ -12093,7 +12298,8 @@
      "Opp3": {
       "part_voiture": 66.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.48,
@@ -12150,7 +12356,8 @@
      "Opp3": {
       "part_voiture": 66.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.48,
@@ -12210,7 +12417,8 @@
      "Opp3": {
       "part_voiture": 93.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.037915
      },
      "Vec2": {
       "personnes_par_piece": 0.455724,
@@ -12267,7 +12475,8 @@
      "Opp3": {
       "part_voiture": 95.196503,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.422058,
@@ -12327,7 +12536,8 @@
      "Opp3": {
       "part_voiture": 83.045213,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.0
      },
      "Vec2": {
       "personnes_par_piece": 0.577223,
@@ -12384,7 +12594,8 @@
      "Opp3": {
       "part_voiture": 84.300468,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 13.428965
      },
      "Vec2": {
       "personnes_par_piece": 0.556164,
@@ -12444,7 +12655,8 @@
      "Opp3": {
       "part_voiture": 86.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.545455,
@@ -12501,7 +12713,8 @@
      "Opp3": {
       "part_voiture": 91.891892,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.447619,
@@ -12561,7 +12774,8 @@
      "Opp3": {
       "part_voiture": 89.714286,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.588816,
@@ -12618,7 +12832,8 @@
      "Opp3": {
       "part_voiture": 92.807785,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.8314
      },
      "Vec2": {
       "personnes_par_piece": 0.492472,
@@ -12678,7 +12893,8 @@
      "Opp3": {
       "part_voiture": 93.548387,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.907407
      },
      "Vec2": {
       "personnes_par_piece": 0.369863,
@@ -12735,7 +12951,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.29878,
@@ -12795,7 +13012,8 @@
      "Opp3": {
       "part_voiture": 87.04,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.330372
      },
      "Vec2": {
       "personnes_par_piece": 0.534286,
@@ -12852,7 +13070,8 @@
      "Opp3": {
       "part_voiture": 87.895136,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 9.7236
      },
      "Vec2": {
       "personnes_par_piece": 0.506943,
@@ -12912,7 +13131,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.463542,
@@ -12969,7 +13189,8 @@
      "Opp3": {
       "part_voiture": 82.051282,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.466667
      },
      "Vec2": {
       "personnes_par_piece": 0.470383,
@@ -13029,7 +13250,8 @@
      "Opp3": {
       "part_voiture": 93.048128,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 54.0
      },
      "Vec2": {
       "personnes_par_piece": 0.66876,
@@ -13086,7 +13308,8 @@
      "Opp3": {
       "part_voiture": 94.810152,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 64.800349
      },
      "Vec2": {
       "personnes_par_piece": 0.628244,
@@ -13146,7 +13369,8 @@
      "Opp3": {
       "part_voiture": 91.525424,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.537118,
@@ -13203,7 +13427,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.513514,
@@ -13263,7 +13488,8 @@
      "Opp3": {
       "part_voiture": 88.959558,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 13.036474
      },
      "Vec2": {
       "personnes_par_piece": 0.63181,
@@ -13320,7 +13546,8 @@
      "Opp3": {
       "part_voiture": 90.493969,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 11.076213
      },
      "Vec2": {
       "personnes_par_piece": 0.622366,
@@ -13380,7 +13607,8 @@
      "Opp3": {
       "part_voiture": 85.035629,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.505407,
@@ -13437,7 +13665,8 @@
      "Opp3": {
       "part_voiture": 87.897774,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.243399
      },
      "Vec2": {
       "personnes_par_piece": 0.466946,
@@ -13497,7 +13726,8 @@
      "Opp3": {
       "part_voiture": 74.074074,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.410156,
@@ -13554,7 +13784,8 @@
      "Opp3": {
       "part_voiture": 86.206897,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44358,
@@ -13614,7 +13845,8 @@
      "Opp3": {
       "part_voiture": 76.930578,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 24.786365
      },
      "Vec2": {
       "personnes_par_piece": 0.58923,
@@ -13671,7 +13903,8 @@
      "Opp3": {
       "part_voiture": 78.427266,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 24.541244
      },
      "Vec2": {
       "personnes_par_piece": 0.573588,
@@ -13731,7 +13964,8 @@
      "Opp3": {
       "part_voiture": 91.110717,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.01997
      },
      "Vec2": {
       "personnes_par_piece": 0.550073,
@@ -13788,7 +14022,8 @@
      "Opp3": {
       "part_voiture": 90.897032,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.883949
      },
      "Vec2": {
       "personnes_par_piece": 0.467248,
@@ -13848,7 +14083,8 @@
      "Opp3": {
       "part_voiture": 87.272727,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.514541,
@@ -13905,7 +14141,8 @@
      "Opp3": {
       "part_voiture": 90.864306,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.999612
      },
      "Vec2": {
       "personnes_par_piece": 0.472582,
@@ -13965,7 +14202,8 @@
      "Opp3": {
       "part_voiture": 90.47619,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.540881,
@@ -14022,7 +14260,8 @@
      "Opp3": {
       "part_voiture": 90.196078,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.490741,
@@ -14082,7 +14321,8 @@
      "Opp3": {
       "part_voiture": 88.405797,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.580071,
@@ -14139,7 +14379,8 @@
      "Opp3": {
       "part_voiture": 93.333333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.028777
      },
      "Vec2": {
       "personnes_par_piece": 0.553785,
@@ -14199,7 +14440,8 @@
      "Opp3": {
       "part_voiture": 89.285714,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.006173
      },
      "Vec2": {
       "personnes_par_piece": 0.552901,
@@ -14256,7 +14498,8 @@
      "Opp3": {
       "part_voiture": 91.752577,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.522727,
@@ -14316,7 +14559,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.496403,
@@ -14373,7 +14617,8 @@
      "Opp3": {
       "part_voiture": 90.540541,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.453039,
@@ -14433,7 +14678,8 @@
      "Opp3": {
       "part_voiture": 92.307692,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.477936,
@@ -14490,7 +14736,8 @@
      "Opp3": {
       "part_voiture": 91.802072,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.875056
      },
      "Vec2": {
       "personnes_par_piece": 0.472361,
@@ -14550,7 +14797,8 @@
      "Opp3": {
       "part_voiture": 82.051282,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.938272
      },
      "Vec2": {
       "personnes_par_piece": 0.50625,
@@ -14607,7 +14855,8 @@
      "Opp3": {
       "part_voiture": 88.372093,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.870968
      },
      "Vec2": {
       "personnes_par_piece": 0.508197,
@@ -14667,7 +14916,8 @@
      "Opp3": {
       "part_voiture": 90.322581,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.981132
      },
      "Vec2": {
       "personnes_par_piece": 0.430894,
@@ -14724,7 +14974,8 @@
      "Opp3": {
       "part_voiture": 89.285714,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.439252,
@@ -14784,7 +15035,8 @@
      "Opp3": {
       "part_voiture": 71.794872,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.324324
      },
      "Vec2": {
       "personnes_par_piece": 0.4625,
@@ -14841,7 +15093,8 @@
      "Opp3": {
       "part_voiture": 71.794872,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.837838
      },
      "Vec2": {
       "personnes_par_piece": 0.4625,
@@ -14901,7 +15154,8 @@
      "Opp3": {
       "part_voiture": 86.440678,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.15493
      },
      "Vec2": {
       "personnes_par_piece": 0.636771,
@@ -14958,7 +15212,8 @@
      "Opp3": {
       "part_voiture": 93.421053,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.9375
      },
      "Vec2": {
       "personnes_par_piece": 0.567376,
@@ -15018,7 +15273,8 @@
      "Opp3": {
       "part_voiture": 83.650616,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.64
      },
      "Vec2": {
       "personnes_par_piece": 0.487104,
@@ -15075,7 +15331,8 @@
      "Opp3": {
       "part_voiture": 82.672984,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.201224
      },
      "Vec2": {
       "personnes_par_piece": 0.46963,
@@ -15135,7 +15392,8 @@
      "Opp3": {
       "part_voiture": 85.294118,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.425532,
@@ -15192,7 +15450,8 @@
      "Opp3": {
       "part_voiture": 78.04878,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.984127
      },
      "Vec2": {
       "personnes_par_piece": 0.401274,
@@ -15252,7 +15511,8 @@
      "Opp3": {
       "part_voiture": 87.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.020833
      },
      "Vec2": {
       "personnes_par_piece": 0.489796,
@@ -15309,7 +15569,8 @@
      "Opp3": {
       "part_voiture": 88.77551,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.488127,
@@ -15369,7 +15630,8 @@
      "Opp3": {
       "part_voiture": 91.176471,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.41791,
@@ -15426,7 +15688,8 @@
      "Opp3": {
       "part_voiture": 91.176471,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.409722,
@@ -15486,7 +15749,8 @@
      "Opp3": {
       "part_voiture": 88.095238,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.490752,
@@ -15543,7 +15807,8 @@
      "Opp3": {
       "part_voiture": 93.039262,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.025971
      },
      "Vec2": {
       "personnes_par_piece": 0.460454,
@@ -15603,7 +15868,8 @@
      "Opp3": {
       "part_voiture": 96.153846,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -15660,7 +15926,8 @@
      "Opp3": {
       "part_voiture": 89.090909,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.431111,
@@ -15720,7 +15987,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.450704,
@@ -15777,7 +16045,8 @@
      "Opp3": {
       "part_voiture": 96.428571,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.452381,
@@ -15837,7 +16106,8 @@
      "Opp3": {
       "part_voiture": 90.625,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.05988
      },
      "Vec2": {
       "personnes_par_piece": 0.577855,
@@ -15894,7 +16164,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.874214
      },
      "Vec2": {
       "personnes_par_piece": 0.456897,
@@ -15954,7 +16225,8 @@
      "Opp3": {
       "part_voiture": 90.47619,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.587571,
@@ -16011,7 +16283,8 @@
      "Opp3": {
       "part_voiture": 86.363636,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.935484
      },
      "Vec2": {
       "personnes_par_piece": 0.476923,
@@ -16071,7 +16344,8 @@
      "Opp3": {
       "part_voiture": 85.631985,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.485651,
@@ -16128,7 +16402,8 @@
      "Opp3": {
       "part_voiture": 91.810869,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.468493,
@@ -16188,7 +16463,8 @@
      "Opp3": {
       "part_voiture": 95.454545,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.431373,
@@ -16245,7 +16521,8 @@
      "Opp3": {
       "part_voiture": 96.153846,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.019231
      },
      "Vec2": {
       "personnes_par_piece": 0.495238,
@@ -16305,7 +16582,8 @@
      "Opp3": {
       "part_voiture": 86.538462,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.519608,
@@ -16362,7 +16640,8 @@
      "Opp3": {
       "part_voiture": 89.830508,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.486239,
@@ -16422,7 +16701,8 @@
      "Opp3": {
       "part_voiture": 85.319293,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.952643
      },
      "Vec2": {
       "personnes_par_piece": 0.557575,
@@ -16479,7 +16759,8 @@
      "Opp3": {
       "part_voiture": 83.130604,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.916781
      },
      "Vec2": {
       "personnes_par_piece": 0.551047,
@@ -16539,7 +16820,8 @@
      "Opp3": {
       "part_voiture": 88.636364,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.441989,
@@ -16596,7 +16878,8 @@
      "Opp3": {
       "part_voiture": 75.675676,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.43125,
@@ -16656,7 +16939,8 @@
      "Opp3": {
       "part_voiture": 94.375,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.0
      },
      "Vec2": {
       "personnes_par_piece": 0.608939,
@@ -16713,7 +16997,8 @@
      "Opp3": {
       "part_voiture": 92.377439,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.994035
      },
      "Vec2": {
       "personnes_par_piece": 0.565782,
@@ -16773,7 +17058,8 @@
      "Opp3": {
       "part_voiture": 97.419355,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.988372
      },
      "Vec2": {
       "personnes_par_piece": 0.525994,
@@ -16830,7 +17116,8 @@
      "Opp3": {
       "part_voiture": 95.490203,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.895712
      },
      "Vec2": {
       "personnes_par_piece": 0.519509,
@@ -16890,7 +17177,8 @@
      "Opp3": {
       "part_voiture": 96.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.509804,
@@ -16947,7 +17235,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.574074,
@@ -17007,7 +17296,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.469697,
@@ -17064,7 +17354,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.469697,
@@ -17124,7 +17415,8 @@
      "Opp3": {
       "part_voiture": 93.235747,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.095885
      },
      "Vec2": {
       "personnes_par_piece": 0.615057,
@@ -17181,7 +17473,8 @@
      "Opp3": {
       "part_voiture": 96.675481,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 8.1117
      },
      "Vec2": {
       "personnes_par_piece": 0.652528,
@@ -17241,7 +17534,8 @@
      "Opp3": {
       "part_voiture": 93.948127,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.945946
      },
      "Vec2": {
       "personnes_par_piece": 0.570827,
@@ -17298,7 +17592,8 @@
      "Opp3": {
       "part_voiture": 96.340254,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.754568
      },
      "Vec2": {
       "personnes_par_piece": 0.552779,
@@ -17358,7 +17653,8 @@
      "Opp3": {
       "part_voiture": 90.697674,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.07
      },
      "Vec2": {
       "personnes_par_piece": 0.578035,
@@ -17415,7 +17711,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.57377,
@@ -17475,7 +17772,8 @@
      "Opp3": {
       "part_voiture": 89.655172,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.525926,
@@ -17532,7 +17830,8 @@
      "Opp3": {
       "part_voiture": 93.220339,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.445513,
@@ -17592,7 +17891,8 @@
      "Opp3": {
       "part_voiture": 85.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.592593,
@@ -17649,7 +17949,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.426471,
@@ -17709,7 +18010,8 @@
      "Opp3": {
       "part_voiture": 79.310345,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.481818,
@@ -17766,7 +18068,8 @@
      "Opp3": {
       "part_voiture": 80.555556,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -17826,7 +18129,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.530612,
@@ -17883,7 +18187,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.45098,
@@ -17943,7 +18248,8 @@
      "Opp3": {
       "part_voiture": 68.75,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.35,
@@ -18000,7 +18306,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.338462,
@@ -18060,7 +18367,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.442308,
@@ -18117,7 +18425,8 @@
      "Opp3": {
       "part_voiture": 89.473684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.398058,
@@ -18177,7 +18486,8 @@
      "Opp3": {
       "part_voiture": 93.04495,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 13.658019
      },
      "Vec2": {
       "personnes_par_piece": 0.590267,
@@ -18234,7 +18544,8 @@
      "Opp3": {
       "part_voiture": 93.457796,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 18.736131
      },
      "Vec2": {
       "personnes_par_piece": 0.527619,
@@ -18294,7 +18605,8 @@
      "Opp3": {
       "part_voiture": 90.30837,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.91018
      },
      "Vec2": {
       "personnes_par_piece": 0.534685,
@@ -18351,7 +18663,8 @@
      "Opp3": {
       "part_voiture": 91.072574,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.489455,
@@ -18411,7 +18724,8 @@
      "Opp3": {
       "part_voiture": 75.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.375,
@@ -18468,7 +18782,8 @@
      "Opp3": {
       "part_voiture": 90.909091,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.387755,
@@ -18528,7 +18843,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.423729,
@@ -18585,7 +18901,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.520833,
@@ -18645,7 +18962,8 @@
      "Opp3": {
       "part_voiture": 77.419355,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.450704,
@@ -18702,7 +19020,8 @@
      "Opp3": {
       "part_voiture": 79.411765,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.475806,
@@ -18762,7 +19081,8 @@
      "Opp3": {
       "part_voiture": 77.5,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47205,
@@ -18819,7 +19139,8 @@
      "Opp3": {
       "part_voiture": 81.395349,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.469512,
@@ -18879,7 +19200,8 @@
      "Opp3": {
       "part_voiture": 90.327169,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 10.874017
      },
      "Vec2": {
       "personnes_par_piece": 0.582743,
@@ -18936,7 +19258,8 @@
      "Opp3": {
       "part_voiture": 90.216663,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 10.000382
      },
      "Vec2": {
       "personnes_par_piece": 0.578951,
@@ -18996,7 +19319,8 @@
      "Opp3": {
       "part_voiture": 94.455446,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.968468
      },
      "Vec2": {
       "personnes_par_piece": 0.53494,
@@ -19053,7 +19377,8 @@
      "Opp3": {
       "part_voiture": 93.801163,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.728436
      },
      "Vec2": {
       "personnes_par_piece": 0.519739,
@@ -19113,7 +19438,8 @@
      "Opp3": {
       "part_voiture": 84.615385,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.48289,
@@ -19170,7 +19496,8 @@
      "Opp3": {
       "part_voiture": 92.405063,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.418685,
@@ -19230,7 +19557,8 @@
      "Opp3": {
       "part_voiture": 85.56701,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -19287,7 +19615,8 @@
      "Opp3": {
       "part_voiture": 85.56701,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460976,
@@ -19347,7 +19676,8 @@
      "Opp3": {
       "part_voiture": 84.210526,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.442105,
@@ -19404,7 +19734,8 @@
      "Opp3": {
       "part_voiture": 95.833333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.420168,
@@ -19464,7 +19795,8 @@
      "Opp3": {
       "part_voiture": 71.153846,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.535,
@@ -19521,7 +19853,8 @@
      "Opp3": {
       "part_voiture": 82.926829,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.480663,
@@ -19581,7 +19914,8 @@
      "Opp3": {
       "part_voiture": 82.608696,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.365741,
@@ -19638,7 +19972,8 @@
      "Opp3": {
       "part_voiture": 85.365854,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.467626,
@@ -19698,7 +20033,8 @@
      "Opp3": {
       "part_voiture": 52.941176,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.367925,
@@ -19755,7 +20091,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.425,
@@ -19815,7 +20152,8 @@
      "Opp3": {
       "part_voiture": 96.428571,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.923077
      },
      "Vec2": {
       "personnes_par_piece": 0.555556,
@@ -19872,7 +20210,8 @@
      "Opp3": {
       "part_voiture": 94.117647,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451613,
@@ -19932,7 +20271,8 @@
      "Opp3": {
       "part_voiture": 88.474533,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.526406,
@@ -19989,7 +20329,8 @@
      "Opp3": {
       "part_voiture": 92.760651,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.704324
      },
      "Vec2": {
       "personnes_par_piece": 0.498349,
@@ -20049,7 +20390,8 @@
      "Opp3": {
       "part_voiture": 89.210019,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.805821
      },
      "Vec2": {
       "personnes_par_piece": 0.539561,
@@ -20106,7 +20448,8 @@
      "Opp3": {
       "part_voiture": 90.289978,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.925941
      },
      "Vec2": {
       "personnes_par_piece": 0.506045,
@@ -20166,7 +20509,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.43871,
@@ -20223,7 +20567,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.43871,
@@ -20283,7 +20628,8 @@
      "Opp3": {
       "part_voiture": 89.473684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.423077,
@@ -20340,7 +20686,8 @@
      "Opp3": {
       "part_voiture": 92.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.388715,
@@ -20400,7 +20747,8 @@
      "Opp3": {
       "part_voiture": 82.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.412935,
@@ -20457,7 +20805,8 @@
      "Opp3": {
       "part_voiture": 82.978723,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.012821
      },
      "Vec2": {
       "personnes_par_piece": 0.423913,
@@ -20517,7 +20866,8 @@
      "Opp3": {
       "part_voiture": 80.191693,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.066333
      },
      "Vec2": {
       "personnes_par_piece": 0.557692,
@@ -20574,7 +20924,8 @@
      "Opp3": {
       "part_voiture": 80.321849,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.996995
      },
      "Vec2": {
       "personnes_par_piece": 0.560168,
@@ -20634,7 +20985,8 @@
      "Opp3": {
       "part_voiture": 78.26087,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.518072,
@@ -20691,7 +21043,8 @@
      "Opp3": {
       "part_voiture": 78.26087,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.518072,
@@ -20751,7 +21104,8 @@
      "Opp3": {
       "part_voiture": 86.225279,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.883624
      },
      "Vec2": {
       "personnes_par_piece": 0.463363,
@@ -20808,7 +21162,8 @@
      "Opp3": {
       "part_voiture": 90.973454,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.982731
      },
      "Vec2": {
       "personnes_par_piece": 0.455945,
@@ -20868,7 +21223,8 @@
      "Opp3": {
       "part_voiture": 85.555556,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.478632,
@@ -20925,7 +21281,8 @@
      "Opp3": {
       "part_voiture": 90.657853,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.100203
      },
      "Vec2": {
       "personnes_par_piece": 0.522237,
@@ -20985,7 +21342,8 @@
      "Opp3": {
       "part_voiture": 88.679245,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.480769,
@@ -21042,7 +21400,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.443925,
@@ -21102,7 +21461,8 @@
      "Opp3": {
       "part_voiture": 85.289853,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 9.190382
      },
      "Vec2": {
       "personnes_par_piece": 0.600707,
@@ -21159,7 +21519,8 @@
      "Opp3": {
       "part_voiture": 87.505668,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 9.07027
      },
      "Vec2": {
       "personnes_par_piece": 0.561824,
@@ -21219,7 +21580,8 @@
      "Opp3": {
       "part_voiture": 75.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.969697
      },
      "Vec2": {
       "personnes_par_piece": 0.389764,
@@ -21276,7 +21638,8 @@
      "Opp3": {
       "part_voiture": 71.698113,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.041667
      },
      "Vec2": {
       "personnes_par_piece": 0.415584,
@@ -21336,7 +21699,8 @@
      "Opp3": {
       "part_voiture": 91.216216,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.33055
      },
      "Vec2": {
       "personnes_par_piece": 0.549231,
@@ -21393,7 +21757,8 @@
      "Opp3": {
       "part_voiture": 90.811341,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.93199
      },
      "Vec2": {
       "personnes_par_piece": 0.535327,
@@ -21453,7 +21818,8 @@
      "Opp3": {
       "part_voiture": 71.07438,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47412,
@@ -21510,7 +21876,8 @@
      "Opp3": {
       "part_voiture": 84.700271,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.45823,
@@ -21570,7 +21937,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.225806
      },
      "Vec2": {
       "personnes_par_piece": 0.738095,
@@ -21627,7 +21995,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.617021,
@@ -21687,7 +22056,8 @@
      "Opp3": {
       "part_voiture": 86.486486,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.467066,
@@ -21744,7 +22114,8 @@
      "Opp3": {
       "part_voiture": 86.486486,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.467066,
@@ -21804,7 +22175,8 @@
      "Opp3": {
       "part_voiture": 82.474227,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.516667,
@@ -21861,7 +22233,8 @@
      "Opp3": {
       "part_voiture": 90.932763,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.504068,
@@ -21921,7 +22294,8 @@
      "Opp3": {
       "part_voiture": 75.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.449744,
@@ -21978,7 +22352,8 @@
      "Opp3": {
       "part_voiture": 81.519547,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.432087,
@@ -22038,7 +22413,8 @@
      "Opp3": {
       "part_voiture": 94.978255,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 16.281724
      },
      "Vec2": {
       "personnes_par_piece": 0.565329,
@@ -22095,7 +22471,8 @@
      "Opp3": {
       "part_voiture": 95.442307,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 15.252498
      },
      "Vec2": {
       "personnes_par_piece": 0.551149,
@@ -22155,7 +22532,8 @@
      "Opp3": {
       "part_voiture": 92.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.568966,
@@ -22212,7 +22590,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.463768,
@@ -22272,7 +22651,8 @@
      "Opp3": {
       "part_voiture": 94.482759,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.046512
      },
      "Vec2": {
       "personnes_par_piece": 0.598261,
@@ -22329,7 +22709,8 @@
      "Opp3": {
       "part_voiture": 95.371606,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.583886,
@@ -22389,7 +22770,8 @@
      "Opp3": {
       "part_voiture": 94.168147,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 46.24655
      },
      "Vec2": {
       "personnes_par_piece": 0.575944,
@@ -22446,7 +22828,8 @@
      "Opp3": {
       "part_voiture": 93.832488,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 44.174885
      },
      "Vec2": {
       "personnes_par_piece": 0.560023,
@@ -22506,7 +22889,8 @@
      "Opp3": {
       "part_voiture": 84.615385,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.509434,
@@ -22563,7 +22947,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.438596,
@@ -22623,7 +23008,8 @@
      "Opp3": {
       "part_voiture": 90.816327,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.004747
      },
      "Vec2": {
       "personnes_par_piece": 0.567204,
@@ -22680,7 +23066,8 @@
      "Opp3": {
       "part_voiture": 89.534307,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.546318,
@@ -22740,7 +23127,8 @@
      "Opp3": {
       "part_voiture": 79.166667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.369565,
@@ -22797,7 +23185,8 @@
      "Opp3": {
       "part_voiture": 79.166667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.369565,
@@ -22857,7 +23246,8 @@
      "Opp3": {
       "part_voiture": 83.561644,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.466599
      },
      "Vec2": {
       "personnes_par_piece": 0.555367,
@@ -22914,7 +23304,8 @@
      "Opp3": {
       "part_voiture": 82.949621,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.968079
      },
      "Vec2": {
       "personnes_par_piece": 0.542702,
@@ -22974,7 +23365,8 @@
      "Opp3": {
       "part_voiture": 76.923077,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -23031,7 +23423,8 @@
      "Opp3": {
       "part_voiture": 81.081081,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -23091,7 +23484,8 @@
      "Opp3": {
       "part_voiture": 95.2,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.785479
      },
      "Vec2": {
       "personnes_par_piece": 0.597633,
@@ -23148,7 +23542,8 @@
      "Opp3": {
       "part_voiture": 96.676041,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.560496,
@@ -23208,7 +23603,8 @@
      "Opp3": {
       "part_voiture": 95.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466667,
@@ -23265,7 +23661,8 @@
      "Opp3": {
       "part_voiture": 95.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.466667,
@@ -23325,7 +23722,8 @@
      "Opp3": {
       "part_voiture": 72.222222,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.436508,
@@ -23382,7 +23780,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.468208,
@@ -23442,7 +23841,8 @@
      "Opp3": {
       "part_voiture": 91.196388,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.052632
      },
      "Vec2": {
       "personnes_par_piece": 0.573224,
@@ -23499,7 +23899,8 @@
      "Opp3": {
       "part_voiture": 91.783615,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.530782,
@@ -23559,7 +23960,8 @@
      "Opp3": {
       "part_voiture": 82.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.579832,
@@ -23616,7 +24018,8 @@
      "Opp3": {
       "part_voiture": 93.333333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.101695
      },
      "Vec2": {
       "personnes_par_piece": 0.483607,
@@ -23676,7 +24079,8 @@
      "Opp3": {
       "part_voiture": 84.971098,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.936909
      },
      "Vec2": {
       "personnes_par_piece": 0.456772,
@@ -23733,7 +24137,8 @@
      "Opp3": {
       "part_voiture": 84.894008,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.015767
      },
      "Vec2": {
       "personnes_par_piece": 0.454082,
@@ -23793,7 +24198,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.49115,
@@ -23850,7 +24256,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.49115,
@@ -23910,7 +24317,8 @@
      "Opp3": {
       "part_voiture": 89.146645,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 24.0
      },
      "Vec2": {
       "personnes_par_piece": 0.589248,
@@ -23967,7 +24375,8 @@
      "Opp3": {
       "part_voiture": 91.875931,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 23.666514
      },
      "Vec2": {
       "personnes_par_piece": 0.589085,
@@ -24027,7 +24436,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.440171,
@@ -24084,7 +24494,8 @@
      "Opp3": {
       "part_voiture": 94.827586,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.434615,
@@ -24144,7 +24555,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.365079,
@@ -24201,7 +24613,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.365079,
@@ -24261,7 +24674,8 @@
      "Opp3": {
       "part_voiture": 93.75,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.432099,
@@ -24318,7 +24732,8 @@
      "Opp3": {
       "part_voiture": 93.75,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.432099,
@@ -24378,7 +24793,8 @@
      "Opp3": {
       "part_voiture": 85.53719,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.928571
      },
      "Vec2": {
       "personnes_par_piece": 0.511675,
@@ -24435,7 +24851,8 @@
      "Opp3": {
       "part_voiture": 84.162029,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.024753
      },
      "Vec2": {
       "personnes_par_piece": 0.488443,
@@ -24495,7 +24912,8 @@
      "Opp3": {
       "part_voiture": 86.419753,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.501661,
@@ -24552,7 +24970,8 @@
      "Opp3": {
       "part_voiture": 86.419753,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.501661,
@@ -24612,7 +25031,8 @@
      "Opp3": {
       "part_voiture": 93.204868,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.963897
      },
      "Vec2": {
       "personnes_par_piece": 0.554849,
@@ -24669,7 +25089,8 @@
      "Opp3": {
       "part_voiture": 94.202412,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.743256
      },
      "Vec2": {
       "personnes_par_piece": 0.535093,
@@ -24729,7 +25150,8 @@
      "Opp3": {
       "part_voiture": 89.189189,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.075
      },
      "Vec2": {
       "personnes_par_piece": 0.625,
@@ -24786,7 +25208,8 @@
      "Opp3": {
       "part_voiture": 89.189189,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.9875
      },
      "Vec2": {
       "personnes_par_piece": 0.625,
@@ -24846,7 +25269,8 @@
      "Opp3": {
       "part_voiture": 85.276261,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.023009
      },
      "Vec2": {
       "personnes_par_piece": 0.551389,
@@ -24903,7 +25327,8 @@
      "Opp3": {
       "part_voiture": 86.532926,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.977405
      },
      "Vec2": {
       "personnes_par_piece": 0.552958,
@@ -24963,7 +25388,8 @@
      "Opp3": {
       "part_voiture": 89.21095,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.0
      },
      "Vec2": {
       "personnes_par_piece": 0.553897,
@@ -25020,7 +25446,8 @@
      "Opp3": {
       "part_voiture": 90.395336,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.928009
      },
      "Vec2": {
       "personnes_par_piece": 0.52643,
@@ -25080,7 +25507,8 @@
      "Opp3": {
       "part_voiture": 85.036042,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 1239.032217
      },
      "Vec2": {
       "personnes_par_piece": 0.675304,
@@ -25137,7 +25565,8 @@
      "Opp3": {
       "part_voiture": 86.109671,
       "transport_commun": 100.0,
-      "reseau_bus": 100.0
+      "reseau_bus": 100.0,
+      "actifs_transports": 1358.452414
      },
      "Vec2": {
       "personnes_par_piece": 0.682366,
@@ -25197,7 +25626,8 @@
      "Opp3": {
       "part_voiture": 94.736842,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.358025,
@@ -25254,7 +25684,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.377551,
@@ -25314,7 +25745,8 @@
      "Opp3": {
       "part_voiture": 89.935242,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 8.194596
      },
      "Vec2": {
       "personnes_par_piece": 0.582759,
@@ -25371,7 +25803,8 @@
      "Opp3": {
       "part_voiture": 92.455398,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.126277
      },
      "Vec2": {
       "personnes_par_piece": 0.558385,
@@ -25431,7 +25864,8 @@
      "Opp3": {
       "part_voiture": 90.625,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.506608,
@@ -25488,7 +25922,8 @@
      "Opp3": {
       "part_voiture": 90.625,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.506608,
@@ -25548,7 +25983,8 @@
      "Opp3": {
       "part_voiture": 91.239064,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.948677
      },
      "Vec2": {
       "personnes_par_piece": 0.502908,
@@ -25605,7 +26041,8 @@
      "Opp3": {
       "part_voiture": 93.520993,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.450428,
@@ -25665,7 +26102,8 @@
      "Opp3": {
       "part_voiture": 85.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.483444,
@@ -25722,7 +26160,8 @@
      "Opp3": {
       "part_voiture": 85.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.063492
      },
      "Vec2": {
       "personnes_par_piece": 0.375,
@@ -25782,7 +26221,8 @@
      "Opp3": {
       "part_voiture": 94.444444,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.351351,
@@ -25839,7 +26279,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.41791,
@@ -25899,7 +26340,8 @@
      "Opp3": {
       "part_voiture": 86.792453,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.576355,
@@ -25956,7 +26398,8 @@
      "Opp3": {
       "part_voiture": 86.440678,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.057143
      },
      "Vec2": {
       "personnes_par_piece": 0.42,
@@ -26016,7 +26459,8 @@
      "Opp3": {
       "part_voiture": 81.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451064,
@@ -26073,7 +26517,8 @@
      "Opp3": {
       "part_voiture": 81.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451064,
@@ -26133,7 +26578,8 @@
      "Opp3": {
       "part_voiture": 91.902072,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 8.123636
      },
      "Vec2": {
       "personnes_par_piece": 0.545094,
@@ -26190,7 +26636,8 @@
      "Opp3": {
       "part_voiture": 89.622205,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.988275
      },
      "Vec2": {
       "personnes_par_piece": 0.548049,
@@ -26250,7 +26697,8 @@
      "Opp3": {
       "part_voiture": 86.956522,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.302521,
@@ -26307,7 +26755,8 @@
      "Opp3": {
       "part_voiture": 80.769231,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.415842,
@@ -26367,7 +26816,8 @@
      "Opp3": {
       "part_voiture": 83.879091,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.524057,
@@ -26424,7 +26874,8 @@
      "Opp3": {
       "part_voiture": 87.980944,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.492702,
@@ -26484,7 +26935,8 @@
      "Opp3": {
       "part_voiture": 81.176471,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.977273
      },
      "Vec2": {
       "personnes_par_piece": 0.531722,
@@ -26541,7 +26993,8 @@
      "Opp3": {
       "part_voiture": 88.421053,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.481579,
@@ -26601,7 +27054,8 @@
      "Opp3": {
       "part_voiture": 95.180723,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.524128,
@@ -26658,7 +27112,8 @@
      "Opp3": {
       "part_voiture": 96.320189,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.936319
      },
      "Vec2": {
       "personnes_par_piece": 0.484951,
@@ -26718,7 +27173,8 @@
      "Opp3": {
       "part_voiture": 90.909091,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.996503
      },
      "Vec2": {
       "personnes_par_piece": 0.549472,
@@ -26775,7 +27231,8 @@
      "Opp3": {
       "part_voiture": 94.572114,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.533664,
@@ -26835,7 +27292,8 @@
      "Opp3": {
       "part_voiture": 88.235294,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.41791,
@@ -26892,7 +27350,8 @@
      "Opp3": {
       "part_voiture": 90.47619,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.455696,
@@ -26952,7 +27411,8 @@
      "Opp3": {
       "part_voiture": 91.515152,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.522099,
@@ -27009,7 +27469,8 @@
      "Opp3": {
       "part_voiture": 91.987889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.498935,
@@ -27069,7 +27530,8 @@
      "Opp3": {
       "part_voiture": 94.949495,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.014019
      },
      "Vec2": {
       "personnes_par_piece": 0.47033,
@@ -27126,7 +27588,8 @@
      "Opp3": {
       "part_voiture": 90.261171,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.998753
      },
      "Vec2": {
       "personnes_par_piece": 0.468441,
@@ -27186,7 +27649,8 @@
      "Opp3": {
       "part_voiture": 93.239901,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.897268
      },
      "Vec2": {
       "personnes_par_piece": 0.582555,
@@ -27243,7 +27707,8 @@
      "Opp3": {
       "part_voiture": 93.034976,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.164796
      },
      "Vec2": {
       "personnes_par_piece": 0.568657,
@@ -27303,7 +27768,8 @@
      "Opp3": {
       "part_voiture": 88.679245,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.442623,
@@ -27360,7 +27826,8 @@
      "Opp3": {
       "part_voiture": 86.538462,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.410714,
@@ -27420,7 +27887,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.675676,
@@ -27477,7 +27945,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.673913,
@@ -27537,7 +28006,8 @@
      "Opp3": {
       "part_voiture": 91.428571,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.49026,
@@ -27594,7 +28064,8 @@
      "Opp3": {
       "part_voiture": 96.25,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.993827
      },
      "Vec2": {
       "personnes_par_piece": 0.429708,
@@ -27654,7 +28125,8 @@
      "Opp3": {
       "part_voiture": 95.705521,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.507485,
@@ -27711,7 +28183,8 @@
      "Opp3": {
       "part_voiture": 95.45308,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.48929,
@@ -27771,7 +28244,8 @@
      "Opp3": {
       "part_voiture": 78.125,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.424242,
@@ -27828,7 +28302,8 @@
      "Opp3": {
       "part_voiture": 77.777778,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.429687,
@@ -27888,7 +28363,8 @@
      "Opp3": {
       "part_voiture": 71.153846,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.433071,
@@ -27945,7 +28421,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.42268,
@@ -28005,7 +28482,8 @@
      "Opp3": {
       "part_voiture": 89.473684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.48532,
@@ -28062,7 +28540,8 @@
      "Opp3": {
       "part_voiture": 89.390966,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.482834,
@@ -28122,7 +28601,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.935484
      },
      "Vec2": {
       "personnes_par_piece": 0.473282,
@@ -28179,7 +28659,8 @@
      "Opp3": {
       "part_voiture": 88.095238,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.464968,
@@ -28239,7 +28720,8 @@
      "Opp3": {
       "part_voiture": 79.844961,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.514286,
@@ -28296,7 +28778,8 @@
      "Opp3": {
       "part_voiture": 82.111684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503157,
@@ -28356,7 +28839,8 @@
      "Opp3": {
       "part_voiture": 94.57501,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 18.433681
      },
      "Vec2": {
       "personnes_par_piece": 0.574558,
@@ -28413,7 +28897,8 @@
      "Opp3": {
       "part_voiture": 94.24584,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 18.942882
      },
      "Vec2": {
       "personnes_par_piece": 0.558717,
@@ -28473,7 +28958,8 @@
      "Opp3": {
       "part_voiture": 87.012987,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.992481
      },
      "Vec2": {
       "personnes_par_piece": 0.384393,
@@ -28530,7 +29016,8 @@
      "Opp3": {
       "part_voiture": 86.458333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.400922,
@@ -28590,7 +29077,8 @@
      "Opp3": {
       "part_voiture": 95.83815,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.557958,
@@ -28647,7 +29135,8 @@
      "Opp3": {
       "part_voiture": 93.582655,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.911397
      },
      "Vec2": {
       "personnes_par_piece": 0.536922,
@@ -28707,7 +29196,8 @@
      "Opp3": {
       "part_voiture": 87.739464,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.578142,
@@ -28764,7 +29254,8 @@
      "Opp3": {
       "part_voiture": 87.060537,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.624798,
@@ -28824,7 +29315,8 @@
      "Opp3": {
       "part_voiture": 87.234043,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.541899,
@@ -28881,7 +29373,8 @@
      "Opp3": {
       "part_voiture": 90.566038,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.52459,
@@ -28941,7 +29434,8 @@
      "Opp3": {
       "part_voiture": 85.378336,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.943401
      },
      "Vec2": {
       "personnes_par_piece": 0.52397,
@@ -28998,7 +29492,8 @@
      "Opp3": {
       "part_voiture": 86.565451,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.999651
      },
      "Vec2": {
       "personnes_par_piece": 0.518657,
@@ -29058,7 +29553,8 @@
      "Opp3": {
       "part_voiture": 87.815587,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.040209
      },
      "Vec2": {
       "personnes_par_piece": 0.548735,
@@ -29115,7 +29611,8 @@
      "Opp3": {
       "part_voiture": 91.263681,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.995624
      },
      "Vec2": {
       "personnes_par_piece": 0.559837,
@@ -29175,7 +29672,8 @@
      "Opp3": {
       "part_voiture": 86.99187,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.928571
      },
      "Vec2": {
       "personnes_par_piece": 0.469072,
@@ -29232,7 +29730,8 @@
      "Opp3": {
       "part_voiture": 86.438038,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.509408,
@@ -29292,7 +29791,8 @@
      "Opp3": {
       "part_voiture": 84.916201,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.473763,
@@ -29349,7 +29849,8 @@
      "Opp3": {
       "part_voiture": 81.411392,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.002461
      },
      "Vec2": {
       "personnes_par_piece": 0.442956,
@@ -29409,7 +29910,8 @@
      "Opp3": {
       "part_voiture": 93.464052,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.491754,
@@ -29466,7 +29968,8 @@
      "Opp3": {
       "part_voiture": 92.378259,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.045425
      },
      "Vec2": {
       "personnes_par_piece": 0.461338,
@@ -29526,7 +30029,8 @@
      "Opp3": {
       "part_voiture": 94.195775,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 28.505266
      },
      "Vec2": {
       "personnes_par_piece": 0.605316,
@@ -29583,7 +30087,8 @@
      "Opp3": {
       "part_voiture": 92.888314,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 68.433091
      },
      "Vec2": {
       "personnes_par_piece": 0.583382,
@@ -29643,7 +30148,8 @@
      "Opp3": {
       "part_voiture": 91.752352,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 9.546423
      },
      "Vec2": {
       "personnes_par_piece": 0.571275,
@@ -29700,7 +30206,8 @@
      "Opp3": {
       "part_voiture": 92.529136,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.082611
      },
      "Vec2": {
       "personnes_par_piece": 0.55423,
@@ -29760,7 +30267,8 @@
      "Opp3": {
       "part_voiture": 84.507042,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460064,
@@ -29817,7 +30325,8 @@
      "Opp3": {
       "part_voiture": 84.507042,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460064,
@@ -29877,7 +30386,8 @@
      "Opp3": {
       "part_voiture": 82.352941,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.407407,
@@ -29934,7 +30444,8 @@
      "Opp3": {
       "part_voiture": 82.352941,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.407407,
@@ -29994,7 +30505,8 @@
      "Opp3": {
       "part_voiture": 94.117647,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.03125
      },
      "Vec2": {
       "personnes_par_piece": 0.477612,
@@ -30051,7 +30563,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -30111,7 +30624,8 @@
      "Opp3": {
       "part_voiture": 92.02698,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 33.013155
      },
      "Vec2": {
       "personnes_par_piece": 0.621879,
@@ -30168,7 +30682,8 @@
      "Opp3": {
       "part_voiture": 94.586757,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 63.901423
      },
      "Vec2": {
       "personnes_par_piece": 0.632613,
@@ -30228,7 +30743,8 @@
      "Opp3": {
       "part_voiture": 87.962963,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.497664,
@@ -30285,7 +30801,8 @@
      "Opp3": {
       "part_voiture": 89.350593,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.001135
      },
      "Vec2": {
       "personnes_par_piece": 0.484064,
@@ -30345,7 +30862,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 10.278094
      },
      "Vec2": {
       "personnes_par_piece": 0.502515,
@@ -30402,7 +30920,8 @@
      "Opp3": {
       "part_voiture": 95.96133,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.89363
      },
      "Vec2": {
       "personnes_par_piece": 0.474,
@@ -30462,7 +30981,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.490722,
@@ -30519,7 +31039,8 @@
      "Opp3": {
       "part_voiture": 87.319625,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.496208,
@@ -30579,7 +31100,8 @@
      "Opp3": {
       "part_voiture": 93.119266,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.601874,
@@ -30636,7 +31158,8 @@
      "Opp3": {
       "part_voiture": 93.565082,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.621621,
@@ -30696,7 +31219,8 @@
      "Opp3": {
       "part_voiture": 94.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.512422,
@@ -30753,7 +31277,8 @@
      "Opp3": {
       "part_voiture": 94.946609,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.493124,
@@ -30813,7 +31338,8 @@
      "Opp3": {
       "part_voiture": 89.795918,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.479592,
@@ -30870,7 +31396,8 @@
      "Opp3": {
       "part_voiture": 98.214286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.448889,
@@ -30930,7 +31457,8 @@
      "Opp3": {
       "part_voiture": 84.637116,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.989654
      },
      "Vec2": {
       "personnes_par_piece": 0.502807,
@@ -30987,7 +31515,8 @@
      "Opp3": {
       "part_voiture": 87.638285,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.980377
      },
      "Vec2": {
       "personnes_par_piece": 0.499434,
@@ -31047,7 +31576,8 @@
      "Opp3": {
       "part_voiture": 81.13258,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.142743
      },
      "Vec2": {
       "personnes_par_piece": 0.530798,
@@ -31104,7 +31634,8 @@
      "Opp3": {
       "part_voiture": 84.313453,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.998312
      },
      "Vec2": {
       "personnes_par_piece": 0.495604,
@@ -31164,7 +31695,8 @@
      "Opp3": {
       "part_voiture": 88.907039,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.433692
      },
      "Vec2": {
       "personnes_par_piece": 0.609021,
@@ -31221,7 +31753,8 @@
      "Opp3": {
       "part_voiture": 88.917617,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.046233
      },
      "Vec2": {
       "personnes_par_piece": 0.613041,
@@ -31281,7 +31814,8 @@
      "Opp3": {
       "part_voiture": 89.473684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.559441,
@@ -31338,7 +31872,8 @@
      "Opp3": {
       "part_voiture": 95.238095,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.62,
@@ -31398,7 +31933,8 @@
      "Opp3": {
       "part_voiture": 88.461538,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.99
      },
      "Vec2": {
       "personnes_par_piece": 0.510204,
@@ -31455,7 +31991,8 @@
      "Opp3": {
       "part_voiture": 96.428571,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.511416,
@@ -31515,7 +32052,8 @@
      "Opp3": {
       "part_voiture": 85.618929,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.979256
      },
      "Vec2": {
       "personnes_par_piece": 0.440325,
@@ -31572,7 +32110,8 @@
      "Opp3": {
       "part_voiture": 78.714867,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.016358
      },
      "Vec2": {
       "personnes_par_piece": 0.449095,
@@ -31632,7 +32171,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.364865,
@@ -31689,7 +32229,8 @@
      "Opp3": {
       "part_voiture": 90.625,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.035714
      },
      "Vec2": {
       "personnes_par_piece": 0.459016,
@@ -31749,7 +32290,8 @@
      "Opp3": {
       "part_voiture": 92.307692,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.462963,
@@ -31806,7 +32348,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.412698,
@@ -31866,7 +32409,8 @@
      "Opp3": {
       "part_voiture": 89.574209,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.110691
      },
      "Vec2": {
       "personnes_par_piece": 0.544856,
@@ -31923,7 +32467,8 @@
      "Opp3": {
       "part_voiture": 90.596486,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.871918
      },
      "Vec2": {
       "personnes_par_piece": 0.512757,
@@ -31983,7 +32528,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.588889,
@@ -32040,7 +32586,8 @@
      "Opp3": {
       "part_voiture": 84.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.117647
      },
      "Vec2": {
       "personnes_par_piece": 0.536842,
@@ -32100,7 +32647,8 @@
      "Opp3": {
       "part_voiture": 92.45283,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.951754
      },
      "Vec2": {
       "personnes_par_piece": 0.494577,
@@ -32157,7 +32705,8 @@
      "Opp3": {
       "part_voiture": 96.86009,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.89625
      },
      "Vec2": {
       "personnes_par_piece": 0.469077,
@@ -32217,7 +32766,8 @@
      "Opp3": {
       "part_voiture": 82.4,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.009479
      },
      "Vec2": {
       "personnes_par_piece": 0.411306,
@@ -32274,7 +32824,8 @@
      "Opp3": {
       "part_voiture": 81.497911,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.089607
      },
      "Vec2": {
       "personnes_par_piece": 0.398234,
@@ -32334,7 +32885,8 @@
      "Opp3": {
       "part_voiture": 81.25,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.933333
      },
      "Vec2": {
       "personnes_par_piece": 0.397351,
@@ -32391,7 +32943,8 @@
      "Opp3": {
       "part_voiture": 97.058824,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.422619,
@@ -32451,7 +33004,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.440678,
@@ -32508,7 +33062,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.440678,
@@ -32568,7 +33123,8 @@
      "Opp3": {
       "part_voiture": 84.071996,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.981647
      },
      "Vec2": {
       "personnes_par_piece": 0.518462,
@@ -32625,7 +33181,8 @@
      "Opp3": {
       "part_voiture": 83.545139,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.974445
      },
      "Vec2": {
       "personnes_par_piece": 0.486954,
@@ -32685,7 +33242,8 @@
      "Opp3": {
       "part_voiture": 87.922705,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.469006,
@@ -32742,7 +33300,8 @@
      "Opp3": {
       "part_voiture": 91.623416,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.936561
      },
      "Vec2": {
       "personnes_par_piece": 0.479807,
@@ -32802,7 +33361,8 @@
      "Opp3": {
       "part_voiture": 93.220339,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.531073,
@@ -32859,7 +33419,8 @@
      "Opp3": {
       "part_voiture": 93.212534,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.53075,
@@ -32919,7 +33480,8 @@
      "Opp3": {
       "part_voiture": 90.196078,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.99
      },
      "Vec2": {
       "personnes_par_piece": 0.436681,
@@ -32976,7 +33538,8 @@
      "Opp3": {
       "part_voiture": 90.196078,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.08
      },
      "Vec2": {
       "personnes_par_piece": 0.436681,
@@ -33036,7 +33599,8 @@
      "Opp3": {
       "part_voiture": 80.909091,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.538071,
@@ -33093,7 +33657,8 @@
      "Opp3": {
       "part_voiture": 86.422313,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.514228,
@@ -33153,7 +33718,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.526786,
@@ -33210,7 +33776,8 @@
      "Opp3": {
       "part_voiture": 96.551724,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.530612,
@@ -33270,7 +33837,8 @@
      "Opp3": {
       "part_voiture": 92.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.271429,
@@ -33327,7 +33895,8 @@
      "Opp3": {
       "part_voiture": 92.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.271429,
@@ -33387,7 +33956,8 @@
      "Opp3": {
       "part_voiture": 95.555556,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.405172,
@@ -33444,7 +34014,8 @@
      "Opp3": {
       "part_voiture": 92.45283,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.392308,
@@ -33504,7 +34075,8 @@
      "Opp3": {
       "part_voiture": 96.13382,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 48.198901
      },
      "Vec2": {
       "personnes_par_piece": 0.614694,
@@ -33561,7 +34133,8 @@
      "Opp3": {
       "part_voiture": 94.431849,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 42.844177
      },
      "Vec2": {
       "personnes_par_piece": 0.613612,
@@ -33621,7 +34194,8 @@
      "Opp3": {
       "part_voiture": 89.135938,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.110509
      },
      "Vec2": {
       "personnes_par_piece": 0.582695,
@@ -33678,7 +34252,8 @@
      "Opp3": {
       "part_voiture": 92.977053,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.056435
      },
      "Vec2": {
       "personnes_par_piece": 0.613231,
@@ -33738,7 +34313,8 @@
      "Opp3": {
       "part_voiture": 84.848485,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47561,
@@ -33795,7 +34371,8 @@
      "Opp3": {
       "part_voiture": 88.888889,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.538462,
@@ -33855,7 +34432,8 @@
      "Opp3": {
       "part_voiture": 86.363636,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.441176,
@@ -33912,7 +34490,8 @@
      "Opp3": {
       "part_voiture": 86.363636,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.441176,
@@ -33972,7 +34551,8 @@
      "Opp3": {
       "part_voiture": 86.170213,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.534494,
@@ -34029,7 +34609,8 @@
      "Opp3": {
       "part_voiture": 91.751979,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.532163,
@@ -34089,7 +34670,8 @@
      "Opp3": {
       "part_voiture": 79.220779,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.42029,
@@ -34146,7 +34728,8 @@
      "Opp3": {
       "part_voiture": 82.105263,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.969136
      },
      "Vec2": {
       "personnes_par_piece": 0.364045,
@@ -34206,7 +34789,8 @@
      "Opp3": {
       "part_voiture": 69.767442,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.396648,
@@ -34263,7 +34847,8 @@
      "Opp3": {
       "part_voiture": 86.111111,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.419355,
@@ -34323,7 +34908,8 @@
      "Opp3": {
       "part_voiture": 91.360294,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 12.725692
      },
      "Vec2": {
       "personnes_par_piece": 0.531605,
@@ -34380,7 +34966,8 @@
      "Opp3": {
       "part_voiture": 90.589341,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.906158
      },
      "Vec2": {
       "personnes_par_piece": 0.501724,
@@ -34440,7 +35027,8 @@
      "Opp3": {
       "part_voiture": 82.608696,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.464539,
@@ -34497,7 +35085,8 @@
      "Opp3": {
       "part_voiture": 93.103448,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.922619
      },
      "Vec2": {
       "personnes_par_piece": 0.455285,
@@ -34557,7 +35146,8 @@
      "Opp3": {
       "part_voiture": 95.586398,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 10.149247
      },
      "Vec2": {
       "personnes_par_piece": 0.570888,
@@ -34614,7 +35204,8 @@
      "Opp3": {
       "part_voiture": 96.060009,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 13.20269
      },
      "Vec2": {
       "personnes_par_piece": 0.531879,
@@ -34674,7 +35265,8 @@
      "Opp3": {
       "part_voiture": 89.230769,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.39403,
@@ -34731,7 +35323,8 @@
      "Opp3": {
       "part_voiture": 92.957746,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.969925
      },
      "Vec2": {
       "personnes_par_piece": 0.420886,
@@ -34791,7 +35384,8 @@
      "Opp3": {
       "part_voiture": 80.555556,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.496552,
@@ -34848,7 +35442,8 @@
      "Opp3": {
       "part_voiture": 88.372093,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.424581,
@@ -34908,7 +35503,8 @@
      "Opp3": {
       "part_voiture": 77.78831,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.728391
      },
      "Vec2": {
       "personnes_par_piece": 0.633236,
@@ -34965,7 +35561,8 @@
      "Opp3": {
       "part_voiture": 80.393032,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.004723
      },
      "Vec2": {
       "personnes_par_piece": 0.642111,
@@ -35025,7 +35622,8 @@
      "Opp3": {
       "part_voiture": 77.570093,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.388535,
@@ -35082,7 +35680,8 @@
      "Opp3": {
       "part_voiture": 77.31055,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.383711,
@@ -35142,7 +35741,8 @@
      "Opp3": {
       "part_voiture": 88.723266,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 12.062668
      },
      "Vec2": {
       "personnes_par_piece": 0.580474,
@@ -35199,7 +35799,8 @@
      "Opp3": {
       "part_voiture": 88.441456,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 12.123014
      },
      "Vec2": {
       "personnes_par_piece": 0.571577,
@@ -35259,7 +35860,8 @@
      "Opp3": {
       "part_voiture": 79.310345,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.451128,
@@ -35316,7 +35918,8 @@
      "Opp3": {
       "part_voiture": 87.096774,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.034483
      },
      "Vec2": {
       "personnes_par_piece": 0.417266,
@@ -35376,7 +35979,8 @@
      "Opp3": {
       "part_voiture": 83.561644,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.45122,
@@ -35433,7 +36037,8 @@
      "Opp3": {
       "part_voiture": 81.690141,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.954887
      },
      "Vec2": {
       "personnes_par_piece": 0.44186,
@@ -35493,7 +36098,8 @@
      "Opp3": {
       "part_voiture": 84.210526,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.534188,
@@ -35550,7 +36156,8 @@
      "Opp3": {
       "part_voiture": 84.210526,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.534188,
@@ -35610,7 +36217,8 @@
      "Opp3": {
       "part_voiture": 89.090909,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -35667,7 +36275,8 @@
      "Opp3": {
       "part_voiture": 93.442623,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.982759
      },
      "Vec2": {
       "personnes_par_piece": 0.453125,
@@ -35727,7 +36336,8 @@
      "Opp3": {
       "part_voiture": 83.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.43,
@@ -35784,7 +36394,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.439655,
@@ -35844,7 +36455,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.355556,
@@ -35901,7 +36513,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.355556,
@@ -35961,7 +36574,8 @@
      "Opp3": {
       "part_voiture": 84.466019,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.048077
      },
      "Vec2": {
       "personnes_par_piece": 0.488263,
@@ -36018,7 +36632,8 @@
      "Opp3": {
       "part_voiture": 86.614748,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.459191,
@@ -36078,7 +36693,8 @@
      "Opp3": {
       "part_voiture": 90.540541,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.428571,
@@ -36135,7 +36751,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.442424,
@@ -36195,7 +36812,8 @@
      "Opp3": {
       "part_voiture": 86.486486,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.993243
      },
      "Vec2": {
       "personnes_par_piece": 0.505119,
@@ -36252,7 +36870,8 @@
      "Opp3": {
       "part_voiture": 86.30137,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.02649
      },
      "Vec2": {
       "personnes_par_piece": 0.524306,
@@ -36312,7 +36931,8 @@
      "Opp3": {
       "part_voiture": 87.878788,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.056997
      },
      "Vec2": {
       "personnes_par_piece": 0.520958,
@@ -36369,7 +36989,8 @@
      "Opp3": {
       "part_voiture": 80.555556,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.914152
      },
      "Vec2": {
       "personnes_par_piece": 0.418079,
@@ -36429,7 +37050,8 @@
      "Opp3": {
       "part_voiture": 92.156863,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.520202,
@@ -36486,7 +37108,8 @@
      "Opp3": {
       "part_voiture": 93.220339,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.471264,
@@ -36546,7 +37169,8 @@
      "Opp3": {
       "part_voiture": 97.260274,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.560886,
@@ -36603,7 +37227,8 @@
      "Opp3": {
       "part_voiture": 98.734177,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.967949
      },
      "Vec2": {
       "personnes_par_piece": 0.508143,
@@ -36663,7 +37288,8 @@
      "Opp3": {
       "part_voiture": 93.220339,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.463602,
@@ -36720,7 +37346,8 @@
      "Opp3": {
       "part_voiture": 93.220339,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.463602,
@@ -36780,7 +37407,8 @@
      "Opp3": {
       "part_voiture": 97.006059,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.087959
      },
      "Vec2": {
       "personnes_par_piece": 0.573902,
@@ -36837,7 +37465,8 @@
      "Opp3": {
       "part_voiture": 96.456747,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.038888
      },
      "Vec2": {
       "personnes_par_piece": 0.568437,
@@ -36897,7 +37526,8 @@
      "Opp3": {
       "part_voiture": 72.727273,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44186,
@@ -36954,7 +37584,8 @@
      "Opp3": {
       "part_voiture": 72.727273,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44186,
@@ -37014,7 +37645,8 @@
      "Opp3": {
       "part_voiture": 86.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.462366,
@@ -37071,7 +37703,8 @@
      "Opp3": {
       "part_voiture": 84.971276,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.435019,
@@ -37131,7 +37764,8 @@
      "Opp3": {
       "part_voiture": 96.291209,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.589054,
@@ -37188,7 +37822,8 @@
      "Opp3": {
       "part_voiture": 96.361927,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.055702
      },
      "Vec2": {
       "personnes_par_piece": 0.542675,
@@ -37248,7 +37883,8 @@
      "Opp3": {
       "part_voiture": 90.055887,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.996575
      },
      "Vec2": {
       "personnes_par_piece": 0.56061,
@@ -37305,7 +37941,8 @@
      "Opp3": {
       "part_voiture": 90.937743,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.526939,
@@ -37365,7 +38002,8 @@
      "Opp3": {
       "part_voiture": 85.507246,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.0
      },
      "Vec2": {
       "personnes_par_piece": 0.42623,
@@ -37422,7 +38060,8 @@
      "Opp3": {
       "part_voiture": 88.405797,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.445993,
@@ -37482,7 +38121,8 @@
      "Opp3": {
       "part_voiture": 75.438596,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.437768,
@@ -37539,7 +38179,8 @@
      "Opp3": {
       "part_voiture": 80.392157,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.409091,
@@ -37599,7 +38240,8 @@
      "Opp3": {
       "part_voiture": 93.568169,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.03073
      },
      "Vec2": {
       "personnes_par_piece": 0.489334,
@@ -37656,7 +38298,8 @@
      "Opp3": {
       "part_voiture": 93.639324,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.968249
      },
      "Vec2": {
       "personnes_par_piece": 0.480227,
@@ -37716,7 +38359,8 @@
      "Opp3": {
       "part_voiture": 79.090457,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 5.089172
      },
      "Vec2": {
       "personnes_par_piece": 0.591947,
@@ -37773,7 +38417,8 @@
      "Opp3": {
       "part_voiture": 89.002292,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.510886,
@@ -37833,7 +38478,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.536723,
@@ -37890,7 +38536,8 @@
      "Opp3": {
       "part_voiture": 95.153407,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44933,
@@ -37950,7 +38597,8 @@
      "Opp3": {
       "part_voiture": 83.529412,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.495495,
@@ -38007,7 +38655,8 @@
      "Opp3": {
       "part_voiture": 65.822785,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.494881,
@@ -38067,7 +38716,8 @@
      "Opp3": {
       "part_voiture": 95.145631,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.547847,
@@ -38124,7 +38774,8 @@
      "Opp3": {
       "part_voiture": 95.883573,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.405689
      },
      "Vec2": {
       "personnes_par_piece": 0.557247,
@@ -38184,7 +38835,8 @@
      "Opp3": {
       "part_voiture": 87.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.416667,
@@ -38241,7 +38893,8 @@
      "Opp3": {
       "part_voiture": 91.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.416667,
@@ -38301,7 +38954,8 @@
      "Opp3": {
       "part_voiture": 82.857143,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.392283,
@@ -38358,7 +39012,8 @@
      "Opp3": {
       "part_voiture": 90.909091,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.352761,
@@ -38418,7 +39073,8 @@
      "Opp3": {
       "part_voiture": 84.210526,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.472727,
@@ -38475,7 +39131,8 @@
      "Opp3": {
       "part_voiture": 84.482759,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.965217
      },
      "Vec2": {
       "personnes_par_piece": 0.504386,
@@ -38535,7 +39192,8 @@
      "Opp3": {
       "part_voiture": 87.854251,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.610348,
@@ -38592,7 +39250,8 @@
      "Opp3": {
       "part_voiture": 92.035593,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.963661
      },
      "Vec2": {
       "personnes_par_piece": 0.530653,
@@ -38652,7 +39311,8 @@
      "Opp3": {
       "part_voiture": 77.777778,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.346535,
@@ -38709,7 +39369,8 @@
      "Opp3": {
       "part_voiture": 66.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.417722,
@@ -38769,7 +39430,8 @@
      "Opp3": {
       "part_voiture": 89.123679,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 26.0
      },
      "Vec2": {
       "personnes_par_piece": 0.520794,
@@ -38826,7 +39488,8 @@
      "Opp3": {
       "part_voiture": 90.932297,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 23.435442
      },
      "Vec2": {
       "personnes_par_piece": 0.504885,
@@ -38886,7 +39549,8 @@
      "Opp3": {
       "part_voiture": 79.591837,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.028571
      },
      "Vec2": {
       "personnes_par_piece": 0.463576,
@@ -38943,7 +39607,8 @@
      "Opp3": {
       "part_voiture": 79.591837,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.971429
      },
      "Vec2": {
       "personnes_par_piece": 0.463576,
@@ -39003,7 +39668,8 @@
      "Opp3": {
       "part_voiture": 81.72043,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47309,
@@ -39060,7 +39726,8 @@
      "Opp3": {
       "part_voiture": 82.257821,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 4.124851
      },
      "Vec2": {
       "personnes_par_piece": 0.464984,
@@ -39120,7 +39787,8 @@
      "Opp3": {
       "part_voiture": 85.185185,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.540052,
@@ -39177,7 +39845,8 @@
      "Opp3": {
       "part_voiture": 87.142738,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.980848
      },
      "Vec2": {
       "personnes_par_piece": 0.534964,
@@ -39237,7 +39906,8 @@
      "Opp3": {
       "part_voiture": 85.256463,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 46.11349
      },
      "Vec2": {
       "personnes_par_piece": 0.645453,
@@ -39294,7 +39964,8 @@
      "Opp3": {
       "part_voiture": 84.496958,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 21.7327
      },
      "Vec2": {
       "personnes_par_piece": 0.590895,
@@ -39354,7 +40025,8 @@
      "Opp3": {
       "part_voiture": 85.483871,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.0
      },
      "Vec2": {
       "personnes_par_piece": 0.47561,
@@ -39411,7 +40083,8 @@
      "Opp3": {
       "part_voiture": 83.870968,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.437247,
@@ -39471,7 +40144,8 @@
      "Opp3": {
       "part_voiture": 90.410959,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.407303,
@@ -39528,7 +40202,8 @@
      "Opp3": {
       "part_voiture": 90.410959,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.407303,
@@ -39588,7 +40263,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.391566,
@@ -39645,7 +40321,8 @@
      "Opp3": {
       "part_voiture": 96.666667,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.351724,
@@ -39705,7 +40382,8 @@
      "Opp3": {
       "part_voiture": 85.882353,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.068493
      },
      "Vec2": {
       "personnes_par_piece": 0.453416,
@@ -39762,7 +40440,8 @@
      "Opp3": {
       "part_voiture": 85.882353,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.027397
      },
      "Vec2": {
       "personnes_par_piece": 0.453416,
@@ -39822,7 +40501,8 @@
      "Opp3": {
       "part_voiture": 93.333333,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.792013
      },
      "Vec2": {
       "personnes_par_piece": 0.539729,
@@ -39879,7 +40559,8 @@
      "Opp3": {
       "part_voiture": 92.93067,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.091251
      },
      "Vec2": {
       "personnes_par_piece": 0.525242,
@@ -39939,7 +40620,8 @@
      "Opp3": {
       "part_voiture": 80.808081,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.551378,
@@ -39996,7 +40678,8 @@
      "Opp3": {
       "part_voiture": 76.666667,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.327869
      },
      "Vec2": {
       "personnes_par_piece": 0.521368,
@@ -40056,7 +40739,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.153153
      },
      "Vec2": {
       "personnes_par_piece": 0.45679,
@@ -40113,7 +40797,8 @@
      "Opp3": {
       "part_voiture": 90.0,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.945946
      },
      "Vec2": {
       "personnes_par_piece": 0.45679,
@@ -40173,7 +40858,8 @@
      "Opp3": {
       "part_voiture": 84.090909,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.606061,
@@ -40230,7 +40916,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.616667,
@@ -40290,7 +40977,8 @@
      "Opp3": {
       "part_voiture": 95.555556,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.418251,
@@ -40347,7 +41035,8 @@
      "Opp3": {
       "part_voiture": 93.181818,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.482301,
@@ -40407,7 +41096,8 @@
      "Opp3": {
       "part_voiture": 94.444444,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.518519,
@@ -40464,7 +41154,8 @@
      "Opp3": {
       "part_voiture": 71.428571,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.563636,
@@ -40524,7 +41215,8 @@
      "Opp3": {
       "part_voiture": 87.218045,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.517857,
@@ -40581,7 +41273,8 @@
      "Opp3": {
       "part_voiture": 89.453992,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.941002
      },
      "Vec2": {
       "personnes_par_piece": 0.557806,
@@ -40641,7 +41334,8 @@
      "Opp3": {
       "part_voiture": 85.294118,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460526,
@@ -40698,7 +41392,8 @@
      "Opp3": {
       "part_voiture": 85.294118,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460526,
@@ -40758,7 +41453,8 @@
      "Opp3": {
       "part_voiture": 86.077565,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.508166,
@@ -40815,7 +41511,8 @@
      "Opp3": {
       "part_voiture": 88.402525,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.055474
      },
      "Vec2": {
       "personnes_par_piece": 0.523307,
@@ -40875,7 +41572,8 @@
      "Opp3": {
       "part_voiture": 91.139241,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.013423
      },
      "Vec2": {
       "personnes_par_piece": 0.488525,
@@ -40932,7 +41630,8 @@
      "Opp3": {
       "part_voiture": 89.473684,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.488525,
@@ -40992,7 +41691,8 @@
      "Opp3": {
       "part_voiture": 88.136943,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 6.033526
      },
      "Vec2": {
       "personnes_par_piece": 0.497167,
@@ -41049,7 +41749,8 @@
      "Opp3": {
       "part_voiture": 90.678573,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.492781,
@@ -41109,7 +41810,8 @@
      "Opp3": {
       "part_voiture": 80.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.5,
@@ -41166,7 +41868,8 @@
      "Opp3": {
       "part_voiture": 100.0,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.413043,
@@ -41226,7 +41929,8 @@
      "Opp3": {
       "part_voiture": 86.549708,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 3.0
      },
      "Vec2": {
       "personnes_par_piece": 0.531381,
@@ -41283,7 +41987,8 @@
      "Opp3": {
       "part_voiture": 92.87405,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 7.780274
      },
      "Vec2": {
       "personnes_par_piece": 0.574196,
@@ -41343,7 +42048,8 @@
      "Opp3": {
       "part_voiture": 90.387481,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 34.128151
      },
      "Vec2": {
       "personnes_par_piece": 0.524074,
@@ -41400,7 +42106,8 @@
      "Opp3": {
       "part_voiture": 90.409635,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 34.474082
      },
      "Vec2": {
       "personnes_par_piece": 0.524676,
@@ -41460,7 +42167,8 @@
      "Opp3": {
       "part_voiture": 62.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.4,
@@ -41517,7 +42225,8 @@
      "Opp3": {
       "part_voiture": 62.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.4,
@@ -41577,7 +42286,8 @@
      "Opp3": {
       "part_voiture": 85.714286,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.462963,
@@ -41634,7 +42344,8 @@
      "Opp3": {
       "part_voiture": 92.307692,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.471698,
@@ -41694,7 +42405,8 @@
      "Opp3": {
       "part_voiture": 97.727273,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.460674,
@@ -41751,7 +42463,8 @@
      "Opp3": {
       "part_voiture": 82.5,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.536913,
@@ -41811,7 +42524,8 @@
      "Opp3": {
       "part_voiture": 81.746032,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.507216,
@@ -41868,7 +42582,8 @@
      "Opp3": {
       "part_voiture": 90.158762,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 1.383233
      },
      "Vec2": {
       "personnes_par_piece": 0.478121,
@@ -41928,7 +42643,8 @@
      "Opp3": {
       "part_voiture": 88.333333,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.503448,
@@ -41985,7 +42701,8 @@
      "Opp3": {
       "part_voiture": 87.446718,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.461699,
@@ -42045,7 +42762,8 @@
      "Opp3": {
       "part_voiture": 88.811189,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.56328,
@@ -42102,7 +42820,8 @@
      "Opp3": {
       "part_voiture": 92.788736,
       "transport_commun": 100.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 2.018427
      },
      "Vec2": {
       "personnes_par_piece": 0.571284,
@@ -42162,7 +42881,8 @@
      "Opp3": {
       "part_voiture": 72.987166,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.496318,
@@ -42219,7 +42939,8 @@
      "Opp3": {
       "part_voiture": 85.407083,
       "transport_commun": 0.0,
-      "reseau_bus": 0.0
+      "reseau_bus": 0.0,
+      "actifs_transports": 0.0
      },
      "Vec2": {
       "personnes_par_piece": 0.44945,

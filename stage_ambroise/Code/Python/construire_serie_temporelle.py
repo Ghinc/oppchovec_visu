@@ -46,6 +46,11 @@ import pandas as pd
 RACINE = Path(__file__).resolve().parents[2]
 GEOJSON = RACINE / "Données" / "Commune_Corse.geojson"
 SORTIE = Path(__file__).resolve().parent.parent / "WEB" / "serie_temporelle.json"
+SORTIE_ROBUSTE = Path(__file__).resolve().parent.parent / "WEB" / "serie_temporelle_robuste.json"
+# Drapeau « transports en commun » d'Opp3 : +100 si des actifs occupés vont travailler en transports en commun. Définition de l'appli : au moins une personne (seuil 0).
+# Or l'effectif est une estimation du recensement, de l'ordre d'UNE personne pour la plupart des petites communes (médiane 1,1 pour les 78 communes dont le drapeau change entre 2016 et 2021) :
+# ce drapeau change de statut pour 78 communes sur 360 et fait varier Opp de ± 4 points. Variante « robuste » : drapeau levé seulement à partir de SEUIL_TRANSPORTS_ROBUSTE personnes.
+SEUIL_TRANSPORTS_ROBUSTE = 5
 ANNEES = (2016, 2021)
 INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho2", "Vec1", "Vec2", "Vec3"]
 DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
@@ -77,7 +82,7 @@ def theil(x):
     return (r * np.log(r.where(r > 0))).fillna(0).sum(axis=1) / x.shape[1]
 
 
-def indicateurs_recensement(dossier, an):
+def indicateurs_recensement(dossier, an, seuil_transports=0):
     """Renvoie (indicateurs, composantes) : DataFrame des indicateurs et dictionnaire {indicateur: DataFrame de ses composantes, une ligne par commune}."""
     a = str(an)[2:]
     P = lambda s: f"P{a}_{s}"
@@ -102,9 +107,11 @@ def indicateurs_recensement(dossier, an):
     # --- Opp3 : voiture + transports en commun + réseau de bus
     d = lire_base_cc(trouver(dossier, "log"), [P("RP"), P("NPER_RP"), P("NBPI_RP"), P("RP_SDB"), P("RPMAISON"), P("RP_VOIT1P")])
     ce = lire_base_cc(trouver(dossier, "carac"), [P("ACTOCC15P_COMMUN"), P("NSAL15P")] + [f"P{a}_{s}SAL15P_{k}" for s in "HF" for k in ("CDI", "CDD", "INTERIM", "EMPAID", "APPR")])
-    out["Opp3"] = 100 * d[P("RP_VOIT1P")] / d[P("RP")] + 100 * (ce[P("ACTOCC15P_COMMUN")] > 0) + 100 * out.index.isin(VILLES_RESEAU_BUS)
-    comp["Opp3"] = pd.DataFrame({"part_voiture": 100 * d[P("RP_VOIT1P")] / d[P("RP")], "transport_commun": 100.0 * (ce[P("ACTOCC15P_COMMUN")] > 0),
-                                 "reseau_bus": 100.0 * out.index.isin(VILLES_RESEAU_BUS)}, index=d.index)
+    tc = ce[P("ACTOCC15P_COMMUN")]
+    drapeau_tc = (tc > 0) if seuil_transports == 0 else (tc >= seuil_transports)          # seuil 0 : au moins une personne (définition de l'appli)
+    out["Opp3"] = 100 * d[P("RP_VOIT1P")] / d[P("RP")] + 100 * drapeau_tc + 100 * out.index.isin(VILLES_RESEAU_BUS)
+    comp["Opp3"] = pd.DataFrame({"part_voiture": 100 * d[P("RP_VOIT1P")] / d[P("RP")], "transport_commun": 100.0 * drapeau_tc,
+                                 "reseau_bus": 100.0 * out.index.isin(VILLES_RESEAU_BUS), "actifs_transports": tc}, index=d.index)
     # --- Vec2
     ppp = d[P("NPER_RP")] / d[P("NBPI_RP")]
     out["Vec2"] = (np.exp(-ppp) + (d[P("RP_SDB")] / d[P("RP")] + 1.0) / 2 + d[P("RPMAISON")] / d[P("RP")]) / 3
@@ -169,13 +176,13 @@ def pk_betti(scores):
     return (brut / brut.sum()).tolist()
 
 
-def calculer(source):
+def calculer(source, seuil_transports=0):
     source = Path(source)
     noms = {f["properties"]["code"]: f["properties"]["nom"] for f in json.loads(GEOJSON.read_text(encoding="utf-8"))["features"]}
     brut, estimees, composantes = {}, {}, {}
     for an in ANNEES:
         dossier = source / str(an)
-        t, comp = indicateurs_recensement(dossier, an)
+        t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
         med, med_dep = indicateur_mediane(dossier, an)
         codes = list(t.index)
@@ -212,7 +219,7 @@ def calculer(source):
                                       "scores_0_10": {v: float(resultat[an].loc[code, v]) for v in ("OppChoVec", "Opp", "Cho", "Vec")},
                                       "vec1_departementale": bool(estimees[an][code]),
                                       "composantes": {k: {col: round(float(v.loc[code, col]), 6) for col in v.columns} for k, v in composantes[an].items()}}
-    return {"annees": list(ANNEES), "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
+    return {"annees": list(ANNEES), "opp3_seuil_transports": seuil_transports, "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},
             "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016", "Cho1": "quartiers prioritaires : géographie 2015 puis 2024, pas de série",
@@ -225,6 +232,9 @@ def main():
         sys.exit(__doc__)
     donnees = calculer(sys.argv[1])
     SORTIE.write_text(json.dumps(donnees, indent=1, ensure_ascii=False), encoding="utf-8")
+    robuste = calculer(sys.argv[1], SEUIL_TRANSPORTS_ROBUSTE)
+    SORTIE_ROBUSTE.write_text(json.dumps(robuste, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"variante robuste (drapeau transports en commun à partir de {SEUIL_TRANSPORTS_ROBUSTE} personnes) : {SORTIE_ROBUSTE}")
     c = donnees["communes"]
     for an in ANNEES:
         v = [x[str(an)]["scores_0_10"]["OppChoVec"] for x in c.values()]

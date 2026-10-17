@@ -121,6 +121,82 @@ class SerieTemporelle(unittest.TestCase):
                 self.assertAlmostEqual(refait["communes"][c][a]["scores_0_10"]["OppChoVec"], self.d["communes"][c][a]["scores_0_10"]["OppChoVec"], places=6)
 
 
+class SerieRobuste(SerieTemporelle):
+    """Variante « Opp3 robuste » (serie_temporelle_robuste.json) : mêmes indicateurs, drapeau « transports en commun » levé à partir de 5 personnes. Toutes les vérifications de la série
+    (structure, scores recalculés, p_k de Betti, seuils de Jenks, échelle commune) valent aussi pour elle ; le rejeu du script ne concerne que la série standard."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.d = charger_json(WEB / "serie_temporelle_robuste.json")
+        cls.noms = sorted(cls.d["communes"])
+
+    def test_le_script_reproduit_le_fichier_depuis_les_sources(self):
+        self.skipTest("rejeu couvert par la série standard (même script, seuil différent)")
+
+
+class FiabiliteEtDrapeauTransports(unittest.TestCase):
+    """Audit des écarts aberrants (RAPPORT_AUDIT_EVOLUTION) : le drapeau « transports en commun » d'Opp3 et la fiabilité des petites communes."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.std = charger_json(WEB / "serie_temporelle.json")
+        cls.rob = charger_json(WEB / "serie_temporelle_robuste.json")
+        cls.noms = sorted(cls.std["communes"])
+
+    def test_seuils_declares(self):
+        self.assertEqual(self.std["opp3_seuil_transports"], 0)
+        self.assertEqual(self.rob["opp3_seuil_transports"], 5)
+
+    def test_drapeau_conforme_a_l_effectif_brut(self):
+        for c in self.noms:
+            for a in ANNEES:
+                o_s = self.std["communes"][c][a]["composantes"]["Opp3"]; o_r = self.rob["communes"][c][a]["composantes"]["Opp3"]
+                self.assertEqual(o_s["actifs_transports"], o_r["actifs_transports"], c)             # même donnée brute
+                self.assertEqual(o_s["transport_commun"], 100.0 if o_s["actifs_transports"] > 0 else 0.0, f"{c} {a} standard")
+                self.assertEqual(o_r["transport_commun"], 100.0 if o_r["actifs_transports"] >= 5 else 0.0, f"{c} {a} robuste")
+
+    def test_la_variante_ne_change_que_opp3_et_ce_qui_en_depend(self):
+        for c in self.noms:
+            for a in ANNEES:
+                s, r = self.std["communes"][c][a]["indicateurs"], self.rob["communes"][c][a]["indicateurs"]
+                for k in s:
+                    if k == "Opp3":
+                        self.assertIn(round(s[k] - r[k], 6), (0.0, 100.0), f"{c} {a}")           # le drapeau standard est levé quand le robuste l'est : écart 0 ou 100
+                    else:
+                        self.assertEqual(s[k], r[k], f"{c} {a} {k}")
+
+    def test_le_drapeau_robuste_change_moins_souvent(self):
+        def changements(d):
+            return sum(1 for c in self.noms if (d["communes"][c]["2016"]["composantes"]["Opp3"]["transport_commun"] > 0) != (d["communes"][c]["2021"]["composantes"]["Opp3"]["transport_commun"] > 0))
+        self.assertEqual(changements(self.std), 78)
+        self.assertEqual(changements(self.rob), 27)
+
+    def test_les_changements_du_drapeau_standard_reposent_sur_des_effectifs_minuscules(self):
+        eff = sorted(max(self.std["communes"][c]["2016"]["composantes"]["Opp3"]["actifs_transports"], self.std["communes"][c]["2021"]["composantes"]["Opp3"]["actifs_transports"])
+                     for c in self.noms if (self.std["communes"][c]["2016"]["composantes"]["Opp3"]["transport_commun"] > 0) != (self.std["communes"][c]["2021"]["composantes"]["Opp3"]["transport_commun"] > 0))
+        self.assertEqual(len(eff), 78)
+        self.assertLess(eff[len(eff) // 2], 2)                  # médiane de l'effectif du côté « levé » : environ une personne
+        self.assertLess(max(eff), 7)
+
+    def test_le_bruit_diminue_avec_la_taille_de_la_commune(self):
+        """Écart-type de la variation de l'indice par classe de population : décroissant (1,8 sous 50 habitants ; 0,6 à partir de 1 000)."""
+        import statistics
+        var = {c: self.std["communes"][c]["2021"]["scores_0_10"]["OppChoVec"] - self.std["communes"][c]["2016"]["scores_0_10"]["OppChoVec"] for c in self.noms}
+        hab = {c: self.std["communes"][c]["2021"]["composantes"]["Cho2"]["population"] for c in self.noms}
+        sd = lambda lo, hi: statistics.pstdev([var[c] for c in self.noms if lo <= hab[c] < hi])
+        petites, moyennes, grandes = sd(0, 100), sd(100, 1000), sd(1000, 10 ** 9)
+        self.assertGreater(petites, 1.2 * moyennes)
+        self.assertGreater(moyennes, 1.5 * grandes)
+        self.assertGreater(sum(1 for c in self.noms if hab[c] < 100), 100)                       # 121 communes de moins de 100 habitants
+
+    def test_populations_de_la_serie_egales_aux_populations_municipales(self):
+        import json
+        agreg = charger_json(WEB / "epci_agregation.json")
+        pop2021 = {n: c["pop"]["Opp2"] for e in agreg["epci"] for n, c in e["communes"].items()}         # population municipale 2021 (millésime d'Opp2)
+        for c in self.noms:
+            self.assertAlmostEqual(self.std["communes"][c]["2021"]["composantes"]["Cho2"]["population"], pop2021[c], delta=0.51, msg=c)
+
+
 class Vec4Comparable(unittest.TestCase):
     """Vec4 comparable (BPE 2016 et 2024, mêmes types d'équipements, même réseau routier) : Données/vec4_serie_temporelle.json, produit par calculer_vec4_serie.py (serveur OSRM)."""
 

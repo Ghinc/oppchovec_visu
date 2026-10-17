@@ -103,6 +103,7 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
 - **vec1_revenu_fiscal.json** et **vec1_variante.js** : variante de Vec1 (revenu fiscal moyen par foyer, DGFiP IRCOM 2021) à la place de la médiane du
   niveau de vie, et case à cocher qui bascule l'appli ; voir `Code/VERIFICATION_COHERENCE_DONNEES.md`, section « Vec1 ». Produit par
   `calculer_revenu_fiscal_vec1.py "<chemin>/ircom_communes_complet_revenus_2021.xlsx"` (non nécessaire à l'indice actuel).
+- **serie_temporelle_robuste.json** : variante de la série où le drapeau « transports en commun » d'Opp3 n'est levé qu'à partir de 5 personnes (case « Opp3 robuste » de l'onglet Évolution) ; même script, `seuil_transports=5`. Audit des écarts aberrants : `Code/RAPPORT_AUDIT_EVOLUTION.md` (drapeau d'Opp3 fondé sur ~1 personne, bruit des communes de moins de 100 habitants).
 - **epci_agregation.json**, **epci_corse.geojson** et **epci.js** : onglet « EPCI » (indice OppChoVec agrégé par intercommunalité, 19 EPCI de Corse). `epci_agregation.json` donne, pour chaque EPCI, ses
   communes (noms de l'appli) et la population de chaque commune **au millésime de chaque indicateur** (Opp1 2020 ; Opp2, Opp3, Vec1, Vec3 2021 ; Cho2, Vec2 2022 ; Opp4, Cho1, Vec4 2023 = dernière population publiée) ;
   `epci_corse.geojson` contient les contours. Produits par `Code/Python/construire_epci_agregation.py` (qui lit `Données/epci_corse_2026.json`, produit par `construire_epci_corse.py`, et les séries historiques de population de l'INSEE).

@@ -118,3 +118,37 @@ test('composantes d\'un indicateur : les contributions s\'additionnent à l\'éc
     }
   }
 });
+
+test('fiabilité : habitants de la série, classements limités aux communes d\'au moins 100 habitants (les très petites communes ne dominent plus les listes)', () => {
+  const { evolutionHabitants, EVOLUTION_SEUIL_FIABLE } = require(path.join(WEB, 'evolution.js'));
+  assert.equal(EVOLUTION_SEUIL_FIABLE, 100);
+  const agreg = lireJson('epci_agregation.json');          // population municipale officielle (INSEE, séries historiques) : 2021 = millésime d'Opp2
+  const pop2021 = Object.fromEntries(agreg.epci.flatMap((e) => Object.entries(e.communes).map(([n, c]) => [n, c.pop.Opp2])));
+  for (const c of noms) assert.ok(Math.abs(evolutionHabitants(d, c) - pop2021[c]) < 0.51, c);
+  const tous = evolutionResume(d, 'OppChoVec');
+  const filtre = evolutionResume(d, 'OppChoVec', 100);
+  assert.equal(tous.nbExclues, 0);
+  assert.equal(filtre.nbExclues, noms.filter((c) => evolutionHabitants(d, c) < 100).length);
+  assert.ok(filtre.nbExclues > 100);
+  for (const e of [...filtre.meilleures, ...filtre.pires]) assert.ok(evolutionHabitants(d, e.commune) >= 100, e.commune);
+  // les moyennes et effectifs portent toujours sur les 360 communes
+  assert.equal(filtre.n, 360);
+  assert.ok(Math.abs(filtre.moyenne1 - tous.moyenne1) < 1e-12 && filtre.progressions === tous.progressions);
+  // sans le filtre, les plus gros écarts sont des communes minuscules
+  assert.ok([...tous.meilleures, ...tous.pires].some((e) => evolutionHabitants(d, e.commune) < 100));
+});
+
+test('Opp3 : le détail montre le drapeau, son critère (seuil) et l\'effectif brut ; variante robuste = seuil de 5 personnes', () => {
+  const rob = lireJson('serie_temporelle_robuste.json');
+  const std = evolutionComposantes(d, 'Piazzali', 'Opp3'), r = evolutionComposantes(rob, 'Piazzali', 'Opp3');
+  assert.match(std.intro, /au moins une personne/);
+  assert.match(r.intro, /au moins 5 personnes/);
+  const eff = std.lignes.find((l) => l.libelle.includes('effectif estimé'));
+  assert.ok(eff && eff.contribution === null, 'ligne d\'information sans contribution');
+  assert.equal(eff.v0, d.communes.Piazzali['2016'].composantes.Opp3.actifs_transports);
+  assert.match(std.note, /99 % de la variance/);
+  // une commune au drapeau fragile : effectif entre 0 et 5 -> mention de la variante
+  const fragile = noms.find((c) => { const o = d.communes[c]['2021'].composantes.Opp3; return o.actifs_transports > 0 && o.actifs_transports < 5; });
+  assert.match(evolutionComposantes(d, fragile, 'Opp3').note, /très fragile/);
+  assert.doesNotMatch(evolutionComposantes(rob, fragile, 'Opp3').note, /très fragile/);
+});

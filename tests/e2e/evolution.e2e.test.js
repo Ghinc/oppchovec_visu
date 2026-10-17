@@ -167,3 +167,52 @@ test('Évolution : 3 cartes de 360 communes aux bonnes couleurs, fiche au clic, 
     assert.deepEqual(nouvellesErreurs(), []);
   });
 });
+
+test('Évolution : grisage des communes de moins de 100 habitants, avertissement dans la fiche, variante Opp3 robuste', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    const remplissage = (nom) => page.evaluate((n) => { let c; evolutionCouches.variation.eachLayer((l) => { if (l._evolutionNom === n) c = l.options.fillColor; }); return c; }, nom);
+    const couleurNormale = await remplissage('Piazzali');
+    assert.notEqual(couleurNormale, '#d9d9d9');
+
+    // grisage : les communes de moins de 100 habitants sont grises, les autres inchangées
+    await page.check('#evolution-griser');
+    assert.equal(await remplissage('Piazzali'), '#d9d9d9');
+    const bastiaAvant = await remplissage('Bastia');
+    assert.notEqual(bastiaAvant, '#d9d9d9');
+    const nbGrises = await page.evaluate(() => { let n = 0; evolutionCouches.a1.eachLayer((l) => { if (l.options.fillColor === '#d9d9d9') n++; }); return n; });
+    assert.equal(nbGrises, await page.evaluate(() => Object.keys(evolutionDonnees.communes).filter((c) => evolutionHabitants(evolutionDonnees, c) < EVOLUTION_SEUIL_FIABLE).length));
+    await page.uncheck('#evolution-griser');
+    assert.equal(await remplissage('Piazzali'), couleurNormale);
+
+    // avertissement dans la fiche d'une petite commune, pas dans celle d'une grande
+    await page.evaluate(() => evolutionFiche('Piazzali'));
+    assert.ok((await page.locator('#evolution-fiche .evolution-alerte').innerText()).includes('très sensibles'));
+    await page.evaluate(() => evolutionFiche('Bastia'));
+    assert.equal(await page.locator('#evolution-fiche .evolution-alerte').count(), 0);
+    // le résumé précise que les classements sont limités aux communes d'au moins 100 habitants
+    await page.click('#evolution-bouton-resume');
+    assert.ok((await page.locator('#evolution-resume').innerText()).includes('au moins 100 habitants'));
+    await page.mouse.click(400, 500);
+
+    // Opp3 : le détail montre le drapeau et l'effectif brut ; la variante robuste change la série
+    const fragile = await page.evaluate(() => Object.keys(evolutionDonnees.communes).find((c) => { const o = evolutionDonnees.communes[c]['2021'].composantes.Opp3; return o.actifs_transports > 0 && o.actifs_transports < 5; }));
+    await page.evaluate((c) => evolutionFiche(c), fragile);
+    await page.click('.evolution-ligne-score[data-variable="Opp3"]');
+    const t = (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');
+    for (const mot of ['effectif estimé', 'au moins une personne', 'très fragile']) assert.ok(t.includes(mot), mot);
+    const std = await page.evaluate((c) => ({ seuil: evolutionDonnees.opp3_seuil_transports, opp: evolutionDonnees.communes[c]['2021'].scores_0_10.Opp }), fragile);
+    assert.equal(std.seuil, 0);
+    await page.check('#evolution-robuste');
+    await page.waitForFunction(() => evolutionDonnees.opp3_seuil_transports === 5);
+    const rob = await page.evaluate((c) => ({ seuil: evolutionDonnees.opp3_seuil_transports, opp: evolutionDonnees.communes[c]['2021'].scores_0_10.Opp }), fragile);
+    assert.equal(rob.seuil, 5);
+    assert.notEqual(rob.opp, std.opp, 'le score d\'Opp de la commune change avec la variante');
+    assert.ok((await page.locator('#evolution-fiche').textContent()).includes('au moins 5 personnes'), 'fiche mise à jour avec la variante');
+    // retour à la série standard
+    await page.uncheck('#evolution-robuste');
+    await page.waitForFunction(() => evolutionDonnees.opp3_seuil_transports === 0);
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
