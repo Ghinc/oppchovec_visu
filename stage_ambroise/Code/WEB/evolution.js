@@ -10,7 +10,7 @@ const EVOLUTION_VARIABLES = {
 };
 const EVOLUTION_NOMS_INDICATEURS = {
     Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
-    Cho1: 'Cho1 · quartiers prioritaires (−log du nombre de personnes)', Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
+    Cho1: 'Cho1 · quartiers prioritaires (−log du nombre de personnes)', Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi', Vec4: 'Vec4 · services à 20 minutes (nombre)',
 };
 // Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
 // Couleurs : la classe qui contient 0 est neutre (blanc), les classes en dessous sont rouges (recul), celles au-dessus bleues (progression) : le signe reste lisible même si les classes ne sont pas centrées sur 0.
@@ -249,6 +249,9 @@ function evolutionComposantes(donnees, commune, cle) {
         const sec = [a0, a1].filter((a, i) => c[i].vec1_departementale);
         note = sec.length
             ? `Revenu non communiqué par la DGFiP (secret statistique) pour cette commune en ${sec.join(' et ')} : valeur moyenne du département.` : 'Revenu propre à la commune aux deux dates.';
+    } else if (cle === 'Vec4') {
+        intro = 'Vec4 = nombre d\'équipements (commerces, services, santé, enseignement…, base permanente des équipements de l\'INSEE) accessibles en 20 minutes ou moins en voiture depuis le centre de la commune. Indicateur direct, sans sous-composantes.';
+        note = 'Seuls les types d\'équipements présents et géolocalisés en ' + a0 + ' et en ' + a1 + ' sont comptés (la nomenclature change), et le réseau routier est le même aux deux dates (OpenStreetMap actuel) : la variation vient des équipements, pas des routes.';
     } else if (cle === 'Vec2') {
         intro = 'Vec2 = [ exp(−personnes par pièce) + (part de logements avec salle de bain + chauffage) / 2 + part de maisons ] / 3, avec chauffage = 1 (constant, comme dans les données actuelles). Contribution = écart du terme correspondant dans cette formule.';
         ligne('Personnes par pièce (terme exp(−x) / 3)', k[0].personnes_par_piece, k[1].personnes_par_piece, 2, (Math.exp(-k[1].personnes_par_piece) - Math.exp(-k[0].personnes_par_piece)) / 3, 4);

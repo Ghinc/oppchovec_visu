@@ -22,7 +22,7 @@ test('Évolution : panneau latéral masqué dans l\'onglet, restauré ailleurs ;
     assert.ok(!(await page.locator('.evolution-info-texte').isVisible()), 'infobulle cachée au repos');
     await page.hover('.evolution-info');
     assert.ok(await page.locator('.evolution-info-texte').isVisible(), 'infobulle visible au survol');
-    assert.ok((await page.locator('.evolution-info-texte').innerText()).includes('8 indicateurs sur 10'));
+    assert.ok((await page.locator('.evolution-info-texte').innerText()).includes('9 indicateurs sur 10'));
     await page.mouse.move(5, 400);
     // retour à un autre onglet : le panneau revient
     await page.click('.tab-button[data-tab="oppchovectab"]');

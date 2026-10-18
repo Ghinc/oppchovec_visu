@@ -3,8 +3,8 @@ Construit une version COMPARABLE dans le temps de l'indice OppChoVec pour deux a
 Écrit Code/WEB/serie_temporelle.json (lu par l'onglet « Évolution » de l'appli).
 
 Principe : mêmes sources, mêmes définitions, mêmes bornes de normalisation pour les deux années. On ne garde que les indicateurs pour lesquels une
-source homogène existe aux deux dates (8 sur 10) ; Opp4 (4G, haut débit, fibre) et Vec4 (services à 20 minutes)
-sont EXCLUS de cet indice : pas de source communale homogène trouvée pour 2016. Ce n'est donc pas l'indice OppChoVec complet de l'appli.
+source homogène existe aux deux dates (9 sur 10) ; Opp4 (4G, haut débit, fibre)
+est EXCLU de cet indice : pas de source communale homogène trouvée pour 2016. Ce n'est donc pas l'indice OppChoVec complet de l'appli.
 Opp1 est sur 4 niveaux de diplôme (le détail à 7 niveaux n'existe pas en 2016) ; le reste suit les définitions de l'indice actuel.
 
 Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux indicateurs » communales, sauf mention)
@@ -18,6 +18,9 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
   Cho2  part des Français parmi les 18 ans et plus (%), avec la méthode de proportion_etrangers_18plus_final.py appliquée aux deux dates : étrangers de 18 ans et plus =
         (population de 18 à 24 ans, POP1B) - 0,7 x (Français de 15 à 24 ans, NAT1) + (étrangers de 25 ans et plus, NAT1), rapportés à la population totale ;
         Cho2 = 100 - cette proportion, plafonné à 100 (retrouve le fichier actuel, calculé en 2022, à 0,01 point près pour 357 communes sur 360)
+  Vec4  nombre d'équipements de la BPE (INSEE) accessibles en 20 minutes ou moins en voiture depuis le centre de la commune (temps de trajet OSRM, même réseau routier
+        aux deux dates), sur les 145 types d'équipements présents et géolocalisés en 2016 ET en 2021 (BPE 2016 ; BPE 2021 ensemble_xy, coordonnées Lambert-93 converties) ;
+        calculé par calculer_vec4_serie.py serie2021 -> Données/vec4_serie_2016_2021.json. Corrélation avec le Vec4 de l'appli (BPE 2024) : 0,996.
   Vec1  REVENU FISCAL MOYEN PAR FOYER FISCAL de la commune (DGFiP, IRCOM : revenu fiscal de référence total / nombre de foyers fiscaux, ligne « Total »),
         pour les deux années (revenus 2016 et revenus 2021), commune par commune. La médiane Filosofi n'est pas diffusée pour 154 communes en 2021 ;
         l'IRCOM couvre 349 communes (2016) et 348 (2021). Seules les communes sous secret statistique (9 les deux années, 5 une seule) reçoivent la
@@ -56,9 +59,10 @@ SORTIE_ROBUSTE = Path(__file__).resolve().parent.parent / "WEB" / "serie_tempore
 # ce drapeau change de statut pour 78 communes sur 360 et fait varier Opp de ± 4 points. Variante « robuste » : drapeau levé seulement à partir de SEUIL_TRANSPORTS_ROBUSTE personnes.
 SEUIL_TRANSPORTS_ROBUSTE = 5
 ANNEES = (2016, 2021)
-INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3"]
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
+INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3", "Vec4"]
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
 QPV = RACINE / "Données" / "qpv2015_population.json"
+VEC4 = RACINE / "Données" / "vec4_serie_2016_2021.json"
 VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247"}
 ALPHA, BETA = 2.5, 1.5
 
@@ -195,6 +199,14 @@ def indicateur_qpv(codes, an):
     return pd.Series([-math.log(x) if x > 0 else 0.0 for x in p], index=codes, name="Cho1"), pd.DataFrame({"personnes_qpv": p})
 
 
+def indicateur_services(noms_par_code, codes, an):
+    """Vec4 : nombre d'équipements (BPE, mêmes types d'équipements aux deux dates) accessibles en 20 minutes ou moins en voiture depuis le centre de la commune
+    (temps de trajet OSRM, même réseau routier aux deux dates) ; calculé par calculer_vec4_serie.py serie2021."""
+    v = json.loads(VEC4.read_text(encoding="utf-8"))["communes"]
+    n = pd.Series([float(v[noms_par_code[c]][str(an)]) for c in codes], index=codes, name="Vec4")
+    return n, pd.DataFrame({"services_20min": n})
+
+
 def minmax(s, lo, hi):
     return (s - lo) / (hi - lo) if hi != lo else s * 0.0
 
@@ -216,6 +228,7 @@ def calculer(source, seuil_transports=0):
         t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
         t["Cho1"], comp["Cho1"] = indicateur_qpv(list(t.index), an)
+        t["Vec4"], comp["Vec4"] = indicateur_services(noms, list(t.index), an)
         med, med_dep, comp["Vec1"] = indicateur_revenu_fiscal(dossier)
         codes = list(t.index)
         diffusee = med.reindex(codes).notna()
@@ -255,8 +268,7 @@ def calculer(source, seuil_transports=0):
     return {"annees": list(ANNEES), "opp3_seuil_transports": seuil_transports, "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},
-            "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016",
-                       "Vec4": "services à 20 minutes : accessibilité calculée avec le réseau routier actuel (OSRM local), BPE 2016 non géolocalisée de la même façon"},
+            "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016"},
             "communes": communes}
 
 

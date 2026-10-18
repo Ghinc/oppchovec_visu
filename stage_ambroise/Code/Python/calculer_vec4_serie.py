@@ -12,6 +12,7 @@ Prérequis : un serveur OSRM local sur localhost:5000 lancé avec `--max-table-s
 
 Usage (depuis stage_ambroise/Code/Python/) :
     python calculer_vec4_serie.py valider "<bpe_corse.csv 2024>" "<communes_corse_coordonnees.csv>"     # retrouve Vec4 actuel avec la BPE 2024
+    python calculer_vec4_serie.py serie2021 "<bpe2016.csv.gz>" "<bpe21_ensemble_xy.csv>" "<communes_corse_coordonnees.csv>"   # écrit Données/vec4_serie_2016_2021.json
     python calculer_vec4_serie.py serie "<bpe2016.csv.gz>" "<bpe_deuxième_date.csv>" "<communes_corse_coordonnees.csv>"   # écrit Données/vec4_serie_temporelle.json
 """
 
@@ -74,6 +75,17 @@ def charger_bpe_2016(chemin):
     return d.dropna(subset=["longitude", "latitude"])
 
 
+def charger_bpe_2021(chemin):
+    """BPE 2021 géolocalisée de la Corse (bpe21_ensemble_xy.csv de l'INSEE, ou extrait Corse) : coordonnées Lambert-93 (EPSG:2154) converties en longitude / latitude."""
+    from pyproj import Transformer
+    d = pd.read_csv(chemin, sep=None, engine="python", dtype=str) if str(chemin).endswith(".csv") and Path(chemin).stat().st_size < 50e6 else pd.read_csv(chemin, sep=";", dtype=str, low_memory=False)
+    d = d[d["DEP"].isin(["2A", "2B"])].copy()
+    x, y = pd.to_numeric(d["LAMBERT_X"], errors="coerce"), pd.to_numeric(d["LAMBERT_Y"], errors="coerce")
+    lon, lat = Transformer.from_crs(2154, 4326, always_xy=True).transform(x.fillna(0).values, y.fillna(0).values)
+    d["longitude"], d["latitude"] = np.where(x.notna(), lon, np.nan), np.where(x.notna(), lat, np.nan)
+    return d.rename(columns={"TYPEQU": "typequ"}).dropna(subset=["longitude", "latitude"])
+
+
 def valider(bpe_2024, communes_csv):
     communes = lire_communes(communes_csv)
     bpe = charger_bpe_2024(bpe_2024)
@@ -86,30 +98,33 @@ def valider(bpe_2024, communes_csv):
     return n
 
 
-def serie(bpe_a, bpe_b, communes_csv, annee_a=2016, annee_b=2024):
+def serie(bpe_a, bpe_b, communes_csv, annee_a=2016, annee_b=2024, chargeur_b=None, sortie=None):
     """Vec4 comparable aux deux dates : uniquement les types présents et géolocalisés aux deux dates. Écrit Données/vec4_serie_temporelle.json."""
     communes = lire_communes(communes_csv)
     a = charger_bpe_2016(bpe_a).rename(columns={"typequ": "typequ"})
-    b = charger_bpe_2024(bpe_b)
+    b = (chargeur_b or charger_bpe_2024)(bpe_b)
     types = sorted(set(a["typequ"]) & set(b["typequ"]))
-    print(f"types communs et géolocalisés aux deux dates : {len(types)} (2016 : {a['typequ'].nunique()}, 2024 : {b['typequ'].nunique()})")
+    print(f"types communs et géolocalisés aux deux dates : {len(types)} ({annee_a} : {a["typequ"].nunique()}, {annee_b} : {b["typequ"].nunique()})")
     a, b = a[a["typequ"].isin(types)], b[b["typequ"].isin(types)]
     print(f"équipements retenus : {len(a)} en {annee_a}, {len(b)} en {annee_b}")
     na = compter(communes, list(zip(a.longitude, a.latitude)))
     nb = compter(communes, list(zip(b.longitude, b.latitude)))
     noms = {f["properties"]["code"]: f["properties"]["nom"] for f in json.loads(GEOJSON.read_text(encoding="utf-8"))["features"]}
+    sortie_fichier = sortie
     sortie = {"methode": "temps de trajet OSRM (réseau routier unique) du centre de chaque commune vers chaque équipement géolocalisé, comptage à 20 minutes ou moins ; "
                          "seuls les types d'équipements présents et géolocalisés aux deux dates sont comptés",
               "annees": [annee_a, annee_b], "types_communs": len(types),
               "equipements": {str(annee_a): int(len(a)), str(annee_b): int(len(b))},
               "communes": {noms[c]: {"code": c, str(annee_a): int(x), str(annee_b): int(y)} for c, x, y in zip(communes.code_commune, na, nb) if c in noms}}
-    SORTIE.write_text(json.dumps(sortie, indent=1, ensure_ascii=False), encoding="utf-8")
-    print(f"moyenne par commune : {na.mean():.0f} en {annee_a}, {nb.mean():.0f} en {annee_b} ; écrit : {SORTIE}")
+    (sortie_fichier or SORTIE).write_text(json.dumps(sortie, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"moyenne par commune : {na.mean():.0f} en {annee_a}, {nb.mean():.0f} en {annee_b} ; écrit : {sortie_fichier or SORTIE}")
 
 
 def main():
     if len(sys.argv) >= 4 and sys.argv[1] == "valider":
         valider(sys.argv[2], sys.argv[3])
+    elif len(sys.argv) >= 5 and sys.argv[1] == "serie2021":       # 2016 -> 2021, mêmes types d'équipements aux deux dates
+        serie(sys.argv[2], sys.argv[3], sys.argv[4], 2016, 2021, charger_bpe_2021, SORTIE.with_name("vec4_serie_2016_2021.json"))
     elif len(sys.argv) >= 5 and sys.argv[1] == "serie":
         serie(sys.argv[2], sys.argv[3], sys.argv[4])
     else:

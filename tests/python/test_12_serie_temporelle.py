@@ -15,7 +15,7 @@ import math
 from common import PYDIR, WEB, charger_json, donnees_actuelles, exige_libs, indice_brut, pk_betti, vers_0_10
 
 ANNEES = ("2016", "2021")
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
 
 
 class SerieTemporelle(unittest.TestCase):
@@ -28,7 +28,7 @@ class SerieTemporelle(unittest.TestCase):
         self.assertEqual(len(self.noms), 360)
         self.assertEqual(self.d["annees"], [2016, 2021])
         self.assertEqual(self.d["indicateurs"], [k for ks in DIMENSIONS.values() for k in ks])
-        self.assertEqual(set(self.d["exclus"]), {"Opp4", "Vec4"})
+        self.assertEqual(set(self.d["exclus"]), {"Opp4"})
         for c in self.noms:
             for a in ANNEES:
                 for v in self.d["communes"][c][a]["indicateurs"].values():
