@@ -16,8 +16,10 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
   Cho2  part des Français parmi les 18 ans et plus (%), avec la méthode de proportion_etrangers_18plus_final.py appliquée aux deux dates : étrangers de 18 ans et plus =
         (population de 18 à 24 ans, POP1B) - 0,7 x (Français de 15 à 24 ans, NAT1) + (étrangers de 25 ans et plus, NAT1), rapportés à la population totale ;
         Cho2 = 100 - cette proportion, plafonné à 100 (retrouve le fichier actuel, calculé en 2022, à 0,01 point près pour 357 communes sur 360)
-  Vec1  médiane du niveau de vie (Filosofi, INSEE), comme l'indicateur actuel ; quand l'INSEE ne la diffuse pas (petites communes), médiane du département
-        de la même année, comme dans les données actuelles (154 communes en 2021)
+  Vec1  REVENU FISCAL MOYEN PAR FOYER FISCAL de la commune (DGFiP, IRCOM : revenu fiscal de référence total / nombre de foyers fiscaux, ligne « Total »),
+        pour les deux années (revenus 2016 et revenus 2021), commune par commune. La médiane Filosofi n'est pas diffusée pour 154 communes en 2021 ;
+        l'IRCOM couvre 349 communes (2016) et 348 (2021). Seules les communes sous secret statistique (9 les deux années, 5 une seule) reçoivent la
+        valeur moyenne de leur département et sont marquées « vec1_departementale ». Valeurs en euros courants (non corrigées de l'inflation).
   Vec2  (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons) / 3, avec chauffage = 1 (constant, comme dans les données actuelles)
   Vec3  stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par leurs effectifs
 
@@ -164,6 +166,25 @@ def indicateur_mediane(dossier, an):
     return med, med_dep
 
 
+def indicateur_revenu_fiscal(dossier):
+    """Vec1 : revenu fiscal moyen par foyer fiscal (IRCOM, DGFiP). Renvoie (moyenne par commune [NaN si secret], moyenne par département, DataFrame nb_foyers/revenu_fiscal)."""
+    brut = pd.read_excel(trouver(dossier, "ircom"), sheet_name=0, header=None)
+    h = next(i for i in range(15) if str(brut.iloc[i, 1]).startswith("D") and str(brut.iloc[i, 2]).startswith("Commune"))
+    d = brut.iloc[h + 1:, 1:6].copy()
+    d.columns = ["dep", "com", "lib", "tranche", "nb"]
+    d["rfr"] = brut.iloc[h + 1:, 6].values                                      # en milliers d'euros
+    d["dep"] = d["dep"].astype(str).str.strip()
+    t = d[d["dep"].isin(["2A0", "2B0"]) & (d["tranche"].astype(str).str.strip().str.lower() == "total")].copy()
+    t["code"] = t["dep"].str[:2] + t["com"].astype(str).str.strip().str.replace(".0", "", regex=False).str.zfill(3)
+    t["nb"] = pd.to_numeric(t["nb"], errors="coerce")
+    t["rfr"] = pd.to_numeric(t["rfr"], errors="coerce") * 1000
+    t = t.set_index("code")[["nb", "rfr"]]
+    valide = t["nb"].gt(0) & t["rfr"].notna()
+    moy = (t["rfr"] / t["nb"]).where(valide)
+    moy_dep = {dep: float(t[valide & t.index.str.startswith(dep)]["rfr"].sum() / t[valide & t.index.str.startswith(dep)]["nb"].sum()) for dep in ("2A", "2B")}
+    return moy, moy_dep, pd.DataFrame({"nb_foyers": t["nb"].where(valide, 0), "revenu_fiscal": t["rfr"].where(valide, 0)})
+
+
 def minmax(s, lo, hi):
     return (s - lo) / (hi - lo) if hi != lo else s * 0.0
 
@@ -184,10 +205,11 @@ def calculer(source, seuil_transports=0):
         dossier = source / str(an)
         t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
-        med, med_dep = indicateur_mediane(dossier, an)
+        med, med_dep, comp["Vec1"] = indicateur_revenu_fiscal(dossier)
         codes = list(t.index)
         diffusee = med.reindex(codes).notna()
         t["Vec1"] = [med[c] if diffusee[c] else med_dep[c[:2]] for c in codes]
+        comp["Vec1"] = comp["Vec1"].reindex(codes)
         estimees[an] = ~diffusee
         t = t[INDICATEURS]
         if set(t.index) != set(noms) or t.isna().any().any():

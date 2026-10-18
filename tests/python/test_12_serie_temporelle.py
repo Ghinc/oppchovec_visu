@@ -4,6 +4,7 @@
   mise à l'échelle 0-10 sur les deux années ensemble, seuils de Jenks sur les deux années ensemble ;
 * rejeu du script construire_serie_temporelle.py si OPPCHOVEC_SERIE désigne le dossier contenant les sous-dossiers 2016 et 2021 (fichiers INSEE / DGFiP).
 """
+import json
 import os
 import sys
 import unittest
@@ -33,18 +34,25 @@ class SerieTemporelle(unittest.TestCase):
                 for v in self.d["communes"][c][a]["indicateurs"].values():
                     self.assertTrue(v == v and abs(v) != float("inf"), f"{c} {a}")
 
-    def test_vec1_2021_est_exactement_celui_de_la_version_actuelle(self):
-        """Vec1 = médiane Filosofi 2021 (valeur départementale quand elle n'est pas diffusée) : identique au fichier de l'appli ; 154 communes départementales aux deux dates."""
-        actuel = donnees_actuelles()
+    def test_vec1_est_le_revenu_fiscal_moyen_par_foyer_de_la_commune(self):
+        """Vec1 = revenu fiscal moyen par foyer fiscal (IRCOM) : propre à la commune aux deux dates, valeur départementale seulement sous secret statistique
+        (11 communes en 2016, 12 en 2021) ; 2021 identique à la variante « revenu fiscal » de l'appli (vec1_revenu_fiscal.json)."""
+        alt = json.loads((WEB / "vec1_revenu_fiscal.json").read_text(encoding="utf-8"))["communes"]
         for c in self.noms:
-            self.assertEqual(self.d["communes"][c]["2021"]["indicateurs"]["Vec1"], actuel[c]["Vec1"], c)
-        for a in ANNEES:
-            self.assertEqual(sum(self.d["communes"][c][a]["vec1_departementale"] for c in self.noms), 154, a)
-        for a in ANNEES:
-            for dep in ("2A", "2B"):                          # ces communes ont exactement la valeur de leur département : une seule valeur par département
+            x = self.d["communes"][c]["2021"]
+            self.assertAlmostEqual(x["indicateurs"]["Vec1"], alt[c]["revenu_moyen"], 6, c)
+            self.assertEqual(x["vec1_departementale"], alt[c]["estime_departement"], c)
+        for a, attendu in (("2016", 11), ("2021", 12)):
+            self.assertEqual(sum(self.d["communes"][c][a]["vec1_departementale"] for c in self.noms), attendu, a)
+            for c in self.noms:
+                x = self.d["communes"][c][a]
+                comp = x["composantes"]["Vec1"]
+                if not x["vec1_departementale"]:
+                    self.assertAlmostEqual(x["indicateurs"]["Vec1"], comp["revenu_fiscal"] / comp["nb_foyers"], 4, f"{c} {a}")
+            for dep in ("2A", "2B"):                          # communes sous secret : exactement la valeur de leur département
                 valeurs = {self.d["communes"][c][a]["indicateurs"]["Vec1"] for c in self.noms
                            if self.d["communes"][c]["code"].startswith(dep) and self.d["communes"][c][a]["vec1_departementale"]}
-                self.assertEqual(len(valeurs), 1, f"{a} {dep}")
+                self.assertLessEqual(len(valeurs), 1, f"{a} {dep}")
 
     def test_cho2_2021_proche_de_l_indicateur_actuel_calcule_en_2022(self):
         actuel = donnees_actuelles()

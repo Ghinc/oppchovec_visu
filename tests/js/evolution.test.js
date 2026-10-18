@@ -109,7 +109,7 @@ test('composantes d\'un indicateur : les contributions s\'additionnent à l\'éc
       const x = evolutionComposantes(d, c, k);
       const ecart = d.communes[c]['2021'].indicateurs[k] - d.communes[c]['2016'].indicateurs[k];
       assert.ok(Math.abs(x.total.v0 - d.communes[c]['2016'].indicateurs[k]) < 1e-12 && Math.abs(x.total.v1 - d.communes[c]['2021'].indicateurs[k]) < 1e-12, `${c} ${k} valeurs`);
-      if (x.lignes.length) {
+      if (x.lignes.some(l => l.contribution !== null)) {      // Vec1 : lignes d'information (foyers, revenu total), sans contribution
         const somme = x.lignes.reduce((t, l) => t + (l.contribution ?? 0), 0);
         const tol = Math.max(1e-4, 1e-5 * Math.abs(ecart));      // composantes arrondies à 6 décimales dans le fichier
         assert.ok(Math.abs(somme - ecart) < tol, `${c} ${k} : somme des contributions ${somme} ≠ écart ${ecart}`);

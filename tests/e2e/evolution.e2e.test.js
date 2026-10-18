@@ -91,7 +91,7 @@ test('Évolution : détail du calcul au clic sur un score (dimensions puis indic
     // dimension Vec : ses trois indicateurs, normalisés, avec leur contribution
     await page.click('.evolution-ligne-score[data-variable="Vec"]');
     t = await texte();
-    for (const mot of ['Vec1 · médiane', 'Vec2 · logement', 'Vec3 · stabilité', 'Contribution (points)', 'Normalisé 2016']) assert.ok(t.includes(mot), mot);
+    for (const mot of ['Vec1 · revenu fiscal moyen', 'Vec2 · logement', 'Vec3 · stabilité', 'Contribution (points)', 'Normalisé 2016']) assert.ok(t.includes(mot), mot);
     assert.equal(await page.locator('.evolution-detail').count(), 2);
     // indicateur brut : lignes cliquables avec leurs composantes
     await page.click('.evolution-ligne-score[data-variable="Opp1"]');

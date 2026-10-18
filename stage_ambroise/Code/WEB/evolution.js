@@ -10,7 +10,7 @@ const EVOLUTION_VARIABLES = {
 };
 const EVOLUTION_NOMS_INDICATEURS = {
     Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
-    Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · médiane du niveau de vie (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
+    Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
 };
 // Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
 // Couleurs : la classe qui contient 0 est neutre (blanc), les classes en dessous sont rouges (recul), celles au-dessus bleues (progression) : le signe reste lisible même si les classes ne sont pas centrées sur 0.
@@ -235,9 +235,14 @@ function evolutionComposantes(donnees, commune, cle) {
         ligne('Part d\'étrangers parmi la population (%)', part[0], part[1], 2, ind[1] - ind[0], 2, '%');
         note = 'Étrangers de 18 ans et plus = population de 18 à 24 ans − 0,7 × Français de 15 à 24 ans + étrangers de 25 ans et plus (tables INSEE POP1B et NAT1). Une hausse de cette part fait baisser Cho2.';
     } else if (cle === 'Vec1') {
-        intro = 'Vec1 = médiane du niveau de vie (Filosofi, INSEE), en euros courants (non corrigés de l\'inflation). C\'est un indicateur direct : il n\'a pas de sous-composantes.';
-        note = [a0, a1].filter((a, i) => c[i].vec1_departementale).length
-            ? `La médiane n'est pas diffusée pour cette commune en ${[a0, a1].filter((a, i) => c[i].vec1_departementale).join(' et ')} : valeur du département.` : 'Médiane propre à la commune aux deux dates.';
+        intro = 'Vec1 = revenu fiscal moyen par foyer fiscal de la commune (DGFiP, IRCOM : revenu fiscal de référence total / nombre de foyers fiscaux), en euros courants (non corrigés de l\'inflation). C\'est un indicateur direct, calculé commune par commune.';
+        if (k[0] && k[1] && k[0].nb_foyers > 0 && k[1].nb_foyers > 0) {
+            ligne('Foyers fiscaux', k[0].nb_foyers, k[1].nb_foyers, 0, null);
+            ligne('Revenu fiscal de référence total (€)', k[0].revenu_fiscal, k[1].revenu_fiscal, 0, null);
+        }
+        const sec = [a0, a1].filter((a, i) => c[i].vec1_departementale);
+        note = sec.length
+            ? `Revenu non communiqué par la DGFiP (secret statistique) pour cette commune en ${sec.join(' et ')} : valeur moyenne du département.` : 'Revenu propre à la commune aux deux dates.';
     } else if (cle === 'Vec2') {
         intro = 'Vec2 = [ exp(−personnes par pièce) + (part de logements avec salle de bain + chauffage) / 2 + part de maisons ] / 3, avec chauffage = 1 (constant, comme dans les données actuelles). Contribution = écart du terme correspondant dans cette formule.';
         ligne('Personnes par pièce (terme exp(−x) / 3)', k[0].personnes_par_piece, k[1].personnes_par_piece, 2, (Math.exp(-k[1].personnes_par_piece) - Math.exp(-k[0].personnes_par_piece)) / 3, 4);
@@ -422,7 +427,7 @@ function evolutionFicheContenu(nom) {
         `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
         `<div class="evolution-petit">${epci ? 'Cliquez sur un score pour voir le détail du calcul et ce qui l\'a fait monter ou baisser ; les indicateurs de l\'EPCI sont des moyennes de ceux des communes.' : 'Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l\'a fait monter ou baisser.'}</div>` +
         (epci ? evolutionCommunesMembresHtml(nom) : '') +
-        (estime.length ? `<div class="evolution-petit">Médiane du niveau de vie non diffusée par l'INSEE pour ${estime.join(' et ')} : valeur du département.</div>` : '');
+        (estime.length ? `<div class="evolution-petit">Revenu fiscal non communiqué par la DGFiP (secret statistique) pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
 
 function evolutionAfficherFiche() {
