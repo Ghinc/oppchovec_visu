@@ -10,7 +10,7 @@ const EVOLUTION_VARIABLES = {
 };
 const EVOLUTION_NOMS_INDICATEURS = {
     Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
-    Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
+    Cho1: 'Cho1 · quartiers prioritaires (−log du nombre de personnes)', Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi',
 };
 // Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
 // Couleurs : la classe qui contient 0 est neutre (blanc), les classes en dessous sont rouges (recul), celles au-dessus bleues (progression) : le signe reste lisible même si les classes ne sont pas centrées sur 0.
@@ -227,6 +227,12 @@ function evolutionComposantes(donnees, commune, cle) {
         const faible = [k[0].actifs_transports, k[1].actifs_transports].some(x => x !== undefined && x > 0 && x < 5);
         note = 'Le drapeau « transports en commun » vaut ±100 points d\'Opp3 (0,41 sur l\'échelle 0-1) : c\'est lui qui fait l\'essentiel des évolutions d\'Opp (99 % de la variance). ' +
             'L\'effectif est une estimation du recensement, de l\'ordre d\'une personne dans la plupart des petites communes' + (faible && seuilTc === 0 ? ' : ici il est inférieur à 5 personnes, donc le drapeau est très fragile. La variante « Opp3 robuste » le lève à partir de 5 personnes.' : '.');
+    } else if (cle === 'Cho1') {
+        intro = 'Cho1 = −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 pour une commune sans quartier (définition de l\'appli). Plus il y a de personnes en quartier prioritaire, plus Cho1 est bas. Indicateur direct, sans sous-composantes.';
+        if (k[0].personnes_qpv > 0 || k[1].personnes_qpv > 0) ligne('Personnes en quartier prioritaire', k[0].personnes_qpv, k[1].personnes_qpv, 0, null);
+        note = k[0].personnes_qpv > 0 || k[1].personnes_qpv > 0
+            ? 'Géographie des quartiers de 2015 aux deux dates (population de 2013 pour ' + a0 + ', de 2018 pour ' + a1 + ') : seule la population change, pas le périmètre. Ce n\'est pas la géographie 2024 de l\'appli.'
+            : 'Aucun quartier prioritaire dans cette commune (Cho1 = 0 aux deux dates).';
     } else if (cle === 'Cho2') {
         intro = 'Cho2 = part des Français parmi les 18 ans et plus = 100 − part des étrangers de 18 ans et plus (plafonné à 100). C\'est un proxy du droit de vote : il ne tient compte ni de l\'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales.';
         ligne('Population totale', k[0].population, k[1].population, 0, null);

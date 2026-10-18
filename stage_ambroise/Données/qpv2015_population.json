@@ -1,0 +1,10 @@
+{
+  "source": "INSEE, quartiers prioritaires de la politique de la ville (QPV) dans leur géographie du 14/09/2015, population par commune. 2013 : DEMO_2018_V1.xls, feuille QP (POP_MUN, recensement 2013) ; 2018 : pop_qpv_2018.xlsx (population municipale au 1er janvier 2018). Même périmètre aux deux dates.",
+  "note": "Sert au Cho1 de la série temporelle : 2016 reçoit la population de 2013, 2021 celle de 2018 (même écart de cinq ans). Pas de lien avec le Cho1 de l'appli, calculé sur la géographie 2024.",
+  "communes": {
+    "2A004": {"nom": "Ajaccio", "personnes_qpv": {"2016": 2833, "2021": 2877}},
+    "2A247": {"nom": "Porto-Vecchio", "personnes_qpv": {"2016": 1012, "2021": 797}},
+    "2B033": {"nom": "Bastia", "personnes_qpv": {"2016": 10432, "2021": 11488}}
+  },
+  "detail_2018": {"Pifano (Porto-Vecchio)": 797, "Salines (Ajaccio)": 1927, "Les Jardins de l'Empereur (Ajaccio)": 950, "Quartier Sud (Bastia)": 8144, "Centre Ancien (Bastia)": 3344}
+}

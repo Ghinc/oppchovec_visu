@@ -15,7 +15,7 @@ import math
 from common import PYDIR, WEB, charger_json, donnees_actuelles, exige_libs, indice_brut, pk_betti, vers_0_10
 
 ANNEES = ("2016", "2021")
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
 
 
 class SerieTemporelle(unittest.TestCase):
@@ -28,7 +28,7 @@ class SerieTemporelle(unittest.TestCase):
         self.assertEqual(len(self.noms), 360)
         self.assertEqual(self.d["annees"], [2016, 2021])
         self.assertEqual(self.d["indicateurs"], [k for ks in DIMENSIONS.values() for k in ks])
-        self.assertEqual(set(self.d["exclus"]), {"Opp4", "Cho1", "Vec4"})
+        self.assertEqual(set(self.d["exclus"]), {"Opp4", "Vec4"})
         for c in self.noms:
             for a in ANNEES:
                 for v in self.d["communes"][c][a]["indicateurs"].values():
@@ -53,6 +53,18 @@ class SerieTemporelle(unittest.TestCase):
                 valeurs = {self.d["communes"][c][a]["indicateurs"]["Vec1"] for c in self.noms
                            if self.d["communes"][c]["code"].startswith(dep) and self.d["communes"][c][a]["vec1_departementale"]}
                 self.assertLessEqual(len(valeurs), 1, f"{a} {dep}")
+
+    def test_cho1_est_moins_log_des_personnes_en_quartier_prioritaire_geographie_2015(self):
+        """Cho1 = -log(personnes en QPV), 0 sans quartier ; trois communes (Ajaccio, Bastia, Porto-Vecchio) ; population 2013 pour 2016, 2018 pour 2021."""
+        attendu = {"Ajaccio": (2833, 2877), "Bastia": (10432, 11488), "Porto-Vecchio": (1012, 797)}
+        for c in self.noms:
+            for a, i in (("2016", 0), ("2021", 1)):
+                x = self.d["communes"][c][a]
+                if c in attendu:
+                    self.assertEqual(x["composantes"]["Cho1"]["personnes_qpv"], attendu[c][i], f"{c} {a}")
+                    self.assertAlmostEqual(x["indicateurs"]["Cho1"], -math.log(attendu[c][i]), 9, f"{c} {a}")
+                else:
+                    self.assertEqual(x["indicateurs"]["Cho1"], 0.0, f"{c} {a}")
 
     def test_cho2_2021_proche_de_l_indicateur_actuel_calcule_en_2022(self):
         actuel = donnees_actuelles()

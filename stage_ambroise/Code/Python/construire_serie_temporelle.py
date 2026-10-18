@@ -3,7 +3,7 @@ Construit une version COMPARABLE dans le temps de l'indice OppChoVec pour deux a
 Écrit Code/WEB/serie_temporelle.json (lu par l'onglet « Évolution » de l'appli).
 
 Principe : mêmes sources, mêmes définitions, mêmes bornes de normalisation pour les deux années. On ne garde que les indicateurs pour lesquels une
-source homogène existe aux deux dates (7 sur 10) ; Opp4 (4G, haut débit, fibre), Cho1 (quartiers prioritaires) et Vec4 (services à 20 minutes)
+source homogène existe aux deux dates (8 sur 10) ; Opp4 (4G, haut débit, fibre) et Vec4 (services à 20 minutes)
 sont EXCLUS de cet indice : pas de source communale homogène trouvée pour 2016. Ce n'est donc pas l'indice OppChoVec complet de l'appli.
 Opp1 est sur 4 niveaux de diplôme (le détail à 7 niveaux n'existe pas en 2016) ; le reste suit les définitions de l'indice actuel.
 
@@ -13,6 +13,8 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
   Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus (formule de oppchovec.py : Σ (x/μ) ln(x/μ) / 8)
   Opp3  part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun
         + 100 pour les 3 villes ayant un réseau de bus (Ajaccio, Bastia, Porto-Vecchio ; inchangé)
+  Cho1  -log(nombre de personnes vivant en quartier prioritaire), 0 sans quartier, comme l'appli, mais sur la géographie QPV de 2015 aux deux dates (Ajaccio, Bastia,
+        Porto-Vecchio) : population 2013 pour 2016 et population 2018 pour 2021 (Données/qpv2015_population.json). La géographie 2024 de l'appli n'est pas utilisée.
   Cho2  part des Français parmi les 18 ans et plus (%), avec la méthode de proportion_etrangers_18plus_final.py appliquée aux deux dates : étrangers de 18 ans et plus =
         (population de 18 à 24 ans, POP1B) - 0,7 x (Français de 15 à 24 ans, NAT1) + (étrangers de 25 ans et plus, NAT1), rapportés à la population totale ;
         Cho2 = 100 - cette proportion, plafonné à 100 (retrouve le fichier actuel, calculé en 2022, à 0,01 point près pour 357 communes sur 360)
@@ -54,8 +56,9 @@ SORTIE_ROBUSTE = Path(__file__).resolve().parent.parent / "WEB" / "serie_tempore
 # ce drapeau change de statut pour 78 communes sur 360 et fait varier Opp de ± 4 points. Variante « robuste » : drapeau levé seulement à partir de SEUIL_TRANSPORTS_ROBUSTE personnes.
 SEUIL_TRANSPORTS_ROBUSTE = 5
 ANNEES = (2016, 2021)
-INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho2", "Vec1", "Vec2", "Vec3"]
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
+INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3"]
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3"]}
+QPV = RACINE / "Données" / "qpv2015_population.json"
 VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247"}
 ALPHA, BETA = 2.5, 1.5
 
@@ -185,6 +188,13 @@ def indicateur_revenu_fiscal(dossier):
     return moy, moy_dep, pd.DataFrame({"nb_foyers": t["nb"].where(valide, 0), "revenu_fiscal": t["rfr"].where(valide, 0)})
 
 
+def indicateur_qpv(codes, an):
+    """Cho1 : -log(nombre de personnes vivant en quartier prioritaire de la commune), 0 sans quartier (comme l'appli) ; géographie QPV 2015 aux deux dates."""
+    pers = {c: v["personnes_qpv"].get(str(an), 0) for c, v in json.loads(QPV.read_text(encoding="utf-8"))["communes"].items()}
+    p = pd.Series([float(pers.get(c, 0)) for c in codes], index=codes)
+    return pd.Series([-math.log(x) if x > 0 else 0.0 for x in p], index=codes, name="Cho1"), pd.DataFrame({"personnes_qpv": p})
+
+
 def minmax(s, lo, hi):
     return (s - lo) / (hi - lo) if hi != lo else s * 0.0
 
@@ -205,6 +215,7 @@ def calculer(source, seuil_transports=0):
         dossier = source / str(an)
         t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
+        t["Cho1"], comp["Cho1"] = indicateur_qpv(list(t.index), an)
         med, med_dep, comp["Vec1"] = indicateur_revenu_fiscal(dossier)
         codes = list(t.index)
         diffusee = med.reindex(codes).notna()
@@ -244,7 +255,7 @@ def calculer(source, seuil_transports=0):
     return {"annees": list(ANNEES), "opp3_seuil_transports": seuil_transports, "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},
-            "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016", "Cho1": "quartiers prioritaires : géographie 2015 puis 2024, pas de série",
+            "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016",
                        "Vec4": "services à 20 minutes : accessibilité calculée avec le réseau routier actuel (OSRM local), BPE 2016 non géolocalisée de la même façon"},
             "communes": communes}
 
