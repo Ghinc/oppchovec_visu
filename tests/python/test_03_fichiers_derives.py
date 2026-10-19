@@ -248,28 +248,27 @@ class FichiersAnnexes(unittest.TestCase):
             "Opp3": lambda s: s["voiture"] + (100 if s["tc"] > 0 else 0) + (100 if s["bus"] else 0),
             "Opp4": lambda s: (s["g4"] + s["debit"] + s["fibre"]) / 3,
             "Cho1": lambda s: -__import__("math").log(s["personnes_qpv"]) if s["personnes_qpv"] > 0 else 0,
-            "Vec2": lambda s: (__import__("math").exp(-s["pers_piece"]) + (s["sdb"] + s["chauffage"]) / 2 + s["maisons"]) / 3,
-            "Vec3": lambda s: (s["stable"] * 1 + s["cdd"] * 0.75 + s["ponctuel"] * 0.5 + s["chomeur"] * 0 + s["aide"] * 0.25)
-                              / (s["stable"] + s["cdd"] + s["ponctuel"] + s["chomeur"] + s["aide"]),
+            "Vec2": lambda s: (__import__("math").exp(-s["pers_piece"]) + s["maisons"]) / 2,
+            "Vec3": lambda s: (s["stable"] * 1 + s["autres"] * 0.5 + s["chomeur"] * 0) / (s["stable"] + s["autres"] + s["chomeur"]),
         }
         for c, d in self.data.items():
             for ind, f in formules.items():
                 self.assertAlmostEqual(f(sc[c][ind]), d[ind], places=9, msg=f"{c}.{ind}")
 
     def test_parts_d_emploi_somment_a_100_aux_arrondis_pres(self):
-        """Vec3.xlsx arrondit chaque part à 0,1 : la somme vaut 100 ± 0,2 (curseurs couplés de l'appli)."""
+        """Les trois parts d'emploi (stable, autres contrats, chômeurs) somment à 100 (curseurs couplés de l'appli)."""
         for c, s in charger_json(WEB / "sous_composantes.json").items():
-            self.assertAlmostEqual(sum(s["Vec3"].values()), 100, delta=0.21, msg=c)
+            self.assertAlmostEqual(sum(s["Vec3"].values()), 100, delta=1e-9, msg=c)
 
-    def test_seule_la_composante_chauffage_est_constante(self):
-        """L'appli grise le curseur d'une composante constante ; on documente laquelle (si ça change : à revoir)."""
+    def test_aucune_composante_n_est_constante(self):
+        """L'appli grise le curseur d'une composante constante ; dans la v2 aucune ne l'est (le chauffage constant de la v1 a été retiré)."""
         sc = charger_json(WEB / "sous_composantes.json")
         constantes = set()
         for ind in ("Opp3", "Opp4", "Cho1", "Vec2", "Vec3"):
             for comp in sc["Bastia"][ind]:
                 if len({s[ind][comp] for s in sc.values()}) == 1:
                     constantes.add(f"{ind}.{comp}")
-        self.assertEqual(constantes, {"Vec2.chauffage"})
+        self.assertEqual(constantes, set())
 
 
 if __name__ == "__main__":

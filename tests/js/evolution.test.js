@@ -122,8 +122,8 @@ test('composantes d\'un indicateur : les contributions s\'additionnent à l\'éc
 test('fiabilité : habitants de la série, classements limités aux communes d\'au moins 100 habitants (les très petites communes ne dominent plus les listes)', () => {
   const { evolutionHabitants, EVOLUTION_SEUIL_FIABLE } = require(path.join(WEB, 'evolution.js'));
   assert.equal(EVOLUTION_SEUIL_FIABLE, 100);
-  const agreg = lireJson('epci_agregation.json');          // population municipale officielle (INSEE, séries historiques) : 2021 = millésime d'Opp2
-  const pop2021 = Object.fromEntries(agreg.epci.flatMap((e) => Object.entries(e.communes).map(([n, c]) => [n, c.pop.Opp2])));
+  const agreg = lireJson('epci_agregation.json');          // population municipale officielle 2021 (INSEE, séries historiques)
+  const pop2021 = Object.fromEntries(agreg.epci.flatMap((e) => Object.entries(e.communes).map(([n, c]) => [n, c.pop_annee['2021']])));
   for (const c of noms) assert.ok(Math.abs(evolutionHabitants(d, c) - pop2021[c]) < 0.51, c);
   const tous = evolutionResume(d, 'OppChoVec');
   const filtre = evolutionResume(d, 'OppChoVec', 100);

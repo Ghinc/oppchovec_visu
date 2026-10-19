@@ -52,28 +52,21 @@ class DonneesEPCI(unittest.TestCase):
     def test_millesimes_des_indicateurs(self):
         m = self.agreg["millesimes"]
         self.assertEqual(set(m), set(INDICATEURS))
-        self.assertEqual((m["Opp1"], m["Opp2"], m["Cho2"], m["Vec1"], m["Vec2"]), (2020, 2021, 2022, 2021, 2022))
+        self.assertEqual((m["Opp1"], m["Opp2"], m["Opp3"], m["Cho2"], m["Vec2"], m["Vec3"]), (2023,) * 6)      # recensement 2023
+        self.assertEqual(m["Cho1"], 2020)                 # population des quartiers prioritaires au 1er janvier 2020
         for k in self.agreg["millesime_approche"]:
             self.assertEqual(m[k], 2023, k)                 # dernière population publiée
         # la population du millésime est bien celle de l'année : une commune de chaque millésime, comparée à la population totale de son EPCI
         for e in self.agreg["epci"]:
             self.assertEqual(sum(c["pop"]["Vec4"] for c in e["communes"].values()), e["population_2023"])
 
-    def test_la_population_2022_est_celle_du_fichier_du_projet(self):
-        import os
-        from pathlib import Path
-        base = os.environ.get("OPPCHOVEC_SOURCES") or r"C:\These\Données2\visualisation_oppchovec_1111\Stage Ambroise"
-        f = Path(base) / "Données" / "Corse_Commune" / "population_corse.xlsx"
-        if not f.exists():
-            self.skipTest("population_corse.xlsx introuvable (définir OPPCHOVEC_SOURCES)")
-        try:
-            import pandas as pd
-            p = pd.read_excel(f).set_index("code_commune")["population_2022"]
-        except Exception as e:                                      # pandas / openpyxl absents
-            self.skipTest(f"lecture impossible : {e}")
+    def test_la_population_du_millesime_2023_est_celle_des_series_historiques(self):
+        """La population attachée aux indicateurs de 2023 est la population municipale 2023 (séries historiques INSEE), identique à `pop_annee` ; 2016 et 2021 servent à contrôler l'onglet Évolution."""
         for e in self.agreg["epci"]:
             for c in e["communes"].values():
-                self.assertEqual(c["pop"]["Cho2"], int(p[c["code"]]), c["code"])
+                self.assertEqual(c["pop"]["Opp1"], c["pop_annee"]["2023"], c["code"])
+                self.assertEqual(set(c["pop_annee"]), {"2016", "2021", "2023"})
+                self.assertTrue(all(v > 0 for v in c["pop_annee"].values()), c["code"])
 
     def test_contours(self):
         g = charger_json(WEB / "epci_corse.geojson")

@@ -32,8 +32,8 @@ def formule(ind, s):
     if ind == "Cho1":
         return -math.log(s["personnes_qpv"]) if s["personnes_qpv"] > 0 else 0
     if ind == "Vec2":
-        return (math.exp(-s["pers_piece"]) + (s["sdb"] + s["chauffage"]) / 2 + s["maisons"]) / 3
-    poids = {"stable": 1, "cdd": 0.75, "ponctuel": 0.5, "chomeur": 0, "aide": 0.25}
+        return (math.exp(-s["pers_piece"]) + s["maisons"]) / 2
+    poids = {"stable": 1, "autres": 0.5, "chomeur": 0}
     return sum(s[k] * w for k, w in poids.items()) / sum(s.values())
 
 

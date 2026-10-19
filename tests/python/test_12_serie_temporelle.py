@@ -36,8 +36,8 @@ class SerieTemporelle(unittest.TestCase):
 
     def test_vec1_est_le_revenu_fiscal_moyen_par_foyer_de_la_commune(self):
         """Vec1 = revenu fiscal moyen par foyer fiscal (IRCOM) : propre à la commune aux deux dates, valeur départementale seulement sous secret statistique
-        (11 communes en 2016, 12 en 2021) ; 2021 identique à la variante « revenu fiscal » de l'appli (vec1_revenu_fiscal.json)."""
-        alt = json.loads((WEB / "vec1_revenu_fiscal.json").read_text(encoding="utf-8"))["communes"]
+        (11 communes en 2016, 12 en 2021) ; 2021 identique à la variante « revenu fiscal 2021 » archivée de l'ancien indice (Données/archive_indice_v1_2020_2024/vec1_revenu_fiscal.json)."""
+        alt = json.loads((RACINE / "stage_ambroise" / "Données" / "archive_indice_v1_2020_2024" / "vec1_revenu_fiscal.json").read_text(encoding="utf-8"))["communes"]
         for c in self.noms:
             x = self.d["communes"][c]["2021"]
             self.assertAlmostEqual(x["indicateurs"]["Vec1"], alt[c]["revenu_moyen"], 6, c)
@@ -91,14 +91,14 @@ class SerieTemporelle(unittest.TestCase):
         self.assertGreater(moy("2021", "debit"), moy("2016", "debit") + 15)
         self.assertGreater(moy("2021", "g4"), moy("2016", "g4") + 15)
 
-    def test_cho2_2021_proche_de_l_indicateur_actuel_calcule_en_2022(self):
+    def test_cho2_2021_proche_de_l_indicateur_courant_calcule_en_2023(self):
         actuel = donnees_actuelles()
         a = [self.d["communes"][c]["2021"]["indicateurs"]["Cho2"] for c in self.noms]
         b = [actuel[c]["Cho2"] for c in self.noms]
         n = len(a)
         ma, mb = sum(a) / n, sum(b) / n
         r = sum((x - ma) * (y - mb) for x, y in zip(a, b)) / math.sqrt(sum((x - ma) ** 2 for x in a) * sum((y - mb) ** 2 for y in b))
-        self.assertGreater(r, 0.85)                           # mesuré : 0,888 (millésimes différents : 2021 et 2022)
+        self.assertGreater(r, 0.8)                            # mesuré : 0,830 (millésimes différents : 2021 et 2023, bruit des petites communes)
         self.assertTrue(all(0 <= x <= 100 for x in a))
 
     def test_recalcul_independant_des_scores(self):
@@ -237,7 +237,7 @@ class FiabiliteEtDrapeauTransports(unittest.TestCase):
     def test_populations_de_la_serie_egales_aux_populations_municipales(self):
         import json
         agreg = charger_json(WEB / "epci_agregation.json")
-        pop2021 = {n: c["pop"]["Opp2"] for e in agreg["epci"] for n, c in e["communes"].items()}         # population municipale 2021 (millésime d'Opp2)
+        pop2021 = {n: c["pop_annee"]["2021"] for e in agreg["epci"] for n, c in e["communes"].items()}         # population municipale 2021 (séries historiques INSEE)
         for c in self.noms:
             self.assertAlmostEqual(self.std["communes"][c]["2021"]["composantes"]["Cho2"]["population"], pop2021[c], delta=0.51, msg=c)
 

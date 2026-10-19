@@ -77,23 +77,9 @@
         <div id="pk-values-display" style="margin-top: 6px; font-size: 12px; color: #555; font-style: italic;">Pondérations égales (p_k = 1/3 chacun)</div>
       </div>
 
-      <!-- Variante de Vec1 : revenu fiscal moyen -->
-      <div class="section" id="section-vec1">
-        <h2>6. Variante de Vec1</h2>
-        <label style="display: flex; align-items: flex-start; cursor: pointer;">
-          <input type="checkbox" id="checkbox-vec1-ircom" disabled style="margin-top: 3px;">
-          <span style="margin-left: 0.5em;">Vec1 = <strong>revenu fiscal moyen par foyer</strong> (DGFiP, IRCOM 2021) au lieu de la médiane du niveau de vie (INSEE, Filosofi 2021)</span>
-        </label>
-        <div id="vec1-avertissement" class="vec1-petit" style="display:none; color:#a15c00;">
-          Les cartes OppChoVec, Opp, Cho, Vec, Parangons, la fiche commune et les seuils suivent cette variante ; les onglets LISA et CAH ne sont <strong>pas</strong> recalculés (ils restent ceux de la médiane). Les modifications de curseurs sont abandonnées à chaque changement.
-        </div>
-        <div id="vec1-comparaison" class="vec1-comparaison">Chargement…</div>
-        <div style="position: relative; height: 230px;"><canvas id="vec1-scatter"></canvas></div>
-      </div>
-
       <!-- Téléchargements -->
       <div class="section">
-        <h2>7. Téléchargements</h2>
+        <h2>6. Téléchargements</h2>
         <a href="downloads/stats_descriptives_betti_0_10.xlsx" download>
           <button style="width:100%; margin-bottom:6px;">📥 Stats descriptives (Betti, 0-10)</button>
         </a>
@@ -385,9 +371,9 @@
             <span class="epci-info" tabindex="0" role="button" aria-label="Comment sont agrégés les EPCI">ⓘ
               <span class="epci-info-texte" role="tooltip">
                 Chaque indicateur est agrégé par EPCI, puis passe par la même chaîne de calcul que les communes (mêmes bornes, mêmes pondérations p<sub>k</sub>, même échelle 0-10, mêmes classes de Jenks) : un EPCI est directement comparable à une commune.
-                <strong>Pro rata du nombre d'habitants</strong> : moyenne des communes pondérée par leur population <em>au millésime de chaque indicateur</em> (2020 pour Opp1, 2021 pour Opp2, Opp3, Vec1 et Vec3, 2022 pour Cho2 et Vec2, 2023 pour Opp4, Cho1 et Vec4).
+                <strong>Pro rata du nombre d'habitants</strong> : moyenne des communes pondérée par leur population <em>au millésime de chaque indicateur</em> (2023 pour tous les indicateurs issus du recensement, pour Opp4, Vec1 et Vec4 — dernière population publiée —, et 2020 pour Cho1).
                 <strong>Moyenne simple</strong> : chaque commune compte pour 1, quelle que soit sa taille.
-                Précaution : une moyenne de valeurs communales n'est exacte que pour les indicateurs additifs ; pour Opp2 (indice de Theil), Vec1 (médiane du niveau de vie), Opp3 (somme de composantes et d'indicatrices) et Cho1 (logarithme du nombre de personnes en quartier prioritaire) c'est une approximation ; l'écart entre les deux méthodes est surtout visible sur Cho1 dans les agglomérations.
+                Précaution : une moyenne de valeurs communales n'est exacte que pour les indicateurs additifs ; pour Opp2 (indice de Theil), Vec1 (revenu fiscal moyen par foyer), Opp3 (somme de composantes et d'indicatrices) et Cho1 (logarithme du nombre de personnes en quartier prioritaire) c'est une approximation ; l'écart entre les deux méthodes est surtout visible sur Cho1 dans les agglomérations.
               </span>
             </span>
             <label class="epci-choix"><input type="checkbox" id="epci-prorata" checked> Pro rata du nombre d'habitants <span class="epci-petit">(décoché : moyenne simple)</span></label>
@@ -461,7 +447,6 @@
   <script src="stage_ambroise/Code/WEB/lisa_data_betti.js?v=20261017a"></script>
   <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js?v=20261017a"></script>
   <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261017a"></script>
-  <script src="stage_ambroise/Code/WEB/vec1_variante.js?v=20261017a"></script>
   <script src="stage_ambroise/Code/WEB/evolution.js?v=20261017a"></script>
   <script src="stage_ambroise/Code/WEB/epci.js?v=20261017a"></script>
   <script src="stage_ambroise/Code/WEB/script.js?v=20261017a"></script>

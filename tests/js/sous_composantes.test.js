@@ -24,7 +24,7 @@ test('chaque indicateur décomposé se recompose exactement depuis ses sous-comp
   }
 });
 
-test('bornes figées des sous-composantes = min et max réels ; seule la composante « chauffage » est constante', async () => {
+test('bornes figées des sous-composantes = min et max réels ; aucune composante n\'est constante', async () => {
   const app = await chargerApp();
   const constantes = [];
   for (const [court, nom] of Object.entries(DECOMPOSES)) {
@@ -36,18 +36,18 @@ test('bornes figées des sous-composantes = min et max réels ; seule la composa
       if (b.min === b.max) constantes.push(`${court}.${comp}`);
     }
   }
-  assert.deepEqual(constantes, ['Vec2.chauffage']);
+  assert.deepEqual(constantes, []);
 });
 
 test('redistribuerParts : le total est conservé, aucune part négative, les autres parts gardent leurs proportions (500 tirages)', async () => {
   const app = await chargerApp();
   const alea = prng(42);
-  const cles = ['stable', 'cdd', 'ponctuel', 'chomeur', 'aide'];
+  const cles = ['stable', 'autres', 'chomeur'];
   for (let i = 0; i < 500; i++) {
     const brutes = cles.map(() => alea());
     const total = 100;
     const parts = Object.fromEntries(cles.map((k, j) => [k, (brutes[j] / brutes.reduce((a, b) => a + b, 0)) * total]));
-    const comp = cles[Math.floor(alea() * 5)];
+    const comp = cles[Math.floor(alea() * cles.length)];
     const cible = alea() * 130 - 15;                                       // y compris hors de [0, 100] : doit être borné
     app.ev(`globalThis.__p = ${JSON.stringify(parts)}`);
     app.ev(`redistribuerParts(__p, ${JSON.stringify(comp)}, ${cible})`);
@@ -65,45 +65,47 @@ test('redistribuerParts : le total est conservé, aucune part négative, les aut
 
 test('redistribuerParts : cas limites (autres parts nulles, part portée au total)', async () => {
   const app = await chargerApp();
-  app.ev('globalThis.__p = { stable: 100, cdd: 0, ponctuel: 0, chomeur: 0, aide: 0 }');
+  app.ev('globalThis.__p = { stable: 100, autres: 0, chomeur: 0 }');
   app.ev("redistribuerParts(__p, 'stable', 60)");
-  assert.deepEqual(plat(app.ev('__p')), { stable: 60, cdd: 10, ponctuel: 10, chomeur: 10, aide: 10 });
-  app.ev('globalThis.__q = { stable: 50, cdd: 30, ponctuel: 10, chomeur: 5, aide: 5 }');
-  app.ev("redistribuerParts(__q, 'cdd', 100)");
+  assert.deepEqual(plat(app.ev('__p')), { stable: 60, autres: 20, chomeur: 20 });
+  app.ev('globalThis.__q = { stable: 50, autres: 30, chomeur: 20 }');
+  app.ev("redistribuerParts(__q, 'autres', 100)");
   const q = plat(app.ev('__q'));
-  assert.equal(q.cdd, 100);
-  assert.ok(Object.entries(q).filter(([k]) => k !== 'cdd').every(([, v]) => Math.abs(v) < 1e-12));
+  assert.equal(q.autres, 100);
+  assert.ok(Object.entries(q).filter(([k]) => k !== 'autres').every(([, v]) => Math.abs(v) < 1e-12));
 });
 
 test('déplacer un curseur de sous-composante met à jour la valeur affichée de l\'indicateur sans toucher aux résultats (brouillon)', async () => {
   const app = await chargerApp();
   const { inputs } = afficherCommune(app, 'Bastia');
   const avant = photo(app);
+  const o = app.ev('JSON.parse(JSON.stringify(sousComposantesCommune.Bastia.Indicateur_Opp4))');
   inputs.Indicateur_Opp4__fibre.value = '0';
   app.ev("majSousComposante('Indicateur_Opp4', 'fibre')");
-  // Bastia : 4G 100, débit 93, fibre 80 -> fibre minimale corse (0) => (100 + 93 + 0) / 3 = 64,333
-  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), /^\d+ % · 64,3 %/);
+  // fibre ramenée à la fibre minimale corse (0) => (4G + débit + 0) / 3
+  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), new RegExp('^\\d+ % · ' + ((o.g4 + o.debit) / 3).toFixed(1).replace('.', ',') + ' %'));
   assert.match(normaliser(app.elements.get('Indicateur_Opp4__fibre_val').innerText), /^0 % · 0 %$/);
   assert.deepEqual(photo(app), avant, 'rien ne doit changer tant que « Recalculer » n\'est pas cliqué');
-  assert.equal(app.ev("sousComposantesCommune.Bastia.Indicateur_Opp4.fibre"), 80);
+  assert.equal(app.ev("sousComposantesCommune.Bastia.Indicateur_Opp4.fibre"), o.fibre);
 });
 
 test('« Recalculer » applique le brouillon : l\'indicateur suit sa formule, seule la commune change, « Réinitialiser » annule', async () => {
   const app = await chargerApp();
   const depart = photo(app);
   const { inputs } = afficherCommune(app, 'Bastia');
+  const o = app.ev('JSON.parse(JSON.stringify(sousComposantesCommune.Bastia.Indicateur_Opp4))');
   inputs.Indicateur_Opp4__fibre.value = '0';
   app.ev("majSousComposante('Indicateur_Opp4', 'fibre')");
   app.ev("recalculerIndice('Bastia')");
   const apres = photo(app);
-  assert.ok(proche(apres.ind.Bastia.Indicateur_Opp4, (100 + 93 + 0) / 3));
+  assert.ok(proche(apres.ind.Bastia.Indicateur_Opp4, (o.g4 + o.debit + 0) / 3));
   assert.equal(app.ev('sousComposantesCommune.Bastia.Indicateur_Opp4.fibre'), 0);
   assert.ok(apres.indice.Bastia < depart.indice.Bastia);
   const autres = Object.keys(depart.indice).filter((c) => c !== 'Bastia' && depart.indice[c] !== apres.indice[c]);
   assert.deepEqual(autres, []);
   app.ev("reinitialiserValeurs('Bastia')");
   assert.deepEqual(photo(app), depart);
-  assert.equal(app.ev('sousComposantesCommune.Bastia.Indicateur_Opp4.fibre'), 80);
+  assert.equal(app.ev('sousComposantesCommune.Bastia.Indicateur_Opp4.fibre'), o.fibre);
 });
 
 test('un brouillon non validé est abandonné quand on affiche une autre commune', async () => {
@@ -133,17 +135,15 @@ test('case à cocher du réseau de bus : -100 points sur Opp3 et seule la commun
   assert.deepEqual(Object.keys(depart.indice).filter((c) => c !== 'Bastia' && depart.indice[c] !== apres.indice[c]), []);
 });
 
-test('parts d\'emploi : toutes les parts restent liées (somme ≈ 100) et le curseur « chauffage » constant est désactivé', async () => {
+test('parts d\'emploi : toutes les parts restent liées (somme ≈ 100)', async () => {
   const app = await chargerApp();
   const { inputs, html } = afficherCommune(app, 'Bastia');
   inputs.Indicateur_Vec3__stable.value = '100';
   app.ev("majSousComposante('Indicateur_Vec3', 'stable')");
   const brouillon = app.ev('JSON.parse(JSON.stringify(brouillonSousComp.valeurs.Indicateur_Vec3))');
   assert.ok(proche(somme(brouillon), somme(app.ev('JSON.parse(JSON.stringify(sousComposantesOrigine.Bastia.Indicateur_Vec3))')), 1e-12));
-  assert.equal(app.ev('bornesSousComp.Indicateur_Vec3.stable.max'), 100, "au moins une commune a 100 % d'emploi stable");
+  assert.ok(app.ev('bornesSousComp.Indicateur_Vec3.stable.max') <= 100, "la part d'emploi stable ne dépasse pas 100 %");
   assert.ok(proche(app.ev('SOUS_COMPOSANTES.Indicateur_Vec3.calcul(brouillonSousComp.valeurs.Indicateur_Vec3)'), 1, 1e-12), "100 % d'emploi stable => Vec3 = 1");
-  assert.equal(inputs.Indicateur_Vec2__chauffage.disabled, true);
-  assert.match(html, /Identique pour toutes les communes corses/);
 });
 
 test("hors échelle : une modification qui dépasse le maximum corse ne déplace aucune autre commune (bornes figées)", async () => {

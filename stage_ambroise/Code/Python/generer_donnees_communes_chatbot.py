@@ -94,16 +94,16 @@ Score global Opportunités : {data['scores_globaux']['Opportunités']}/10
 
 Composantes :
   Opp1 - Niveau d'éducation          : {data['opportunites']['Opp1_Education']}
-           → Mesure le niveau moyen d'éducation de la population
+           → Niveau de diplôme moyen (1 à 7) des 18 ans et plus non scolarisés (INSEE, recensement 2023)
 
   Opp2 - Inégalités (Indice de Theil) : {data['opportunites']['Opp2_Inegalites']}
-           → Plus le score est bas, moins il y a d'inégalités
+           → Indice de Theil sur les 8 catégories socioprofessionnelles : plus il est bas, moins la répartition est inégale (INSEE, recensement 2023)
 
   Opp3 - Mobilité                     : {data['opportunites']['Opp3_Mobilite']}
-           → Accès aux transports et taux d'équipement automobile
+           → Part de ménages avec voiture + 100 si des actifs vont au travail en transports en commun + 100 pour les villes à réseau de bus (INSEE, recensement 2023)
 
   Opp4 - Connectivité numérique       : {data['opportunites']['Opp4_Connectivite']}
-           → Couverture 4G et accès au très haut débit
+           → Moyenne de la couverture 4G, des locaux éligibles à 30 Mbit/s et de la fibre, en % (ARCEP, T4 2024)
 
 
 🗳️  CHOIX - Détail des indicateurs
@@ -112,10 +112,10 @@ Score global Choix : {data['scores_globaux']['Choix']}/10
 
 Composantes :
   Cho1 - Quartier prioritaire         : {data['choix']['Cho1_QuartierPrioritaire']}
-           → Présence de quartiers prioritaires de la politique de la ville
+           → −log du nombre de personnes vivant en quartier prioritaire, 0 si aucune (INSEE, QPV 2024)
 
-  Cho2 - Participation électorale     : {data['choix']['Cho2_ParticipationElectorale']}
-           → Taux de participation aux élections
+  Cho2 - Droit de vote (proxy)         : {data['choix']['Cho2_ParticipationElectorale']}
+           → Part de Français parmi les 18 ans et plus, proxy des personnes ayant le droit de vote (INSEE, recensement 2023)
 
 
 🏠 VÉCU - Détail des indicateurs
@@ -123,17 +123,17 @@ Composantes :
 Score global Vécu : {data['scores_globaux']['Vécu']}/10
 
 Composantes :
-  Vec1 - Niveau de vie médian         : {data['vecu']['Vec1_NiveauVie']} €/an
-           → Revenu médian de la commune
+  Vec1 - Revenu fiscal moyen par foyer : {data['vecu']['Vec1_NiveauVie']} €/an
+           → Revenu fiscal de référence total divisé par le nombre de foyers fiscaux (DGFiP, revenus 2024)
 
   Vec2 - Qualité du logement          : {data['vecu']['Vec2_Logement']}
-           → Nombre de pièces, décence, type de logement
+           → Densité d'occupation (personnes par pièce) et part de maisons (INSEE, recensement 2023)
 
-  Vec3 - Statut social (CSP)          : {data['vecu']['Vec3_StatutSocial']}
-           → Répartition des catégories socio-professionnelles
+  Vec3 - Stabilité de l'emploi        : {data['vecu']['Vec3_StatutSocial']}
+           → Chômeurs 0, autres contrats 0,5, CDI et non-salariés 1 (INSEE, recensement 2023)
 
-  Vec4 - Emploi                       : {data['vecu']['Vec4_Emploi']} établissements
-           → Nombre d'établissements employeurs
+  Vec4 - Services à 20 minutes        : {data['vecu']['Vec4_Emploi']} services
+           → Nombre de services de vie courante accessibles en 20 minutes en voiture (BPE 2024)
 
 
 {'='*80}

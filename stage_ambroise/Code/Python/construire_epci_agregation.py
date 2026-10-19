@@ -11,10 +11,9 @@ Entrées :
   * INSEE, « Séries historiques de population » (base-pop-historiques-1876-2023.xlsx) : population municipale de chaque commune et de chaque année (2006-2023) ;
   * Données/Commune_Corse.geojson (contours et noms des communes de l'appli).
 
-Millésime de population de chaque indicateur (année du recensement ou de la source ; 2023 = dernière population publiée quand la source est plus récente ou non documentée) :
-  Opp1 2020 (diplômes, recensement 2020) · Opp2 2021 (catégories socioprofessionnelles) · Opp3 2021 (voitures, transports) · Opp4 2023 (ARCEP : millésime non documenté, dernière population)
-  Cho1 2023 (quartiers prioritaires, géographie 2024 : dernière population) · Cho2 2022 (nationalité, tables 2022) · Vec1 2021 (Filosofi) · Vec2 2022 (logement)
-  Vec3 2021 (emploi) · Vec4 2023 (BPE 2024 : dernière population)
+Millésime de population de chaque indicateur (indice courant v2 ; 2023 = dernière population publiée quand la source est plus récente) :
+  Opp1, Opp2, Opp3, Cho2, Vec2, Vec3 2023 (recensement 2023) · Opp4 2023 (ARCEP T4 2024 : dernière population) · Cho1 2020 (population des QPV au 1er janvier 2020)
+  Vec1 2023 (revenus 2024 : dernière population) · Vec4 2023 (BPE 2024 : dernière population)
 
 Usage (depuis stage_ambroise/Code/Python/) :
     python construire_epci_agregation.py <base-pop-historiques-1876-2023.xlsx>
@@ -32,9 +31,9 @@ GEOJSON = RACINE / "Données" / "Commune_Corse.geojson"
 EPCI = RACINE / "Données" / "epci_corse_2026.json"
 WEB = Path(__file__).resolve().parent.parent / "WEB"
 
-MILLESIMES = {"Opp1": 2020, "Opp2": 2021, "Opp3": 2021, "Opp4": 2023, "Cho1": 2023, "Cho2": 2022, "Vec1": 2021, "Vec2": 2022, "Vec3": 2021, "Vec4": 2023}
+MILLESIMES = {"Opp1": 2023, "Opp2": 2023, "Opp3": 2023, "Opp4": 2023, "Cho1": 2020, "Cho2": 2023, "Vec1": 2023, "Vec2": 2023, "Vec3": 2023, "Vec4": 2023}
 # indicateurs dont le millésime n'est pas celui d'une source datée : population la plus récente publiée
-MILLESIME_APPROCHE = {"Opp4": "millésime ARCEP non documenté", "Cho1": "quartiers prioritaires (géographie 2024)", "Vec4": "BPE 2024 (population 2024 pas encore publiée)"}
+MILLESIME_APPROCHE = {"Opp4": "ARCEP T4 2024 (population 2024 pas encore publiée)", "Vec1": "revenus 2024 (population 2024 pas encore publiée)", "Vec4": "BPE 2024 (population 2024 pas encore publiée)"}
 
 
 def construire(pop_hist):
@@ -46,7 +45,7 @@ def construire(pop_hist):
 
     p = pd.read_excel(pop_hist, sheet_name="pop_1876_2023", header=5, dtype={"CODGEO": str})
     p = p[p["CODGEO"].isin(nom_de)].set_index("CODGEO")
-    annees = sorted(set(MILLESIMES.values()))
+    annees = sorted(set(MILLESIMES.values()) | {2016, 2021})            # 2016 et 2021 : années de la série temporelle (contrôle des populations de l'onglet Évolution)
     if len(p) != 360 or any(f"PMUN{a}" not in p.columns for a in annees):
         sys.exit(f"populations historiques incomplètes : {len(p)} communes, colonnes {[c for c in p.columns if c.startswith('PMUN')][:4]}")
     pop = {code: {a: int(p.loc[code, f"PMUN{a}"]) for a in annees} for code in nom_de}
@@ -56,7 +55,7 @@ def construire(pop_hist):
     for e in epci["epci"]:
         communes = {}
         for code in e["communes"]:
-            communes[nom_de[code]] = {"code": code, "pop": {k: pop[code][a] for k, a in MILLESIMES.items()}}
+            communes[nom_de[code]] = {"code": code, "pop": {k: pop[code][a] for k, a in MILLESIMES.items()}, "pop_annee": {str(a): pop[code][a] for a in (2016, 2021, 2023)}}
         sortie["epci"].append({"siren": e["siren"], "nom": e["nom"], "nature": e["nature"], "fiscalite": e["fiscalite"], "nb_communes": e["nb_communes"],
                                "population_2023": sum(pop[c][2023] for c in e["communes"]), "communes": communes})
     sortie["epci"].sort(key=lambda e: e["nom"])

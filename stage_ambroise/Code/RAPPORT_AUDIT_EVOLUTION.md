@@ -48,16 +48,16 @@ Avec le seuil de 5, l'écart-type de la variation de la dimension Opp passe de 1
 
 | Habitants | Communes | Écart-type | Part des variations > 1,5 point |
 |---|---|---|---|
-| moins de 50 | 48 | 1,25 | 25 % |
-| 50 à 99 | 73 | 1,08 | 27 % |
-| 100 à 199 | 84 | 0,95 | 20 % |
-| 200 à 499 | 59 | 0,78 | 8 % |
+| moins de 50 | 48 | 1,22 | 25 % |
+| 50 à 99 | 73 | 1,07 | 27 % |
+| 100 à 199 | 84 | 0,95 | 19 % |
+| 200 à 499 | 59 | 0,77 | 8 % |
 | 500 à 999 | 40 | 0,94 | 18 % |
-| 1 000 et plus | 56 | 0,82 | 38 % |
+| 1 000 et plus | 56 | 0,81 | 38 % |
 
 **Depuis l'ajout d'Opp4, ce tableau n'est plus un pur indicateur de bruit :** la connectivité progresse réellement, surtout dans les communes de 1 000 habitants et plus (débit et fibre), si bien que la part de variations de plus de 1,5 point n'est plus décroissante avec la taille. Le bruit des petits effectifs et la progression réelle se mélangent ; la décomposition par indicateur est dans `RAPPORT_VARIATIONS_EVOLUTION`.
 
-Les plus fortes variations de l'indice : Porri (43 hab., +4,9), Occhiatana (254 hab., +3,8), Altiani (53 hab., +3,5), Novella (79 hab., +3,4), Prato-di-Giovellina (48 hab., +3,2), Santa-Reparata-di-Moriani (57 hab., +3,2).
+Les plus fortes variations de l'indice : Porri (43 hab., +4,9), Occhiatana (254 hab., +3,8), Altiani (53 hab., +3,4), Novella (79 hab., +3,4), Prato-di-Giovellina (48 hab., +3,2), Santa-Reparata-di-Moriani (57 hab., +3,2).
 Exemple, Porri (43 habitants en 2021) : le niveau de diplôme moyen passe de 2,21 à 2,56, la part de Français de 98,6 % à 100,0 %, la stabilité de l'emploi est calculée sur **22 actifs** en 2021, et la couverture 4G de 100 % à 100 %.
 
 ### 3. Cho2 (droit de vote, proxy) : une approximation fragile dans les petites communes

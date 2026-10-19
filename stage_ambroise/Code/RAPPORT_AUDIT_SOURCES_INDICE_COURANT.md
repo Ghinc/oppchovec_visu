@@ -10,6 +10,29 @@ Rapport du 19 octobre 2026. Rédigé pour la doctorante qui pilote le projet. Ob
 - **Les millésimes vont de 2020 à 2024** (Opp1 2020 ; Opp2, Opp3, Vec1, Vec3 2021 ; Cho1, Cho2, Vec2 2022 ; Vec4 2024). Une cible homogène est possible : **recensement 2023 pour tout ce qui vient de l'INSEE**, revenus 2024, ARCEP et BPE 2024. Le recensement 2023 vient d'être publié (la base « Diplômes - Formation 2023 » date du 19 octobre 2026), mais je n'ai pas encore confirmé que toutes ses bases sont en ligne.
 - **Le chantier est lourd, mais mécanique** : changer les sources oblige à tout régénérer (scores, Jenks, LISA, CAH, Excel, chatbot, documentation, tests de référence). Je propose un ordre en bas de page.
 
+## Mise à jour du 19 octobre 2026 : l'indice v2 est en place
+
+Vos décisions (revenu fiscal moyen pour Vec1, 4G « au moins un opérateur », recensement 2023, bus d'Ajaccio, Bastia et Porto-Vecchio validés, remplacement entier avec archive de l'ancien) ont été appliquées. **Les 17 variables ont maintenant une source officielle et un millésime**, détaillés dans `Données/indice_v2/sources_indice_v2.json` et `VERIFICATION_COHERENCE_DONNEES.md`. L'ancien indice reste reconstructible (étiquette Git `indice-courant-v1-2020-2024`, `Données/archive_indice_v1_2020_2024/`).
+
+| Indicateur | Source v2 | Millésime |
+|---|---|---|
+| Opp1, Opp2, Opp3, Cho2, Vec2, Vec3 | INSEE, bases communales et tables détaillées du recensement | 2023 |
+| Opp4 (4G, débit, fibre) | ARCEP, cartes de couverture et « Ma connexion internet » | T4 2024 |
+| Cho1 | INSEE, population communale en QPV 2024 | référence 1er janvier 2020 (publiée en 2025) |
+| Vec1 | DGFiP, IRCOM (revenu fiscal moyen par foyer fiscal) | revenus 2024 |
+| Vec4 | INSEE, base permanente des équipements | 2024 |
+
+**Réponse à votre question sur les quartiers prioritaires :** entre 2023 et 2025, l'INSEE ne publie pas de population en nombre d'habitants pour les QPV de la géographie 2024. Les estimations démographiques 2022 sont des parts (jeunes, étrangers, etc.), sans effectif ; la seule population en nombre est la population de référence au 1er janvier 2020 (publiée le 10 juillet 2025), utilisée ici.
+
+**Trois écarts à connaître :**
+- **Vec3** : le recensement 2023 ne distingue plus les CDD, l'intérim, les emplois aidés et les apprentis ; ils sont regroupés en « autres contrats » au poids 0,5 (corrélation de 0,98 avec l'ancien calcul sur 2021).
+- **Vec2** : le terme de confort (salle de bain + chauffage) est retiré : le chauffage valait 1 partout et la salle de bain n'est plus publiée par commune en 2023 ; cela ne change pas les scores normalisés.
+- **Opp4** : avec « au moins un opérateur », la 4G est à 94,6 % ou plus partout (moyenne 99,9 %) ; la fibre vaut 55,7 % en moyenne et le débit 65,0 %.
+
+L'onglet Évolution a été aligné sur les mêmes définitions de Vec2 et de Vec3 (« l'indicateur doit être le même partout »).
+
+*Ce qui suit est l'audit initial, tel que rédigé avant le remplacement.*
+
 ## 1. Comment j'ai classé
 
 | Statut | Signification |

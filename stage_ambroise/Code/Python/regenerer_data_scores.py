@@ -1,28 +1,22 @@
 """
-Régénère Code/WEB/data_scores_0_10.json à partir des indicateurs bruts.
+Régénère Code/WEB/data_scores_0_10.json (indice courant v2) à partir de Données/indice_v2/sources_indice_v2.json (produit par construire_indice_v2.py).
 
-1. Recalcule Score_*, OppChoVec et leurs versions 0-10 depuis les 10 indicateurs du JSON
-   actuel et vérifie qu'on retrouve exactement le fichier (sinon on s'arrête : la chaîne
-   de calcul ne serait pas la bonne).
-2. Remplace Vec3 par sa recomposition depuis les sous-composantes brutes (poids de
-   exporter_sous_composantes.py), puis recalcule tout et écrit le fichier.
+1. Contrôle : le recalcul des scores depuis les 10 indicateurs du JSON actuel doit retrouver exactement le fichier (sinon la chaîne de calcul n'est pas la bonne).
+2. Remplace les 10 indicateurs bruts par ceux de la v2, recalcule Score_*, OppChoVec et leurs versions 0-10 (pondérations égales, normalisation min-max), écrit le fichier.
 
-Les autres indicateurs ne sont pas touchés. Le script est idempotent.
+Usage (depuis stage_ambroise/Code/Python/) :
+    python regenerer_data_scores.py
 
-Usage :
-    python regenerer_data_scores.py "C:/These/Données2/visualisation_oppchovec_1111/Stage Ambroise"
-
-Ensuite, régénérer les fichiers dérivés : seuils Jenks (calculer_jenks_5_classes.py),
-CAH (graphique_ecarts_types_cah.py, preparer_donnees_cah_web_complet.py,
-generer_cah_data_js_complet.py), chatbot (generer_donnees_communes_chatbot.py),
-LISA (gen_lisa_knn5.py) et sous_composantes.json (exporter_sous_composantes.py).
+Ensuite, régénérer les fichiers dérivés : sous_composantes.json (exporter_sous_composantes.py), seuils Jenks (calculer_jenks_5_classes.py),
+CAH (graphique_ecarts_types_cah.py, preparer_donnees_cah_web_complet.py, generer_cah_data_js_complet.py), chatbot (generer_donnees_communes_chatbot.py),
+LISA (gen_lisa_knn5.py) et les tableaux Excel (gen_excel_010.py) : voir WEB/README_FICHIERS.md, « Procédure de régénération ».
 """
 
 import json
 import sys
 from pathlib import Path
 
-from exporter_sous_composantes import WEB_DIR, calc_vec3, sous_composantes_par_commune
+from exporter_sous_composantes import SOURCES_V2, WEB_DIR
 
 ALPHA, BETA = 2.5, 1.5
 DIMENSIONS = {
@@ -31,7 +25,7 @@ DIMENSIONS = {
     "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"],
 }
 TOLERANCE = 1e-9
-CHAMPS_DEPENDANT_DE_VEC3 = ["Vec3", "Score_Vec", "Score_Vec_0_10", "OppChoVec", "OppChoVec_0_10"]
+INDICATEURS = [k for inds in DIMENSIONS.values() for k in inds]
 
 
 def min_max(valeurs):
@@ -62,10 +56,11 @@ def ecart_max(a, b):
 
 
 def main():
-    if len(sys.argv) != 2:
-        sys.exit(__doc__)
     chemin = WEB_DIR / "data_scores_0_10.json"
     actuel = json.loads(chemin.read_text(encoding="utf-8"))
+    v2 = json.loads(SOURCES_V2.read_text(encoding="utf-8"))["communes"]
+    if set(v2) != set(actuel):
+        sys.exit(f"Communes différentes : {sorted(set(v2) ^ set(actuel))}")
 
     # 1. Contrôle : la chaîne de calcul redonne le fichier actuel
     controle = json.loads(json.dumps(actuel))
@@ -75,28 +70,16 @@ def main():
         sys.exit(f"Le recalcul ne reproduit pas le JSON actuel (écart {err:.2e}) : arrêt.")
     print(f"Contrôle : recalcul identique au JSON actuel (écart max {err:.1e})")
 
-    # 2. Vec3 depuis les sous-composantes brutes, puis recalcul complet
-    sc = sous_composantes_par_commune(Path(sys.argv[1]), actuel)
+    # 2. Indicateurs de la v2, puis recalcul complet
     nouveau = json.loads(json.dumps(actuel))
     for c in nouveau:
-        nouveau[c]["Vec3"] = calc_vec3(sc[c]["Vec3"])
+        for k in INDICATEURS:
+            nouveau[c][k] = v2[c][k]["valeur"]
     recalculer(nouveau)
-
-    for cle in ["Vec3", "Score_Vec_0_10", "OppChoVec_0_10"]:
+    for cle in INDICATEURS + ["Score_Opp_0_10", "Score_Cho_0_10", "Score_Vec_0_10", "OppChoVec_0_10"]:
         e = max(abs(nouveau[c][cle] - actuel[c][cle]) for c in actuel)
-        print(f"  {cle:15s} écart max {e:.4f}")
-    inchanges = [k for k in ["Opp1", "Opp2", "Opp3", "Opp4", "Cho1", "Cho2", "Vec1", "Vec2", "Vec4",
-                             "Score_Opp", "Score_Cho", "Score_Opp_0_10", "Score_Cho_0_10"]
-                 if max(abs(nouveau[c][k] - actuel[c][k]) for c in actuel) > TOLERANCE]
-    if inchanges:
-        sys.exit(f"Champs modifiés de façon inattendue : {inchanges}")
-
-    # N'écrire que les champs qui dépendent de Vec3 : les autres restent identiques au bit près
-    sortie = json.loads(json.dumps(actuel))
-    for c in sortie:
-        for cle in CHAMPS_DEPENDANT_DE_VEC3:
-            sortie[c][cle] = nouveau[c][cle]
-    chemin.write_text(json.dumps(sortie, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"  {cle:15s} écart max avec l'ancienne version {e:.4f}")
+    chemin.write_text(json.dumps(nouveau, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"{len(nouveau)} communes écrites dans {chemin}")
 
 

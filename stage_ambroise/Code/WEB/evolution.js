@@ -188,7 +188,7 @@ function evolutionDetails(donnees, commune) {
 const EVOLUTION_NIVEAUX = ['Niveau 1 · aucun diplôme ou brevet', 'Niveau 2 · CAP, BEP', 'Niveau 3 · baccalauréat', 'Niveau 4 · enseignement supérieur'];
 const EVOLUTION_CSP = ['Agriculteurs exploitants', 'Artisans, commerçants, chefs d\'entreprise', 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
     'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'];
-const EVOLUTION_STATUTS = [['chom', 'Chômeurs (15-64 ans)', 0], ['aide', 'Emplois aidés', 0.25], ['ponctuel', 'Intérim et apprentis', 0.5], ['cdd', 'CDD', 0.75], ['stable', 'CDI et non-salariés', 1]];
+const EVOLUTION_STATUTS = [['chom', 'Chômeurs (15-64 ans)', 0], ['autres', 'Autres contrats (CDD, intérim, emplois aidés, apprentis)', 0.5], ['stable', 'CDI et non-salariés', 1]];
 
 function evolutionComposantes(donnees, commune, cle) {
     const [a0, a1] = donnees.annees;
@@ -260,13 +260,12 @@ function evolutionComposantes(donnees, commune, cle) {
         intro = 'Vec4 = nombre d\'équipements (commerces, services, santé, enseignement…, base permanente des équipements de l\'INSEE) accessibles en 20 minutes ou moins en voiture depuis le centre de la commune. Indicateur direct, sans sous-composantes.';
         note = 'Seuls les types d\'équipements présents et géolocalisés en ' + a0 + ' et en ' + a1 + ' sont comptés (la nomenclature change), et le réseau routier est le même aux deux dates (OpenStreetMap actuel) : la variation vient des équipements, pas des routes.';
     } else if (cle === 'Vec2') {
-        intro = 'Vec2 = [ exp(−personnes par pièce) + (part de logements avec salle de bain + chauffage) / 2 + part de maisons ] / 3, avec chauffage = 1 (constant, comme dans les données actuelles). Contribution = écart du terme correspondant dans cette formule.';
-        ligne('Personnes par pièce (terme exp(−x) / 3)', k[0].personnes_par_piece, k[1].personnes_par_piece, 2, (Math.exp(-k[1].personnes_par_piece) - Math.exp(-k[0].personnes_par_piece)) / 3, 4);
-        ligne('Résidences principales avec salle de bain (%, terme / 6)', 100 * k[0].part_sdb, 100 * k[1].part_sdb, 1, (k[1].part_sdb - k[0].part_sdb) / 6, 4, '%');
-        ligne('Maisons parmi les résidences principales (%, terme / 3)', 100 * k[0].part_maisons, 100 * k[1].part_maisons, 1, (k[1].part_maisons - k[0].part_maisons) / 3, 4, '%');
+        intro = 'Vec2 = [ exp(−personnes par pièce) + part de maisons ] / 2. Contribution = écart du terme correspondant dans cette formule. La salle de bain et le chauffage, qui figuraient dans l\'ancienne formule, n\'ont plus de donnée mesurée dans le recensement 2023 : ils sont retirés.';
+        ligne('Personnes par pièce (terme exp(−x) / 2)', k[0].personnes_par_piece, k[1].personnes_par_piece, 2, (Math.exp(-k[1].personnes_par_piece) - Math.exp(-k[0].personnes_par_piece)) / 2, 4);
+        ligne('Maisons parmi les résidences principales (%, terme / 2)', 100 * k[0].part_maisons, 100 * k[1].part_maisons, 1, (k[1].part_maisons - k[0].part_maisons) / 2, 4, '%');
         note = 'Moins de personnes par pièce (plus d\'espace) fait monter l\'indice.';
     } else if (cle === 'Vec3') {
-        intro = 'Vec3 = stabilité de l\'emploi = Σ poids × part du statut : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1. Contribution d\'un statut = poids × écart de sa part.';
+        intro = 'Vec3 = stabilité de l\'emploi = Σ poids × part du statut : chômeurs 0, autres contrats (CDD, intérim, emplois aidés, apprentis) 0,5, CDI et non-salariés 1. Contribution d\'un statut = poids × écart de sa part.';
         colonne = 'Part des actifs (%)';
         EVOLUTION_STATUTS.forEach(([cl, lib, poids]) => {
             const p = k.map(o => 100 * o[cl] / somme(o));

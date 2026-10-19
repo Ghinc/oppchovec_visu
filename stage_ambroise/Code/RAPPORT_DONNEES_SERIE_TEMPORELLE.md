@@ -33,6 +33,8 @@ Déjà présents sur le disque avant la session, et utilisés pour la comparaiso
 
 ## 2. Comparaison avec les données de la version actuelle
 
+> **Note du 19 octobre 2026.** La comparaison ci-dessous a été faite avec l'indice courant **v1** (millésimes 2020-2024). L'indice courant est maintenant la **v2** (sources officielles 2023-2025 ; voir `RAPPORT_AUDIT_SOURCES_INDICE_COURANT` et `VERIFICATION_COHERENCE_DONNEES`). Depuis, la série a aussi été alignée sur la v2 pour Vec2 (sans salle de bain ni chauffage) et Vec3 (trois catégories d'emploi), « l'indicateur devant être le même partout ».
+
 « Actuel » = le contenu de `data_scores_0_10.json` (indicateurs bruts). « Recalculé 2021 » = le même indicateur refait par `construire_serie_temporelle.py` depuis les bases ci-dessus.
 Corrélations de Pearson et de rang sur les 360 communes ; écart moyen absolu après remise de chaque série sur 0-1 (min-max).
 

@@ -28,8 +28,9 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
         pour les deux années (revenus 2016 et revenus 2021), commune par commune. La médiane Filosofi n'est pas diffusée pour 154 communes en 2021 ;
         l'IRCOM couvre 349 communes (2016) et 348 (2021). Seules les communes sous secret statistique (9 les deux années, 5 une seule) reçoivent la
         valeur moyenne de leur département et sont marquées « vec1_departementale ». Valeurs en euros courants (non corrigées de l'inflation).
-  Vec2  (exp(-personnes par pièce) + (salle de bain + chauffage)/2 + part de maisons) / 3, avec chauffage = 1 (constant, comme dans les données actuelles)
-  Vec3  stabilité de l'emploi : chômeurs 0, emplois aidés 0,25, intérim et apprentis 0,5, CDD 0,75, CDI et non-salariés 1, pondérés par leurs effectifs
+  Vec2  (exp(-personnes par pièce) + part de maisons) / 2 : même définition que l'indice courant v2 (la salle de bain et le chauffage, sans donnée mesurée en 2023, en sont retirés)
+  Vec3  stabilité de l'emploi : chômeurs 0, autres contrats (CDD, intérim, emplois aidés, apprentis) 0,5, CDI et non-salariés 1, pondérés par leurs effectifs ; même définition que
+        l'indice courant v2 (le recensement 2023 ne distingue plus les CDD, l'intérim, les emplois aidés et les apprentis)
 
 Pour chaque indicateur, le fichier de sortie garde aussi ses COMPOSANTES (effectifs par niveau de diplôme, par catégorie socioprofessionnelle, par statut d'emploi,
 etc.) : l'onglet « Évolution » s'en sert pour montrer, au clic sur un indicateur, ce qui l'a fait monter ou baisser (clé « composantes » de chaque commune et année).
@@ -127,14 +128,13 @@ def indicateurs_recensement(dossier, an, seuil_transports=0):
                                  "reseau_bus": 100.0 * out.index.isin(VILLES_RESEAU_BUS), "actifs_transports": tc}, index=d.index)
     # --- Vec2
     ppp = d[P("NPER_RP")] / d[P("NBPI_RP")]
-    out["Vec2"] = (np.exp(-ppp) + (d[P("RP_SDB")] / d[P("RP")] + 1.0) / 2 + d[P("RPMAISON")] / d[P("RP")]) / 3
-    comp["Vec2"] = pd.DataFrame({"personnes_par_piece": ppp, "part_sdb": d[P("RP_SDB")] / d[P("RP")], "part_maisons": d[P("RPMAISON")] / d[P("RP")]})
+    out["Vec2"] = (np.exp(-ppp) + d[P("RPMAISON")] / d[P("RP")]) / 2
+    comp["Vec2"] = pd.DataFrame({"personnes_par_piece": ppp, "part_maisons": d[P("RPMAISON")] / d[P("RP")]})
     # --- Vec3
     act = lire_base_cc(trouver(dossier, "emploi-pop"), [P("CHOM1564"), P("ACT1564")])
     H = lambda k: ce[f"P{a}_HSAL15P_{k}"] + ce[f"P{a}_FSAL15P_{k}"]
-    comptes = pd.DataFrame({"chom": act[P("CHOM1564")], "aide": H("EMPAID"), "ponctuel": H("INTERIM") + H("APPR"), "cdd": H("CDD"),
-                            "stable": H("CDI") + ce[P("NSAL15P")]})
-    out["Vec3"] = (comptes * [0, 0.25, 0.5, 0.75, 1]).sum(axis=1) / comptes.sum(axis=1)
+    comptes = pd.DataFrame({"chom": act[P("CHOM1564")], "autres": H("EMPAID") + H("INTERIM") + H("APPR") + H("CDD"), "stable": H("CDI") + ce[P("NSAL15P")]})
+    out["Vec3"] = (comptes * [0, 0.5, 1]).sum(axis=1) / comptes.sum(axis=1)
     comp["Vec3"] = comptes
     return out, comp
 

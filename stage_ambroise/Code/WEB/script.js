@@ -74,16 +74,16 @@ const traductions = {
             "language-english": "Libellés en anglais"
         },
         descriptions: {
-            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : recensement INSEE 2020. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
-            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
-            Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
-            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
-            Indicateur_Cho1: "Ne pas être discriminé. Calculé avec −log(nombre de personnes vivant en quartier prioritaire), 0 si aucune.",
-            Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion de personnes possédant le droit de vote dans la commune.",
-            Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
-            Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
-            Indicateur_Vec3: "Stabilité de l'emploi. Score basé sur la répartition des types de contrats et statuts d'emploi.",
-            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante accessibles en moins de 20 minutes en voiture."
+            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : INSEE, recensement 2023. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
+            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles (8 catégories, 15 ans et plus). Source : INSEE, recensement 2023.",
+            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les trois villes qui ont un réseau de bus urbain. Source : INSEE, recensement 2023.",
+            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024.",
+            Indicateur_Cho1: "Ne pas être discriminé. −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 si aucune. Source : INSEE, population communale en QPV 2024 (référence 1er janvier 2020).",
+            Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Part de Français parmi les 18 ans et plus, proxy des personnes ayant le droit de vote dans la commune. Source : INSEE, recensement 2023.",
+            Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal moyen par foyer fiscal de la commune (revenu fiscal de référence total divisé par le nombre de foyers fiscaux). Source : DGFiP, revenus 2024 ; pour les communes sous secret statistique, moyenne du département.",
+            Indicateur_Vec2: "Avoir un logement décent. Moyenne de la densité d'occupation (personnes par pièce) et de la part de maisons dans les résidences principales. Source : INSEE, recensement 2023.",
+            Indicateur_Vec3: "Stabilité de l'emploi. Statuts d'emploi pondérés : chômeurs 0, autres contrats (CDD, intérim, emplois aidés, apprentis) 0,5, CDI, fonctionnaires et non-salariés 1. Source : INSEE, recensement 2023.",
+            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante (base permanente des équipements 2024) accessibles en moins de 20 minutes en voiture."
         }
     },
     en: {
@@ -116,16 +116,16 @@ const traductions = {
             "language-english": "English labels"
         },
         descriptions: {
-            Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: 2020 INSEE census. Small municipalities have few people concerned: their value is less certain.",
-            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories.",
-            Indicateur_Opp3: "Having the means of mobility. Score based on the proportion of households with a car and access to transport.",
-            Indicateur_Opp4: "Having access to ICT. Average of 4G coverage, high-speed Internet and fiber.",
-            Indicateur_Cho1: "Not being discriminated against. Calculated with −log(number of people living in priority areas), 0 if none.",
-            Indicateur_Cho2: "Having the means to influence political decisions. Proportion of people with voting rights in the municipality.",
-            Indicateur_Vec1: "Having a decent income. Median tax income of the municipality.",
-            Indicateur_Vec2: "Having decent housing. Score based on comfort, occupancy density and housing type.",
-            Indicateur_Vec3: "Job stability. Score based on the distribution of contract types and employment status.",
-            Indicateur_Vec4: "Being close to services. Number of everyday services accessible within 20 minutes by car."
+            Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: INSEE, 2023 census. Small municipalities have few people concerned: their value is less certain.",
+            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories (8 categories, aged 15 and over). Source: INSEE, 2023 census.",
+            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the three cities with an urban bus network. Source: INSEE, 2023 census.",
+            Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024.",
+            Indicateur_Cho1: "Not being discriminated against. −log(number of people living in a priority neighbourhood), 0 if none. Source: INSEE, municipal population in priority neighbourhoods (QPV 2024, reference 1 January 2020).",
+            Indicateur_Cho2: "Having the means to influence political decisions. Share of French nationals among people aged 18 and over, a proxy for people with voting rights in the municipality. Source: INSEE, 2023 census.",
+            Indicateur_Vec1: "Having a decent income. Mean tax income per tax household of the municipality (total reference tax income divided by the number of tax households). Source: DGFiP, 2024 incomes; municipalities under statistical secrecy take the département average.",
+            Indicateur_Vec2: "Having decent housing. Average of occupancy density (people per room) and the share of houses among main residences. Source: INSEE, 2023 census.",
+            Indicateur_Vec3: "Job stability. Weighted employment statuses: unemployed 0, other contracts (fixed-term, temp, subsidised, apprentices) 0.5, permanent, civil servants and self-employed 1. Source: INSEE, 2023 census.",
+            Indicateur_Vec4: "Being close to services. Number of everyday services (permanent facilities database 2024) accessible within 20 minutes by car."
         }
     }
 };
@@ -171,10 +171,10 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 2.04, 4.04, 5.34, 7.31, 10],  // 5 classes - valeurs par défaut basées sur Jenks
-    opp: [0, 2.72, 4.14, 5.44, 6.88, 10],
-    cho: [0, 2.35, 6.11, 8.20, 9.30, 10],
-    vec: [0, 2.04, 3.37, 4.53, 6.80, 10]
+    oppchovec: [0, 3.09, 4.63, 5.99, 7.71, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    opp: [0, 3.11, 5.03, 6.61, 7.86, 10],
+    cho: [0, 2.44, 6.37, 8.31, 9.32, 10],
+    vec: [0, 2.61, 3.96, 5.24, 7.30, 10]
 };
 
 // Palette de couleurs (5 classes) - Bleu clair vers Violet (inversé pour valeurs croissantes)
@@ -2103,9 +2103,6 @@ async function chargerFichiersAutomatiquement() {
     // 7. Appliquer le mode Betti par défaut
     recalculerCarteOppChoVec();
 
-    // 7 bis. Variante Vec1 (revenu fiscal moyen, case à cocher) : chargée APRÈS le recalcul pour ne pas retarder l'état final des cartes
-    if (typeof chargerVec1Variante === 'function') await chargerVec1Variante();
-
     // 8. Générer les visualisations de données
     if (indiceFinale && Object.keys(indiceFinale).length > 0) {
         genererDataVisualisations(indiceFinale);
@@ -2222,9 +2219,9 @@ const SOUS_COMPOSANTES = {
   Indicateur_Opp4: {
     cle: 'Opp4',
     composantes: {
-      g4:    { label: 'Population couverte en 4G', unite: '%', decimales: 0 },
-      debit: { label: 'Population avec débit > 30 Mb/s', unite: '%', decimales: 0 },
-      fibre: { label: 'Taux de fibre', unite: '%', decimales: 0 }
+      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', unite: '%', decimales: 0 },
+      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', unite: '%', decimales: 0 },
+      fibre: { label: 'Locaux raccordables à la fibre', unite: '%', decimales: 0 }
     },
     calcul: c => (c.g4 + c.debit + c.fibre) / 3
   },
@@ -2239,25 +2236,21 @@ const SOUS_COMPOSANTES = {
     cle: 'Vec2',
     composantes: {
       pers_piece: { label: 'Personnes par pièce', unite: '', decimales: 2, inverse: true },
-      sdb:        { label: 'Logements avec salle de bain', unite: '%', decimales: 1, facteur: 100 },
-      chauffage:  { label: 'Logements avec chauffage', unite: '%', decimales: 1, facteur: 100 },
       maisons:    { label: 'Maisons individuelles', unite: '%', decimales: 1, facteur: 100 }
     },
-    calcul: c => (Math.exp(-c.pers_piece) + (c.sdb + c.chauffage) / 2 + c.maisons) / 3
+    calcul: c => (Math.exp(-c.pers_piece) + c.maisons) / 2
   },
   Indicateur_Vec3: {
     cle: 'Vec3',
     parts: true,  // parts d'actifs qui somment à 100 % : bouger l'une redistribue les autres
     composantes: {
-      stable:   { label: 'Emploi stable (poids 1)', unite: '%', decimales: 1 },
-      cdd:      { label: 'CDD (poids 0,75)', unite: '%', decimales: 1 },
-      ponctuel: { label: 'Contrat ponctuel (poids 0,5)', unite: '%', decimales: 1 },
-      chomeur:  { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 },
-      aide:     { label: 'Emploi aidé (poids 0,25)', unite: '%', decimales: 1 }
+      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', unite: '%', decimales: 1 },
+      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', unite: '%', decimales: 1 },
+      chomeur: { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 }
     },
     calcul: c => {
-      const total = c.stable + c.cdd + c.ponctuel + c.chomeur + c.aide;
-      return total === 0 ? 0 : (c.stable * 1 + c.cdd * 0.75 + c.ponctuel * 0.5 + c.chomeur * 0 + c.aide * 0.25) / total;
+      const total = c.stable + c.autres + c.chomeur;
+      return total === 0 ? 0 : (c.stable * 1 + c.autres * 0.5 + c.chomeur * 0) / total;
     }
   }
 };
@@ -3043,7 +3036,6 @@ function recalculerCarteOppChoVec() {
     afficherToutesLesCartes(geoAffichee, indiceAffiche, scoresAffiches);
 
     majAffichagePk(pkValues);
-    if (typeof rafraichirComparaisonVec1 === 'function') rafraichirComparaisonVec1();   // comparaison des deux sources de Vec1 (suit le mode p_k)
     if (typeof rafraichirEPCI === 'function') rafraichirEPCI();   // onglet EPCI (suit le mode p_k et les indicateurs courants)
 
     // Mettre à jour le tableau top 10 et l'histogramme
