@@ -1,0 +1,5415 @@
+{
+ "methode": "Opp4 = (4G + débit >= 30 Mbit/s + fibre) / 3, en % ; 4G = population couverte par au moins un opérateur (ARCEP x grille INSEE 200 m) ; débit et fibre = locaux éligibles",
+ "sources": {
+  "2016": {
+   "g4": "ARCEP, couverture 4G théorique 2017_T1 (mars 2017), grille INSEE Filosofi 2019",
+   "debit_fibre": "Observatoire France Très Haut Débit, T4 2016"
+  },
+  "2021": {
+   "g4": "ARCEP, couverture 4G théorique 2021_T4, grille INSEE Filosofi 2021",
+   "debit_fibre": "ARCEP, Ma connexion internet, T4 2021 (commune_debit_filaire.csv, commune_techno.csv)"
+  }
+ },
+ "communes": {
+  "Cristinacce": {
+   "code": "2A100",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bastelica": {
+   "code": "2A031",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.70466321243524,
+    "debit": 11.577752553916005,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Quenza": {
+   "code": "2A254",
+   "2016": {
+    "g4": 99.43181818181817,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 50.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Chiatra": {
+   "code": "2B088",
+   "2016": {
+    "g4": 99.41520467836257,
+    "debit": 49.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 87.76758409785933,
+    "debit": 41.86046511627907,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ogliastro": {
+   "code": "2B183",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.0939226519337,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Frasseto": {
+   "code": "2A119",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Serriera": {
+   "code": "2A279",
+   "2016": {
+    "g4": 98.76543209876543,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Valle-di-Mezzana": {
+   "code": "2A336",
+   "2016": {
+    "g4": 100.0,
+    "debit": 5.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lozzi": {
+   "code": "2B147",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sant'Andréa-di-Bozio": {
+   "code": "2B292",
+   "2016": {
+    "g4": 40.909090909090914,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Balogna": {
+   "code": "2A028",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Campo": {
+   "code": "2A056",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Foce": {
+   "code": "2A115",
+   "2016": {
+    "g4": 62.7906976744186,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 92.07317073170732,
+    "fibre": 90.85365853658537,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietrosella": {
+   "code": "2A228",
+   "2016": {
+    "g4": 98.10895992796038,
+    "debit": 13.200000000000001,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.1060544494108,
+    "debit": 47.87183165949307,
+    "fibre": 41.55906264945003,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Propriano": {
+   "code": "2A249",
+   "2016": {
+    "g4": 100.0,
+    "debit": 11.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 59.16564417177914,
+    "fibre": 56.09815950920245,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zérubia": {
+   "code": "2A357",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Linguizzetta": {
+   "code": "2B143",
+   "2016": {
+    "g4": 100.0,
+    "debit": 5.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.86431478968792,
+    "debit": 4.62211118051218,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piedicorte-di-Gaggio": {
+   "code": "2B218",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.4149377593360996,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Brando": {
+   "code": "2B043",
+   "2016": {
+    "g4": 99.92652461425422,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.03489235337788,
+    "debit": 1.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pancheraccia": {
+   "code": "2B201",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 17.370892018779344,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Aiti": {
+   "code": "2B003",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bustanico": {
+   "code": "2B045",
+   "2016": {
+    "g4": 32.35294117647059,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cagnano": {
+   "code": "2B046",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 25.132275132275133,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Corscia": {
+   "code": "2B095",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Monte": {
+   "code": "2B166",
+   "2016": {
+    "g4": 94.8663101604278,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 47.608200455580864,
+    "fibre": 47.380410022779046,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Porri": {
+   "code": "2B245",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 87.5,
+    "fibre": 87.5,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Porta": {
+   "code": "2B246",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 94.39655172413794,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Speloncato": {
+   "code": "2B290",
+   "2016": {
+    "g4": 100.0,
+    "debit": 78.10000000000001,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 32.804232804232804,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cognocoli-Monticchi": {
+   "code": "2A091",
+   "2016": {
+    "g4": 56.15384615384615,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.4251968503937,
+    "debit": 0.9049773755656109,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Villanova": {
+   "code": "2A351",
+   "2016": {
+    "g4": 98.63760217983652,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.56115107913669,
+    "debit": 93.2258064516129,
+    "fibre": 93.2258064516129,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Mausoléo": {
+   "code": "2B156",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Osani": {
+   "code": "2A197",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 79.91266375545851,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Aghione": {
+   "code": "2B002",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 35.25179856115108,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casabianca": {
+   "code": "2B069",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Focicchia": {
+   "code": "2B116",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Luri": {
+   "code": "2B152",
+   "2016": {
+    "g4": 100.0,
+    "debit": 43.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 38.22660098522167,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Nocario": {
+   "code": "2B176",
+   "2016": {
+    "g4": 67.46987951807229,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Nicolao": {
+   "code": "2B313",
+   "2016": {
+    "g4": 100.0,
+    "debit": 37.2,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 75.4304913901722,
+    "fibre": 70.22259554808903,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Serra-di-Ferro": {
+   "code": "2A276",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.12536443148689,
+    "debit": 50.14866204162537,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sorbollano": {
+   "code": "2A285",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Felce": {
+   "code": "2B111",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.92771084337349,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pioggiola": {
+   "code": "2B235",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 31.20567375886525,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Valle-d'Alesani": {
+   "code": "2B334",
+   "2016": {
+    "g4": 28.000000000000004,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Palneca": {
+   "code": "2A200",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 19.62264150943396,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Peri": {
+   "code": "2A209",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.2846299810246679,
+    "fibre": 0.2846299810246679,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rosazia": {
+   "code": "2A262",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sollacaro": {
+   "code": "2A284",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 34.24947145877378,
+    "fibre": 26.849894291754758,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Aregno": {
+   "code": "2B020",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castellare-di-Casinca": {
+   "code": "2B077",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 78.37370242214533,
+    "fibre": 78.37370242214533,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castineta": {
+   "code": "2B082",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietra-di-Verde": {
+   "code": "2B225",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.5555555555555556,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Calcatoggio": {
+   "code": "2A048",
+   "2016": {
+    "g4": 100.0,
+    "debit": 22.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 20.17208413001912,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Moca-Croce": {
+   "code": "2A160",
+   "2016": {
+    "g4": 23.214285714285715,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 2.4390243902439024,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Albertacce": {
+   "code": "2B007",
+   "2016": {
+    "g4": 98.72611464968153,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pie-d'Orezza": {
+   "code": "2B222",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggio-Mezzana": {
+   "code": "2B242",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 74.39143135345667,
+    "fibre": 74.39143135345667,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Quercitello": {
+   "code": "2B255",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vallecalle": {
+   "code": "2B333",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olivese": {
+   "code": "2A186",
+   "2016": {
+    "g4": 2.843601895734597,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.50980392156863,
+    "debit": 92.5233644859813,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sampolo": {
+   "code": "2A268",
+   "2016": {
+    "g4": 94.64285714285714,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietraserena": {
+   "code": "2B226",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 97.05882352941177,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggio-di-Nazza": {
+   "code": "2B236",
+   "2016": {
+    "g4": 39.25233644859813,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.656716417910445,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sant'Antonino": {
+   "code": "2B296",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Reparata-di-Moriani": {
+   "code": "2B317",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 98.98989898989899,
+    "fibre": 98.98989898989899,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Coti-Chiavari": {
+   "code": "2A098",
+   "2016": {
+    "g4": 92.53246753246754,
+    "debit": 16.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.83566146261298,
+    "debit": 8.67383512544803,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Figari": {
+   "code": "2A114",
+   "2016": {
+    "g4": 97.66320474777447,
+    "debit": 31.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 46.017699115044245,
+    "fibre": 29.067392784206945,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Altiani": {
+   "code": "2B012",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 96.64429530201342,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Gavino-di-Tenda": {
+   "code": "2B301",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 54.76190476190476,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santo-Pietro-di-Tenda": {
+   "code": "2B314",
+   "2016": {
+    "g4": 97.81420765027322,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 9.053497942386832,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santo-Pietro-di-Venaco": {
+   "code": "2B315",
+   "2016": {
+    "g4": 100.0,
+    "debit": 6.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 11.659192825112108,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Maria-Poggio": {
+   "code": "2B311",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 55.96491228070175,
+    "fibre": 55.43859649122807,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Granace": {
+   "code": "2A128",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 10.526315789473685,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Parata": {
+   "code": "2B202",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Silvareccio": {
+   "code": "2B280",
+   "2016": {
+    "g4": 10.465116279069768,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 88.03418803418803,
+    "fibre": 84.61538461538461,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bastelicaccia": {
+   "code": "2A032",
+   "2016": {
+    "g4": 100.0,
+    "debit": 16.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 94.13223140495867,
+    "fibre": 93.7603305785124,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Porto-Vecchio": {
+   "code": "2A247",
+   "2016": {
+    "g4": 99.98395700477279,
+    "debit": 10.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.72078508663874,
+    "debit": 38.90980064129374,
+    "fibre": 28.614247873971838,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Favalello": {
+   "code": "2B110",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Prunelli-di-Fiumorbo": {
+   "code": "2B251",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 20.153473344103393,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ambiegna": {
+   "code": "2A014",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cauro": {
+   "code": "2A085",
+   "2016": {
+    "g4": 100.0,
+    "debit": 45.9,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 77.80040733197556,
+    "fibre": 39.81670061099796,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Letia": {
+   "code": "2A141",
+   "2016": {
+    "g4": 5.442176870748299,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 82.3529411764706,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Lucia-di-Moriani": {
+   "code": "2B307",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 78.68190988567586,
+    "fibre": 78.68190988567586,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Eccica-Suarella": {
+   "code": "2A104",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.4,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.08724832214765,
+    "fibre": 42.281879194630875,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Soveria": {
+   "code": "2B289",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Damiano": {
+   "code": "2B297",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Crocicchia": {
+   "code": "2B102",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 60.95238095238095,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cargiaca": {
+   "code": "2A066",
+   "2016": {
+    "g4": 44.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Grossa": {
+   "code": "2A129",
+   "2016": {
+    "g4": 91.83673469387756,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 89.79591836734694,
+    "debit": 85.38461538461539,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Guargualé": {
+   "code": "2A132",
+   "2016": {
+    "g4": 7.352941176470589,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmiccia": {
+   "code": "2A191",
+   "2016": {
+    "g4": 79.56989247311827,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Salice": {
+   "code": "2A266",
+   "2016": {
+    "g4": 1.4598540145985401,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 50.29585798816568,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ersa": {
+   "code": "2B107",
+   "2016": {
+    "g4": 98.1981981981982,
+    "debit": 20.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 96.84210526315789,
+    "debit": 17.61904761904762,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Muracciole": {
+   "code": "2B171",
+   "2016": {
+    "g4": 7.142857142857142,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piano": {
+   "code": "2B214",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 100.0,
+    "fibre": 100.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pino": {
+   "code": "2B233",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Reparata-di-Balagna": {
+   "code": "2B316",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.947261663286,
+    "fibre": 81.947261663286,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Aullène": {
+   "code": "2A024",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Azilone-Ampaza": {
+   "code": "2A026",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 39.884393063583815,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Maria-di-Lota": {
+   "code": "2B309",
+   "2016": {
+    "g4": 98.3947681331748,
+    "debit": 27.200000000000003,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.84463362724232,
+    "debit": 96.14711033274956,
+    "fibre": 95.53415061295972,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Petreto-Bicchisano": {
+   "code": "2A211",
+   "2016": {
+    "g4": 99.10913140311804,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.02670623145401,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vero": {
+   "code": "2A345",
+   "2016": {
+    "g4": 100.0,
+    "debit": 24.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 19.142857142857142,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bastia": {
+   "code": "2B033",
+   "2016": {
+    "g4": 99.72942972110448,
+    "debit": 71.1,
+    "fibre": 8.5,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.68922532032363,
+    "debit": 92.73615086714935,
+    "fibre": 78.48459336588651,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Érone": {
+   "code": "2B106",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ville-di-Paraso": {
+   "code": "2B352",
+   "2016": {
+    "g4": 100.0,
+    "debit": 22.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.838709677419355,
+    "fibre": 0.4032258064516129,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sartène": {
+   "code": "2A272",
+   "2016": {
+    "g4": 94.94284053478009,
+    "debit": 38.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.9599358974359,
+    "debit": 68.31878344128414,
+    "fibre": 61.6727682343002,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sant'Andréa-d'Orcino": {
+   "code": "2A295",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Algajola": {
+   "code": "2B010",
+   "2016": {
+    "g4": 88.35616438356165,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 92.38095238095238,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Azzana": {
+   "code": "2A027",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cargèse": {
+   "code": "2A065",
+   "2016": {
+    "g4": 100.0,
+    "debit": 50.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 16.323731138545952,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Serra-di-Scopamène": {
+   "code": "2A278",
+   "2016": {
+    "g4": 98.56115107913669,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 75.08090614886731,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Borgo": {
+   "code": "2B042",
+   "2016": {
+    "g4": 100.0,
+    "debit": 26.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 86.03443158207183,
+    "fibre": 76.44701691896705,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pero-Casevecchie": {
+   "code": "2B210",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 100.0,
+    "fibre": 89.86486486486487,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Venzolasca": {
+   "code": "2B343",
+   "2016": {
+    "g4": 100.0,
+    "debit": 32.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 80.44728434504792,
+    "fibre": 64.7923322683706,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vico": {
+   "code": "2A348",
+   "2016": {
+    "g4": 99.73562458691342,
+    "debit": 62.2,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.29278642149929,
+    "debit": 46.24664879356568,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casamaccioli": {
+   "code": "2B073",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Corte": {
+   "code": "2B096",
+   "2016": {
+    "g4": 100.0,
+    "debit": 53.800000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 84.00962861072902,
+    "fibre": 79.45323246217332,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lumio": {
+   "code": "2B150",
+   "2016": {
+    "g4": 100.0,
+    "debit": 1.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 1.3630731102850062,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Urtaca": {
+   "code": "2B332",
+   "2016": {
+    "g4": 10.133333333333333,
+    "debit": 93.4,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 80.23255813953489,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Giuncheto": {
+   "code": "2A127",
+   "2016": {
+    "g4": 91.54929577464789,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.065040650406504,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmo": {
+   "code": "2B192",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 7.8431372549019605,
+    "fibre": 7.8431372549019605,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Palasca": {
+   "code": "2B199",
+   "2016": {
+    "g4": 87.81362007168458,
+    "debit": 3.3000000000000003,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 40.823970037453186,
+    "fibre": 39.51310861423221,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piedigriggio": {
+   "code": "2B220",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Coggia": {
+   "code": "2A090",
+   "2016": {
+    "g4": 100.0,
+    "debit": 22.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.64819700967458,
+    "debit": 31.865284974093264,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Forciolo": {
+   "code": "2A117",
+   "2016": {
+    "g4": 11.267605633802818,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 1.1235955056179776,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Loreto-di-Tallano": {
+   "code": "2A146",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 58.94736842105263,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cambia": {
+   "code": "2B051",
+   "2016": {
+    "g4": 58.82352941176471,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Arbellara": {
+   "code": "2A018",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bocognano": {
+   "code": "2A040",
+   "2016": {
+    "g4": 100.0,
+    "debit": 4.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.272151898734177,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Renno": {
+   "code": "2A258",
+   "2016": {
+    "g4": 98.46153846153847,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 68.59205776173285,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Campile": {
+   "code": "2B054",
+   "2016": {
+    "g4": 100.0,
+    "debit": 4.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.573170731707317,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Gavignano": {
+   "code": "2B122",
+   "2016": {
+    "g4": 97.5609756097561,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casaglione": {
+   "code": "2A070",
+   "2016": {
+    "g4": 99.2094861660079,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 92.83819628647215,
+    "debit": 11.859443631039532,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bigorno": {
+   "code": "2B036",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Carcheto-Brustico": {
+   "code": "2B063",
+   "2016": {
+    "g4": 96.42857142857143,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castirla": {
+   "code": "2B083",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 77.12418300653594,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Scolca": {
+   "code": "2B274",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tallone": {
+   "code": "2B320",
+   "2016": {
+    "g4": 99.05123339658444,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 7.608695652173913,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bilia": {
+   "code": "2A038",
+   "2016": {
+    "g4": 84.21052631578947,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 3.6144578313253013,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Marignana": {
+   "code": "2A154",
+   "2016": {
+    "g4": 3.592814371257485,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 8.59106529209622,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piana": {
+   "code": "2A212",
+   "2016": {
+    "g4": 100.0,
+    "debit": 79.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 73.45767575322812,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rospigliani": {
+   "code": "2B263",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Talasani": {
+   "code": "2B319",
+   "2016": {
+    "g4": 99.84767707539984,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.83193277310924,
+    "debit": 81.374321880651,
+    "fibre": 81.374321880651,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Valle-di-Campoloro": {
+   "code": "2B335",
+   "2016": {
+    "g4": 100.0,
+    "debit": 46.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 42.384105960264904,
+    "fibre": 37.41721854304636,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rezza": {
+   "code": "2A259",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggio-Marinaccio": {
+   "code": "2B241",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lecci": {
+   "code": "2A139",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.92260061919505,
+    "debit": 3.917348256564787,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Viggianello": {
+   "code": "2A349",
+   "2016": {
+    "g4": 100.0,
+    "debit": 2.8000000000000003,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 64.61769115442279,
+    "fibre": 63.26836581709146,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Gavino-d'Ampugnani": {
+   "code": "2B299",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 84.375,
+    "fibre": 5.46875,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Lorenzo": {
+   "code": "2B304",
+   "2016": {
+    "g4": 4.761904761904762,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.85057471264368,
+    "debit": 16.48936170212766,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Valle-d'Orezza": {
+   "code": "2B338",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zoza": {
+   "code": "2A363",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lano": {
+   "code": "2B137",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Mazzola": {
+   "code": "2B157",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Scata": {
+   "code": "2B273",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 21.53846153846154,
+    "fibre": 21.53846153846154,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Grosseto-Prugna": {
+   "code": "2A130",
+   "2016": {
+    "g4": 99.0192380233874,
+    "debit": 12.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.81481481481481,
+    "debit": 73.29500396510706,
+    "fibre": 69.98413957176844,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ucciani": {
+   "code": "2A330",
+   "2016": {
+    "g4": 100.0,
+    "debit": 3.4000000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 3.629032258064516,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Campi": {
+   "code": "2B053",
+   "2016": {
+    "g4": 13.636363636363635,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Monacia-d'Orezza": {
+   "code": "2B164",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pianello": {
+   "code": "2B213",
+   "2016": {
+    "g4": 44.44444444444444,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 91.93548387096774,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Argiusta-Moriccio": {
+   "code": "2A021",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 71.12299465240642,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bonifacio": {
+   "code": "2A041",
+   "2016": {
+    "g4": 99.9672828398495,
+    "debit": 18.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 90.62708472314877,
+    "debit": 43.54234908750585,
+    "fibre": 28.451099672437998,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Gavino-di-Carbini": {
+   "code": "2A300",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tolla": {
+   "code": "2A326",
+   "2016": {
+    "g4": 3.896103896103896,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Centuri": {
+   "code": "2B086",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piazzole": {
+   "code": "2B217",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 91.2280701754386,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tasso": {
+   "code": "2A322",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 97.48743718592965,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Moïta": {
+   "code": "2B161",
+   "2016": {
+    "g4": 86.27450980392157,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 92.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Stazzona": {
+   "code": "2B291",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 1.5384615384615385,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cannelle": {
+   "code": "2A060",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmeto": {
+   "code": "2A189",
+   "2016": {
+    "g4": 100.0,
+    "debit": 3.9,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 47.53211629479378,
+    "fibre": 39.01284651791751,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cervione": {
+   "code": "2B087",
+   "2016": {
+    "g4": 100.0,
+    "debit": 31.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 77.0517511761631,
+    "fibre": 70.8311552535285,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Giuncaggio": {
+   "code": "2B126",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 5.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Nessa": {
+   "code": "2B175",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Novella": {
+   "code": "2B180",
+   "2016": {
+    "g4": 1.7241379310344827,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 91.04477611940298,
+    "fibre": 73.88059701492537,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Levie": {
+   "code": "2A142",
+   "2016": {
+    "g4": 96.68938656280429,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 67.88154897494306,
+    "fibre": 2.3917995444191344,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castiglione": {
+   "code": "2B081",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rogliano": {
+   "code": "2B261",
+   "2016": {
+    "g4": 100.0,
+    "debit": 49.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.08943089430894,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vignale": {
+   "code": "2B350",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 71.36363636363636,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Partinello": {
+   "code": "2A203",
+   "2016": {
+    "g4": 98.24561403508771,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ghisonaccia": {
+   "code": "2B123",
+   "2016": {
+    "g4": 100.0,
+    "debit": 46.300000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 29.913344887348355,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tox": {
+   "code": "2B328",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 88.63636363636364,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Volpajola": {
+   "code": "2B355",
+   "2016": {
+    "g4": 100.0,
+    "debit": 26.900000000000002,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 26.51006711409396,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zicavo": {
+   "code": "2A359",
+   "2016": {
+    "g4": 100.0,
+    "debit": 90.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 65.19337016574586,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Alando": {
+   "code": "2B005",
+   "2016": {
+    "g4": 46.666666666666664,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 92.98245614035088,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Croce": {
+   "code": "2B101",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Feliceto": {
+   "code": "2B112",
+   "2016": {
+    "g4": 96.95431472081218,
+    "debit": 91.9,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 83.59375,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vezzani": {
+   "code": "2B347",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 85.75,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Afa": {
+   "code": "2A001",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.2,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 97.45189807592304,
+    "fibre": 97.34789391575663,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cardo-Torgia": {
+   "code": "2A064",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 9.375,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tavaco": {
+   "code": "2A323",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Biguglia": {
+   "code": "2B037",
+   "2016": {
+    "g4": 100.0,
+    "debit": 21.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 93.92910210146465,
+    "fibre": 90.89365315219699,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Carticasi": {
+   "code": "2B068",
+   "2016": {
+    "g4": 25.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cateri": {
+   "code": "2B084",
+   "2016": {
+    "g4": 100.0,
+    "debit": 17.299999999999997,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 10.833333333333334,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Giocatojo": {
+   "code": "2B125",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 100.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Morosaglia": {
+   "code": "2B169",
+   "2016": {
+    "g4": 98.90975166565717,
+    "debit": 52.800000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 61.09090909090909,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Quasquara": {
+   "code": "2A253",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Barbaggio": {
+   "code": "2B029",
+   "2016": {
+    "g4": 100.0,
+    "debit": 1.7999999999999998,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Popolasca": {
+   "code": "2B244",
+   "2016": {
+    "g4": 60.86956521739131,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Orto": {
+   "code": "2A196",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pianottoli-Caldarello": {
+   "code": "2A215",
+   "2016": {
+    "g4": 100.0,
+    "debit": 47.599999999999994,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.68102073365232,
+    "debit": 38.353196099674975,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Urbalacone": {
+   "code": "2A331",
+   "2016": {
+    "g4": 4.918032786885246,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 82.43243243243244,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Canari": {
+   "code": "2B058",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.081632653061225,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tralonca": {
+   "code": "2B329",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 24.0,
+    "fibre": 24.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vescovato": {
+   "code": "2B346",
+   "2016": {
+    "g4": 100.0,
+    "debit": 32.4,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.03896103896103,
+    "fibre": 78.74458874458874,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lopigna": {
+   "code": "2A144",
+   "2016": {
+    "g4": 2.73972602739726,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 56.25,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Matra": {
+   "code": "2B155",
+   "2016": {
+    "g4": 10.526315789473683,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Penta-Acquatella": {
+   "code": "2B206",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietralba": {
+   "code": "2B223",
+   "2016": {
+    "g4": 99.54128440366972,
+    "debit": 82.19999999999999,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 71.83406113537117,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Prunelli-di-Casacconi": {
+   "code": "2B250",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 2.358490566037736,
+    "fibre": 1.8867924528301887,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ventiseri": {
+   "code": "2B342",
+   "2016": {
+    "g4": 100.0,
+    "debit": 27.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 16.14474599860821,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Arro": {
+   "code": "2A022",
+   "2016": {
+    "g4": 14.925373134328357,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 96.92307692307692,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Carbuccia": {
+   "code": "2A062",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 3.125,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sari-Solenzara": {
+   "code": "2A269",
+   "2016": {
+    "g4": 97.71319676036208,
+    "debit": 58.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.62067330488384,
+    "debit": 38.45760980592441,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ajaccio": {
+   "code": "2A004",
+   "2016": {
+    "g4": 99.7962870045158,
+    "debit": 71.0,
+    "fibre": 53.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.84120928410134,
+    "debit": 94.36895859930695,
+    "fibre": 92.68192595294546,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Mela": {
+   "code": "2A158",
+   "2016": {
+    "g4": 93.93939393939394,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 93.10344827586206,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Calenzana": {
+   "code": "2B049",
+   "2016": {
+    "g4": 97.6485408356078,
+    "debit": 66.4,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 43.97094430992736,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Manso": {
+   "code": "2B153",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 18.07909604519774,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Montegrosso": {
+   "code": "2B167",
+   "2016": {
+    "g4": 60.75581395348837,
+    "debit": 6.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 20.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Nonza": {
+   "code": "2B178",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 87.57062146892656,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vallica": {
+   "code": "2B339",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Velone-Orneto": {
+   "code": "2B340",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 58.8235294117647,
+    "fibre": 58.8235294117647,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Gavino-di-Fiumorbo": {
+   "code": "2B365",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Conca": {
+   "code": "2A092",
+   "2016": {
+    "g4": 88.6861313868613,
+    "debit": 35.199999999999996,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.51393188854489,
+    "debit": 17.99163179916318,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Verdèse": {
+   "code": "2B344",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Monacia-d'Aullène": {
+   "code": "2A163",
+   "2016": {
+    "g4": 97.30722154222767,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 13.489736070381232,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pruno": {
+   "code": "2B252",
+   "2016": {
+    "g4": 8.771929824561402,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 38.9937106918239,
+    "fibre": 36.477987421383645,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Solaro": {
+   "code": "2B283",
+   "2016": {
+    "g4": 99.50779327317474,
+    "debit": 2.9000000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 18.75792141951838,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Taglio-Isolaccio": {
+   "code": "2B318",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 73.98945518453426,
+    "fibre": 73.63796133567662,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zuani": {
+   "code": "2B364",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casanova": {
+   "code": "2B074",
+   "2016": {
+    "g4": 100.0,
+    "debit": 94.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 51.80327868852459,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggio-d'Oletta": {
+   "code": "2B239",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zonza": {
+   "code": "2A362",
+   "2016": {
+    "g4": 99.08710536325599,
+    "debit": 13.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.96242720270524,
+    "debit": 23.330324909747294,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Erbajolo": {
+   "code": "2B105",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 90.9090909090909,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rapaggio": {
+   "code": "2B256",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rapale": {
+   "code": "2B257",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Serra-di-Fiumorbo": {
+   "code": "2B277",
+   "2016": {
+    "g4": 93.4375,
+    "debit": 1.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 1.1019283746556474,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Arbori": {
+   "code": "2A019",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 89.38053097345133,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piedicroce": {
+   "code": "2B219",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 68.78980891719745,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pila-Canale": {
+   "code": "2A232",
+   "2016": {
+    "g4": 99.00497512437812,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 60.176991150442475,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Noceta": {
+   "code": "2B177",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cozzano": {
+   "code": "2A099",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Cuttoli-Corticchiato": {
+   "code": "2A103",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.22529644268775,
+    "fibre": 70.0592885375494,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Barrettali": {
+   "code": "2B030",
+   "2016": {
+    "g4": 85.11627906976744,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 15.588235294117647,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Monticello": {
+   "code": "2B168",
+   "2016": {
+    "g4": 100.0,
+    "debit": 5.800000000000001,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 86.05187319884726,
+    "fibre": 85.47550432276657,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ota": {
+   "code": "2A198",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 13.176144244105409,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pastricciola": {
+   "code": "2A204",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 74.66666666666667,
+    "debit": 11.525423728813559,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sari-d'Orcino": {
+   "code": "2A270",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 32.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Aléria": {
+   "code": "2B009",
+   "2016": {
+    "g4": 100.0,
+    "debit": 41.3,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 28.17610062893082,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Antisanti": {
+   "code": "2B016",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 70.60041407867494,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Isolaccio-di-Fiumorbo": {
+   "code": "2B135",
+   "2016": {
+    "g4": 44.41558441558441,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 45.267489711934154,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Canale-di-Verde": {
+   "code": "2B057",
+   "2016": {
+    "g4": 100.0,
+    "debit": 3.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 6.372549019607843,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Furiani": {
+   "code": "2B120",
+   "2016": {
+    "g4": 100.0,
+    "debit": 8.799999999999999,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.19419642857143,
+    "fibre": 79.60379464285714,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Oletta": {
+   "code": "2B185",
+   "2016": {
+    "g4": 100.0,
+    "debit": 25.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 7.991202346041056,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sorio": {
+   "code": "2B287",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Carpineto": {
+   "code": "2B067",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castellare-di-Mercurio": {
+   "code": "2B078",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lucciana": {
+   "code": "2B148",
+   "2016": {
+    "g4": 100.0,
+    "debit": 55.900000000000006,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.68575076107238,
+    "debit": 83.93559928443649,
+    "fibre": 64.81216457960645,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggio-di-Venaco": {
+   "code": "2B238",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Corbara": {
+   "code": "2B093",
+   "2016": {
+    "g4": 100.0,
+    "debit": 27.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.54493742889647,
+    "debit": 84.26812585499316,
+    "fibre": 82.83173734610124,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Muro": {
+   "code": "2B173",
+   "2016": {
+    "g4": 58.291457286432156,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmeta-di-Tuda": {
+   "code": "2B188",
+   "2016": {
+    "g4": 98.92904953145917,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Belvédère-Campomoro": {
+   "code": "2A035",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 2.2332506203473947,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Murzo": {
+   "code": "2A174",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Murato": {
+   "code": "2B172",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 2.226345083487941,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Saint-Florent": {
+   "code": "2B298",
+   "2016": {
+    "g4": 99.72080037226617,
+    "debit": 63.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.32789246279404,
+    "debit": 44.381061038220196,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Giuliano": {
+   "code": "2B303",
+   "2016": {
+    "g4": 100.0,
+    "debit": 2.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 19.248826291079812,
+    "fibre": 3.912363067292645,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olcani": {
+   "code": "2B184",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Carbini": {
+   "code": "2A061",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 49.03846153846154,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Calacuccia": {
+   "code": "2B047",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 73.49397590361446,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ficaja": {
+   "code": "2B113",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ortale": {
+   "code": "2B194",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Patrimonio": {
+   "code": "2B205",
+   "2016": {
+    "g4": 100.0,
+    "debit": 26.400000000000002,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 16.79790026246719,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casalta": {
+   "code": "2B072",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Farinole": {
+   "code": "2B109",
+   "2016": {
+    "g4": 78.4256559766764,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.43181818181817,
+    "debit": 28.213166144200628,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ghisoni": {
+   "code": "2B124",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 5.081967213114754,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sermano": {
+   "code": "2B275",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Altagène": {
+   "code": "2A011",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sainte-Lucie-de-Tallano": {
+   "code": "2A308",
+   "2016": {
+    "g4": 97.56521739130434,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 7.759882869692533,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tavera": {
+   "code": "2A324",
+   "2016": {
+    "g4": 100.0,
+    "debit": 83.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 61.98979591836735,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Belgodère": {
+   "code": "2B034",
+   "2016": {
+    "g4": 100.0,
+    "debit": 90.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 80.80912863070539,
+    "fibre": 64.41908713692946,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Chisa": {
+   "code": "2B366",
+   "2016": {
+    "g4": 49.056603773584904,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 79.43262411347517,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Fozzano": {
+   "code": "2A118",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 77.29729729729729,
+    "fibre": 18.91891891891892,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zévaco": {
+   "code": "2A358",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piobetta": {
+   "code": "2B234",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Giovanni-di-Moriani": {
+   "code": "2B302",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 55.172413793103445,
+    "fibre": 55.172413793103445,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sarrola-Carcopino": {
+   "code": "2A271",
+   "2016": {
+    "g4": 100.0,
+    "debit": 16.400000000000002,
+    "fibre": 0.3,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 74.13000656598818,
+    "fibre": 72.42284963887064,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castello-di-Rostino": {
+   "code": "2B079",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 53.98936170212766,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lugo-di-Nazza": {
+   "code": "2B149",
+   "2016": {
+    "g4": 63.63636363636363,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Saliceto": {
+   "code": "2B267",
+   "2016": {
+    "g4": 97.05882352941177,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 65.88235294117646,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sorbo-Ocagnano": {
+   "code": "2B286",
+   "2016": {
+    "g4": 100.0,
+    "debit": 37.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.01851851851852,
+    "fibre": 77.77777777777777,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Soccia": {
+   "code": "2A282",
+   "2016": {
+    "g4": 9.278350515463918,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rusio": {
+   "code": "2B264",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sisco": {
+   "code": "2B281",
+   "2016": {
+    "g4": 100.0,
+    "debit": 22.900000000000002,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 15.348837209302326,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Valle-di-Rostino": {
+   "code": "2B337",
+   "2016": {
+    "g4": 97.60479041916167,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Albitreccia": {
+   "code": "2A008",
+   "2016": {
+    "g4": 98.79566439181052,
+    "debit": 32.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 79.55974842767296,
+    "fibre": 66.9287211740042,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ciamannacce": {
+   "code": "2A089",
+   "2016": {
+    "g4": 6.666666666666667,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 61.935483870967744,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Corrano": {
+   "code": "2A094",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Île-Rousse": {
+   "code": "2B134",
+   "2016": {
+    "g4": 98.61134071747396,
+    "debit": 74.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 98.81841876629018,
+    "debit": 86.23251748251748,
+    "fibre": 79.72027972027972,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmi-Cappella": {
+   "code": "2B190",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.19678714859438,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Penta-di-Casinca": {
+   "code": "2B207",
+   "2016": {
+    "g4": 100.0,
+    "debit": 48.9,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 80.86616968406106,
+    "fibre": 73.12744053958112,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Novale": {
+   "code": "2B179",
+   "2016": {
+    "g4": 94.11764705882352,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Olmeta-di-Capocorso": {
+   "code": "2B187",
+   "2016": {
+    "g4": 23.275862068965516,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ortiporio": {
+   "code": "2B195",
+   "2016": {
+    "g4": 5.319148936170213,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 3.5714285714285716,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piève": {
+   "code": "2B230",
+   "2016": {
+    "g4": 51.19047619047619,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Prato-di-Giovellina": {
+   "code": "2B248",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 99.01960784313725,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tarrano": {
+   "code": "2B321",
+   "2016": {
+    "g4": 42.857142857142854,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Tomino": {
+   "code": "2B327",
+   "2016": {
+    "g4": 100.0,
+    "debit": 9.700000000000001,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zalana": {
+   "code": "2B356",
+   "2016": {
+    "g4": 62.10526315789474,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 29.166666666666668,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Guitera-les-Bains": {
+   "code": "2A133",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 40.90909090909091,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Poggiolo": {
+   "code": "2A240",
+   "2016": {
+    "g4": 17.5,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 54.21686746987952,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Canavaggia": {
+   "code": "2B059",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 3.5353535353535355,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Riventosa": {
+   "code": "2B260",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Lucia-di-Mercurio": {
+   "code": "2B306",
+   "2016": {
+    "g4": 60.264900662251655,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 46.76258992805755,
+    "fibre": 3.597122302158273,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Alata": {
+   "code": "2A006",
+   "2016": {
+    "g4": 100.0,
+    "debit": 9.9,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 75.66056910569105,
+    "fibre": 72.2560975609756,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Campana": {
+   "code": "2B052",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": true
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": true
+   }
+  },
+  "Sant'Andréa-di-Cotone": {
+   "code": "2B293",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 92.66055045871559,
+    "fibre": 92.66055045871559,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Appietto": {
+   "code": "2A017",
+   "2016": {
+    "g4": 99.5420346745175,
+    "debit": 8.7,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 67.57546251217137,
+    "fibre": 49.5618305744888,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Maria-Siché": {
+   "code": "2A312",
+   "2016": {
+    "g4": 76.27365356622998,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 29.792147806004618,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zigliara": {
+   "code": "2A360",
+   "2016": {
+    "g4": 3.587443946188341,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Meria": {
+   "code": "2B159",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietracorbara": {
+   "code": "2B224",
+   "2016": {
+    "g4": 100.0,
+    "debit": 49.5,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 36.20933521923621,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietroso": {
+   "code": "2B229",
+   "2016": {
+    "g4": 95.75289575289575,
+    "debit": 39.4,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 40.56603773584906,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pigna": {
+   "code": "2B231",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.7874015748031497,
+    "fibre": 0.7874015748031497,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Guagno": {
+   "code": "2A131",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 66.56626506024097,
+    "fibre": 0.30120481927710846,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Sotta": {
+   "code": "2A288",
+   "2016": {
+    "g4": 100.0,
+    "debit": 25.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 76.2071992976295,
+    "fibre": 74.71466198419667,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ampriani": {
+   "code": "2B015",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Asco": {
+   "code": "2B023",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 83.71212121212122,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lento": {
+   "code": "2B140",
+   "2016": {
+    "g4": 92.3076923076923,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 98.93617021276596,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Omessa": {
+   "code": "2B193",
+   "2016": {
+    "g4": 100.0,
+    "debit": 10.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 11.510791366906474,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Pietricaggio": {
+   "code": "2B227",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 98.50746268656717,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ville-di-Pietrabugno": {
+   "code": "2B353",
+   "2016": {
+    "g4": 100.0,
+    "debit": 3.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 88.327721661055,
+    "fibre": 87.46726524504302,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Loreto-di-Casinca": {
+   "code": "2B145",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 1.8867924528301887,
+    "fibre": 1.8867924528301887,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Venaco": {
+   "code": "2B341",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casalabriva": {
+   "code": "2A071",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 10.505836575875486,
+    "fibre": 6.22568093385214,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Calvi": {
+   "code": "2B050",
+   "2016": {
+    "g4": 100.0,
+    "debit": 32.300000000000004,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 24.80460109128447,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Campitello": {
+   "code": "2B055",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Castifao": {
+   "code": "2B080",
+   "2016": {
+    "g4": 75.25773195876289,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Costa": {
+   "code": "2B097",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 91.83673469387755,
+    "fibre": 91.83673469387755,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lama": {
+   "code": "2B136",
+   "2016": {
+    "g4": 11.304347826086957,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Ocana": {
+   "code": "2A181",
+   "2016": {
+    "g4": 97.87485242030696,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 33.05439330543933,
+    "fibre": 29.497907949790793,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Bisinchi": {
+   "code": "2B039",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 2.127659574468085,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Morsiglia": {
+   "code": "2B170",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Santa-Maria-Figaniella": {
+   "code": "2A310",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 4.3478260869565215,
+    "fibre": 4.3478260869565215,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Perelli": {
+   "code": "2B208",
+   "2016": {
+    "g4": 79.41176470588235,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 38.095238095238095,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Polveroso": {
+   "code": "2B243",
+   "2016": {
+    "g4": 0.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Zilia": {
+   "code": "2B361",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Casevecchie": {
+   "code": "2B075",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 58.208955223880594,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Galéria": {
+   "code": "2B121",
+   "2016": {
+    "g4": 71.3375796178344,
+    "debit": 8.6,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 99.05808477237049,
+    "debit": 6.63265306122449,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Lavatoggio": {
+   "code": "2B138",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Moltifao": {
+   "code": "2B162",
+   "2016": {
+    "g4": 84.03940886699507,
+    "debit": 13.8,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 9.422492401215806,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piazzali": {
+   "code": "2B216",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 19.35483870967742,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Rutali": {
+   "code": "2B265",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 81.08108108108108,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "San-Martino-di-Lota": {
+   "code": "2B305",
+   "2016": {
+    "g4": 100.0,
+    "debit": 2.1,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 97.36526946107784,
+    "debit": 95.49697968149368,
+    "fibre": 93.62987369577155,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Piedipartino": {
+   "code": "2B221",
+   "2016": {
+    "g4": 75.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Alzi": {
+   "code": "2B013",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 28.125,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Avapessa": {
+   "code": "2B025",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Occhiatana": {
+   "code": "2B182",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 92.48554913294798,
+    "fibre": 92.48554913294798,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Évisa": {
+   "code": "2A108",
+   "2016": {
+    "g4": 25.806451612903224,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 59.183673469387756,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Moncale": {
+   "code": "2B165",
+   "2016": {
+    "g4": 100.0,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 6.228373702422146,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  },
+  "Vivario": {
+   "code": "2B354",
+   "2016": {
+    "g4": 89.25831202046037,
+    "debit": 0.0,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   },
+   "2021": {
+    "g4": 100.0,
+    "debit": 39.961759082217974,
+    "fibre": 0.0,
+    "g4_estime_au_centre": false
+   }
+  }
+ }
+}

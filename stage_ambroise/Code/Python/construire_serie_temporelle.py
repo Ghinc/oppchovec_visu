@@ -3,14 +3,17 @@ Construit une version COMPARABLE dans le temps de l'indice OppChoVec pour deux a
 Écrit Code/WEB/serie_temporelle.json (lu par l'onglet « Évolution » de l'appli).
 
 Principe : mêmes sources, mêmes définitions, mêmes bornes de normalisation pour les deux années. On ne garde que les indicateurs pour lesquels une
-source homogène existe aux deux dates (9 sur 10) ; Opp4 (4G, haut débit, fibre)
-est EXCLU de cet indice : pas de source communale homogène trouvée pour 2016. Ce n'est donc pas l'indice OppChoVec complet de l'appli.
+source homogène existe aux deux dates : les 10 indicateurs d'OppChoVec. Les sources ne sont pas toujours celles de l'appli (Opp1 sur 4 niveaux de diplôme, Cho1 sur la géographie 2015, Opp4 recalculé
+à partir des cartes ARCEP) : voir RAPPORT_SOURCES_2016_2021_PAR_INDICATEUR.html.
 Opp1 est sur 4 niveaux de diplôme (le détail à 7 niveaux n'existe pas en 2016) ; le reste suit les définitions de l'indice actuel.
 
 Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux indicateurs » communales, sauf mention)
   Opp1  niveau de diplôme moyen des 18 ans et plus non scolarisés, sur 4 niveaux comparables (1 aucun diplôme ou brevet, 2 CAP-BEP, 3 bac,
         4 enseignement supérieur) : le détail à 7 niveaux n'existe pas dans le millésime 2016. Les 15-17 ans non scolarisés sont retirés du niveau 1.
   Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus (formule de oppchovec.py : Σ (x/μ) ln(x/μ) / 8)
+  Opp4  (4G + débit >= 30 Mbit/s + fibre) / 3, en % : 4G = population couverte par au moins un opérateur (cartes ARCEP de mars 2017 et de décembre 2021 x grille INSEE 200 m) ;
+        débit = locaux éligibles à 30 Mbit/s (Observatoire THD T4 2016 ; ARCEP Ma connexion internet T4 2021, offres filaires) ; fibre = locaux raccordables FttH (mêmes fichiers) ;
+        calculé par construire_opp4_serie.py -> Données/opp4_serie_2016_2021.json.
   Opp3  part des ménages ayant au moins une voiture (%) + 100 si des actifs occupés vont travailler en transports en commun
         + 100 pour les 3 villes ayant un réseau de bus (Ajaccio, Bastia, Porto-Vecchio ; inchangé)
   Cho1  -log(nombre de personnes vivant en quartier prioritaire), 0 sans quartier, comme l'appli, mais sur la géographie QPV de 2015 aux deux dates (Ajaccio, Bastia,
@@ -59,10 +62,11 @@ SORTIE_ROBUSTE = Path(__file__).resolve().parent.parent / "WEB" / "serie_tempore
 # ce drapeau change de statut pour 78 communes sur 360 et fait varier Opp de ± 4 points. Variante « robuste » : drapeau levé seulement à partir de SEUIL_TRANSPORTS_ROBUSTE personnes.
 SEUIL_TRANSPORTS_ROBUSTE = 5
 ANNEES = (2016, 2021)
-INDICATEURS = ["Opp1", "Opp2", "Opp3", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3", "Vec4"]
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
+INDICATEURS = ["Opp1", "Opp2", "Opp3", "Opp4", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3", "Vec4"]
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3", "Opp4"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
 QPV = RACINE / "Données" / "qpv2015_population.json"
 VEC4 = RACINE / "Données" / "vec4_serie_2016_2021.json"
+OPP4 = RACINE / "Données" / "opp4_serie_2016_2021.json"
 VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247"}
 ALPHA, BETA = 2.5, 1.5
 
@@ -207,6 +211,13 @@ def indicateur_services(noms_par_code, codes, an):
     return n, pd.DataFrame({"services_20min": n})
 
 
+def indicateur_connectivite(noms_par_code, codes, an):
+    """Opp4 : (4G + débit >= 30 Mbit/s + fibre) / 3, en % ; composantes lues dans Données/opp4_serie_2016_2021.json (construire_opp4_serie.py)."""
+    v = json.loads(OPP4.read_text(encoding="utf-8"))["communes"]
+    comp = pd.DataFrame({k: [float(v[noms_par_code[c]][str(an)][k]) for c in codes] for k in ("g4", "debit", "fibre")}, index=codes)
+    return comp.mean(axis=1).rename("Opp4"), comp
+
+
 def minmax(s, lo, hi):
     return (s - lo) / (hi - lo) if hi != lo else s * 0.0
 
@@ -227,6 +238,7 @@ def calculer(source, seuil_transports=0):
         dossier = source / str(an)
         t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
+        t["Opp4"], comp["Opp4"] = indicateur_connectivite(noms, list(t.index), an)
         t["Cho1"], comp["Cho1"] = indicateur_qpv(list(t.index), an)
         t["Vec4"], comp["Vec4"] = indicateur_services(noms, list(t.index), an)
         med, med_dep, comp["Vec1"] = indicateur_revenu_fiscal(dossier)
@@ -268,7 +280,7 @@ def calculer(source, seuil_transports=0):
     return {"annees": list(ANNEES), "opp3_seuil_transports": seuil_transports, "indicateurs": INDICATEURS, "dimensions": DIMENSIONS,
             "p_k_betti": dict(zip(DIMENSIONS, pk)), "seuils_jenks": seuils, "seuils_jenks_variation": seuils_variation,
             "echelle": {k: [float(lo[k]), float(hi[k])] for k in INDICATEURS},
-            "exclus": {"Opp4": "4G, haut débit, fibre : pas de source communale homogène pour 2016"},
+            "exclus": {},
             "communes": communes}
 
 

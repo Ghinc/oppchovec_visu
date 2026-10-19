@@ -123,6 +123,12 @@ def calculer(parquet, dossier_cartes, crs_force=None):
     pts = population_corse(parquet)
     communes = gpd.read_file(GEOJSON).to_crs(2154)[["code", "nom", "geometry"]]
     pts = gpd.sjoin(pts, communes, how="inner", predicate="within")
+    # Commune sans carreau habité dans la grille (Campana) : couverture évaluée au point représentatif de la commune (0 ou 100 %), marquée « estime_au_centre ».
+    manquantes = communes[~communes["code"].isin(pts["code"])]
+    if len(manquantes):
+        ajout = gpd.GeoDataFrame({"ind": 1.0, "code": manquantes["code"].values, "nom": manquantes["nom"].values},
+                                 geometry=manquantes.geometry.representative_point().values, crs=2154)
+        pts = pd.concat([pts, ajout], ignore_index=True)
     cartes = cartes_operateurs(dossier_cartes, crs_force)
     x, y = pts.geometry.x.values, pts.geometry.y.values
     for nom, (poly, epsg) in cartes.items():
@@ -144,7 +150,8 @@ def calculer(parquet, dossier_cartes, crs_force=None):
             part = {k: float((s["ind"] * s[k].astype(float)).sum() / pop * 100) for k in ops + ["au_moins_un", "tous", "moyenne"]}
         else:
             part = {k: None for k in ops + ["au_moins_un", "tous", "moyenne"]}
-        resultat[nom] = {"code": code, "population_grille": round(pop, 1), "part_population_couverte_4g_pct": part}
+        centre = code in set(manquantes["code"])
+        resultat[nom] = {"code": code, "population_grille": 0.0 if centre else round(pop, 1), "estime_au_centre": centre, "part_population_couverte_4g_pct": part}
     return {"operateurs": ops, "communes": resultat}
 
 

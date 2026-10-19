@@ -9,7 +9,7 @@ const EVOLUTION_VARIABLES = {
     Vec: 'Vécu (Vec)',
 };
 const EVOLUTION_NOMS_INDICATEURS = {
-    Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité',
+    Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité (4G, débit, fibre)',
     Cho1: 'Cho1 · quartiers prioritaires (−log du nombre de personnes)', Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi', Vec4: 'Vec4 · services à 20 minutes (nombre)',
 };
 // Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
@@ -216,6 +216,13 @@ function evolutionComposantes(donnees, commune, cle) {
             ligne(lib, p[0], p[1], 1, terme(k[1], i) - terme(k[0], i), 4, '%');
         });
         note = 'Une catégorie dont la part s\'éloigne de la moyenne (12,5 %) fait monter l\'indice ; un rapprochement le fait baisser.';
+    } else if (cle === 'Opp4') {
+        intro = 'Opp4 = (part de la population couverte par la 4G + part des locaux éligibles à un débit d\'au moins 30 Mbit/s + part des locaux raccordables à la fibre) ÷ 3, en %. Contribution d\'une composante = écart de la composante ÷ 3.';
+        colonne = 'Part (%)';
+        ligne('Population couverte par la 4G (au moins un opérateur)', k[0].g4, k[1].g4, 1, (k[1].g4 - k[0].g4) / 3, 2, '%');
+        ligne('Locaux éligibles à 30 Mbit/s ou plus', k[0].debit, k[1].debit, 1, (k[1].debit - k[0].debit) / 3, 2, '%');
+        ligne('Locaux raccordables à la fibre (FttH)', k[0].fibre, k[1].fibre, 1, (k[1].fibre - k[0].fibre) / 3, 2, '%');
+        note = '4G : cartes de couverture théorique de l\'ARCEP (mars 2017 pour ' + a0 + ', décembre 2021 pour ' + a1 + ') croisées avec la population ; débit et fibre : locaux éligibles (Observatoire France Très Haut Débit en ' + a0 + ', ARCEP « Ma connexion internet » en ' + a1 + ').';
     } else if (cle === 'Opp3') {
         const seuilTc = donnees.opp3_seuil_transports || 0;
         const critereTc = seuilTc > 0 ? `au moins ${seuilTc} personnes` : 'au moins une personne';

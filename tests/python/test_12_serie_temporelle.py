@@ -15,7 +15,7 @@ import math
 from common import PYDIR, RACINE, WEB, charger_json, donnees_actuelles, exige_libs, indice_brut, pk_betti, vers_0_10
 
 ANNEES = ("2016", "2021")
-DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
+DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3", "Opp4"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
 
 
 class SerieTemporelle(unittest.TestCase):
@@ -28,7 +28,7 @@ class SerieTemporelle(unittest.TestCase):
         self.assertEqual(len(self.noms), 360)
         self.assertEqual(self.d["annees"], [2016, 2021])
         self.assertEqual(self.d["indicateurs"], [k for ks in DIMENSIONS.values() for k in ks])
-        self.assertEqual(set(self.d["exclus"]), {"Opp4"})
+        self.assertEqual(self.d["exclus"], {})
         for c in self.noms:
             for a in ANNEES:
                 for v in self.d["communes"][c][a]["indicateurs"].values():
@@ -74,6 +74,22 @@ class SerieTemporelle(unittest.TestCase):
             for a in ANNEES:
                 self.assertEqual(self.d["communes"][c][a]["indicateurs"]["Vec4"], v["communes"][c][a], f"{c} {a}")
                 self.assertEqual(self.d["communes"][c][a]["composantes"]["Vec4"]["services_20min"], v["communes"][c][a], f"{c} {a}")
+
+    def test_opp4_est_la_moyenne_de_la_4g_du_debit_et_de_la_fibre(self):
+        """Opp4 = (4G + débit >= 30 Mbit/s + fibre) / 3, en %, depuis Données/opp4_serie_2016_2021.json (4G : population couverte par au moins un opérateur)."""
+        o = json.loads((RACINE / "stage_ambroise" / "Données" / "opp4_serie_2016_2021.json").read_text(encoding="utf-8"))["communes"]
+        for c in self.noms:
+            for a in ANNEES:
+                x = o[c][a]
+                for k in ("g4", "debit", "fibre"):
+                    self.assertTrue(0 <= x[k] <= 100, f"{c} {a} {k} = {x[k]}")
+                    self.assertAlmostEqual(self.d["communes"][c][a]["composantes"]["Opp4"][k], x[k], 5, f"{c} {a} {k}")
+                self.assertAlmostEqual(self.d["communes"][c][a]["indicateurs"]["Opp4"], (x["g4"] + x["debit"] + x["fibre"]) / 3, 9, f"{c} {a}")
+        # ordre de grandeur : la 4G et le débit progressent, la fibre part de presque rien
+        moy = lambda a, k: sum(o[c][a][k] for c in self.noms) / len(self.noms)
+        self.assertLess(moy("2016", "fibre"), 1)
+        self.assertGreater(moy("2021", "debit"), moy("2016", "debit") + 15)
+        self.assertGreater(moy("2021", "g4"), moy("2016", "g4") + 15)
 
     def test_cho2_2021_proche_de_l_indicateur_actuel_calcule_en_2022(self):
         actuel = donnees_actuelles()
@@ -208,14 +224,14 @@ class FiabiliteEtDrapeauTransports(unittest.TestCase):
         self.assertLess(max(eff), 7)
 
     def test_le_bruit_diminue_avec_la_taille_de_la_commune(self):
-        """Écart-type de la variation de l'indice par classe de population : décroissant (1,8 sous 50 habitants ; 0,6 à partir de 1 000)."""
+        """Écart-type de la variation de l'indice par classe de population : décroissant (1,25 sous 50 habitants ; 1,16 sous 100 ; 0,90 de 100 à 999 ; 0,82 à partir de 1 000). Opp4 (progression réelle de la connectivité, commune à toutes les tailles) atténue l'écart : avant Opp4, 1,8 contre 0,6."""
         import statistics
         var = {c: self.std["communes"][c]["2021"]["scores_0_10"]["OppChoVec"] - self.std["communes"][c]["2016"]["scores_0_10"]["OppChoVec"] for c in self.noms}
         hab = {c: self.std["communes"][c]["2021"]["composantes"]["Cho2"]["population"] for c in self.noms}
         sd = lambda lo, hi: statistics.pstdev([var[c] for c in self.noms if lo <= hab[c] < hi])
         petites, moyennes, grandes = sd(0, 100), sd(100, 1000), sd(1000, 10 ** 9)
         self.assertGreater(petites, 1.2 * moyennes)
-        self.assertGreater(moyennes, 1.5 * grandes)
+        self.assertGreater(moyennes, 1.05 * grandes)
         self.assertGreater(sum(1 for c in self.noms if hab[c] < 100), 100)                       # 121 communes de moins de 100 habitants
 
     def test_populations_de_la_serie_egales_aux_populations_municipales(self):
