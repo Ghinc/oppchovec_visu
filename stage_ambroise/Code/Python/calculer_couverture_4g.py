@@ -2,8 +2,8 @@
 Part de la POPULATION de chaque commune corse couverte par la 4G, à partir des cartes de couverture théorique de l'ARCEP (un polygone par opérateur) et de la grille
 de population de l'INSEE (carreaux de 200 m, Filosofi : colonne « ind », individus des ménages fiscaux).
 
-Méthode : le centre de chaque carreau habité reçoit la population du carreau ; il est affecté à sa commune (jointure spatiale avec le GeoJSON des communes) ; il est
-« couvert » par un opérateur s'il tombe dans un polygone de sa carte 4G. Pour chaque commune on écrit la part de la population couverte :
+Méthode : chaque carreau habité est découpé selon les communes qu'il recoupe et sa population est répartie au prorata des surfaces ; un morceau est
+« couvert » par un opérateur si son point représentatif tombe dans un polygone de sa carte 4G. Pour chaque commune on écrit la part de la population couverte :
     - par chaque opérateur ;
     - par au moins un opérateur ("au_moins_un") ;
     - par tous les opérateurs ("tous") ;
@@ -37,7 +37,7 @@ BORNES_CORSE = (8.3, 41.2, 9.8, 43.1)                                           
 
 
 def population_corse(parquet):
-    """Points (Lambert-93) des carreaux habités de Corse avec leur population. Le centre du carreau se déduit de l'identifiant « CRS3035RES200mN<y>E<x> » (coin sud-ouest)."""
+    """Carreaux habités de Corse (carrés de 200 m, Lambert-93) avec leur population. Les centres se déduisent de l'identifiant « CRS3035RES200mN<y>E<x> » (coin sud-ouest)."""
     t = pq.read_table(parquet, columns=["idcar_200m", "ind"]).to_pandas()
     m = t["idcar_200m"].str.extract(r"N(\d+)E(\d+)").astype(float)
     t["y"], t["x"] = m[0] + 100, m[1] + 100
@@ -46,8 +46,19 @@ def population_corse(parquet):
     t = t[(t.x >= min(x0, x1)) & (t.x <= max(x0, x1)) & (t.y >= min(y0, y1)) & (t.y <= max(y0, y1)) & (t["ind"] > 0)].copy()
     lon, lat = Transformer.from_crs(3035, 4326, always_xy=True).transform(t.x.values, t.y.values)
     t = t[(lon >= BORNES_CORSE[0]) & (lon <= BORNES_CORSE[2]) & (lat >= BORNES_CORSE[1]) & (lat <= BORNES_CORSE[3])]
-    g = gpd.GeoDataFrame(t[["ind"]], geometry=gpd.points_from_xy(t.x, t.y), crs=3035).to_crs(2154)
-    return g
+    carres = shapely.box(t.x.values - 100, t.y.values - 100, t.x.values + 100, t.y.values + 100)
+    return gpd.GeoDataFrame({"ind": t["ind"].values, "id": np.arange(len(t))}, geometry=carres, crs=3035).to_crs(2154)
+
+
+def repartir_par_commune(carreaux, communes):
+    """Découpe chaque carreau selon les communes qu'il recoupe et répartit sa population au prorata des surfaces (un carreau à cheval sur deux communes compte pour les deux).
+    Renvoie un point représentatif par morceau, avec sa part de population dans « ind » : la couverture 4G est testée en ce point. Les carreaux joués par le centre
+    perdaient les habitants des communes dont tous les carreaux sont à cheval (Campana : 17 personnes rattachées à Nocario)."""
+    morceaux = gpd.overlay(carreaux, communes, how="intersection", keep_geom_type=True)
+    morceaux["aire"] = morceaux.area
+    morceaux["ind"] = morceaux["ind"] * morceaux["aire"] / morceaux.groupby("id")["aire"].transform("sum")      # la part tombée dans la mer n'est pas perdue
+    morceaux["geometry"] = morceaux.geometry.representative_point()
+    return morceaux[["ind", "code", "nom", "geometry"]]
 
 
 class CarteAnneaux:
@@ -120,10 +131,9 @@ def cartes_operateurs(dossier, crs_force=None):
 
 
 def calculer(parquet, dossier_cartes, crs_force=None):
-    pts = population_corse(parquet)
     communes = gpd.read_file(GEOJSON).to_crs(2154)[["code", "nom", "geometry"]]
-    pts = gpd.sjoin(pts, communes, how="inner", predicate="within")
-    # Commune sans carreau habité dans la grille (Campana) : couverture évaluée au point représentatif de la commune (0 ou 100 %), marquée « estime_au_centre ».
+    pts = repartir_par_commune(population_corse(parquet), communes)
+    # Commune sans aucun carreau habité dans la grille : couverture évaluée au point représentatif de la commune (0 ou 100 %), marquée « estime_au_centre ».
     manquantes = communes[~communes["code"].isin(pts["code"])]
     if len(manquantes):
         ajout = gpd.GeoDataFrame({"ind": 1.0, "code": manquantes["code"].values, "nom": manquantes["nom"].values},
