@@ -18,9 +18,8 @@ où <dossier des cartes 4G> contient (à n'importe quelle profondeur) un fichier
 
 import json
 import re
-import shutil
+import struct
 import sys
-import tempfile
 import warnings
 from pathlib import Path
 
@@ -51,23 +50,58 @@ def population_corse(parquet):
     return g
 
 
+class CarteAnneaux:
+    """Carte de couverture lue directement dans un shapefile : liste de contours (anneaux) sans distinction extérieur / trou. Un point est « couvert » s'il est dans un nombre
+    IMPAIR de contours (règle pair-impair), ce qui gère les trous sans reconstruire les polygones. Nécessaire pour les cartes de 2017 : une seule entité de plusieurs millions de
+    sommets par opérateur, que les bibliothèques de lecture standard mettent des heures à traiter."""
+
+    def __init__(self, anneaux):
+        self.anneaux = anneaux
+
+    def contient(self, x, y):
+        parite = np.zeros(len(x), dtype=bool)
+        for poly, (x0, y0, x1, y1) in self.anneaux:
+            m = (x >= x0) & (x <= x1) & (y >= y0) & (y <= y1)
+            if m.any():
+                parite[m] ^= shapely.contains_xy(poly, x[m], y[m])
+        return parite
+
+
+def lire_shp_anneaux(chemin, bbox):
+    """Anneaux d'un shapefile de polygones dont l'emprise touche bbox (xmin, ymin, xmax, ymax), dans le système de coordonnées du fichier."""
+    data = Path(chemin).read_bytes()
+    pos, anneaux = 100, []
+    while pos + 12 <= len(data):
+        _, mots = struct.unpack(">ii", data[pos:pos + 8])
+        debut = pos + 8
+        if struct.unpack("<i", data[debut:debut + 4])[0] in (5, 15, 25):               # polygone (simple, Z, M)
+            nparts, npts = struct.unpack("<ii", data[debut + 36:debut + 44])
+            parts = np.frombuffer(data, "<i4", nparts, debut + 44)
+            pts = np.frombuffer(data, "<f8", npts * 2, debut + 44 + 4 * nparts).reshape(-1, 2)
+            bornes = list(parts) + [npts]
+            for i in range(nparts):
+                r = pts[bornes[i]:bornes[i + 1]]
+                x0, y0 = r.min(axis=0)
+                x1, y1 = r.max(axis=0)
+                if len(r) >= 4 and x1 >= bbox[0] and x0 <= bbox[2] and y1 >= bbox[1] and y0 <= bbox[3]:
+                    poly = shapely.Polygon(r)
+                    shapely.prepare(poly)
+                    anneaux.append((poly, (x0, y0, x1, y1)))
+        pos = debut + mots * 2
+    return CarteAnneaux(anneaux)
+
+
 def lire_carte(chemin, zone, crs_force=None):
     """Lit une carte de couverture limitée à la Corse SANS la reprojeter (les polygones sont énormes : on convertit plutôt les points de population dans le système de la carte).
-    Renvoie (polygone de la zone couverte, code EPSG de la carte). Par défaut la carte est en Lambert-93 (EPSG:2154) ; les cartes de 2017 sont en Lambert II étendu (NTF,
-    EPSG:27572) avec un fichier .prj illisible : on passe alors crs_force=27572, ce qui ignore le .prj."""
+    Renvoie (zone couverte, code EPSG de la carte). Par défaut la carte est en Lambert-93 (EPSG:2154) ; les cartes de 2017 sont en Lambert II étendu (NTF, EPSG:27572) avec un
+    fichier .prj illisible : on passe alors crs_force=27572, ce qui ignore le .prj et lit le shapefile directement."""
     epsg = crs_force or 2154
     t = Transformer.from_crs(2154, epsg, always_xy=True)
     xs, ys = zip(*[t.transform(x, y) for x in (zone[0], zone[2]) for y in (zone[1], zone[3])])
     bbox = (min(xs) - 5000, min(ys) - 5000, max(xs) + 5000, max(ys) + 5000)
-    if crs_force:
-        with tempfile.TemporaryDirectory() as tmp:
-            for ext in (".shp", ".shx", ".dbf"):
-                src = Path(chemin).with_suffix(ext)
-                if src.exists():
-                    shutil.copy(src, Path(tmp) / ("c" + ext))
-            g = gpd.read_file(Path(tmp) / "c.shp", bbox=bbox)
-    else:
-        g = gpd.read_file(chemin, bbox=bbox)
+    if crs_force and Path(chemin).suffix == ".shp":
+        return lire_shp_anneaux(chemin, bbox), epsg
+    g = gpd.read_file(chemin, bbox=bbox)
     geoms = g.geometry.make_valid().clip_by_rect(*bbox)
     return geoms[~geoms.is_empty].union_all(), epsg
 
@@ -93,8 +127,11 @@ def calculer(parquet, dossier_cartes, crs_force=None):
     x, y = pts.geometry.x.values, pts.geometry.y.values
     for nom, (poly, epsg) in cartes.items():
         xn, yn = Transformer.from_crs(2154, epsg, always_xy=True).transform(x, y)
-        shapely.prepare(poly)
-        pts[nom] = shapely.contains_xy(poly, xn, yn)
+        if isinstance(poly, CarteAnneaux):
+            pts[nom] = poly.contient(np.asarray(xn), np.asarray(yn))
+        else:
+            shapely.prepare(poly)
+            pts[nom] = shapely.contains_xy(poly, xn, yn)
     ops = list(cartes)
     pts["au_moins_un"] = pts[ops].any(axis=1)
     pts["tous"] = pts[ops].all(axis=1)
