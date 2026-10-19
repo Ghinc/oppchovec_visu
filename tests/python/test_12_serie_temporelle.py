@@ -12,7 +12,7 @@ from pathlib import Path
 
 import math
 
-from common import PYDIR, WEB, charger_json, donnees_actuelles, exige_libs, indice_brut, pk_betti, vers_0_10
+from common import PYDIR, RACINE, WEB, charger_json, donnees_actuelles, exige_libs, indice_brut, pk_betti, vers_0_10
 
 ANNEES = ("2016", "2021")
 DIMENSIONS = {"Opp": ["Opp1", "Opp2", "Opp3"], "Cho": ["Cho1", "Cho2"], "Vec": ["Vec1", "Vec2", "Vec3", "Vec4"]}
@@ -65,6 +65,15 @@ class SerieTemporelle(unittest.TestCase):
                     self.assertAlmostEqual(x["indicateurs"]["Cho1"], -math.log(attendu[c][i]), 9, f"{c} {a}")
                 else:
                     self.assertEqual(x["indicateurs"]["Cho1"], 0.0, f"{c} {a}")
+
+    def test_vec4_est_celui_du_fichier_2016_2021(self):
+        """Vec4 de la série = nombre d'équipements à 20 minutes du fichier Données/vec4_serie_2016_2021.json (BPE 2016 et 2021, 147 types, pharmacies et gynécologues rapprochés)."""
+        v = json.loads((RACINE / "stage_ambroise" / "Données" / "vec4_serie_2016_2021.json").read_text(encoding="utf-8"))
+        self.assertEqual(v["types_communs"], 147)
+        for c in self.noms:
+            for a in ANNEES:
+                self.assertEqual(self.d["communes"][c][a]["indicateurs"]["Vec4"], v["communes"][c][a], f"{c} {a}")
+                self.assertEqual(self.d["communes"][c][a]["composantes"]["Vec4"]["services_20min"], v["communes"][c][a], f"{c} {a}")
 
     def test_cho2_2021_proche_de_l_indicateur_actuel_calcule_en_2022(self):
         actuel = donnees_actuelles()

@@ -19,7 +19,7 @@ Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux 
         (population de 18 à 24 ans, POP1B) - 0,7 x (Français de 15 à 24 ans, NAT1) + (étrangers de 25 ans et plus, NAT1), rapportés à la population totale ;
         Cho2 = 100 - cette proportion, plafonné à 100 (retrouve le fichier actuel, calculé en 2022, à 0,01 point près pour 357 communes sur 360)
   Vec4  nombre d'équipements de la BPE (INSEE) accessibles en 20 minutes ou moins en voiture depuis le centre de la commune (temps de trajet OSRM, même réseau routier
-        aux deux dates), sur les 145 types d'équipements présents et géolocalisés en 2016 ET en 2021 (BPE 2016 ; BPE 2021 ensemble_xy, coordonnées Lambert-93 converties) ;
+        aux deux dates), sur les 147 types d'équipements présents et géolocalisés en 2016 ET en 2021, après rapprochement des types recodés (pharmacie D301 -> D307, gynécologie D204 et D205 -> D214) (BPE 2016 ; BPE 2021 ensemble_xy, coordonnées Lambert-93 converties) ;
         calculé par calculer_vec4_serie.py serie2021 -> Données/vec4_serie_2016_2021.json. Corrélation avec le Vec4 de l'appli (BPE 2024) : 0,996.
   Vec1  REVENU FISCAL MOYEN PAR FOYER FISCAL de la commune (DGFiP, IRCOM : revenu fiscal de référence total / nombre de foyers fiscaux, ligne « Total »),
         pour les deux années (revenus 2016 et revenus 2021), commune par commune. La médiane Filosofi n'est pas diffusée pour 154 communes en 2021 ;

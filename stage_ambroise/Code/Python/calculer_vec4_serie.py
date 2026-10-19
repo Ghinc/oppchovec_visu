@@ -98,11 +98,19 @@ def valider(bpe_2024, communes_csv):
     return n
 
 
-def serie(bpe_a, bpe_b, communes_csv, annee_a=2016, annee_b=2024, chargeur_b=None, sortie=None):
+# Types de la BPE 2016 recodés dans la nomenclature 2021 (même équipement, autre code) : on les rapproche pour ne pas perdre les pharmacies ni les gynécologues.
+# Pharmacie D301 -> D307 ; gynécologie médicale D204 et gynécologie obstétrique D205 -> D214 (« gynécologie médicale et/ou obstétrique »).
+# Non rapprochés (correspondance incertaine, équipements peu quotidiens) : tribunaux, gares, théâtre, musée.
+RECODAGES_2016_VERS_2021 = {"D301": "D307", "D204": "D214", "D205": "D214"}
+
+
+def serie(bpe_a, bpe_b, communes_csv, annee_a=2016, annee_b=2024, chargeur_b=None, sortie=None, recodages=None):
     """Vec4 comparable aux deux dates : uniquement les types présents et géolocalisés aux deux dates. Écrit Données/vec4_serie_temporelle.json."""
     communes = lire_communes(communes_csv)
     a = charger_bpe_2016(bpe_a).rename(columns={"typequ": "typequ"})
     b = (chargeur_b or charger_bpe_2024)(bpe_b)
+    if recodages:
+        a["typequ"] = a["typequ"].replace(recodages)
     types = sorted(set(a["typequ"]) & set(b["typequ"]))
     print(f"types communs et géolocalisés aux deux dates : {len(types)} ({annee_a} : {a["typequ"].nunique()}, {annee_b} : {b["typequ"].nunique()})")
     a, b = a[a["typequ"].isin(types)], b[b["typequ"].isin(types)]
@@ -124,7 +132,7 @@ def main():
     if len(sys.argv) >= 4 and sys.argv[1] == "valider":
         valider(sys.argv[2], sys.argv[3])
     elif len(sys.argv) >= 5 and sys.argv[1] == "serie2021":       # 2016 -> 2021, mêmes types d'équipements aux deux dates
-        serie(sys.argv[2], sys.argv[3], sys.argv[4], 2016, 2021, charger_bpe_2021, SORTIE.with_name("vec4_serie_2016_2021.json"))
+        serie(sys.argv[2], sys.argv[3], sys.argv[4], 2016, 2021, charger_bpe_2021, SORTIE.with_name("vec4_serie_2016_2021.json"), RECODAGES_2016_VERS_2021)
     elif len(sys.argv) >= 5 and sys.argv[1] == "serie":
         serie(sys.argv[2], sys.argv[3], sys.argv[4])
     else:
