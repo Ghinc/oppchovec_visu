@@ -549,7 +549,6 @@ button.small {
   gap: var(--spacing-xs);
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-sm);
-  padding-right: var(--spacing-lg, 16px);          /* marge à droite : le contenu ne colle pas au bord de la carte de l'indicateur */
   background-color: var(--bg-hover);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-fast);
@@ -2717,4 +2716,10 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 
 .indicateur-row-header > .indicateur-titre + span {
   margin-left: 6px;
+}
+
+/* Marge à l'intérieur de la coloration bleue de chaque indicateur (la règle « #resultCommune li » mettait 0 sur les côtés) */
+#resultCommune li.indicateur-row {
+  padding-left: 12px;
+  padding-right: 12px;
 }
