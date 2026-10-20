@@ -8,13 +8,6 @@ const { chargerApp, afficherCommune, photo, lireJson } = require('./helpers/outi
 const data = lireJson('data_scores_0_10.json');
 const MODES = ['betti', 'egal'];
 
-// Déplace le sous-curseur `ind__comp` (tous les indicateurs sont décomposés) et déclenche la mise à jour du brouillon, comme le ferait la page
-function fixer(app, inputs, id, pct) {
-  const [ind, comp] = id.split('__');
-  inputs[id].value = String(pct);
-  app.ev(`majSousComposante(${JSON.stringify(ind)}, ${JSON.stringify(comp)})`);
-}
-
 async function appEnMode(mode) {
   const app = await chargerApp();
   if (mode === 'egal') app.ev('toggleModePk()');
@@ -38,7 +31,8 @@ for (const mode of MODES) {
     const app = await appEnMode(mode);
     const { inputs } = afficherCommune(app, 'Bastia');
     const avant = photo(app);
-    fixer(app, inputs, 'Indicateur_Vec4__services', 100);        // services accessibles : maximum corse
+    inputs.Indicateur_Vec4.value = '100';                       // services accessibles : maximum corse
+    app.ev("majLibelleSlider('Indicateur_Vec4')");
     assert.match(String(app.elements.get('Indicateur_Vec4_val').innerText).replace(/[  ]/g, ' '), /^100 % de l'échelle corse · valeur : 5 278 services$/);
     app.ev("recalculerIndice('Bastia')");
     const apres = photo(app);
@@ -54,8 +48,8 @@ for (const mode of MODES) {
     const { inputs } = afficherCommune(app, 'Ajaccio');
     const avant = photo(app);
     const origine = JSON.stringify(app.ev('indicateursOrigine'));
-    fixer(app, inputs, 'Indicateur_Cho2__francais', 0);     // droit de vote minimal
-    fixer(app, inputs, 'Indicateur_Vec1__revenu', 0);     // revenu minimal
+    inputs.Indicateur_Cho2.value = '0';     // droit de vote minimal
+    inputs.Indicateur_Vec1.value = '0';     // revenu minimal
     app.ev("recalculerIndice('Ajaccio')");
     const apres = photo(app);
     assert.ok(apres.indice.Ajaccio < avant.indice.Ajaccio);
@@ -67,8 +61,8 @@ for (const mode of MODES) {
     const app = await appEnMode(mode);
     const depart = photo(app);
     const { inputs } = afficherCommune(app, 'Bastia');
-    fixer(app, inputs, 'Indicateur_Vec4__services', 100);
-    fixer(app, inputs, 'Indicateur_Cho2__francais', 0);
+    inputs.Indicateur_Vec4.value = '100';
+    inputs.Indicateur_Cho2.value = '0';
     app.ev("recalculerIndice('Bastia')");
     assert.notDeepEqual(photo(app).indice.Bastia, depart.indice.Bastia);
     app.ev("reinitialiserValeurs('Bastia')");
@@ -79,7 +73,7 @@ for (const mode of MODES) {
   test(`[${mode}] répéter le même recalcul est idempotent`, async () => {
     const app = await appEnMode(mode);
     const { inputs } = afficherCommune(app, 'Corte');
-    fixer(app, inputs, 'Indicateur_Opp1__n7', 100);
+    inputs.Indicateur_Opp1.value = '90';
     app.ev("recalculerIndice('Corte')");
     const une = photo(app);
     afficherCommune(app, 'Corte');                         // le panneau est ré-affiché avec les nouvelles valeurs
@@ -91,9 +85,9 @@ for (const mode of MODES) {
 test('modifier deux communes successivement : seules ces deux communes changent ; réinitialiser les restaure toutes', async () => {
   const app = await chargerApp();
   const depart = photo(app);
-  for (const [commune, indicateur] of [['Bastia', 'Indicateur_Vec4__services'], ['Ajaccio', 'Indicateur_Opp1__n7']]) {
+  for (const [commune, indicateur] of [['Bastia', 'Indicateur_Vec4'], ['Ajaccio', 'Indicateur_Opp1']]) {
     const { inputs } = afficherCommune(app, commune);
-    fixer(app, inputs, indicateur, 100);
+    inputs[indicateur].value = '100';
     app.ev(`recalculerIndice(${JSON.stringify(commune)})`);
   }
   const apres = photo(app);
@@ -108,7 +102,7 @@ test('basculer le mode p_k après une modification conserve la modification dans
   const app = await chargerApp();                                        // départ : Betti
   const baseBetti = photo(app);
   const { inputs } = afficherCommune(app, 'Bastia');
-  fixer(app, inputs, 'Indicateur_Vec4__services', 100);
+  inputs.Indicateur_Vec4.value = '100';
   app.ev("recalculerIndice('Bastia')");
   const modBetti = photo(app);
   app.ev('toggleModePk()');                                              // -> égal
@@ -125,7 +119,7 @@ test('les seuils de Jenks et les p_k ne dépendent pas des modifications (réfé
   const seuils = JSON.stringify(app.ev('seuilsJenks.oppchovec'));
   const pk = JSON.stringify(app.ev('referencePk("betti").pk'));
   const { inputs } = afficherCommune(app, 'Bastia');
-  fixer(app, inputs, 'Indicateur_Vec4__services', 100);
+  inputs.Indicateur_Vec4.value = '100';
   app.ev("recalculerIndice('Bastia')");
   assert.equal(JSON.stringify(app.ev('seuilsJenks.oppchovec')), seuils);
   assert.equal(JSON.stringify(app.ev('referencePk("betti").pk')), pk);
@@ -139,7 +133,7 @@ test('une commune améliorée au-delà de la meilleure commune réelle dépasse 
   const { inputs } = afficherCommune(app, meilleure);
   assert.equal(app.ev(`indiceFinale[${JSON.stringify(meilleure)}]`), 10);
   // on porte chaque indicateur de la commune à 100 % de l'échelle corse : l'indice ne peut qu'augmenter ou rester égal
-  for (const id of ['Indicateur_Vec4__services', 'Indicateur_Cho2__francais', 'Indicateur_Vec1__revenu', 'Indicateur_Opp4__g4', 'Indicateur_Opp4__debit', 'Indicateur_Opp4__fibre']) fixer(app, inputs, id, 100);
+  for (const id of Object.keys(inputs)) if (/^Indicateur_\w+$/.test(id)) inputs[id].value = '100';
   app.ev(`recalculerIndice(${JSON.stringify(meilleure)})`);
   const apres = app.ev(`indiceFinale[${JSON.stringify(meilleure)}]`);
   assert.ok(apres >= 10 - 1e-12);
