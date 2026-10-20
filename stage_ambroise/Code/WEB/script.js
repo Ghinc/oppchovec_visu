@@ -4731,6 +4731,13 @@ function echapperHtmlDominance(s) {
     return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// Unités de l'analyse de dominance : les communes, ou les EPCI quand l'échelle « EPCI » est cochée (scoresParCommune et geoUnites() les suivent)
+const dominanceEstEPCI = () => typeof echelleEstEPCI === 'function' && echelleEstEPCI();
+const dominanceUnite = (n = 1, maj = false) => {
+    const mot = dominanceEstEPCI() ? 'EPCI' : 'commune' + (n > 1 ? 's' : '');
+    return maj ? mot.charAt(0).toUpperCase() + mot.slice(1) : mot;
+};
+
 function initialiserOngletDominance() {
     if (dominanceInitialise) {
         setTimeout(() => { if (_carteDominance) _carteDominance.invalidateSize(); }, 100);
@@ -4742,7 +4749,8 @@ function initialiserOngletDominance() {
         dominanceLayerRef = null;
         document.getElementById('map-dominance').innerHTML = '';
     }
-    if (!communeJson || !communeJson.features || !scoresParCommune || Object.keys(scoresParCommune).length === 0) {
+    const geoDominance = typeof geoUnites === 'function' ? geoUnites() : communeJson;
+    if (!geoDominance || !geoDominance.features || !scoresParCommune || Object.keys(scoresParCommune).length === 0) {
         console.warn('Dominance: données non prêtes');
         return;
     }
@@ -4757,13 +4765,13 @@ function initialiserOngletDominance() {
 
     // Légende : une ligne par couche, avec son effectif
     document.getElementById('dominance-legend').innerHTML =
-        res.effectifs.map((n, i) => `<div class="dominance-legend-row"><span class="dominance-swatch" style="background:${couleurCouche(i + 1, nb)}"></span>Couche ${i + 1} — ${n} commune${n > 1 ? 's' : ''}</div>`).join('') +
+        res.effectifs.map((n, i) => `<div class="dominance-legend-row"><span class="dominance-swatch" style="background:${couleurCouche(i + 1, nb)}"></span>Couche ${i + 1} — ${n} ${dominanceUnite(n)}</div>`).join('') +
         (exclues.size ? '<div class="dominance-legend-row"><span class="dominance-swatch" style="background:#ccc"></span>Sans couche (valeur manquante)</div>' : '');
     document.getElementById('dominance-excluded').innerHTML = exclues.size
-        ? `${exclues.size} commune${exclues.size > 1 ? 's' : ''} exclue${exclues.size > 1 ? 's' : ''} du calcul (valeur manquante, aucune couche) : ` +
+        ? `${exclues.size} ${dominanceUnite(exclues.size)} exclue${exclues.size > 1 ? 's' : ''} du calcul (valeur manquante, aucune couche) : ` +
           res.exclues.map(e => `${echapperHtmlDominance(e.commune)} (${e.manquantes.map(d => nomDimension[d]).join(', ')})`).join(' ; ')
-        : 'Aucune commune exclue : les 3 scores sont renseignés pour toutes les communes.';
-    document.getElementById('dominance-fiche').innerHTML = '<p class="dominance-hint">Cliquez sur une commune de la carte pour afficher sa fiche.</p>';
+        : `Aucune ${dominanceUnite()} exclue : les 3 scores sont renseignés pour toutes les ${dominanceEstEPCI() ? 'EPCI' : 'communes'}.`;
+    document.getElementById('dominance-fiche').innerHTML = `<p class="dominance-hint">Cliquez sur ${dominanceEstEPCI() ? 'un EPCI' : 'une commune'} de la carte pour afficher sa fiche.</p>`;
 
     const carte = L.map(document.getElementById('map-dominance'), {
         center: [42.0, 9.0], zoom: 8, zoomSnap: 0.1, zoomDelta: 0.1
@@ -4778,7 +4786,7 @@ function initialiserOngletDominance() {
         weight: nom === dominanceSelection ? 2.5 : 0.8,
         fillOpacity: 0.85
     });
-    dominanceLayerRef = L.geoJSON(communeJson, {
+    dominanceLayerRef = L.geoJSON(geoDominance, {
         style: feature => style(feature.properties.nom),
         onEachFeature: (feature, layer) => {
             const nom = feature.properties.nom;
@@ -4813,12 +4821,12 @@ function dominanceAfficherFiche(nom) {
     let html = `<h4>${echapperHtmlDominance(nom)}</h4>`;
     if (!res.couches[nom]) {
         const e = res.exclues.find(x => x.commune === nom);
-        html += `<p>Aucune couche : valeur manquante sur ${e ? e.manquantes.join(', ') : 'au moins une dimension'}. Commune exclue du calcul.</p>${scoresHtml}`;
+        html += `<p>Aucune couche : valeur manquante sur ${e ? e.manquantes.join(', ') : 'au moins une dimension'}. ${dominanceUnite(1, true)} exclu${dominanceEstEPCI() ? '' : 'e'} du calcul.</p>${scoresHtml}`;
     } else {
         const dom = res.dominants[nom], dos = res.domines[nom];
         html += `<p>Couche <strong>${res.couches[nom]}</strong> sur ${res.nbCouches}</p>${scoresHtml}
-            <h5>Communes qui la dominent (${dom.length})</h5>${liste(dom)}
-            <h5>Communes qu'elle domine (${dos.length})</h5>${liste(dos)}`;
+            <h5>${dominanceUnite(2, true)} qui la dominent (${dom.length})</h5>${liste(dom)}
+            <h5>${dominanceUnite(2, true)} qu'elle domine (${dos.length})</h5>${liste(dos)}`;
     }
     const fiche = document.getElementById('dominance-fiche');
     fiche.innerHTML = html;
