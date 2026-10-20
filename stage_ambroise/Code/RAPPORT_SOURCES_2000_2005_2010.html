@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources pour OppChoVec en 2000, 2005 et 2010</title>
+<style>
+:root{
+  --fond:#f6f4ef; --carte:#ffffff; --texte:#1f2a33; --discret:#5d6b77; --trait:#dcd7cc; --accent:#1f5f8b; --accent-doux:#e4eef5;
+  --ok:#1b7f5c; --ok-fond:#dff3ea; --approx:#9a6700; --approx-fond:#fbeccb; --non:#b3261e; --non-fond:#f9dedc; --code:#efece4;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --fond:#12171c; --carte:#1a2128; --texte:#e6ebef; --discret:#9aa8b4; --trait:#2d3944; --accent:#74b4e3; --accent-doux:#1d2d3a;
+    --ok:#5fd0a2; --ok-fond:#163a2d; --approx:#f0bf59; --approx-fond:#3d3015; --non:#ff8f86; --non-fond:#44201e; --code:#222b33;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+header.haut{background:linear-gradient(135deg,#17405c,#1f5f8b 60%,#3a86b5);color:#fff;padding:44px 20px 38px}
+header.haut .contenu{max-width:1100px;margin:0 auto}
+header.haut h1{margin:0 0 .35em;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.2;font-weight:700}
+header.haut p{margin:.3em 0;max-width:780px;opacity:.95}
+header.haut .meta{margin-top:1em;font-size:.88rem;opacity:.85}
+nav.sommaire{position:sticky;top:0;z-index:20;background:var(--carte);border-bottom:1px solid var(--trait)}
+nav.sommaire ul{list-style:none;margin:0 auto;padding:8px 20px;max-width:1100px;display:flex;gap:6px 18px;flex-wrap:wrap;font-size:.9rem}
+nav.sommaire a{color:var(--accent);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
+nav.sommaire a:hover{border-bottom-color:var(--accent)}
+main{max-width:1100px;margin:0 auto;padding:10px 20px 70px}
+section{margin-top:44px;scroll-margin-top:56px}
+h2{font-size:1.45rem;margin:0 0 .5em;padding-bottom:.3em;border-bottom:3px solid var(--accent)}
+h3{font-size:1.1rem;margin:1.4em 0 .3em;color:var(--accent)}
+p{margin:.65em 0}
+a{color:var(--accent)}
+code{background:var(--code);padding:.08em .35em;border-radius:4px;font:.86em ui-monospace,Consolas,monospace;word-break:break-word}
+.chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0}
+.chiffre{background:var(--carte);border:1px solid var(--trait);border-left:5px solid var(--accent);border-radius:8px;padding:14px 16px}
+.chiffre b{display:block;font-size:1.7rem;line-height:1.15;color:var(--accent)}
+.chiffre span{font-size:.88rem;color:var(--discret)}
+.encart{background:var(--accent-doux);border-left:5px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.encart.alerte{background:var(--approx-fond);border-left-color:var(--approx)}
+.tableau{overflow-x:auto;margin:14px 0;border:1px solid var(--trait);border-radius:8px;background:var(--carte)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:.55em .75em;text-align:left;vertical-align:top;border-bottom:1px solid var(--trait)}
+thead th{background:var(--accent-doux);font-weight:600;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;white-space:nowrap}
+.pastille{display:inline-block;font-weight:600;padding:.1em .55em;border-radius:999px;font-size:.82rem;white-space:nowrap}
+.ok{background:var(--ok-fond);color:var(--ok)}
+.approx{background:var(--approx-fond);color:var(--approx)}
+.non{background:var(--non-fond);color:var(--non)}
+.matrice td{min-width:150px}
+.matrice td.l{font-weight:600;white-space:nowrap}
+.fiche{background:var(--carte);border:1px solid var(--trait);border-radius:10px;padding:6px 20px 14px;margin:18px 0}
+.fiche h3{margin-top:.9em}
+.fiche .etat{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px}
+.fiche dl{margin:.4em 0;display:grid;grid-template-columns:minmax(110px,170px) 1fr;gap:4px 14px}
+.fiche dt{color:var(--discret);font-size:.9rem}
+.fiche dd{margin:0}
+.legende span{margin-right:16px;white-space:nowrap}
+.frise{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:16px 0}
+.frise div{background:var(--carte);border:1px solid var(--trait);border-top:5px solid var(--accent);border-radius:8px;padding:12px 15px}
+.frise strong{font-size:1.15rem}
+ul.liens li{margin:.3em 0}
+footer{max-width:1100px;margin:0 auto;padding:0 20px 50px;color:var(--discret);font-size:.85rem}
+@media (max-width:640px){main{padding:6px 14px 50px}header.haut{padding:30px 14px}.fiche dl{grid-template-columns:1fr}.fiche dt{margin-top:.5em}}
+@media print{nav.sommaire{display:none}body{background:#fff;color:#000}header.haut{background:#17405c}.fiche,.chiffre,.frise div{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="haut">
+  <div class="contenu">
+    <h1>Peut-on refaire OppChoVec en 2000, 2005 et 2010 ?</h1>
+    <p>Inventaire des sources disponibles pour les 360 communes corses, indicateur par indicateur, et comparaison avec celles utilisées pour les années récentes (2016-2021).</p>
+    <p class="meta">Rapport du 15 octobre 2026 · inventaire seulement : aucune série n'a été calculée · rédigé pour la doctorante qui pilote le projet</p>
+  </div>
+</header>
+
+<nav class="sommaire" aria-label="Sommaire">
+  <ul>
+    <li><a href="#bref">En bref</a></li>
+    <li><a href="#annees">Quelles années ?</a></li>
+    <li><a href="#matrice">Vue d'ensemble</a></li>
+    <li><a href="#detail">Détail par indicateur</a></li>
+    <li><a href="#recensement">Fichiers de recensement</a></li>
+    <li><a href="#revenu">Le revenu : médiane ou moyenne ?</a></li>
+    <li><a href="#limites">Précautions</a></li>
+    <li><a href="#verifie">Vérifié ou pas</a></li>
+    <li><a href="#suite">Suite possible</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="bref">
+  <h2>En bref</h2>
+  <div class="chiffres">
+    <div class="chiffre"><b>7 sur 10</b><span>indicateurs reconstituables en 2005 et en 2010 (Opp3 complet grâce aux fichiers détail), avec des réserves précisées plus bas</span></div>
+    <div class="chiffre"><b>6 sur 10</b><span>pour 2000 (recensement de 1999) : Vec3 manque, Opp3 sans transports en commun</span></div>
+    <div class="chiffre"><b>3 à part</b><span>Opp4 (4G, haut débit, fibre) impossible ; Cho1 et Vec4 seulement approchés</span></div>
+    <div class="chiffre"><b>360 / 360</b><span>communes présentes dans toutes les bases INSEE vérifiées, avec les mêmes codes qu'aujourd'hui</span></div>
+  </div>
+  <ul>
+    <li><strong>Le recensement fournit l'essentiel.</strong> Les bases « fiche synthétique » de l'INSEE contiennent chacune <em>deux</em> millésimes côte à côte : un pour le recensement de 1999 et un pour 2006 ou 2010. J'ai téléchargé celles de 2010 : les 360 communes y sont, en 1999 comme en 2010, avec les mêmes codes que dans votre GeoJSON.</li>
+    <li><strong>Il n'y a pas de « 2005 » ni de « 2000 » en recensement.</strong> Les années utilisables sont <strong>1999</strong> (recensement général), <strong>2006</strong> (premier millésime annuel, enquêtes 2004-2008) et <strong>2010</strong> (enquêtes 2008-2012).</li>
+    <li><strong>Certains trous se comblent dans les fichiers de recensement</strong> : les transports en commun (Opp3) via le fichier détail des mobilités professionnelles, et les personnes par pièce de 1999 (Vec2) via les séries historiques. Voir <a href="#recensement">« Compléter avec les fichiers de recensement »</a>.</li>
+    <li><strong>Revenu :</strong> on obtient une <strong>médiane</strong> pour 212 communes sur 360 en 2001 et 2005, 233 en 2010 (fiscal, INSEE « RFLM »), et une <strong>moyenne</strong> par foyer fiscal pour 274 communes en 2000, 348 en 2005 et 349 en 2010 (DGFiP « IRCOM »). Le détail et la recommandation sont dans la section <a href="#revenu">Le revenu</a>.</li>
+    <li><strong>Ce qui ne pourra pas se faire :</strong> la 4G n'existait pas avant 2012, il n'y a pas de données communales de débit avant la loi de 2016, et la fibre était absente ; les services (Vec4) et les quartiers (Cho1) demandent des substituts.</li>
+  </ul>
+</section>
+
+<section id="annees">
+  <h2>De quelles années parle-t-on ?</h2>
+  <p>Les « années » de la demande correspondent à des millésimes de sources qui ne tombent pas pile. Voici la correspondance retenue :</p>
+  <div class="frise">
+    <div><strong>≈ 2000</strong><br>Recensement <b>1999</b> (référence : mars 1999). Revenus : fiscal 2001 (INSEE), impôt 1999-2000 (DGFiP).</div>
+    <div><strong>≈ 2005</strong><br>Recensement <b>2006</b> (enquêtes 2004-2008, premier millésime du recensement annuel). Revenus : fiscal 2005.</div>
+    <div><strong>≈ 2010</strong><br>Recensement <b>2010</b> (enquêtes 2008-2012). Revenus : fiscal 2010. Équipements : 2011-2012 (comptages communaux).</div>
+  </div>
+  <div class="encart alerte"><strong>Attention :</strong> les millésimes 2006 et 2010 partagent l'enquête de 2008 (chacun regroupe cinq années d'enquête). Ils ne sont donc pas totalement indépendants ; 1999 est un recensement général distinct. Pour les années récentes, 2016 et 2021 ne se recouvrent pas.</div>
+</section>
+
+<section id="matrice">
+  <h2>Vue d'ensemble : indicateur par indicateur</h2>
+  <p class="legende"><span><span class="pastille ok">● comparable</span> même définition possible</span><span><span class="pastille approx">◐ approché</span> définition proche ou substitut</span><span><span class="pastille non">○ impossible</span> pas de source communale</span></p>
+  <div class="tableau">
+  <table class="matrice">
+    <thead><tr><th>Indicateur</th><th>≈ 2000 (1999)</th><th>≈ 2005 (2006)</th><th>≈ 2010</th><th>Source actuelle (2016-2021)</th></tr></thead>
+    <tbody>
+      <tr><td class="l">Opp1 · éducation</td><td><span class="pastille ok">● 4 niveaux</span></td><td><span class="pastille ok">● 4 niveaux</span></td><td><span class="pastille ok">● 4 niveaux</span></td><td>INSEE, diplômes : 7 niveaux (2020), 4 niveaux (2016)</td></tr>
+      <tr><td class="l">Opp2 · diversité sociale</td><td><span class="pastille ok">● Theil</span></td><td><span class="pastille ok">● Theil</span></td><td><span class="pastille ok">● Theil</span></td><td>INSEE, 8 catégories socioprofessionnelles</td></tr>
+      <tr><td class="l">Opp3 · mobilité</td><td><span class="pastille approx">◐ voiture seule</span></td><td><span class="pastille ok">● avec fichier détail</span></td><td><span class="pastille ok">● avec fichier détail</span></td><td>voiture + transports en commun + bus des 3 villes</td></tr>
+      <tr><td class="l">Opp4 · 4G, débit, fibre</td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td>ARCEP, couverture communale récente</td></tr>
+      <tr><td class="l">Cho1 · quartiers prioritaires</td><td><span class="pastille approx">◐ ZUS</span></td><td><span class="pastille approx">◐ ZUS</span></td><td><span class="pastille approx">◐ ZUS / CUCS</span></td><td>Quartiers prioritaires 2015 puis 2024</td></tr>
+      <tr><td class="l">Cho2 · nationalité</td><td><span class="pastille approx">◐ à confirmer</span></td><td><span class="pastille approx">◐ 15 ans et plus</span></td><td><span class="pastille approx">◐ 15 ans et plus</span></td><td>INSEE NAT1 + POP1B, 18 ans et plus</td></tr>
+      <tr><td class="l">Vec1 · revenu</td><td><span class="pastille approx">◐ moyenne (274/360)</span></td><td><span class="pastille ok">● médiane (212/360)</span></td><td><span class="pastille ok">● médiane (233/360)</span></td><td>Filosofi : médiane (206/360 en 2016 et 2021)</td></tr>
+      <tr><td class="l">Vec2 · logement</td><td><span class="pastille ok">● via séries historiques</span></td><td><span class="pastille ok">● complet</span></td><td><span class="pastille ok">● complet</span></td><td>INSEE, résidences principales</td></tr>
+      <tr><td class="l">Vec3 · emploi</td><td><span class="pastille non">○ 4 circonscriptions seulement</span></td><td><span class="pastille ok">● complet</span></td><td><span class="pastille ok">● complet</span></td><td>INSEE, chômage + statuts d'emploi</td></tr>
+      <tr><td class="l">Vec4 · services à 20 min</td><td><span class="pastille non">○</span></td><td><span class="pastille non">○</span></td><td><span class="pastille approx">◐ comptages communaux</span></td><td>BPE 2024 géolocalisée + temps de trajet OSRM</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Lecture : pour <strong>2005</strong> et <strong>2010</strong>, on dispose de Opp1, Opp2, Opp3, Cho2 (approché), Vec1, Vec2, Vec3, soit 7 indicateurs ; pour <strong>2000</strong>, Vec3 manque et Opp3 n'a que la voiture, soit 6 indicateurs. Cho1 et Vec4 sont des ajouts possibles avec des substituts.</p>
+</section>
+
+<section id="detail">
+  <h2>Détail par indicateur</h2>
+
+  <div class="fiche">
+    <h3>Opp1 · éducation</h3>
+    <div class="etat"><span class="pastille ok">● 1999</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Diplômes - formation</em>, base « indicateurs de la fiche synthétique » : 2010 (avec 1999 dans le même fichier, page 2044702) et 2006 (page 2044694). <strong>Téléchargé et vérifié pour 1999 et 2010.</strong></dd>
+      <dt>Contenu</dt><dd>Non scolarisés de 15 ans et plus par diplôme en <strong>7 niveaux</strong> (aucun diplôme, CEP, BEPC, CAP-BEP, bac, bac+2, supérieur long), et population de 15-17 ans scolarisée ou non (pour ne garder que les 18 ans et plus, comme aujourd'hui).</dd>
+      <dt>Différence avec l'actuel</dt><dd>Les 7 niveaux de 1999-2010 ne sont <strong>pas</strong> les 7 niveaux de 2020 : avant, « aucun diplôme » et « CEP » sont séparés et le supérieur est en deux niveaux ; en 2020, ils sont fusionnés et le supérieur est en trois. Le millésime 2016 n'a que 4 niveaux. <strong>Seul dénominateur commun : 4 niveaux</strong> (aucun diplôme ou brevet, CAP-BEP, bac, supérieur), ce qui est déjà ce que fait la série 2016-2021.</dd>
+      <dt>Remarque</dt><dd>Cette échelle à 7 niveaux de 1999-2010 est probablement celle du rapport de stage (« échelle de 1 à 7 »).</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Opp2 · diversité sociale (indice de Theil)</h3>
+    <div class="etat"><span class="pastille ok">● 1999</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Évolution et structure de la population</em> (2010 + 1999 : page 2044743 ; 2006 + 1999 : page 2044735). <strong>Vérifié pour 1999 et 2010</strong> : les 8 catégories (agriculteurs, artisans-commerçants, cadres, professions intermédiaires, employés, ouvriers, retraités, autres sans activité) sont présentes pour les 360 communes.</dd>
+      <dt>Différence avec l'actuel</dt><dd>Aucune de définition : mêmes 8 catégories, même formule de Theil. À noter que l'INSEE a changé de nomenclature des professions en 2003 ; les bases qui présentent 1999 à côté de 2006 ou 2010 sont conçues pour être comparables entre ces années.</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Opp3 · mobilité (voiture, transports en commun, réseau de bus)</h3>
+    <div class="etat"><span class="pastille ok">● voiture</span><span class="pastille ok">● transports en commun 2006-2010 (fichier détail)</span><span class="pastille non">○ transports en commun 1999</span><span class="pastille ok">● bus (constant)</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Logement</em> (2010 + 1999 : page 2044717 ; 2006 : page 2044725). <strong>Vérifié</strong> : la part des ménages ayant au moins une voiture (<code>RP_VOIT1P</code>) est présente pour 1999 et 2010, pour les 360 communes.</dd>
+      <dt>Ce qui manque, et où le trouver</dt><dd>Le « +100 si des actifs vont travailler en transports en commun » vient aujourd'hui d'une variable (<code>ACTOCC15P_COMMUN</code>) qui <strong>n'est pas</strong> dans la base « fiche synthétique » de 2010. Elle se reconstitue à partir du <strong>fichier détail « Mobilités professionnelles des individus »</strong> (variable <code>TRANS</code> = mode de transport, une ligne par actif occupé, avec la commune de résidence) : voir la section <a href="#recensement">« Fichiers de recensement »</a>. Pour 1999, je n'ai pas trouvé d'équivalent.</dd>
+      <dt>Réseau de bus</dt><dd>Le +100 des trois villes (Ajaccio, Bastia, Porto-Vecchio) est une constante de notre code : à rediscuter pour 2000 (les réseaux de bus de l'époque ne sont pas documentés ici).</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Opp4 · 4G, débit supérieur à 30 Mb/s, fibre</h3>
+    <div class="etat"><span class="pastille non">○ 2000</span><span class="pastille non">○ 2005</span><span class="pastille non">○ 2010</span></div>
+    <dl>
+      <dt>Pourquoi</dt><dd>La <strong>4G</strong> n'est déployée qu'à partir de 2012. Le <strong>débit supérieur à 30 Mb/s</strong> et la <strong>fibre</strong> n'existent pas comme mesures communales à ces dates. L'ARCEP n'a publié des données de couverture en open data qu'après la loi pour une République numérique (2016) ; ses fichiers communaux de déploiement commencent en 2018, et un fichier T4 2017 existe pour la fibre. Je n'ai trouvé <strong>aucune donnée communale d'éligibilité ADSL</strong> pour 2005-2010 (seulement des chiffres nationaux : 98,4 % de la population en 2009, 98,5 % en 2010).</dd>
+      <dt>Conséquence</dt><dd>Opp4 est à <strong>exclure</strong> des indices anciens, ou à redéfinir avec une technologie de l'époque (ADSL, 2G/3G), ce qui ferait un autre indicateur.</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Cho1 · population en quartiers prioritaires</h3>
+    <div class="etat"><span class="pastille approx">◐ ZUS (2000, 2005)</span><span class="pastille approx">◐ ZUS / CUCS (2010)</span></div>
+    <dl>
+      <dt>Source</dt><dd>Avant 2015, la politique de la ville raisonnait en <strong>zones urbaines sensibles (ZUS)</strong>, puis en quartiers des contrats urbains de cohésion sociale (CUCS, 2007-2014). L'INSEE publie la <strong>population des communes en ZUS</strong> au recensement 2006 (page 2130333) ; elle remplace celle de 1999. D'après cette page, les deux seules communes corses concernées seraient Ajaccio (18 804 habitants en ZUS) et Bastia (11 257) : <em>chiffres lus sur la page, non téléchargés</em>.</dd>
+      <dt>Différence avec l'actuel</dt><dd>Les périmètres ne sont pas ceux des quartiers prioritaires (2015, puis 2024) : une variation entre dates mêlerait l'évolution de la population et le changement de périmètre. À traiter comme un indicateur à part.</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Cho2 · droit de vote (part de Français)</h3>
+    <div class="etat"><span class="pastille approx">◐ 1999 à confirmer</span><span class="pastille approx">◐ 2006</span><span class="pastille approx">◐ 2010</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Nationalité et immigration</em>, tableaux détaillés. La table <strong>NAT1</strong> (population par sexe, âge et nationalité, 4 classes d'âge) est confirmée pour <strong>2006</strong> (page 2120441). Pour 2010, la base existe (page 2403632, sous-page 2052701) mais je n'ai pas vu la liste de ses tables. Pour 1999, je n'ai pas localisé de fichier communal équivalent.</dd>
+      <dt>Le piège des 18 ans et plus</dt><dd>L'indicateur actuel isole les 18 ans et plus avec la population par année d'âge (table POP1B). Je n'ai <strong>pas trouvé</strong> cette table pour 2006 et 2010 ; les bases « fiche synthétique » ne donnent que des classes d'âge larges (15-29 ans, etc.). On peut donc au mieux calculer la <strong>part de Français parmi les 15 ans et plus</strong>, comme dans la série 2016-2021 pour la partie « 15 ans et plus ».</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Vec1 · revenu</h3>
+    <div class="etat"><span class="pastille approx">◐ 2000 : moyenne</span><span class="pastille ok">● 2005 : médiane</span><span class="pastille ok">● 2010 : médiane</span></div>
+    <p>Voir la section dédiée <a href="#revenu">« Le revenu : médiane ou moyenne ? »</a>.</p>
+  </div>
+
+  <div class="fiche">
+    <h3>Vec2 · qualité du logement</h3>
+    <div class="etat"><span class="pastille ok">● 1999 (via séries historiques)</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Logement</em> (mêmes pages que Opp3). <strong>Vérifié</strong> pour 2010 : personnes des résidences principales (<code>NPER_RP</code>), nombre de pièces, salle de bain, chauffage central collectif et individuel, chauffage électrique, maisons.</dd>
+      <dt>1999</dt><dd>La feuille 1999 de la base 2010 a le nombre de pièces, la salle de bain, le chauffage et les maisons, mais <strong>pas</strong> <code>NPER_RP</code>. Le nombre de personnes se récupère dans la base <em>Séries historiques</em> (<code>D99_PMEN</code>, population des ménages) : j'ai vérifié sur 2010 que <code>PMEN</code> et <code>NPER_RP</code> sont <strong>identiques</strong> pour les 360 communes. Vec2 est donc complet en 1999.</dd>
+      <dt>Différence avec l'actuel</dt><dd>Même définition que la série 2016-2021 (rapport des sommes pour les personnes par pièce, chauffage constant à 1).</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Vec3 · stabilité de l'emploi</h3>
+    <div class="etat"><span class="pastille non">○ 1999</span><span class="pastille ok">● 2006</span><span class="pastille ok">● 2010</span></div>
+    <dl>
+      <dt>Source</dt><dd>INSEE, <em>Caractéristiques de l'emploi</em> (2010 + 1999 : page 2044673 ; 2006 : page 2044664) et <em>Emploi - population active</em> (page 2044658) pour les chômeurs. <strong>Vérifié</strong> : pour 2010, CDI, CDD, intérim, emplois aidés, apprentis, non-salariés et chômeurs sont présents pour les 360 communes.</dd>
+      <dt>1999</dt><dd><strong>Pas de fichier communal public trouvé.</strong> Les bases communales (éditions 2006, 2007, 2009, 2010) n'ont, pour 1999, que les salariés totaux (par sexe, temps partiel) et les actifs occupés. Le recensement de 1999 a pourtant bien relevé ces statuts : ils sont publiés dans les <strong>tableaux « analyses » par circonscription législative</strong> (voir section <a href="#recensement">Fichiers de recensement</a>), soit 4 zones pour toute la Corse.</dd>
+    </dl>
+  </div>
+
+  <div class="fiche">
+    <h3>Vec4 · services accessibles en moins de 20 minutes</h3>
+    <div class="etat"><span class="pastille non">○ 2000</span><span class="pastille non">○ 2005</span><span class="pastille approx">◐ 2010 (≈ 2011-2012)</span></div>
+    <dl>
+      <dt>Source</dt><dd>La base permanente des équipements (BPE) remplace l'inventaire communal (dernière édition en 1998 : 36 types d'équipements contre 235 aujourd'hui) ; sa première diffusion porte sur 2007. Je n'ai pas localisé les fichiers INSEE de 2008-2010. J'ai en revanche <strong>téléchargé et vérifié</strong> un jeu data.gouv.fr de <strong>comptages par commune et par type pour 2011 et 2012</strong> (329 communes corses, 159 types), avec les coordonnées du centre de la commune mais pas celles de chaque équipement.</dd>
+      <dt>Méthode de substitution</dt><dd>Sans coordonnées d'équipement, on compte, pour chaque commune, les équipements des communes à moins de 20 minutes (centre à centre). <strong>Test fait aujourd'hui sur la BPE 2024</strong> : cette approximation donne une corrélation de <strong>0,90</strong> (0,89 en rang) avec le vrai Vec4, mais sous-estime les niveaux (440 services en moyenne contre 516).</dd>
+      <dt>Limite</dt><dd>Le réseau routier est celui d'aujourd'hui (OpenStreetMap 2025) : les routes ont changé depuis 2010. Et la nomenclature des équipements a évolué (seuls 120 types sur 168 de 2016 existent encore en 2024).</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="recensement">
+  <h2>Compléter avec les fichiers de recensement</h2>
+  <p>Oui, certains manques se comblent sans sortir du recensement. Il existe, en plus des tableaux par commune, des <strong>fichiers détail</strong> : une ligne par habitant (anonymisée, avec un poids), qu'on peut agréger soi-même par commune quand la commune de résidence y figure.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Ce qui manque</th><th>Où le prendre</th><th>Résultat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Opp3 · transports en commun</strong>, 2006-2010</td><td>Fichier détail <em>Mobilités professionnelles des individus</em> (2006 : page 2407634, 91 Mo ; 2010 : page 2411532 ; 2007 à 2009 aussi), variable <code>TRANS</code></td><td><span class="pastille ok">vérifié sur 2006</span> : 83 330 lignes pour la Corse, <strong>les 360 communes</strong> présentes, 111 671 actifs occupés une fois pondérés. 2 653 utilisent les transports en commun (2,4 %), répartis dans <strong>184 communes</strong> (le test actuel donne 168 communes en 2021 : même ordre de grandeur).</td></tr>
+      <tr><td><strong>Vec2 · personnes par pièce</strong>, 1999</td><td>Base <em>Séries historiques</em> (page 4171585), variable <code>D99_PMEN</code></td><td><span class="pastille ok">vérifié</span> : <code>PMEN</code> est <strong>identique</strong> à <code>NPER_RP</code> en 2010 sur les 360 communes (écart nul).</td></tr>
+      <tr><td><strong>Cho2 · 18 ans et plus</strong>, 2006-2010</td><td>Fichier détail mobilités : nationalité (<code>INATC</code>) et âge quinquennal (<code>AGEREVQ</code>) existent, mais <strong>seulement pour les actifs occupés</strong>. Le fichier détail général des individus, lui, ne semble donner que le « canton ou ville » de résidence (d'après la documentation du fichier 2009) : pas la commune pour les petites.</td><td><span class="pastille approx">variante possible</span> : « part de Français parmi les actifs occupés de 18 ans et plus » (population différente de l'indicateur actuel, mais calculable aux mêmes dates, y compris 2016 et 2021 avec les fichiers de ces années).</td></tr>
+      <tr><td><strong>Vec3 · statuts d'emploi</strong>, 1999</td><td>Recherche ciblée (voir l'encadré ci-dessous) : pas de fichier communal public ; les statuts détaillés de 1999 (apprentis, intérimaires, emplois aidés, CDD, titulaires de la fonction publique, CDI) sont publiés <strong>par circonscription législative</strong>.</td><td><span class="pastille non">communal : non trouvé</span></td></tr>
+      <tr><td><strong>Cho2 · population par année d'âge</strong>, 2006-2010</td><td>Table <code>POP1B</code> : non localisée pour ces millésimes</td><td><span class="pastille non">non trouvé</span> : reste le 15 ans et plus.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>Vec3 en 1999 : recherche ciblée</h3>
+  <ul>
+    <li><strong>Ce qui existe :</strong> le recensement de 1999 a relevé la condition d'emploi. Les tableaux « analyses » RP99 par <strong>circonscription législative</strong> (publiés par l'Assemblée nationale à partir des données de l'INSEE) la détaillent : j'ai téléchargé les 4 fichiers de la Corse (<code>2A01</code>, <code>2A02</code>, <code>2B01</code>, <code>2B02</code>) et la table « ACT 2 – Population active ayant un emploi par sexe, âge et condition d'emploi » y distingue « apprenti sous contrat », « placé par une agence d'intérim », « emploi aidé », « stagiaire rémunéré », « CDD », « titulaire de la fonction publique » et « contrat à durée indéterminée », avec le sexe et le temps de travail.</li>
+    <li><strong>Ce qui manque :</strong> la même information <strong>par commune</strong>. Les bases communales de l'INSEE pour 1999 (éditions 2006, 2007, 2009, 2010) n'ont que les salariés totaux et le temps partiel ; les tableaux détaillés de 1999 ne descendent pas à la commune ; le fichier détail des mobilités professionnelles commence en 2006 ; les fichiers détail d'individus ne donnent que le canton ou la ville ; les données « îlots » 1999 de data.gouv.fr ne concernent que Bordeaux.</li>
+    <li><strong>Pistes pour l'obtenir :</strong> (1) demander à l'INSEE un <strong>tableau sur mesure</strong> du recensement de 1999 par commune (il détient les données complètes, c'était un recensement exhaustif) ; (2) tenter le portail « Statistiques locales » de l'INSEE commune par commune (non vérifié) ; (3) à défaut, utiliser les 4 circonscriptions comme valeur de remplacement, ce qui ne distingue presque pas les communes, comme la valeur départementale du revenu ; (4) définir un Vec3 « simplifié » avec ce qui existe en 1999 pour toutes les communes (chômeurs, non-salariés, salariés à temps partiel), mais ce serait un autre indicateur.</li>
+    <li><strong>Précaution :</strong> l'INSEE signale que le questionnement de 1999 sur l'emploi différait de celui des recensements suivants (la question « travaillez-vous ? » venait en premier), ce qui rend les comparaisons de condition d'emploi délicates, surtout pour les jeunes.</li>
+  </ul>
+  <div class="encart alerte"><strong>Limite des fichiers détail :</strong> ce sont des échantillons pondérés. Dans le fichier 2006, la moitié des communes corses ont moins de 50 actifs pondérés et 128 communes ont moins de 30 lignes : un indicateur construit dessus est <strong>bruité dans les petites communes</strong>. On peut s'en tenir à un test « au moins un utilisateur » (comme aujourd'hui pour les transports en commun), moins sensible que des taux.</div>
+  <p>Ces fichiers sont gros (91 Mo compressés, 821 Mo décompressés pour 2006) mais se lisent par morceaux ; je l'ai fait pour la Corse en quelques minutes.</p>
+</section>
+
+<section id="revenu">
+  <h2>Le revenu : médiane ou moyenne ?</h2>
+  <p>Vous pouvez partir de l'un ou de l'autre ; voici ce qui existe à chaque date, <strong>vérifié sur les fichiers</strong> pour les 360 communes corses.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Date</th><th>Médiane (INSEE)</th><th>Moyenne par foyer (DGFiP, IRCOM)</th><th>Ce qu'on obtient</th></tr></thead>
+    <tbody>
+      <tr><td><strong>≈ 2000</strong></td><td>RFLM 2001 : <strong>212 / 360</strong> communes</td><td>IRCOM revenus 2000 : <strong>274 / 360</strong> (86 sous secret statistique)</td><td>Médiane ou moyenne, toutes deux incomplètes ; la moyenne couvre davantage de communes</td></tr>
+      <tr><td><strong>≈ 2005</strong></td><td>RFLM 2005 : <strong>212 / 360</strong></td><td>IRCOM revenus 2005 : <strong>348 / 360</strong></td><td>Médiane partielle, moyenne presque complète</td></tr>
+      <tr><td><strong>≈ 2010</strong></td><td>RFLM 2010 : <strong>233 / 360</strong></td><td>IRCOM revenus 2010 : <strong>349 / 360</strong></td><td>Médiane partielle, moyenne presque complète</td></tr>
+      <tr><td>2016 (rappel)</td><td>Filosofi : 206 / 360</td><td>IRCOM : 349 / 360</td><td>idem</td></tr>
+      <tr><td>2021 (rappel)</td><td>Filosofi : 206 / 360</td><td>IRCOM : 348 / 360</td><td>idem</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>Ce que mesurent ces deux familles</h3>
+  <ul>
+    <li><strong>Médiane, avant 2012 : « revenus fiscaux localisés des ménages » (RFLM).</strong> Revenu <em>fiscal</em> déclaré (avant prestations sociales), par unité de consommation. Seuil de diffusion : <strong>50 ménages pour la médiane</strong>, 2 000 habitants pour tous les autres indicateurs. C'est pourquoi la <strong>moyenne par unité de consommation n'existe que pour 24 communes en 2001 et 2005, 26 en 2010</strong>.</li>
+    <li><strong>Médiane, depuis 2012 : Filosofi</strong> (revenu <em>disponible</em> par unité de consommation, après impôts et prestations). C'est le concept actuel du projet. Il y a donc <strong>une rupture de concept entre 2010 (RFLM) et 2016 (Filosofi)</strong> : pas de série médiane continue de 2000 à 2021.</li>
+    <li><strong>Moyenne, toutes dates : IRCOM</strong> (revenu fiscal de référence total divisé par le nombre de foyers fiscaux). C'est la <strong>seule série continue</strong> de 2000 à 2024, avec le même concept à chaque date. Limites : moyenne et non médiane, par foyer fiscal et non par unité de consommation, foyers non imposés inclus ; en 2000, 86 communes sont sous secret.</li>
+  </ul>
+  <div class="encart">
+    <strong>Rapprochement vérifié sur les mêmes communes</strong> : médiane RFLM et moyenne IRCOM sont corrélées à <strong>0,77</strong> (rang 0,69) en 2010 sur 233 communes, et à <strong>0,72</strong> (rang 0,73) en 2005 sur 212 communes. Les deux ne sont donc pas interchangeables, mais elles classent les communes de façon assez proche (en 2016-2021, la corrélation de rang entre la médiane Filosofi et la moyenne IRCOM était de 0,67).
+  </div>
+  <h3>Recommandation</h3>
+  <p>Pour <strong>comparer dans le temps avec une définition constante</strong>, partir de la <strong>moyenne IRCOM</strong> (couverture quasi complète en 2005 et 2010, concept identique jusqu'en 2021). Pour <strong>rester proche de l'indicateur actuel</strong> (médiane par unité de consommation), prendre la médiane RFLM en 2005 et 2010, en assumant la rupture de concept avec Filosofi et en gardant la règle « valeur du département quand elle n'est pas diffusée » (148 communes en 2001 et en 2005, 127 en 2010). Les deux choix sont défendables ; le premier donne une série plus propre, le second un indicateur plus fidèle à l'esprit actuel.</p>
+</section>
+
+<section id="limites">
+  <h2>Précautions communes à toutes les dates</h2>
+  <ul>
+    <li><strong>Géographie :</strong> les codes des 360 communes sont identiques en 1999, 2010 et dans votre GeoJSON (vérifié sur la base diplômes). Aucune fusion à gérer.</li>
+    <li><strong>Petites communes :</strong> l'INSEE déconseille d'interpréter des effectifs inférieurs à 200 ; en Corse, beaucoup de communes sont concernées. Une partie des « évolutions » sera du bruit, comme déjà observé entre 2016 et 2021 (corrélations de 0,33 à 0,88 selon l'indicateur).</li>
+    <li><strong>Euros courants :</strong> tout revenu de 2000 à 2010 est en euros de l'époque ; il faudrait le corriger de l'inflation pour comparer avec 2021. Je n'ai pas la série officielle de l'indice des prix sous la main.</li>
+    <li><strong>Normalisation :</strong> comme pour 2016-2021, il faut normaliser sur toutes les dates ensemble (échelle commune) et calculer les poids de Betti sur l'ensemble, sinon chaque année aurait sa propre échelle.</li>
+    <li><strong>Résultats d'enquête :</strong> chaque millésime regroupe cinq années d'enquête ; deux millésimes proches (2006 et 2010) ne sont pas indépendants.</li>
+  </ul>
+</section>
+
+<section id="verifie">
+  <h2>Ce qui est vérifié, et ce qui ne l'est pas</h2>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Élément</th><th>Statut</th></tr></thead>
+    <tbody>
+      <tr><td>Bases INSEE 2010 (diplômes, catégories socioprofessionnelles, logement, caractéristiques de l'emploi, emploi - population active), feuilles 1999 et 2010 : contenu, variables, 360 communes corses</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Revenus fiscaux localisés (RFLM) 2001, 2005, 2010 : médiane et moyenne par unité de consommation, communes couvertes</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>IRCOM (DGFiP) 2000, 2005, 2010 : communes couvertes, moyenne par foyer</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Concordance des codes communes 1999 / 2010 / GeoJSON</td><td><span class="pastille ok">vérifiée</span></td></tr>
+      <tr><td>Test de l'approximation « comptages communaux » pour Vec4 (BPE 2024, serveur OSRM local)</td><td><span class="pastille ok">calculé</span></td></tr>
+      <tr><td>Comptages d'équipements par commune 2011-2012 (data.gouv.fr)</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Fichier détail <em>Mobilités professionnelles</em> 2006 : communes de résidence, mode de transport, poids</td><td><span class="pastille ok">téléchargé et lu</span></td></tr>
+      <tr><td>Tableaux RP99 des 4 circonscriptions corses : présence des statuts et conditions d'emploi</td><td><span class="pastille ok">téléchargés et lus</span></td></tr>
+      <tr><td>Séries historiques : <code>D99_PMEN</code> et équivalence <code>PMEN</code> = <code>NPER_RP</code> (2010)</td><td><span class="pastille ok">téléchargé et vérifié</span></td></tr>
+      <tr><td>Bases INSEE 2006 (diplômes, CSP, logement, emploi) : variables et fichiers</td><td><span class="pastille approx">décrits par les pages INSEE, non téléchargés</span></td></tr>
+      <tr><td>NAT1 2006 : existence et classes d'âge</td><td><span class="pastille approx">page INSEE lue (liste des fichiers)</span></td></tr>
+      <tr><td>NAT1 2010, POP1B 2006 et 2010, nationalité 1999, transports en commun 1999, statuts d'emploi 1999</td><td><span class="pastille non">non localisés</span></td></tr>
+      <tr><td>Fichiers détail mobilités 2007 à 2010 (existence confirmée par les pages INSEE, non téléchargés)</td><td><span class="pastille approx">pages INSEE lues</span></td></tr>
+      <tr><td>Populations en ZUS (Ajaccio, Bastia) 2006</td><td><span class="pastille approx">lues sur la page INSEE (résumé automatique), à contrôler</span></td></tr>
+      <tr><td>BPE 2007-2010, inventaire communal 1998, données ADSL communales</td><td><span class="pastille non">non localisés</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="suite">
+  <h2>Suite possible</h2>
+  <ol>
+    <li><strong>Série 2006 → 2010 → 2016 → 2021 avec 7 indicateurs</strong> (Opp1, Opp2, Opp3 avec transports en commun, Cho2 15+, Vec1, Vec2, Vec3) : c'est ce qui est le plus solide. Il suffit de télécharger les bases 2006 et les fichiers détail de mobilité, et d'étendre le script de la série temporelle.</li>
+    <li><strong>Ajouter 1999</strong> : 6 indicateurs aujourd'hui (sans Vec3 communal ; Opp3 sans transports en commun). Pour avoir les 7, il faut obtenir le tableau communal de 1999 auprès de l'INSEE.</li>
+    <li><strong>Choisir le revenu</strong> : moyenne IRCOM (série continue) ou médiane RFLM puis Filosofi (rupture de concept en 2012).</li>
+    <li><strong>Vec4 et Cho1 en option</strong>, avec leurs substituts (comptages communaux, ZUS) et leurs avertissements.</li>
+  </ol>
+  <p>Dites-moi quelles dates vous voulez réellement (1999, 2006, 2010 ?) et quel revenu retenir, et je lance le calcul.</p>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="liens">
+    <li><a href="https://www.insee.fr/fr/statistiques/2044702">INSEE, Diplômes - formation en 2010 (avec 1999)</a> · <a href="https://www.insee.fr/fr/statistiques/2044694">en 2006</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/2044743">INSEE, Évolution et structure de la population en 2010 (avec 1999)</a> · <a href="https://www.insee.fr/fr/statistiques/2044735">en 2006</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/2044717">INSEE, Logement en 2010 (avec 1999)</a> · <a href="https://www.insee.fr/fr/statistiques/2044725">en 2006</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/2044673">INSEE, Caractéristiques de l'emploi en 2010 (avec 1999)</a> · <a href="https://www.insee.fr/fr/statistiques/2044664">en 2006</a> · <a href="https://www.insee.fr/fr/statistiques/2044658">Emploi - population active en 2010</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/2120441">INSEE, Nationalité en 2006 (tables NAT1 à NAT3A)</a> · <a href="https://www.insee.fr/fr/statistiques/2403632">Nationalité et immigration en 2010</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/1893279">INSEE, Revenus fiscaux localisés des ménages 2001</a> · <a href="https://www.insee.fr/fr/statistiques/1893289">2005</a> · <a href="https://www.insee.fr/fr/statistiques/1893299">2010</a></li>
+    <li><a href="https://www.data.gouv.fr/datasets/limpot-sur-le-revenu-par-collectivite-territoriale-ircom">DGFiP, IRCOM (impôt sur le revenu par commune), 1992 à 2024</a></li>
+    <li><a href="https://www.insee.fr/fr/statistiques/2130333">INSEE, Populations communales 2006 en ZUS</a></li>
+    <li><a href="https://insee.fr/fr/statistiques/2407634">INSEE, Mobilités professionnelles des individus en 2006 (fichier détail)</a> · <a href="https://insee.fr/fr/statistiques/2411532">2010</a> · <a href="https://www.insee.fr/fr/statistiques/4171585">Séries historiques (base communale)</a></li>
+    <li><a href="https://www.insee.fr/fr/metadonnees/source/serie/s1161">INSEE, Base permanente des équipements (séries)</a> · <a href="https://www.data.gouv.fr/datasets/le-marche-du-haut-et-tres-haut-debit-fixe-deploiements">ARCEP, marché du haut et très haut débit fixe</a></li>
+  </ul>
+</section>
+
+</main>
+<footer>
+  Fichier autonome, sans dépendance externe : il peut être archivé tel quel. Généré à partir des vérifications faites dans le dépôt OppChoVec (branche <code>visu_corse_simple</code>).
+</footer>
+</body>
+</html>

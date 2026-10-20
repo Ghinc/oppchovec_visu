@@ -44,4 +44,7 @@ const couleursCarte = (type) => `(() => { const o = {}; geojsonLayers[${JSON.str
 const classeDe = (valeur, seuils) => { for (let i = 1; i < seuils.length - 1; i++) if (valeur <= seuils[i]) return i - 1; return seuils.length - 2; };
 const comptes = (liste) => liste.reduce((o, x) => { o[x] = (o[x] || 0) + 1; return o; }, {});
 
-module.exports = { test, avecAppli, sauter, data, communes, lireJson, lireConstJs, normaliser, proche, couleursCarte, classeDe, comptes, WEB, RACINE };
+const evolutionActive = /SITE_EVOLUTION\s*=\s*true/.test(fs.readFileSync(path.join(WEB, 'config_site.js'), 'utf8'));
+const sansEvolution = evolutionActive ? false : 'site sans onglet Évolution (config_site.js)';
+
+module.exports = { evolutionActive, sansEvolution, test, avecAppli, sauter, data, communes, lireJson, lireConstJs, normaliser, proche, couleursCarte, classeDe, comptes, WEB, RACINE };

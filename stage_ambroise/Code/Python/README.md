@@ -1,6 +1,8 @@
 
 # 📘 README – Calcul de l’indice OppChoVec à l’échelle communale
 
+> **Mise à jour du 19 octobre 2026.** Ce README décrit le programme historique `oppchovec.py` et ses fichiers Excel individuels (indice « v1 »). **L'indice courant (v2) n'est plus produit par ce programme** : il est construit par `construire_indice_v2.py` à partir de sources officielles de 2023 à 2025 (voir `WEB/README_FICHIERS.md`, section « Procédure de régénération », et `RAPPORT_AUDIT_SOURCES_INDICE_COURANT`). L'ancien calcul reste reconstructible : `Données/archive_indice_v1_2020_2024/LISEZ_MOI.md`.
+
 ## 🧾 Description générale
 
 Ce script Python permet de calculer l’indice de bien-être objectif OppChoVec pour l’ensemble des communes corses.  

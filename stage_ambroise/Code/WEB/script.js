@@ -74,16 +74,16 @@ const traductions = {
             "language-english": "Libellés en anglais"
         },
         descriptions: {
-            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : recensement INSEE 2020. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
-            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles.",
-            Indicateur_Opp3: "Avoir les moyens de mobilité. Score basé sur la proportion de ménages avec voiture et l'accès aux transports.",
-            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la couverture 4G, Internet haut débit et fibre.",
-            Indicateur_Cho1: "Ne pas être discriminé. Calculé avec −log(nombre de personnes vivant en quartier prioritaire), 0 si aucune.",
-            Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Proportion de personnes possédant le droit de vote dans la commune.",
-            Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal médian de la commune.",
-            Indicateur_Vec2: "Avoir un logement décent. Score basé sur le confort, la densité d'occupation et le type de logement.",
-            Indicateur_Vec3: "Stabilité de l'emploi. Score basé sur la répartition des types de contrats et statuts d'emploi.",
-            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante accessibles en moins de 20 minutes en voiture."
+            Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : INSEE, recensement 2023. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
+            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles (8 catégories, 15 ans et plus). Source : INSEE, recensement 2023.",
+            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les quatre communes qui ont un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source : INSEE, recensement 2023.",
+            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024.",
+            Indicateur_Cho1: "Ne pas être discriminé. −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 si aucune. Source : INSEE, population communale en QPV 2024 (référence 1er janvier 2020).",
+            Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Part de Français parmi les 18 ans et plus, proxy des personnes ayant le droit de vote dans la commune. Source : INSEE, recensement 2023.",
+            Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal moyen par foyer fiscal de la commune (revenu fiscal de référence total divisé par le nombre de foyers fiscaux). Source : DGFiP, revenus 2024 ; pour les communes sous secret statistique, moyenne du département.",
+            Indicateur_Vec2: "Avoir un logement décent. Moyenne de la densité d'occupation (personnes par pièce) et de la part de maisons dans les résidences principales. Source : INSEE, recensement 2023.",
+            Indicateur_Vec3: "Stabilité de l'emploi. Statuts d'emploi pondérés : chômeurs 0, autres contrats (CDD, intérim, emplois aidés, apprentis) 0,5, CDI, fonctionnaires et non-salariés 1. Source : INSEE, recensement 2023.",
+            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante (base permanente des équipements 2024) accessibles en moins de 20 minutes en voiture."
         }
     },
     en: {
@@ -116,16 +116,16 @@ const traductions = {
             "language-english": "English labels"
         },
         descriptions: {
-            Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: 2020 INSEE census. Small municipalities have few people concerned: their value is less certain.",
-            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories.",
-            Indicateur_Opp3: "Having the means of mobility. Score based on the proportion of households with a car and access to transport.",
-            Indicateur_Opp4: "Having access to ICT. Average of 4G coverage, high-speed Internet and fiber.",
-            Indicateur_Cho1: "Not being discriminated against. Calculated with −log(number of people living in priority areas), 0 if none.",
-            Indicateur_Cho2: "Having the means to influence political decisions. Proportion of people with voting rights in the municipality.",
-            Indicateur_Vec1: "Having a decent income. Median tax income of the municipality.",
-            Indicateur_Vec2: "Having decent housing. Score based on comfort, occupancy density and housing type.",
-            Indicateur_Vec3: "Job stability. Score based on the distribution of contract types and employment status.",
-            Indicateur_Vec4: "Being close to services. Number of everyday services accessible within 20 minutes by car."
+            Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: INSEE, 2023 census. Small municipalities have few people concerned: their value is less certain.",
+            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories (8 categories, aged 15 and over). Source: INSEE, 2023 census.",
+            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the four municipalities with a regular urban bus network (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source: INSEE, 2023 census.",
+            Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024.",
+            Indicateur_Cho1: "Not being discriminated against. −log(number of people living in a priority neighbourhood), 0 if none. Source: INSEE, municipal population in priority neighbourhoods (QPV 2024, reference 1 January 2020).",
+            Indicateur_Cho2: "Having the means to influence political decisions. Share of French nationals among people aged 18 and over, a proxy for people with voting rights in the municipality. Source: INSEE, 2023 census.",
+            Indicateur_Vec1: "Having a decent income. Mean tax income per tax household of the municipality (total reference tax income divided by the number of tax households). Source: DGFiP, 2024 incomes; municipalities under statistical secrecy take the département average.",
+            Indicateur_Vec2: "Having decent housing. Average of occupancy density (people per room) and the share of houses among main residences. Source: INSEE, 2023 census.",
+            Indicateur_Vec3: "Job stability. Weighted employment statuses: unemployed 0, other contracts (fixed-term, temp, subsidised, apprentices) 0.5, permanent, civil servants and self-employed 1. Source: INSEE, 2023 census.",
+            Indicateur_Vec4: "Being close to services. Number of everyday services (permanent facilities database 2024) accessible within 20 minutes by car."
         }
     }
 };
@@ -171,10 +171,10 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 2.04, 4.04, 5.34, 7.31, 10],  // 5 classes - valeurs par défaut basées sur Jenks
-    opp: [0, 2.72, 4.14, 5.44, 6.88, 10],
-    cho: [0, 2.35, 6.11, 8.20, 9.30, 10],
-    vec: [0, 2.04, 3.37, 4.53, 6.80, 10]
+    oppchovec: [0, 3.16, 4.67, 6.03, 7.71, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    opp: [0, 3.11, 5.02, 6.58, 7.86, 10],
+    cho: [0, 2.44, 6.37, 8.31, 9.32, 10],
+    vec: [0, 2.61, 3.96, 5.24, 7.30, 10]
 };
 
 // Palette de couleurs (5 classes) - Bleu clair vers Violet (inversé pour valeurs croissantes)
@@ -663,7 +663,8 @@ function ajouterBoutonTelechargement(carte, mapType) {
 
 // Exporter le GeoJSON enrichi avec les classes Jenks
 function exporterGeoJSONAvecJenks(type) {
-    if (!communeJson || !communeJson.features) {
+    const geoUnitesExport = (typeof geoUnites === 'function') ? geoUnites() : communeJson;
+    if (!geoUnitesExport || !geoUnitesExport.features) {
         alert("GeoJSON des communes non chargé.");
         return;
     }
@@ -689,7 +690,7 @@ function exporterGeoJSONAvecJenks(type) {
     };
 
     // Enrichir les features
-    const features = communeJson.features.map(f => {
+    const features = geoUnitesExport.features.map(f => {
         const nom = f.properties.nom;
         const valeur = getValeur(nom);
         let classeJenks = null, labelJenks = null, couleur = '#ccc';
@@ -1235,6 +1236,8 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
         cartes[type].removeControl(legendControls[type]);
     }
 
+    communeLayers[type] = {};        // les unités changent avec l'échelle (communes / EPCI)
+
     // Créer la couche GeoJSON
     geojsonLayers[type] = L.geoJSON(geojsonData, {
         style: feature => {
@@ -1308,7 +1311,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 <svg width="30" height="2" style="margin-right: 8px;">
                     <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
                 </svg>
-                <span class="legende-limites" style="font-size: 11px;">${traductions[lang].limitesCommunes}</span>
+                <span class="legende-limites" style="font-size: 11px;">${(typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'Limites des EPCI' : traductions[lang].limitesCommunes}</span>
             </div>
         `;
 
@@ -1345,7 +1348,7 @@ function afficherToutesLesCartes(geojsonData, indiceFinal, scores) {
     afficherCarteUnique('map-vec', 'vec', geojsonData, scoresVec, 'Score Vec');
 
     // Si les cartes LISA ont déjà été initialisées, les mettre à jour
-    if (lisaCartesInitialisees) {
+    if (lisaCartesInitialisees && !(typeof echelleEstEPCI === 'function' && echelleEstEPCI())) {
         afficherCarteLISA('map-lisa-5pct', 'lisa-5pct', geojsonData, indiceFinal, clustersLISA5pct, '5%');
         afficherCarteLISA('map-lisa-1pct', 'lisa-1pct', geojsonData, indiceFinal, clustersLISA1pct, '1%');
     }
@@ -1926,6 +1929,10 @@ function readFileAsText(file) {
 // Fonction pour générer les visualisations de données (top 10 et histogramme)
 function genererDataVisualisations(indiceFinale) {
     console.log("📊 Génération des visualisations de données...");
+    const unite = (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'EPCI' : 'commune';          // unités affichées
+    const titreTop = document.getElementById('datavis-top10-titre'), colTop = document.getElementById('datavis-top10-col');
+    if (titreTop) titreTop.textContent = unite === 'EPCI' ? 'Top 10 des EPCI' : 'Top 10 des communes';
+    if (colTop) colTop.textContent = unite === 'EPCI' ? 'EPCI' : 'Commune';
 
     // Créer un tableau de [commune, score] et trier par score décroissant
     const communesScores = Object.entries(indiceFinale).map(([commune, score]) => ({
@@ -2014,7 +2021,7 @@ function genererDataVisualisations(indiceFinale) {
                         },
                         title: {
                             display: true,
-                            text: 'Nombre de communes',
+                            text: unite === 'EPCI' ? 'Nombre d\'EPCI' : 'Nombre de communes',
                             font: {
                                 size: 13,
                                 weight: 'bold'
@@ -2194,6 +2201,54 @@ const META_INDICATEURS = {
   Indicateur_Vec4: { unite: 'services', decimales: 0 }
 };
 
+// Provenance et année de chaque donnée utilisée (infobulles ⓘ du panneau commune).
+// Même contenu que `sources` et `millesimes` de Données/indice_v2/sources_indice_v2.json ; null = information manquante (signalée dans l'infobulle).
+const RP23 = 'INSEE, recensement de la population 2023 (collectes de 2021 à 2025, résultats publiés le 25/06/2026)';
+const SOURCES_DONNEES = {
+  Opp1: { indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
+  Opp2: { indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
+  Opp3: {
+    indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr)`, annee: '2023' },
+    voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
+    tc: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (actifs occupés allant travailler en transports en commun)`, annee: '2023' },
+    bus: { provenance: "Réseaux urbains Muvistrada (Ajaccio, CA du Pays Ajaccien), Via Bastia (CA de Bastia), A Citadina (Porto-Vecchio, CC du Sud Corse) et A Balanina (L'Île-Rousse, CC de l'Île-Rousse - Balagne, en service depuis mai 2022), référencés sur transport.data.gouv.fr (point d'accès national aux données de transport) ; réseaux saisonniers exclus ; sélection faite par la doctorante", annee: 'jeux référencés en 2026 (créés de 2019 à 2023)' }
+  },
+  Opp4: {
+    indicateur: { provenance: 'ARCEP (couverture mobile et « Ma connexion internet »)', annee: 'T4 2024' },
+    g4: { provenance: "ARCEP, couvertures théoriques 4G des 4 opérateurs, croisées avec la grille de population INSEE Filosofi au carreau de 200 m (revenus 2021)", annee: 'T4 2024 (grille : 2021)' },
+    debit: { provenance: "ARCEP, « Ma connexion internet », offres filaires (commune_debit_filaire)", annee: 'T4 2024' },
+    fibre: { provenance: "ARCEP, « Ma connexion internet », technologies par commune (commune_techno)", annee: 'T4 2024' }
+  },
+  Cho1: {
+    indicateur: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' },
+    personnes_qpv: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' }
+  },
+  Cho2: { indicateur: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)`, annee: '2023' } },
+  Vec1: { indicateur: { provenance: 'DGFiP, impôt sur le revenu par commune (IRCOM, revenus 2024) : revenu fiscal de référence total / nombre de foyers fiscaux ; communes sous secret statistique : moyenne du département', annee: 'revenus 2024' } },
+  Vec2: {
+    indicateur: { provenance: `${RP23}, base communale Logement`, annee: '2023' },
+    pers_piece: { provenance: `${RP23}, base communale Logement (résidences principales, pièces)`, annee: '2023' },
+    maisons: { provenance: `${RP23}, base communale Logement (maisons)`, annee: '2023' }
+  },
+  Vec3: {
+    indicateur: { provenance: `${RP23}, bases communales Caractéristiques de l'emploi et Emploi - population active`, annee: '2023' },
+    stable: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDI, fonctionnaires, non-salariés)`, annee: '2023' },
+    autres: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDD, intérim, aidés, apprentis)`, annee: '2023' },
+    chomeur: { provenance: `${RP23}, base communale Emploi - population active (chômeurs)`, annee: '2023' }
+  },
+  Vec4: { indicateur: { provenance: "INSEE, base permanente des équipements 2024 ; temps de trajet OSRM sur OpenStreetMap (Geofabrik, 06/11/2025)", annee: '2024' } }
+};
+
+function badgeSource(indicateur, comp) {
+  const s = SOURCES_DONNEES[indicateur.replace('Indicateur_', '')]?.[comp || 'indicateur'];
+  const echapper = t => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const texte = s
+    ? `Provenance : ${s.provenance}. Année : ${s.annee || 'non renseignée (à documenter)'}.`
+    : 'Provenance et année non renseignées (à documenter).';
+  const manque = !s || !s.annee;
+  return `<span class="src-badge${manque ? ' src-manquante' : ''}" tabindex="0" role="note" aria-label="${echapper(texte)}" data-src="${echapper(texte)}">ⓘ</span>`;
+}
+
 // Indicateurs décomposés : un slider par sous-composante, l'indicateur est recalculé par sa formule d'origine
 // (mêmes formules que Code/Python/exporter_sous_composantes.py, qui vérifie qu'elles redonnent le JSON).
 // binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
@@ -2204,16 +2259,16 @@ const SOUS_COMPOSANTES = {
     composantes: {
       voiture: { label: 'Ménages avec au moins une voiture', unite: '%', decimales: 1 },
       tc:      { label: 'Réseau de transports en commun (+100 pts)', binaire: 100 },
-      bus:     { label: 'Réseau de bus urbain (+100 pts)', binaire: 1 }
+      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', binaire: 1 }
     },
     calcul: c => c.voiture + (c.tc > 0 ? 100 : 0) + (c.bus ? 100 : 0)
   },
   Indicateur_Opp4: {
     cle: 'Opp4',
     composantes: {
-      g4:    { label: 'Population couverte en 4G', unite: '%', decimales: 0 },
-      debit: { label: 'Population avec débit > 30 Mb/s', unite: '%', decimales: 0 },
-      fibre: { label: 'Taux de fibre', unite: '%', decimales: 0 }
+      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', unite: '%', decimales: 0 },
+      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', unite: '%', decimales: 0 },
+      fibre: { label: 'Locaux raccordables à la fibre', unite: '%', decimales: 0 }
     },
     calcul: c => (c.g4 + c.debit + c.fibre) / 3
   },
@@ -2228,25 +2283,21 @@ const SOUS_COMPOSANTES = {
     cle: 'Vec2',
     composantes: {
       pers_piece: { label: 'Personnes par pièce', unite: '', decimales: 2, inverse: true },
-      sdb:        { label: 'Logements avec salle de bain', unite: '%', decimales: 1, facteur: 100 },
-      chauffage:  { label: 'Logements avec chauffage', unite: '%', decimales: 1, facteur: 100 },
       maisons:    { label: 'Maisons individuelles', unite: '%', decimales: 1, facteur: 100 }
     },
-    calcul: c => (Math.exp(-c.pers_piece) + (c.sdb + c.chauffage) / 2 + c.maisons) / 3
+    calcul: c => (Math.exp(-c.pers_piece) + c.maisons) / 2
   },
   Indicateur_Vec3: {
     cle: 'Vec3',
     parts: true,  // parts d'actifs qui somment à 100 % : bouger l'une redistribue les autres
     composantes: {
-      stable:   { label: 'Emploi stable (poids 1)', unite: '%', decimales: 1 },
-      cdd:      { label: 'CDD (poids 0,75)', unite: '%', decimales: 1 },
-      ponctuel: { label: 'Contrat ponctuel (poids 0,5)', unite: '%', decimales: 1 },
-      chomeur:  { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 },
-      aide:     { label: 'Emploi aidé (poids 0,25)', unite: '%', decimales: 1 }
+      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', unite: '%', decimales: 1 },
+      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', unite: '%', decimales: 1 },
+      chomeur: { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 }
     },
     calcul: c => {
-      const total = c.stable + c.cdd + c.ponctuel + c.chomeur + c.aide;
-      return total === 0 ? 0 : (c.stable * 1 + c.cdd * 0.75 + c.ponctuel * 0.5 + c.chomeur * 0 + c.aide * 0.25) / total;
+      const total = c.stable + c.autres + c.chomeur;
+      return total === 0 ? 0 : (c.stable * 1 + c.autres * 0.5 + c.chomeur * 0) / total;
     }
   }
 };
@@ -2361,7 +2412,7 @@ function htmlSousComposantes(indicateur, communeNom) {
       html += `
         <label class="sc-binaire">
           <input type="checkbox" id="${id}" ${valeurs[comp] ? 'checked' : ''} onchange="majSousComposante('${indicateur}', '${comp}')" />
-          ${meta.label}
+          ${meta.label} ${badgeSource(indicateur, comp)}
         </label>`;
       continue;
     }
@@ -2370,7 +2421,7 @@ function htmlSousComposantes(indicateur, communeNom) {
     html += `
       <div class="sc-row">
         <div class="sc-header">
-          <span>${meta.label}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
+          <span>${meta.label} ${badgeSource(indicateur, comp)}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
           <span id="${id}_val">${libelleSousComposante(indicateur, comp, valeurs[comp])}</span>
         </div>
         <div class="slider-wrap">
@@ -2436,6 +2487,10 @@ function estDecompose(indicateur, communeNom) {
 
 // fonction pour afficher le detail d'une commune
 function afficherCommune(communeNom) {
+  if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
+    epciAfficherDansPanneau(communeNom);
+    return;
+  }
 
   for (const commune of Dejasurligner){
        reinitialiserStyleCommune(commune, indicateursCommune);
@@ -2497,7 +2552,7 @@ function afficherCommune(communeNom) {
     indicateursHTML += `
       <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
-          <strong>${nomIndicateur}</strong>
+          <strong>${nomIndicateur}</strong>${badgeSource(nomIndicateur)}
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>
@@ -2993,8 +3048,19 @@ function recalculerCarteOppChoVec() {
     seuilsJenks['oppchovec'] = ref.jenks;
     console.log('[Jenks oppchovec]', seuilsJenks['oppchovec'].map(v => v.toFixed(3)).join(' | '));
 
+    // Échelle EPCI (case « EPCI » de la barre du haut) : les unités affichées deviennent les EPCI ; les communes restent la base du calcul (epci.js)
+    let geoAffichee = communeJson, indiceAffiche = indiceNorm, scoresAffiches = scoresParCommune;
+    if (typeof echelleEstEPCI === 'function') {
+        epciMemoriserBase(indiceNorm, scoresParCommune);
+        if (echelleEstEPCI() && epciDonnees) {
+            const vue = epciVue();
+            geoAffichee = vue.geo; indiceAffiche = vue.indice; scoresAffiches = vue.scores;
+        }
+    }
+
     // Mettre à jour indiceFinale pour que les popups LISA montrent les bonnes valeurs
-    indiceFinale = indiceNorm;
+    indiceFinale = indiceAffiche;
+    scoresParCommune = scoresAffiches;
 
     // Switcher les clusters LISA selon le mode
     if (modeCalculPk === 'betti' && typeof LISA_DATA_BETTI !== 'undefined' && typeof LISA_DATA_BETTI_1PCT !== 'undefined') {
@@ -3014,12 +3080,13 @@ function recalculerCarteOppChoVec() {
     }
 
     // Cartes OppChoVec, dimensions et LISA (si déjà initialisées)
-    afficherToutesLesCartes(communeJson, indiceNorm, scoresParCommune);
+    afficherToutesLesCartes(geoAffichee, indiceAffiche, scoresAffiches);
 
     majAffichagePk(pkValues);
+    if (typeof rafraichirEPCI === 'function') rafraichirEPCI();   // onglet EPCI (suit le mode p_k et les indicateurs courants)
 
     // Mettre à jour le tableau top 10 et l'histogramme
-    genererDataVisualisations(indiceNorm);
+    genererDataVisualisations(indiceAffiche);
 
     // Mettre à jour l'affichage de la commune sélectionnée si présent
     const communeSelectEl = document.getElementById('communeSelect');
@@ -3027,8 +3094,8 @@ function recalculerCarteOppChoVec() {
         afficherCommune(communeSelectEl.value);
     }
 
-    // Mettre à jour les parangons si déjà initialisés
-    if (parangonsInitialise) {
+    // Mettre à jour les parangons si déjà initialisés ET si l'indice des communes a changé (les parangons restent à l'échelle des communes, même quand la case « EPCI » est cochée)
+    if (parangonsInitialise && signatureIndiceCommunes() !== parangonsSignature) {
         parangonsInitialise = false;
         initialiserOngletParangons();
     }
@@ -3038,6 +3105,8 @@ function recalculerCarteOppChoVec() {
         dominanceInitialise = false;
         initialiserOngletDominance();
     }
+    // Les corrélations reposent sur des données communales : pas de recalcul à l'échelle EPCI (elles se recalculent au retour aux communes)
+    if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) return;
 
     // Mettre à jour la corrélation si déjà initialisée
     if (correlationInitialise) {
@@ -4256,6 +4325,15 @@ let parangonsLayerRef = null;      // couche GeoJSON de la carte parangons
 let parangonsSelectedCommune = null;
 let parangonsCurrentCluster = null;
 
+// Indice des COMMUNES : indiceFinale porte les EPCI quand la case « EPCI » est cochée (epci.js) ; les parangons restent communaux
+function indiceCommunes() {
+    return (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? epciBase.indice : indiceFinale;
+}
+let parangonsSignature = '';
+function signatureIndiceCommunes() {
+    return JSON.stringify(Object.values(indiceCommunes()).map(v => Math.round(v * 1e6)));
+}
+
 function initialiserOngletParangons() {
     if (parangonsInitialise) {
         setTimeout(() => { if (_carteParangons) _carteParangons.invalidateSize(); }, 100);
@@ -4263,17 +4341,20 @@ function initialiserOngletParangons() {
     }
     // Détruire la carte précédente si elle existe (recalcul après bascule p_k)
     if (_carteParangons) {
+        try { _carteParangons.stop(); } catch (e) { /* aucune animation en cours */ }          // une animation de zoom en cours se terminerait sur une carte détruite
         _carteParangons.remove();
         _carteParangons = null;
         parangonsLayerRef = null;
         document.getElementById('map-parangons').innerHTML = '';
     }
-    if (!communeJson || !communeJson.features || !indiceFinale || Object.keys(indiceFinale).length === 0) {
+    const indiceP = indiceCommunes();
+    if (!communeJson || !communeJson.features || !indiceP || Object.keys(indiceP).length === 0) {
         console.warn('Parangons: données non prêtes');
         return;
     }
 
     parangonsInitialise = true;
+    parangonsSignature = signatureIndiceCommunes();
 
     const seuils = seuilsJenks.oppchovec || [0, 2.29, 3.91, 5.08, 7.26, 10];
     const labels = genererLabelsJenks(seuils);
@@ -4286,7 +4367,7 @@ function initialiserOngletParangons() {
         clusters.push({ communes: [], mean: 0, label: labels[i], couleur: colorsJenks[i] });
     }
 
-    for (const [nom, score] of Object.entries(indiceFinale)) {
+    for (const [nom, score] of Object.entries(indiceP)) {
         let classe = nbClasses - 1;
         for (let i = 1; i < seuils.length; i++) {
             if (score <= seuils[i]) { classe = i - 1; break; }
@@ -4327,7 +4408,7 @@ function initialiserOngletParangons() {
 
     parangonsLayerRef = L.geoJSON(communeJson, {
         style: feature => {
-            const val = indiceFinale[feature.properties.nom];
+            const val = indiceP[feature.properties.nom];
             return {
                 fillColor: getColor(val),
                 color: '#333',
@@ -4337,7 +4418,7 @@ function initialiserOngletParangons() {
         },
         onEachFeature: (feature, layer) => {
             const nom = feature.properties.nom;
-            const val = indiceFinale[nom];
+            const val = indiceP[nom];
             layer._parangonsNom = nom;
             layer.on('click', () => {
                 // Trouver le cluster de cette commune
@@ -4481,7 +4562,7 @@ function _parangonsSelectionnerCommune(nom, carte, layer, getColor) {
 
     // Réinitialiser tous les styles
     layer.eachLayer(l => {
-        const val = indiceFinale[l._parangonsNom];
+        const val = indiceCommunes()[l._parangonsNom];
         l.setStyle({
             fillColor: l._parangonsNom === nom ? '#ff0000' : getColor(val),
             color: l._parangonsNom === nom ? '#cc0000' : '#333',
@@ -4647,22 +4728,22 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(targetTab).classList.add('active');
 
             // Si on clique sur l'onglet LISA, initialiser les cartes LISA (lazy loading)
-            if (targetTab === 'lisatab') {
+            if (targetTab === 'lisatab' && !echelleEstEPCI()) {
                 initialiserCartesLISA();
             }
 
             // Si on clique sur l'onglet CAH, initialiser les cartes CAH (lazy loading)
-            if (targetTab === 'cahtab') {
+            if (targetTab === 'cahtab' && !echelleEstEPCI()) {
                 initialiserCartesCAH();
             }
 
             // Si on clique sur l'onglet Entreprises, initialiser (lazy loading)
-            if (targetTab === 'entreprisestab') {
+            if (targetTab === 'entreprisestab' && !echelleEstEPCI()) {
                 initialiserOngletEntreprises();
             }
 
             // Si on clique sur l'onglet Corrélation, initialiser (lazy loading)
-            if (targetTab === 'correlationtab') {
+            if (targetTab === 'correlationtab' && !echelleEstEPCI()) {
                 initialiserOngletCorrelation();
             }
 

@@ -6,7 +6,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css">
+  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261017a">
 </head>
 <body>
   <div id="app">
@@ -58,6 +58,7 @@
           <button class="tab-button" data-tab="chotab" id="tab-cho">Cho</button>
           <button class="tab-button" data-tab="vectab" id="tab-vec">Vec</button>
           <button class="tab-button" data-tab="dominancetab">Dominance</button>
+          <button class="tab-button" data-tab="evolutiontab">Évolution</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
           <div id="map-oppchovec" class="map"></div>
@@ -102,16 +103,59 @@
             </div>
           </div>
         </div>
+        <!-- Onglet Évolution (2016 → 2021) -->
+        <div class="tab-content" id="evolutiontab">
+          <div class="evolution-entete">
+            <strong class="evolution-titre-onglet">Évolution 2016 → 2021</strong>
+            <span class="evolution-info" tabindex="0" role="button" aria-label="À savoir avant de lire ces cartes">ⓘ
+              <span class="evolution-info-texte" role="tooltip">
+                Indice OppChoVec <em>comparable dans le temps</em> : mêmes sources, mêmes définitions et même échelle pour les deux années, mais
+                <strong>10 indicateurs sur 10</strong>, recalculés avec des sources disponibles aux deux dates : ce n'est donc pas exactement l'indice des autres onglets. Opp4 (connectivité) est la moyenne de la 4G (population couverte par au moins un opérateur, cartes ARCEP de mars 2017 et de décembre 2021), du débit de 30 Mbit/s et de la fibre (locaux éligibles). Opp1 est ici un niveau de diplôme sur 4 niveaux. Cho1 utilise la géographie des quartiers prioritaires de 2015 aux deux dates (population de 2013 et de 2018). Vec1 est le revenu fiscal moyen par foyer fiscal (DGFiP) en euros courants (non corrigés de l'inflation, d'où une hausse de Vec en grande partie nominale) ; pour 14 communes sous secret statistique il prend la valeur de leur département.
+                Les petites communes ont des valeurs instables d'une année à l'autre : lire leurs évolutions avec prudence.
+              </span>
+            </span>
+            <label class="evolution-choix">Variable affichée :
+              <select id="evolution-variable">
+                <option value="OppChoVec">Indice OppChoVec</option>
+                <option value="Opp">Opportunités (Opp)</option>
+                <option value="Cho">Choix (Cho)</option>
+                <option value="Vec">Vécu (Vec)</option>
+              </select>
+            </label>
+            <label class="evolution-option" title="Les évolutions des communes de moins de 100 habitants dépendent de quelques personnes (écart-type de la variation de l'indice : 1,4 à 1,8 point, contre 0,6 au-delà de 1 000 habitants)"><input type="checkbox" id="evolution-griser"> Griser les communes de moins de 100 habitants</label>
+            <label class="evolution-option" title="Le drapeau « transports en commun » d'Opp3 (+100 points) repose sur un effectif de l'ordre d'une personne dans la plupart des petites communes : il change de statut pour 78 communes sur 360. Variante : drapeau levé à partir de 5 personnes (27 communes changent)."><input type="checkbox" id="evolution-robuste"> Opp3 robuste (≥ 5 actifs en transports en commun)</label>
+            <span class="evolution-resume-zone">
+              <button type="button" id="evolution-bouton-resume" class="evolution-bouton" aria-expanded="false" aria-controls="evolution-resume">Résumé chiffré ▾</button>
+              <div id="evolution-resume" class="evolution-resume evolution-popover" hidden>Chargement…</div>
+            </span>
+          </div>
+          <div class="evolution-cartes" id="evolution-cartes">
+            <div class="evolution-carte" data-carte="a0"><h4><span id="evolution-titre-a0">2016</span><button type="button" class="evolution-loupe" data-carte="a0" title="Agrandir cette carte" aria-label="Agrandir la carte 2016">🔍</button></h4><div id="map-evolution-a0" class="map"></div></div>
+            <div class="evolution-carte" data-carte="a1"><h4><span id="evolution-titre-a1">2021</span><button type="button" class="evolution-loupe" data-carte="a1" title="Agrandir cette carte" aria-label="Agrandir la carte 2021">🔍</button></h4><div id="map-evolution-a1" class="map"></div></div>
+            <div class="evolution-carte" data-carte="variation"><h4><span>Évolution</span><button type="button" class="evolution-loupe" data-carte="variation" title="Agrandir cette carte" aria-label="Agrandir la carte d'évolution">🔍</button></h4><div id="map-evolution-variation" class="map"></div></div>
+          </div>
+          <div class="evolution-bas">
+            <div class="evolution-bas-gauche">
+              <div id="evolution-legende-annees" class="evolution-legende"></div>
+              <div id="evolution-legende-variation" class="evolution-legende"></div>
+            </div>
+            <div id="evolution-fiche" class="evolution-fiche"><span class="evolution-petit">Cliquez sur une commune pour voir ses valeurs en 2016 et 2021.</span></div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data.js"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_1pct.js"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_betti.js"></script>
-  <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js"></script>
-  <script src="stage_ambroise/Code/WEB/cah_data.js"></script>
-  <script src="stage_ambroise/Code/WEB/dominance.js"></script>
-  <script src="stage_ambroise/Code/WEB/script.js"></script>
+  <script src="stage_ambroise/Code/WEB/config_site.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_1pct.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_betti.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/evolution.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/site.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/dominance.js?v=20261020a"></script>
+  <script src="stage_ambroise/Code/WEB/script.js?v=20261020a"></script>
 </body>
 </html>

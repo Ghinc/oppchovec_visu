@@ -21,7 +21,7 @@ Les tests ne modifient **aucun** fichier du dépôt (les scripts de régénérat
 | Python | Python 3.10+ ; `numpy pandas openpyxl scipy scikit-learn jenkspy geopandas libpysal esda matplotlib`. Un module absent fait *ignorer* les tests qui en dépendent (et le dit), jamais échouer. |
 | JavaScript | Node 20+ (testé avec 22). Aucune dépendance npm : `node:test`, `node:vm`. |
 | Navigateur | `cd tests && npm install` (playwright-core) et un Chromium (cache Playwright, ou variable `CHROME_PATH`). Sans cela, les tests e2e sont ignorés. Les bibliothèques Leaflet et Chart.js sont chargées depuis leur CDN : il faut un accès réseau. |
-| Sources brutes | Les fichiers xlsx/csv par indicateur ne sont pas dans le dépôt. Définir `OPPCHOVEC_SOURCES` = dossier « Stage Ambroise » contenant `Données/Corse_Commune/` (par défaut, `C:\These\Données2\visualisation_oppchovec_1111\Stage Ambroise`). Sans elles, les tests de recalcul depuis les sources sont ignorés. |
+| Sources brutes | Les extraits des bases INSEE, fichiers ARCEP, IRCOM… de l'indice v2 sont volumineux et hors dépôt (`C:\These\Données2\indice_v2_sources`, voir son `LISEZ_MOI.md`). Définir `OPPCHOVEC_V2` pour un autre emplacement. Sans eux, le test qui rejoue `construire_indice_v2.py` est ignoré ; les composantes brutes versionnées (`Données/indice_v2/sources_indice_v2.json`) suffisent aux autres tests de recalcul. |
 
 ## Branche `démo_outil`
 
@@ -43,6 +43,7 @@ onglets retirés ont été supprimés. **Non-régression par rapport à la branc
 | `python/test_08_js_vs_python.py` | L'appli (script.js réel) contre un recalcul Python indépendant : état de base, seuils de Jenks, et 30 scénarios de modification aléatoires |
 | `python/test_09_tableaux_excel.py` | Les fichiers Excel proposés par le site (`downloads/`) reflètent-ils les données actuelles ? Les scripts `gen_*.py` rejoués sur une copie y écrivent-ils (et nulle part ailleurs) ? |
 | `python/test_10_dominance.py` | Onglet Dominance : couches recalculées en Python, identiques à `dominance.js` ; si A domine B, score(A) ≥ score(B) (p_k égaux, Betti, fichier) |
+| `python/test_12_serie_temporelle.py` | Série temporelle 2016 / 2021 (onglet Évolution) : scores, p_k de Betti et seuils de Jenks recalculés indépendamment depuis les indicateurs bruts du fichier ; rejeu du script si `OPPCHOVEC_SERIE` désigne le dossier des sources |
 | `js/*.test.js` | La logique de `script.js` dans un bac à sable Node : chargement, curseurs, recalcul, bascule p_k, sous-composantes |
 | `e2e/*.e2e.test.js` | Dans un vrai navigateur : cartes (couleur de chaque commune), histogramme, top 10, panneau commune, tous les onglets, coefficients de corrélation |
 
@@ -54,23 +55,19 @@ réellement produit par `afficherCommune`.
 
 ## Références de non-régression (« ce qu'on avait avant »)
 
-`tests/fixtures/` contient deux états figés de l'historique, reconstruits depuis git par `generer_baseline.py` :
-- `baseline_*` : **avant la correction des poids de Vec3** (commit `4438162`, 2026-10-11) ;
-- `avant_opp1_*` : **après Vec3 et avant le remplacement d'Opp1** par le niveau de diplôme INSEE (commit `9c8a310`, 2026-10-13).
-Chacun comprend `*_data_scores_0_10.json` (copie exacte) et `*_derives.json` (seuils Jenks, clusters LISA et CAH). `test_04` compare `baseline` -> `avant_opp1` (empreinte de la correction Vec3) puis `avant_opp1` -> état actuel (empreinte du remplacement d'Opp1 : seuls `Opp1`, `Score_Opp`, `Score_Opp_0_10`, `OppChoVec`, `OppChoVec_0_10` changent ; Cho et Vec sont identiques au bit près).
+`tests/fixtures/` contient deux états figés de `data_scores_0_10.json`, reconstruits depuis git par `generer_baseline.py` :
+- `baseline_data_scores_0_10.json` : **avant la correction des poids de Vec3** (commit `4438162`, 2026-10-11), état d'origine du pipeline Python ;
+- `v1_data_scores_0_10.json` : **l'indice courant v1** (millésimes 2020-2024), à l'étiquette Git `indice-courant-v1-2020-2024`, avant son remplacement par la v2 (sources officielles 2023-2025) le 2026-10-19.
+`test_04` vérifie que la formule reproduit la référence v1, puis documente ce que le passage à la v2 a changé (Vec4 et les communes inchangés, Cho1 plus bas, corrélations de rang par indicateur) et ce qu'il a laissé intact.
 
-Cette référence est corroborée par trois archives du dépôt qui lui sont identiques (aux noms « La Porta » / « L'Île-Rousse » près) :
+La référence `baseline` est corroborée par trois archives du dépôt qui lui sont identiques (aux noms « La Porta » / « L'Île-Rousse » près) :
 `Code/Python/data_scores_0_10.json`, `Code/WEB/data_scores_0_10_backup_20251112_204530.json` et `Code/Python/data_scores_1_10.json`.
 Surtout, la formule recalculée *indépendamment* reproduit ces résultats d'origine à 1e-9 : la référence n'est pas qu'une photographie.
+Les fichiers plus anciens (`Code/data_scores.json`, `data_scores_normalisation_elem.json`, `Code/Python/data_scores.json`, `oppchovec_resultats_V.xlsx`) relèvent d'une méthode antérieure
+et ne sont **pas** des références valables.
 
-Les fichiers plus anciens (`Code/data_scores.json`, `data_scores_normalisation_elem.json`, `Code/Python/data_scores.json`,
-`oppchovec_resultats_V.xlsx`) relèvent d'une méthode antérieure (corrélation de rang avec l'indice actuel de 0,40 à 0,74) : ils ne sont **pas**
-des références valables et ne sont pas utilisés.
-
-Les bornes de `test_04` sont l'empreinte **mesurée** de chaque changement, avec une petite marge : pour Vec3 corrélation de rang ≥ 0,999, écart max 0,25,
-0 à 3 communes LISA qui changent ; pour Opp1 (changement bien plus profond, voulu) corrélation de rang du Score_Opp ≥ 0,7 (mesuré 0,76), de l'indice ≥ 0,90
-(égal, mesuré 0,93) / 0,80 (Betti, 0,84), au plus 30 / 10 / 40 / 25 communes LISA qui changent (mesuré 20 / 5 / 30 / 15). Pour changer volontairement de référence (nouvelle correction de méthode) : relancer
-`fixtures/generer_baseline.py` avec le nouveau commit de référence et mettre à jour ces bornes, en le disant ici.
+Les bornes de `test_04` sont l'empreinte **mesurée** du passage à la v2 (corrélations de rang par indicateur entre la v1 et la v2, avec une marge). Pour changer volontairement de référence :
+relancer `fixtures/generer_baseline.py` avec la nouvelle référence git et mettre à jour ces bornes, en le disant ici.
 
 ## Dettes connues (signalées, pas cachées)
 
@@ -79,10 +76,9 @@ corrigé le test le signale (« succès inattendu ») pour qu'on retire la marqu
 
 | Dette | Où |
 |---|---|
-| `oppchovec.py` n'est pas synchronisé avec le JSON pour **Opp4** (fibre absente), **Cho2** (lit `Cho2.xlsx` au lieu de `Cho2_francais_18plus.xlsx`) et **Opp1** (lit `Opp1.xlsx`, une suite artificielle 5,75 ; 5,76… sans rapport avec l'éducation, au lieu du niveau de diplôme INSEE) | `test_05`, 3 tests |
 | `stage_ambroise/Code/WEB/index.html` est une copie plus ancienne de `index.html` (il lui manque 3 onglets) | `test_07` |
 
-Corrigé le 2026-10-13 : **Opp1** ne vient plus de `Opp1.xlsx` (suite artificielle) mais du recensement INSEE (`Données/education_communes_opp1.json`, voir `Code/VERIFICATION_COHERENCE_DONNEES.md`). Tests : `test_05` (`Opp1DepuisLeRecensement` : cohérence interne, 18+ = 15+ moins les 15-17 ans, rejeu du calcul si `OPPCHOVEC_INSEE_DIPLOMES` désigne `base-ic-diplomes-formation-2020.xlsx` ; `RegenererOpp1EstIdempotent`) et `test_04`. Au passage, les scripts CAH de la procédure documentée lisaient `../WEB/Commune_Corse.geojson`, un fichier qui n'existe pas dans le dépôt : ils lisent maintenant `../../Données/`.
+Corrigé le 2026-10-19 : l'indice courant a été reconstruit depuis des sources officielles de millésime homogène (v2) ; `oppchovec.py`, resté sur l'ancienne chaîne de fichiers, n'est plus la source de l'indice et n'est plus testé. L'ancien indice v1 est archivé (étiquette Git `indice-courant-v1-2020-2024`, `Données/archive_indice_v1_2020_2024/`).
 
 Dettes corrigées le 2026-10-12, conservées comme tests de non-régression :
 - course `invalidateSize` (150 ms) sur une carte détruite par la bascule p_k : fonction `invaliderTailleApres` (6 minuteries) ; test e2e sur les 3 sous-onglets de Corrélation ;

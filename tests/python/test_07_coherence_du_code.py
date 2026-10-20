@@ -11,7 +11,7 @@ from common import ALPHA, BETA, PYDIR, RACINE, STAGE, WEB, exige_libs, libs_disp
 SCRIPT_JS = (WEB / "script.js")
 INDEX = RACINE / "index.html"
 INDEX_WEB = WEB / "index.html"
-POIDS_VEC3 = {"stable": 1.0, "cdd": 0.75, "ponctuel": 0.5, "chomeur": 0.0, "aide": 0.25}   # (rang - 1) / 4
+POIDS_VEC3 = {"stable": 1.0, "autres": 0.5, "chomeur": 0.0}   # le recensement 2023 regroupe CDD, intérim, aidés et apprentis : poids moyen 0,5
 CHAINE_DE_REGENERATION = ["regenerer_data_scores.py", "exporter_sous_composantes.py", "calculer_jenks_5_classes.py",
                           "graphique_ecarts_types_cah.py", "preparer_donnees_cah_web_complet.py",
                           "generer_cah_data_js_complet.py", "generer_donnees_communes_chatbot.py"]
@@ -35,7 +35,7 @@ class PoidsEtConstantesDupliques(unittest.TestCase):
     """Ces valeurs vivent à plusieurs endroits (Python, JavaScript, scripts de génération) : elles doivent rester identiques."""
 
     def test_poids_vec3_dans_script_js(self):
-        m = re.search(r"c\.stable \* ([\d.]+) \+ c\.cdd \* ([\d.]+) \+ c\.ponctuel \* ([\d.]+) \+ c\.chomeur \* ([\d.]+) \+ c\.aide \* ([\d.]+)", js())
+        m = re.search(r"c\.stable \* ([\d.]+) \+ c\.autres \* ([\d.]+) \+ c\.chomeur \* ([\d.]+)", js())
         self.assertIsNotNone(m, "formule Vec3 de SOUS_COMPOSANTES introuvable")
         self.assertEqual(dict(zip(POIDS_VEC3, map(float, m.groups()))), POIDS_VEC3)
 
@@ -46,16 +46,10 @@ class PoidsEtConstantesDupliques(unittest.TestCase):
             self.assertIsNotNone(m, f"libellé de {cle}")
             self.assertEqual(float(m.group(1).replace(",", ".")), poids, f"poids affiché pour {cle}")
 
-    def test_poids_vec3_dans_l_exporteur_et_oppchovec_py(self):
+    def test_poids_vec3_dans_l_exporteur(self):
         sys.path.insert(0, str(PYDIR))
         import exporter_sous_composantes as exp
         self.assertEqual({k: p for k, (_, p) in exp.VEC3_CATEGORIES.items()}, POIDS_VEC3)
-        if not libs_disponibles("pandas"):
-            self.skipTest("pandas absent : oppchovec.py non importable")
-        import oppchovec
-        par_colonne = dict(zip(oppchovec.COLONNES["Vec3"], oppchovec.POND_VEC3))
-        for cle, (colonne, _) in exp.VEC3_CATEGORIES.items():
-            self.assertEqual(par_colonne[colonne], POIDS_VEC3[cle], colonne)
 
     def test_alpha_beta_partout(self):
         self.assertRegex(js(), r"const alpha = 2\.5;\s*const beta = 1\.5;")
@@ -101,13 +95,14 @@ class FichiersEtIdentifiantsReferences(unittest.TestCase):
             for ref in re.findall(r'<(?:script|link)[^>]*(?:src|href)="([^"]+)"', texte):
                 if ref.startswith(("http://", "https://", "//")):
                     continue
+                chemin = ref.split("?")[0]          # « ?v=… » : version ajoutée aux liens pour éviter les anciens fichiers en cache
                 with self.subTest(index=index.name, ref=ref):
-                    self.assertTrue((index.parent / ref).exists(), f"{ref} introuvable depuis {index.parent}")
+                    self.assertTrue((index.parent / chemin).exists(), f"{ref} introuvable depuis {index.parent}")
 
     def test_index_html_charge_tous_les_fichiers_de_donnees_js(self):
         texte = INDEX.read_text(encoding="utf-8")
         for f in ("cah_data.js", "lisa_data.js", "lisa_data_1pct.js", "lisa_data_betti.js", "lisa_data_betti_1pct.js", "script.js"):
-            self.assertRegex(texte, rf'src="[^"]*{f}"')
+            self.assertRegex(texte, rf'src="[^"]*{f}(\?v=[\w.-]+)?"')
         # script.js doit venir après les fichiers de données qu'il lit au chargement
         self.assertLess(texte.index("lisa_data_betti_1pct.js"), texte.index("script.js"))
         self.assertLess(texte.index("cah_data.js"), texte.index("script.js"))
@@ -122,7 +117,7 @@ class FichiersEtIdentifiantsReferences(unittest.TestCase):
         # Version « démo » : le code des onglets retirés (LISA, CAH, Parangons, Corrélation, Entreprises, Data Visualisation, chatbot)
         # et le choix de langue sont encore dans script.js, mais plus dans index.html ; leurs identifiants sont attendus absents.
         retires = re.compile(r"^(cah\d|toggleCAH|chatbot|checkbox-english|correlation|scatter-chart|map-(correlation|subjectif|entreprises|parangons|lisa)"
-                             r"|parangons-|histogram-chart|top10-)")
+                             r"|parangons-|histogram-chart|top10-|datavis-)")
         manquants = sorted(i for i in utilises - ids_html - ids_dynamiques if not retires.match(i))
         self.assertEqual(manquants, [], f"identifiants utilisés par script.js mais absents de index.html : {manquants}")
 

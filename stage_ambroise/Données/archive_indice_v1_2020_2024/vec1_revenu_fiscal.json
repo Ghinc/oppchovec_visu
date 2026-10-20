@@ -1,0 +1,2171 @@
+{
+ "source": "DGFiP, IRCOM (impôt sur le revenu par commune), revenus 2021 déclarés en 2022 : revenu fiscal de référence total / nombre de foyers fiscaux (ligne « Total » de la commune)",
+ "annee_revenus": 2021,
+ "note": "estime_departement = donnée non communiquée (secret statistique) : valeur moyenne du département",
+ "moyenne_departement": {
+  "2A": 28368.044930688244,
+  "2B": 24981.362981125094
+ },
+ "communes": {
+  "Cristinacce": {
+   "code": "2A100",
+   "revenu_moyen": 27686.23076923077,
+   "nb_foyers": 26,
+   "estime_departement": false
+  },
+  "Bastelica": {
+   "code": "2A031",
+   "revenu_moyen": 22127.289552238806,
+   "nb_foyers": 335,
+   "estime_departement": false
+  },
+  "Quenza": {
+   "code": "2A254",
+   "revenu_moyen": 20350.610294117647,
+   "nb_foyers": 136,
+   "estime_departement": false
+  },
+  "Chiatra": {
+   "code": "2B088",
+   "revenu_moyen": 23797.33552631579,
+   "nb_foyers": 152,
+   "estime_departement": false
+  },
+  "Ogliastro": {
+   "code": "2B183",
+   "revenu_moyen": 17423.88679245283,
+   "nb_foyers": 53,
+   "estime_departement": false
+  },
+  "Frasseto": {
+   "code": "2A119",
+   "revenu_moyen": 21742.786885245903,
+   "nb_foyers": 61,
+   "estime_departement": false
+  },
+  "Serriera": {
+   "code": "2A279",
+   "revenu_moyen": 22655.972222222223,
+   "nb_foyers": 72,
+   "estime_departement": false
+  },
+  "Valle-di-Mezzana": {
+   "code": "2A336",
+   "revenu_moyen": 28296.81443298969,
+   "nb_foyers": 291,
+   "estime_departement": false
+  },
+  "Lozzi": {
+   "code": "2B147",
+   "revenu_moyen": 24281.95588235294,
+   "nb_foyers": 68,
+   "estime_departement": false
+  },
+  "Sant'Andréa-di-Bozio": {
+   "code": "2B292",
+   "revenu_moyen": 16666.244444444445,
+   "nb_foyers": 45,
+   "estime_departement": false
+  },
+  "Balogna": {
+   "code": "2A028",
+   "revenu_moyen": 15691.611111111111,
+   "nb_foyers": 90,
+   "estime_departement": false
+  },
+  "Campo": {
+   "code": "2A056",
+   "revenu_moyen": 19668.304347826088,
+   "nb_foyers": 69,
+   "estime_departement": false
+  },
+  "Foce": {
+   "code": "2A115",
+   "revenu_moyen": 28547.443298969072,
+   "nb_foyers": 97,
+   "estime_departement": false
+  },
+  "Pietrosella": {
+   "code": "2A228",
+   "revenu_moyen": 38414.70348837209,
+   "nb_foyers": 1032,
+   "estime_departement": false
+  },
+  "Propriano": {
+   "code": "2A249",
+   "revenu_moyen": 22896.121768140118,
+   "nb_foyers": 2398,
+   "estime_departement": false
+  },
+  "Zérubia": {
+   "code": "2A357",
+   "revenu_moyen": 17656.043478260868,
+   "nb_foyers": 23,
+   "estime_departement": false
+  },
+  "Linguizzetta": {
+   "code": "2B143",
+   "revenu_moyen": 18960.016717325227,
+   "nb_foyers": 658,
+   "estime_departement": false
+  },
+  "Piedicorte-di-Gaggio": {
+   "code": "2B218",
+   "revenu_moyen": 21597.862068965518,
+   "nb_foyers": 58,
+   "estime_departement": false
+  },
+  "Brando": {
+   "code": "2B043",
+   "revenu_moyen": 30794.10438596491,
+   "nb_foyers": 1140,
+   "estime_departement": false
+  },
+  "Pancheraccia": {
+   "code": "2B201",
+   "revenu_moyen": 19119.15,
+   "nb_foyers": 120,
+   "estime_departement": false
+  },
+  "Aiti": {
+   "code": "2B003",
+   "revenu_moyen": 39367.875,
+   "nb_foyers": 16,
+   "estime_departement": false
+  },
+  "Bustanico": {
+   "code": "2B045",
+   "revenu_moyen": 12869.466666666667,
+   "nb_foyers": 30,
+   "estime_departement": false
+  },
+  "Cagnano": {
+   "code": "2B046",
+   "revenu_moyen": 20179.603603603602,
+   "nb_foyers": 111,
+   "estime_departement": false
+  },
+  "Corscia": {
+   "code": "2B095",
+   "revenu_moyen": 19551.79090909091,
+   "nb_foyers": 110,
+   "estime_departement": false
+  },
+  "Monte": {
+   "code": "2B166",
+   "revenu_moyen": 20302.317708333332,
+   "nb_foyers": 384,
+   "estime_departement": false
+  },
+  "Porri": {
+   "code": "2B245",
+   "revenu_moyen": 21256.41176470588,
+   "nb_foyers": 34,
+   "estime_departement": false
+  },
+  "Porta": {
+   "code": "2B246",
+   "revenu_moyen": 16438.1953125,
+   "nb_foyers": 128,
+   "estime_departement": false
+  },
+  "Speloncato": {
+   "code": "2B290",
+   "revenu_moyen": 19619.871794871793,
+   "nb_foyers": 156,
+   "estime_departement": false
+  },
+  "Cognocoli-Monticchi": {
+   "code": "2A091",
+   "revenu_moyen": 23553.57894736842,
+   "nb_foyers": 114,
+   "estime_departement": false
+  },
+  "Villanova": {
+   "code": "2A351",
+   "revenu_moyen": 35640.21923076923,
+   "nb_foyers": 260,
+   "estime_departement": false
+  },
+  "Mausoléo": {
+   "code": "2B156",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Osani": {
+   "code": "2A197",
+   "revenu_moyen": 19584.162162162163,
+   "nb_foyers": 74,
+   "estime_departement": false
+  },
+  "Aghione": {
+   "code": "2B002",
+   "revenu_moyen": 15944.117283950618,
+   "nb_foyers": 162,
+   "estime_departement": false
+  },
+  "Casabianca": {
+   "code": "2B069",
+   "revenu_moyen": 21676.515151515152,
+   "nb_foyers": 33,
+   "estime_departement": false
+  },
+  "Focicchia": {
+   "code": "2B116",
+   "revenu_moyen": 20634.0,
+   "nb_foyers": 13,
+   "estime_departement": false
+  },
+  "Luri": {
+   "code": "2B152",
+   "revenu_moyen": 21996.590822179733,
+   "nb_foyers": 523,
+   "estime_departement": false
+  },
+  "Nocario": {
+   "code": "2B176",
+   "revenu_moyen": 20787.475,
+   "nb_foyers": 40,
+   "estime_departement": false
+  },
+  "San-Nicolao": {
+   "code": "2B313",
+   "revenu_moyen": 19955.78289962825,
+   "nb_foyers": 1345,
+   "estime_departement": false
+  },
+  "Serra-di-Ferro": {
+   "code": "2A276",
+   "revenu_moyen": 26348.005988023953,
+   "nb_foyers": 334,
+   "estime_departement": false
+  },
+  "Sorbollano": {
+   "code": "2A285",
+   "revenu_moyen": 25688.08108108108,
+   "nb_foyers": 37,
+   "estime_departement": false
+  },
+  "Felce": {
+   "code": "2B111",
+   "revenu_moyen": 25039.190476190477,
+   "nb_foyers": 21,
+   "estime_departement": false
+  },
+  "Pioggiola": {
+   "code": "2B235",
+   "revenu_moyen": 21122.58,
+   "nb_foyers": 50,
+   "estime_departement": false
+  },
+  "Valle-d'Alesani": {
+   "code": "2B334",
+   "revenu_moyen": 15667.016393442624,
+   "nb_foyers": 61,
+   "estime_departement": false
+  },
+  "Palneca": {
+   "code": "2A200",
+   "revenu_moyen": 13939.4375,
+   "nb_foyers": 80,
+   "estime_departement": false
+  },
+  "Peri": {
+   "code": "2A209",
+   "revenu_moyen": 28250.456193353475,
+   "nb_foyers": 1324,
+   "estime_departement": false
+  },
+  "Rosazia": {
+   "code": "2A262",
+   "revenu_moyen": 15836.085714285715,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Sollacaro": {
+   "code": "2A284",
+   "revenu_moyen": 19558.914590747332,
+   "nb_foyers": 281,
+   "estime_departement": false
+  },
+  "Aregno": {
+   "code": "2B020",
+   "revenu_moyen": 24380.029177718832,
+   "nb_foyers": 377,
+   "estime_departement": false
+  },
+  "Castellare-di-Casinca": {
+   "code": "2B077",
+   "revenu_moyen": 23648.740124740125,
+   "nb_foyers": 481,
+   "estime_departement": false
+  },
+  "Castineta": {
+   "code": "2B082",
+   "revenu_moyen": 18640.1875,
+   "nb_foyers": 32,
+   "estime_departement": false
+  },
+  "Pietra-di-Verde": {
+   "code": "2B225",
+   "revenu_moyen": 17166.119047619046,
+   "nb_foyers": 84,
+   "estime_departement": false
+  },
+  "Calcatoggio": {
+   "code": "2A048",
+   "revenu_moyen": 27753.359030837004,
+   "nb_foyers": 454,
+   "estime_departement": false
+  },
+  "Moca-Croce": {
+   "code": "2A160",
+   "revenu_moyen": 23100.46794871795,
+   "nb_foyers": 156,
+   "estime_departement": false
+  },
+  "Albertacce": {
+   "code": "2B007",
+   "revenu_moyen": 20294.593495934958,
+   "nb_foyers": 123,
+   "estime_departement": false
+  },
+  "Pie-d'Orezza": {
+   "code": "2B222",
+   "revenu_moyen": 14254.0,
+   "nb_foyers": 18,
+   "estime_departement": false
+  },
+  "Poggio-Mezzana": {
+   "code": "2B242",
+   "revenu_moyen": 21631.614583333332,
+   "nb_foyers": 480,
+   "estime_departement": false
+  },
+  "Quercitello": {
+   "code": "2B255",
+   "revenu_moyen": 48843.15789473684,
+   "nb_foyers": 38,
+   "estime_departement": false
+  },
+  "Vallecalle": {
+   "code": "2B333",
+   "revenu_moyen": 23985.350515463917,
+   "nb_foyers": 97,
+   "estime_departement": false
+  },
+  "Olivese": {
+   "code": "2A186",
+   "revenu_moyen": 16825.224242424243,
+   "nb_foyers": 165,
+   "estime_departement": false
+  },
+  "Sampolo": {
+   "code": "2A268",
+   "revenu_moyen": 17752.5,
+   "nb_foyers": 52,
+   "estime_departement": false
+  },
+  "Pietraserena": {
+   "code": "2B226",
+   "revenu_moyen": 17893.32608695652,
+   "nb_foyers": 46,
+   "estime_departement": false
+  },
+  "Poggio-di-Nazza": {
+   "code": "2B236",
+   "revenu_moyen": 26420.16,
+   "nb_foyers": 75,
+   "estime_departement": false
+  },
+  "Sant'Antonino": {
+   "code": "2B296",
+   "revenu_moyen": 17630.676056338027,
+   "nb_foyers": 71,
+   "estime_departement": false
+  },
+  "Santa-Reparata-di-Moriani": {
+   "code": "2B317",
+   "revenu_moyen": 15016.6,
+   "nb_foyers": 25,
+   "estime_departement": false
+  },
+  "Coti-Chiavari": {
+   "code": "2A098",
+   "revenu_moyen": 40322.17554240631,
+   "nb_foyers": 507,
+   "estime_departement": false
+  },
+  "Figari": {
+   "code": "2A114",
+   "revenu_moyen": 24819.067647058822,
+   "nb_foyers": 1020,
+   "estime_departement": false
+  },
+  "Altiani": {
+   "code": "2B012",
+   "revenu_moyen": 24031.75,
+   "nb_foyers": 36,
+   "estime_departement": false
+  },
+  "San-Gavino-di-Tenda": {
+   "code": "2B301",
+   "revenu_moyen": 20603.305555555555,
+   "nb_foyers": 36,
+   "estime_departement": false
+  },
+  "Santo-Pietro-di-Tenda": {
+   "code": "2B314",
+   "revenu_moyen": 18503.23113207547,
+   "nb_foyers": 212,
+   "estime_departement": false
+  },
+  "Santo-Pietro-di-Venaco": {
+   "code": "2B315",
+   "revenu_moyen": 25763.496932515336,
+   "nb_foyers": 163,
+   "estime_departement": false
+  },
+  "Santa-Maria-Poggio": {
+   "code": "2B311",
+   "revenu_moyen": 21321.18345323741,
+   "nb_foyers": 556,
+   "estime_departement": false
+  },
+  "Granace": {
+   "code": "2A128",
+   "revenu_moyen": 25147.5,
+   "nb_foyers": 42,
+   "estime_departement": false
+  },
+  "Parata": {
+   "code": "2B202",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Silvareccio": {
+   "code": "2B280",
+   "revenu_moyen": 18985.841463414636,
+   "nb_foyers": 82,
+   "estime_departement": false
+  },
+  "Bastelicaccia": {
+   "code": "2A032",
+   "revenu_moyen": 31959.28007590133,
+   "nb_foyers": 2635,
+   "estime_departement": false
+  },
+  "Porto-Vecchio": {
+   "code": "2A247",
+   "revenu_moyen": 28562.50989329742,
+   "nb_foyers": 9653,
+   "estime_departement": false
+  },
+  "Favalello": {
+   "code": "2B110",
+   "revenu_moyen": 23008.666666666668,
+   "nb_foyers": 45,
+   "estime_departement": false
+  },
+  "Prunelli-di-Fiumorbo": {
+   "code": "2B251",
+   "revenu_moyen": 23719.15317919075,
+   "nb_foyers": 2422,
+   "estime_departement": false
+  },
+  "Ambiegna": {
+   "code": "2A014",
+   "revenu_moyen": 14920.615384615385,
+   "nb_foyers": 39,
+   "estime_departement": false
+  },
+  "Cauro": {
+   "code": "2A085",
+   "revenu_moyen": 29079.35817805383,
+   "nb_foyers": 966,
+   "estime_departement": false
+  },
+  "Letia": {
+   "code": "2A141",
+   "revenu_moyen": 22692.284090909092,
+   "nb_foyers": 88,
+   "estime_departement": false
+  },
+  "Santa-Lucia-di-Moriani": {
+   "code": "2B307",
+   "revenu_moyen": 20452.73457394711,
+   "nb_foyers": 1021,
+   "estime_departement": false
+  },
+  "Eccica-Suarella": {
+   "code": "2A104",
+   "revenu_moyen": 31501.651245551602,
+   "nb_foyers": 843,
+   "estime_departement": false
+  },
+  "Soveria": {
+   "code": "2B289",
+   "revenu_moyen": 27479.4,
+   "nb_foyers": 70,
+   "estime_departement": false
+  },
+  "San-Damiano": {
+   "code": "2B297",
+   "revenu_moyen": 14519.79411764706,
+   "nb_foyers": 34,
+   "estime_departement": false
+  },
+  "Crocicchia": {
+   "code": "2B102",
+   "revenu_moyen": 21730.55,
+   "nb_foyers": 40,
+   "estime_departement": false
+  },
+  "Cargiaca": {
+   "code": "2A066",
+   "revenu_moyen": 14413.137931034482,
+   "nb_foyers": 29,
+   "estime_departement": false
+  },
+  "Grossa": {
+   "code": "2A129",
+   "revenu_moyen": 26152.787234042553,
+   "nb_foyers": 47,
+   "estime_departement": false
+  },
+  "Guargualé": {
+   "code": "2A132",
+   "revenu_moyen": 17075.245283018867,
+   "nb_foyers": 53,
+   "estime_departement": false
+  },
+  "Olmiccia": {
+   "code": "2A191",
+   "revenu_moyen": 22940.054794520547,
+   "nb_foyers": 73,
+   "estime_departement": false
+  },
+  "Salice": {
+   "code": "2A266",
+   "revenu_moyen": 19280.133333333335,
+   "nb_foyers": 45,
+   "estime_departement": false
+  },
+  "Ersa": {
+   "code": "2B107",
+   "revenu_moyen": 26266.58947368421,
+   "nb_foyers": 95,
+   "estime_departement": false
+  },
+  "Muracciole": {
+   "code": "2B171",
+   "revenu_moyen": 17557.5,
+   "nb_foyers": 20,
+   "estime_departement": false
+  },
+  "Piano": {
+   "code": "2B214",
+   "revenu_moyen": 16350.95652173913,
+   "nb_foyers": 23,
+   "estime_departement": false
+  },
+  "Pino": {
+   "code": "2B233",
+   "revenu_moyen": 22481.188118811882,
+   "nb_foyers": 101,
+   "estime_departement": false
+  },
+  "Santa-Reparata-di-Balagna": {
+   "code": "2B316",
+   "revenu_moyen": 26260.893682588598,
+   "nb_foyers": 649,
+   "estime_departement": false
+  },
+  "Aullène": {
+   "code": "2A024",
+   "revenu_moyen": 23864.744680851065,
+   "nb_foyers": 94,
+   "estime_departement": false
+  },
+  "Azilone-Ampaza": {
+   "code": "2A026",
+   "revenu_moyen": 22154.225225225226,
+   "nb_foyers": 111,
+   "estime_departement": false
+  },
+  "Santa-Maria-di-Lota": {
+   "code": "2B309",
+   "revenu_moyen": 31973.649871904356,
+   "nb_foyers": 1171,
+   "estime_departement": false
+  },
+  "Petreto-Bicchisano": {
+   "code": "2A211",
+   "revenu_moyen": 21638.283333333333,
+   "nb_foyers": 360,
+   "estime_departement": false
+  },
+  "Vero": {
+   "code": "2A345",
+   "revenu_moyen": 24293.779840848805,
+   "nb_foyers": 377,
+   "estime_departement": false
+  },
+  "Bastia": {
+   "code": "2B033",
+   "revenu_moyen": 25411.913658701917,
+   "nb_foyers": 23604,
+   "estime_departement": false
+  },
+  "Érone": {
+   "code": "2B106",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Ville-di-Paraso": {
+   "code": "2B352",
+   "revenu_moyen": 18516.874125874125,
+   "nb_foyers": 143,
+   "estime_departement": false
+  },
+  "Sartène": {
+   "code": "2A272",
+   "revenu_moyen": 22048.9072815534,
+   "nb_foyers": 2060,
+   "estime_departement": false
+  },
+  "Sant'Andréa-d'Orcino": {
+   "code": "2A295",
+   "revenu_moyen": 30151.405405405407,
+   "nb_foyers": 74,
+   "estime_departement": false
+  },
+  "Algajola": {
+   "code": "2B010",
+   "revenu_moyen": 31214.61176470588,
+   "nb_foyers": 255,
+   "estime_departement": false
+  },
+  "Azzana": {
+   "code": "2A027",
+   "revenu_moyen": 16812.685714285715,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Cargèse": {
+   "code": "2A065",
+   "revenu_moyen": 25271.02685421995,
+   "nb_foyers": 782,
+   "estime_departement": false
+  },
+  "Serra-di-Scopamène": {
+   "code": "2A278",
+   "revenu_moyen": 19871.463768115944,
+   "nb_foyers": 69,
+   "estime_departement": false
+  },
+  "Borgo": {
+   "code": "2B042",
+   "revenu_moyen": 26425.15074496056,
+   "nb_foyers": 5705,
+   "estime_departement": false
+  },
+  "Pero-Casevecchie": {
+   "code": "2B210",
+   "revenu_moyen": 17164.558823529413,
+   "nb_foyers": 68,
+   "estime_departement": false
+  },
+  "Venzolasca": {
+   "code": "2B343",
+   "revenu_moyen": 24302.142023346303,
+   "nb_foyers": 1028,
+   "estime_departement": false
+  },
+  "Vico": {
+   "code": "2A348",
+   "revenu_moyen": 26021.261669024047,
+   "nb_foyers": 707,
+   "estime_departement": false
+  },
+  "Casamaccioli": {
+   "code": "2B073",
+   "revenu_moyen": 19388.430555555555,
+   "nb_foyers": 72,
+   "estime_departement": false
+  },
+  "Corte": {
+   "code": "2B096",
+   "revenu_moyen": 22729.17870291702,
+   "nb_foyers": 3531,
+   "estime_departement": false
+  },
+  "Lumio": {
+   "code": "2B150",
+   "revenu_moyen": 32577.99882352941,
+   "nb_foyers": 850,
+   "estime_departement": false
+  },
+  "Urtaca": {
+   "code": "2B332",
+   "revenu_moyen": 31543.75,
+   "nb_foyers": 144,
+   "estime_departement": false
+  },
+  "Giuncheto": {
+   "code": "2A127",
+   "revenu_moyen": 32517.363636363636,
+   "nb_foyers": 55,
+   "estime_departement": false
+  },
+  "Olmo": {
+   "code": "2B192",
+   "revenu_moyen": 17905.373333333333,
+   "nb_foyers": 75,
+   "estime_departement": false
+  },
+  "Palasca": {
+   "code": "2B199",
+   "revenu_moyen": 24441.928571428572,
+   "nb_foyers": 140,
+   "estime_departement": false
+  },
+  "Piedigriggio": {
+   "code": "2B220",
+   "revenu_moyen": 18374.967032967033,
+   "nb_foyers": 91,
+   "estime_departement": false
+  },
+  "Coggia": {
+   "code": "2A090",
+   "revenu_moyen": 26389.755838641187,
+   "nb_foyers": 471,
+   "estime_departement": false
+  },
+  "Forciolo": {
+   "code": "2A117",
+   "revenu_moyen": 25734.5625,
+   "nb_foyers": 32,
+   "estime_departement": false
+  },
+  "Loreto-di-Tallano": {
+   "code": "2A146",
+   "revenu_moyen": 22637.41379310345,
+   "nb_foyers": 29,
+   "estime_departement": false
+  },
+  "Cambia": {
+   "code": "2B051",
+   "revenu_moyen": 28680.1,
+   "nb_foyers": 30,
+   "estime_departement": false
+  },
+  "Arbellara": {
+   "code": "2A018",
+   "revenu_moyen": 20848.74193548387,
+   "nb_foyers": 124,
+   "estime_departement": false
+  },
+  "Bocognano": {
+   "code": "2A040",
+   "revenu_moyen": 22145.572327044025,
+   "nb_foyers": 318,
+   "estime_departement": false
+  },
+  "Renno": {
+   "code": "2A258",
+   "revenu_moyen": 16327.51923076923,
+   "nb_foyers": 52,
+   "estime_departement": false
+  },
+  "Campile": {
+   "code": "2B054",
+   "revenu_moyen": 20810.775510204083,
+   "nb_foyers": 98,
+   "estime_departement": false
+  },
+  "Gavignano": {
+   "code": "2B122",
+   "revenu_moyen": 17165.885714285716,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Casaglione": {
+   "code": "2A070",
+   "revenu_moyen": 35704.82154882155,
+   "nb_foyers": 297,
+   "estime_departement": false
+  },
+  "Bigorno": {
+   "code": "2B036",
+   "revenu_moyen": 21404.636363636364,
+   "nb_foyers": 44,
+   "estime_departement": false
+  },
+  "Carcheto-Brustico": {
+   "code": "2B063",
+   "revenu_moyen": 13769.56,
+   "nb_foyers": 25,
+   "estime_departement": false
+  },
+  "Castirla": {
+   "code": "2B083",
+   "revenu_moyen": 19078.025423728814,
+   "nb_foyers": 118,
+   "estime_departement": false
+  },
+  "Scolca": {
+   "code": "2B274",
+   "revenu_moyen": 22309.956521739132,
+   "nb_foyers": 46,
+   "estime_departement": false
+  },
+  "Tallone": {
+   "code": "2B320",
+   "revenu_moyen": 21234.9625,
+   "nb_foyers": 240,
+   "estime_departement": false
+  },
+  "Bilia": {
+   "code": "2A038",
+   "revenu_moyen": 24387.314285714285,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Marignana": {
+   "code": "2A154",
+   "revenu_moyen": 19842.30769230769,
+   "nb_foyers": 65,
+   "estime_departement": false
+  },
+  "Piana": {
+   "code": "2A212",
+   "revenu_moyen": 26229.125954198473,
+   "nb_foyers": 262,
+   "estime_departement": false
+  },
+  "Rospigliani": {
+   "code": "2B263",
+   "revenu_moyen": 23107.696969696968,
+   "nb_foyers": 33,
+   "estime_departement": false
+  },
+  "Talasani": {
+   "code": "2B319",
+   "revenu_moyen": 21837.1875,
+   "nb_foyers": 544,
+   "estime_departement": false
+  },
+  "Valle-di-Campoloro": {
+   "code": "2B335",
+   "revenu_moyen": 26096.51965065502,
+   "nb_foyers": 229,
+   "estime_departement": false
+  },
+  "Rezza": {
+   "code": "2A259",
+   "revenu_moyen": 19359.846153846152,
+   "nb_foyers": 26,
+   "estime_departement": false
+  },
+  "Poggio-Marinaccio": {
+   "code": "2B241",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": 24,
+   "estime_departement": true
+  },
+  "Lecci": {
+   "code": "2A139",
+   "revenu_moyen": 32844.963,
+   "nb_foyers": 1000,
+   "estime_departement": false
+  },
+  "Viggianello": {
+   "code": "2A349",
+   "revenu_moyen": 33140.68807339449,
+   "nb_foyers": 545,
+   "estime_departement": false
+  },
+  "San-Gavino-d'Ampugnani": {
+   "code": "2B299",
+   "revenu_moyen": 20848.905405405407,
+   "nb_foyers": 74,
+   "estime_departement": false
+  },
+  "San-Lorenzo": {
+   "code": "2B304",
+   "revenu_moyen": 19050.258620689656,
+   "nb_foyers": 58,
+   "estime_departement": false
+  },
+  "Valle-d'Orezza": {
+   "code": "2B338",
+   "revenu_moyen": 13418.0,
+   "nb_foyers": 25,
+   "estime_departement": false
+  },
+  "Zoza": {
+   "code": "2A363",
+   "revenu_moyen": 17613.2,
+   "nb_foyers": 30,
+   "estime_departement": false
+  },
+  "Lano": {
+   "code": "2B137",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Mazzola": {
+   "code": "2B157",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Scata": {
+   "code": "2B273",
+   "revenu_moyen": 39346.74285714285,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Grosseto-Prugna": {
+   "code": "2A130",
+   "revenu_moyen": 35254.62904564315,
+   "nb_foyers": 2410,
+   "estime_departement": false
+  },
+  "Ucciani": {
+   "code": "2A330",
+   "revenu_moyen": 20389.739644970414,
+   "nb_foyers": 338,
+   "estime_departement": false
+  },
+  "Campi": {
+   "code": "2B053",
+   "revenu_moyen": 10744.8,
+   "nb_foyers": 20,
+   "estime_departement": false
+  },
+  "Monacia-d'Orezza": {
+   "code": "2B164",
+   "revenu_moyen": 17697.8,
+   "nb_foyers": 15,
+   "estime_departement": false
+  },
+  "Pianello": {
+   "code": "2B213",
+   "revenu_moyen": 13588.176470588236,
+   "nb_foyers": 34,
+   "estime_departement": false
+  },
+  "Argiusta-Moriccio": {
+   "code": "2A021",
+   "revenu_moyen": 17006.56923076923,
+   "nb_foyers": 65,
+   "estime_departement": false
+  },
+  "Bonifacio": {
+   "code": "2A041",
+   "revenu_moyen": 31430.22360248447,
+   "nb_foyers": 2415,
+   "estime_departement": false
+  },
+  "San-Gavino-di-Carbini": {
+   "code": "2A300",
+   "revenu_moyen": 30774.992101105847,
+   "nb_foyers": 633,
+   "estime_departement": false
+  },
+  "Tolla": {
+   "code": "2A326",
+   "revenu_moyen": 21322.848101265823,
+   "nb_foyers": 79,
+   "estime_departement": false
+  },
+  "Centuri": {
+   "code": "2B086",
+   "revenu_moyen": 25429.96153846154,
+   "nb_foyers": 130,
+   "estime_departement": false
+  },
+  "Piazzole": {
+   "code": "2B217",
+   "revenu_moyen": 32711.724137931036,
+   "nb_foyers": 29,
+   "estime_departement": false
+  },
+  "Tasso": {
+   "code": "2A322",
+   "revenu_moyen": 17198.5,
+   "nb_foyers": 54,
+   "estime_departement": false
+  },
+  "Moïta": {
+   "code": "2B161",
+   "revenu_moyen": 15061.813953488372,
+   "nb_foyers": 43,
+   "estime_departement": false
+  },
+  "Stazzona": {
+   "code": "2B291",
+   "revenu_moyen": 42811.90909090909,
+   "nb_foyers": 22,
+   "estime_departement": false
+  },
+  "Cannelle": {
+   "code": "2A060",
+   "revenu_moyen": 17590.853658536584,
+   "nb_foyers": 41,
+   "estime_departement": false
+  },
+  "Olmeto": {
+   "code": "2A189",
+   "revenu_moyen": 27566.131421744325,
+   "nb_foyers": 837,
+   "estime_departement": false
+  },
+  "Cervione": {
+   "code": "2B087",
+   "revenu_moyen": 22064.83585858586,
+   "nb_foyers": 1188,
+   "estime_departement": false
+  },
+  "Giuncaggio": {
+   "code": "2B126",
+   "revenu_moyen": 19380.36170212766,
+   "nb_foyers": 47,
+   "estime_departement": false
+  },
+  "Nessa": {
+   "code": "2B175",
+   "revenu_moyen": 24718.8,
+   "nb_foyers": 60,
+   "estime_departement": false
+  },
+  "Novella": {
+   "code": "2B180",
+   "revenu_moyen": 18049.90740740741,
+   "nb_foyers": 54,
+   "estime_departement": false
+  },
+  "Levie": {
+   "code": "2A142",
+   "revenu_moyen": 20860.9825708061,
+   "nb_foyers": 459,
+   "estime_departement": false
+  },
+  "Castiglione": {
+   "code": "2B081",
+   "revenu_moyen": 21889.36842105263,
+   "nb_foyers": 19,
+   "estime_departement": false
+  },
+  "Rogliano": {
+   "code": "2B261",
+   "revenu_moyen": 22475.893982808022,
+   "nb_foyers": 349,
+   "estime_departement": false
+  },
+  "Vignale": {
+   "code": "2B350",
+   "revenu_moyen": 18781.022058823528,
+   "nb_foyers": 136,
+   "estime_departement": false
+  },
+  "Partinello": {
+   "code": "2A203",
+   "revenu_moyen": 17005.760869565216,
+   "nb_foyers": 46,
+   "estime_departement": false
+  },
+  "Ghisonaccia": {
+   "code": "2B123",
+   "revenu_moyen": 24810.64481094127,
+   "nb_foyers": 2486,
+   "estime_departement": false
+  },
+  "Tox": {
+   "code": "2B328",
+   "revenu_moyen": 18856.314285714285,
+   "nb_foyers": 70,
+   "estime_departement": false
+  },
+  "Volpajola": {
+   "code": "2B355",
+   "revenu_moyen": 17895.64197530864,
+   "nb_foyers": 243,
+   "estime_departement": false
+  },
+  "Zicavo": {
+   "code": "2A359",
+   "revenu_moyen": 15467.607843137255,
+   "nb_foyers": 153,
+   "estime_departement": false
+  },
+  "Alando": {
+   "code": "2B005",
+   "revenu_moyen": 25869.30769230769,
+   "nb_foyers": 13,
+   "estime_departement": false
+  },
+  "Croce": {
+   "code": "2B101",
+   "revenu_moyen": 17844.222222222223,
+   "nb_foyers": 54,
+   "estime_departement": false
+  },
+  "Feliceto": {
+   "code": "2B112",
+   "revenu_moyen": 22168.31506849315,
+   "nb_foyers": 146,
+   "estime_departement": false
+  },
+  "Vezzani": {
+   "code": "2B347",
+   "revenu_moyen": 20465.1912568306,
+   "nb_foyers": 183,
+   "estime_departement": false
+  },
+  "Afa": {
+   "code": "2A001",
+   "revenu_moyen": 33623.63840155945,
+   "nb_foyers": 2052,
+   "estime_departement": false
+  },
+  "Cardo-Torgia": {
+   "code": "2A064",
+   "revenu_moyen": 21157.925925925927,
+   "nb_foyers": 27,
+   "estime_departement": false
+  },
+  "Tavaco": {
+   "code": "2A323",
+   "revenu_moyen": 23824.563265306122,
+   "nb_foyers": 245,
+   "estime_departement": false
+  },
+  "Biguglia": {
+   "code": "2B037",
+   "revenu_moyen": 27404.705050065302,
+   "nb_foyers": 4594,
+   "estime_departement": false
+  },
+  "Carticasi": {
+   "code": "2B068",
+   "revenu_moyen": 21022.5,
+   "nb_foyers": 14,
+   "estime_departement": false
+  },
+  "Cateri": {
+   "code": "2B084",
+   "revenu_moyen": 20227.06,
+   "nb_foyers": 150,
+   "estime_departement": false
+  },
+  "Giocatojo": {
+   "code": "2B125",
+   "revenu_moyen": 15345.0,
+   "nb_foyers": 34,
+   "estime_departement": false
+  },
+  "Morosaglia": {
+   "code": "2B169",
+   "revenu_moyen": 20414.459546925566,
+   "nb_foyers": 618,
+   "estime_departement": false
+  },
+  "Quasquara": {
+   "code": "2A253",
+   "revenu_moyen": 18026.535714285714,
+   "nb_foyers": 28,
+   "estime_departement": false
+  },
+  "Barbaggio": {
+   "code": "2B029",
+   "revenu_moyen": 27967.55980861244,
+   "nb_foyers": 209,
+   "estime_departement": false
+  },
+  "Popolasca": {
+   "code": "2B244",
+   "revenu_moyen": 28836.727272727272,
+   "nb_foyers": 22,
+   "estime_departement": false
+  },
+  "Orto": {
+   "code": "2A196",
+   "revenu_moyen": 24292.666666666668,
+   "nb_foyers": 39,
+   "estime_departement": false
+  },
+  "Pianottoli-Caldarello": {
+   "code": "2A215",
+   "revenu_moyen": 25011.216730038024,
+   "nb_foyers": 526,
+   "estime_departement": false
+  },
+  "Urbalacone": {
+   "code": "2A331",
+   "revenu_moyen": 13820.542857142857,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Canari": {
+   "code": "2B058",
+   "revenu_moyen": 18102.76923076923,
+   "nb_foyers": 182,
+   "estime_departement": false
+  },
+  "Tralonca": {
+   "code": "2B329",
+   "revenu_moyen": 25959.701492537315,
+   "nb_foyers": 67,
+   "estime_departement": false
+  },
+  "Vescovato": {
+   "code": "2B346",
+   "revenu_moyen": 20634.061987704918,
+   "nb_foyers": 1952,
+   "estime_departement": false
+  },
+  "Lopigna": {
+   "code": "2A144",
+   "revenu_moyen": 16966.571428571428,
+   "nb_foyers": 77,
+   "estime_departement": false
+  },
+  "Matra": {
+   "code": "2B155",
+   "revenu_moyen": 18715.74193548387,
+   "nb_foyers": 31,
+   "estime_departement": false
+  },
+  "Penta-Acquatella": {
+   "code": "2B206",
+   "revenu_moyen": 16945.0,
+   "nb_foyers": 19,
+   "estime_departement": false
+  },
+  "Pietralba": {
+   "code": "2B223",
+   "revenu_moyen": 22135.630363036304,
+   "nb_foyers": 303,
+   "estime_departement": false
+  },
+  "Prunelli-di-Casacconi": {
+   "code": "2B250",
+   "revenu_moyen": 18869.377192982458,
+   "nb_foyers": 114,
+   "estime_departement": false
+  },
+  "Ventiseri": {
+   "code": "2B342",
+   "revenu_moyen": 26172.942228335625,
+   "nb_foyers": 1454,
+   "estime_departement": false
+  },
+  "Arro": {
+   "code": "2A022",
+   "revenu_moyen": 20632.35849056604,
+   "nb_foyers": 53,
+   "estime_departement": false
+  },
+  "Carbuccia": {
+   "code": "2A062",
+   "revenu_moyen": 21299.921875,
+   "nb_foyers": 256,
+   "estime_departement": false
+  },
+  "Sari-Solenzara": {
+   "code": "2A269",
+   "revenu_moyen": 25641.300552486187,
+   "nb_foyers": 905,
+   "estime_departement": false
+  },
+  "Ajaccio": {
+   "code": "2A004",
+   "revenu_moyen": 28323.51783093442,
+   "nb_foyers": 38837,
+   "estime_departement": false
+  },
+  "Mela": {
+   "code": "2A158",
+   "revenu_moyen": 23225.0,
+   "nb_foyers": 28,
+   "estime_departement": false
+  },
+  "Calenzana": {
+   "code": "2B049",
+   "revenu_moyen": 25201.675193337298,
+   "nb_foyers": 1681,
+   "estime_departement": false
+  },
+  "Manso": {
+   "code": "2B153",
+   "revenu_moyen": 26312.732394366198,
+   "nb_foyers": 71,
+   "estime_departement": false
+  },
+  "Montegrosso": {
+   "code": "2B167",
+   "revenu_moyen": 23623.390410958906,
+   "nb_foyers": 292,
+   "estime_departement": false
+  },
+  "Nonza": {
+   "code": "2B178",
+   "revenu_moyen": 20501.07894736842,
+   "nb_foyers": 38,
+   "estime_departement": false
+  },
+  "Vallica": {
+   "code": "2B339",
+   "revenu_moyen": 16138.0,
+   "nb_foyers": 14,
+   "estime_departement": false
+  },
+  "Velone-Orneto": {
+   "code": "2B340",
+   "revenu_moyen": 16192.012987012988,
+   "nb_foyers": 77,
+   "estime_departement": false
+  },
+  "San-Gavino-di-Fiumorbo": {
+   "code": "2B365",
+   "revenu_moyen": 18035.166666666668,
+   "nb_foyers": 90,
+   "estime_departement": false
+  },
+  "Conca": {
+   "code": "2A092",
+   "revenu_moyen": 57575.34839650146,
+   "nb_foyers": 686,
+   "estime_departement": false
+  },
+  "Verdèse": {
+   "code": "2B344",
+   "revenu_moyen": 15535.095238095239,
+   "nb_foyers": 21,
+   "estime_departement": false
+  },
+  "Monacia-d'Aullène": {
+   "code": "2A163",
+   "revenu_moyen": 23380.66765578635,
+   "nb_foyers": 337,
+   "estime_departement": false
+  },
+  "Pruno": {
+   "code": "2B252",
+   "revenu_moyen": 21190.722222222223,
+   "nb_foyers": 108,
+   "estime_departement": false
+  },
+  "Solaro": {
+   "code": "2B283",
+   "revenu_moyen": 25924.112,
+   "nb_foyers": 500,
+   "estime_departement": false
+  },
+  "Taglio-Isolaccio": {
+   "code": "2B318",
+   "revenu_moyen": 22415.706766917294,
+   "nb_foyers": 399,
+   "estime_departement": false
+  },
+  "Zuani": {
+   "code": "2B364",
+   "revenu_moyen": 13450.375,
+   "nb_foyers": 16,
+   "estime_departement": false
+  },
+  "Casanova": {
+   "code": "2B074",
+   "revenu_moyen": 28705.382075471698,
+   "nb_foyers": 212,
+   "estime_departement": false
+  },
+  "Poggio-d'Oletta": {
+   "code": "2B239",
+   "revenu_moyen": 66165.73722627737,
+   "nb_foyers": 137,
+   "estime_departement": false
+  },
+  "Zonza": {
+   "code": "2A362",
+   "revenu_moyen": 30012.314591078066,
+   "nb_foyers": 2152,
+   "estime_departement": false
+  },
+  "Erbajolo": {
+   "code": "2B105",
+   "revenu_moyen": 19925.370967741936,
+   "nb_foyers": 62,
+   "estime_departement": false
+  },
+  "Rapaggio": {
+   "code": "2B256",
+   "revenu_moyen": 21953.866666666665,
+   "nb_foyers": 15,
+   "estime_departement": false
+  },
+  "Rapale": {
+   "code": "2B257",
+   "revenu_moyen": 23412.591666666667,
+   "nb_foyers": 120,
+   "estime_departement": false
+  },
+  "Serra-di-Fiumorbo": {
+   "code": "2B277",
+   "revenu_moyen": 21379.150943396227,
+   "nb_foyers": 265,
+   "estime_departement": false
+  },
+  "Arbori": {
+   "code": "2A019",
+   "revenu_moyen": 20261.428571428572,
+   "nb_foyers": 42,
+   "estime_departement": false
+  },
+  "Piedicroce": {
+   "code": "2B219",
+   "revenu_moyen": 22974.076923076922,
+   "nb_foyers": 39,
+   "estime_departement": false
+  },
+  "Pila-Canale": {
+   "code": "2A232",
+   "revenu_moyen": 25651.125,
+   "nb_foyers": 184,
+   "estime_departement": false
+  },
+  "Noceta": {
+   "code": "2B177",
+   "revenu_moyen": 21685.703703703704,
+   "nb_foyers": 27,
+   "estime_departement": false
+  },
+  "Cozzano": {
+   "code": "2A099",
+   "revenu_moyen": 21029.4453125,
+   "nb_foyers": 128,
+   "estime_departement": false
+  },
+  "Cuttoli-Corticchiato": {
+   "code": "2A103",
+   "revenu_moyen": 27846.23106060606,
+   "nb_foyers": 1320,
+   "estime_departement": false
+  },
+  "Barrettali": {
+   "code": "2B030",
+   "revenu_moyen": 24251.068493150684,
+   "nb_foyers": 73,
+   "estime_departement": false
+  },
+  "Monticello": {
+   "code": "2B168",
+   "revenu_moyen": 30545.54763749032,
+   "nb_foyers": 1291,
+   "estime_departement": false
+  },
+  "Ota": {
+   "code": "2A198",
+   "revenu_moyen": 22280.22680412371,
+   "nb_foyers": 291,
+   "estime_departement": false
+  },
+  "Pastricciola": {
+   "code": "2A204",
+   "revenu_moyen": 18225.720588235294,
+   "nb_foyers": 68,
+   "estime_departement": false
+  },
+  "Sari-d'Orcino": {
+   "code": "2A270",
+   "revenu_moyen": 22246.61386138614,
+   "nb_foyers": 202,
+   "estime_departement": false
+  },
+  "Aléria": {
+   "code": "2B009",
+   "revenu_moyen": 21348.846414073072,
+   "nb_foyers": 1478,
+   "estime_departement": false
+  },
+  "Antisanti": {
+   "code": "2B016",
+   "revenu_moyen": 24929.398601398603,
+   "nb_foyers": 286,
+   "estime_departement": false
+  },
+  "Isolaccio-di-Fiumorbo": {
+   "code": "2B135",
+   "revenu_moyen": 15663.151960784313,
+   "nb_foyers": 204,
+   "estime_departement": false
+  },
+  "Canale-di-Verde": {
+   "code": "2B057",
+   "revenu_moyen": 20204.757425742573,
+   "nb_foyers": 202,
+   "estime_departement": false
+  },
+  "Furiani": {
+   "code": "2B120",
+   "revenu_moyen": 27189.715336420595,
+   "nb_foyers": 3671,
+   "estime_departement": false
+  },
+  "Oletta": {
+   "code": "2B185",
+   "revenu_moyen": 25353.95025906736,
+   "nb_foyers": 965,
+   "estime_departement": false
+  },
+  "Sorio": {
+   "code": "2B287",
+   "revenu_moyen": 14793.986301369863,
+   "nb_foyers": 73,
+   "estime_departement": false
+  },
+  "Carpineto": {
+   "code": "2B067",
+   "revenu_moyen": 17967.3125,
+   "nb_foyers": 16,
+   "estime_departement": false
+  },
+  "Castellare-di-Mercurio": {
+   "code": "2B078",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": 17,
+   "estime_departement": true
+  },
+  "Lucciana": {
+   "code": "2B148",
+   "revenu_moyen": 23930.1783847981,
+   "nb_foyers": 4210,
+   "estime_departement": false
+  },
+  "Poggio-di-Venaco": {
+   "code": "2B238",
+   "revenu_moyen": 21664.5,
+   "nb_foyers": 116,
+   "estime_departement": false
+  },
+  "Corbara": {
+   "code": "2B093",
+   "revenu_moyen": 31826.30406504065,
+   "nb_foyers": 615,
+   "estime_departement": false
+  },
+  "Muro": {
+   "code": "2B173",
+   "revenu_moyen": 18261.53591160221,
+   "nb_foyers": 181,
+   "estime_departement": false
+  },
+  "Olmeta-di-Tuda": {
+   "code": "2B188",
+   "revenu_moyen": 24715.76897689769,
+   "nb_foyers": 303,
+   "estime_departement": false
+  },
+  "Belvédère-Campomoro": {
+   "code": "2A035",
+   "revenu_moyen": 32353.531250000004,
+   "nb_foyers": 128,
+   "estime_departement": false
+  },
+  "Murzo": {
+   "code": "2A174",
+   "revenu_moyen": 23437.191176470587,
+   "nb_foyers": 68,
+   "estime_departement": false
+  },
+  "Murato": {
+   "code": "2B172",
+   "revenu_moyen": 23486.905612244896,
+   "nb_foyers": 392,
+   "estime_departement": false
+  },
+  "Saint-Florent": {
+   "code": "2B298",
+   "revenu_moyen": 25474.9797979798,
+   "nb_foyers": 1089,
+   "estime_departement": false
+  },
+  "San-Giuliano": {
+   "code": "2B303",
+   "revenu_moyen": 24309.32400932401,
+   "nb_foyers": 429,
+   "estime_departement": false
+  },
+  "Olcani": {
+   "code": "2B184",
+   "revenu_moyen": 22809.95348837209,
+   "nb_foyers": 43,
+   "estime_departement": false
+  },
+  "Carbini": {
+   "code": "2A061",
+   "revenu_moyen": 19659.59259259259,
+   "nb_foyers": 54,
+   "estime_departement": false
+  },
+  "Calacuccia": {
+   "code": "2B047",
+   "revenu_moyen": 19138.769633507854,
+   "nb_foyers": 191,
+   "estime_departement": false
+  },
+  "Ficaja": {
+   "code": "2B113",
+   "revenu_moyen": 18614.25,
+   "nb_foyers": 16,
+   "estime_departement": false
+  },
+  "Ortale": {
+   "code": "2B194",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Patrimonio": {
+   "code": "2B205",
+   "revenu_moyen": 24076.03664921466,
+   "nb_foyers": 573,
+   "estime_departement": false
+  },
+  "Casalta": {
+   "code": "2B072",
+   "revenu_moyen": 16886.833333333332,
+   "nb_foyers": 30,
+   "estime_departement": false
+  },
+  "Farinole": {
+   "code": "2B109",
+   "revenu_moyen": 29740.274193548386,
+   "nb_foyers": 124,
+   "estime_departement": false
+  },
+  "Ghisoni": {
+   "code": "2B124",
+   "revenu_moyen": 18191.082089552237,
+   "nb_foyers": 134,
+   "estime_departement": false
+  },
+  "Sermano": {
+   "code": "2B275",
+   "revenu_moyen": 21869.954545454544,
+   "nb_foyers": 44,
+   "estime_departement": false
+  },
+  "Altagène": {
+   "code": "2A011",
+   "revenu_moyen": 35909.625,
+   "nb_foyers": 32,
+   "estime_departement": false
+  },
+  "Sainte-Lucie-de-Tallano": {
+   "code": "2A308",
+   "revenu_moyen": 21433.315589353613,
+   "nb_foyers": 263,
+   "estime_departement": false
+  },
+  "Tavera": {
+   "code": "2A324",
+   "revenu_moyen": 21111.072413793103,
+   "nb_foyers": 290,
+   "estime_departement": false
+  },
+  "Belgodère": {
+   "code": "2B034",
+   "revenu_moyen": 25682.846547314577,
+   "nb_foyers": 391,
+   "estime_departement": false
+  },
+  "Chisa": {
+   "code": "2B366",
+   "revenu_moyen": 23879.94230769231,
+   "nb_foyers": 52,
+   "estime_departement": false
+  },
+  "Fozzano": {
+   "code": "2A118",
+   "revenu_moyen": 20424.96212121212,
+   "nb_foyers": 132,
+   "estime_departement": false
+  },
+  "Zévaco": {
+   "code": "2A358",
+   "revenu_moyen": 16249.102564102564,
+   "nb_foyers": 39,
+   "estime_departement": false
+  },
+  "Piobetta": {
+   "code": "2B234",
+   "revenu_moyen": 19962.615384615383,
+   "nb_foyers": 13,
+   "estime_departement": false
+  },
+  "San-Giovanni-di-Moriani": {
+   "code": "2B302",
+   "revenu_moyen": 15471.677419354839,
+   "nb_foyers": 62,
+   "estime_departement": false
+  },
+  "Sarrola-Carcopino": {
+   "code": "2A271",
+   "revenu_moyen": 23338.03693065244,
+   "nb_foyers": 2437,
+   "estime_departement": false
+  },
+  "Castello-di-Rostino": {
+   "code": "2B079",
+   "revenu_moyen": 22444.783050847458,
+   "nb_foyers": 295,
+   "estime_departement": false
+  },
+  "Lugo-di-Nazza": {
+   "code": "2B149",
+   "revenu_moyen": 21168.48717948718,
+   "nb_foyers": 39,
+   "estime_departement": false
+  },
+  "Saliceto": {
+   "code": "2B267",
+   "revenu_moyen": 21673.032258064515,
+   "nb_foyers": 31,
+   "estime_departement": false
+  },
+  "Sorbo-Ocagnano": {
+   "code": "2B286",
+   "revenu_moyen": 22028.412857142856,
+   "nb_foyers": 700,
+   "estime_departement": false
+  },
+  "Soccia": {
+   "code": "2A282",
+   "revenu_moyen": 21968.805194805194,
+   "nb_foyers": 77,
+   "estime_departement": false
+  },
+  "Rusio": {
+   "code": "2B264",
+   "revenu_moyen": 19871.18918918919,
+   "nb_foyers": 37,
+   "estime_departement": false
+  },
+  "Sisco": {
+   "code": "2B281",
+   "revenu_moyen": 25785.479524438575,
+   "nb_foyers": 757,
+   "estime_departement": false
+  },
+  "Valle-di-Rostino": {
+   "code": "2B337",
+   "revenu_moyen": 18336.802469135804,
+   "nb_foyers": 81,
+   "estime_departement": false
+  },
+  "Albitreccia": {
+   "code": "2A008",
+   "revenu_moyen": 36387.72897196261,
+   "nb_foyers": 1070,
+   "estime_departement": false
+  },
+  "Ciamannacce": {
+   "code": "2A089",
+   "revenu_moyen": 16992.18181818182,
+   "nb_foyers": 33,
+   "estime_departement": false
+  },
+  "Corrano": {
+   "code": "2A094",
+   "revenu_moyen": 17917.14893617021,
+   "nb_foyers": 47,
+   "estime_departement": false
+  },
+  "Île-Rousse": {
+   "code": "2B134",
+   "revenu_moyen": 23478.702849389418,
+   "nb_foyers": 2211,
+   "estime_departement": false
+  },
+  "Olmi-Cappella": {
+   "code": "2B190",
+   "revenu_moyen": 20252.876404494382,
+   "nb_foyers": 89,
+   "estime_departement": false
+  },
+  "Penta-di-Casinca": {
+   "code": "2B207",
+   "revenu_moyen": 22021.292294446837,
+   "nb_foyers": 2323,
+   "estime_departement": false
+  },
+  "Novale": {
+   "code": "2B179",
+   "revenu_moyen": 17516.514285714286,
+   "nb_foyers": 35,
+   "estime_departement": false
+  },
+  "Olmeta-di-Capocorso": {
+   "code": "2B187",
+   "revenu_moyen": 18302.87777777778,
+   "nb_foyers": 90,
+   "estime_departement": false
+  },
+  "Ortiporio": {
+   "code": "2B195",
+   "revenu_moyen": 17498.962962962964,
+   "nb_foyers": 81,
+   "estime_departement": false
+  },
+  "Piève": {
+   "code": "2B230",
+   "revenu_moyen": 23350.651515151516,
+   "nb_foyers": 66,
+   "estime_departement": false
+  },
+  "Prato-di-Giovellina": {
+   "code": "2B248",
+   "revenu_moyen": 24236.233333333334,
+   "nb_foyers": 30,
+   "estime_departement": false
+  },
+  "Tarrano": {
+   "code": "2B321",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Tomino": {
+   "code": "2B327",
+   "revenu_moyen": 23616.649635036498,
+   "nb_foyers": 137,
+   "estime_departement": false
+  },
+  "Zalana": {
+   "code": "2B356",
+   "revenu_moyen": 17607.0,
+   "nb_foyers": 81,
+   "estime_departement": false
+  },
+  "Guitera-les-Bains": {
+   "code": "2A133",
+   "revenu_moyen": 23091.843373493975,
+   "nb_foyers": 83,
+   "estime_departement": false
+  },
+  "Poggiolo": {
+   "code": "2A240",
+   "revenu_moyen": 19144.01818181818,
+   "nb_foyers": 55,
+   "estime_departement": false
+  },
+  "Canavaggia": {
+   "code": "2B059",
+   "revenu_moyen": 23099.434210526317,
+   "nb_foyers": 76,
+   "estime_departement": false
+  },
+  "Riventosa": {
+   "code": "2B260",
+   "revenu_moyen": 20706.551020408162,
+   "nb_foyers": 98,
+   "estime_departement": false
+  },
+  "Santa-Lucia-di-Mercurio": {
+   "code": "2B306",
+   "revenu_moyen": 21371.573170731706,
+   "nb_foyers": 82,
+   "estime_departement": false
+  },
+  "Alata": {
+   "code": "2A006",
+   "revenu_moyen": 34821.48223121907,
+   "nb_foyers": 2223,
+   "estime_departement": false
+  },
+  "Campana": {
+   "code": "2B052",
+   "revenu_moyen": 29572.733333333334,
+   "nb_foyers": 15,
+   "estime_departement": false
+  },
+  "Sant'Andréa-di-Cotone": {
+   "code": "2B293",
+   "revenu_moyen": 21753.9406779661,
+   "nb_foyers": 118,
+   "estime_departement": false
+  },
+  "Appietto": {
+   "code": "2A017",
+   "revenu_moyen": 29087.262455516015,
+   "nb_foyers": 1124,
+   "estime_departement": false
+  },
+  "Santa-Maria-Siché": {
+   "code": "2A312",
+   "revenu_moyen": 21683.39033457249,
+   "nb_foyers": 269,
+   "estime_departement": false
+  },
+  "Zigliara": {
+   "code": "2A360",
+   "revenu_moyen": 24026.115384615383,
+   "nb_foyers": 78,
+   "estime_departement": false
+  },
+  "Meria": {
+   "code": "2B159",
+   "revenu_moyen": 23294.5625,
+   "nb_foyers": 64,
+   "estime_departement": false
+  },
+  "Pietracorbara": {
+   "code": "2B224",
+   "revenu_moyen": 22742.773835920176,
+   "nb_foyers": 451,
+   "estime_departement": false
+  },
+  "Pietroso": {
+   "code": "2B229",
+   "revenu_moyen": 20666.84699453552,
+   "nb_foyers": 183,
+   "estime_departement": false
+  },
+  "Pigna": {
+   "code": "2B231",
+   "revenu_moyen": 20223.951612903227,
+   "nb_foyers": 62,
+   "estime_departement": false
+  },
+  "Guagno": {
+   "code": "2A131",
+   "revenu_moyen": 29656.77380952381,
+   "nb_foyers": 84,
+   "estime_departement": false
+  },
+  "Sotta": {
+   "code": "2A288",
+   "revenu_moyen": 25640.138170974154,
+   "nb_foyers": 1006,
+   "estime_departement": false
+  },
+  "Ampriani": {
+   "code": "2B015",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Asco": {
+   "code": "2B023",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": 60,
+   "estime_departement": true
+  },
+  "Lento": {
+   "code": "2B140",
+   "revenu_moyen": 17141.697674418603,
+   "nb_foyers": 43,
+   "estime_departement": false
+  },
+  "Omessa": {
+   "code": "2B193",
+   "revenu_moyen": 22717.209039548023,
+   "nb_foyers": 354,
+   "estime_departement": false
+  },
+  "Pietricaggio": {
+   "code": "2B227",
+   "revenu_moyen": 7325.2,
+   "nb_foyers": 20,
+   "estime_departement": false
+  },
+  "Ville-di-Pietrabugno": {
+   "code": "2B353",
+   "revenu_moyen": 40673.01329787234,
+   "nb_foyers": 2256,
+   "estime_departement": false
+  },
+  "Loreto-di-Casinca": {
+   "code": "2B145",
+   "revenu_moyen": 16651.661971830985,
+   "nb_foyers": 142,
+   "estime_departement": false
+  },
+  "Venaco": {
+   "code": "2B341",
+   "revenu_moyen": 23933.257142857143,
+   "nb_foyers": 420,
+   "estime_departement": false
+  },
+  "Casalabriva": {
+   "code": "2A071",
+   "revenu_moyen": 22685.150326797386,
+   "nb_foyers": 153,
+   "estime_departement": false
+  },
+  "Calvi": {
+   "code": "2B050",
+   "revenu_moyen": 25462.61696243374,
+   "nb_foyers": 4339,
+   "estime_departement": false
+  },
+  "Campitello": {
+   "code": "2B055",
+   "revenu_moyen": 18001.072727272727,
+   "nb_foyers": 55,
+   "estime_departement": false
+  },
+  "Castifao": {
+   "code": "2B080",
+   "revenu_moyen": 17053.52727272727,
+   "nb_foyers": 110,
+   "estime_departement": false
+  },
+  "Costa": {
+   "code": "2B097",
+   "revenu_moyen": 22613.684210526317,
+   "nb_foyers": 38,
+   "estime_departement": false
+  },
+  "Lama": {
+   "code": "2B136",
+   "revenu_moyen": 22535.717171717173,
+   "nb_foyers": 99,
+   "estime_departement": false
+  },
+  "Ocana": {
+   "code": "2A181",
+   "revenu_moyen": 22811.488063660476,
+   "nb_foyers": 377,
+   "estime_departement": false
+  },
+  "Bisinchi": {
+   "code": "2B039",
+   "revenu_moyen": 19493.909090909092,
+   "nb_foyers": 121,
+   "estime_departement": false
+  },
+  "Morsiglia": {
+   "code": "2B170",
+   "revenu_moyen": 23266.072463768116,
+   "nb_foyers": 69,
+   "estime_departement": false
+  },
+  "Santa-Maria-Figaniella": {
+   "code": "2A310",
+   "revenu_moyen": 16921.346153846152,
+   "nb_foyers": 52,
+   "estime_departement": false
+  },
+  "Perelli": {
+   "code": "2B208",
+   "revenu_moyen": 12316.42857142857,
+   "nb_foyers": 28,
+   "estime_departement": false
+  },
+  "Polveroso": {
+   "code": "2B243",
+   "revenu_moyen": 33965.529411764706,
+   "nb_foyers": 17,
+   "estime_departement": false
+  },
+  "Zilia": {
+   "code": "2B361",
+   "revenu_moyen": 23456.934673366835,
+   "nb_foyers": 199,
+   "estime_departement": false
+  },
+  "Casevecchie": {
+   "code": "2B075",
+   "revenu_moyen": 21877.612903225807,
+   "nb_foyers": 31,
+   "estime_departement": false
+  },
+  "Galéria": {
+   "code": "2B121",
+   "revenu_moyen": 24372.546558704453,
+   "nb_foyers": 247,
+   "estime_departement": false
+  },
+  "Lavatoggio": {
+   "code": "2B138",
+   "revenu_moyen": 20621.725490196077,
+   "nb_foyers": 102,
+   "estime_departement": false
+  },
+  "Moltifao": {
+   "code": "2B162",
+   "revenu_moyen": 22863.068527918782,
+   "nb_foyers": 394,
+   "estime_departement": false
+  },
+  "Piazzali": {
+   "code": "2B216",
+   "revenu_moyen": 24981.362981125094,
+   "nb_foyers": null,
+   "estime_departement": true
+  },
+  "Rutali": {
+   "code": "2B265",
+   "revenu_moyen": 24919.825112107625,
+   "nb_foyers": 223,
+   "estime_departement": false
+  },
+  "San-Martino-di-Lota": {
+   "code": "2B305",
+   "revenu_moyen": 32749.80231884058,
+   "nb_foyers": 1725,
+   "estime_departement": false
+  },
+  "Piedipartino": {
+   "code": "2B221",
+   "revenu_moyen": 17522.266666666666,
+   "nb_foyers": 15,
+   "estime_departement": false
+  },
+  "Alzi": {
+   "code": "2B013",
+   "revenu_moyen": 12578.266666666666,
+   "nb_foyers": 15,
+   "estime_departement": false
+  },
+  "Avapessa": {
+   "code": "2B025",
+   "revenu_moyen": 16565.0,
+   "nb_foyers": 57,
+   "estime_departement": false
+  },
+  "Occhiatana": {
+   "code": "2B182",
+   "revenu_moyen": 22030.07100591716,
+   "nb_foyers": 169,
+   "estime_departement": false
+  },
+  "Évisa": {
+   "code": "2A108",
+   "revenu_moyen": 15971.1640625,
+   "nb_foyers": 128,
+   "estime_departement": false
+  },
+  "Moncale": {
+   "code": "2B165",
+   "revenu_moyen": 26517.492822966506,
+   "nb_foyers": 209,
+   "estime_departement": false
+  },
+  "Vivario": {
+   "code": "2B354",
+   "revenu_moyen": 18391.18918918919,
+   "nb_foyers": 222,
+   "estime_departement": false
+  }
+ }
+}

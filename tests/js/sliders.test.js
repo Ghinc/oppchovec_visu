@@ -72,8 +72,8 @@ test('formats d\'affichage : valeur brute avec son unité', async () => {
   assert.equal(f('Opp4', 91), '91,0 %');
   assert.equal(f('Cho1', -8.8242), '-8,82');
   assert.equal(f('Opp3', 281.4), '281,4 pts');
-  assert.match(normaliser(app.ev("libelleSlider('Indicateur_Vec1', 20530)")), /^36 % de l'échelle corse · valeur : 20 530 €$/);
-  assert.match(normaliser(app.ev("libelleEchelle('Indicateur_Vec1')")), /^Corse : 15 600 € → 29 320 €$/);
+  assert.match(normaliser(app.ev("libelleSlider('Indicateur_Vec1', 20530)")), /^18 % de l'échelle corse · valeur : 20 530 €$/);
+  assert.match(normaliser(app.ev("libelleEchelle('Indicateur_Vec1')")), /^Corse : 12 746 € → 56 621 €$/);
 });
 
 test('META_INDICATEURS couvre exactement les 10 indicateurs', async () => {
@@ -97,5 +97,5 @@ test('valeurBruteDepuisSlider : tant que le curseur n\'a pas bougé, la valeur e
   app.ev('globalThis.__i = ' + JSON.stringify(intact));
   assert.equal(app.ev("valeurBruteDepuisSlider('Indicateur_Vec1', __i)"), 20530.123456789);
   app.ev("__i.value = '50'");
-  assert.equal(app.ev("valeurBruteDepuisSlider('Indicateur_Vec1', __i)"), 15600 + 0.5 * (29320 - 15600));
+  assert.equal(app.ev("valeurBruteDepuisSlider('Indicateur_Vec1', __i)"), app.ev("bornesRef.min['Indicateur_Vec1']") + 0.5 * (app.ev("bornesRef.max['Indicateur_Vec1']") - app.ev("bornesRef.min['Indicateur_Vec1']")));
 });

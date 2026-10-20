@@ -8,7 +8,8 @@ test('tous les onglets s\'ouvrent, affichent leur contenu, sans nouvelle erreur'
   await avecAppli(async (appli) => {
     const { page } = appli;
     const onglets = await page.$$eval('.tab-button[data-tab]', (b) => b.map((x) => x.dataset.tab));
-    assert.deepEqual(onglets, ['oppchovectab', 'opptab', 'chotab', 'vectab', 'dominancetab']);
+    const evolution = /SITE_EVOLUTION\s*=\s*true/.test(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', '..', 'stage_ambroise', 'Code', 'WEB', 'config_site.js'), 'utf8'));
+    assert.deepEqual(onglets, ['oppchovectab', 'opptab', 'chotab', 'vectab', 'dominancetab'].concat(evolution ? ['evolutiontab'] : []));
     for (const tab of onglets) {
       await cliquerOnglet(page, tab);
       await page.waitForSelector(`#${tab}.active`, { state: 'visible', timeout: 15000 });
