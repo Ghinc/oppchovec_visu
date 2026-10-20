@@ -278,6 +278,30 @@ class FichiersAnnexes(unittest.TestCase):
             if not x["Vec1"]["departemental"]:
                 self.assertAlmostEqual(x["Vec1"]["revenu_fiscal"] / x["Vec1"]["foyers"], d["Vec1"], delta=1e-3, msg=c)
 
+    def test_effectifs_des_tableaux_coherents_avec_la_population(self):
+        """Les effectifs détaillés (diplômes, catégories, actifs…) doivent rester du bon ordre de grandeur par rapport à la population de la commune
+        (pas identiques : champs différents — 18 ans et plus non scolarisés, 15 ans et plus, actifs — et pondérations du recensement, arrondis près pour les très petites communes)."""
+        det = charger_json(WEB / "details_calcul.json")
+        pop_totale = 0
+        for c, x in det.items():
+            pop = x["Cho2"]["population"]
+            pop_totale += pop
+            o1 = sum(x["Opp1"][f"niveau{k}"] for k in range(1, 8))
+            o2 = sum(x["Opp2"][f"cs{k}"] for k in range(1, 9))
+            v3 = x["Vec3"]["stable"] + x["Vec3"]["autres"] + x["Vec3"]["chomeur"]
+            with self.subTest(commune=c):
+                self.assertGreater(o1 / pop, 0.5, "diplômes : 18 ans et plus non scolarisés")
+                self.assertLessEqual(o1 / pop, 1.01)
+                self.assertGreater(o2 / pop, 0.75, "catégories socioprofessionnelles : 15 ans et plus")
+                self.assertLessEqual(o2 / pop, 1.01)
+                self.assertGreater(v3 / pop, 0.05, "actifs (emploi et chômage)")
+                self.assertLess(v3 / pop, 0.7)
+                self.assertLessEqual(x["Vec1"]["foyers"] / pop, 1.2, "foyers fiscaux")
+                self.assertLessEqual(x["Cho1"]["personnes_qpv"], pop)
+                if pop > 100:
+                    self.assertGreaterEqual(o2, o1 - 1, "les 15 ans et plus incluent les 18 ans et plus non scolarisés")
+        self.assertAlmostEqual(pop_totale, 355486, delta=2000, msg="population de la Corse (recensement 2023)")
+
     def test_parts_d_emploi_somment_a_100_aux_arrondis_pres(self):
         """Les trois parts d'emploi (stable, autres contrats, chômeurs) somment à 100 (curseurs couplés de l'appli)."""
         for c, s in charger_json(WEB / "sous_composantes.json").items():

@@ -549,6 +549,7 @@ button.small {
   gap: var(--spacing-xs);
   margin-bottom: var(--spacing-md);
   padding: var(--spacing-sm);
+  padding-right: var(--spacing-lg, 16px);          /* marge à droite : le contenu ne colle pas au bord de la carte de l'indicateur */
   background-color: var(--bg-hover);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-fast);
