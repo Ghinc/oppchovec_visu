@@ -36,6 +36,8 @@ RAPPORTS = [
      "Description du programme de calcul historique de l'indice."),
     ("01_indice_courant_et_sources", f"{CODE}/RAPPORT_COMPARAISON_INDICE_V1_V2.md", "Ancien et nouvel indice courant : ce qui change sur la carte",
      "Comparaison des cartes de l'indice v1 (2020-2024) et v2 (2023-2025), avec l'image des deux cartes, les classes qui changent, les indicateurs responsables et les communes qui bougent le plus."),
+    ("01_indice_courant_et_sources", f"{CODE}/RAPPORT_MISES_A_JOUR_A_VENIR.md", "Mises à jour à venir : quand refaire la carte",
+     "Calendrier des prochaines données (recensement, ARCEP, revenus, BPE, QPV), fonctionnement de la rotation du recensement, quand une nouvelle carte devient intéressante, procédure de régénération."),
     ("02_onglet_evolution_2016_2021", f"{CODE}/RAPPORT_SOURCES_2016_2021_PAR_INDICATEUR.html", "Sources 2016 et 2021, indicateur par indicateur",
      "Pour chaque variable des 10 indicateurs : donnée récupérée, source et année pour 2016 et 2021, et explication de ce qui diffère. Inclut la couverture 4G calculée."),
     ("02_onglet_evolution_2016_2021", f"{CODE}/RAPPORT_VARIATIONS_EVOLUTION.md", "Pourquoi l'indice varie entre 2016 et 2021",
