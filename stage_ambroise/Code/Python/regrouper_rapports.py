@@ -34,6 +34,8 @@ RAPPORTS = [
      "Comment utiliser les données dans une page web."),
     ("01_indice_courant_et_sources", f"{CODE}/Python/README.md", "Calcul de l'indice à l'échelle communale (oppchovec.py)",
      "Description du programme de calcul historique de l'indice."),
+    ("01_indice_courant_et_sources", f"{CODE}/RAPPORT_COMPARAISON_INDICE_V1_V2.md", "Ancien et nouvel indice courant : ce qui change sur la carte",
+     "Comparaison des cartes de l'indice v1 (2020-2024) et v2 (2023-2025), avec l'image des deux cartes, les classes qui changent, les indicateurs responsables et les communes qui bougent le plus."),
     ("02_onglet_evolution_2016_2021", f"{CODE}/RAPPORT_SOURCES_2016_2021_PAR_INDICATEUR.html", "Sources 2016 et 2021, indicateur par indicateur",
      "Pour chaque variable des 10 indicateurs : donnée récupérée, source et année pour 2016 et 2021, et explication de ce qui diffère. Inclut la couverture 4G calculée."),
     ("02_onglet_evolution_2016_2021", f"{CODE}/RAPPORT_VARIATIONS_EVOLUTION.md", "Pourquoi l'indice varie entre 2016 et 2021",
@@ -122,6 +124,10 @@ def main():
             (cible / nom).write_bytes(contenu)
             date = date_modif(source)
         formats = [nom]
+        if not hors:                                                        # image associée au rapport (<nom>_cartes.png), si elle est dans le dépôt
+            png = lire_depot(source.rsplit(".", 1)[0] + "_cartes.png")
+            if png is not None:
+                (cible / (Path(nom).stem + "_cartes.png")).write_bytes(png)
         if nom.endswith(".md"):                                           # version HTML du Markdown
             sortie = cible / (Path(nom).stem + ".html")
             subprocess.run([sys.executable, str(convertisseur), str(cible / nom), str(sortie)], check=True, capture_output=True)
