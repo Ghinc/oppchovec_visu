@@ -1,7 +1,7 @@
 """
 Export des sous-composantes brutes des indicateurs OppChoVec pour les sliders du web (indice courant v2).
 
-Écrit Code/WEB/sous_composantes.json : pour chaque commune, les valeurs brutes des sous-composantes des 10 indicateurs (Opp1 et Opp2 en parts, Opp3, Opp4, Vec2 et Vec3 en sous-composantes ; Cho1, Cho2, Vec1 et Vec4 en une seule composante),
+Écrit Code/WEB/sous_composantes.json : pour chaque commune, les valeurs brutes des sous-composantes des indicateurs décomposables (Opp3, Opp4, Cho1, Vec2, Vec3),
 lues dans Données/indice_v2/sources_indice_v2.json (produit par construire_indice_v2.py à partir des sources officielles).
 
 Le script vérifie que chaque recomposition redonne la valeur du JSON data_scores_0_10.json et refuse d'écrire le fichier au moindre écart : les sliders ne doivent jamais changer l'indice.
@@ -34,17 +34,6 @@ VEC3_CATEGORIES = {
 
 
 # Formules des indicateurs à partir de leurs sous-composantes (miroir de script.js)
-def calc_opp1(c):
-    total = sum(c[f"n{k}"] for k in range(1, 8))
-    return sum(k * c[f"n{k}"] for k in range(1, 8)) / total if total else 0
-
-
-def calc_opp2(c):
-    x = [c[f"cs{k}"] for k in range(1, 9)]
-    mu = sum(x) / 8
-    return sum((v / mu) * math.log(v / mu) for v in x if v > 0) / 8
-
-
 def calc_opp3(c):
     return c["voiture"] + (100 if c["tc"] > 0 else 0) + (100 if c["bus"] else 0)
 
@@ -55,18 +44,6 @@ def calc_opp4(c):
 
 def calc_cho1(c):
     return -math.log(c["personnes_qpv"]) if c["personnes_qpv"] > 0 else 0
-
-
-def calc_cho2(c):
-    return c["francais"]
-
-
-def calc_vec1(c):
-    return c["revenu"]
-
-
-def calc_vec4(c):
-    return c["services"]
 
 
 def calc_vec2(c):
@@ -80,7 +57,7 @@ def calc_vec3(c):
     return sum(c[k] * poids for k, (_, poids) in VEC3_CATEGORIES.items()) / total
 
 
-CALCULS = {"Opp1": calc_opp1, "Opp2": calc_opp2, "Cho2": calc_cho2, "Vec1": calc_vec1, "Vec4": calc_vec4, "Opp3": calc_opp3, "Opp4": calc_opp4, "Cho1": calc_cho1, "Vec2": calc_vec2, "Vec3": calc_vec3}
+CALCULS = {"Opp3": calc_opp3, "Opp4": calc_opp4, "Cho1": calc_cho1, "Vec2": calc_vec2, "Vec3": calc_vec3}
 
 
 def sous_composantes_par_commune(noms_attendus):
@@ -90,15 +67,8 @@ def sous_composantes_par_commune(noms_attendus):
         sys.exit(f"Communes différentes de data_scores_0_10.json : {sorted(set(communes) ^ set(noms_attendus))}")
     sortie = {}
     for nom, c in communes.items():
-        total1 = sum(c["Opp1"][f"niveau{k}"] for k in range(1, 8))
-        total2 = sum(c["Opp2"][f"cs{k}"] for k in range(1, 9))
         total3 = c["Vec3"]["chomeur"] + c["Vec3"]["autres"] + c["Vec3"]["stable"]
         sortie[nom] = {
-            "Opp1": {f"n{k}": 100 * c["Opp1"][f"niveau{k}"] / total1 for k in range(1, 8)},
-            "Opp2": {f"cs{k}": 100 * c["Opp2"][f"cs{k}"] / total2 for k in range(1, 9)},
-            "Cho2": {"francais": c["Cho2"]["valeur"]},
-            "Vec1": {"revenu": c["Vec1"]["valeur"]},
-            "Vec4": {"services": c["Vec4"]["valeur"]},
             "Opp3": {"voiture": c["Opp3"]["voiture"], "tc": c["Opp3"]["tc"], "bus": 1 if c["code"] in VILLES_RESEAU_BUS else 0},
             "Opp4": {"g4": c["Opp4"]["g4"], "debit": c["Opp4"]["debit"], "fibre": c["Opp4"]["fibre"]},
             "Cho1": {"personnes_qpv": c["Cho1"]["personnes_qpv"]},

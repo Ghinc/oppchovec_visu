@@ -18,21 +18,13 @@ from common import (INDICATEURS, RACINE, WEB, bornes_indicateurs, charger_json, 
 NODE = shutil.which("node")
 GRAINE = 20261011
 NB_SCENARIOS = 30
-DECOMPOSES = ("Opp1", "Opp2", "Opp3", "Opp4", "Cho1", "Cho2", "Vec1", "Vec2", "Vec3", "Vec4")           # tous les indicateurs ont leurs sous-curseurs
+DECOMPOSES = ("Opp3", "Opp4", "Cho1", "Vec2", "Vec3")
 BINAIRES = {("Opp3", "tc"): 100, ("Opp3", "bus"): 1}          # valeur de la composante quand la case est cochée
-ENTIERS = {("Cho1", "personnes_qpv"), ("Vec4", "services")}
-PARTS = ("Opp1", "Opp2", "Vec3")
+ENTIERS = {("Cho1", "personnes_qpv")}
+PARTS = ("Vec3",)
 
 
 def formule(ind, s):
-    if ind == "Opp1":
-        return sum(k * s[f"n{k}"] for k in range(1, 8)) / sum(s[f"n{k}"] for k in range(1, 8))
-    if ind == "Opp2":
-        x = [s[f"cs{k}"] for k in range(1, 9)]
-        mu = sum(x) / 8
-        return sum((v / mu) * math.log(v / mu) for v in x if v > 0) / 8
-    if ind in ("Cho2", "Vec1", "Vec4"):
-        return next(iter(s.values()))
     if ind == "Opp3":
         return s["voiture"] + (100 if s["tc"] > 0 else 0) + (100 if s["bus"] else 0)
     if ind == "Opp4":
@@ -90,7 +82,7 @@ class AppliContrePython(unittest.TestCase):
         for _ in range(NB_SCENARIOS):
             sc = {"mode": rng.choice(["egal", "betti"]), "commune": rng.choice(cls.communes), "curseurs": {}, "sous": []}
             simples = [k for k in INDICATEURS if k not in DECOMPOSES]
-            for k in rng.sample(simples, rng.randint(0, min(3, len(simples)))):
+            for k in rng.sample(simples, rng.randint(0, 3)):
                 sc["curseurs"][f"Indicateur_{k}"] = round(rng.uniform(0, 100), 3)
             for ind in rng.sample(DECOMPOSES, rng.randint(0, 3)):
                 comps = [c for c in cls.sc["Bastia"][ind] if cls.bornes_sc[ind][c][0] != cls.bornes_sc[ind][c][1]]
@@ -178,12 +170,11 @@ class AppliContrePython(unittest.TestCase):
                                          f"{nom} ne doit pas bouger quand on modifie {c}")
 
     def test_les_scenarios_couvrent_bien_les_cas(self):
-        """Garde-fou sur le générateur : le tirage doit exercer sous-curseurs, cases à cocher, parts (diplôme, catégories, emploi) et les deux modes."""
+        """Garde-fou sur le générateur : le tirage doit exercer curseurs simples, cases à cocher, parts d'emploi et les deux modes."""
         modes = {s["mode"] for s in self.scenarios}
         self.assertEqual(modes, {"egal", "betti"})
+        self.assertTrue(any(s["curseurs"] for s in self.scenarios))
         sous = [e for s in self.scenarios for e in s["sous"]]
-        self.assertTrue(any(e["ind"] in ("Indicateur_Opp1", "Indicateur_Opp2") for e in sous), "parts de diplôme ou de catégories")
-        self.assertTrue(any(e["ind"] in ("Indicateur_Cho2", "Indicateur_Vec1", "Indicateur_Vec4") for e in sous), "indicateurs à une seule composante")
         self.assertTrue(any(e.get("binaire") for e in sous))
         self.assertTrue(any(e["ind"] == "Indicateur_Vec3" for e in sous))
         self.assertTrue(any(e["ind"] == "Indicateur_Cho1" for e in sous))
