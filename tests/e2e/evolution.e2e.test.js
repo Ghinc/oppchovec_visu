@@ -280,7 +280,7 @@ test('Évolution : chaque ligne des tableaux (scores, indicateurs, détails dép
     const texte = await tip.innerText();
     assert.ok(texte.includes('2016') && texte.includes('2021') && texte.includes('ARCEP'), texte);
     // ligne de composante : source propre à la composante (4G : cartes ARCEP de mars 2017 puis décembre 2021)
-    const ligne4g = page.locator('#evolution-fiche tr', { hasText: 'Population couverte par la 4G' }).first().locator('.evolution-src');
+    const ligne4g = page.locator('#evolution-fiche .evolution-src[data-src^="Population couverte par la 4G"]');
     await ligne4g.hover();
     assert.match(await tip.innerText(), /mars 2017[\s\S]*décembre 2021/);
     await page.mouse.move(5, 5);
