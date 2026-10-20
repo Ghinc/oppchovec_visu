@@ -124,20 +124,18 @@ test('panneau commune : changer de commune abandonne un brouillon non validé', 
   });
 });
 
-test('panneau commune : chaque indicateur et chaque sous-composante a une infobulle de provenance et d\'année ', { skip: sauter }, async () => {
+test('panneau commune : pas de ⓘ de provenance en double ; la description (bulle verte) de chaque indicateur donne sa source et son millésime', { skip: sauter }, async () => {
   await avecAppli(async ({ page }) => {
     await ouvrirCommune(page, 'Bastia');
-    const badges = await page.$$eval('#resultCommune .src-badge', (els) => els.map((e) => ({ txt: e.dataset.src, manque: e.classList.contains('src-manquante') })));
-    // 12 sous-curseurs + 36 variables des tableaux « Voir le calcul » (Opp1 7, Opp2 8, Opp3 3, Opp4 3, Cho1 1, Cho2 5, Vec1 2, Vec2 3, Vec3 3, Vec4 1)
-    assert.equal(badges.length, 12 + 36);
-    assert.equal(await page.locator('#resultCommune .calcul-detail .src-badge').count(), 36);
-    assert.ok(await page.locator('#resultCommune .calcul-detail .sc-aide').count() >= 36, 'un petit texte explicatif par variable du tableau');
-    for (const b of badges) assert.match(b.txt, /^Provenance : .+ Année : .+\.$/);
-    assert.equal(badges.filter((b) => b.manque).length, 0, 'toutes les données ont une provenance et une année');
-    // l'infobulle s'affiche au survol
-    const premier = page.locator('#resultCommune .sous-composantes .src-badge').first();
-    await premier.hover();
-    assert.equal(await premier.evaluate((e) => getComputedStyle(e, '::after').display), 'block');
+    assert.equal(await page.locator('#resultCommune .src-badge').count(), 0, 'pas de ⓘ de provenance en plus de la bulle verte');
+    assert.equal(await page.locator('#resultCommune .sc-aide').count(), 0, 'pas de petit texte qui répète la description');
+    // la bulle verte de chaque indicateur : « Source : … » avec une année
+    const descriptions = await page.$$eval('#resultCommune .indicator-info-box p', (els) => els.map((e) => e.textContent));
+    assert.equal(descriptions.length, 10);
+    for (const d of descriptions) assert.match(d, /Source : .*(20\d\d|T4 2024)/, d);
+    // précisions de provenance qui n'étaient que dans les anciennes infobulles
+    const toutes = descriptions.join(' ');
+    for (const mot of ['transport.data.gouv.fr', 'Filosofi', 'OSRM', 'Ma connexion internet', 'référence 1er janvier 2020', 'revenus 2024']) assert.ok(toutes.includes(mot), mot);
   });
 });
 
