@@ -1259,6 +1259,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
             }
             communeLayers[type][name] = layer;
             layer.bindPopup(`<strong>${name}</strong><br>${titre}: ${val !== undefined ? val.toFixed(2) : 'N/A'}/10`);
+            layer.on('click', () => selectionnerCommuneDepuisCarte(name));       // le clic sélectionne aussi la commune dans la liste et affiche sa fiche
         }
     }).addTo(cartes[type]);
 
@@ -2661,6 +2662,13 @@ function estDecompose(indicateur, communeNom) {
 }
 
 // fonction pour afficher le detail d'une commune
+// Clic sur une commune (ou un EPCI) d'une carte : elle est choisie dans la liste déroulante et sa fiche s'affiche
+function selectionnerCommuneDepuisCarte(nom) {
+  const liste = document.getElementById('communeSelect');
+  if (liste && [...liste.options].some(o => o.value === nom)) liste.value = nom;
+  afficherCommune(nom);
+}
+
 function afficherCommune(communeNom) {
   if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
     epciAfficherDansPanneau(communeNom);
@@ -2727,7 +2735,7 @@ function afficherCommune(communeNom) {
     indicateursHTML += `
       <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
-          <strong>${nomIndicateur}</strong>${badgeSource(nomIndicateur)}
+          <strong>${nomIndicateur}</strong>
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>
