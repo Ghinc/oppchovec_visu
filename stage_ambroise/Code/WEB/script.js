@@ -2209,10 +2209,10 @@ const SOURCES_DONNEES = {
   Opp1: { indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
   Opp2: { indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
   Opp3: {
-    indicateur: { provenance: `${RP23} ; réseaux de bus : liste fournie par la doctorante`, annee: '2023' },
+    indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina (transport.data.gouv.fr)`, annee: '2023' },
     voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
     tc: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (actifs occupés allant travailler en transports en commun)`, annee: '2023' },
-    bus: { provenance: "Liste de trois villes (Ajaccio, Bastia, Porto-Vecchio) fournie par la doctorante, sans source officielle", annee: null }
+    bus: { provenance: "Réseaux urbains Muvistrada (Ajaccio, CA du Pays Ajaccien), Via Bastia (CA de Bastia) et A Citadina (Porto-Vecchio, CC du Sud Corse), référencés sur transport.data.gouv.fr (point d'accès national aux données de transport) ; sélection des trois villes faite par la doctorante", annee: 'jeux référencés en 2026 (créés en 2019, 2022 et 2023)' }
   },
   Opp4: {
     indicateur: { provenance: 'ARCEP (couverture mobile et « Ma connexion internet »)', annee: 'T4 2024' },
