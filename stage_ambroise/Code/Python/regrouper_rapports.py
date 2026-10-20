@@ -133,7 +133,11 @@ def main():
                     (cible / Path(f).name).write_bytes(lire_depot(f))
         if nom.endswith(".md"):                                           # version HTML du Markdown
             sortie = cible / (Path(nom).stem + ".html")
-            subprocess.run([sys.executable, str(convertisseur), str(cible / nom), str(sortie)], check=True, capture_output=True)
+            html_depot = None if hors else lire_depot(source.rsplit(".", 1)[0] + ".html")
+            if html_depot is not None:                                      # le HTML commité fait foi (il peut contenir des images intégrées)
+                sortie.write_bytes(html_depot)
+            else:
+                subprocess.run([sys.executable, str(convertisseur), str(cible / nom), str(sortie)], check=True, capture_output=True)
             formats = [sortie.name, nom]
         elif nom.endswith(".html") and not hors:                          # rapport HTML : joindre le Markdown s'il existe
             md = lire_depot(source[:-5] + ".md")
