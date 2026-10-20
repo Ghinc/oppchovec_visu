@@ -15,6 +15,14 @@ Rapport du 20 octobre 2026. Rédigé pour la doctorante qui pilote le projet. Ob
 
 Couleur plus foncée = score plus élevé (5 classes de Jenks). Troisième carte : changement de classe de chaque commune entre l'ancien et le nouvel indice (rouge : baisse, bleu : hausse, gris : inchangé).
 
+### Chaque carte en grand
+
+![Ancien indice](RAPPORT_COMPARAISON_INDICE_V1_V2_carte_v1.png)
+
+![Nouvel indice](RAPPORT_COMPARAISON_INDICE_V1_V2_carte_v2.png)
+
+Le contour orange entoure les communes des deux intercommunalités du Taravo (voir plus bas).
+
 ## Ce qui a bougé
 
 | | Indice v1 | Indice v2 |
@@ -60,6 +68,67 @@ J'ai remis, un par un, l'ancienne valeur de chaque indicateur dans le nouvel ind
 
 | Commune | Habitants | Indice v1 → v2 | Classe v1 → v2 | Principal moteur |
 |---|---|---|---|---|
+## Zoom sur le Taravo
+
+Le Taravo est ici l'ensemble des communes de deux intercommunalités : la **CC de la Pieve de l'Ornano et du Taravo** (28 communes) et la **CC du Sartenais Valinco Taravo** (18 communes), soit 46 communes.
+
+![Le Taravo, ancien et nouvel indice](RAPPORT_COMPARAISON_INDICE_V1_V2_taravo.png)
+
+- **21 communes sur 46 gardent leur classe**, 19 changent d'une classe, 6 de deux classes ou plus ; pour toute la Corse : 42 % gardent leur classe, contre 46 % ici.
+- Écart moyen d'indice dans le Taravo : +0,00 (écart moyen en valeur absolue 1,10), contre +0,20 (1,19) pour toute la Corse.
+- **Hausses** : 6 communes ; **baisses** : 19.
+
+Détail commune par commune (classes de 1, la plus basse, à 5, la plus haute ; « moteur » : l'indicateur dont l'ancienne valeur, remise dans le nouvel indice, déplace le plus le score de la commune) :
+
+| Commune | Intercommunalité | Habitants | Indice v1 → v2 | Classe v1 → v2 | Principal moteur |
+|---|---|---|---|---|---|
+| Guitera-les-Bains | Pieve de l'Ornano et Taravo | 154 | 5,5 → 2,4 | 4 → 1 | Opp4 (74 → 42) |
+| Tasso | Pieve de l'Ornano et Taravo | 89 | 4,1 → 1,8 | 3 → 1 | Opp4 (92 → 66) |
+| Corrano | Pieve de l'Ornano et Taravo | 74 | 4,1 → 1,8 | 3 → 1 | Opp4 (60 → 33) |
+| Frasseto | Pieve de l'Ornano et Taravo | 134 | 4,4 → 6,6 | 3 → 4 | Opp4 (50 → 98) |
+| Olivese | Pieve de l'Ornano et Taravo | 221 | 4,9 → 2,9 | 3 → 2 | Opp4 (90 → 64) |
+| Coti-Chiavari | Pieve de l'Ornano et Taravo | 736 | 5,9 → 7,6 | 4 → 4 | Opp4 (62 → 88) |
+| Guargualé | Pieve de l'Ornano et Taravo | 146 | 3,2 → 1,6 | 2 → 1 | Opp4 (60 → 33) |
+| Urbalacone | Pieve de l'Ornano et Taravo | 64 | 6,2 → 4,6 | 4 → 3 | Vec2 (0,79 → 0,69) |
+| Quasquara | Pieve de l'Ornano et Taravo | 66 | 3,7 → 2,1 | 3 → 1 | Opp4 (50 → 33) |
+| Albitreccia | Pieve de l'Ornano et Taravo | 1833 | 6,4 → 8,0 | 4 → 5 | Opp4 (66 → 94) |
+| Zévaco | Pieve de l'Ornano et Taravo | 50 | 2,5 → 1,0 | 2 → 1 | Opp4 (60 → 33) |
+| Zicavo | Pieve de l'Ornano et Taravo | 203 | 3,9 → 2,5 | 3 → 1 | Opp4 (82 → 55) |
+| Azilone-Ampaza | Pieve de l'Ornano et Taravo | 208 | 4,4 → 3,1 | 3 → 2 | Opp4 (63 → 46) |
+| Grosseto-Prugna | Pieve de l'Ornano et Taravo | 3900 | 6,2 → 7,5 | 4 → 4 | Vec1 (26630 → 47703) |
+| Palneca | Pieve de l'Ornano et Taravo | 133 | 3,8 → 5,1 | 3 → 3 | Opp4 (67 → 99) |
+| Ciamannacce | Pieve de l'Ornano et Taravo | 129 | 5,8 → 7,1 | 4 → 4 | Opp1 (3,05 → 3,75) |
+| Zigliara | Pieve de l'Ornano et Taravo | 127 | 5,4 → 4,2 | 4 → 2 | Vec2 (0,84 → 0,77) |
+| Cardo-Torgia | Pieve de l'Ornano et Taravo | 32 | 3,8 → 2,7 | 3 → 2 | Vec3 (1,00 → 0,85) |
+| Cognocoli-Monticchi | Pieve de l'Ornano et Taravo | 171 | 2,6 → 1,7 | 2 → 1 | Opp4 (59 → 34) |
+| Campo | Pieve de l'Ornano et Taravo | 102 | 4,1 → 4,9 | 3 → 3 | Opp4 (60 → 92) |
+| Forciolo | Pieve de l'Ornano et Taravo | 93 | 6,1 → 5,3 | 4 → 3 | Opp4 (60 → 34) |
+| Serra-di-Ferro | Pieve de l'Ornano et Taravo | 726 | 4,1 → 4,7 | 3 → 3 | Opp4 (58 → 87) |
+| Santa-Maria-Siché | Pieve de l'Ornano et Taravo | 363 | 4,0 → 4,6 | 3 → 3 | Opp4 (70 → 94) |
+| Pietrosella | Pieve de l'Ornano et Taravo | 2073 | 6,5 → 7,0 | 4 → 4 | Vec1 (28370 → 44635) |
+| Cozzano | Pieve de l'Ornano et Taravo | 281 | 2,8 → 3,2 | 2 → 2 | Opp4 (60 → 93) |
+| Cauro | Pieve de l'Ornano et Taravo | 1485 | 9,0 → 9,4 | 5 → 5 | Vec2 (0,76 → 0,66) |
+| Sampolo | Pieve de l'Ornano et Taravo | 90 | 4,3 → 4,6 | 3 → 3 | Opp4 (60 → 76) |
+| Pila-Canale | Pieve de l'Ornano et Taravo | 271 | 2,8 → 2,6 | 2 → 1 | Opp4 (80 → 52) |
+| Granace | Sartenais Valinco Taravo | 92 | 5,2 → 8,3 | 4 → 5 | Opp4 (37 → 95) |
+| Belvédère-Campomoro | Sartenais Valinco Taravo | 213 | 3,4 → 5,4 | 2 → 3 | Opp4 (54 → 93) |
+| Olmeto | Sartenais Valinco Taravo | 1289 | 4,4 → 5,9 | 3 → 4 | Opp4 (60 → 87) |
+| Moca-Croce | Sartenais Valinco Taravo | 221 | 4,2 → 5,7 | 3 → 3 | Opp4 (61 → 95) |
+| Propriano | Sartenais Valinco Taravo | 3995 | 1,7 → 3,0 | 1 → 2 | Opp4 (70 → 95) |
+| Argiusta-Moriccio | Sartenais Valinco Taravo | 75 | 3,9 → 2,9 | 3 → 2 | Vec2 (0,82 → 0,74) |
+| Giuncheto | Sartenais Valinco Taravo | 106 | 4,0 → 4,9 | 3 → 3 | Opp4 (61 → 92) |
+| Bilia | Sartenais Valinco Taravo | 53 | 5,0 → 5,9 | 4 → 4 | Opp4 (60 → 89) |
+| Petreto-Bicchisano | Sartenais Valinco Taravo | 571 | 5,5 → 4,8 | 4 → 3 | Opp3 (189 → 93) |
+| Viggianello | Sartenais Valinco Taravo | 908 | 5,9 → 6,5 | 4 → 4 | Vec1 (24940 → 39419) |
+| Sartène | Sartenais Valinco Taravo | 3741 | 3,0 → 3,5 | 2 → 2 | Opp4 (71 → 91) |
+| Grossa | Sartenais Valinco Taravo | 74 | 3,8 → 3,5 | 3 → 2 | Opp4 (73 → 88) |
+| Sollacaro | Sartenais Valinco Taravo | 396 | 4,1 → 3,8 | 3 → 2 | Vec2 (0,79 → 0,70) |
+| Casalabriva | Sartenais Valinco Taravo | 234 | 2,9 → 3,1 | 2 → 2 | Opp4 (64 → 88) |
+| Foce | Sartenais Valinco Taravo | 150 | 6,2 → 6,0 | 4 → 4 | Vec1 (26190 → 34702) |
+| Fozzano | Sartenais Valinco Taravo | 210 | 3,3 → 3,5 | 2 → 2 | Vec2 (0,72 → 0,60) |
+| Santa-Maria-Figaniella | Sartenais Valinco Taravo | 74 | 2,7 → 2,8 | 2 → 2 | Opp4 (61 → 87) |
+| Arbellara | Sartenais Valinco Taravo | 165 | 3,0 → 3,0 | 2 → 2 | Opp3 (193 → 88) |
+
 | **Baisses** | | | | |
 | Verdèse | 41 | 4,9 → 1,0 | 3 → 1 | Cho2 (99 → 93) |
 | Guitera-les-Bains | 154 | 5,5 → 2,4 | 4 → 1 | Opp4 (74 → 42) |

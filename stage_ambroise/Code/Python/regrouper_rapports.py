@@ -124,10 +124,13 @@ def main():
             (cible / nom).write_bytes(contenu)
             date = date_modif(source)
         formats = [nom]
-        if not hors:                                                        # image associée au rapport (<nom>_cartes.png), si elle est dans le dépôt
-            png = lire_depot(source.rsplit(".", 1)[0] + "_cartes.png")
-            if png is not None:
-                (cible / (Path(nom).stem + "_cartes.png")).write_bytes(png)
+        if not hors:                                                        # images associées au rapport (<nom>_*.png), si elles sont dans le dépôt
+            dossier_src = source.rsplit("/", 1)[0]
+            prefixe = Path(source).stem + "_"
+            liste = subprocess.run(["git", "ls-files", dossier_src], cwd=DEPOT, capture_output=True, text=True).stdout.splitlines()
+            for f in liste:
+                if Path(f).name.startswith(prefixe) and f.endswith(".png"):
+                    (cible / Path(f).name).write_bytes(lire_depot(f))
         if nom.endswith(".md"):                                           # version HTML du Markdown
             sortie = cible / (Path(nom).stem + ".html")
             subprocess.run([sys.executable, str(convertisseur), str(cible / nom), str(sortie)], check=True, capture_output=True)
