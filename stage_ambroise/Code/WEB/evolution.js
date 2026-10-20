@@ -361,6 +361,85 @@ function evolutionSourcesHtml(type) {
         `<table class="evolution-table-source">${entete}${cles.map(ligne).join('')}</table>${epci}`;
 }
 
+// ---------- Infobulles ⓘ à chaque ligne des tableaux : d'où vient la donnée de la ligne ----------
+const EVOLUTION_SOURCES_COURT = {
+    Opp1: 'INSEE, recensement (2016 → 2021)', Opp2: 'INSEE, recensement (2016 → 2021)', Opp3: 'INSEE, recensement (2016 → 2021) ; bus : liste fixe de 3 communes',
+    Opp4: 'ARCEP et Observatoire THD (2016-2017) → ARCEP (2021)', Cho1: 'INSEE, quartiers prioritaires (2013 → 2018)', Cho2: 'INSEE, recensement (2016 → 2021)',
+    Vec1: 'DGFiP, IRCOM (revenus 2016 → 2021)', Vec2: 'INSEE, recensement (2016 → 2021)', Vec3: 'INSEE, recensement (2016 → 2021)', Vec4: 'INSEE, BPE (2016 → 2021) et OSRM',
+};
+
+function evolutionBadge(texte) {
+    const t = evolutionEchapper(texte);
+    return `<span class="evolution-src" tabindex="0" role="note" aria-label="${t}" data-src="${t}">ⓘ</span>`;
+}
+
+// Source d'un indicateur aux deux dates
+function evolutionBadgeIndicateur(cle) {
+    const [a0, a1] = evolutionDonnees.annees, s = EVOLUTION_SOURCES[cle];
+    return evolutionBadge(`${cle} · ${s[0]}\n${a0} : ${s[1]}\n${a1} : ${s[2]}`);
+}
+
+// Sources des indicateurs d'une dimension (ou des 10 pour l'indice)
+function evolutionBadgeVariable(variable) {
+    const d = evolutionDonnees;
+    const cles = variable === 'OppChoVec' ? d.indicateurs : d.dimensions[variable];
+    return evolutionBadge(`${EVOLUTION_VARIABLES[variable]} : calculé à partir des données suivantes\n` + cles.map(k => `${k} ${EVOLUTION_SOURCES[k][0]} : ${EVOLUTION_SOURCES_COURT[k]}`).join('\n'));
+}
+
+function evolutionBadgeCalcule(texte) {
+    return evolutionBadge(texte || 'Valeur calculée à partir des lignes du tableau : ce n\'est pas une donnée source.');
+}
+
+// Source d'une composante d'un indicateur (ligne du détail), selon son libellé ; à défaut, la source de l'indicateur
+function evolutionBadgeLigne(cle, libelle) {
+    const [a0, a1] = evolutionDonnees.annees;
+    const rp = (a, base) => `INSEE, recensement ${a}, ${base}`;
+    const deux = (t0, t1) => evolutionBadge(`${libelle.trim()}\n${a0} : ${t0}\n${a1} : ${t1}`);
+    const l = libelle;
+    if (cle === 'Opp1') return deux(rp(a0, 'base communale Diplômes-formation'), rp(a1, 'base communale Diplômes-formation'));
+    if (cle === 'Opp2') return deux(rp(a0, 'base communale Évolution et structure de la population (catégories socioprofessionnelles)'), rp(a1, 'base communale Évolution et structure de la population (catégories socioprofessionnelles)'));
+    if (cle === 'Opp3') {
+        if (/bus/i.test(l)) return evolutionBadge(`${l.trim()}\nListe fixe de 3 communes (Ajaccio, Bastia, Porto-Vecchio), la même aux deux dates, sans source datée`);
+        if (/voiture/i.test(l)) return deux(rp(a0, 'base communale Logement'), rp(a1, 'base communale Logement'));
+        return deux(rp(a0, 'base communale Caractéristiques de l\'emploi (actifs allant travailler en transports en commun)'), rp(a1, 'base communale Caractéristiques de l\'emploi (actifs allant travailler en transports en commun)'));
+    }
+    if (cle === 'Opp4') {
+        if (/4G/.test(l)) return deux('ARCEP, couvertures 4G théoriques de mars 2017 (4 opérateurs) × grille de population Filosofi 2019', 'ARCEP, couvertures 4G théoriques de décembre 2021 (4 opérateurs) × grille de population Filosofi 2021');
+        if (/fibre/i.test(l)) return deux('Observatoire France Très Haut Débit, T4 2016 (locaux éligibles FttH)', 'ARCEP, « Ma connexion internet », T4 2021 (locaux éligibles FttH)');
+        return deux('Observatoire France Très Haut Débit, T4 2016 (locaux éligibles à 30 Mbit/s ou plus)', 'ARCEP, « Ma connexion internet », T4 2021 (offres filaires, 30 Mbit/s ou plus)');
+    }
+    if (cle === 'Cho1') return deux('INSEE, population des quartiers prioritaires (géographie 2015), recensement 2013', 'INSEE, population municipale au 1er janvier 2018 des quartiers prioritaires (géographie 2015)');
+    if (cle === 'Cho2') {
+        if (/^Population/.test(l.trim())) return deux(rp(a0, 'table POP1B (population par âge)'), rp(a1, 'table POP1B (population par âge)'));
+        return deux(rp(a0, 'tables POP1B (population par âge) et NAT1 (nationalité)'), rp(a1, 'tables POP1B (population par âge) et NAT1 (nationalité)'));
+    }
+    if (cle === 'Vec1') return deux(`DGFiP, IRCOM, revenus ${a0} (communes sous secret statistique : moyenne du département)`, `DGFiP, IRCOM, revenus ${a1} (communes sous secret statistique : moyenne du département)`);
+    if (cle === 'Vec2') return deux(rp(a0, 'base communale Logement'), rp(a1, 'base communale Logement'));
+    if (cle === 'Vec3') {
+        if (/Chômeurs/.test(l)) return deux(rp(a0, 'base communale Emploi - population active'), rp(a1, 'base communale Emploi - population active'));
+        return deux(rp(a0, 'base communale Caractéristiques de l\'emploi'), rp(a1, 'base communale Caractéristiques de l\'emploi'));
+    }
+    return evolutionBadgeIndicateur(cle);
+}
+
+// Info-bulle flottante unique (non découpée par les zones défilantes), affichée au survol ou au focus d'un ⓘ
+function evolutionMontrerInfoSource(cible) {
+    let tip = document.getElementById('evolution-src-tip');
+    if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'evolution-src-tip';
+        tip.className = 'evolution-src-tip';
+        tip.hidden = true;
+        document.body.appendChild(tip);
+    }
+    if (!cible) { tip.hidden = true; return; }
+    tip.textContent = cible.dataset.src;
+    tip.hidden = false;
+    const r = cible.getBoundingClientRect(), t = tip.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(window.innerWidth - t.width - 8, r.left + r.width / 2 - t.width / 2)) + 'px';
+    tip.style.top = (r.top - t.height - 6 >= 8 ? r.top - t.height - 6 : r.bottom + 6) + 'px';
+}
+
 function evolutionBasculerSource(type, ouvrir) {
     for (const t of ['a0', 'a1', 'variation']) {
         const pop = document.getElementById('evolution-source-' + t);
@@ -409,25 +488,25 @@ function evolutionDetailHtml(variable, nom) {
         const lignes = det.dimensions.map(x => {
             const dd = x.d1 - x.d0;
             const part = Math.abs(i.somme1 - i.somme0) > 1e-9 ? `${evolutionSigne(100 * x.contributionSomme / (i.somme1 - i.somme0), 0)} %` : '—';
-            return `<tr><td>${evolutionFleche(dd, 3)} ${EVOLUTION_VARIABLES[x.nom]}</td><td>${evolutionFmt(x.poids, 3)}</td><td>${f3(x.d0)}</td><td>${f3(x.d1)}</td><td>${evolutionSigne(dd, 3)}</td><td><strong>${evolutionSigne(x.contributionSomme, 3)}</strong></td><td>${part}</td></tr>`;
+            return `<tr><td>${evolutionFleche(dd, 3)} ${EVOLUTION_VARIABLES[x.nom]} ${evolutionBadgeVariable(x.nom)}</td><td>${evolutionFmt(x.poids, 3)}</td><td>${f3(x.d0)}</td><td>${f3(x.d1)}</td><td>${evolutionSigne(dd, 3)}</td><td><strong>${evolutionSigne(x.contributionSomme, 3)}</strong></td><td>${part}</td></tr>`;
         }).join('');
         return `<div class="evolution-petit">Indice brut = ⅓ × (Σ p<sub>k</sub> × d<sub>k</sub><sup>${b1}</sup>)<sup>${al1}/${b1}</sup>, où d<sub>k</sub> est la dimension (0-1) et p<sub>k</sub> son poids (Betti et al., 2008) ; puis ramené à 0-10 (min-max sur les deux années).</div>` +
             `<table class="evolution-table evolution-table-detail"><tr><th>Dimension</th><th>p<sub>k</sub></th><th>d<sub>k</sub> ${a0}</th><th>d<sub>k</sub> ${a1}</th><th>Écart</th><th>Contribution à ΔS</th><th>Part</th></tr>${lignes}` +
-            `<tr class="evolution-total"><td>Somme S = Σ p<sub>k</sub> d<sub>k</sub><sup>${b1}</sup></td><td></td><td>${f3(i.somme0)}</td><td>${f3(i.somme1)}</td><td></td><td><strong>${evolutionSigne(i.somme1 - i.somme0, 3)}</strong></td><td></td></tr>` +
-            `<tr class="evolution-total"><td>Indice brut = ⅓ S<sup>${evolutionFmt(EVOLUTION_ALPHA / EVOLUTION_BETA, 2)}</sup></td><td></td><td>${f3(i.brut0)}</td><td>${f3(i.brut1)}</td><td>${evolutionSigne(i.brut1 - i.brut0, 3)}</td><td></td><td></td></tr>` +
-            `<tr class="evolution-total"><td>Score 0-10</td><td></td><td>${evolutionFmt(i.score0)}</td><td>${evolutionFmt(i.score1)}</td><td><strong>${evolutionSigne(i.score1 - i.score0, 2)}</strong></td><td></td><td></td></tr></table>` +
+            `<tr class="evolution-total"><td>Somme S = Σ p<sub>k</sub> d<sub>k</sub><sup>${b1}</sup> ${evolutionBadgeCalcule()}</td><td></td><td>${f3(i.somme0)}</td><td>${f3(i.somme1)}</td><td></td><td><strong>${evolutionSigne(i.somme1 - i.somme0, 3)}</strong></td><td></td></tr>` +
+            `<tr class="evolution-total"><td>Indice brut = ⅓ S<sup>${evolutionFmt(EVOLUTION_ALPHA / EVOLUTION_BETA, 2)}</sup> ${evolutionBadgeCalcule()}</td><td></td><td>${f3(i.brut0)}</td><td>${f3(i.brut1)}</td><td>${evolutionSigne(i.brut1 - i.brut0, 3)}</td><td></td><td></td></tr>` +
+            `<tr class="evolution-total"><td>Score 0-10 ${evolutionBadgeCalcule('Indice brut ramené sur 0-10 (min-max sur les deux années) : valeur calculée, pas une donnée source.')}</td><td></td><td>${evolutionFmt(i.score0)}</td><td>${evolutionFmt(i.score1)}</td><td><strong>${evolutionSigne(i.score1 - i.score0, 2)}</strong></td><td></td><td></td></tr></table>` +
             `<div class="evolution-petit">▲ dimension en hausse, ▼ en baisse. La part indique la contribution de chaque dimension à la variation de S ; l'indice n'étant pas une somme (exposants), les contributions ne s'additionnent pas exactement en points sur 10.</div>`;
     }
     const x = det.dimensions.find(z => z.nom === variable);
     const lignes = x.indicateurs.map(ind => {
         const dec = EVOLUTION_DECIMALES[ind.cle] ?? 2;
-        return `<tr><td>${evolutionFleche(ind.contributionPoints, 2)} ${EVOLUTION_NOMS_INDICATEURS[ind.cle]}</td><td>${evolutionFmt(ind.brut0, dec)}</td><td>${evolutionFmt(ind.brut1, dec)}</td><td>${f3(ind.norm0)}</td><td>${f3(ind.norm1)}</td><td><strong>${evolutionSigne(ind.contributionPoints, 2)}</strong></td></tr>`;
+        return `<tr><td>${evolutionFleche(ind.contributionPoints, 2)} ${EVOLUTION_NOMS_INDICATEURS[ind.cle]} ${evolutionBadgeIndicateur(ind.cle)}</td><td>${evolutionFmt(ind.brut0, dec)}</td><td>${evolutionFmt(ind.brut1, dec)}</td><td>${f3(ind.norm0)}</td><td>${f3(ind.norm1)}</td><td><strong>${evolutionSigne(ind.contributionPoints, 2)}</strong></td></tr>`;
     }).join('');
     const n = x.indicateurs.length;
     return `<div class="evolution-petit">Dimension ${EVOLUTION_VARIABLES[variable]} = ${n > 1 ? `moyenne des ${n} indicateurs normalisés` : 'indicateur unique, normalisé'} (min-max entre 0 et 1 sur les deux années), puis ramenée à 0-10 (min-max sur les deux années). ` +
         `Contribution = écart du normalisé ÷ ${n}, en points sur 10 : leur somme est exactement l'évolution du score.</div>` +
         `<table class="evolution-table evolution-table-detail"><tr><th>Indicateur</th><th>Brut ${a0}</th><th>Brut ${a1}</th><th>Normalisé ${a0}</th><th>Normalisé ${a1}</th><th>Contribution (points)</th></tr>${lignes}` +
-        `<tr class="evolution-total"><td>Score de la dimension (0-10)</td><td></td><td></td><td>${evolutionFmt(x.score0)}</td><td>${evolutionFmt(x.score1)}</td><td><strong>${evolutionSigne(x.score1 - x.score0, 2)}</strong></td></tr></table>` +
+        `<tr class="evolution-total"><td>Score de la dimension (0-10) ${evolutionBadgeCalcule('Moyenne des indicateurs normalisés, ramenée sur 0-10 : valeur calculée, pas une donnée source.')}</td><td></td><td></td><td>${evolutionFmt(x.score0)}</td><td>${evolutionFmt(x.score1)}</td><td><strong>${evolutionSigne(x.score1 - x.score0, 2)}</strong></td></tr></table>` +
         (variable === 'Cho' ? `<div class="evolution-petit">Cho2 est un proxy du droit de vote : la part de Français parmi les 18 ans et plus approche la part des personnes qui peuvent voter dans la commune (elle ne tient compte ni de l'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales).</div>` : '');
 }
 
@@ -439,13 +518,13 @@ function evolutionIndicateurHtml(cle, nom) {
     const dim = Object.entries(d.dimensions).find(([, ks]) => ks.includes(cle))[0];
     const part = evolutionDetails(d, nom).dimensions.find(z => z.nom === dim).indicateurs.find(i => i.cle === cle).contributionPoints;
     const f = (v, dec) => evolutionFmt(v, dec);
-    const lignes = x.lignes.map(l => `<tr><td>${l.contribution === null ? '' : evolutionFleche(l.contribution, l.decContribution) + ' '}${l.libelle}</td><td>${f(l.v0, l.dec)}</td><td>${f(l.v1, l.dec)}</td>` +
+    const lignes = x.lignes.map(l => `<tr><td>${l.contribution === null ? '' : evolutionFleche(l.contribution, l.decContribution) + ' '}${l.libelle} ${evolutionBadgeLigne(cle, l.libelle)}</td><td>${f(l.v0, l.dec)}</td><td>${f(l.v1, l.dec)}</td>` +
         `<td>${evolutionSigne(l.v1 - l.v0, l.dec)}</td><td>${l.contribution === null ? '' : `<strong>${evolutionSigne(l.contribution, l.decContribution)}</strong>`}</td></tr>`).join('');
     const t = x.total;
     const entete = x.lignes.length ? `<tr><th>Composante</th><th>${a0}</th><th>${a1}</th><th>Écart</th><th>Contribution</th></tr>` : '';
     return `<div class="evolution-petit">${x.intro}</div>` +
         `<table class="evolution-table evolution-table-detail">${entete}${lignes}` +
-        `<tr class="evolution-total"><td>${EVOLUTION_NOMS_INDICATEURS[cle]}</td><td>${f(t.v0, t.dec)}</td><td>${f(t.v1, t.dec)}</td><td><strong>${evolutionSigne(t.v1 - t.v0, t.dec)}</strong></td><td>${x.lignes.length ? 'somme des contributions' : ''}</td></tr></table>` +
+        `<tr class="evolution-total"><td>${EVOLUTION_NOMS_INDICATEURS[cle]} ${x.lignes.length ? evolutionBadgeCalcule('Indicateur calculé à partir des composantes ci-dessus : voir leurs sources.') : evolutionBadgeIndicateur(cle)}</td><td>${f(t.v0, t.dec)}</td><td>${f(t.v1, t.dec)}</td><td><strong>${evolutionSigne(t.v1 - t.v0, t.dec)}</strong></td><td>${x.lignes.length ? 'somme des contributions' : ''}</td></tr></table>` +
         (x.lignes.length ? `<div class="evolution-petit">${x.colonne === 'Valeur' ? '' : `Colonnes 2016 et 2021 : ${x.colonne.charAt(0).toLowerCase() + x.colonne.slice(1)}. `}▲ composante qui fait monter l'indicateur, ▼ qui le fait baisser.</div>` : '') +
         (x.note ? `<div class="evolution-petit">${x.note}</div>` : '') +
         `<div class="evolution-petit">Dans la dimension ${EVOLUTION_VARIABLES[dim]}, cet indicateur contribue pour <strong>${evolutionSigne(part, 2)} point</strong> (sur 10) à l'évolution du score.</div>`;
@@ -469,14 +548,14 @@ function evolutionFicheContenu(nom) {
         const x0 = c[String(a0)].indicateurs[k], x1 = c[String(a1)].indicateurs[k];
         const dec = EVOLUTION_DECIMALES[k] ?? 2;
         const ouvert = !epci && evolutionDetailsOuverts.has(k);
-        if (epci) return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>`;       // le détail des composantes est communal
-        return `<tr class="evolution-ligne-score" data-variable="${k}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_NOMS_INDICATEURS[k]}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>` +
+        if (epci) return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]} ${evolutionBadgeIndicateur(k)}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>`;       // le détail des composantes est communal
+        return `<tr class="evolution-ligne-score" data-variable="${k}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_NOMS_INDICATEURS[k]} ${evolutionBadgeIndicateur(k)}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>` +
             (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionIndicateurHtml(k, nom)}</td></tr>` : '');
     }).join('');
     const scores = Object.keys(EVOLUTION_VARIABLES).map(v => {
         const v0 = evolutionValeur(d, nom, a0, v), v1 = evolutionValeur(d, nom, a1, v);
         const ouvert = evolutionDetailsOuverts.has(v);
-        return `<tr class="evolution-ligne-score" data-variable="${v}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_VARIABLES[v]}</td><td>${evolutionFmt(v0)}</td><td>${evolutionFmt(v1)}</td><td><strong>${evolutionSigne(v1 - v0, 2)}</strong></td></tr>` +
+        return `<tr class="evolution-ligne-score" data-variable="${v}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_VARIABLES[v]} ${evolutionBadgeVariable(v)}</td><td>${evolutionFmt(v0)}</td><td>${evolutionFmt(v1)}</td><td><strong>${evolutionSigne(v1 - v0, 2)}</strong></td></tr>` +
             (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionDetailHtml(v, nom)}</td></tr>` : '');
     }).join('');
     const estime = [a0, a1].filter(a => c[String(a)].vec1_departementale);
@@ -654,8 +733,12 @@ async function initialiserOngletEvolution() {
     }
     evolutionConstruireCouches();
     const fiche = document.getElementById('evolution-fiche');
-    fiche.addEventListener('click', e => { const l = e.target.closest('.evolution-ligne-score'); if (l) evolutionBasculerDetail(l.dataset.variable); });
-    fiche.addEventListener('keydown', e => { const l = e.target.closest('.evolution-ligne-score'); if (l && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); evolutionBasculerDetail(l.dataset.variable); } });
+    fiche.addEventListener('click', e => { if (e.target.closest('.evolution-src')) return; const l = e.target.closest('.evolution-ligne-score'); if (l) evolutionBasculerDetail(l.dataset.variable); });
+    fiche.addEventListener('mouseover', e => { const b = e.target.closest('.evolution-src'); if (b) evolutionMontrerInfoSource(b); });
+    fiche.addEventListener('mouseout', e => { if (e.target.closest('.evolution-src')) evolutionMontrerInfoSource(null); });
+    fiche.addEventListener('focusin', e => { const b = e.target.closest('.evolution-src'); if (b) evolutionMontrerInfoSource(b); });
+    fiche.addEventListener('focusout', e => { if (e.target.closest('.evolution-src')) evolutionMontrerInfoSource(null); });
+    fiche.addEventListener('keydown', e => { if (e.target.closest('.evolution-src')) return; const l = e.target.closest('.evolution-ligne-score'); if (l && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); evolutionBasculerDetail(l.dataset.variable); } });
     if (typeof ResizeObserver !== 'undefined') {
         for (const [type, id] of Object.entries(ids)) new ResizeObserver(() => evolutionRecadrer(type)).observe(document.getElementById(id));
     }

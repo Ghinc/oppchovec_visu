@@ -252,3 +252,43 @@ test('Évolution : légendes sur les cartes, fiche pleine largeur, bouton ⓘ de
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Évolution : chaque ligne des tableaux (scores, indicateurs, détails dépliés) a un ⓘ qui donne la source de ses données', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    await page.evaluate(() => evolutionFiche('Bastia'));
+    // tout déplier : les 4 scores et les 10 indicateurs
+    for (const v of ['OppChoVec', 'Opp', 'Cho', 'Vec', 'Opp1', 'Opp2', 'Opp3', 'Opp4', 'Cho1', 'Cho2', 'Vec1', 'Vec2', 'Vec3', 'Vec4']) {
+      const ligne = page.locator(`#evolution-fiche .evolution-ligne-score[data-variable="${v}"]`);
+      if ((await ligne.getAttribute('aria-expanded')) !== 'true') await ligne.click();
+    }
+    const lignesSansSource = await page.$$eval('#evolution-fiche table tr', (trs) => trs
+      .filter((tr) => tr.querySelector('td') && !tr.classList.contains('evolution-detail') && !tr.querySelector('td[colspan]'))
+      .filter((tr) => !tr.querySelector('td .evolution-src'))
+      .map((tr) => tr.querySelector('td').textContent.trim()));
+    assert.deepEqual(lignesSansSource, [], 'lignes de tableau sans ⓘ de source');
+    const nb = await page.locator('#evolution-fiche .evolution-src').count();
+    assert.ok(nb >= 60, `beaucoup de lignes ont leur source (${nb})`);
+    // un clic sur le ⓘ ne replie pas la ligne ; le survol affiche la source des deux années
+    const ligne = page.locator('#evolution-fiche .evolution-ligne-score[data-variable="Opp4"]');
+    await ligne.locator('.evolution-src').first().click();
+    assert.equal(await ligne.getAttribute('aria-expanded'), 'true');
+    await ligne.locator('.evolution-src').first().hover();
+    const tip = page.locator('#evolution-src-tip');
+    assert.ok(await tip.isVisible());
+    const texte = await tip.innerText();
+    assert.ok(texte.includes('2016') && texte.includes('2021') && texte.includes('ARCEP'), texte);
+    // ligne de composante : source propre à la composante (4G : cartes ARCEP de mars 2017 puis décembre 2021)
+    const ligne4g = page.locator('#evolution-fiche tr', { hasText: 'Population couverte par la 4G' }).first().locator('.evolution-src');
+    await ligne4g.hover();
+    assert.match(await tip.innerText(), /mars 2017[\s\S]*décembre 2021/);
+    await page.mouse.move(5, 5);
+    assert.ok(!(await tip.isVisible()));
+    // la fiche d'un score donne les sources de ses indicateurs
+    await page.locator('#evolution-fiche .evolution-ligne-score[data-variable="Cho"] .evolution-src').first().hover();
+    const tc = await tip.innerText();
+    assert.ok(tc.includes('Cho1') && tc.includes('Cho2') && !tc.includes('Opp1'), tc);
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
