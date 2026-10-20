@@ -83,8 +83,8 @@ test('déplacer un curseur de sous-composante met à jour la valeur affichée de
   inputs.Indicateur_Opp4__fibre.value = '0';
   app.ev("majSousComposante('Indicateur_Opp4', 'fibre')");
   // fibre ramenée à la fibre minimale corse (0) => (4G + débit + 0) / 3
-  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), new RegExp("^" + ((o.g4 + o.debit) / 3).toFixed(1).replace('.', ',') + " % · \\d+ % entre le plus bas et le plus haut de Corse$"));
-  assert.match(normaliser(app.elements.get('Indicateur_Opp4__fibre_val').innerText), /^0 % · 0 % entre le plus bas et le plus haut de Corse$/);
+  assert.match(normaliser(app.elements.get('Indicateur_Opp4_val').innerText), new RegExp("^\\d+ % de l'échelle corse · valeur : " + ((o.g4 + o.debit) / 3).toFixed(1).replace('.', ',') + ' %'));
+  assert.match(normaliser(app.elements.get('Indicateur_Opp4__fibre_val').innerText), /^0 % de l'échelle corse · valeur : 0 %$/);
   assert.deepEqual(photo(app), avant, 'rien ne doit changer tant que « Recalculer » n\'est pas cliqué');
   assert.equal(app.ev("sousComposantesCommune.Bastia.Indicateur_Opp4.fibre"), o.fibre);
 });

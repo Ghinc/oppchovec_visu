@@ -26,9 +26,9 @@ const { demarrerServeur, disponibilite, ouvrirAppli, RACINE } = require('../e2e/
 const REF = process.argv[2] || 'visu_corse_simple';
 const CARTES = [['oppchovectab', 'oppchovec'], ['opptab', 'opp'], ['chotab', 'cho'], ['vectab', 'vec']];
 const COMMUNES_FICHE = ['Bastia', 'Ajaccio', 'Afa', 'Érone', 'Propriano'];
-// Libellé volontairement modifié dans la démo (« 87 % · 96,4 % » -> « 96,4 % · 87 % entre le plus bas et le plus haut de Corse ») : on le ramène à l'ancien format
+// Libellé volontairement modifié dans la démo (« 87 % · 96,4 % » -> « 87 % de l'échelle corse · valeur : 96,4 % ») : on le ramène à l'ancien format
 // avant de comparer, pour que le reste de la fiche soit vérifié à l'identique.
-const ancienLibelle = (t) => t.replace(/(\S+(?: \S+)*?) · (\d+) % entre le plus bas et le plus haut de Corse/g, '$2 % · $1');
+const ancienLibelle = (t) => t.replace(/% de l'échelle corse · valeur :/g, '% ·');
 const git = (...args) => execFileSync('git', args, { cwd: RACINE, encoding: 'utf8', maxBuffer: 1 << 28 });
 const sha = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12);
 const resultats = [];
