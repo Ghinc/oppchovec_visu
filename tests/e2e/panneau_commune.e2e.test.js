@@ -138,3 +138,21 @@ test('panneau commune : chaque indicateur et chaque sous-composante a une infobu
     assert.equal(await premier.evaluate((e) => getComputedStyle(e, '::after').display), 'block');
   });
 });
+
+test('panneau commune : menu « Voir le calcul » pour chaque indicateur et pour l\'indice ; l\'indice détaillé redonne celui de la carte', { skip: sauter }, async () => {
+  await avecAppli(async ({ page }) => {
+    await ouvrirCommune(page, 'Bastia');
+    assert.equal(await page.locator('#resultCommune details.calcul-detail').count(), 10 + 1);
+    // détail d'Opp1 : 7 niveaux, valeur de l'indicateur identique à celle de l'appli
+    const opp1 = page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Opp1') }).locator('details.calcul-detail');
+    await opp1.locator('summary').click();
+    assert.equal(await opp1.locator('tbody tr').count(), 8);
+    const valeur = await page.evaluate(() => indicateursOrigine.Bastia.Indicateur_Opp1);
+    assert.match(normaliser(await opp1.innerText()), new RegExp('Valeur de l\'indicateur : ' + valeur.toFixed(2).replace('.', ',')));
+    // détail de l'indice : le 0-10 recalculé à la main est celui de la carte
+    const indice = page.locator('#resultCommune details.calcul-detail-indice');
+    await indice.locator('summary').click();
+    const sur10 = await page.evaluate(() => indiceFinale.Bastia);
+    assert.match(normaliser(await indice.innerText()), new RegExp(sur10.toFixed(2).replace('.', ',') + ' / 10'));
+  });
+});

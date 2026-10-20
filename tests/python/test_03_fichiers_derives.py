@@ -255,6 +255,29 @@ class FichiersAnnexes(unittest.TestCase):
             for ind, f in formules.items():
                 self.assertAlmostEqual(f(sc[c][ind]), d[ind], places=9, msg=f"{c}.{ind}")
 
+    def test_details_calcul_redonnent_les_indicateurs(self):
+        """details_calcul.json (menu « Voir le calcul ») : la valeur et la recomposition depuis les éléments bruts redonnent chaque indicateur."""
+        import math
+        det = charger_json(WEB / "details_calcul.json")
+        self.assertEqual(set(det), set(self.data))
+        for c, d in self.data.items():
+            x = det[c]
+            for ind in INDICATEURS:
+                self.assertAlmostEqual(x[ind]["valeur"], d[ind], delta=1e-3, msg=f"{c}.{ind}")
+            o1 = x["Opp1"]
+            self.assertAlmostEqual(sum(n * o1[f"niveau{n}"] for n in range(1, 8)) / sum(o1[f"niveau{n}"] for n in range(1, 8)), d["Opp1"], delta=1e-3, msg=c)
+            cs = [x["Opp2"][f"cs{i}"] for i in range(1, 9)]
+            mu = sum(cs) / 8
+            self.assertAlmostEqual(sum((v / mu) * math.log(v / mu) for v in cs if v > 0) / 8, d["Opp2"], delta=1e-3, msg=c)
+            o3 = x["Opp3"]
+            self.assertAlmostEqual(o3["voiture"] + (100 if o3["tc_actifs"] > 0 else 0) + o3["bus"], d["Opp3"], delta=1e-3, msg=c)
+            o4 = x["Opp4"]
+            self.assertAlmostEqual((o4["g4"] + o4["debit"] + o4["fibre"]) / 3, d["Opp4"], delta=1e-3, msg=c)
+            c2 = x["Cho2"]
+            self.assertAlmostEqual(min(100.0, 100 - 100 * c2["etrangers_18_plus"] / c2["population"]), d["Cho2"], delta=1e-3, msg=c)
+            if not x["Vec1"]["departemental"]:
+                self.assertAlmostEqual(x["Vec1"]["revenu_fiscal"] / x["Vec1"]["foyers"], d["Vec1"], delta=1e-3, msg=c)
+
     def test_parts_d_emploi_somment_a_100_aux_arrondis_pres(self):
         """Les trois parts d'emploi (stable, autres contrats, chômeurs) somment à 100 (curseurs couplés de l'appli)."""
         for c, s in charger_json(WEB / "sous_composantes.json").items():

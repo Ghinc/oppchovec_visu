@@ -2517,3 +2517,47 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 .evolution-choix, .evolution-option, .evolution-titre-onglet, .evolution-info { flex: 0 0 auto; }
 .evolution-choix { display: inline-flex; align-items: center; gap: 6px; }
 .evolution-choix select { width: auto; min-width: 150px; margin-left: 0; }
+
+/* Menu déroulant « Voir le calcul » */
+.calcul-detail {
+  margin-top: var(--spacing-xs);
+  font-size: 12px;
+  text-align: left;
+}
+
+.calcul-detail > summary {
+  cursor: pointer;
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.calcul-detail p {
+  margin: 4px 0;
+}
+
+.calcul-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0;
+  font-size: 11.5px;
+}
+
+.calcul-table td,
+.calcul-table th {
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+}
+
+.calcul-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.calcul-note {
+  color: var(--text-secondary, #666);
+}
+
+.calcul-detail-indice {
+  margin: var(--spacing-sm) 0;
+}

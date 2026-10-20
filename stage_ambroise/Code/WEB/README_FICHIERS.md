@@ -96,6 +96,7 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
   scores 0-10 standardisés. `cah_data.js` recopie les deux JSON (`CAH_DATA_3`, `CAH_DATA_5`). Les images `cah_3_clusters_ecarts.png`
   et `cah_5_clusters_ecarts.png` montrent l'écart de chaque groupe à la moyenne.
 - **donnees_completes_communes.json** : valeurs arrondies par commune, pour l'assistant conversationnel.
+- **details_calcul.json** : éléments bruts du calcul des 10 indicateurs de chaque commune (effectifs par niveau de diplôme, revenus et foyers fiscaux, parts de couverture…), affichés par le menu déroulant « Voir le calcul » du panneau commune. Produit par `exporter_details_calcul.py` à partir de `sources_indice_v2.json`.
 - **sous_composantes.json** : valeurs brutes des sous-composantes d'Opp3, Opp4, Cho1, Vec2 et Vec3 (curseurs du panneau
   commune). Il est vérifié à la génération : chaque recomposition doit redonner exactement l'indicateur de `data_scores_0_10.json`.
 - **`../../Données/indice_v2/sources_indice_v2.json`** : **source de l'indice courant v2**. Pour chaque commune, les composantes brutes de chacun des 10 indicateurs (effectifs par niveau de
@@ -132,7 +133,7 @@ ne sont pas dans le dépôt : ils sont dans `C:/These/Données2/indice_v2_source
 1. **Scores et indice** : `python regenerer_data_scores.py` remplace les 10 indicateurs de `data_scores_0_10.json` par ceux de `sources_indice_v2.json` et recalcule tous les scores. Il vérifie d'abord que le
    fichier actuel se retrouve depuis ses indicateurs.
 2. **Seuils de Jenks** : `python calculer_jenks_5_classes.py`
-3. **Données sous-jacentes aux curseurs** : `python exporter_sous_composantes.py`
+3. **Données sous-jacentes aux curseurs et au détail du calcul** : `python exporter_sous_composantes.py`, puis `python exporter_details_calcul.py`
 4. **LISA** (depuis la racine du dépôt) : `python gen_lisa_knn5.py`. Les scripts `gen_*.py` de la racine prennent leurs chemins dans
    `chemins.py` (relatifs au dépôt, rien n'est codé en dur). `gen_lisa_betti.py` (voisinage Queen) est **obsolète** : il refuse de tourner
    sans `--ancienne-methode`, car il écraserait les mêmes fichiers avec une autre méthode.
