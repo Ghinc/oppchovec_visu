@@ -70,6 +70,7 @@ class NomsDeCommunesAlignes(unittest.TestCase):
     def test_fichiers_derives_ont_les_memes_noms(self):
         cibles = {
             "sous_composantes.json": set(charger_json(WEB / "sous_composantes.json")),
+            "details_calcul.json": set(charger_json(WEB / "details_calcul.json")),
             "densite_entrepreneuriale.json": set(charger_json(WEB / "densite_entrepreneuriale.json")),
             "donnees_completes_communes.json": set(charger_json(WEB / "donnees_completes_communes.json")),
             "cah_3_clusters.json": set(charger_json(WEB / "cah_3_clusters.json")["clusters"]),
