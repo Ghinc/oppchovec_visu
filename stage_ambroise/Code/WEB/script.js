@@ -2207,8 +2207,10 @@ const META_INDICATEURS = {
 // Même contenu que `sources` et `millesimes` de Données/indice_v2/sources_indice_v2.json ; null = information manquante (signalée dans l'infobulle).
 const RP23 = 'INSEE, recensement de la population 2023 (collectes de 2021 à 2025, résultats publiés le 25/06/2026)';
 const SOURCES_DONNEES = {
-  Opp1: { indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
-  Opp2: { indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
+  Opp1: Object.assign({ indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
+    Object.fromEntries([1, 2, 3, 4, 5, 6, 7].map(k => ['n' + k, { provenance: `${RP23}, base communale Diplômes - Formation (personnes de 15 ans et plus non scolarisées, moins les 15-17 ans non scolarisés ; niveau ${k})`, annee: '2023' }]))),
+  Opp2: Object.assign({ indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
+    Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, { provenance: `${RP23}, base communale Évolution et structure de la population (population de 15 ans et plus par catégorie socioprofessionnelle)`, annee: '2023' }]))),
   Opp3: {
     indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr)`, annee: '2023' },
     voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
@@ -2225,8 +2227,9 @@ const SOURCES_DONNEES = {
     indicateur: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' },
     personnes_qpv: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' }
   },
-  Cho2: { indicateur: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)`, annee: '2023' } },
-  Vec1: { indicateur: { provenance: 'DGFiP, impôt sur le revenu par commune (IRCOM, revenus 2024) : revenu fiscal de référence total / nombre de foyers fiscaux ; communes sous secret statistique : moyenne du département', annee: 'revenus 2024' } },
+  Cho2: { indicateur: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)`, annee: '2023' },
+    francais: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge) ; part de Français parmi les 18 ans et plus, estimée à partir de ces tables`, annee: '2023' } },
+  Vec1: (() => { const f = { provenance: 'DGFiP, impôt sur le revenu par commune (IRCOM, revenus 2024) : revenu fiscal de référence total / nombre de foyers fiscaux ; communes sous secret statistique : moyenne du département', annee: 'revenus 2024' }; return { indicateur: f, revenu: f }; })(),
   Vec2: {
     indicateur: { provenance: `${RP23}, base communale Logement`, annee: '2023' },
     pers_piece: { provenance: `${RP23}, base communale Logement (résidences principales, pièces)`, annee: '2023' },
@@ -2238,7 +2241,7 @@ const SOURCES_DONNEES = {
     autres: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDD, intérim, aidés, apprentis)`, annee: '2023' },
     chomeur: { provenance: `${RP23}, base communale Emploi - population active (chômeurs)`, annee: '2023' }
   },
-  Vec4: { indicateur: { provenance: "INSEE, base permanente des équipements 2024 ; temps de trajet OSRM sur OpenStreetMap (Geofabrik, 06/11/2025)", annee: '2024' } }
+  Vec4: (() => { const f = { provenance: "INSEE, base permanente des équipements 2024 ; temps de trajet OSRM sur OpenStreetMap (Geofabrik, 06/11/2025)", annee: '2024' }; return { indicateur: f, services: f }; })()
 };
 
 function badgeSource(indicateur, comp) {
@@ -2256,36 +2259,87 @@ function badgeSource(indicateur, comp) {
 // binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
 // facteur = multiplicateur d'affichage (fractions 0-1 affichées en %).
 const SOUS_COMPOSANTES = {
+  Indicateur_Opp1: {
+    cle: 'Opp1',
+    parts: true,  // parts de personnes qui somment à 100 % : bouger l'une redistribue les autres
+    composantes: {
+      n1: { label: "Niveau 1 : aucun diplôme ou certificat d'études", aide: "Part des personnes de 18 ans et plus non scolarisées dont le diplôme le plus élevé est le certificat d'études ou aucun diplôme (valeur 1).", unite: '%', decimales: 1 },
+      n2: { label: 'Niveau 2 : brevet des collèges', aide: 'Part dont le diplôme le plus élevé est le brevet des collèges (valeur 2).', unite: '%', decimales: 1 },
+      n3: { label: 'Niveau 3 : CAP-BEP', aide: 'Part dont le diplôme le plus élevé est un CAP ou un BEP (valeur 3).', unite: '%', decimales: 1 },
+      n4: { label: 'Niveau 4 : baccalauréat', aide: 'Part dont le diplôme le plus élevé est le baccalauréat (valeur 4).', unite: '%', decimales: 1 },
+      n5: { label: 'Niveau 5 : bac + 2', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 2 (valeur 5).', unite: '%', decimales: 1 },
+      n6: { label: 'Niveau 6 : bac + 3 ou 4', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 3 ou bac + 4 (valeur 6).', unite: '%', decimales: 1 },
+      n7: { label: 'Niveau 7 : bac + 5 ou plus', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 5 ou plus (valeur 7).', unite: '%', decimales: 1 }
+    },
+    calcul: c => {
+      let total = 0, somme = 0;
+      for (let k = 1; k <= 7; k++) { total += c['n' + k]; somme += k * c['n' + k]; }
+      return total === 0 ? 0 : somme / total;
+    }
+  },
+  Indicateur_Opp2: {
+    cle: 'Opp2',
+    parts: true,
+    composantes: {
+      cs1: { label: 'Agriculteurs exploitants', aide: 'Part de la population de 15 ans et plus dans cette catégorie socioprofessionnelle. L\'indicateur est l\'indice de Theil des 8 catégories.', unite: '%', decimales: 1 },
+      cs2: { label: "Artisans, commerçants, chefs d'entreprise", aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs3: { label: 'Cadres et professions intellectuelles supérieures', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs4: { label: 'Professions intermédiaires', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs5: { label: 'Employés', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs6: { label: 'Ouvriers', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs7: { label: 'Retraités', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
+      cs8: { label: 'Autres personnes sans activité professionnelle', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 }
+    },
+    calcul: c => {
+      const x = [1, 2, 3, 4, 5, 6, 7, 8].map(k => c['cs' + k]);
+      const mu = x.reduce((a, b) => a + b, 0) / 8;
+      return mu === 0 ? 0 : x.reduce((s, v) => s + (v > 0 ? (v / mu) * Math.log(v / mu) : 0), 0) / 8;
+    }
+  },
   Indicateur_Opp3: {
     cle: 'Opp3',
     composantes: {
-      voiture: { label: 'Ménages avec au moins une voiture', unite: '%', decimales: 1 },
-      tc:      { label: 'Réseau de transports en commun (+100 pts)', binaire: 100 },
-      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', binaire: 1 }
+      voiture: { label: 'Ménages avec au moins une voiture', aide: 'Part des ménages de la commune qui possèdent au moins une voiture.', unite: '%', decimales: 1 },
+      tc:      { label: 'Réseau de transports en commun (+100 pts)', aide: 'Coché si au moins un actif occupé de la commune va travailler en transports en commun.', binaire: 100 },
+      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', aide: 'Coché si la commune a un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L\'Île-Rousse).', binaire: 1 }
     },
     calcul: c => c.voiture + (c.tc > 0 ? 100 : 0) + (c.bus ? 100 : 0)
   },
   Indicateur_Opp4: {
     cle: 'Opp4',
     composantes: {
-      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', unite: '%', decimales: 0 },
-      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', unite: '%', decimales: 0 },
-      fibre: { label: 'Locaux raccordables à la fibre', unite: '%', decimales: 0 }
+      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', aide: 'Part des habitants couverts en 4G par au moins un des quatre opérateurs.', unite: '%', decimales: 0 },
+      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', aide: 'Part des locaux (logements et entreprises) qui peuvent avoir au moins 30 Mbit/s sur un réseau filaire.', unite: '%', decimales: 0 },
+      fibre: { label: 'Locaux raccordables à la fibre', aide: 'Part des locaux raccordables à la fibre optique jusqu\'au domicile.', unite: '%', decimales: 0 }
     },
     calcul: c => (c.g4 + c.debit + c.fibre) / 3
   },
   Indicateur_Cho1: {
     cle: 'Cho1',
     composantes: {
-      personnes_qpv: { label: 'Personnes en quartier prioritaire', unite: 'pers.', decimales: 0, entier: true, inverse: true }
+      personnes_qpv: { label: 'Personnes en quartier prioritaire', aide: 'Nombre d\'habitants vivant dans un quartier prioritaire de la politique de la ville (0 s\'il n\'y en a pas). L\'indicateur est moins le logarithme de ce nombre : plus il est grand, plus l\'indicateur baisse.', unite: 'pers.', decimales: 0, entier: true, inverse: true }
     },
     calcul: c => c.personnes_qpv > 0 ? -Math.log(c.personnes_qpv) : 0
+  },
+  Indicateur_Cho2: {
+    cle: 'Cho2',
+    composantes: {
+      francais: { label: 'Part de Français parmi les 18 ans et plus', aide: 'Proxy des personnes ayant le droit de vote dans la commune : part de Français parmi les habitants de 18 ans et plus.', unite: '%', decimales: 1 }
+    },
+    calcul: c => c.francais
+  },
+  Indicateur_Vec1: {
+    cle: 'Vec1',
+    composantes: {
+      revenu: { label: 'Revenu fiscal moyen par foyer fiscal', aide: 'Revenu fiscal de référence total de la commune divisé par son nombre de foyers fiscaux.', unite: '€', decimales: 0 }
+    },
+    calcul: c => c.revenu
   },
   Indicateur_Vec2: {
     cle: 'Vec2',
     composantes: {
-      pers_piece: { label: 'Personnes par pièce', unite: '', decimales: 2, inverse: true },
-      maisons:    { label: 'Maisons individuelles', unite: '%', decimales: 1, facteur: 100 }
+      pers_piece: { label: 'Personnes par pièce', aide: 'Nombre moyen de personnes par pièce dans les résidences principales : plus il est élevé, plus les logements sont suroccupés.', unite: '', decimales: 2, inverse: true },
+      maisons:    { label: 'Maisons individuelles', aide: 'Part des résidences principales qui sont des maisons individuelles.', unite: '%', decimales: 1, facteur: 100 }
     },
     calcul: c => (Math.exp(-c.pers_piece) + c.maisons) / 2
   },
@@ -2293,14 +2347,21 @@ const SOUS_COMPOSANTES = {
     cle: 'Vec3',
     parts: true,  // parts d'actifs qui somment à 100 % : bouger l'une redistribue les autres
     composantes: {
-      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', unite: '%', decimales: 1 },
-      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', unite: '%', decimales: 1 },
-      chomeur: { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 }
+      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', aide: 'Part des actifs en emploi stable : CDI, fonctionnaires, indépendants et employeurs.', unite: '%', decimales: 1 },
+      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', aide: 'Part des actifs en contrat précaire ou aidé.', unite: '%', decimales: 1 },
+      chomeur: { label: 'Chômeurs (poids 0)', aide: 'Part des actifs au chômage.', unite: '%', decimales: 1 }
     },
     calcul: c => {
       const total = c.stable + c.autres + c.chomeur;
       return total === 0 ? 0 : (c.stable * 1 + c.autres * 0.5 + c.chomeur * 0) / total;
     }
+  },
+  Indicateur_Vec4: {
+    cle: 'Vec4',
+    composantes: {
+      services: { label: 'Services du quotidien accessibles en 20 minutes', aide: 'Nombre de services du quotidien (santé, commerces, services à la population) accessibles en 20 minutes de trajet routier ou moins.', unite: 'services', decimales: 0, entier: true }
+    },
+    calcul: c => c.services
   }
 };
 
@@ -2529,7 +2590,8 @@ function htmlSousComposantes(indicateur, communeNom) {
         <label class="sc-binaire">
           <input type="checkbox" id="${id}" ${valeurs[comp] ? 'checked' : ''} onchange="majSousComposante('${indicateur}', '${comp}')" />
           ${meta.label} ${badgeSource(indicateur, comp)}
-        </label>`;
+        </label>
+        ${meta.aide ? `<div class="sc-aide sc-aide-binaire">${meta.aide}</div>` : ''}`;
       continue;
     }
     const bornes = bornesSousComp[indicateur][comp];
@@ -2540,6 +2602,7 @@ function htmlSousComposantes(indicateur, communeNom) {
           <span>${meta.label} ${badgeSource(indicateur, comp)}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
           <span id="${id}_val">${libelleSousComposante(indicateur, comp, valeurs[comp])}</span>
         </div>
+        ${meta.aide ? `<div class="sc-aide">${meta.aide}</div>` : ''}
         <div class="slider-wrap">
           <span class="slider-origine" style="--p:${pctEntre(bornes, origine[comp])}" title="Valeur d'origine"></span>
           <input type="range" id="${id}" min="0" max="100" step="any"
