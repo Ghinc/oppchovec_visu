@@ -26,7 +26,7 @@ Vos décisions (revenu fiscal moyen pour Vec1, 4G « au moins un opérateur », 
 
 **Trois écarts à connaître :**
 - **Vec3** : le recensement 2023 ne distingue plus les CDD, l'intérim, les emplois aidés et les apprentis ; ils sont regroupés en « autres contrats » au poids 0,5 (corrélation de 0,98 avec l'ancien calcul sur 2021).
-- **Vec2** : le terme de confort (salle de bain + chauffage) est retiré : le chauffage valait 1 partout et la salle de bain n'est plus publiée par commune en 2023 ; cela ne change pas les scores normalisés.
+- **Vec2** : le terme de confort (salle de bain + chauffage) est retiré : le chauffage valait 1 partout et la salle de bain n'est plus publiée par commune pour la France métropolitaine dans le recensement 2023 (« nd » pour 34 747 communes sur 34 858 ; seuls les DOM ont des valeurs) ; le combustible principal, seule variable de chauffage publiée, partage toutes les résidences et vaut donc toujours 100 %. Cela ne change pas les scores normalisés. **Décision du 20 octobre 2026 : on garde cette formule** (plutôt que d'aller chercher la salle de bain du recensement 2022, hors de la fenêtre 2023-2025).
 - **Opp4** : avec « au moins un opérateur », la 4G est à 94,6 % ou plus partout (moyenne 99,9 %) ; la fibre vaut 55,7 % en moyenne et le débit 65,0 %.
 
 L'onglet Évolution a été aligné sur les mêmes définitions de Vec2 et de Vec3 (« l'indicateur doit être le même partout »).
