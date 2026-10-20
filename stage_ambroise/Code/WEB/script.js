@@ -2098,6 +2098,7 @@ async function chargerFichiersAutomatiquement() {
     const data_indicateurs_dict = calculerIndicateurs(dataIndicateurs, false);
     populateCommuneSelect(data_indicateurs_dict);
     await chargerSousComposantes();
+    chargerDetailsCalcul();         // sans attendre : n'est utile qu'à l'ouverture d'une fiche commune
 
     // 7. Appliquer le mode Betti par défaut
     recalculerCarteOppChoVec();
@@ -2401,6 +2402,124 @@ function libelleIndicateurDecompose(indicateur, valeur) {
   return `${pct.toFixed(0)} ${SUFFIXE_ECHELLE} ${formaterBrut(indicateur, valeur)}${hors}`;
 }
 
+// --- Détail du calcul : menu déroulant « Voir le calcul » de chaque indicateur et de l'indice (valeurs d'origine de la commune) ---
+let detailsCalcul = null;       // details_calcul.json : éléments bruts de chaque indicateur (effectifs, revenus, foyers…), produit par exporter_details_calcul.py
+
+async function chargerDetailsCalcul() {
+  try {
+    const response = await fetch(BASE_PATH + 'details_calcul.json');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    detailsCalcul = await response.json();
+  } catch (e) {
+    console.warn('⚠ details_calcul.json indisponible : pas de détail du calcul', e);
+  }
+}
+
+const NIVEAUX_DIPLOME = ['Aucun diplôme ou certificat d\'études', 'Brevet des collèges', 'CAP-BEP', 'Baccalauréat', 'Bac + 2', 'Bac + 3 ou 4', 'Bac + 5 ou plus'];
+const CATEGORIES_SOCIOPRO = ['Agriculteurs exploitants', 'Artisans, commerçants, chefs d\'entreprise', 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
+  'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'];
+const fmtDetail = (x, d = 0) => Number(x).toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function tableauDetail(lignes) {
+  return `<table class="calcul-table"><tbody>${lignes.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</tbody></table>`;
+}
+
+// Explication du calcul d'un indicateur à partir de ses éléments bruts d : { formule, lignes }
+function explicationIndicateur(cle, d) {
+  switch (cle) {
+    case 'Opp1': return {
+      formule: 'Niveau moyen de diplôme (échelle de 1 à 7) = somme de (niveau × effectif) ÷ somme des effectifs, pour les personnes de 18 ans et plus non scolarisées.',
+      lignes: NIVEAUX_DIPLOME.map((n, i) => [`Niveau ${i + 1} : ${n}`, `${fmtDetail(d['niveau' + (i + 1)], 0)} personnes`])
+        .concat([[`dont ${fmtDetail(d.retire_15_17, 0)} personnes de 15 à 17 ans non scolarisées retirées du niveau 1`, '']]) };
+    case 'Opp2': return {
+      formule: 'Indice de Theil des 8 catégories socioprofessionnelles (15 ans et plus) : T = (1/8) × somme de (xᵢ/μ) × ln(xᵢ/μ), où xᵢ est l\'effectif de la catégorie et μ la moyenne des 8 effectifs.',
+      lignes: CATEGORIES_SOCIOPRO.map((n, i) => [n, `${fmtDetail(d['cs' + (i + 1)], 0)} personnes`]) };
+    case 'Opp3': return {
+      formule: 'Part des ménages avec au moins une voiture (%), + 100 points si au moins un actif occupé va travailler en transports en commun, + 100 points si la commune a un réseau de bus urbain régulier.',
+      lignes: [['Ménages avec au moins une voiture', `${fmtDetail(d.voiture, 1)} %`],
+        [`Actifs occupés allant travailler en transports en commun (${fmtDetail(d.tc_actifs, 0)} personnes)`, d.tc > 0 ? '+ 100 points' : '0'],
+        ['Réseau de bus urbain régulier', d.bus > 0 ? '+ 100 points' : '0']] };
+    case 'Opp4': return {
+      formule: 'Moyenne de trois parts de la population ou des locaux : (4G + débit ≥ 30 Mbit/s + fibre) ÷ 3.',
+      lignes: [['Population couverte en 4G (au moins un opérateur)', `${fmtDetail(d.g4, 1)} %`], ['Locaux éligibles à 30 Mbit/s ou plus', `${fmtDetail(d.debit, 1)} %`],
+        ['Locaux raccordables à la fibre', `${fmtDetail(d.fibre, 1)} %`]] };
+    case 'Cho1': return {
+      formule: 'Moins le logarithme népérien du nombre de personnes vivant en quartier prioritaire de la politique de la ville ; 0 s\'il n\'y en a pas.',
+      lignes: [['Personnes en quartier prioritaire', fmtDetail(d.personnes_qpv, 0)]] };
+    case 'Cho2': return {
+      formule: 'Part de Français parmi les 18 ans et plus = 100 − 100 × étrangers de 18 ans et plus ÷ population. Étrangers de 18 ans et plus = (18-24 ans − 0,7 × Français de 15-24 ans) + étrangers de 25 ans et plus (estimation à partir des tables de nationalité).',
+      lignes: [['Population', fmtDetail(d.population, 0)], ['Personnes de 18 à 24 ans', fmtDetail(d.pop_18_24, 0)], ['Français de 15 à 24 ans', fmtDetail(d.francais_15_24, 0)],
+        ['Étrangers de 25 ans et plus', fmtDetail(d.etrangers_25_plus, 0)], ['Étrangers de 18 ans et plus (estimés)', fmtDetail(d.etrangers_18_plus, 0)]] };
+    case 'Vec1': return {
+      formule: 'Revenu fiscal de référence total de la commune ÷ nombre de foyers fiscaux.' + (d.departemental ? ' Commune sous secret statistique : valeur remplacée par la moyenne du département.' : ''),
+      lignes: d.departemental ? [['Moyenne du département', `${fmtDetail(d.valeur, 0)} €`]]
+        : [['Revenu fiscal de référence total', `${fmtDetail(d.revenu_fiscal, 0)} €`], ['Foyers fiscaux', fmtDetail(d.foyers, 0)]] };
+    case 'Vec2': return {
+      formule: 'Moyenne de deux termes : exp(− personnes par pièce) et part de maisons parmi les résidences principales.',
+      lignes: [['Personnes par pièce', fmtDetail(d.pers_piece, 2)], ['exp(− personnes par pièce)', fmtDetail(Math.exp(-d.pers_piece), 3)],
+        ['Part de maisons', `${fmtDetail(100 * d.maisons, 1)} %`], [`Résidences principales`, fmtDetail(d.residences_principales, 0)]] };
+    case 'Vec3': return {
+      formule: 'Statuts d\'emploi pondérés : (1 × CDI, fonctionnaires et non-salariés + 0,5 × autres contrats + 0 × chômeurs) ÷ total.',
+      lignes: [['CDI, fonctionnaires et non-salariés (poids 1)', fmtDetail(d.stable, 0)], ['Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', fmtDetail(d.autres, 0)],
+        ['Chômeurs (poids 0)', fmtDetail(d.chomeur, 0)]] };
+    case 'Vec4': return {
+      formule: 'Nombre de services du quotidien accessibles en 20 minutes ou moins (base permanente des équipements, temps de trajet routier).',
+      lignes: [] };
+  }
+  return null;
+}
+
+function htmlDetailCalcul(indicateur, communeNom) {
+  const cle = indicateur.replace('Indicateur_', '');
+  const d = detailsCalcul?.[communeNom]?.[cle];
+  const valeur = indicateursOrigine[communeNom]?.[indicateur];
+  const b = bornesRef && { min: bornesRef.min[indicateur], max: bornesRef.max[indicateur] };
+  const ex = d && explicationIndicateur(cle, d);
+  if (!ex || typeof valeur !== 'number' || !b) return '';
+  const meta = META_INDICATEURS[indicateur];
+  const norm = b.max === b.min ? 0 : (valeur - b.min) / (b.max - b.min);
+  return `
+    <details class="calcul-detail">
+      <summary>Voir le calcul</summary>
+      <p>${ex.formule}</p>
+      ${ex.lignes.length ? tableauDetail(ex.lignes) : ''}
+      <p><strong>Valeur de l'indicateur : ${formaterValeur(meta, valeur)}</strong></p>
+      <p>Normalisation sur l'échelle corse : (valeur − minimum) ÷ (maximum − minimum) = (${formaterValeur(meta, valeur)} − ${formaterValeur(meta, b.min)}) ÷ (${formaterValeur(meta, b.max)} − ${formaterValeur(meta, b.min)}) = <strong>${fmtDetail(norm, 3)}</strong>.</p>
+    </details>`;
+}
+
+// De la valeur des indicateurs à l'indice 0-10 (valeurs d'origine de la commune, p_k du mode actuel)
+function htmlDetailIndice(communeNom) {
+  const origine = indicateursOrigine[communeNom];
+  if (!origine || !bornesRef) return '';
+  const norm = normaliserDonnees({ [communeNom]: origine }, bornesRef.min, bornesRef.max);
+  const sc = calculerScoresParCommune(norm)[communeNom];
+  const ref = referencePk(modeCalculPk);
+  const dims = [
+    ['Opp', 'Score_Opp', ['Opp1', 'Opp2', 'Opp3', 'Opp4'], '(Opp1 + Opp2 + Opp3 + Opp4) ÷ 4'],
+    ['Cho', 'Score_Cho', ['Cho1', 'Cho2'], '(Cho1 + Cho2) ÷ 2'],
+    ['Vec', 'Score_Vec', ['Vec1', 'Vec2', 'Vec3', 'Vec4'], '(Vec1 + Vec2 + Vec3 + Vec4) ÷ 4']
+  ];
+  const n = k => norm[communeNom]['Indicateur_' + k];
+  let somme = 0;
+  const lignes = dims.map(([nom, champ, ks, formule], i) => {
+    somme += ref.pk[i] * Math.pow(sc[champ], 1.5);
+    return `<tr><td>${nom} = ${formule}</td><td>${ks.map(k => fmtDetail(n(k), 3)).join(' ; ')}</td><td>${fmtDetail(sc[champ], 3)}</td><td>${fmtDetail(ref.pk[i], 3)}</td></tr>`;
+  }).join('');
+  const brut = (1 / 3) * Math.pow(somme, 2.5 / 1.5);
+  const sur10 = ref.max === ref.min ? 5 : (brut - ref.min) / (ref.max - ref.min) * 10;
+  return `
+    <details class="calcul-detail calcul-detail-indice">
+      <summary>Voir le calcul de l'indice OppChoVec</summary>
+      <p>Chaque indicateur est d'abord normalisé entre 0 et 1 (échelle corse). Chaque dimension est la moyenne des indicateurs normalisés qui la composent.</p>
+      <table class="calcul-table"><thead><tr><th>Dimension</th><th>Indicateurs normalisés</th><th>Valeur</th><th>Poids p<sub>k</sub></th></tr></thead><tbody>${lignes}</tbody></table>
+      <p>S = somme des p<sub>k</sub> × dimension<sub>k</sub><sup>1,5</sup> = ${fmtDetail(somme, 4)}.<br>
+      Indice brut = (1/3) × S<sup>2,5/1,5</sup> = ${fmtDetail(brut, 4)}.<br>
+      Passage sur 0-10 (minimum et maximum de la Corse : ${fmtDetail(ref.min, 4)} et ${fmtDetail(ref.max, 4)}) : <strong>${fmtDetail(sur10, 2)} / 10</strong>.</p>
+      <p class="calcul-note">Les poids p<sub>k</sub> sont ${modeCalculPk === 'betti' ? 'ceux de Betti et al. (2008), calculés sur toute la Corse' : 'égaux (1 pour chaque dimension)'}. Valeurs d'origine de la commune, sans les modifications faites avec les curseurs.</p>
+    </details>`;
+}
+
 function htmlSousComposantes(indicateur, communeNom) {
   const def = SOUS_COMPOSANTES[indicateur];
   const valeurs = brouillonSousComp.valeurs[indicateur];
@@ -2562,11 +2681,13 @@ function afficherCommune(communeNom) {
           <button class="info-close-button" onclick="closeIndicatorInfo('${nomIndicateur}')" aria-label="Close">✕</button>
           <p data-indicator-desc="${nomIndicateur}">${description}</p>
         </div>${controle}
+        ${htmlDetailCalcul(nomIndicateur, communeNom)}
       </li>`;
   }
 
   indicateursHTML += `
   </ul>
+  ${htmlDetailIndice(communeNom)}
   <div style="display: flex; justify-content: space-between; margin-top: 10px;">
     <button onclick="recalculerIndice('${communeNom}')">🔁 Recalculer Indice</button>
     <button onclick="reinitialiserValeurs('${communeNom}')">🔄 Réinitialiser</button>
