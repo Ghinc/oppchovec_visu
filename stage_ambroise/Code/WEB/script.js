@@ -2583,6 +2583,25 @@ function selectionnerCommuneDepuisCarte(nom) {
   afficherCommune(nom);
 }
 
+// Titre court (affiché à côté du nom de l'indicateur) et titre complet (infobulle)
+const TITRES_INDICATEURS = {
+  Indicateur_Opp1: ['Éducation', 'Avoir une bonne éducation'],
+  Indicateur_Opp2: ['Diversité CSP', 'Diversité des catégories socioprofessionnelles'],
+  Indicateur_Opp3: ['Mobilité', 'Avoir les moyens de mobilité'],
+  Indicateur_Opp4: ['Accès aux TIC', "Avoir accès aux technologies de l'information et de la communication"],
+  Indicateur_Cho1: ['Non-discrimination', 'Ne pas être discriminé'],
+  Indicateur_Cho2: ['Influence politique', "Avoir les moyens d'influencer les décisions politiques"],
+  Indicateur_Vec1: ['Revenu', 'Avoir un revenu décent'],
+  Indicateur_Vec2: ['Logement', 'Avoir un logement décent'],
+  Indicateur_Vec3: ['Emploi stable', "Stabilité de l'emploi"],
+  Indicateur_Vec4: ['Services', 'Être proche des services']
+};
+
+function titreIndicateurHtml(indicateur) {
+  const t = TITRES_INDICATEURS[indicateur];
+  return t ? `<span class="indicateur-titre" title="${t[1].replace(/"/g, '&quot;')}">${t[0]}</span>` : '';
+}
+
 function afficherCommune(communeNom) {
   if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
     epciAfficherDansPanneau(communeNom);
@@ -2649,10 +2668,11 @@ function afficherCommune(communeNom) {
     indicateursHTML += `
       <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
-          <strong>${nomIndicateur}</strong>
+          <strong>${nomIndicateur.replace('_', ' ')}</strong>
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>
+          ${titreIndicateurHtml(nomIndicateur)}
           <span id="${nomIndicateur}_val">${decompose ? libelleIndicateurDecompose(nomIndicateur, valeur) : libelleSlider(nomIndicateur, valeur)}</span>
         </div>
         <div id="info-${nomIndicateur}" class="indicator-info-box" style="display: none;">
@@ -2780,7 +2800,7 @@ for (const indicateur in data1) {
     html += `
       <tr>
         <td style="position: relative;">
-          ${indicateur}
+          ${indicateur.replace('_', ' ')}
           <button class="info-button" data-indicator="${indicateur}" onclick="toggleIndicatorInfo(event, '${indicateur}_comp')" aria-label="Information" style="float: right; margin-left: 8px;">
             🛈
           </button>
