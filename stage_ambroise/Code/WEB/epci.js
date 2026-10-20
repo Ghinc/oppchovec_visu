@@ -336,15 +336,15 @@ function epciInstallerBandeaux() {
     }
 }
 
+// Les deux cases du haut (EPCI pro rata des habitants / EPCI pro rata des communes) ; aucune cochée = communes
 function epciMajControle() {
-    const case_ = document.getElementById('echelle-epci-case');
-    if (!case_) return;
-    case_.checked = echelleEstEPCI();
-    document.getElementById('echelle-epci-modes').hidden = !echelleEstEPCI();
-    for (const r of document.querySelectorAll('input[name="echelle-epci-mode"]')) r.checked = r.value === (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune');
+    const pop = document.getElementById('echelle-epci-pop'), com = document.getElementById('echelle-epci-commune');
+    if (!pop || !com) return;
+    pop.checked = echelleEpci === 'epci-pop';
+    com.checked = echelleEpci === 'epci-commune';
     document.body.classList.toggle('mode-echelle-epci', echelleEstEPCI());
     const etat = document.getElementById('echelle-epci-etat');
-    if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'EPCI · pro rata du nombre d\'habitants' : echelleEpci === 'epci-commune' ? 'EPCI · moyenne simple (1 commune = 1)' : 'communes';
+    if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'moyennes pondérées par la population' : echelleEpci === 'epci-commune' ? 'moyennes simples (1 commune = 1)' : 'communes';
 }
 
 // Change l'échelle d'analyse de toute l'appli ('commune' | 'epci-pop' | 'epci-commune') ; renvoie false si elle n'a pas pu être changée
@@ -370,16 +370,11 @@ async function changerEchelle(mode) {
 if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
     document.addEventListener('DOMContentLoaded', () => {
         epciInstallerBandeaux();
-        const caseEpci = document.getElementById('echelle-epci-case');
-        if (caseEpci) {
-            caseEpci.addEventListener('change', () => changerEchelle(caseEpci.checked ? (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune') : 'commune'));
-            document.querySelectorAll('input[name="echelle-epci-mode"]').forEach(r => r.addEventListener('change', () => {
-                if (!r.checked) return;
-                document.getElementById('epci-prorata').checked = r.value === 'epci-pop';
-                if (echelleEstEPCI()) changerEchelle(r.value); else epciMajControle();
-                if (epciInitialise) epciRedessiner();
-            }));
-            document.getElementById('epci-prorata').addEventListener('change', () => {       // même méthode que l'onglet EPCI : la case de l'onglet et les boutons du haut restent synchronisés
+        const casePop = document.getElementById('echelle-epci-pop'), caseCommune = document.getElementById('echelle-epci-commune');
+        if (casePop && caseCommune) {
+            casePop.addEventListener('change', () => changerEchelle(casePop.checked ? 'epci-pop' : 'commune'));
+            caseCommune.addEventListener('change', () => changerEchelle(caseCommune.checked ? 'epci-commune' : 'commune'));
+            document.getElementById('epci-prorata').addEventListener('change', () => {       // même méthode que l'onglet EPCI : la case de l'onglet et les cases du haut restent synchronisées
                 if (echelleEstEPCI()) changerEchelle(document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune'); else epciMajControle();
             });
         }

@@ -52,13 +52,10 @@
             <div id="pk-values-display"></div>
           </div>
         </div>
-        <div class="echelle-epci" title="Passe toutes les analyses à l'échelle des intercommunalités (EPCI)">
+        <div class="echelle-epci" title="Passe toutes les analyses (cartes, dominance…) à l'échelle des intercommunalités (EPCI)">
           <span class="echelle-epci-titre">Échelle d'analyse :</span>
-          <label class="echelle-epci-case"><input type="checkbox" id="echelle-epci-case"> <strong>EPCI</strong></label>
-          <span id="echelle-epci-modes" class="echelle-epci-modes" hidden>
-            <label title="Moyenne pondérée par la population de chaque commune (au millésime de chaque indicateur)"><input type="radio" name="echelle-epci-mode" value="epci-pop" checked> EPCI population</label>
-            <label title="Moyenne simple : chaque commune compte pour 1"><input type="radio" name="echelle-epci-mode" value="epci-commune"> EPCI commune</label>
-          </span>
+          <label class="echelle-epci-case" title="Chaque indicateur est la moyenne des communes de l'EPCI pondérée par leur nombre d'habitants"><input type="checkbox" id="echelle-epci-pop"> <strong>EPCI</strong> pro rata habitants</label>
+          <label class="echelle-epci-case" title="Chaque indicateur est la moyenne simple des communes de l'EPCI : chaque commune compte pour 1"><input type="checkbox" id="echelle-epci-commune"> <strong>EPCI</strong> pro rata communes</label>
           <span class="echelle-epci-etat" id="echelle-epci-etat">communes</span>
         </div>
         <div class="tabs">

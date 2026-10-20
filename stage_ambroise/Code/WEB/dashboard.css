@@ -2628,7 +2628,7 @@ body.mode-epci aside { display: none; }
 /* ============================================
    CASE « EPCI » (barre du haut) : échelle d'analyse de toute l'appli
    ============================================ */
-.echelle-epci { flex: 0 0 auto; display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 3px 14px; font-size: 13px; white-space: nowrap; background: #f6f8fb; border-bottom: 1px solid var(--border-light); }
+.echelle-epci { flex: 0 0 auto; display: flex; align-items: center; justify-content: flex-start; gap: 16px; padding: 3px 140px 3px 14px; font-size: 13px; white-space: nowrap; background: #f6f8fb; border-bottom: 1px solid var(--border-light); }
 .echelle-epci-titre { color: #555; }
 .echelle-epci-etat { color: #555; font-style: italic; min-width: 70px; }
 .echelle-epci label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }

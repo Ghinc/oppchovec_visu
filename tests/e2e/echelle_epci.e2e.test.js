@@ -14,22 +14,20 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     const palette = await page.evaluate(() => colorsJenks);
 
     // état de départ : communes, case décochée, options cachées
-    assert.ok(!(await page.locator('#echelle-epci-case').isChecked()));
-    assert.ok(!(await page.locator('#echelle-epci-modes').isVisible()));
+    assert.ok(!(await page.locator('#echelle-epci-pop').isChecked()) && !(await page.locator('#echelle-epci-commune').isChecked()));
     assert.equal(Object.keys(await couleurs()).length, 360);
     const communesAvant = await couleurs();
 
     // case cochée : 19 EPCI, deux options visibles, « population » par défaut
-    await page.check('#echelle-epci-case');
+    await page.check('#echelle-epci-pop');
     await page.waitForFunction(() => Object.keys(epciGeoVue ? (() => { const o = {}; geojsonLayers.oppchovec.eachLayer((l) => { o[l.feature.properties.nom] = 1; }); return o; })() : {}).length === 19);
-    assert.ok(await page.locator('#echelle-epci-modes').isVisible());
-    assert.ok(await page.locator('input[name="echelle-epci-mode"][value="epci-pop"]').isChecked());
+    assert.ok(await page.locator('#echelle-epci-pop').isChecked());
     assert.equal(await polygones('map-oppchovec'), 19);
     const pop = await couleurs();
     assert.deepEqual(Object.keys(pop).sort(), noms);
     const valeursPop = await page.evaluate(() => JSON.parse(JSON.stringify(indiceFinale)));
     for (const [nom, v] of Object.entries(valeursPop)) assert.equal(pop[nom], palette[classeDe(v, seuils)], `population ${nom}`);
-    assert.ok((await page.locator('#echelle-epci-etat').innerText()).includes('pro rata'));
+    assert.ok((await page.locator('#echelle-epci-etat').innerText()).includes('pondérées'));
 
     // les autres cartes (Opp, Cho, Vec) suivent aussi
     for (const t of ['opptab', 'chotab', 'vectab']) {
@@ -58,8 +56,9 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     for (const mot of [ajaccio, 'Pro rata', 'Simple', 'Ajaccio']) assert.ok(fiche.includes(mot), mot);
 
     // « EPCI commune » : moyenne simple, les couleurs changent
-    await page.check('input[name="echelle-epci-mode"][value="epci-commune"]');
-    await page.waitForFunction(() => document.getElementById('echelle-epci-etat').textContent.includes('simple'));
+    await page.check('#echelle-epci-commune');
+    assert.ok(!(await page.locator('#echelle-epci-pop').isChecked()), 'les deux cases sont exclusives');
+    await page.waitForFunction(() => document.getElementById('echelle-epci-etat').textContent.includes('simples'));
     const simple = await couleurs();
     assert.equal(Object.keys(simple).length, 19);
     assert.notDeepEqual(simple, pop, 'les deux méthodes ne colorent pas pareil');
@@ -68,9 +67,8 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     assert.ok(await page.locator('#epci-prorata').evaluate((e) => !e.checked), 'la case de l\'onglet EPCI suit');
 
     // case décochée : retour exact aux communes
-    await page.uncheck('#echelle-epci-case');
+    await page.uncheck('#echelle-epci-commune');
     await page.waitForFunction(() => { let n = 0; geojsonLayers.oppchovec.eachLayer(() => n++); return n === 360; });
-    assert.ok(!(await page.locator('#echelle-epci-modes').isVisible()));
     assert.deepEqual(await couleurs(), communesAvant, 'mêmes couleurs qu\'au départ');
     assert.equal((await page.$$eval('#communeSelect option', (o) => o.length)) > 300, true);
     await page.click('.tab-button[data-tab="dominancetab"]');
@@ -87,7 +85,7 @@ test('Échelle EPCI : l\'onglet Évolution passe aux EPCI (19 polygones, série 
     assert.equal(await unites('a0'), 360);
     assert.equal(await page.locator('#evolution-griser').isDisabled(), false);
 
-    await page.check('#echelle-epci-case');
+    await page.check('#echelle-epci-pop');
     await page.waitForFunction(() => evolutionCouches.a1.getLayers().length === 19);
     for (const t of ['a0', 'a1', 'variation']) assert.equal(await unites(t), 19, t);
     assert.equal(await page.locator('#evolutiontab .epci-indisponible').isVisible(), false, 'pas de bandeau : l\'évolution existe à l\'échelle EPCI');
@@ -119,12 +117,12 @@ test('Échelle EPCI : l\'onglet Évolution passe aux EPCI (19 polygones, série 
 
     // moyenne simple : les valeurs changent
     const avant = await page.evaluate((n) => evolutionDonnees.communes[n]['2021'].scores_0_10.OppChoVec, nom);
-    await page.check('input[name="echelle-epci-mode"][value="epci-commune"]');
+    await page.check('#echelle-epci-commune');
     await page.waitForFunction(() => evolutionDonnees.prorata === false);
     assert.notEqual(await page.evaluate((n) => evolutionDonnees.communes[n]['2021'].scores_0_10.OppChoVec, nom), avant);
 
     // case décochée : retour aux 360 communes
-    await page.uncheck('#echelle-epci-case');
+    await page.uncheck('#echelle-epci-commune');
     await page.waitForFunction(() => evolutionCouches.a1.getLayers().length === 360);
     assert.equal(await page.locator('#evolution-griser').isDisabled(), false);
     assert.ok(!(await page.locator('.evolution-titre-onglet').innerText()).includes('EPCI'));
