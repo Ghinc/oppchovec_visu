@@ -2534,9 +2534,9 @@ body.mode-evolution aside { display: none; }
 .evolution-cartes { flex: 1 1 auto; display: flex; min-height: 0; }
 .evolution-carte { flex: 1 1 33%; min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #ddd; }
 .evolution-carte h4 { margin: 0; padding: 4px 10px; font-size: 14px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
-.evolution-loupe, .evolution-bouton { border: 1px solid #aaa; background: #fff; color: #222; border-radius: 4px; cursor: pointer; margin-top: 0; box-shadow: none; font-weight: normal; }
-.evolution-loupe { font-size: 13px; line-height: 1; padding: 2px 6px; }
-.evolution-loupe:hover, .evolution-bouton:hover { background: #e8f1fb; border-color: #4a90d9; box-shadow: none; transform: none; }
+.evolution-loupe, .evolution-bouton, .evolution-bouton-source { border: 1px solid #aaa; background: #fff; color: #222; border-radius: 4px; cursor: pointer; margin-top: 0; box-shadow: none; font-weight: normal; }
+.evolution-loupe, .evolution-bouton-source { font-size: 13px; line-height: 1; padding: 2px 6px; }
+.evolution-loupe:hover, .evolution-bouton:hover, .evolution-bouton-source:hover { background: #e8f1fb; border-color: #4a90d9; box-shadow: none; transform: none; }
 /* Une carte agrandie : elle prend la grande colonne de gauche, les deux autres sont rangées en petit à droite */
 .evolution-cartes.zoom { display: grid; grid-template-columns: minmax(0, 1fr) 27%; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
 .evolution-cartes.zoom .evolution-carte { grid-column: 2; border-right: none; border-bottom: 1px solid #ddd; }
@@ -2754,4 +2754,4 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 .evolution-source-popover .evolution-petit { margin: 4px 0; }
 .evolution-table-source { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 11.5px; }
 .evolution-table-source th, .evolution-table-source td { padding: 3px 5px; border-bottom: 1px solid #e3e3e3; text-align: left; vertical-align: top; }
-.evolution-table-source th { background: #f0f0f0; }
+.evolution-table-source th { background: #e6edf5; color: #222; }
