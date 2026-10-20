@@ -22,7 +22,7 @@ TOLERANCE = 1e-9
 SOURCES_V2 = WEB_DIR.parent.parent / "Données" / "indice_v2" / "sources_indice_v2.json"
 
 # Communes avec un vrai réseau de bus urbain (+100 sur Opp3) : liste fournie par la doctorante
-VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247"}  # Ajaccio, Bastia, Porto-Vecchio
+VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247", "2B134"}  # Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse
 
 # Catégories d'emploi de Vec3 et leur poids de stabilité. Le recensement 2023 ne distingue plus CDD, intérim, emplois aidés et apprentis (une seule catégorie « autre contrat ») :
 # elles sont regroupées au poids moyen 0,5 (v1 : 0,25 ; 0,5 ; 0,75).

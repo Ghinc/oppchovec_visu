@@ -4,7 +4,7 @@
  "sources": {
   "Opp1": "INSEE, recensement 2023, base communale Diplômes - Formation (base_cc_diplomes_formation_2023), mise en ligne le 25/06/2026",
   "Opp2": "INSEE, recensement 2023, base communale Évolution et structure de la population (base_cc_evol_struct_pop_2023)",
-  "Opp3": "INSEE, recensement 2023, bases communales Logement (ménages avec voiture) et Caractéristiques de l'emploi (actifs occupés en transports en commun) ; réseaux de bus : liste de trois villes fournie par la doctorante",
+  "Opp3": "INSEE, recensement 2023, bases communales Logement (ménages avec voiture) et Caractéristiques de l'emploi (actifs occupés en transports en commun) ; réseaux de bus urbains réguliers : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr), sélection faite par la doctorante",
   "Opp4": "ARCEP, couvertures théoriques 4G T4 2024 (4 opérateurs) x grille de population INSEE Filosofi 200 m (2021) ; ARCEP « Ma connexion internet » T4 2024, offres filaires (commune_debit_filaire, commune_techno)",
   "Cho1": "INSEE, population communale en QPV 2024 (pop_reference_communales_QPV24, référence 1er janvier 2020, publiée le 10/07/2025)",
   "Cho2": "INSEE, recensement 2023, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)",
@@ -21138,11 +21138,11 @@
     "cs8": 574.81862
    },
    "Opp3": {
-    "valeur": 180.3408078047027,
+    "valeur": 280.3408078047027,
     "voiture": 80.34080780470272,
     "tc_actifs": 5.04433,
     "tc": 100.0,
-    "bus": 0.0
+    "bus": 100.0
    },
    "Vec2": {
     "valeur": 0.3446567812963601,

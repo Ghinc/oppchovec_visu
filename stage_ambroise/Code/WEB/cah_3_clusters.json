@@ -2093,10 +2093,10 @@
     },
     "Île-Rousse": {
       "cluster": 3,
-      "Score_Opp": 6.472998937160995,
+      "Score_Opp": 8.33791764804827,
       "Score_Cho": 5.839101696651264,
       "Score_Vec": 1.8117755426982494,
-      "OppChoVec": 1.9523570682512503
+      "OppChoVec": 2.8289937771628977
     },
     "Olmi-Cappella": {
       "cluster": 3,
@@ -2553,10 +2553,10 @@
     {
       "cluster": 3,
       "n_communes": 192,
-      "opp_moyen": 7.160304383737379,
+      "opp_moyen": 7.17001750202325,
       "cho_moyen": 8.860155614267319,
       "vec_moyen": 4.424526383172479,
-      "oppchovec_moyen": 5.672060542326484
+      "oppchovec_moyen": 5.676626358518733
     }
   ]
 }

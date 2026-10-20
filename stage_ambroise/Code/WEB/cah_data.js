@@ -2098,10 +2098,10 @@ const CAH_DATA_3 = {
     },
     "Île-Rousse": {
       "cluster": 3,
-      "Score_Opp": 6.472998937160995,
+      "Score_Opp": 8.33791764804827,
       "Score_Cho": 5.839101696651264,
       "Score_Vec": 1.8117755426982494,
-      "OppChoVec": 1.9523570682512503
+      "OppChoVec": 2.8289937771628977
     },
     "Olmi-Cappella": {
       "cluster": 3,
@@ -2558,10 +2558,10 @@ const CAH_DATA_3 = {
     {
       "cluster": 3,
       "n_communes": 192,
-      "opp_moyen": 7.160304383737379,
+      "opp_moyen": 7.17001750202325,
       "cho_moyen": 8.860155614267319,
       "vec_moyen": 4.424526383172479,
-      "oppchovec_moyen": 5.672060542326484
+      "oppchovec_moyen": 5.676626358518733
     }
   ]
 };
@@ -2799,7 +2799,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 4.80442723812502
     },
     "Osani": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.029381338215713,
       "Score_Cho": 8.77314269639864,
       "Score_Vec": 4.261106544681904,
@@ -2855,7 +2855,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 4.282322585407455
     },
     "Sorbollano": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.588780507923608,
       "Score_Cho": 9.877943427231452,
       "Score_Vec": 4.234925110636542,
@@ -2988,7 +2988,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 5.53117716688587
     },
     "Olivese": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.2012216501728634,
       "Score_Cho": 10.0,
       "Score_Vec": 4.034643251333151,
@@ -3016,7 +3016,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 2.5907450052627077
     },
     "Sant'Antonino": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.167401523448245,
       "Score_Cho": 10.0,
       "Score_Vec": 4.342986271930006,
@@ -3051,7 +3051,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 6.395271427681961
     },
     "San-Gavino-di-Tenda": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.3709849422165177,
       "Score_Cho": 10.0,
       "Score_Vec": 4.377155812717128,
@@ -3205,7 +3205,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 2.7124294678218175
     },
     "Olmiccia": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.8529430448692015,
       "Score_Cho": 8.426942433933268,
       "Score_Vec": 4.02941453481663,
@@ -3261,7 +3261,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 1.4882223176061768
     },
     "Azilone-Ampaza": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.074104092054108,
       "Score_Cho": 9.427859815147443,
       "Score_Vec": 4.081143813237404,
@@ -3380,7 +3380,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 5.530259894564583
     },
     "Casamaccioli": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.710667865123632,
       "Score_Cho": 9.698427735952395,
       "Score_Vec": 4.086332719602989,
@@ -3450,7 +3450,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 6.4123734840827975
     },
     "Loreto-di-Tallano": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.1309418411657175,
       "Score_Cho": 9.493595070428375,
       "Score_Vec": 4.379285932360584,
@@ -3464,21 +3464,21 @@ const CAH_DATA_5 = {
       "OppChoVec": 3.6218485974798194
     },
     "Arbellara": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.647713759334618,
       "Score_Cho": 8.671630128164491,
       "Score_Vec": 3.7008998072656207,
       "OppChoVec": 3.8196461572149283
     },
     "Bocognano": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.039071570915265,
       "Score_Cho": 9.513849759596573,
       "Score_Vec": 3.9144443546217893,
       "OppChoVec": 4.325499583609711
     },
     "Renno": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.7974589468251825,
       "Score_Cho": 9.916042676566226,
       "Score_Vec": 3.776983672311103,
@@ -3492,7 +3492,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 4.975170441571441
     },
     "Gavignano": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.415990320097567,
       "Score_Cho": 8.520839353512969,
       "Score_Vec": 3.9649625263632315,
@@ -3723,7 +3723,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 5.9100974071830406
     },
     "Centuri": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.439108361495053,
       "Score_Cho": 9.452310814629863,
       "Score_Vec": 4.3794646197348195,
@@ -4052,7 +4052,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 6.443744476507699
     },
     "Arro": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.7460669119708867,
       "Score_Cho": 9.804107126850287,
       "Score_Vec": 3.796952739111103,
@@ -4255,7 +4255,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 2.954020949934258
     },
     "Noceta": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.5661953702810285,
       "Score_Cho": 10.0,
       "Score_Vec": 4.374489109793615,
@@ -4451,7 +4451,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 4.351676140408539
     },
     "Carbini": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.768892433290658,
       "Score_Cho": 10.0,
       "Score_Vec": 4.031792965912454,
@@ -4528,7 +4528,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 4.046996214276514
     },
     "Tavera": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.277302599269922,
       "Score_Cho": 9.462915154410666,
       "Score_Vec": 4.694438414839955,
@@ -4563,7 +4563,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 1.8683871162369872
     },
     "Piobetta": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.8398275189754445,
       "Score_Cho": 8.797927692430987,
       "Score_Vec": 4.391859372011683,
@@ -4662,10 +4662,10 @@ const CAH_DATA_5 = {
     },
     "Île-Rousse": {
       "cluster": 5,
-      "Score_Opp": 6.472998937160995,
+      "Score_Opp": 8.33791764804827,
       "Score_Cho": 5.839101696651264,
       "Score_Vec": 1.8117755426982494,
-      "OppChoVec": 1.9523570682512503
+      "OppChoVec": 2.8289937771628977
     },
     "Olmi-Cappella": {
       "cluster": 5,
@@ -4703,7 +4703,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 3.7473718097101587
     },
     "Piève": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.483587976668961,
       "Score_Cho": 8.905699692419937,
       "Score_Vec": 4.554383640855876,
@@ -4829,7 +4829,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 6.4690167371621365
     },
     "Pietroso": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 3.969172260733985,
       "Score_Cho": 8.466387465454673,
       "Score_Vec": 3.8619738732237145,
@@ -4899,7 +4899,7 @@ const CAH_DATA_5 = {
       "OppChoVec": 9.180533601523484
     },
     "Loreto-di-Casinca": {
-      "cluster": 2,
+      "cluster": 1,
       "Score_Opp": 4.198233713240215,
       "Score_Cho": 9.494859502212574,
       "Score_Vec": 4.248748724829603,
@@ -5105,19 +5105,19 @@ const CAH_DATA_5 = {
   "stats": [
     {
       "cluster": 1,
-      "n_communes": 60,
-      "opp_moyen": 4.6795452100714305,
-      "cho_moyen": 9.487854415814716,
-      "vec_moyen": 5.278281089317886,
-      "oppchovec_moyen": 5.287548379286374
+      "n_communes": 82,
+      "opp_moyen": 4.501070257958223,
+      "cho_moyen": 9.463118847490536,
+      "vec_moyen": 4.978234794771513,
+      "oppchovec_moyen": 5.035100211447089
     },
     {
       "cluster": 2,
-      "n_communes": 95,
-      "opp_moyen": 3.071431773103816,
-      "cho_moyen": 9.097376189745596,
-      "vec_moyen": 3.538895181250815,
-      "oppchovec_moyen": 3.522811751462848
+      "n_communes": 73,
+      "opp_moyen": 2.7872735602270433,
+      "cho_moyen": 9.007482979184807,
+      "vec_moyen": 3.3517349918717336,
+      "oppchovec_moyen": 3.2745452302396134
     },
     {
       "cluster": 3,
@@ -5138,10 +5138,10 @@ const CAH_DATA_5 = {
     {
       "cluster": 5,
       "n_communes": 126,
-      "opp_moyen": 6.753506032502421,
+      "opp_moyen": 6.76830697465232,
       "cho_moyen": 8.652604895390317,
       "vec_moyen": 3.607030144850886,
-      "oppchovec_moyen": 4.835839850466318
+      "oppchovec_moyen": 4.842797284664029
     }
   ]
 };

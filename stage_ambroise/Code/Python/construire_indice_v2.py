@@ -8,7 +8,7 @@ Indicateurs (mêmes définitions que la v1 sauf mention) :
   Opp1  niveau de diplôme moyen (7 niveaux) des 18 ans et plus non scolarisés ; recensement 2023, base communale « Diplômes - Formation » ; 15-17 ans non scolarisés retirés du niveau 1.
   Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus ; recensement 2023, base « Évolution et structure de la population ».
   Opp3  % de ménages avec au moins une voiture (base « Logement 2023 ») + 100 si des actifs occupés vont travailler en transports en commun (base « Caractéristiques de l'emploi 2023 »,
-        au moins une personne) + 100 pour Ajaccio, Bastia et Porto-Vecchio (réseaux de bus, liste fournie par la doctorante).
+        au moins une personne) + 100 pour Ajaccio, Bastia, Porto-Vecchio et L'Île-Rousse (réseaux de bus urbains réguliers, transport.data.gouv.fr).
   Opp4  (4G + débit >= 30 Mbit/s + fibre) / 3, en % : 4G = population couverte par au moins un opérateur (ARCEP T4 2024 x grille INSEE de 200 m) ; débit et fibre = locaux éligibles
         (ARCEP « Ma connexion internet » T4 2024, offres filaires).
   Cho1  -log(nombre de personnes vivant en quartier prioritaire), 0 sans quartier ; INSEE, population communale en QPV 2024 (référence 1er janvier 2020, publiée en 2025).
@@ -40,7 +40,7 @@ from construire_serie_temporelle import indicateur_revenu_fiscal, theil
 RACINE = Path(__file__).resolve().parents[2]
 GEOJSON = RACINE / "Données" / "Commune_Corse.geojson"
 SORTIE = RACINE / "Données" / "indice_v2" / "sources_indice_v2.json"
-VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247"}
+VILLES_RESEAU_BUS = {"2A004", "2B033", "2A247", "2B134"}
 NIVEAUX = {"DIPLMIN": 1, "BEPC": 2, "CAPBEP": 3, "BAC": 4, "SUP2": 5, "SUP34": 6, "SUP5": 7}
 
 
@@ -157,7 +157,7 @@ def indicateurs(dossier):
 SOURCES = {
     "Opp1": "INSEE, recensement 2023, base communale Diplômes - Formation (base_cc_diplomes_formation_2023), mise en ligne le 25/06/2026",
     "Opp2": "INSEE, recensement 2023, base communale Évolution et structure de la population (base_cc_evol_struct_pop_2023)",
-    "Opp3": "INSEE, recensement 2023, bases communales Logement (ménages avec voiture) et Caractéristiques de l'emploi (actifs occupés en transports en commun) ; réseaux de bus : liste de trois villes fournie par la doctorante",
+    "Opp3": "INSEE, recensement 2023, bases communales Logement (ménages avec voiture) et Caractéristiques de l'emploi (actifs occupés en transports en commun) ; réseaux de bus urbains réguliers : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr), sélection faite par la doctorante",
     "Opp4": "ARCEP, couvertures théoriques 4G T4 2024 (4 opérateurs) x grille de population INSEE Filosofi 200 m (2021) ; ARCEP « Ma connexion internet » T4 2024, offres filaires (commune_debit_filaire, commune_techno)",
     "Cho1": "INSEE, population communale en QPV 2024 (pop_reference_communales_QPV24, référence 1er janvier 2020, publiée le 10/07/2025)",
     "Cho2": "INSEE, recensement 2023, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)",

@@ -58,9 +58,9 @@ class IndicateursDepuisLesComposantes(unittest.TestCase):
     def test_opp3_voiture_transports_bus(self):
         self.verifier("Opp3", lambda c: c["Opp3"]["voiture"] + (100 if c["Opp3"]["tc_actifs"] > 0 else 0) + c["Opp3"]["bus"])
 
-    def test_opp3_les_trois_villes_a_reseau_de_bus(self):
+    def test_opp3_les_quatre_communes_a_reseau_de_bus(self):
         villes = {nom for nom, c in self.v2.items() if c["Opp3"]["bus"] > 0}
-        self.assertEqual(villes, {"Ajaccio", "Bastia", "Porto-Vecchio"})
+        self.assertEqual(villes, {"Ajaccio", "Bastia", "Porto-Vecchio", "Île-Rousse"})
 
     def test_opp4_inclut_la_4g_le_debit_et_la_fibre(self):
         self.verifier("Opp4", lambda c: (c["Opp4"]["g4"] + c["Opp4"]["debit"] + c["Opp4"]["fibre"]) / 3)

@@ -97,7 +97,7 @@ L'indice courant a été **entièrement reconstruit** à partir de sources offic
 |---|---|---|---|
 | Opp1 | niveau de diplôme moyen (1 à 7) des 18 ans et plus non scolarisés ; les 15-17 ans non scolarisés sont retirés du niveau 1 | INSEE, base communale Diplômes - Formation | recensement 2023 |
 | Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | INSEE, base Évolution et structure de la population | recensement 2023 |
-| Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés vont travailler en transports en commun (au moins une personne) + 100 pour Ajaccio, Bastia, Porto-Vecchio (liste fournie) | INSEE, bases Logement et Caractéristiques de l'emploi | recensement 2023 |
+| Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés vont travailler en transports en commun (au moins une personne) + 100 pour Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse (réseaux de bus, transport.data.gouv.fr) | INSEE, bases Logement et Caractéristiques de l'emploi | recensement 2023 |
 | Opp4 | (4G + débit ≥ 30 Mbit/s + fibre) / 3, en % ; 4G = population couverte par au moins un opérateur (cartes ARCEP × grille de population de 200 m) ; débit et fibre = locaux éligibles, offres filaires | ARCEP, couvertures théoriques et « Ma connexion internet » | T4 2024 |
 | Cho1 | −log(personnes vivant en quartier prioritaire), 0 sans quartier | INSEE, population communale en QPV 2024 | référence 1er janvier 2020, publiée en 2025 |
 | Cho2 | % de Français parmi les 18 ans et plus (proxy du droit de vote) | INSEE, tables NAT1 et POP1 | recensement 2023 |
@@ -112,7 +112,7 @@ L'indice courant a été **entièrement reconstruit** à partir de sources offic
 - **Vec2** : le terme de confort (salle de bain + chauffage) disparaît : le chauffage valait 1 pour toutes les communes et la salle de bain n'est plus publiée par commune dans le recensement 2023 (« nd »). Ce terme étant constant, le retirer ne change pas les scores normalisés.
 - **Vec3** : le recensement 2023 ne distingue plus les CDD, l'intérim, les emplois aidés et les apprentis (une seule catégorie « autre contrat ») ; ils sont regroupés au poids moyen 0,5. Simulé sur 2021, ce regroupement donne une corrélation de 0,98 avec l'ancien calcul.
 - **Opp1, Opp2, Opp3, Cho2, Vec3** : même méthode, millésime 2023 au lieu de 2020-2022. **Cho1** : population officielle des quartiers prioritaires (5 778 / 1 127 / 11 027) au lieu de 62 à 69 % de celle-ci.
-- **Opp3** : les trois villes à réseau de bus sont une liste fournie par la doctorante.
+- **Opp3** : les quatre communes à réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse) sont référencées sur transport.data.gouv.fr ; la sélection a été faite par la doctorante.
 
 **Contrôles faits :** les populations de la base sont celles du recensement 2023 ; pour Opp4, le débit 2021 du fichier ARCEP a été comparé à celui de la v1 (347 communes sur 360 à ±1 point) ; pour Vec1, le calcul est le même que dans la série temporelle (test automatique) ; chaque
 recomposition des sous-composantes redonne l'indicateur. Les corrélations v1 → v2 par indicateur vont de 0,31 (Opp4, dont la 4G n'était pas reproductible) à 1,00 (Cho1, Vec4) ; elles sont du même ordre que le bruit d'un recensement à l'autre (0,74 à 0,87 pour Opp1, Opp2, Opp3).
@@ -129,7 +129,7 @@ recensement de l'INSEE (millésimes 2016 et 2021, qui ne se recouvrent pas : enq
 |---|---|---|
 | Opp1 | niveau de diplôme moyen des 18 ans et plus non scolarisés, sur **4** niveaux (aucun diplôme ou brevet, CAP-BEP, bac, supérieur) : le millésime 2016 n'a pas le détail à 7 niveaux ; 15-17 ans non scolarisés retirés du niveau 1 | 0,91 (échelle différente) |
 | Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
-| Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia et Porto-Vecchio | 0,99 |
+| Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia, Porto-Vecchio et L'Île-Rousse | 0,99 |
 | Cho2 | % de Français parmi les **18 ans et plus**, utilisé comme **proxy du droit de vote** (il ne tient compte ni de l'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales), par la méthode de `proportion_etrangers_18plus_final.py` (population de 18-24 ans en POP1B, Français 15-24 ans × 0,7 en NAT1, étrangers 25 ans et plus en NAT1) : appliquée aux deux dates, elle retrouve le fichier actuel (calculé en 2022) à 0,01 point près pour 357 communes sur 360 | 0,89 (millésimes 2021 et 2022) |
 | Vec1 | **revenu fiscal moyen par foyer fiscal** (DGFiP, IRCOM : revenu fiscal de référence total ÷ nombre de foyers fiscaux, par commune) ; communes sous secret statistique : moyenne du département (11 en 2016, 12 en 2021) | 0,45 (concept différent de la médiane de l'appli) ; 2021 identique à la variante « revenu fiscal » |
 | Vec2 | (exp(-personnes par pièce) + part de maisons) / 2 : même définition que l'indice courant v2 (salle de bain et chauffage retirés) | 0,96 (avec la v1) |

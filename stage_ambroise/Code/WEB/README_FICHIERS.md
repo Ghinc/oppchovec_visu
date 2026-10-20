@@ -35,19 +35,19 @@ seuil appartient à la classe **inférieure** (`valeur <= seuil`). C'est ce que 
 
 **OppChoVec :**
 ```
-Classe 1 : 0.00 - 3.09
-Classe 2 : 3.09 - 4.63
-Classe 3 : 4.63 - 5.99
-Classe 4 : 5.99 - 7.71
+Classe 1 : 0.00 - 3.16
+Classe 2 : 3.16 - 4.67
+Classe 3 : 4.67 - 6.03
+Classe 4 : 6.03 - 7.71
 Classe 5 : 7.71 - 10.00
 ```
 
 **Score_Opp :**
 ```
 Classe 1 : 0.00 - 3.11
-Classe 2 : 3.11 - 5.03
-Classe 3 : 5.03 - 6.61
-Classe 4 : 6.61 - 7.86
+Classe 2 : 3.11 - 5.02
+Classe 3 : 5.02 - 6.58
+Classe 4 : 6.58 - 7.86
 Classe 5 : 7.86 - 10.00
 ```
 
@@ -83,7 +83,7 @@ Voisinage = 5 plus proches voisins (KNN k = 5), 9999 permutations, graine 42.
 |---|---|---|---|---|
 | `lisa_data.js` | `LISA_DATA` | p_k égaux | 5 % | 67 communes (18,6 %) |
 | `lisa_data_1pct.js` | `LISA_DATA_1PCT` | p_k égaux | 1 % | 34 communes (9,4 %) |
-| `lisa_data_betti.js` | `LISA_DATA_BETTI` | p_k de Betti et al. | 5 % | 89 communes (24,7 %) |
+| `lisa_data_betti.js` | `LISA_DATA_BETTI` | p_k de Betti et al. | 5 % | 91 communes (25,3 %) |
 | `lisa_data_betti_1pct.js` | `LISA_DATA_BETTI_1PCT` | p_k de Betti et al. | 1 % | 45 communes (12,5 %) |
 
 Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `statistiques` (effectif par type de cluster) et

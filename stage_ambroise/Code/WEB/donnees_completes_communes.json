@@ -8617,15 +8617,15 @@
   },
   "Île-Rousse": {
     "scores_globaux": {
-      "OppChoVec": 1.95,
-      "Opportunités": 6.47,
+      "OppChoVec": 2.83,
+      "Opportunités": 8.34,
       "Choix": 5.84,
       "Vécu": 1.81
     },
     "opportunites": {
       "Opp1_Education": 3.11,
       "Opp2_Inegalites": 0.2944,
-      "Opp3_Mobilite": 180.34,
+      "Opp3_Mobilite": 280.34,
       "Opp4_Connectivite": 91.06
     },
     "choix": {

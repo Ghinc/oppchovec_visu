@@ -76,7 +76,7 @@ const traductions = {
         descriptions: {
             Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : INSEE, recensement 2023. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
             Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles (8 catégories, 15 ans et plus). Source : INSEE, recensement 2023.",
-            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les trois villes qui ont un réseau de bus urbain. Source : INSEE, recensement 2023.",
+            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les quatre communes qui ont un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source : INSEE, recensement 2023.",
             Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024.",
             Indicateur_Cho1: "Ne pas être discriminé. −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 si aucune. Source : INSEE, population communale en QPV 2024 (référence 1er janvier 2020).",
             Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Part de Français parmi les 18 ans et plus, proxy des personnes ayant le droit de vote dans la commune. Source : INSEE, recensement 2023.",
@@ -118,7 +118,7 @@ const traductions = {
         descriptions: {
             Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: INSEE, 2023 census. Small municipalities have few people concerned: their value is less certain.",
             Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories (8 categories, aged 15 and over). Source: INSEE, 2023 census.",
-            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the three cities with an urban bus network. Source: INSEE, 2023 census.",
+            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the four municipalities with a regular urban bus network (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source: INSEE, 2023 census.",
             Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024.",
             Indicateur_Cho1: "Not being discriminated against. −log(number of people living in a priority neighbourhood), 0 if none. Source: INSEE, municipal population in priority neighbourhoods (QPV 2024, reference 1 January 2020).",
             Indicateur_Cho2: "Having the means to influence political decisions. Share of French nationals among people aged 18 and over, a proxy for people with voting rights in the municipality. Source: INSEE, 2023 census.",
@@ -171,8 +171,8 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 3.09, 4.63, 5.99, 7.71, 10],  // 5 classes - valeurs par défaut basées sur Jenks
-    opp: [0, 3.11, 5.03, 6.61, 7.86, 10],
+    oppchovec: [0, 3.16, 4.67, 6.03, 7.71, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    opp: [0, 3.11, 5.02, 6.58, 7.86, 10],
     cho: [0, 2.44, 6.37, 8.31, 9.32, 10],
     vec: [0, 2.61, 3.96, 5.24, 7.30, 10]
 };
@@ -2209,10 +2209,10 @@ const SOURCES_DONNEES = {
   Opp1: { indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
   Opp2: { indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
   Opp3: {
-    indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina (transport.data.gouv.fr)`, annee: '2023' },
+    indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr)`, annee: '2023' },
     voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
     tc: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (actifs occupés allant travailler en transports en commun)`, annee: '2023' },
-    bus: { provenance: "Réseaux urbains Muvistrada (Ajaccio, CA du Pays Ajaccien), Via Bastia (CA de Bastia) et A Citadina (Porto-Vecchio, CC du Sud Corse), référencés sur transport.data.gouv.fr (point d'accès national aux données de transport) ; sélection des trois villes faite par la doctorante", annee: 'jeux référencés en 2026 (créés en 2019, 2022 et 2023)' }
+    bus: { provenance: "Réseaux urbains Muvistrada (Ajaccio, CA du Pays Ajaccien), Via Bastia (CA de Bastia), A Citadina (Porto-Vecchio, CC du Sud Corse) et A Balanina (L'Île-Rousse, CC de l'Île-Rousse - Balagne, en service depuis mai 2022), référencés sur transport.data.gouv.fr (point d'accès national aux données de transport) ; réseaux saisonniers exclus ; sélection faite par la doctorante", annee: 'jeux référencés en 2026 (créés de 2019 à 2023)' }
   },
   Opp4: {
     indicateur: { provenance: 'ARCEP (couverture mobile et « Ma connexion internet »)', annee: 'T4 2024' },
@@ -2260,7 +2260,7 @@ const SOUS_COMPOSANTES = {
     composantes: {
       voiture: { label: 'Ménages avec au moins une voiture', unite: '%', decimales: 1 },
       tc:      { label: 'Réseau de transports en commun (+100 pts)', binaire: 100 },
-      bus:     { label: 'Réseau de bus urbain (+100 pts)', binaire: 1 }
+      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', binaire: 1 }
     },
     calcul: c => c.voiture + (c.tc > 0 ? 100 : 0) + (c.bus ? 100 : 0)
   },
