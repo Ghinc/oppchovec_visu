@@ -31,6 +31,7 @@ let echelleEpci = 'commune';
 let epciBase = { indice: {}, scores: {} };     // indice et scores 0-10 des COMMUNES : restent disponibles quand les variables de l'appli (indiceFinale, scoresParCommune) portent les EPCI
 let epciGeoVue = null;                         // contours des EPCI au format attendu par les cartes de l'appli (properties.nom = nom de l'EPCI)
 let epciResultats = { prorata: {}, simple: {} };
+let epciSurcharges = {};          // simulation : { siren: { Indicateur_Opp1: valeur agrégée modifiée à la main } } ; remise à zéro quand l'échelle change
 
 // ---------- Calculs purs ----------
 
@@ -68,6 +69,7 @@ function epciPoids(e, k, prorata) {
 // Scores des EPCI (0-10) avec la chaîne de calcul de l'appli : { siren: { agregats, oppchovec, opp, cho, vec } }
 function epciCalculer(prorata) {
     const agg = epciAgreger(indicateursCommune, epciDonnees.epci, prorata);
+    for (const [siren, o] of Object.entries(epciSurcharges)) if (agg[siren]) Object.assign(agg[siren], o);       // valeurs modifiées à la main (simulation)
     const ref = referencePk(modeCalculPk);
     const scores01 = calculerScoresParCommune(normaliserDonnees(agg, bornesRef.min, bornesRef.max));
     const dims = scoresDimension0a10(scores01);
@@ -158,7 +160,7 @@ function epciCommuneHtml(e, nom) {
     }).join('');
     const poidsPop = epciPoids(e, 'Cho2', true)[nom];
     return `<div class="epci-commune"><h4>Commune : ${epciEch(nom)}</h4>` +
-        `<div class="epci-petit">${epciFmt(e.communes[nom].pop.Cho2, 0)} habitants (2022), soit <strong>${pct(poidsPop)}</strong> de la population de ${epciEch(e.nom)} : en pro rata elle pèse ce poids dans chaque moyenne, contre ${pct(1 / e.nb_communes)} en moyenne simple (1 commune sur ${e.nb_communes}).</div>` +
+        `<div class="epci-petit">${epciFmt(e.communes[nom].pop.Cho2, 0)} habitants (${epciDonnees.millesimes.Cho2}), soit <strong>${pct(poidsPop)}</strong> de la population de ${epciEch(e.nom)} : en pro rata elle pèse ce poids dans chaque moyenne, contre ${pct(1 / e.nb_communes)} en moyenne simple (1 commune sur ${e.nb_communes}).</div>` +
         `<table class="epci-table"><tr><th>Scores (0-10)</th><th>Commune</th><th>EPCI pro rata</th><th>EPCI simple</th></tr>${scores}</table>` +
         `<table class="epci-table"><tr><th>Indicateurs</th><th>Commune</th><th>EPCI pro rata</th><th>EPCI simple</th><th>Poids pro rata</th><th>Poids simple</th></tr>${lignes}</table>` +
         `<div class="epci-petit">▲ ▼ : la commune est au-dessus ou en dessous de la valeur de l'EPCI. Le poids pro rata est la part de la population de l'EPCI, au millésime de l'indicateur. Les valeurs de la commune sont celles de l'appli (curseurs compris).</div></div>`;
@@ -166,18 +168,30 @@ function epciCommuneHtml(e, nom) {
 
 // HTML de la fiche d'un EPCI (scores et indicateurs agrégés selon les deux méthodes, communes membres) ; commune : détail d'une commune de l'EPCI, ou null
 function epciFicheHtml(e, commune) {
-    const p = epciResultats.prorata[e.siren], s = epciResultats.simple[e.siren];
-    const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => `<tr><td>${lib}</td><td>${epciFmt(p[k])}</td><td>${epciFmt(s[k])}</td><td>${(p[k] - s[k] >= 0 ? '+' : '') + epciFmt(p[k] - s[k])}</td></tr>`).join('');
-    const brut = EPCI_INDICATEURS.map(k => {
-        const a = p.agregats['Indicateur_' + k], b = s.agregats['Indicateur_' + k];
-        const dec = (k === 'Opp3' || k === 'Vec1' || k === 'Vec4') ? 0 : 2;
-        return `<tr><td>${k}</td><td>${epciFmt(a, dec)}</td><td>${epciFmt(b, dec)}</td><td class="epci-petit">pop. ${epciDonnees.millesimes[k]}${epciDonnees.millesime_approche[k] ? ' *' : ''}</td></tr>`;
+    // une seule méthode : celle choisie en haut (pondérée par les habitants ou simple), la même que sur les cartes
+    const prorata = echelleEpci === 'epci-pop' ? true : echelleEpci === 'epci-commune' ? false : epciProrata();
+    const r = epciResultats[prorata ? 'prorata' : 'simple'][e.siren];
+    const methode = prorata ? 'moyenne pondérée par les habitants' : 'moyenne simple (1 commune = 1)';
+    const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => `<tr><td>${lib}</td><td><strong>${epciFmt(r[k])}</strong></td></tr>`).join('');
+    const indicateurs = EPCI_INDICATEURS.map(k => {
+        const ind = 'Indicateur_' + k, meta = META_INDICATEURS[ind];
+        const t = typeof TITRES_INDICATEURS !== 'undefined' && TITRES_INDICATEURS[ind] ? ' — ' + TITRES_INDICATEURS[ind][0] : '';
+        const etoile = epciDonnees.millesime_approche[k] ? ' *' : '';
+        return `<tr><td>${k}${t}</td><td><strong>${formaterValeur(meta, r.agregats[ind])}</strong></td>${prorata ? `<td class="epci-petit">${epciDonnees.millesimes[k]}${etoile}</td>` : ''}</tr>`;
     }).join('');
+    const approches = EPCI_INDICATEURS.filter(k => epciDonnees.millesime_approche[k]).map(k => `${k} : ${epciDonnees.millesime_approche[k]}`).join(' ; ');
+    const mill = epciDonnees.millesimes.Cho2;
     const communes = Object.entries(e.communes).sort((a, b) => b[1].pop.Cho2 - a[1].pop.Cho2).map(([nom, c]) => `<a href="#" class="epci-lien-commune" data-commune="${epciEch(nom)}">${epciEch(nom)}</a> (${epciFmt(c.pop.Cho2, 0)})`).join(', ');
-    return (commune && e.communes[commune] ? epciCommuneHtml(e, commune) : '') + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (2023)</div>` +
-        `<table class="epci-table"><tr><th>Scores (0-10)</th><th>Pro rata</th><th>Simple</th><th>Écart</th></tr>${scores}<tr><th>Indicateurs agrégés</th><th>Pro rata</th><th>Simple</th><th>Pondération</th></tr>${brut}</table>` +
-        `<div class="epci-petit">* population la plus récente publiée (2023) : millésime de la source non daté ou plus récent que les populations disponibles.</div>` +
-        `<div class="epci-petit"><strong>Communes</strong> (habitants 2022) : ${communes}</div>`;
+    const explication = prorata
+        ? "Chaque indicateur de l'EPCI est la moyenne de ses communes <strong>pondérée par leur nombre d'habitants</strong> : une grande commune pèse plus."
+        : "Chaque indicateur de l'EPCI est la <strong>moyenne simple</strong> de ses communes : chaque commune compte pour 1, quelle que soit sa taille.";
+    const simulation = epciSurcharges[e.siren] ? '<div class="epci-simulation">Simulation : des indicateurs de cet EPCI ont été modifiés à la main ; les scores ci-dessous en tiennent compte. « Réinitialiser » rétablit les valeurs calculées.</div>' : '';
+    return (commune && e.communes[commune] ? epciCommuneHtml(e, commune) : '') + simulation + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (${mill})</div>` +
+        `<div class="epci-petit">${explication}</div>` +
+        `<table class="epci-table"><tr><th>Scores de l'EPCI (sur 10)</th><th>${methode}</th></tr>${scores}</table>` +
+        `<table class="epci-table"><tr><th>Indicateurs de l'EPCI</th><th>${methode}</th>${prorata ? '<th>Année de la population pour la pondération</th>' : ''}</tr>${indicateurs}</table>` +
+        (prorata && approches ? `<div class="epci-petit">* source plus récente que les populations publiées : la population ${mill} est utilisée pour pondérer (${epciEch(approches)}).</div>` : '') +
+        `<div class="epci-petit"><strong>Communes</strong> (habitants ${mill}) : ${communes}</div>`;
 }
 
 function epciFiche() {
@@ -315,7 +329,85 @@ function epciAfficherDansPanneau(nom) {         // panneau « sélection » de l
     for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
     surlignerCommune(nom, 'red');
     const e = epciDonnees.epci.find(x => x.nom === nom);
-    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) + epciDetailCalculHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+}
+
+
+// ---------- Détail du calcul d'un EPCI (même présentation que pour une commune) ----------
+
+// Un EPCI : pour chaque indicateur, un curseur sur la valeur agrégée (simulation) et le détail de la moyenne des communes (« Voir le calcul »), puis le calcul de l'indice
+function epciDetailCalculHtml(e) {
+    if (typeof indicateursCommune === 'undefined' || !epciResultats.prorata[e.siren]) return '';
+    const prorata = echelleEpci === 'epci-pop';
+    const agg = epciResultats[prorata ? 'prorata' : 'simple'][e.siren].agregats;                       // valeurs courantes (simulation comprise)
+    const origine = epciAgreger(indicateursCommune, epciDonnees.epci, prorata)[e.siren];                // valeurs calculées, sans simulation
+    const surcharge = epciSurcharges[e.siren] || {};
+    const lignesIndicateurs = EPCI_INDICATEURS.map(k => {
+        const ind = 'Indicateur_' + k, meta = META_INDICATEURS[ind], valeur = agg[ind], calculee = origine[ind];
+        const b = { min: bornesRef.min[ind], max: bornesRef.max[ind] };
+        const poids = epciPoids(e, k, prorata);
+        const communes = Object.entries(e.communes)
+            .map(([nom, c]) => ({ nom, hab: c.pop[k], w: poids[nom], v: Number(indicateursCommune[nom] && indicateursCommune[nom][ind]) }))
+            .filter(l => isFinite(l.v)).sort((a, b2) => b2.w - a.w);
+        const rows = communes.map(l => `<tr><td>${epciEch(l.nom)}</td><td>${prorata ? epciFmt(l.hab, 0) + ' hab.' : ''}</td><td>${epciFmt(100 * l.w, 1)} %</td><td>${formaterValeur(meta, l.v)}</td></tr>`).join('');
+        const formule = prorata
+            ? `Moyenne des valeurs des communes pondérée par leur population de ${epciDonnees.millesimes[k]} : somme de (population × valeur) ÷ somme des populations.`
+            : 'Moyenne simple des valeurs des communes : chaque commune compte pour 1 (somme des valeurs ÷ nombre de communes).';
+        const approx = ['Opp2', 'Opp3', 'Vec1', 'Cho1'].includes(k) ? '<p class="calcul-note">Moyenne de valeurs communales : approximation pour cet indicateur (indice de Theil, somme avec indicatrices, revenu moyen par foyer ou logarithme), voir « Précaution » dans la méthode.</p>' : '';
+        const modifiee = ind in surcharge ? `<p class="calcul-note">Valeur modifiée à la main (simulation) : ${formaterValeur(meta, valeur)} remplace le résultat calculé ci-dessus.</p>` : '';
+        const normCalc = b.max === b.min ? 0 : (calculee - b.min) / (b.max - b.min);
+        const titre = typeof titreIndicateurHtml === 'function' ? titreIndicateurHtml(ind) : '';
+        return `
+      <li class="indicateur-row">
+        <div class="indicateur-row-header">
+          <strong>${ind.replace('_', ' ')}</strong>
+          ${titre}
+          <span id="${ind}_val">${libelleSlider(ind, valeur)}</span>
+        </div>
+        <div class="slider-wrap">
+          <span class="slider-origine" style="--p:${pctDepuisValeur(ind, calculee)}" title="Valeur calculée"></span>
+          <input type="range" id="${ind}" min="0" max="100" step="any" value="${pctDepuisValeur(ind, valeur)}" data-brut="${valeur}" data-origine="${calculee}" oninput="majLibelleSlider('${ind}')" />
+        </div>
+        <div class="slider-echelle">${libelleEchelle(ind)}</div>
+        <details class="calcul-detail">
+          <summary>Voir le calcul</summary>
+          <p>${formule}</p>
+          <table class="calcul-table"><thead><tr><th>Commune</th><th>${prorata ? 'Population' : ''}</th><th>Poids</th><th>Valeur</th></tr></thead><tbody>${rows}</tbody></table>
+          <p><strong>Valeur de l'indicateur pour l'EPCI : ${formaterValeur(meta, calculee)}</strong></p>
+          ${approx}
+          <p>Normalisation sur l'échelle corse : (valeur − minimum) ÷ (maximum − minimum) = (${formaterValeur(meta, calculee)} − ${formaterValeur(meta, b.min)}) ÷ (${formaterValeur(meta, b.max)} − ${formaterValeur(meta, b.min)}) = <strong>${epciFmt(normCalc, 3)}</strong>.</p>
+          ${modifiee}
+        </details>
+      </li>`;
+    }).join('');
+    const indice = typeof htmlDetailIndiceDepuis === 'function'
+        ? htmlDetailIndiceDepuis(agg, "Valeurs de l'EPCI (agrégées à partir de celles de ses communes, ou modifiées à la main) ; mêmes bornes et mêmes poids que pour les communes.") : '';
+    return `<h4 style="margin-top:14px;">Indicateurs de l'EPCI :</h4>
+      <p class="sliders-legende">0 % = valeur la plus basse observée en Corse, 100 % = la plus haute · ▾ = valeur calculée</p>
+      <ul>${lignesIndicateurs}</ul>
+      <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+        <button onclick="epciRecalculer('${e.siren}')">🔁 Recalculer Indice</button>
+        <button onclick="epciReinitialiser('${e.siren}')">🔄 Réinitialiser</button>
+      </div>${indice}`;
+}
+
+// Simulation : les curseurs de l'EPCI deviennent ses valeurs agrégées ; seuls les scores de cet EPCI changent (bornes, p_k et classes restent ceux des communes)
+function epciRecalculer(siren) {
+    const surcharge = {};
+    for (const k of EPCI_INDICATEURS) {
+        const ind = 'Indicateur_' + k, input = document.getElementById(ind);
+        if (!input) continue;
+        const v = valeurBruteDepuisSlider(ind, input), calculee = Number(input.dataset.origine);
+        if (Math.abs(v - calculee) > 1e-6 * Math.max(1, Math.abs(calculee))) surcharge[ind] = v;
+    }
+    if (Object.keys(surcharge).length) epciSurcharges[siren] = surcharge; else delete epciSurcharges[siren];
+    recalculerCarteOppChoVec();
+    if (typeof alert === 'function') alert('Indice recalculé avec succès');
+}
+
+function epciReinitialiser(siren) {
+    delete epciSurcharges[siren];
+    recalculerCarteOppChoVec();
 }
 
 const EPCI_ONGLETS_NON_DISPONIBLES = {       // analyses qui reposent sur des données communales (l'Évolution a sa version EPCI : evolution.js)
@@ -336,19 +428,21 @@ function epciInstallerBandeaux() {
     }
 }
 
+// Les deux cases du haut (EPCI pro rata des habitants / EPCI pro rata des communes) ; aucune cochée = communes
 function epciMajControle() {
-    const case_ = document.getElementById('echelle-epci-case');
-    if (!case_) return;
-    case_.checked = echelleEstEPCI();
-    document.getElementById('echelle-epci-modes').hidden = !echelleEstEPCI();
-    for (const r of document.querySelectorAll('input[name="echelle-epci-mode"]')) r.checked = r.value === (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune');
+    const pop = document.getElementById('echelle-epci-pop'), com = document.getElementById('echelle-epci-commune');
+    if (!pop || !com) return;
+    pop.checked = echelleEpci === 'epci-pop';
+    com.checked = echelleEpci === 'epci-commune';
     document.body.classList.toggle('mode-echelle-epci', echelleEstEPCI());
+    if (typeof majLibellesEchelle === 'function') majLibellesEchelle();
     const etat = document.getElementById('echelle-epci-etat');
-    if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'EPCI · pro rata du nombre d\'habitants' : echelleEpci === 'epci-commune' ? 'EPCI · moyenne simple (1 commune = 1)' : 'communes';
+    if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'moyennes pondérées par la population' : echelleEpci === 'epci-commune' ? 'moyennes simples (1 commune = 1)' : 'communes';
 }
 
 // Change l'échelle d'analyse de toute l'appli ('commune' | 'epci-pop' | 'epci-commune') ; renvoie false si elle n'a pas pu être changée
 async function changerEchelle(mode) {
+    epciSurcharges = {};
     if (mode !== 'commune') {
         const pret = typeof bornesRef !== 'undefined' && bornesRef;
         if (!pret || !(await epciChargerDonnees())) { epciMajControle(); return false; }
@@ -370,16 +464,11 @@ async function changerEchelle(mode) {
 if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
     document.addEventListener('DOMContentLoaded', () => {
         epciInstallerBandeaux();
-        const caseEpci = document.getElementById('echelle-epci-case');
-        if (caseEpci) {
-            caseEpci.addEventListener('change', () => changerEchelle(caseEpci.checked ? (document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune') : 'commune'));
-            document.querySelectorAll('input[name="echelle-epci-mode"]').forEach(r => r.addEventListener('change', () => {
-                if (!r.checked) return;
-                document.getElementById('epci-prorata').checked = r.value === 'epci-pop';
-                if (echelleEstEPCI()) changerEchelle(r.value); else epciMajControle();
-                if (epciInitialise) epciRedessiner();
-            }));
-            document.getElementById('epci-prorata').addEventListener('change', () => {       // même méthode que l'onglet EPCI : la case de l'onglet et les boutons du haut restent synchronisés
+        const casePop = document.getElementById('echelle-epci-pop'), caseCommune = document.getElementById('echelle-epci-commune');
+        if (casePop && caseCommune) {
+            casePop.addEventListener('change', () => changerEchelle(casePop.checked ? 'epci-pop' : 'commune'));
+            caseCommune.addEventListener('change', () => changerEchelle(caseCommune.checked ? 'epci-commune' : 'commune'));
+            document.getElementById('epci-prorata').addEventListener('change', () => {       // même méthode que l'onglet EPCI : la case de l'onglet et les cases du haut restent synchronisées
                 if (echelleEstEPCI()) changerEchelle(document.getElementById('epci-prorata').checked ? 'epci-pop' : 'epci-commune'); else epciMajControle();
             });
         }

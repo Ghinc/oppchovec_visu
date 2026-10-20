@@ -76,14 +76,14 @@ const traductions = {
         descriptions: {
             Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : INSEE, recensement 2023. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
             Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles (8 catégories, 15 ans et plus). Source : INSEE, recensement 2023.",
-            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les quatre communes qui ont un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source : INSEE, recensement 2023.",
-            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024.",
+            Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les quatre communes qui ont un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse ; réseaux référencés sur transport.data.gouv.fr). Source : INSEE, recensement 2023.",
+            Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024 (4G : couvertures théoriques des quatre opérateurs croisées avec la grille de population Filosofi de l'INSEE, 2021 ; débit et fibre : « Ma connexion internet »).",
             Indicateur_Cho1: "Ne pas être discriminé. −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 si aucune. Source : INSEE, population communale en QPV 2024 (référence 1er janvier 2020).",
             Indicateur_Cho2: "Avoir les moyens d'influencer les décisions politiques. Part de Français parmi les 18 ans et plus, proxy des personnes ayant le droit de vote dans la commune. Source : INSEE, recensement 2023.",
             Indicateur_Vec1: "Avoir un revenu décent. Revenu fiscal moyen par foyer fiscal de la commune (revenu fiscal de référence total divisé par le nombre de foyers fiscaux). Source : DGFiP, revenus 2024 ; pour les communes sous secret statistique, moyenne du département.",
             Indicateur_Vec2: "Avoir un logement décent. Moyenne de la densité d'occupation (personnes par pièce) et de la part de maisons dans les résidences principales. Source : INSEE, recensement 2023.",
             Indicateur_Vec3: "Stabilité de l'emploi. Statuts d'emploi pondérés : chômeurs 0, autres contrats (CDD, intérim, emplois aidés, apprentis) 0,5, CDI, fonctionnaires et non-salariés 1. Source : INSEE, recensement 2023.",
-            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante (base permanente des équipements 2024) accessibles en moins de 20 minutes en voiture."
+            Indicateur_Vec4: "Être proche des services. Nombre de services de vie courante (base permanente des équipements 2024) accessibles en moins de 20 minutes en voiture. Source : INSEE, base permanente des équipements 2024 ; temps de trajet calculés avec OSRM sur OpenStreetMap (2025)."
         }
     },
     en: {
@@ -118,14 +118,14 @@ const traductions = {
         descriptions: {
             Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: INSEE, 2023 census. Small municipalities have few people concerned: their value is less certain.",
             Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories (8 categories, aged 15 and over). Source: INSEE, 2023 census.",
-            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the four municipalities with a regular urban bus network (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source: INSEE, 2023 census.",
-            Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024.",
+            Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the four municipalities with a regular urban bus network (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse; networks listed on transport.data.gouv.fr). Source: INSEE, 2023 census.",
+            Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024 (4G: theoretical coverage of the four operators combined with the INSEE Filosofi population grid, 2021; speed and fibre: \"Ma connexion internet\").",
             Indicateur_Cho1: "Not being discriminated against. −log(number of people living in a priority neighbourhood), 0 if none. Source: INSEE, municipal population in priority neighbourhoods (QPV 2024, reference 1 January 2020).",
             Indicateur_Cho2: "Having the means to influence political decisions. Share of French nationals among people aged 18 and over, a proxy for people with voting rights in the municipality. Source: INSEE, 2023 census.",
             Indicateur_Vec1: "Having a decent income. Mean tax income per tax household of the municipality (total reference tax income divided by the number of tax households). Source: DGFiP, 2024 incomes; municipalities under statistical secrecy take the département average.",
             Indicateur_Vec2: "Having decent housing. Average of occupancy density (people per room) and the share of houses among main residences. Source: INSEE, 2023 census.",
             Indicateur_Vec3: "Job stability. Weighted employment statuses: unemployed 0, other contracts (fixed-term, temp, subsidised, apprentices) 0.5, permanent, civil servants and self-employed 1. Source: INSEE, 2023 census.",
-            Indicateur_Vec4: "Being close to services. Number of everyday services (permanent facilities database 2024) accessible within 20 minutes by car."
+            Indicateur_Vec4: "Being close to services. Number of everyday services (permanent facilities database 2024) accessible within 20 minutes by car. Source: INSEE, permanent facilities database 2024; travel times computed with OSRM on OpenStreetMap (2025)."
         }
     }
 };
@@ -506,7 +506,7 @@ function mettreAJourLegendes() {
     });
 
     document.querySelectorAll('.legende-limites').forEach(el => {
-        el.textContent = traductions[lang].limitesCommunes;
+        el.textContent = libelleLimites(lang);
     });
     document.querySelectorAll('.legende-routes').forEach(el => {
         el.textContent = traductions[lang].routesPrincipales;
@@ -1259,6 +1259,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
             }
             communeLayers[type][name] = layer;
             layer.bindPopup(`<strong>${name}</strong><br>${titre}: ${val !== undefined ? val.toFixed(2) : 'N/A'}/10`);
+            layer.on('click', () => selectionnerCommuneDepuisCarte(name));       // le clic sélectionne aussi la commune dans la liste et affiche sa fiche
         }
     }).addTo(cartes[type]);
 
@@ -1311,7 +1312,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 <svg width="30" height="2" style="margin-right: 8px;">
                     <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
                 </svg>
-                <span class="legende-limites" style="font-size: 11px;">${(typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'Limites des EPCI' : traductions[lang].limitesCommunes}</span>
+                <span class="legende-limites" style="font-size: 11px;">${libelleLimites(lang)}</span>
             </div>
         `;
 
@@ -2202,58 +2203,6 @@ const META_INDICATEURS = {
   Indicateur_Vec4: { unite: 'services', decimales: 0 }
 };
 
-// Provenance et année de chaque donnée utilisée (infobulles ⓘ du panneau commune).
-// Même contenu que `sources` et `millesimes` de Données/indice_v2/sources_indice_v2.json ; null = information manquante (signalée dans l'infobulle).
-const RP23 = 'INSEE, recensement de la population 2023 (collectes de 2021 à 2025, résultats publiés le 25/06/2026)';
-const SOURCES_DONNEES = {
-  Opp1: Object.assign({ indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
-    Object.fromEntries([1, 2, 3, 4, 5, 6, 7].map(k => ['n' + k, { provenance: `${RP23}, base communale Diplômes - Formation (personnes de 15 ans et plus non scolarisées, moins les 15-17 ans non scolarisés ; niveau ${k})`, annee: '2023' }]))),
-  Opp2: Object.assign({ indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
-    Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, { provenance: `${RP23}, base communale Évolution et structure de la population (population de 15 ans et plus par catégorie socioprofessionnelle)`, annee: '2023' }]))),
-  Opp3: {
-    indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr)`, annee: '2023' },
-    voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
-    tc: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (actifs occupés allant travailler en transports en commun)`, annee: '2023' },
-    bus: { provenance: "Réseaux urbains Muvistrada (Ajaccio, CA du Pays Ajaccien), Via Bastia (CA de Bastia), A Citadina (Porto-Vecchio, CC du Sud Corse) et A Balanina (L'Île-Rousse, CC de l'Île-Rousse - Balagne, en service depuis mai 2022), référencés sur transport.data.gouv.fr (point d'accès national aux données de transport) ; réseaux saisonniers exclus ; sélection faite par la doctorante", annee: 'jeux référencés en 2026 (créés de 2019 à 2023)' }
-  },
-  Opp4: {
-    indicateur: { provenance: 'ARCEP (couverture mobile et « Ma connexion internet »)', annee: 'T4 2024' },
-    g4: { provenance: "ARCEP, couvertures théoriques 4G des 4 opérateurs, croisées avec la grille de population INSEE Filosofi au carreau de 200 m (revenus 2021)", annee: 'T4 2024 (grille : 2021)' },
-    debit: { provenance: "ARCEP, « Ma connexion internet », offres filaires (commune_debit_filaire)", annee: 'T4 2024' },
-    fibre: { provenance: "ARCEP, « Ma connexion internet », technologies par commune (commune_techno)", annee: 'T4 2024' }
-  },
-  Cho1: {
-    indicateur: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' },
-    personnes_qpv: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' }
-  },
-  Cho2: { indicateur: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)`, annee: '2023' },
-    francais: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge) ; part de Français parmi les 18 ans et plus, estimée à partir de ces tables`, annee: '2023' } },
-  Vec1: (() => { const f = { provenance: 'DGFiP, impôt sur le revenu par commune (IRCOM, revenus 2024) : revenu fiscal de référence total / nombre de foyers fiscaux ; communes sous secret statistique : moyenne du département', annee: 'revenus 2024' }; return { indicateur: f, revenu: f }; })(),
-  Vec2: {
-    indicateur: { provenance: `${RP23}, base communale Logement`, annee: '2023' },
-    pers_piece: { provenance: `${RP23}, base communale Logement (résidences principales, pièces)`, annee: '2023' },
-    maisons: { provenance: `${RP23}, base communale Logement (maisons)`, annee: '2023' }
-  },
-  Vec3: {
-    indicateur: { provenance: `${RP23}, bases communales Caractéristiques de l'emploi et Emploi - population active`, annee: '2023' },
-    stable: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDI, fonctionnaires, non-salariés)`, annee: '2023' },
-    autres: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDD, intérim, aidés, apprentis)`, annee: '2023' },
-    chomeur: { provenance: `${RP23}, base communale Emploi - population active (chômeurs)`, annee: '2023' }
-  },
-  Vec4: (() => { const f = { provenance: "INSEE, base permanente des équipements 2024 ; temps de trajet OSRM sur OpenStreetMap (Geofabrik, 06/11/2025)", annee: '2024' }; return { indicateur: f, services: f }; })()
-};
-
-function badgeSource(indicateur, comp) {
-  const src = SOURCES_DONNEES[indicateur.replace('Indicateur_', '')];
-  const s = src?.[comp || 'indicateur'] || (comp ? src?.indicateur : undefined);
-  const echapper = t => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  const texte = s
-    ? `Provenance : ${s.provenance}. Année : ${s.annee || 'non renseignée (à documenter)'}.`
-    : 'Provenance et année non renseignées (à documenter).';
-  const manque = !s || !s.annee;
-  return `<span class="src-badge${manque ? ' src-manquante' : ''}" tabindex="0" role="note" aria-label="${echapper(texte)}" data-src="${echapper(texte)}">ⓘ</span>`;
-}
-
 // Indicateurs décomposés : un slider par sous-composante, l'indicateur est recalculé par sa formule d'origine
 // (mêmes formules que Code/Python/exporter_sous_composantes.py, qui vérifie qu'elles redonnent le JSON).
 // binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
@@ -2262,33 +2211,33 @@ const SOUS_COMPOSANTES = {
   Indicateur_Opp3: {
     cle: 'Opp3',
     composantes: {
-      voiture: { label: 'Ménages avec au moins une voiture', aide: 'Part des ménages de la commune qui possèdent au moins une voiture.', unite: '%', decimales: 1 },
-      tc:      { label: 'Réseau de transports en commun (+100 pts)', aide: 'Coché si au moins un actif occupé de la commune va travailler en transports en commun.', binaire: 100 },
-      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', aide: 'Coché si la commune a un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L\'Île-Rousse).', binaire: 1 }
+      voiture: { label: 'Ménages avec au moins une voiture', unite: '%', decimales: 1 },
+      tc:      { label: 'Réseau de transports en commun (+100 pts)', binaire: 100 },
+      bus:     { label: 'Réseau de bus urbain régulier (+100 pts)', binaire: 1 }
     },
     calcul: c => c.voiture + (c.tc > 0 ? 100 : 0) + (c.bus ? 100 : 0)
   },
   Indicateur_Opp4: {
     cle: 'Opp4',
     composantes: {
-      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', aide: 'Part des habitants couverts en 4G par au moins un des quatre opérateurs.', unite: '%', decimales: 0 },
-      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', aide: 'Part des locaux (logements et entreprises) qui peuvent avoir au moins 30 Mbit/s sur un réseau filaire.', unite: '%', decimales: 0 },
-      fibre: { label: 'Locaux raccordables à la fibre', aide: 'Part des locaux raccordables à la fibre optique jusqu\'au domicile.', unite: '%', decimales: 0 }
+      g4:    { label: 'Population couverte en 4G (au moins un opérateur)', unite: '%', decimales: 0 },
+      debit: { label: 'Locaux éligibles à 30 Mbit/s ou plus', unite: '%', decimales: 0 },
+      fibre: { label: 'Locaux raccordables à la fibre', unite: '%', decimales: 0 }
     },
     calcul: c => (c.g4 + c.debit + c.fibre) / 3
   },
   Indicateur_Cho1: {
     cle: 'Cho1',
     composantes: {
-      personnes_qpv: { label: 'Personnes en quartier prioritaire', aide: 'Nombre d\'habitants vivant dans un quartier prioritaire de la politique de la ville (0 s\'il n\'y en a pas). L\'indicateur est moins le logarithme de ce nombre : plus il est grand, plus l\'indicateur baisse.', unite: 'pers.', decimales: 0, entier: true, inverse: true }
+      personnes_qpv: { label: 'Personnes en quartier prioritaire', unite: 'pers.', decimales: 0, entier: true, inverse: true }
     },
     calcul: c => c.personnes_qpv > 0 ? -Math.log(c.personnes_qpv) : 0
   },
   Indicateur_Vec2: {
     cle: 'Vec2',
     composantes: {
-      pers_piece: { label: 'Personnes par pièce', aide: 'Nombre moyen de personnes par pièce dans les résidences principales : plus il est élevé, plus les logements sont suroccupés.', unite: '', decimales: 2, inverse: true },
-      maisons:    { label: 'Maisons individuelles', aide: 'Part des résidences principales qui sont des maisons individuelles.', unite: '%', decimales: 1, facteur: 100 }
+      pers_piece: { label: 'Personnes par pièce', unite: '', decimales: 2, inverse: true },
+      maisons:    { label: 'Maisons individuelles', unite: '%', decimales: 1, facteur: 100 }
     },
     calcul: c => (Math.exp(-c.pers_piece) + c.maisons) / 2
   },
@@ -2296,9 +2245,9 @@ const SOUS_COMPOSANTES = {
     cle: 'Vec3',
     parts: true,  // parts d'actifs qui somment à 100 % : bouger l'une redistribue les autres
     composantes: {
-      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', aide: 'Part des actifs en emploi stable : CDI, fonctionnaires, indépendants et employeurs.', unite: '%', decimales: 1 },
-      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', aide: 'Part des actifs en contrat précaire ou aidé.', unite: '%', decimales: 1 },
-      chomeur: { label: 'Chômeurs (poids 0)', aide: 'Part des actifs au chômage.', unite: '%', decimales: 1 }
+      stable:  { label: 'CDI, fonctionnaires et non-salariés (poids 1)', unite: '%', decimales: 1 },
+      autres:  { label: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', unite: '%', decimales: 1 },
+      chomeur: { label: 'Chômeurs (poids 0)', unite: '%', decimales: 1 }
     },
     calcul: c => {
       const total = c.stable + c.autres + c.chomeur;
@@ -2419,65 +2368,32 @@ async function chargerDetailsCalcul() {
   }
 }
 
-// Variables de chaque indicateur : libellé et petit texte explicatif (affichés dans « Voir le calcul », avec l'infobulle de provenance et d'année)
+// Libellé de chaque variable affichée dans « Voir le calcul » (la description de l'indicateur, dans l'infobulle verte, dit déjà ce qu'il mesure et d'où il vient)
 const VARIABLES_CALCUL = {
   Opp1: {
-    n1: ["Niveau 1 : aucun diplôme ou certificat d'études", "Personnes de 18 ans et plus non scolarisées dont le diplôme le plus élevé est le certificat d'études ou aucun diplôme (valeur 1)."],
-    n2: ['Niveau 2 : brevet des collèges', 'Personnes dont le diplôme le plus élevé est le brevet des collèges (valeur 2).'],
-    n3: ['Niveau 3 : CAP-BEP', 'Personnes dont le diplôme le plus élevé est un CAP ou un BEP (valeur 3).'],
-    n4: ['Niveau 4 : baccalauréat', 'Personnes dont le diplôme le plus élevé est le baccalauréat (valeur 4).'],
-    n5: ['Niveau 5 : bac + 2', 'Personnes dont le diplôme le plus élevé est de niveau bac + 2 (valeur 5).'],
-    n6: ['Niveau 6 : bac + 3 ou 4', 'Personnes dont le diplôme le plus élevé est de niveau bac + 3 ou bac + 4 (valeur 6).'],
-    n7: ['Niveau 7 : bac + 5 ou plus', 'Personnes dont le diplôme le plus élevé est de niveau bac + 5 ou plus (valeur 7).']
+    n1: "Niveau 1 : aucun diplôme ou certificat d'études", n2: 'Niveau 2 : brevet des collèges', n3: 'Niveau 3 : CAP-BEP', n4: 'Niveau 4 : baccalauréat',
+    n5: 'Niveau 5 : bac + 2', n6: 'Niveau 6 : bac + 3 ou 4', n7: 'Niveau 7 : bac + 5 ou plus'
   },
   Opp2: Object.fromEntries([
     'Agriculteurs exploitants', "Artisans, commerçants, chefs d'entreprise", 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
     'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'
-  ].map((n, i) => ['cs' + (i + 1), [n, 'Personnes de 15 ans et plus dans cette catégorie socioprofessionnelle.']])),
-  Opp3: {
-    voiture: ['Ménages avec au moins une voiture', 'Part des ménages de la commune qui possèdent au moins une voiture.'],
-    tc: ['Actifs occupés allant travailler en transports en commun', 'Au moins un actif occupé de la commune va travailler en transports en commun : + 100 points.'],
-    bus: ['Réseau de bus urbain régulier', "La commune a un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse) : + 100 points."]
-  },
-  Opp4: {
-    g4: ['Population couverte en 4G (au moins un opérateur)', 'Part des habitants couverts en 4G par au moins un des quatre opérateurs.'],
-    debit: ['Locaux éligibles à 30 Mbit/s ou plus', 'Part des locaux (logements et entreprises) qui peuvent avoir au moins 30 Mbit/s sur un réseau filaire.'],
-    fibre: ['Locaux raccordables à la fibre', "Part des locaux raccordables à la fibre optique jusqu'au domicile."]
-  },
-  Cho1: { personnes_qpv: ['Personnes en quartier prioritaire', "Habitants vivant dans un quartier prioritaire de la politique de la ville (0 s'il n'y en a pas). L'indicateur est moins le logarithme de ce nombre : plus il est grand, plus l'indicateur baisse."] },
-  Cho2: {
-    population: ['Population', 'Nombre d\'habitants de la commune (recensement).'],
-    pop_18_24: ['Personnes de 18 à 24 ans', 'Habitants de 18 à 24 ans.'],
-    francais_15_24: ['Français de 15 à 24 ans', 'Habitants de nationalité française de 15 à 24 ans (les tables de nationalité ne séparent pas les 18-24 ans).'],
-    etrangers_25_plus: ['Étrangers de 25 ans et plus', 'Habitants étrangers de 25 ans et plus.'],
-    etrangers_18_plus: ['Étrangers de 18 ans et plus (estimés)', 'Estimation du nombre d\'étrangers de 18 ans et plus, proxy des personnes sans droit de vote : (18-24 ans − 0,7 × Français de 15-24 ans) + étrangers de 25 ans et plus.']
-  },
-  Vec1: {
-    revenu_fiscal: ['Revenu fiscal de référence total', 'Somme des revenus fiscaux de référence des foyers fiscaux de la commune.'],
-    foyers: ['Foyers fiscaux', 'Nombre de foyers fiscaux de la commune.'],
-    departement: ['Moyenne du département', 'Commune sous secret statistique : la valeur du département la remplace.']
-  },
-  Vec2: {
-    pers_piece: ['Personnes par pièce', 'Nombre moyen de personnes par pièce dans les résidences principales : plus il est élevé, plus les logements sont suroccupés.'],
-    maisons: ['Part de maisons', 'Part des résidences principales qui sont des maisons individuelles.'],
-    residences_principales: ['Résidences principales', 'Nombre de résidences principales de la commune.']
-  },
-  Vec3: {
-    stable: ['CDI, fonctionnaires et non-salariés (poids 1)', 'Actifs en emploi stable : CDI, fonctionnaires, indépendants et employeurs.'],
-    autres: ['Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', 'Actifs en contrat précaire ou aidé.'],
-    chomeur: ['Chômeurs (poids 0)', 'Actifs au chômage.']
-  },
-  Vec4: { services: ['Services du quotidien accessibles en 20 minutes', 'Nombre de services du quotidien (santé, commerces, services à la population) accessibles en 20 minutes de trajet routier ou moins.'] }
+  ].map((n, i) => ['cs' + (i + 1), n])),
+  Opp3: { voiture: 'Ménages avec au moins une voiture', tc: 'Actifs occupés allant travailler en transports en commun', bus: 'Réseau de bus urbain régulier' },
+  Opp4: { g4: 'Population couverte en 4G (au moins un opérateur)', debit: 'Locaux éligibles à 30 Mbit/s ou plus', fibre: 'Locaux raccordables à la fibre' },
+  Cho1: { personnes_qpv: 'Personnes en quartier prioritaire' },
+  Cho2: { population: 'Population', pop_18_24: 'Personnes de 18 à 24 ans', francais_15_24: 'Français de 15 à 24 ans', etrangers_25_plus: 'Étrangers de 25 ans et plus',
+    etrangers_18_plus: 'Étrangers de 18 ans et plus (estimés)' },
+  Vec1: { revenu_fiscal: 'Revenu fiscal de référence total', foyers: 'Foyers fiscaux', departement: 'Moyenne du département' },
+  Vec2: { pers_piece: 'Personnes par pièce', maisons: 'Part de maisons', residences_principales: 'Résidences principales' },
+  Vec3: { stable: 'CDI, fonctionnaires et non-salariés (poids 1)', autres: 'Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', chomeur: 'Chômeurs (poids 0)' },
+  Vec4: { services: 'Services du quotidien accessibles en 20 minutes' }
 };
 
 const fmtDetail = (x, d = 0) => Number(x).toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
 
-// Tableau des variables : libellé avec infobulle de provenance et d'année, petit texte explicatif, valeur
+// Tableau des variables : libellé et valeur
 function tableauDetail(cle, lignes) {
-  const rows = lignes.map(([comp, valeur]) => {
-    const [label, aide] = VARIABLES_CALCUL[cle][comp];
-    return `<tr><td><span class="calcul-var">${label}</span> ${badgeSource('Indicateur_' + cle, comp)}<div class="sc-aide">${aide}</div></td><td>${valeur}</td></tr>`;
-  }).join('');
+  const rows = lignes.map(([comp, valeur]) => `<tr><td>${VARIABLES_CALCUL[cle][comp]}</td><td>${valeur}</td></tr>`).join('');
   return `<table class="calcul-table"><tbody>${rows}</tbody></table>`;
 }
 
@@ -2504,7 +2420,8 @@ function explicationIndicateur(cle, d) {
     case 'Cho2': return {
       formule: 'Part de Français parmi les 18 ans et plus = 100 − 100 × étrangers de 18 ans et plus ÷ population.',
       lignes: [['population', fmtDetail(d.population, 0)], ['pop_18_24', fmtDetail(d.pop_18_24, 0)], ['francais_15_24', fmtDetail(d.francais_15_24, 0)],
-        ['etrangers_25_plus', fmtDetail(d.etrangers_25_plus, 0)], ['etrangers_18_plus', fmtDetail(d.etrangers_18_plus, 0)]] };
+        ['etrangers_25_plus', fmtDetail(d.etrangers_25_plus, 0)], ['etrangers_18_plus', fmtDetail(d.etrangers_18_plus, 0)]],
+      note: 'Étrangers de 18 ans et plus (estimation à partir des tables de nationalité) = (18-24 ans − 0,7 × Français de 15-24 ans) + étrangers de 25 ans et plus.' };
     case 'Vec1': return {
       formule: 'Revenu fiscal de référence total de la commune ÷ nombre de foyers fiscaux.' + (d.departemental ? ' Commune sous secret statistique : valeur remplacée par la moyenne du département.' : ''),
       lignes: d.departemental ? [['departement', `${fmtDetail(d.valeur, 0)} €`]] : [['revenu_fiscal', `${fmtDetail(d.revenu_fiscal, 0)} €`], ['foyers', fmtDetail(d.foyers, 0)]] };
@@ -2544,7 +2461,12 @@ function htmlDetailCalcul(indicateur, communeNom) {
 
 // De la valeur des indicateurs à l'indice 0-10 (valeurs d'origine de la commune, p_k du mode actuel)
 function htmlDetailIndice(communeNom) {
-  const origine = indicateursOrigine[communeNom];
+  return htmlDetailIndiceDepuis(indicateursOrigine[communeNom], "Valeurs d'origine de la commune, sans les modifications faites avec les curseurs.");
+}
+
+// origine : { Indicateur_Opp1: valeur, … } d'une commune ou d'un EPCI (valeurs agrégées)
+function htmlDetailIndiceDepuis(origine, noteFin) {
+  const communeNom = 'unite';
   if (!origine || !bornesRef) return '';
   const norm = normaliserDonnees({ [communeNom]: origine }, bornesRef.min, bornesRef.max);
   const sc = calculerScoresParCommune(norm)[communeNom];
@@ -2570,7 +2492,7 @@ function htmlDetailIndice(communeNom) {
       <p>S = somme des p<sub>k</sub> × dimension<sub>k</sub><sup>1,5</sup> = ${fmtDetail(somme, 4)}.<br>
       Indice brut = (1/3) × S<sup>2,5/1,5</sup> = ${fmtDetail(brut, 4)}.<br>
       Passage sur 0-10 (minimum et maximum de la Corse : ${fmtDetail(ref.min, 4)} et ${fmtDetail(ref.max, 4)}) : <strong>${fmtDetail(sur10, 2)} / 10</strong>.</p>
-      <p class="calcul-note">Les poids p<sub>k</sub> sont ${modeCalculPk === 'betti' ? 'ceux de Betti et al. (2008), calculés sur toute la Corse' : 'égaux (1 pour chaque dimension)'}. Valeurs d'origine de la commune, sans les modifications faites avec les curseurs.</p>
+      <p class="calcul-note">Les poids p<sub>k</sub> sont ${modeCalculPk === 'betti' ? 'ceux de Betti et al. (2008), calculés sur toute la Corse' : 'égaux (1 pour chaque dimension)'}. ${noteFin}</p>
     </details>`;
 }
 
@@ -2585,9 +2507,8 @@ function htmlSousComposantes(indicateur, communeNom) {
       html += `
         <label class="sc-binaire">
           <input type="checkbox" id="${id}" ${valeurs[comp] ? 'checked' : ''} onchange="majSousComposante('${indicateur}', '${comp}')" />
-          ${meta.label} ${badgeSource(indicateur, comp)}
-        </label>
-        ${meta.aide ? `<div class="sc-aide sc-aide-binaire">${meta.aide}</div>` : ''}`;
+          ${meta.label}
+        </label>`;
       continue;
     }
     const bornes = bornesSousComp[indicateur][comp];
@@ -2595,10 +2516,9 @@ function htmlSousComposantes(indicateur, communeNom) {
     html += `
       <div class="sc-row">
         <div class="sc-header">
-          <span>${meta.label} ${badgeSource(indicateur, comp)}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
+          <span>${meta.label}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
           <span id="${id}_val">${libelleSousComposante(indicateur, comp, valeurs[comp])}</span>
         </div>
-        ${meta.aide ? `<div class="sc-aide">${meta.aide}</div>` : ''}
         <div class="slider-wrap">
           <span class="slider-origine" style="--p:${pctEntre(bornes, origine[comp])}" title="Valeur d'origine"></span>
           <input type="range" id="${id}" min="0" max="100" step="any"
@@ -2661,6 +2581,52 @@ function estDecompose(indicateur, communeNom) {
 }
 
 // fonction pour afficher le detail d'une commune
+// Libellés qui suivent l'échelle d'analyse : « commune » devient « EPCI » quand une case EPCI est cochée
+const enModeEpci = () => typeof echelleEstEPCI === 'function' && echelleEstEPCI();
+const libelleLimites = lang => enModeEpci() ? 'Limites des EPCI' : traductions[lang].limitesCommunes;
+
+function libelleChoixUnite(lang) {
+  return enModeEpci() ? '-- Sélectionner un EPCI --' : traductions[lang].ui['commune-select'];
+}
+
+function majLibellesEchelle() {
+  const lang = langueFrancais ? 'fr' : 'en';
+  const epci = enModeEpci() && lang === 'fr';
+  const titre = document.querySelector('[data-translate="commune-title"]');
+  if (titre) titre.textContent = epci ? '1. Sélection EPCI' : traductions[lang].ui['commune-title'];
+  const info = document.querySelector('[data-translate="commune-info"]');
+  if (info) info.textContent = epci ? "Informations de l'EPCI sélectionné :" : traductions[lang].ui['commune-info'];
+  const premiere = document.querySelector('#communeSelect option[value=""]');
+  if (premiere) premiere.textContent = libelleChoixUnite(lang);
+  document.querySelectorAll('.legende-limites').forEach(el => { el.textContent = libelleLimites(lang); });
+}
+
+// Clic sur une commune (ou un EPCI) d'une carte : elle est choisie dans la liste déroulante et sa fiche s'affiche
+function selectionnerCommuneDepuisCarte(nom) {
+  const liste = document.getElementById('communeSelect');
+  if (liste && [...liste.options].some(o => o.value === nom)) liste.value = nom;
+  afficherCommune(nom);
+}
+
+// Titre court (affiché à côté du nom de l'indicateur) et titre complet (infobulle)
+const TITRES_INDICATEURS = {
+  Indicateur_Opp1: ['Éducation', 'Avoir une bonne éducation'],
+  Indicateur_Opp2: ['Diversité CSP', 'Diversité des catégories socioprofessionnelles'],
+  Indicateur_Opp3: ['Mobilité', 'Avoir les moyens de mobilité'],
+  Indicateur_Opp4: ['Accès aux TIC', "Avoir accès aux technologies de l'information et de la communication"],
+  Indicateur_Cho1: ['Non-discrimination', 'Ne pas être discriminé'],
+  Indicateur_Cho2: ['Influence politique', "Avoir les moyens d'influencer les décisions politiques"],
+  Indicateur_Vec1: ['Revenu', 'Avoir un revenu décent'],
+  Indicateur_Vec2: ['Logement', 'Avoir un logement décent'],
+  Indicateur_Vec3: ['Emploi stable', "Stabilité de l'emploi"],
+  Indicateur_Vec4: ['Services', 'Être proche des services']
+};
+
+function titreIndicateurHtml(indicateur) {
+  const t = TITRES_INDICATEURS[indicateur];
+  return t ? `<span class="indicateur-titre" title="${t[1].replace(/"/g, '&quot;')}">${t[0]}</span>` : '';
+}
+
 function afficherCommune(communeNom) {
   if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
     epciAfficherDansPanneau(communeNom);
@@ -2727,10 +2693,11 @@ function afficherCommune(communeNom) {
     indicateursHTML += `
       <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
-          <strong>${nomIndicateur}</strong>${badgeSource(nomIndicateur)}
+          <strong>${nomIndicateur.replace('_', ' ')}</strong>
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>
+          ${titreIndicateurHtml(nomIndicateur)}
           <span id="${nomIndicateur}_val">${decompose ? libelleIndicateurDecompose(nomIndicateur, valeur) : libelleSlider(nomIndicateur, valeur)}</span>
         </div>
         <div id="info-${nomIndicateur}" class="indicator-info-box" style="display: none;">
@@ -2858,7 +2825,7 @@ for (const indicateur in data1) {
     html += `
       <tr>
         <td style="position: relative;">
-          ${indicateur}
+          ${indicateur.replace('_', ' ')}
           <button class="info-button" data-indicator="${indicateur}" onclick="toggleIndicatorInfo(event, '${indicateur}_comp')" aria-label="Information" style="float: right; margin-left: 8px;">
             🛈
           </button>
@@ -2945,7 +2912,7 @@ html += `
   function populateCommuneSelect(data) {
     const select = document.getElementById("communeSelect");
     const lang = langueFrancais ? 'fr' : 'en';
-    select.innerHTML = `<option value="" data-translate="commune-select">${traductions[lang].ui['commune-select']}</option>`; // reset with dynamic translation
+    select.innerHTML = `<option value="" data-translate="commune-select">${libelleChoixUnite(lang)}</option>`; // reset with dynamic translation
 
     // 🔤 Trier les noms de communes
     const communesTriees = Object.keys(data).sort((a, b) => a.localeCompare(b, 'fr'));
