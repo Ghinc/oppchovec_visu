@@ -2244,7 +2244,8 @@ const SOURCES_DONNEES = {
 };
 
 function badgeSource(indicateur, comp) {
-  const s = SOURCES_DONNEES[indicateur.replace('Indicateur_', '')]?.[comp || 'indicateur'];
+  const src = SOURCES_DONNEES[indicateur.replace('Indicateur_', '')];
+  const s = src?.[comp || 'indicateur'] || (comp ? src?.indicateur : undefined);
   const echapper = t => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   const texte = s
     ? `Provenance : ${s.provenance}. Année : ${s.annee || 'non renseignée (à documenter)'}.`
@@ -2258,43 +2259,6 @@ function badgeSource(indicateur, comp) {
 // binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
 // facteur = multiplicateur d'affichage (fractions 0-1 affichées en %).
 const SOUS_COMPOSANTES = {
-  Indicateur_Opp1: {
-    cle: 'Opp1',
-    parts: true,  // parts de personnes qui somment à 100 % : bouger l'une redistribue les autres
-    composantes: {
-      n1: { label: "Niveau 1 : aucun diplôme ou certificat d'études", aide: "Part des personnes de 18 ans et plus non scolarisées dont le diplôme le plus élevé est le certificat d'études ou aucun diplôme (valeur 1).", unite: '%', decimales: 1 },
-      n2: { label: 'Niveau 2 : brevet des collèges', aide: 'Part dont le diplôme le plus élevé est le brevet des collèges (valeur 2).', unite: '%', decimales: 1 },
-      n3: { label: 'Niveau 3 : CAP-BEP', aide: 'Part dont le diplôme le plus élevé est un CAP ou un BEP (valeur 3).', unite: '%', decimales: 1 },
-      n4: { label: 'Niveau 4 : baccalauréat', aide: 'Part dont le diplôme le plus élevé est le baccalauréat (valeur 4).', unite: '%', decimales: 1 },
-      n5: { label: 'Niveau 5 : bac + 2', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 2 (valeur 5).', unite: '%', decimales: 1 },
-      n6: { label: 'Niveau 6 : bac + 3 ou 4', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 3 ou bac + 4 (valeur 6).', unite: '%', decimales: 1 },
-      n7: { label: 'Niveau 7 : bac + 5 ou plus', aide: 'Part dont le diplôme le plus élevé est de niveau bac + 5 ou plus (valeur 7).', unite: '%', decimales: 1 }
-    },
-    calcul: c => {
-      let total = 0, somme = 0;
-      for (let k = 1; k <= 7; k++) { total += c['n' + k]; somme += k * c['n' + k]; }
-      return total === 0 ? 0 : somme / total;
-    }
-  },
-  Indicateur_Opp2: {
-    cle: 'Opp2',
-    parts: true,
-    composantes: {
-      cs1: { label: 'Agriculteurs exploitants', aide: 'Part de la population de 15 ans et plus dans cette catégorie socioprofessionnelle. L\'indicateur est l\'indice de Theil des 8 catégories.', unite: '%', decimales: 1 },
-      cs2: { label: "Artisans, commerçants, chefs d'entreprise", aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs3: { label: 'Cadres et professions intellectuelles supérieures', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs4: { label: 'Professions intermédiaires', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs5: { label: 'Employés', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs6: { label: 'Ouvriers', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs7: { label: 'Retraités', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 },
-      cs8: { label: 'Autres personnes sans activité professionnelle', aide: 'Part de la population de 15 ans et plus dans cette catégorie.', unite: '%', decimales: 1 }
-    },
-    calcul: c => {
-      const x = [1, 2, 3, 4, 5, 6, 7, 8].map(k => c['cs' + k]);
-      const mu = x.reduce((a, b) => a + b, 0) / 8;
-      return mu === 0 ? 0 : x.reduce((s, v) => s + (v > 0 ? (v / mu) * Math.log(v / mu) : 0), 0) / 8;
-    }
-  },
   Indicateur_Opp3: {
     cle: 'Opp3',
     composantes: {
@@ -2320,20 +2284,6 @@ const SOUS_COMPOSANTES = {
     },
     calcul: c => c.personnes_qpv > 0 ? -Math.log(c.personnes_qpv) : 0
   },
-  Indicateur_Cho2: {
-    cle: 'Cho2',
-    composantes: {
-      francais: { label: 'Part de Français parmi les 18 ans et plus', aide: 'Proxy des personnes ayant le droit de vote dans la commune : part de Français parmi les habitants de 18 ans et plus.', unite: '%', decimales: 1 }
-    },
-    calcul: c => c.francais
-  },
-  Indicateur_Vec1: {
-    cle: 'Vec1',
-    composantes: {
-      revenu: { label: 'Revenu fiscal moyen par foyer fiscal', aide: 'Revenu fiscal de référence total de la commune divisé par son nombre de foyers fiscaux.', unite: '€', decimales: 0 }
-    },
-    calcul: c => c.revenu
-  },
   Indicateur_Vec2: {
     cle: 'Vec2',
     composantes: {
@@ -2354,13 +2304,6 @@ const SOUS_COMPOSANTES = {
       const total = c.stable + c.autres + c.chomeur;
       return total === 0 ? 0 : (c.stable * 1 + c.autres * 0.5 + c.chomeur * 0) / total;
     }
-  },
-  Indicateur_Vec4: {
-    cle: 'Vec4',
-    composantes: {
-      services: { label: 'Services du quotidien accessibles en 20 minutes', aide: 'Nombre de services du quotidien (santé, commerces, services à la population) accessibles en 20 minutes de trajet routier ou moins.', unite: 'services', decimales: 0, entier: true }
-    },
-    calcul: c => c.services
   }
 };
 
@@ -2476,56 +2419,105 @@ async function chargerDetailsCalcul() {
   }
 }
 
-const NIVEAUX_DIPLOME = ['Aucun diplôme ou certificat d\'études', 'Brevet des collèges', 'CAP-BEP', 'Baccalauréat', 'Bac + 2', 'Bac + 3 ou 4', 'Bac + 5 ou plus'];
-const CATEGORIES_SOCIOPRO = ['Agriculteurs exploitants', 'Artisans, commerçants, chefs d\'entreprise', 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
-  'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'];
+// Variables de chaque indicateur : libellé et petit texte explicatif (affichés dans « Voir le calcul », avec l'infobulle de provenance et d'année)
+const VARIABLES_CALCUL = {
+  Opp1: {
+    n1: ["Niveau 1 : aucun diplôme ou certificat d'études", "Personnes de 18 ans et plus non scolarisées dont le diplôme le plus élevé est le certificat d'études ou aucun diplôme (valeur 1)."],
+    n2: ['Niveau 2 : brevet des collèges', 'Personnes dont le diplôme le plus élevé est le brevet des collèges (valeur 2).'],
+    n3: ['Niveau 3 : CAP-BEP', 'Personnes dont le diplôme le plus élevé est un CAP ou un BEP (valeur 3).'],
+    n4: ['Niveau 4 : baccalauréat', 'Personnes dont le diplôme le plus élevé est le baccalauréat (valeur 4).'],
+    n5: ['Niveau 5 : bac + 2', 'Personnes dont le diplôme le plus élevé est de niveau bac + 2 (valeur 5).'],
+    n6: ['Niveau 6 : bac + 3 ou 4', 'Personnes dont le diplôme le plus élevé est de niveau bac + 3 ou bac + 4 (valeur 6).'],
+    n7: ['Niveau 7 : bac + 5 ou plus', 'Personnes dont le diplôme le plus élevé est de niveau bac + 5 ou plus (valeur 7).']
+  },
+  Opp2: Object.fromEntries([
+    'Agriculteurs exploitants', "Artisans, commerçants, chefs d'entreprise", 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
+    'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'
+  ].map((n, i) => ['cs' + (i + 1), [n, 'Personnes de 15 ans et plus dans cette catégorie socioprofessionnelle.']])),
+  Opp3: {
+    voiture: ['Ménages avec au moins une voiture', 'Part des ménages de la commune qui possèdent au moins une voiture.'],
+    tc: ['Actifs occupés allant travailler en transports en commun', 'Au moins un actif occupé de la commune va travailler en transports en commun : + 100 points.'],
+    bus: ['Réseau de bus urbain régulier', "La commune a un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse) : + 100 points."]
+  },
+  Opp4: {
+    g4: ['Population couverte en 4G (au moins un opérateur)', 'Part des habitants couverts en 4G par au moins un des quatre opérateurs.'],
+    debit: ['Locaux éligibles à 30 Mbit/s ou plus', 'Part des locaux (logements et entreprises) qui peuvent avoir au moins 30 Mbit/s sur un réseau filaire.'],
+    fibre: ['Locaux raccordables à la fibre', "Part des locaux raccordables à la fibre optique jusqu'au domicile."]
+  },
+  Cho1: { personnes_qpv: ['Personnes en quartier prioritaire', "Habitants vivant dans un quartier prioritaire de la politique de la ville (0 s'il n'y en a pas). L'indicateur est moins le logarithme de ce nombre : plus il est grand, plus l'indicateur baisse."] },
+  Cho2: {
+    population: ['Population', 'Nombre d\'habitants de la commune (recensement).'],
+    pop_18_24: ['Personnes de 18 à 24 ans', 'Habitants de 18 à 24 ans.'],
+    francais_15_24: ['Français de 15 à 24 ans', 'Habitants de nationalité française de 15 à 24 ans (les tables de nationalité ne séparent pas les 18-24 ans).'],
+    etrangers_25_plus: ['Étrangers de 25 ans et plus', 'Habitants étrangers de 25 ans et plus.'],
+    etrangers_18_plus: ['Étrangers de 18 ans et plus (estimés)', 'Estimation du nombre d\'étrangers de 18 ans et plus, proxy des personnes sans droit de vote : (18-24 ans − 0,7 × Français de 15-24 ans) + étrangers de 25 ans et plus.']
+  },
+  Vec1: {
+    revenu_fiscal: ['Revenu fiscal de référence total', 'Somme des revenus fiscaux de référence des foyers fiscaux de la commune.'],
+    foyers: ['Foyers fiscaux', 'Nombre de foyers fiscaux de la commune.'],
+    departement: ['Moyenne du département', 'Commune sous secret statistique : la valeur du département la remplace.']
+  },
+  Vec2: {
+    pers_piece: ['Personnes par pièce', 'Nombre moyen de personnes par pièce dans les résidences principales : plus il est élevé, plus les logements sont suroccupés.'],
+    maisons: ['Part de maisons', 'Part des résidences principales qui sont des maisons individuelles.'],
+    residences_principales: ['Résidences principales', 'Nombre de résidences principales de la commune.']
+  },
+  Vec3: {
+    stable: ['CDI, fonctionnaires et non-salariés (poids 1)', 'Actifs en emploi stable : CDI, fonctionnaires, indépendants et employeurs.'],
+    autres: ['Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', 'Actifs en contrat précaire ou aidé.'],
+    chomeur: ['Chômeurs (poids 0)', 'Actifs au chômage.']
+  },
+  Vec4: { services: ['Services du quotidien accessibles en 20 minutes', 'Nombre de services du quotidien (santé, commerces, services à la population) accessibles en 20 minutes de trajet routier ou moins.'] }
+};
+
 const fmtDetail = (x, d = 0) => Number(x).toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
 
-function tableauDetail(lignes) {
-  return `<table class="calcul-table"><tbody>${lignes.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</tbody></table>`;
+// Tableau des variables : libellé avec infobulle de provenance et d'année, petit texte explicatif, valeur
+function tableauDetail(cle, lignes) {
+  const rows = lignes.map(([comp, valeur]) => {
+    const [label, aide] = VARIABLES_CALCUL[cle][comp];
+    return `<tr><td><span class="calcul-var">${label}</span> ${badgeSource('Indicateur_' + cle, comp)}<div class="sc-aide">${aide}</div></td><td>${valeur}</td></tr>`;
+  }).join('');
+  return `<table class="calcul-table"><tbody>${rows}</tbody></table>`;
 }
 
-// Explication du calcul d'un indicateur à partir de ses éléments bruts d : { formule, lignes }
+// Explication du calcul d'un indicateur à partir de ses éléments bruts d : { formule, lignes: [[variable, valeur affichée]], note }
 function explicationIndicateur(cle, d) {
   switch (cle) {
     case 'Opp1': return {
       formule: 'Niveau moyen de diplôme (échelle de 1 à 7) = somme de (niveau × effectif) ÷ somme des effectifs, pour les personnes de 18 ans et plus non scolarisées.',
-      lignes: NIVEAUX_DIPLOME.map((n, i) => [`Niveau ${i + 1} : ${n}`, `${fmtDetail(d['niveau' + (i + 1)], 0)} personnes`])
-        .concat([[`dont ${fmtDetail(d.retire_15_17, 0)} personnes de 15 à 17 ans non scolarisées retirées du niveau 1`, '']]) };
+      lignes: [1, 2, 3, 4, 5, 6, 7].map(k => ['n' + k, `${fmtDetail(d['niveau' + k], 0)} personnes`]),
+      note: `Les ${fmtDetail(d.retire_15_17, 0)} personnes de 15 à 17 ans non scolarisées sont retirées du niveau 1 (le recensement compte les non-scolarisés dès 15 ans).` };
     case 'Opp2': return {
       formule: 'Indice de Theil des 8 catégories socioprofessionnelles (15 ans et plus) : T = (1/8) × somme de (xᵢ/μ) × ln(xᵢ/μ), où xᵢ est l\'effectif de la catégorie et μ la moyenne des 8 effectifs.',
-      lignes: CATEGORIES_SOCIOPRO.map((n, i) => [n, `${fmtDetail(d['cs' + (i + 1)], 0)} personnes`]) };
+      lignes: [1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, `${fmtDetail(d['cs' + k], 0)} personnes`]) };
     case 'Opp3': return {
       formule: 'Part des ménages avec au moins une voiture (%), + 100 points si au moins un actif occupé va travailler en transports en commun, + 100 points si la commune a un réseau de bus urbain régulier.',
-      lignes: [['Ménages avec au moins une voiture', `${fmtDetail(d.voiture, 1)} %`],
-        [`Actifs occupés allant travailler en transports en commun (${fmtDetail(d.tc_actifs, 0)} personnes)`, d.tc > 0 ? '+ 100 points' : '0'],
-        ['Réseau de bus urbain régulier', d.bus > 0 ? '+ 100 points' : '0']] };
+      lignes: [['voiture', `${fmtDetail(d.voiture, 1)} %`], ['tc', d.tc > 0 ? `+ 100 points (${fmtDetail(d.tc_actifs, 0)} actifs)` : `0 (${fmtDetail(d.tc_actifs, 0)} actif)`],
+        ['bus', d.bus > 0 ? '+ 100 points' : '0']] };
     case 'Opp4': return {
       formule: 'Moyenne de trois parts de la population ou des locaux : (4G + débit ≥ 30 Mbit/s + fibre) ÷ 3.',
-      lignes: [['Population couverte en 4G (au moins un opérateur)', `${fmtDetail(d.g4, 1)} %`], ['Locaux éligibles à 30 Mbit/s ou plus', `${fmtDetail(d.debit, 1)} %`],
-        ['Locaux raccordables à la fibre', `${fmtDetail(d.fibre, 1)} %`]] };
+      lignes: [['g4', `${fmtDetail(d.g4, 1)} %`], ['debit', `${fmtDetail(d.debit, 1)} %`], ['fibre', `${fmtDetail(d.fibre, 1)} %`]] };
     case 'Cho1': return {
       formule: 'Moins le logarithme népérien du nombre de personnes vivant en quartier prioritaire de la politique de la ville ; 0 s\'il n\'y en a pas.',
-      lignes: [['Personnes en quartier prioritaire', fmtDetail(d.personnes_qpv, 0)]] };
+      lignes: [['personnes_qpv', fmtDetail(d.personnes_qpv, 0)]] };
     case 'Cho2': return {
-      formule: 'Part de Français parmi les 18 ans et plus = 100 − 100 × étrangers de 18 ans et plus ÷ population. Étrangers de 18 ans et plus = (18-24 ans − 0,7 × Français de 15-24 ans) + étrangers de 25 ans et plus (estimation à partir des tables de nationalité).',
-      lignes: [['Population', fmtDetail(d.population, 0)], ['Personnes de 18 à 24 ans', fmtDetail(d.pop_18_24, 0)], ['Français de 15 à 24 ans', fmtDetail(d.francais_15_24, 0)],
-        ['Étrangers de 25 ans et plus', fmtDetail(d.etrangers_25_plus, 0)], ['Étrangers de 18 ans et plus (estimés)', fmtDetail(d.etrangers_18_plus, 0)]] };
+      formule: 'Part de Français parmi les 18 ans et plus = 100 − 100 × étrangers de 18 ans et plus ÷ population.',
+      lignes: [['population', fmtDetail(d.population, 0)], ['pop_18_24', fmtDetail(d.pop_18_24, 0)], ['francais_15_24', fmtDetail(d.francais_15_24, 0)],
+        ['etrangers_25_plus', fmtDetail(d.etrangers_25_plus, 0)], ['etrangers_18_plus', fmtDetail(d.etrangers_18_plus, 0)]] };
     case 'Vec1': return {
       formule: 'Revenu fiscal de référence total de la commune ÷ nombre de foyers fiscaux.' + (d.departemental ? ' Commune sous secret statistique : valeur remplacée par la moyenne du département.' : ''),
-      lignes: d.departemental ? [['Moyenne du département', `${fmtDetail(d.valeur, 0)} €`]]
-        : [['Revenu fiscal de référence total', `${fmtDetail(d.revenu_fiscal, 0)} €`], ['Foyers fiscaux', fmtDetail(d.foyers, 0)]] };
+      lignes: d.departemental ? [['departement', `${fmtDetail(d.valeur, 0)} €`]] : [['revenu_fiscal', `${fmtDetail(d.revenu_fiscal, 0)} €`], ['foyers', fmtDetail(d.foyers, 0)]] };
     case 'Vec2': return {
       formule: 'Moyenne de deux termes : exp(− personnes par pièce) et part de maisons parmi les résidences principales.',
-      lignes: [['Personnes par pièce', fmtDetail(d.pers_piece, 2)], ['exp(− personnes par pièce)', fmtDetail(Math.exp(-d.pers_piece), 3)],
-        ['Part de maisons', `${fmtDetail(100 * d.maisons, 1)} %`], [`Résidences principales`, fmtDetail(d.residences_principales, 0)]] };
+      lignes: [['pers_piece', fmtDetail(d.pers_piece, 2)], ['maisons', `${fmtDetail(100 * d.maisons, 1)} %`], ['residences_principales', fmtDetail(d.residences_principales, 0)]],
+      note: `exp(− ${fmtDetail(d.pers_piece, 2)}) = ${fmtDetail(Math.exp(-d.pers_piece), 3)}.` };
     case 'Vec3': return {
       formule: 'Statuts d\'emploi pondérés : (1 × CDI, fonctionnaires et non-salariés + 0,5 × autres contrats + 0 × chômeurs) ÷ total.',
-      lignes: [['CDI, fonctionnaires et non-salariés (poids 1)', fmtDetail(d.stable, 0)], ['Autres contrats : CDD, intérim, aidés, apprentis (poids 0,5)', fmtDetail(d.autres, 0)],
-        ['Chômeurs (poids 0)', fmtDetail(d.chomeur, 0)]] };
+      lignes: [['stable', fmtDetail(d.stable, 0)], ['autres', fmtDetail(d.autres, 0)], ['chomeur', fmtDetail(d.chomeur, 0)]] };
     case 'Vec4': return {
       formule: 'Nombre de services du quotidien accessibles en 20 minutes ou moins (base permanente des équipements, temps de trajet routier).',
-      lignes: [] };
+      lignes: [['services', fmtDetail(d.valeur, 0)]] };
   }
   return null;
 }
@@ -2543,7 +2535,8 @@ function htmlDetailCalcul(indicateur, communeNom) {
     <details class="calcul-detail">
       <summary>Voir le calcul</summary>
       <p>${ex.formule}</p>
-      ${ex.lignes.length ? tableauDetail(ex.lignes) : ''}
+      ${tableauDetail(cle, ex.lignes)}
+      ${ex.note ? `<p class="calcul-note">${ex.note}</p>` : ''}
       <p><strong>Valeur de l'indicateur : ${formaterValeur(meta, valeur)}</strong></p>
       <p>Normalisation sur l'échelle corse : (valeur − minimum) ÷ (maximum − minimum) = (${formaterValeur(meta, valeur)} − ${formaterValeur(meta, b.min)}) ÷ (${formaterValeur(meta, b.max)} − ${formaterValeur(meta, b.min)}) = <strong>${fmtDetail(norm, 3)}</strong>.</p>
     </details>`;

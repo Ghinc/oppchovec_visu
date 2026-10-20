@@ -19,16 +19,20 @@ test('panneau commune : 10 indicateurs, curseurs 0-100 %, valeurs brutes, échel
   await avecAppli(async ({ page }) => {
     await ouvrirCommune(page, 'Bastia');
     assert.equal(await page.locator('#resultCommune .indicateur-row').count(), 10);
-    assert.equal(await page.locator('#resultCommune .indicateur-decompose').count(), 10, 'tous les indicateurs ont leurs sous-curseurs');
+    assert.equal(await page.locator('#resultCommune .indicateur-decompose').count(), 5);
     for (const id of ['Opp1', 'Opp2', 'Cho2', 'Vec1', 'Vec4']) {
+      const slider = page.locator(`#Indicateur_${id}`);
+      assert.equal(await slider.getAttribute('min'), '0');
+      assert.equal(await slider.getAttribute('max'), '100');
+      const pct = parseFloat(await slider.inputValue());
+      assert.ok(pct >= 0 && pct <= 100, `${id} : ${pct}`);
       assert.match(normaliser(await page.locator(`#Indicateur_${id}_val`).innerText()), /^\d+ % de l'échelle corse · valeur : /);
     }
     assert.match(normaliser(await page.locator('#Indicateur_Vec1_val').innerText()), /^33 % de l'échelle corse · valeur : 27 283 €$/);
-    assert.match(normaliser(await page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Vec1_val') }).locator('.slider-echelle').first().innerText()), /^Corse : 12 746 € → 56 621 €$/);
+    assert.match(normaliser(await page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Vec1') }).locator('.slider-echelle').innerText()), /^Corse : 12 746 € → 56 621 €$/);
     assert.ok(await page.locator('#resultCommune .slider-origine').count() >= 10, 'un repère de valeur d\'origine par indicateur');
-    // sous-curseurs : Opp1 (7), Opp2 (8), Opp3 (1 curseur + 2 cases), Opp4 (3), Cho1 (1), Cho2 (1), Vec1 (1), Vec2 (2), Vec3 (3), Vec4 (1)
-    assert.equal(await page.locator('#resultCommune .sous-composantes input[type=range]').count(), 7 + 8 + 1 + 3 + 1 + 1 + 1 + 2 + 3 + 1);
-    assert.ok(await page.locator('#resultCommune .sc-aide').count() >= 28, 'un petit texte explicatif sous chaque variable');
+    // sous-curseurs : Opp3 (1 curseur + 2 cases), Opp4 (3), Cho1 (1), Vec2 (2), Vec3 (3)
+    assert.equal(await page.locator('#resultCommune .sous-composantes input[type=range]').count(), 1 + 3 + 1 + 2 + 3);
     assert.equal(await page.locator('#resultCommune .sous-composantes input[type=checkbox]').count(), 2);
     assert.equal(await page.locator('#resultCommune .indicateur-decompose input[id^="Indicateur_"]:not([id*="__"])').count(), 0,
       'pas de curseur direct sur un indicateur décomposé');
@@ -55,7 +59,7 @@ test('panneau commune : déplacer un curseur puis recalculer ne change que cette
   await avecAppli(async ({ page }) => {
     const depart = await photoPage(page);
     await ouvrirCommune(page, 'Bastia');
-    await deplacer(page, 'Indicateur_Vec4__services', 100);
+    await deplacer(page, 'Indicateur_Vec4', 100);
     assert.match(normaliser(await page.locator('#Indicateur_Vec4_val').innerText()), /^100 % de l'échelle corse · valeur : 5 278 services$/);
     await cliquerBouton(page, 'Recalculer');
     const apres = await photoPage(page);
@@ -66,7 +70,7 @@ test('panneau commune : déplacer un curseur puis recalculer ne change que cette
     }
     // le panneau ré-affiché reflète la modification
     assert.match(normaliser(await page.locator('#resultCommune').innerText()), new RegExp(`OppChoVec : ${apres.indice.Bastia.toFixed(2)}/10`));
-    assert.equal(await page.locator('#Indicateur_Vec4__services').inputValue(), '100');
+    assert.equal(await page.locator('#Indicateur_Vec4').inputValue(), '100');
     await cliquerBouton(page, 'Réinitialiser');
     assert.deepEqual(await photoPage(page), depart);
   });
@@ -124,8 +128,10 @@ test('panneau commune : chaque indicateur et chaque sous-composante a une infobu
   await avecAppli(async ({ page }) => {
     await ouvrirCommune(page, 'Bastia');
     const badges = await page.$$eval('#resultCommune .src-badge', (els) => els.map((e) => ({ txt: e.dataset.src, manque: e.classList.contains('src-manquante') })));
-    // 10 indicateurs + leurs sous-composantes (7 + 8 + 3 + 3 + 1 + 1 + 1 + 2 + 3 + 1)
-    assert.equal(badges.length, 10 + 30);
+    // 10 indicateurs + 12 sous-curseurs + 36 variables des tableaux « Voir le calcul » (Opp1 7, Opp2 8, Opp3 3, Opp4 3, Cho1 1, Cho2 5, Vec1 2, Vec2 3, Vec3 3, Vec4 1)
+    assert.equal(badges.length, 10 + 12 + 36);
+    assert.equal(await page.locator('#resultCommune .calcul-detail .src-badge').count(), 36);
+    assert.ok(await page.locator('#resultCommune .calcul-detail .sc-aide').count() >= 36, 'un petit texte explicatif par variable du tableau');
     for (const b of badges) assert.match(b.txt, /^Provenance : .+ Année : .+\.$/);
     assert.equal(badges.filter((b) => b.manque).length, 0, 'toutes les données ont une provenance et une année');
     // l'infobulle s'affiche au survol
@@ -140,9 +146,9 @@ test('panneau commune : menu « Voir le calcul » pour chaque indicateur et pour
     await ouvrirCommune(page, 'Bastia');
     assert.equal(await page.locator('#resultCommune details.calcul-detail').count(), 10 + 1);
     // détail d'Opp1 : 7 niveaux, valeur de l'indicateur identique à celle de l'appli
-    const opp1 = page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Opp1_val') }).locator('details.calcul-detail');
+    const opp1 = page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Opp1') }).locator('details.calcul-detail');
     await opp1.locator('summary').click();
-    assert.equal(await opp1.locator('tbody tr').count(), 8);
+    assert.equal(await opp1.locator('tbody tr').count(), 7);
     const valeur = await page.evaluate(() => indicateursOrigine.Bastia.Indicateur_Opp1);
     assert.match(normaliser(await opp1.innerText()), new RegExp('Valeur de l\'indicateur : ' + valeur.toFixed(2).replace('.', ',')));
     // détail de l'indice : le 0-10 recalculé à la main est celui de la carte
