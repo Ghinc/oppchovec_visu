@@ -53,7 +53,7 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     await page.selectOption('#communeSelect', ajaccio);
     await page.click('#validerCommune');
     const fiche = (await page.locator('#resultCommune').textContent()).replace(/\s+/g, ' ');
-    for (const mot of [ajaccio, 'Pro rata', 'Simple', 'Ajaccio']) assert.ok(fiche.includes(mot), mot);
+    for (const mot of [ajaccio, 'pondérée par les habitants', 'Moyenne simple', 'Ajaccio']) assert.ok(fiche.includes(mot), mot);
 
     // « EPCI commune » : moyenne simple, les couleurs changent
     await page.check('#echelle-epci-commune');

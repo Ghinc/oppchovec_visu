@@ -2723,3 +2723,12 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
   padding-left: 12px;
   padding-right: 12px;
 }
+
+/* Colonne de la méthode d'agrégation affichée sur les cartes (fiche d'un EPCI) */
+.epci-table td.epci-actif {
+  background: #e1edfa;
+}
+
+.epci-table th.epci-actif {
+  background: #1f4f8f;
+}

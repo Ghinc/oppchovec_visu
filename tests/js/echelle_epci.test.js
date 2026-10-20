@@ -74,7 +74,7 @@ test('échelle EPCI : panneau de sélection = fiche de l\'EPCI ; histogramme et 
   const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
   app.ev(`afficherCommune(${JSON.stringify(e.nom)})`);
   const html = app.ev('document.getElementById("resultCommune").innerHTML');
-  for (const mot of [e.nom, 'Pro rata', 'Simple', 'Opp1', 'Vec4', 'Ajaccio']) assert.ok(html.includes(mot), mot);
+  for (const mot of [e.nom, 'pondérée par les habitants', 'Moyenne simple', 'Opp1', 'Vec4', 'Ajaccio']) assert.ok(html.includes(mot), mot);
   assert.ok(!html.includes('type="range"'),'pas de curseurs à l\'échelle EPCI');
   // retour aux communes
   await app.ev("changerEchelle('commune')");
