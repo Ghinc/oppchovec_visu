@@ -314,17 +314,63 @@ function evolutionLegendes() {
     const s = d.seuils_jenks[evolutionVariable];
     const lib = [`≤ ${evolutionFmt(s[0])}`, ...s.slice(1).map((x, i) => `${evolutionFmt(s[i])} – ${evolutionFmt(x)}`), `> ${evolutionFmt(s[s.length - 1])}`];
     const pastille = c => `<span class="evolution-pastille" style="background:${c}"></span>`;
-    document.getElementById('evolution-legende-annees').innerHTML =
-        `<strong>${EVOLUTION_VARIABLES[evolutionVariable]} (0-10), mêmes classes pour ${d.annees[0]} et ${d.annees[1]}</strong> ` +
+    // légendes posées sur les cartes : les deux années partagent les mêmes classes
+    const niveaux = `<strong>${EVOLUTION_VARIABLES[evolutionVariable]} (0-10)</strong><em>mêmes classes en ${d.annees[0]} et ${d.annees[1]}</em>` +
         lib.map((l, i) => `<span class="evolution-classe">${pastille(colorsJenks[i])}${l}</span>`).join('');
+    for (const id of ['evolution-legende-a0', 'evolution-legende-annees']) { const el = document.getElementById(id); if (el) el.innerHTML = niveaux; }
     const sv = d.seuils_jenks_variation[evolutionVariable];
     const signe = x => (x > 0 ? '+' : x < 0 ? '−' : '') + evolutionFmt(Math.abs(x));
     const zero = evolutionClasse(0, sv);
     const libVar = [`≤ ${signe(sv[0])}`, ...sv.slice(1).map((x, i) => `${signe(sv[i])} – ${signe(x)}`), `> ${signe(sv[sv.length - 1])}`];
     const couleursVar = evolutionCouleursVariation(sv);
     document.getElementById('evolution-legende-variation').innerHTML =
-        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]} (points sur 10), classes de Jenks${d.unite === 'epci' ? ' des variations des EPCI' : ''}</strong> ` +
+        `<strong>Évolution ${d.annees[0]} → ${d.annees[1]}</strong><em>points sur 10, classes de Jenks${d.unite === 'epci' ? ' des variations des EPCI' : ''}</em>` +
         libVar.map((l, i) => `<span class="evolution-classe">${pastille(couleursVar[i])}${l}${i === zero ? ' (contient 0)' : ''}</span>`).join('');
+}
+
+// ---------- Provenance des données de chaque carte (bouton ⓘ du titre) ----------
+// Source et année de chaque indicateur aux deux dates (détail : rapport « Sources 2016 et 2021, indicateur par indicateur »)
+const EVOLUTION_SOURCES = {
+    Opp1: ['Éducation', 'INSEE, recensement 2016, diplômes (4 niveaux)', 'INSEE, recensement 2021, diplômes (4 niveaux)'],
+    Opp2: ['Diversité CSP', 'INSEE, recensement 2016, catégories socioprofessionnelles', 'INSEE, recensement 2021, catégories socioprofessionnelles'],
+    Opp3: ['Mobilité', 'INSEE, recensement 2016 (ménages avec voiture, actifs en transports en commun) ; réseau de bus : liste fixe de 3 communes, non datée', 'INSEE, recensement 2021 (ménages avec voiture, actifs en transports en commun) ; réseau de bus : liste fixe de 3 communes, non datée'],
+    Opp4: ['Accès aux TIC', 'ARCEP, couvertures 4G théoriques de mars 2017 × grille de population Filosofi 2019 ; Observatoire France Très Haut Débit, T4 2016 (débit ≥ 30 Mbit/s, fibre)', 'ARCEP, couvertures 4G théoriques de décembre 2021 × grille Filosofi 2021 ; ARCEP « Ma connexion internet », T4 2021 (débit, fibre)'],
+    Cho1: ['Non-discrimination', 'INSEE, population des quartiers prioritaires (géographie 2015), recensement 2013', 'INSEE, population municipale au 1er janvier 2018 des quartiers prioritaires (géographie 2015)'],
+    Cho2: ['Influence politique', 'INSEE, recensement 2016, population par âge et nationalité', 'INSEE, recensement 2021, population par âge et nationalité'],
+    Vec1: ['Revenu', 'DGFiP, IRCOM, revenus 2016 (revenu fiscal moyen par foyer)', 'DGFiP, IRCOM, revenus 2021 (revenu fiscal moyen par foyer)'],
+    Vec2: ['Logement', 'INSEE, recensement 2016, logement (personnes par pièce, maisons)', 'INSEE, recensement 2021, logement (personnes par pièce, maisons)'],
+    Vec3: ['Emploi stable', 'INSEE, recensement 2016, emploi (CDI, autres contrats, chômeurs)', 'INSEE, recensement 2021, emploi (CDI, autres contrats, chômeurs)'],
+    Vec4: ['Services', 'INSEE, base permanente des équipements 2016 ; temps de trajet OSRM sur OpenStreetMap (2025)', 'INSEE, base permanente des équipements 2021 ; temps de trajet OSRM sur OpenStreetMap (2025)'],
+};
+
+function evolutionSourcesHtml(type) {
+    const d = evolutionDonnees;
+    const [a0, a1] = d.annees;
+    const cles = evolutionVariable === 'OppChoVec' ? d.indicateurs : d.dimensions[evolutionVariable];
+    const col = type === 'a0' ? 1 : 2;
+    const ligne = k => type === 'variation'
+        ? `<tr><td><strong>${k}</strong> ${EVOLUTION_SOURCES[k][0]}</td><td>${EVOLUTION_SOURCES[k][1]}</td><td>${EVOLUTION_SOURCES[k][2]}</td></tr>`
+        : `<tr><td><strong>${k}</strong> ${EVOLUTION_SOURCES[k][0]}</td><td>${EVOLUTION_SOURCES[k][col]}</td></tr>`;
+    const entete = type === 'variation' ? `<tr><th>Indicateur</th><th>${a0}</th><th>${a1}</th></tr>` : `<tr><th>Indicateur</th><th>Source et année</th></tr>`;
+    const titre = type === 'variation'
+        ? `Évolution ${a0} → ${a1} · ${EVOLUTION_VARIABLES[evolutionVariable]} : différence entre les scores des deux cartes`
+        : `${EVOLUTION_VARIABLES[evolutionVariable]} en ${type === 'a0' ? a0 : a1}`;
+    const epci = evolutionEstEpci() ? '<p class="evolution-petit">À l\'échelle des EPCI, les valeurs des communes sont agrégées (moyenne pondérée par les habitants ou moyenne simple).</p>' : '';
+    return `<strong>${titre}</strong>` +
+        `<p class="evolution-petit">Mêmes définitions aux deux dates (indicateurs recalculés pour être comparables), sur des sources de chaque année.</p>` +
+        `<table class="evolution-table-source">${entete}${cles.map(ligne).join('')}</table>${epci}`;
+}
+
+function evolutionBasculerSource(type, ouvrir) {
+    for (const t of ['a0', 'a1', 'variation']) {
+        const pop = document.getElementById('evolution-source-' + t);
+        const bouton = document.querySelector(`.evolution-bouton-source[data-carte="${t}"]`);
+        if (!pop || !bouton) continue;
+        const afficher = t === type && (ouvrir === undefined ? pop.hidden : ouvrir);
+        if (afficher) pop.innerHTML = evolutionSourcesHtml(t);
+        pop.hidden = !afficher;
+        bouton.setAttribute('aria-expanded', String(afficher));
+    }
 }
 
 function evolutionResumeHtml() {
@@ -643,6 +689,9 @@ if (typeof document !== 'undefined') {
         const bouton = document.querySelector('.tab-button[data-tab="evolutiontab"]');
         if (bouton) bouton.addEventListener('click', () => setTimeout(initialiserOngletEvolution, 0));
         document.querySelectorAll('.evolution-loupe').forEach(b => b.addEventListener('click', () => { if (evolutionInitialise) evolutionAgrandir(b.dataset.carte); }));
+        document.querySelectorAll('.evolution-bouton-source').forEach(b => b.addEventListener('click', ev => { ev.stopPropagation(); if (evolutionInitialise) evolutionBasculerSource(b.dataset.carte); }));
+        document.addEventListener('click', ev => { if (!ev.target.closest('.evolution-source-popover')) evolutionBasculerSource(null, false); });
+        document.addEventListener('keydown', ev => { if (ev.key === 'Escape') evolutionBasculerSource(null, false); });
         const boutonResume = document.getElementById('evolution-bouton-resume');
         if (boutonResume) {
             boutonResume.addEventListener('click', e => { e.stopPropagation(); evolutionBasculerResume(); });
