@@ -123,3 +123,21 @@ test('panneau commune : changer de commune abandonne un brouillon non validé', 
     assert.deepEqual(await photoPage(page), depart);
   });
 });
+
+test('panneau commune : chaque indicateur et chaque sous-composante a une infobulle de provenance et d\'année ; les manques sont signalés', { skip: sauter }, async () => {
+  await avecAppli(async ({ page }) => {
+    await ouvrirCommune(page, 'Bastia');
+    const badges = await page.$$eval('#resultCommune .src-badge', (els) => els.map((e) => ({ txt: e.dataset.src, manque: e.classList.contains('src-manquante') })));
+    // 10 indicateurs + 2 cases et 1 curseur d'Opp3, 3 d'Opp4, 1 de Cho1, 2 de Vec2, 3 de Vec3
+    assert.equal(badges.length, 10 + 3 + 3 + 1 + 2 + 3);
+    for (const b of badges) assert.match(b.txt, /^Provenance : .+ Année : .+\.$/);
+    // seule la liste des villes de bus n'a pas d'année
+    const manquantes = badges.filter((b) => b.manque);
+    assert.equal(manquantes.length, 1);
+    assert.match(manquantes[0].txt, /Ajaccio, Bastia, Porto-Vecchio.*non renseignée/);
+    // l'infobulle s'affiche au survol
+    const premier = page.locator('#resultCommune .src-badge').first();
+    await premier.hover();
+    assert.equal(await premier.evaluate((e) => getComputedStyle(e, '::after').display), 'block');
+  });
+});

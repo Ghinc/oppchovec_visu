@@ -2202,6 +2202,54 @@ const META_INDICATEURS = {
   Indicateur_Vec4: { unite: 'services', decimales: 0 }
 };
 
+// Provenance et année de chaque donnée utilisée (infobulles ⓘ du panneau commune).
+// Même contenu que `sources` et `millesimes` de Données/indice_v2/sources_indice_v2.json ; null = information manquante (signalée dans l'infobulle).
+const RP23 = 'INSEE, recensement de la population 2023 (collectes de 2021 à 2025, résultats publiés le 25/06/2026)';
+const SOURCES_DONNEES = {
+  Opp1: { indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
+  Opp2: { indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
+  Opp3: {
+    indicateur: { provenance: `${RP23} ; réseaux de bus : liste fournie par la doctorante`, annee: '2023' },
+    voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
+    tc: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (actifs occupés allant travailler en transports en commun)`, annee: '2023' },
+    bus: { provenance: "Liste de trois villes (Ajaccio, Bastia, Porto-Vecchio) fournie par la doctorante, sans source officielle", annee: null }
+  },
+  Opp4: {
+    indicateur: { provenance: 'ARCEP (couverture mobile et « Ma connexion internet »)', annee: 'T4 2024' },
+    g4: { provenance: "ARCEP, couvertures théoriques 4G des 4 opérateurs, croisées avec la grille de population INSEE Filosofi au carreau de 200 m (revenus 2021)", annee: 'T4 2024 (grille : 2021)' },
+    debit: { provenance: "ARCEP, « Ma connexion internet », offres filaires (commune_debit_filaire)", annee: 'T4 2024' },
+    fibre: { provenance: "ARCEP, « Ma connexion internet », technologies par commune (commune_techno)", annee: 'T4 2024' }
+  },
+  Cho1: {
+    indicateur: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' },
+    personnes_qpv: { provenance: 'INSEE, population communale en quartier prioritaire (QPV 2024), publiée le 10/07/2025', annee: '2024 (population au 1er janvier 2020)' }
+  },
+  Cho2: { indicateur: { provenance: `${RP23}, tables détaillées NAT1 (nationalité) et POP1 (population par sexe et âge)`, annee: '2023' } },
+  Vec1: { indicateur: { provenance: 'DGFiP, impôt sur le revenu par commune (IRCOM, revenus 2024) : revenu fiscal de référence total / nombre de foyers fiscaux ; communes sous secret statistique : moyenne du département', annee: 'revenus 2024' } },
+  Vec2: {
+    indicateur: { provenance: `${RP23}, base communale Logement`, annee: '2023' },
+    pers_piece: { provenance: `${RP23}, base communale Logement (résidences principales, pièces)`, annee: '2023' },
+    maisons: { provenance: `${RP23}, base communale Logement (maisons)`, annee: '2023' }
+  },
+  Vec3: {
+    indicateur: { provenance: `${RP23}, bases communales Caractéristiques de l'emploi et Emploi - population active`, annee: '2023' },
+    stable: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDI, fonctionnaires, non-salariés)`, annee: '2023' },
+    autres: { provenance: `${RP23}, base communale Caractéristiques de l'emploi (CDD, intérim, aidés, apprentis)`, annee: '2023' },
+    chomeur: { provenance: `${RP23}, base communale Emploi - population active (chômeurs)`, annee: '2023' }
+  },
+  Vec4: { indicateur: { provenance: "INSEE, base permanente des équipements 2024 ; temps de trajet OSRM sur OpenStreetMap (Geofabrik, 06/11/2025)", annee: '2024' } }
+};
+
+function badgeSource(indicateur, comp) {
+  const s = SOURCES_DONNEES[indicateur.replace('Indicateur_', '')]?.[comp || 'indicateur'];
+  const echapper = t => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const texte = s
+    ? `Provenance : ${s.provenance}. Année : ${s.annee || 'non renseignée (à documenter)'}.`
+    : 'Provenance et année non renseignées (à documenter).';
+  const manque = !s || !s.annee;
+  return `<span class="src-badge${manque ? ' src-manquante' : ''}" tabindex="0" role="note" aria-label="${echapper(texte)}" data-src="${echapper(texte)}">ⓘ</span>`;
+}
+
 // Indicateurs décomposés : un slider par sous-composante, l'indicateur est recalculé par sa formule d'origine
 // (mêmes formules que Code/Python/exporter_sous_composantes.py, qui vérifie qu'elles redonnent le JSON).
 // binaire = valeur brute quand la case est cochée ; inverse = une valeur plus basse est plus favorable ;
@@ -2361,7 +2409,7 @@ function htmlSousComposantes(indicateur, communeNom) {
       html += `
         <label class="sc-binaire">
           <input type="checkbox" id="${id}" ${valeurs[comp] ? 'checked' : ''} onchange="majSousComposante('${indicateur}', '${comp}')" />
-          ${meta.label}
+          ${meta.label} ${badgeSource(indicateur, comp)}
         </label>`;
       continue;
     }
@@ -2370,7 +2418,7 @@ function htmlSousComposantes(indicateur, communeNom) {
     html += `
       <div class="sc-row">
         <div class="sc-header">
-          <span>${meta.label}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
+          <span>${meta.label} ${badgeSource(indicateur, comp)}${meta.inverse ? ' <em title="Une valeur plus basse est plus favorable">(↓ mieux)</em>' : ''}</span>
           <span id="${id}_val">${libelleSousComposante(indicateur, comp, valeurs[comp])}</span>
         </div>
         <div class="slider-wrap">
@@ -2501,7 +2549,7 @@ function afficherCommune(communeNom) {
     indicateursHTML += `
       <li class="indicateur-row${decompose ? ' indicateur-decompose' : ''}">
         <div class="indicateur-row-header">
-          <strong>${nomIndicateur}</strong>
+          <strong>${nomIndicateur}</strong>${badgeSource(nomIndicateur)}
           <button class="info-button" data-indicator="${nomIndicateur}" onclick="toggleIndicatorInfo(event, '${nomIndicateur}')" aria-label="Information">
             🛈
           </button>

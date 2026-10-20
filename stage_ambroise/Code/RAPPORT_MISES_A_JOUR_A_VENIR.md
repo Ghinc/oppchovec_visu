@@ -7,7 +7,7 @@ Les dates marquées **(officiel)** viennent d'un calendrier publié par la sourc
 ## En bref
 
 - **Rien d'urgent.** L'indice courant v2 utilise des données de 2023 à 2025, c'est le millésime le plus récent disponible pour la plupart des sources.
-- **Une mise à jour peu coûteuse est possible dès maintenant** : Opp4 (réseau) avec le trimestre T4 2025 de l'ARCEP, et la BPE 2025 pour Vec4 (publiée en 2026).
+- **Des données plus récentes existent déjà pour Opp4 (ARCEP T4 2025) et Vec4 (BPE 2025), mais on ne les intègre pas** : la carte est une photographie d'un instant donné, renouvelée d'un bloc quand c'est pertinent.
 - **La prochaine vraie mise à jour d'ensemble : mi-2027**, quand l'INSEE publie le recensement millésime 2025 (juin 2027) et que les revenus 2025 de la DGFiP arrivent (printemps 2027, estimation). Mais pour les petites communes, ce recensement ne sera renouvelé qu'aux deux cinquièmes.
 - **La première carte où presque toutes les petites communes ont de nouvelles données de recensement : celle du millésime 2028**, publié vers juin 2029 (estimation).
 
@@ -31,7 +31,7 @@ Source : [calendrier de diffusion du recensement de l'INSEE](https://www.insee.f
 
 Ce que le millésime 2025 apporterait : les collectes de 2026 et 2027 viendraient remplacer celles de 2021 et 2022. Environ **2 communes de rotation sur 5** auraient de nouvelles données de recensement ; les trois autres groupes garderaient les mêmes collectes qu'en 2023. En clair : la carte de juin 2027 changerait un peu, celle de 2029 davantage.
 
-À noter : la liste des communes de chaque groupe de rotation figure dans le décret n° 2003-561 (annexe). Elle n'est pas encore récupérée dans le projet ; on pourrait ainsi dire, commune par commune, quelle année sa collecte est renouvelée.
+Ordre de grandeur pour la Corse : chaque campagne annuelle recense une soixantaine à une quatre-vingtaine de petites communes (74 communes en 2025, 75 en 2026, plus l'échantillon de 8 % à Ajaccio, Bastia et Porto-Vecchio), soit à peu près 360 / 5 par groupe. La liste commune par commune des groupes n'est pas publiée dans un fichier que j'ai pu retrouver (le décret n° 2003-561 ne la donne pas sous forme exploitable, et l'INSEE ne l'expose que campagne par campagne) : voir §5.
 
 ## 2. Source par source : les dix indicateurs
 
@@ -56,13 +56,13 @@ Détails vérifiés pour cette session :
 
 | Échéance | Ce qui est nouveau | Ampleur du changement attendu | Recommandation |
 |---|---|---|---|
-| **Maintenant (fin 2026)** | Opp4 en T4 2025, Vec4 en BPE 2025 | Petite : Opp4 mesure le réseau, qui progresse ; Vec4 bouge à la marge | Facultatif. À faire si vous voulez une carte « 2025 » homogène sur ces deux indicateurs |
+| **Maintenant (fin 2026)** | Opp4 en T4 2025, Vec4 en BPE 2025 sont disponibles | Petite | **Ne rien faire** : la carte est une photographie à un instant donné, on la renouvelle d'un bloc quand c'est pertinent, pas indicateur par indicateur |
 | **Mars 2027** | 4G T4 2026 | Très petite | Inutile seule |
 | **Juin à juillet 2027** | Recensement millésime 2025 (2/5 des petites communes renouvelées) + revenus 2025 (mai 2027, estimation) | Moyenne : 8 indicateurs sur 10 bougent, en partie | **Première mise à jour d'ensemble intéressante.** C'est la bonne date pour une v3 si vous voulez une carte à jour pour l'année 2027 |
 | **Juin 2029** | Recensement millésime 2027 | Forte | Les petites communes auront toutes eu une collecte renouvelée depuis la v2 |
 | **Vers 2031** | Millésime 2028, complet pour les petites communes (estimation) | — | Première carte dont tout le recensement est neuf pour toutes les communes |
 
-Mon conseil : **une v3 en juillet 2027**, une fois le recensement 2025 et les revenus 2025 sortis. D'ici là, ne rien changer, sauf à vouloir intégrer Opp4 et Vec4 plus récents pour la rédaction.
+Mon conseil : **une v3 en juillet 2027**, une fois le recensement 2025 et les revenus 2025 sortis. D'ici là, ne rien changer.
 
 ## 4. Comment refaire la carte le moment venu
 
@@ -81,7 +81,6 @@ Toutes les étapes sont déjà des scripts du dépôt. La procédure est décrit
 
 ## 5. Ce qui reste à décider ou à faire (hors calendrier)
 
-- Récupérer la liste des **groupes de rotation par commune** (décret 2003-561) pour savoir, commune par commune, quand ses données seront renouvelées.
-- Décider si l'on **met à jour Opp4 et Vec4 dès maintenant** (voir le tableau du §3).
+- **Groupes de rotation par commune** : recherche faite, liste non trouvée en ligne. Pour l'obtenir, demander à la direction régionale de l'INSEE en Corse la liste des communes recensées en 2021, 2022, 2023, 2024 et 2025 (le groupe d'une commune est l'année où elle a été enquêtée, qui se répète tous les cinq ans). Si vous préférez, je prépare le courriel.
 - Porter l'onglet Évolution et l'agrégation par EPCI vers `demo_outil` (non commencé).
 - Revérifier les calendriers du §2 marqués « estimation » au printemps 2027.
