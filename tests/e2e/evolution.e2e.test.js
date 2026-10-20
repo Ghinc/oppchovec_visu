@@ -217,3 +217,38 @@ test('Évolution : grisage des communes de moins de 100 habitants, avertissement
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Évolution : légendes sur les cartes, fiche pleine largeur, bouton ⓘ de provenance des données de chaque carte', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    // une légende posée sur chacune des trois cartes, plus de colonne de légendes en bas
+    for (const t of ['a0', 'a1', 'variation']) {
+      const l = page.locator(`.evolution-carte[data-carte="${t}"] .evolution-legende-carte`);
+      assert.ok(await l.isVisible(), `légende sur la carte ${t}`);
+      assert.equal(await l.locator('.evolution-classe').count(), 5, `5 classes sur ${t}`);
+    }
+    assert.equal(await page.locator('.evolution-bas-gauche').count(), 0);
+    const largeurBas = await page.evaluate(() => document.querySelector('.evolution-bas').getBoundingClientRect().width);
+    const largeurFiche = await page.evaluate(() => document.getElementById('evolution-fiche').getBoundingClientRect().width);
+    assert.ok(largeurFiche > 0.9 * largeurBas, `la fiche prend la largeur (${largeurFiche} / ${largeurBas})`);
+    // provenance : une infobulle par carte, sources de l'année, 10 indicateurs pour l'indice
+    for (const [t, motsAttendus] of [['a0', ['2016', 'mars 2017']], ['a1', ['2021', 'décembre 2021']], ['variation', ['2016', '2021']]]) {
+      await page.click(`.evolution-bouton-source[data-carte="${t}"]`);
+      const pop = page.locator(`#evolution-source-${t}`);
+      assert.ok(await pop.isVisible(), `infobulle ${t}`);
+      assert.equal(await pop.locator('tr').count(), 1 + 10, 'en-tête + 10 indicateurs');
+      const texte = await pop.innerText();
+      for (const m of motsAttendus) assert.ok(texte.includes(m), `${t} : ${m}`);
+      assert.equal(await page.locator('.evolution-cartes.zoom').count(), 0, 'le bouton ⓘ n\'agrandit pas la carte');
+    }
+    // une seule infobulle ouverte à la fois ; Échap les ferme ; avec une dimension, seuls ses indicateurs
+    assert.equal(await page.locator('.evolution-source-popover:visible').count(), 1);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('.evolution-source-popover:visible').count(), 0);
+    await page.selectOption('#evolution-variable', 'Cho');
+    await page.click('.evolution-bouton-source[data-carte="a1"]');
+    assert.equal(await page.locator('#evolution-source-a1 tr').count(), 1 + 2, 'Cho : 2 indicateurs');
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
