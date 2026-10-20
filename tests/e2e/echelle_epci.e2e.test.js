@@ -106,7 +106,16 @@ test('Échelle EPCI : l\'onglet Évolution passe aux EPCI (19 polygones, série 
     let t = (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');
     for (const mot of [nom, 'Indice OppChoVec', 'Ajaccio (', 'Communes']) assert.ok(t.includes(mot), mot);
     assert.equal(await page.locator('#evolution-fiche .evolution-alerte').count(), 0);
-    assert.equal(await page.locator('#evolution-fiche .evolution-ligne-score[data-variable="Opp1"]').count(), 0, 'indicateurs non cliquables à l\'échelle EPCI');
+    // les indicateurs bruts sont dépliables : moyenne des communes aux deux dates, poids qui somment à 100 % chaque année
+    await page.click('#evolution-fiche .evolution-ligne-score[data-variable="Opp1"]');
+    const detail = page.locator('#evolution-fiche .evolution-detail', { hasText: 'moyenne des valeurs de ses communes' });
+    assert.ok(await detail.isVisible(), 'détail de l\'indicateur d\'un EPCI');
+    assert.equal(await detail.locator('tbody tr, tr').filter({ hasText: 'Ajaccio' }).count() >= 1, true, 'une ligne par commune');
+    const poids2016 = await detail.locator('tr td:nth-child(3)').allInnerTexts();
+    assert.ok(Math.abs(poids2016.filter((x) => x.includes('%')).reduce((t, x) => t + parseFloat(x.replace(/\s/g, '').replace(',', '.')), 0) - 100) < 0.3, 'poids 2016 : 100 %');
+    const valeurEpci = await page.evaluate((n) => evolutionDonnees.communes[n]['2016'].indicateurs.Opp1, nom);
+    assert.ok((await detail.innerText()).replace(/\s+/g, ' ').includes(valeurEpci.toFixed(2).replace('.', ',')), 'la valeur de l\'EPCI affichée est celle de la série');
+    await page.click('#evolution-fiche .evolution-ligne-score[data-variable="Opp1"]');
     await page.click('.evolution-ligne-score[data-variable="OppChoVec"]');
     t = (await page.locator('#evolution-fiche').textContent()).replace(/\s+/g, ' ');
     for (const mot of ['Somme S', 'Contribution à ΔS']) assert.ok(t.includes(mot), mot);

@@ -530,6 +530,45 @@ function evolutionIndicateurHtml(cle, nom) {
         `<div class="evolution-petit">Dans la dimension ${EVOLUTION_VARIABLES[dim]}, cet indicateur contribue pour <strong>${evolutionSigne(part, 2)} point</strong> (sur 10) à l'évolution du score.</div>`;
 }
 
+// Détail d'un indicateur brut d'un EPCI : moyenne des valeurs de ses communes aux deux dates (pondérée par les habitants de chaque année, ou simple)
+function evolutionIndicateurEpciHtml(cle, nomEpci) {
+    const d = evolutionDonnees;
+    const [a0, a1] = d.annees;
+    const base = evolutionDonneesCommunes();
+    const epci = epciDonnees.epci.find(x => x.nom === nomEpci);
+    const noms = Object.keys(epci.communes).filter(n => base.communes[n]);
+    const prorata = d.prorata !== false;
+    const dec = EVOLUTION_DECIMALES[cle] ?? 2;
+    const f = (v, n = dec) => evolutionFmt(v, n);
+    const an = a => String(a);
+    const hab = Object.fromEntries([a0, a1].map(a => [a, Object.fromEntries(noms.map(n => [n, base.communes[n][an(a)].composantes.Cho2.population]))]));
+    const total = Object.fromEntries([a0, a1].map(a => [a, noms.reduce((t, n) => t + (prorata ? hab[a][n] : 1), 0)]));
+    const poids = (a, n) => (prorata ? hab[a][n] : 1) / total[a];
+    const val = (a, n) => base.communes[n][an(a)].indicateurs[cle];
+    const agg = a => noms.reduce((t, n) => t + poids(a, n) * val(a, n), 0);
+    const pct = x => evolutionFmt(100 * x, 1) + ' %';
+    const classement = [...noms].sort((x, y) => hab[a1][y] - hab[a1][x]);
+    const lignes = classement.map(n => prorata
+        ? `<tr><td>${evolutionEchapper(n)}</td><td>${f(hab[a0][n], 0)}</td><td>${pct(poids(a0, n))}</td><td>${f(val(a0, n))}</td><td>${f(hab[a1][n], 0)}</td><td>${pct(poids(a1, n))}</td><td>${f(val(a1, n))}</td><td>${evolutionSigne(val(a1, n) - val(a0, n), dec)}</td></tr>`
+        : `<tr><td>${evolutionEchapper(n)}</td><td>${pct(poids(a0, n))}</td><td>${f(val(a0, n))}</td><td>${f(val(a1, n))}</td><td>${evolutionSigne(val(a1, n) - val(a0, n), dec)}</td></tr>`).join('');
+    const entete = prorata
+        ? `<tr><th>Commune</th><th>Habitants ${a0}</th><th>Poids ${a0}</th><th>${a0}</th><th>Habitants ${a1}</th><th>Poids ${a1}</th><th>${a1}</th><th>Écart</th></tr>`
+        : `<tr><th>Commune</th><th>Poids</th><th>${a0}</th><th>${a1}</th><th>Écart</th></tr>`;
+    const t0 = agg(a0), t1 = agg(a1);
+    const vide = prorata ? '<td></td><td></td>' : '';
+    const totale = prorata
+        ? `<tr class="evolution-total"><td>${EVOLUTION_NOMS_INDICATEURS[cle]} de l'EPCI ${evolutionBadgeIndicateur(cle)}</td><td>${f(total[a0], 0)}</td><td></td><td>${f(t0)}</td><td>${f(total[a1], 0)}</td><td></td><td>${f(t1)}</td><td><strong>${evolutionSigne(t1 - t0, dec)}</strong></td></tr>`
+        : `<tr class="evolution-total"><td>${EVOLUTION_NOMS_INDICATEURS[cle]} de l'EPCI ${evolutionBadgeIndicateur(cle)}</td><td></td><td>${f(t0)}</td><td>${f(t1)}</td><td><strong>${evolutionSigne(t1 - t0, dec)}</strong></td></tr>`;
+    const intro = prorata
+        ? `${cle} de l'EPCI = moyenne des valeurs de ses communes pondérée par leur nombre d'habitants de l'année : Σ (habitants × valeur) ÷ Σ habitants, calculée séparément en ${a0} et en ${a1}.`
+        : `${cle} de l'EPCI = moyenne simple des valeurs de ses communes (chaque commune compte pour 1), calculée séparément en ${a0} et en ${a1}.`;
+    const approx = ['Opp2', 'Opp3', 'Vec1', 'Cho1'].includes(cle) ? '<div class="evolution-petit">Moyenne de valeurs communales : approximation pour cet indicateur (indice de Theil, somme avec indicatrices, revenu moyen par foyer ou logarithme).</div>' : '';
+    void vide;
+    return `<div class="evolution-petit">${intro}</div>` +
+        `<table class="evolution-table evolution-table-detail">${entete}${classement.length ? lignes : ''}${totale}</table>` +
+        `<div class="evolution-petit">Le poids d'une commune est sa part des habitants de l'EPCI${prorata ? ' cette année-là' : ' (1 ÷ nombre de communes)'} ; chaque valeur de commune est celle de l'indicateur ${cle} à cette date.</div>` + approx;
+}
+
 // Communes membres d'un EPCI : habitants de la dernière année et évolution de leur indice (série communale)
 function evolutionCommunesMembresHtml(nomEpci) {
     const e = epciDonnees.epci.find(x => x.nom === nomEpci), base = evolutionDonneesCommunes();
@@ -547,10 +586,9 @@ function evolutionFicheContenu(nom) {
     const lignes = Object.keys(EVOLUTION_NOMS_INDICATEURS).map(k => {
         const x0 = c[String(a0)].indicateurs[k], x1 = c[String(a1)].indicateurs[k];
         const dec = EVOLUTION_DECIMALES[k] ?? 2;
-        const ouvert = !epci && evolutionDetailsOuverts.has(k);
-        if (epci) return `<tr><td>${EVOLUTION_NOMS_INDICATEURS[k]} ${evolutionBadgeIndicateur(k)}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>`;       // le détail des composantes est communal
+        const ouvert = evolutionDetailsOuverts.has(k);
         return `<tr class="evolution-ligne-score" data-variable="${k}" tabindex="0" role="button" aria-expanded="${ouvert}" title="Cliquer pour ${ouvert ? 'replier' : 'voir'} le détail du calcul"><td>${ouvert ? '▾' : '▸'} ${EVOLUTION_NOMS_INDICATEURS[k]} ${evolutionBadgeIndicateur(k)}</td><td>${evolutionFmt(x0, dec)}</td><td>${evolutionFmt(x1, dec)}</td><td><strong>${evolutionSigne(x1 - x0, dec)}</strong></td></tr>` +
-            (ouvert ? `<tr class="evolution-detail"><td colspan="4">${evolutionIndicateurHtml(k, nom)}</td></tr>` : '');
+            (ouvert ? `<tr class="evolution-detail"><td colspan="4">${epci ? evolutionIndicateurEpciHtml(k, nom) : evolutionIndicateurHtml(k, nom)}</td></tr>` : '');
     }).join('');
     const scores = Object.keys(EVOLUTION_VARIABLES).map(v => {
         const v0 = evolutionValeur(d, nom, a0, v), v1 = evolutionValeur(d, nom, a1, v);
@@ -565,7 +603,7 @@ function evolutionFicheContenu(nom) {
     return `<h4>${evolutionEchapper(nom)}</h4>${alerte}` +
         `<table class="evolution-table"><tr><th>Scores (0-10)</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${scores}` +
         `<tr><th>Indicateurs bruts</th><th>${a0}</th><th>${a1}</th><th>Évolution</th></tr>${lignes}</table>` +
-        `<div class="evolution-petit">${epci ? 'Cliquez sur un score pour voir le détail du calcul et ce qui l\'a fait monter ou baisser ; les indicateurs de l\'EPCI sont des moyennes de ceux des communes.' : 'Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l\'a fait monter ou baisser.'}</div>` +
+        `<div class="evolution-petit">${epci ? 'Cliquez sur un score ou sur un indicateur pour voir le détail du calcul ; les indicateurs de l\'EPCI sont des moyennes de ceux des communes.' : 'Cliquez sur un score ou sur un indicateur pour voir le détail du calcul et ce qui l\'a fait monter ou baisser.'}</div>` +
         (epci ? evolutionCommunesMembresHtml(nom) : '') +
         (estime.length ? `<div class="evolution-petit">Revenu fiscal non communiqué par la DGFiP (secret statistique) pour ${estime.join(' et ')} : valeur du département.</div>` : '');
 }
