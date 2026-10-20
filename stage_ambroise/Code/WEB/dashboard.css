@@ -2732,3 +2732,13 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 .epci-table th.epci-actif {
   background: #1f4f8f;
 }
+
+/* Bandeau de simulation (valeurs d'un EPCI modifiées à la main) */
+.epci-simulation {
+  margin: 6px 0;
+  padding: 6px 10px;
+  background: #fff4d6;
+  border-left: 4px solid #e0b84c;
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+}

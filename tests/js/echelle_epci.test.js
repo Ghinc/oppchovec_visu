@@ -75,7 +75,7 @@ test('échelle EPCI : panneau de sélection = fiche de l\'EPCI ; histogramme et 
   app.ev(`afficherCommune(${JSON.stringify(e.nom)})`);
   const html = app.ev('document.getElementById("resultCommune").innerHTML');
   for (const mot of [e.nom, 'pondérée par les habitants', 'Opp1', 'Vec4', 'Ajaccio']) assert.ok(html.includes(mot), mot);
-  assert.ok(!html.includes('type="range"'),'pas de curseurs à l\'échelle EPCI');
+  assert.equal((html.match(/type="range"/g) || []).length, 10, 'un curseur par indicateur agrégé de l\'EPCI (simulation)');
   // retour aux communes
   await app.ev("changerEchelle('commune')");
   assert.equal(app.ev('echelleEstEPCI()'), false);

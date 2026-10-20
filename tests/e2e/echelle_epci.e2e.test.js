@@ -176,3 +176,34 @@ test('Échelle EPCI : « commune » devient « EPCI » dans les titres et légen
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Échelle EPCI : curseurs sur les valeurs agrégées d\'un EPCI (simulation), Recalculer ne change que cet EPCI, Réinitialiser restaure', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, alertes, nouvellesErreurs }) => {
+    const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
+    const photo = () => page.evaluate(() => JSON.parse(JSON.stringify(indiceFinale)));
+    for (const [case_, prorata] of [['#echelle-epci-pop', true], ['#echelle-epci-commune', false]]) {
+      await page.check(case_);
+      await page.waitForFunction((n) => typeof epciResultats !== 'undefined' && Object.keys(epciResultats.prorata).length === 19 && document.getElementById('echelle-epci-etat').textContent.length > 0, 0);
+      await page.selectOption('#communeSelect', e.nom);
+      await page.click('#validerCommune');
+      assert.equal(await page.locator('#resultCommune input[type=range]').count(), 10, 'un curseur par indicateur');
+      const avant = await photo();
+      // Opp1 poussé au maximum corse : le score de l'EPCI monte, les autres ne bougent pas
+      await page.$eval('#Indicateur_Opp1', (el) => { el.value = '100'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+      assert.match((await page.locator('#Indicateur_Opp1_val').innerText()).replace(/\s+/g, ' '), /^100 % de l'échelle corse/);
+      await page.locator('#resultCommune button', { hasText: 'Recalculer' }).click();
+      const apres = await photo();
+      assert.ok(apres[e.nom] > avant[e.nom], `${e.nom} doit monter (${prorata ? 'pro rata' : 'simple'})`);
+      for (const nom of Object.keys(avant)) if (nom !== e.nom) assert.equal(apres[nom], avant[nom], `${nom} ne doit pas bouger`);
+      assert.equal(alertes.at(-1), 'Indice recalculé avec succès');
+      assert.ok((await page.locator('#resultCommune').innerText()).includes('Simulation'), 'bandeau de simulation');
+      assert.equal((await page.locator('#Indicateur_Opp1').inputValue()).slice(0, 3), '100', 'le curseur garde la valeur simulée');
+      await page.locator('#resultCommune button', { hasText: 'Réinitialiser' }).click();
+      assert.deepEqual(await photo(), avant, 'retour exact à l\'état calculé');
+      assert.ok(!(await page.locator('#resultCommune').innerText()).includes('Simulation'));
+      await page.uncheck(case_);
+      await page.waitForFunction(() => { let n = 0; geojsonLayers.oppchovec.eachLayer(() => n++); return n === 360; });
+    }
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
