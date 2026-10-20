@@ -166,26 +166,28 @@ function epciCommuneHtml(e, nom) {
 
 // HTML de la fiche d'un EPCI (scores et indicateurs agrégés selon les deux méthodes, communes membres) ; commune : détail d'une commune de l'EPCI, ou null
 function epciFicheHtml(e, commune) {
-    const p = epciResultats.prorata[e.siren], s = epciResultats.simple[e.siren];
-    // méthode affichée sur les cartes (colonne mise en évidence)
-    const actif = echelleEpci === 'epci-pop' ? 'prorata' : echelleEpci === 'epci-commune' ? 'simple' : (epciProrata() ? 'prorata' : 'simple');
-    const cls = m => (m === actif ? ' class="epci-actif"' : '');
-    const entetes = `<th${cls('prorata')}>Moyenne pondérée par les habitants</th><th${cls('simple')}>Moyenne simple (1 commune = 1)</th>`;
-    const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => `<tr><td>${lib}</td><td${cls('prorata')}>${epciFmt(p[k])}</td><td${cls('simple')}>${epciFmt(s[k])}</td><td>${(p[k] - s[k] >= 0 ? '+' : '') + epciFmt(p[k] - s[k])}</td></tr>`).join('');
+    // une seule méthode : celle choisie en haut (pondérée par les habitants ou simple), la même que sur les cartes
+    const prorata = echelleEpci === 'epci-pop' ? true : echelleEpci === 'epci-commune' ? false : epciProrata();
+    const r = epciResultats[prorata ? 'prorata' : 'simple'][e.siren];
+    const methode = prorata ? 'moyenne pondérée par les habitants' : 'moyenne simple (1 commune = 1)';
+    const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => `<tr><td>${lib}</td><td><strong>${epciFmt(r[k])}</strong></td></tr>`).join('');
     const indicateurs = EPCI_INDICATEURS.map(k => {
         const ind = 'Indicateur_' + k, meta = META_INDICATEURS[ind];
         const t = typeof TITRES_INDICATEURS !== 'undefined' && TITRES_INDICATEURS[ind] ? ' — ' + TITRES_INDICATEURS[ind][0] : '';
         const etoile = epciDonnees.millesime_approche[k] ? ' *' : '';
-        return `<tr><td>${k}${t}</td><td${cls('prorata')}>${formaterValeur(meta, p.agregats[ind])}</td><td${cls('simple')}>${formaterValeur(meta, s.agregats[ind])}</td><td class="epci-petit">${epciDonnees.millesimes[k]}${etoile}</td></tr>`;
+        return `<tr><td>${k}${t}</td><td><strong>${formaterValeur(meta, r.agregats[ind])}</strong></td>${prorata ? `<td class="epci-petit">${epciDonnees.millesimes[k]}${etoile}</td>` : ''}</tr>`;
     }).join('');
     const approches = EPCI_INDICATEURS.filter(k => epciDonnees.millesime_approche[k]).map(k => `${k} : ${epciDonnees.millesime_approche[k]}`).join(' ; ');
     const mill = epciDonnees.millesimes.Cho2;
     const communes = Object.entries(e.communes).sort((a, b) => b[1].pop.Cho2 - a[1].pop.Cho2).map(([nom, c]) => `<a href="#" class="epci-lien-commune" data-commune="${epciEch(nom)}">${epciEch(nom)}</a> (${epciFmt(c.pop.Cho2, 0)})`).join(', ');
+    const explication = prorata
+        ? "Chaque indicateur de l'EPCI est la moyenne de ses communes <strong>pondérée par leur nombre d'habitants</strong> : une grande commune pèse plus."
+        : "Chaque indicateur de l'EPCI est la <strong>moyenne simple</strong> de ses communes : chaque commune compte pour 1, quelle que soit sa taille.";
     return (commune && e.communes[commune] ? epciCommuneHtml(e, commune) : '') + `<h4>${epciEch(e.nom)}</h4><div class="epci-petit">${e.nature} · fiscalité ${e.fiscalite} · ${e.nb_communes} communes · ${epciFmt(e.population_2023, 0)} habitants (${mill})</div>` +
-        `<div class="epci-petit">Un EPCI se calcule à partir de ses communes de deux façons : <strong>pondérée par les habitants</strong> (une grande commune pèse plus) ou <strong>simple</strong> (chaque commune compte pour 1). La colonne en bleu est celle affichée sur les cartes.</div>` +
-        `<table class="epci-table"><tr><th>Scores de l'EPCI (sur 10)</th>${entetes}<th>Écart (pondérée − simple)</th></tr>${scores}</table>` +
-        `<table class="epci-table"><tr><th>Indicateurs de l'EPCI (valeurs moyennes des communes)</th>${entetes}<th>Année de la population pour la pondération</th></tr>${indicateurs}</table>` +
-        `<div class="epci-petit">* source plus récente que les populations publiées : la population ${mill} est utilisée pour pondérer (${epciEch(approches)}).</div>` +
+        `<div class="epci-petit">${explication}</div>` +
+        `<table class="epci-table"><tr><th>Scores de l'EPCI (sur 10)</th><th>${methode}</th></tr>${scores}</table>` +
+        `<table class="epci-table"><tr><th>Indicateurs de l'EPCI</th><th>${methode}</th>${prorata ? '<th>Année de la population pour la pondération</th>' : ''}</tr>${indicateurs}</table>` +
+        (prorata && approches ? `<div class="epci-petit">* source plus récente que les populations publiées : la population ${mill} est utilisée pour pondérer (${epciEch(approches)}).</div>` : '') +
         `<div class="epci-petit"><strong>Communes</strong> (habitants ${mill}) : ${communes}</div>`;
 }
 

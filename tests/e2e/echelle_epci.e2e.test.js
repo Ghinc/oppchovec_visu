@@ -53,7 +53,7 @@ test('Échelle EPCI : cartes, top 10, sélection, bandeaux ; deux méthodes ; re
     await page.selectOption('#communeSelect', ajaccio);
     await page.click('#validerCommune');
     const fiche = (await page.locator('#resultCommune').textContent()).replace(/\s+/g, ' ');
-    for (const mot of [ajaccio, 'pondérée par les habitants', 'Moyenne simple', 'Ajaccio']) assert.ok(fiche.includes(mot), mot);
+    for (const mot of [ajaccio, 'pondérée par les habitants', 'Ajaccio']) assert.ok(fiche.includes(mot), mot);
 
     // « EPCI commune » : moyenne simple, les couleurs changent
     await page.check('#echelle-epci-commune');
@@ -144,7 +144,9 @@ test('Échelle EPCI : « commune » devient « EPCI » dans les titres et légen
     const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
     await page.selectOption('#communeSelect', e.nom);
     await page.click('#validerCommune');
-    assert.equal(await page.locator('#resultCommune details.calcul-detail').count(), 10 + 1, 'un détail par indicateur et un pour l\'indice');
+    const fichePop = (await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').toLowerCase();
+    assert.ok(fichePop.includes('année de la population pour la pondération') && !fichePop.includes('moyenne simple (1 commune = 1)'), 'une seule méthode affichée : pondérée par les habitants');
+    assert.equal(await page.locator('#resultCommune details.calcul-detail').count(), 10 + 1,'un détail par indicateur et un pour l\'indice');
     const bloc = page.locator('#resultCommune .indicateur-row', { has: page.locator('summary') }).first();
     await bloc.locator('summary').click();
     const lignes = await bloc.locator('tbody tr').count();
@@ -165,6 +167,8 @@ test('Échelle EPCI : « commune » devient « EPCI » dans les titres et légen
     await page.click('#validerCommune');
     await page.locator('#resultCommune summary').first().click();
     assert.match(await page.locator('#resultCommune details.calcul-detail').first().innerText(), /Moyenne simple/);
+    const ficheSimple = (await page.locator('#resultCommune').innerText()).replace(/\s+/g, ' ').toLowerCase();
+    assert.ok(ficheSimple.includes('moyenne simple (1 commune = 1)') && !ficheSimple.includes('année de la population') && !ficheSimple.includes('pondérée par les habitants'), 'une seule méthode affichée : simple');
     // retour aux communes : libellés rétablis
     await page.uncheck('#echelle-epci-commune');
     await page.waitForFunction(() => document.querySelector('[data-translate="commune-title"]').textContent.includes('commune'));
