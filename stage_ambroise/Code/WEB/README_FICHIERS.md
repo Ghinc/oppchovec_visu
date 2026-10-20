@@ -97,7 +97,7 @@ Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `st
   et `cah_5_clusters_ecarts.png` montrent l'écart de chaque groupe à la moyenne.
 - **donnees_completes_communes.json** : valeurs arrondies par commune, pour l'assistant conversationnel.
 - **details_calcul.json** : éléments bruts du calcul des 10 indicateurs de chaque commune (effectifs par niveau de diplôme, revenus et foyers fiscaux, parts de couverture…), affichés par le menu déroulant « Voir le calcul » du panneau commune. Produit par `exporter_details_calcul.py` à partir de `sources_indice_v2.json`.
-- **sous_composantes.json** : valeurs brutes des sous-composantes d'Opp3, Opp4, Cho1, Vec2 et Vec3 (curseurs du panneau
+- **sous_composantes.json** : valeurs brutes des sous-composantes des 10 indicateurs (parts de diplôme pour Opp1, catégories pour Opp2, sous-composantes d'Opp3, Opp4, Vec2 et Vec3, une seule composante pour Cho1, Cho2, Vec1 et Vec4 ; curseurs du panneau
   commune). Il est vérifié à la génération : chaque recomposition doit redonner exactement l'indicateur de `data_scores_0_10.json`.
 - **`../../Données/indice_v2/sources_indice_v2.json`** : **source de l'indice courant v2**. Pour chaque commune, les composantes brutes de chacun des 10 indicateurs (effectifs par niveau de
   diplôme, catégories socioprofessionnelles, ménages avec voiture, couverture 4G, débit, fibre, population en QPV, population par âge et nationalité, revenu fiscal et foyers, personnes par pièce,

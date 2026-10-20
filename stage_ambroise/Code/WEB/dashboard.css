@@ -2738,3 +2738,15 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 .calcul-detail-indice {
   margin: var(--spacing-sm) 0;
 }
+
+/* Petit texte explicatif sous chaque variable */
+.sc-aide {
+  margin: 1px 0 3px 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--text-secondary, #666);
+}
+
+.sc-aide-binaire {
+  margin-left: 22px;
+}
