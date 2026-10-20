@@ -506,7 +506,7 @@ function mettreAJourLegendes() {
     });
 
     document.querySelectorAll('.legende-limites').forEach(el => {
-        el.textContent = traductions[lang].limitesCommunes;
+        el.textContent = libelleLimites(lang);
     });
     document.querySelectorAll('.legende-routes').forEach(el => {
         el.textContent = traductions[lang].routesPrincipales;
@@ -1312,7 +1312,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
                 <svg width="30" height="2" style="margin-right: 8px;">
                     <line x1="0" y1="1" x2="30" y2="1" stroke="#333" stroke-width="1.5" />
                 </svg>
-                <span class="legende-limites" style="font-size: 11px;">${(typeof echelleEstEPCI === 'function' && echelleEstEPCI()) ? 'Limites des EPCI' : traductions[lang].limitesCommunes}</span>
+                <span class="legende-limites" style="font-size: 11px;">${libelleLimites(lang)}</span>
             </div>
         `;
 
@@ -2461,7 +2461,12 @@ function htmlDetailCalcul(indicateur, communeNom) {
 
 // De la valeur des indicateurs à l'indice 0-10 (valeurs d'origine de la commune, p_k du mode actuel)
 function htmlDetailIndice(communeNom) {
-  const origine = indicateursOrigine[communeNom];
+  return htmlDetailIndiceDepuis(indicateursOrigine[communeNom], "Valeurs d'origine de la commune, sans les modifications faites avec les curseurs.");
+}
+
+// origine : { Indicateur_Opp1: valeur, … } d'une commune ou d'un EPCI (valeurs agrégées)
+function htmlDetailIndiceDepuis(origine, noteFin) {
+  const communeNom = 'unite';
   if (!origine || !bornesRef) return '';
   const norm = normaliserDonnees({ [communeNom]: origine }, bornesRef.min, bornesRef.max);
   const sc = calculerScoresParCommune(norm)[communeNom];
@@ -2487,7 +2492,7 @@ function htmlDetailIndice(communeNom) {
       <p>S = somme des p<sub>k</sub> × dimension<sub>k</sub><sup>1,5</sup> = ${fmtDetail(somme, 4)}.<br>
       Indice brut = (1/3) × S<sup>2,5/1,5</sup> = ${fmtDetail(brut, 4)}.<br>
       Passage sur 0-10 (minimum et maximum de la Corse : ${fmtDetail(ref.min, 4)} et ${fmtDetail(ref.max, 4)}) : <strong>${fmtDetail(sur10, 2)} / 10</strong>.</p>
-      <p class="calcul-note">Les poids p<sub>k</sub> sont ${modeCalculPk === 'betti' ? 'ceux de Betti et al. (2008), calculés sur toute la Corse' : 'égaux (1 pour chaque dimension)'}. Valeurs d'origine de la commune, sans les modifications faites avec les curseurs.</p>
+      <p class="calcul-note">Les poids p<sub>k</sub> sont ${modeCalculPk === 'betti' ? 'ceux de Betti et al. (2008), calculés sur toute la Corse' : 'égaux (1 pour chaque dimension)'}. ${noteFin}</p>
     </details>`;
 }
 
@@ -2576,6 +2581,26 @@ function estDecompose(indicateur, communeNom) {
 }
 
 // fonction pour afficher le detail d'une commune
+// Libellés qui suivent l'échelle d'analyse : « commune » devient « EPCI » quand une case EPCI est cochée
+const enModeEpci = () => typeof echelleEstEPCI === 'function' && echelleEstEPCI();
+const libelleLimites = lang => enModeEpci() ? 'Limites des EPCI' : traductions[lang].limitesCommunes;
+
+function libelleChoixUnite(lang) {
+  return enModeEpci() ? '-- Sélectionner un EPCI --' : traductions[lang].ui['commune-select'];
+}
+
+function majLibellesEchelle() {
+  const lang = langueFrancais ? 'fr' : 'en';
+  const epci = enModeEpci() && lang === 'fr';
+  const titre = document.querySelector('[data-translate="commune-title"]');
+  if (titre) titre.textContent = epci ? '1. Sélection EPCI' : traductions[lang].ui['commune-title'];
+  const info = document.querySelector('[data-translate="commune-info"]');
+  if (info) info.textContent = epci ? "Informations de l'EPCI sélectionné :" : traductions[lang].ui['commune-info'];
+  const premiere = document.querySelector('#communeSelect option[value=""]');
+  if (premiere) premiere.textContent = libelleChoixUnite(lang);
+  document.querySelectorAll('.legende-limites').forEach(el => { el.textContent = libelleLimites(lang); });
+}
+
 // Clic sur une commune (ou un EPCI) d'une carte : elle est choisie dans la liste déroulante et sa fiche s'affiche
 function selectionnerCommuneDepuisCarte(nom) {
   const liste = document.getElementById('communeSelect');
@@ -2887,7 +2912,7 @@ html += `
   function populateCommuneSelect(data) {
     const select = document.getElementById("communeSelect");
     const lang = langueFrancais ? 'fr' : 'en';
-    select.innerHTML = `<option value="" data-translate="commune-select">${traductions[lang].ui['commune-select']}</option>`; // reset with dynamic translation
+    select.innerHTML = `<option value="" data-translate="commune-select">${libelleChoixUnite(lang)}</option>`; // reset with dynamic translation
 
     // 🔤 Trier les noms de communes
     const communesTriees = Object.keys(data).sort((a, b) => a.localeCompare(b, 'fr'));

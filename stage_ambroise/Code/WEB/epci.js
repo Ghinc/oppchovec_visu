@@ -315,7 +315,54 @@ function epciAfficherDansPanneau(nom) {         // panneau « sélection » de l
     for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
     surlignerCommune(nom, 'red');
     const e = epciDonnees.epci.find(x => x.nom === nom);
-    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) + epciDetailCalculHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+}
+
+
+// ---------- Détail du calcul d'un EPCI (même présentation que pour une commune) ----------
+
+// Un EPCI : pour chaque indicateur, la moyenne des communes (pro rata de la population au millésime de l'indicateur, ou moyenne simple) avec le tableau des communes, puis le calcul de l'indice
+function epciDetailCalculHtml(e) {
+    if (typeof indicateursCommune === 'undefined' || !epciResultats.prorata[e.siren]) return '';
+    const prorata = echelleEpci === 'epci-pop';
+    const agg = epciResultats[prorata ? 'prorata' : 'simple'][e.siren].agregats;
+    const lignesIndicateurs = EPCI_INDICATEURS.map(k => {
+        const ind = 'Indicateur_' + k, meta = META_INDICATEURS[ind], valeur = agg[ind];
+        const b = { min: bornesRef.min[ind], max: bornesRef.max[ind] };
+        const poids = epciPoids(e, k, prorata);
+        const communes = Object.entries(e.communes)
+            .map(([nom, c]) => ({ nom, hab: c.pop[k], w: poids[nom], v: Number(indicateursCommune[nom] && indicateursCommune[nom][ind]) }))
+            .filter(l => isFinite(l.v)).sort((a, b2) => b2.w - a.w);
+        const dec = meta.decimales;
+        const rows = communes.map(l => `<tr><td>${epciEch(l.nom)}</td><td>${prorata ? epciFmt(l.hab, 0) + ' hab.' : ''}</td><td>${epciFmt(100 * l.w, 1)} %</td><td>${formaterValeur(meta, l.v)}</td></tr>`).join('');
+        const formule = prorata
+            ? `Moyenne des valeurs des communes pondérée par leur population de ${epciDonnees.millesimes[k]} : somme de (population × valeur) ÷ somme des populations.`
+            : 'Moyenne simple des valeurs des communes : chaque commune compte pour 1 (somme des valeurs ÷ nombre de communes).';
+        const approx = ['Opp2', 'Opp3', 'Vec1', 'Cho1'].includes(k) ? '<p class="calcul-note">Moyenne de valeurs communales : approximation pour cet indicateur (indice de Theil, somme avec indicatrices, revenu moyen par foyer ou logarithme), voir « Précaution » dans la méthode.</p>' : '';
+        const norm = b.max === b.min ? 0 : (valeur - b.min) / (b.max - b.min);
+        const titre = typeof titreIndicateurHtml === 'function' ? titreIndicateurHtml(ind) : '';
+        return `
+      <li class="indicateur-row">
+        <div class="indicateur-row-header">
+          <strong>${ind.replace('_', ' ')}</strong>
+          ${titre}
+          <span>${libelleSlider(ind, valeur)}</span>
+        </div>
+        <div class="slider-wrap"><div class="jauge-indicateur"><div class="jauge-remplie" style="width:${Math.min(100, Math.max(0, 100 * norm))}%"></div></div></div>
+        <div class="slider-echelle">${libelleEchelle(ind)}</div>
+        <details class="calcul-detail">
+          <summary>Voir le calcul</summary>
+          <p>${formule}</p>
+          <table class="calcul-table"><thead><tr><th>Commune</th><th>${prorata ? 'Population' : ''}</th><th>Poids</th><th>Valeur</th></tr></thead><tbody>${rows}</tbody></table>
+          <p><strong>Valeur de l'indicateur pour l'EPCI : ${formaterValeur(meta, valeur)}</strong></p>
+          ${approx}
+          <p>Normalisation sur l'échelle corse : (valeur − minimum) ÷ (maximum − minimum) = (${formaterValeur(meta, valeur)} − ${formaterValeur(meta, b.min)}) ÷ (${formaterValeur(meta, b.max)} − ${formaterValeur(meta, b.min)}) = <strong>${epciFmt(norm, 3)}</strong>.</p>
+        </details>
+      </li>`;
+    }).join('');
+    const indice = typeof htmlDetailIndiceDepuis === 'function'
+        ? htmlDetailIndiceDepuis(agg, "Valeurs de l'EPCI agrégées à partir de celles de ses communes (mêmes bornes et mêmes poids que pour les communes).") : '';
+    return `<h4 style="margin-top:14px;">Indicateurs de l'EPCI :</h4><ul>${lignesIndicateurs}</ul>${indice}`;
 }
 
 const EPCI_ONGLETS_NON_DISPONIBLES = {       // analyses qui reposent sur des données communales (l'Évolution a sa version EPCI : evolution.js)
@@ -343,6 +390,7 @@ function epciMajControle() {
     pop.checked = echelleEpci === 'epci-pop';
     com.checked = echelleEpci === 'epci-commune';
     document.body.classList.toggle('mode-echelle-epci', echelleEstEPCI());
+    if (typeof majLibellesEchelle === 'function') majLibellesEchelle();
     const etat = document.getElementById('echelle-epci-etat');
     if (etat) etat.textContent = echelleEpci === 'epci-pop' ? 'moyennes pondérées par la population' : echelleEpci === 'epci-commune' ? 'moyennes simples (1 commune = 1)' : 'communes';
 }

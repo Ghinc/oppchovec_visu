@@ -129,3 +129,46 @@ test('Échelle EPCI : l\'onglet Évolution passe aux EPCI (19 polygones, série 
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Échelle EPCI : « commune » devient « EPCI » dans les titres et légendes, et le détail du calcul reste disponible (tableau des communes, indice)', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    const titre = () => page.locator('[data-translate="commune-title"]').innerText();
+    assert.ok((await titre()).includes('commune'));
+    await page.check('#echelle-epci-pop');
+    await page.waitForFunction(() => document.getElementById('echelle-epci-etat').textContent.includes('pondérées') && typeof epciResultats !== 'undefined' && epciResultats.prorata && Object.keys(epciResultats.prorata).length === 19);
+    assert.equal(await titre(), '1. Sélection EPCI');
+    assert.match(await page.locator('[data-translate="commune-info"]').innerText(), /EPCI/);
+    assert.match(await page.locator('#communeSelect option[value=""]').innerText(), /EPCI/);
+    assert.match(await page.locator('.legende-limites').first().innerText(), /EPCI/);
+    // fiche d'un EPCI, avec le détail du calcul
+    const e = agreg.epci.find((x) => x.nom.includes('Pays Ajaccien'));
+    await page.selectOption('#communeSelect', e.nom);
+    await page.click('#validerCommune');
+    assert.equal(await page.locator('#resultCommune details.calcul-detail').count(), 10 + 1, 'un détail par indicateur et un pour l\'indice');
+    const bloc = page.locator('#resultCommune .indicateur-row', { has: page.locator('summary') }).first();
+    await bloc.locator('summary').click();
+    const lignes = await bloc.locator('tbody tr').count();
+    assert.equal(lignes, Object.keys(e.communes).length, 'une ligne par commune de l\'EPCI');
+    const poids = await bloc.locator('tbody tr td:nth-child(3)').allInnerTexts();
+    assert.ok(Math.abs(poids.reduce((t, x) => t + parseFloat(x.replace(/\s/g, '').replace(',', '.')), 0) - 100) < 0.3, 'les poids somment à 100 %');
+    // la valeur affichée est celle de l'agrégation, et le 0-10 détaillé celui de la carte
+    const agg = await page.evaluate((siren) => epciResultats.prorata[siren].agregats.Indicateur_Opp1, e.siren);
+    assert.match((await bloc.innerText()).replace(/\s+/g, ' '), new RegExp("Valeur de l'indicateur pour l'EPCI : " + agg.toFixed(2).replace('.', ',')));
+    const indice = page.locator('#resultCommune details.calcul-detail-indice');
+    await indice.locator('summary').click();
+    const sur10 = await page.evaluate((nom) => indiceFinale[nom], e.nom);
+    assert.match((await indice.innerText()).replace(/\s+/g, ' '), new RegExp(sur10.toFixed(2).replace('.', ',') + ' / 10'));
+    // moyenne simple : le titre de calcul change
+    await page.check('#echelle-epci-commune');
+    await page.waitForFunction(() => document.getElementById('echelle-epci-etat').textContent.includes('simples'));
+    await page.selectOption('#communeSelect', e.nom);
+    await page.click('#validerCommune');
+    await page.locator('#resultCommune summary').first().click();
+    assert.match(await page.locator('#resultCommune details.calcul-detail').first().innerText(), /Moyenne simple/);
+    // retour aux communes : libellés rétablis
+    await page.uncheck('#echelle-epci-commune');
+    await page.waitForFunction(() => document.querySelector('[data-translate="commune-title"]').textContent.includes('commune'));
+    assert.match(await page.locator('#communeSelect option[value=""]').innerText(), /commune/);
+    assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
+  });
+});
