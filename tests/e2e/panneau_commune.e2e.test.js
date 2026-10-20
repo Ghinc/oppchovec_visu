@@ -26,9 +26,9 @@ test('panneau commune : 10 indicateurs, curseurs 0-100 %, valeurs brutes, échel
       assert.equal(await slider.getAttribute('max'), '100');
       const pct = parseFloat(await slider.inputValue());
       assert.ok(pct >= 0 && pct <= 100, `${id} : ${pct}`);
-      assert.match(normaliser(await page.locator(`#Indicateur_${id}_val`).innerText()), /^\d+ % de l'échelle corse · valeur : /);
+      assert.match(normaliser(await page.locator(`#Indicateur_${id}_val`).innerText()), / · \d+ % entre le plus bas et le plus haut de Corse$/);
     }
-    assert.match(normaliser(await page.locator('#Indicateur_Vec1_val').innerText()), /^33 % de l'échelle corse · valeur : 27 283 €$/);
+    assert.match(normaliser(await page.locator('#Indicateur_Vec1_val').innerText()), /^27 283 € · 33 % entre le plus bas et le plus haut de Corse$/);
     assert.match(normaliser(await page.locator('#resultCommune .indicateur-row', { has: page.locator('#Indicateur_Vec1') }).locator('.slider-echelle').innerText()), /^Corse : 12 746 € → 56 621 €$/);
     assert.ok(await page.locator('#resultCommune .slider-origine').count() >= 10, 'un repère de valeur d\'origine par indicateur');
     // sous-curseurs : Opp3 (1 curseur + 2 cases), Opp4 (3), Cho1 (1), Vec2 (2), Vec3 (3)
@@ -60,7 +60,7 @@ test('panneau commune : déplacer un curseur puis recalculer ne change que cette
     const depart = await photoPage(page);
     await ouvrirCommune(page, 'Bastia');
     await deplacer(page, 'Indicateur_Vec4', 100);
-    assert.match(normaliser(await page.locator('#Indicateur_Vec4_val').innerText()), /^100 % de l'échelle corse · valeur : 5 278 services$/);
+    assert.match(normaliser(await page.locator('#Indicateur_Vec4_val').innerText()), /^5 278 services · 100 % entre le plus bas et le plus haut de Corse$/);
     await cliquerBouton(page, 'Recalculer');
     const apres = await photoPage(page);
     assert.ok(apres.indice.Bastia > depart.indice.Bastia);
@@ -81,9 +81,9 @@ test('panneau commune : une sous-composante (fibre) met à jour l\'indicateur à
     const depart = await photoPage(page);
     await ouvrirCommune(page, 'Bastia');
     await deplacer(page, 'Indicateur_Opp4__fibre', 0);
-    assert.match(normaliser(await page.locator('#Indicateur_Opp4__fibre_val').innerText()), /^0 % de l'échelle corse · valeur : 0 %$/);
+    assert.match(normaliser(await page.locator('#Indicateur_Opp4__fibre_val').innerText()), /^0 % · 0 % entre le plus bas et le plus haut de Corse$/);
     const o4 = await page.evaluate(() => JSON.parse(JSON.stringify(sousComposantesOrigine.Bastia.Indicateur_Opp4)));
-    assert.match(normaliser(await page.locator('#Indicateur_Opp4_val').innerText()), new RegExp("^\\d+ % de l'échelle corse · valeur : " + ((o4.g4 + o4.debit) / 3).toFixed(1).replace(".", ",") + " %"));
+    assert.match(normaliser(await page.locator('#Indicateur_Opp4_val').innerText()), new RegExp("^" + ((o4.g4 + o4.debit) / 3).toFixed(1).replace(".", ",") + " % · \\d+ % entre le plus bas et le plus haut de Corse$"));
     assert.deepEqual(await photoPage(page), depart, 'aucun effet avant « Recalculer »');
     await cliquerBouton(page, 'Recalculer');
     const apres = await photoPage(page);
@@ -104,7 +104,7 @@ test('panneau commune : décocher le réseau de bus et pousser « emploi stable 
     const parts = await page.evaluate(() => JSON.parse(JSON.stringify(brouillonSousComp.valeurs.Indicateur_Vec3)));
     assert.ok(proche(Object.values(parts).reduce((a, b) => a + b, 0), 100, 1e-6));
     assert.ok(proche(parts.stable, 100, 1e-9));
-    assert.match(normaliser(await page.locator('#Indicateur_Vec3_val').innerText()), /^100 % de l'échelle corse · valeur : 1,000/);
+    assert.match(normaliser(await page.locator('#Indicateur_Vec3_val').innerText()), /^1,000 · 100 % entre le plus bas et le plus haut de Corse$/);
     // les autres curseurs de parts ont suivi à l'écran
     for (const k of ['autres', 'chomeur']) assert.equal(parseFloat(await page.locator(`#Indicateur_Vec3__${k}`).inputValue()) < 1e-6, true, k);
   });

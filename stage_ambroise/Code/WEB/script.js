@@ -2287,12 +2287,13 @@ function formaterBrut(indicateur, valeur) {
   return formaterValeur(META_INDICATEURS[indicateur], valeur);
 }
 
-// « 87 % de l'échelle corse · valeur : 96,4 % » : le 1er pourcentage est la position sur l'échelle min-max observée en Corse,
-// la valeur qui suit est la valeur réelle de l'indicateur (dans son unité)
-const SUFFIXE_ECHELLE = "% de l'échelle corse · valeur :";
+// « 96,4 % · 87 % entre le plus bas et le plus haut de Corse » : la valeur réelle de l'indicateur (dans son unité), puis sa position (0-100 %)
+// sur l'échelle min-max observée en Corse (celle du curseur)
+const SUFFIXE_POSITION = '% entre le plus bas et le plus haut de Corse';
+const libellePosition = (valeurAffichee, pct) => `${valeurAffichee} · ${pct.toFixed(0)} ${SUFFIXE_POSITION}`;
 
 function libelleSlider(indicateur, valeur) {
-  return `${pctDepuisValeur(indicateur, valeur).toFixed(0)} ${SUFFIXE_ECHELLE} ${formaterBrut(indicateur, valeur)}`;
+  return libellePosition(formaterBrut(indicateur, valeur), pctDepuisValeur(indicateur, valeur));
 }
 
 function libelleEchelle(indicateur) {
@@ -2345,14 +2346,14 @@ async function chargerSousComposantes() {
 function libelleSousComposante(indicateur, comp, valeur) {
   const def = SOUS_COMPOSANTES[indicateur].composantes[comp];
   const pct = pctEntre(bornesSousComp[indicateur][comp], valeur);
-  return `${pct.toFixed(0)} ${SUFFIXE_ECHELLE} ${formaterValeur(def, valeur)}`;
+  return libellePosition(formaterValeur(def, valeur), pct);
 }
 
 // Libellé de l'indicateur recalculé depuis ses sous-composantes (peut sortir de l'échelle corse)
 function libelleIndicateurDecompose(indicateur, valeur) {
   const pct = pctDepuisValeur(indicateur, valeur);
   const hors = pct > 100.0001 ? ' ↑ au-delà du max corse' : pct < -0.0001 ? ' ↓ en deçà du min corse' : '';
-  return `${pct.toFixed(0)} ${SUFFIXE_ECHELLE} ${formaterBrut(indicateur, valeur)}${hors}`;
+  return `${libellePosition(formaterBrut(indicateur, valeur), pct)}${hors}`;
 }
 
 // --- Détail du calcul : menu déroulant « Voir le calcul » de chaque indicateur et de l'indice (valeurs d'origine de la commune) ---
