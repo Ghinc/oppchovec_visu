@@ -4,7 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const { chargerApp, lireJson, WEB } = require('./helpers/outils');
-const { epciAgreger, epciClasse, EPCI_INDICATEURS } = require(path.join(WEB, 'epci.js'));
+const { epciAgreger, epciClasse, EPCI_INDICATEURS, epciComparaisonHtml, epciEcartTexte } = require(path.join(WEB, 'epci.js'));
 
 const data = lireJson('data_scores_0_10.json');
 const agreg = lireJson('epci_agregation.json');
@@ -112,4 +112,29 @@ test('poids d\'une commune dans l\'agrégation : somme = 1 ; pro rata = part de 
   }
   // Ajaccio pèse plus de 80 % de son agglomération en pro rata
   assert.ok(epciPoids(e, 'Cho2', true).Ajaccio > 0.8 && proche(epciPoids(e, 'Cho2', false).Ajaccio, 0.1));
+});
+
+// ---------- Comparaison de deux EPCI (mode EPCI du panneau) ----------
+
+test('comparaison de deux EPCI : écart « premier moins second », jamais de « -0,00 », signe + explicite', () => {
+  assert.equal(epciEcartTexte(3, 1, 0), '+2');
+  assert.equal(epciEcartTexte(1, 3, 0), '-2');
+  assert.equal(epciEcartTexte(1.001, 1, 2), '0,00');
+  assert.equal(epciEcartTexte(5.5, 2.25, 2), '+3,25');
+});
+
+test('comparaison de deux EPCI : tableau avec les 4 scores, les 10 indicateurs, la population et l\'écart de chacun', () => {
+  const [a, b] = agreg.epci;
+  const res = (decal) => ({
+    oppchovec: 5 + decal, opp: 6 + decal, cho: 4 + decal, vec: 3 + decal,
+    agregats: Object.fromEntries(EPCI_INDICATEURS.map((k, i) => ['Indicateur_' + k, 10 * (i + 1) + decal])),
+  });
+  const html = epciComparaisonHtml(a, b, res(0), res(2), 'moyenne simple (1 commune = 1)');
+  assert.ok(html.includes(a.nom) && html.includes(b.nom), 'les deux noms');
+  for (const k of EPCI_INDICATEURS) assert.ok(html.includes(`<td>${k}`) || html.includes(`>${k} `) || html.includes(`>${k}<`), `ligne ${k}`);
+  assert.ok(html.includes('Habitants') && html.includes('Communes'));
+  assert.ok(html.includes('class="epci-ecart">-2,00<'), 'écart du score : 5 - 7 = -2');
+  assert.ok(html.includes('moyenne simple'), 'la méthode d\'agrégation est indiquée');
+  assert.ok(!html.includes('Simulation'), 'pas de mention de simulation par défaut');
+  assert.ok(epciComparaisonHtml(a, b, res(0), res(2), 'x', [a.nom]).includes('Simulation'), 'mention quand un EPCI a été modifié à la main');
 });

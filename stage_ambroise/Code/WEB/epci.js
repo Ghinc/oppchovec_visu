@@ -325,11 +325,77 @@ function epciVue() {
 
 function geoUnites() { return echelleEstEPCI() && epciGeoVue ? epciGeoVue : communeJson; }
 
+let epciPanneauNom = null;                       // EPCI affiché dans le panneau de la barre latérale (pour le redessiner quand la comparaison change)
+
 function epciAfficherDansPanneau(nom) {         // panneau « sélection » de la barre latérale : fiche de l'EPCI choisi
+    epciPanneauNom = nom;
     for (const c of Dejasurligner.splice(0)) reinitialiserStyleCommune(c, indicateursCommune);
     surlignerCommune(nom, 'red');
     const e = epciDonnees.epci.find(x => x.nom === nom);
-    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) + epciDetailCalculHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+    const autre = e && epciComparaisons[e.siren] ? epciDonnees.epci.find(x => x.siren === epciComparaisons[e.siren]) : null;
+    if (autre) surlignerCommune(autre.nom, 'red');                    // comme pour deux communes comparées : les deux sont surlignés sur les cartes
+    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) + epciDetailCalculHtml(e) + epciComparerHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+}
+
+// ---------- Comparaison de deux EPCI (même principe que la comparaison de deux communes : bouton « Comparer », choix du second, tableau côte à côte) ----------
+
+const epciComparaisons = {};      // { siren: siren de l'EPCI comparé } ; '' = sélecteur ouvert, pas encore de choix. Conservé quand la fiche est redessinée.
+
+function epciEcartTexte(x, y, dec) {
+    const d = Number(x) - Number(y), r = Number(d.toFixed(dec));
+    return (r > 0 ? '+' : '') + epciFmt(r === 0 ? 0 : d, dec);
+}
+
+// Valeur d'un indicateur avec son unité (mêmes formats que la fiche) et écart « premier moins second »
+function epciValeurTexte(ind, v) {
+    return typeof formaterValeur === 'function' && typeof META_INDICATEURS !== 'undefined' ? formaterValeur(META_INDICATEURS[ind], v) : epciFmt(v, 2);
+}
+function epciEcartIndicateur(ind, x, y) {
+    const meta = (typeof META_INDICATEURS !== 'undefined' && META_INDICATEURS[ind]) || { unite: '', decimales: 2 };
+    const unite = meta.unite === '%' ? 'pt' : meta.unite.startsWith('/') ? '' : meta.unite;
+    return epciEcartTexte(x, y, meta.decimales) + (unite ? ' ' + unite : '');
+}
+
+// Tableau de comparaison de deux EPCI. ra, rb : résultats de epciResultats[méthode][siren] (valeurs courantes, simulation comprise) ; libelleMethode : méthode d'agrégation
+function epciComparaisonHtml(a, b, ra, rb, libelleMethode, simules = []) {
+    const titre = k => (typeof TITRES_INDICATEURS !== 'undefined' && TITRES_INDICATEURS['Indicateur_' + k]) || null;
+    const ligne = (lib, x, y) => `<tr><td>${lib}</td><td>${epciFmt(x, 2)}</td><td>${epciFmt(y, 2)}</td><td class="epci-ecart">${epciEcartTexte(x, y, 2)}</td></tr>`;
+    const scores = Object.entries(EPCI_VARIABLES).map(([k, lib]) => ligne(lib, ra[k], rb[k])).join('');
+    const indicateurs = EPCI_INDICATEURS.map(k => {
+        const ind = 'Indicateur_' + k, t = titre(k), x = ra.agregats[ind], y = rb.agregats[ind];
+        return `<tr><td${t ? ` title="${epciEch(t[1])}"` : ''}>${k}${t ? ' — ' + epciEch(t[0]) : ''}</td><td>${epciValeurTexte(ind, x)}</td><td>${epciValeurTexte(ind, y)}</td><td class="epci-ecart">${epciEcartIndicateur(ind, x, y)}</td></tr>`;
+    }).join('');
+    const simulation = simules.length ? `<div class="epci-simulation">Simulation : des indicateurs de ${simules.map(epciEch).join(' et de ')} ont été modifiés à la main ; le tableau en tient compte.</div>` : '';
+    return `<div class="epci-comparaison"><h4>Comparaison entre <strong>${epciEch(a.nom)}</strong> et <strong>${epciEch(b.nom)}</strong></h4>${simulation}` +
+        `<table class="epci-table epci-table-comparaison"><tr><th>Indicateur</th><th>${epciEch(a.nom)}</th><th>${epciEch(b.nom)}</th><th title="Premier EPCI moins second">Écart</th></tr>` +
+        `<tr><td>Communes</td><td>${a.nb_communes}</td><td>${b.nb_communes}</td><td class="epci-ecart">${epciEcartTexte(a.nb_communes, b.nb_communes, 0)}</td></tr>` +
+        `<tr><td>Habitants${epciDonnees && epciDonnees.millesimes ? ' (' + epciDonnees.millesimes.Cho2 + ')' : ''}</td><td>${epciFmt(a.population_2023, 0)}</td><td>${epciFmt(b.population_2023, 0)}</td><td class="epci-ecart">${epciEcartTexte(a.population_2023, b.population_2023, 0)}</td></tr>` +
+        `<tr><th colspan="4">Scores (0-10)</th></tr>${scores}<tr><th colspan="4">Indicateurs</th></tr>${indicateurs}</table>` +
+        `<div class="epci-petit">Agrégation : ${libelleMethode}. Écart = premier EPCI moins second. Mêmes bornes, mêmes p<sub>k</sub> et même échelle 0-10 que les communes.</div></div>`;
+}
+
+// Bouton « Comparer », sélecteur du second EPCI et tableau, en bas de la fiche d'un EPCI
+function epciComparerHtml(e) {
+    const choix = epciComparaisons[e.siren];
+    let html = `<div class="epci-comparer" data-siren="${e.siren}"><div style="text-align:center; margin-top: 8px;"><button type="button" class="epci-bouton-comparer" aria-expanded="${choix !== undefined}">📊 Comparer</button></div>`;
+    if (choix !== undefined) {
+        const options = epciDonnees.epci.filter(x => x.siren !== e.siren).sort((p, q) => p.nom.localeCompare(q.nom, 'fr'))
+            .map(x => `<option value="${x.siren}"${x.siren === choix ? ' selected' : ''}>${epciEch(x.nom)}</option>`).join('');
+        html += `<div class="epci-comparer-choix"><strong>Sélection de l'EPCI à comparer</strong><select class="epci-comparer-select" aria-label="EPCI à comparer"><option value="">-- Sélectionner un EPCI --</option>${options}</select>` +
+            `<button type="button" class="epci-valider-comparaison">Valider la comparaison</button><div class="epci-petit epci-comparer-erreur" hidden>Veuillez sélectionner un EPCI pour la comparaison.</div></div>`;
+        const autre = choix ? epciDonnees.epci.find(x => x.siren === choix) : null;
+        if (autre) {
+            const m = echelleEpci === 'epci-pop' ? 'prorata' : 'simple';
+            const simules = [e, autre].filter(x => epciSurcharges[x.siren] && Object.keys(epciSurcharges[x.siren]).length).map(x => x.nom);
+            html += epciComparaisonHtml(e, autre, epciResultats[m][e.siren], epciResultats[m][autre.siren], m === 'prorata' ? 'moyenne pondérée par les habitants' : 'moyenne simple (1 commune = 1)', simules);
+        }
+    }
+    return html + '</div>';
+}
+
+// Redessine la fiche du panneau quand la comparaison change
+function epciActualiserComparaisons() {
+    if (echelleEstEPCI() && epciPanneauNom) epciAfficherDansPanneau(epciPanneauNom);
 }
 
 
@@ -464,6 +530,20 @@ async function changerEchelle(mode) {
 if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
     document.addEventListener('DOMContentLoaded', () => {
         epciInstallerBandeaux();
+        document.addEventListener('click', e => {
+            const ouvrir = e.target.closest('.epci-bouton-comparer'), valider = e.target.closest('.epci-valider-comparaison');
+            if (!ouvrir && !valider) return;
+            const zone = e.target.closest('.epci-comparer');
+            if (!zone) return;
+            const siren = zone.dataset.siren;
+            if (ouvrir) { if (siren in epciComparaisons) delete epciComparaisons[siren]; else epciComparaisons[siren] = ''; }
+            else {
+                const autre = zone.querySelector('.epci-comparer-select').value;
+                if (!autre) { zone.querySelector('.epci-comparer-erreur').hidden = false; return; }
+                epciComparaisons[siren] = autre;
+            }
+            epciActualiserComparaisons();
+        });
         const casePop = document.getElementById('echelle-epci-pop'), caseCommune = document.getElementById('echelle-epci-commune');
         if (casePop && caseCommune) {
             casePop.addEventListener('change', () => changerEchelle(casePop.checked ? 'epci-pop' : 'commune'));
@@ -481,5 +561,5 @@ if (typeof document !== 'undefined' && typeof document.addEventListener === 'fun
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { epciAgreger, epciPoids, epciClasse, EPCI_INDICATEURS, EPCI_ONGLETS_NON_DISPONIBLES };
+    module.exports = { epciComparaisonHtml, epciEcartTexte, epciEcartIndicateur, epciAgreger, epciPoids, epciClasse, EPCI_INDICATEURS, EPCI_ONGLETS_NON_DISPONIBLES };
 }

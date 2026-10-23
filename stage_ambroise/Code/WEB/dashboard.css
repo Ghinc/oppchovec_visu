@@ -2618,6 +2618,15 @@ body.mode-epci aside { display: none; }
 .epci-choix { white-space: nowrap; }
 .epci-commune { background: #fff; border: 1px solid #cfd8e3; border-left: 4px solid #0b3d91; border-radius: 6px; padding: 4px 10px 8px 10px; margin-bottom: 10px; }
 .epci-commune h4 { margin-top: 4px; }
+/* Comparaison de deux EPCI (bouton « Comparer » de la fiche) */
+.epci-comparer { margin-top: 6px; }
+.epci-bouton-comparer, .epci-valider-comparaison { cursor: pointer; }
+.epci-comparer-choix { margin-top: 8px; padding: 6px 8px; background: #f4f7fb; border: 1px solid #cfd8e3; border-radius: 6px; }
+.epci-comparer-choix select { width: 100%; padding: 4px; margin: 4px 0; }
+.epci-comparaison { margin-top: 8px; }
+.epci-table-comparaison th[colspan] { background: #e8eef6; color: #223; font-weight: 600; text-align: left; }
+.epci-table-comparaison th { vertical-align: bottom; }
+.epci-table-comparaison td.epci-ecart { color: #555; white-space: nowrap; }
 .epci-hausse { color: #2166ac; }
 .epci-baisse { color: #b2182b; }
 .epci-lien-commune { color: #0b3d91; text-decoration: none; }

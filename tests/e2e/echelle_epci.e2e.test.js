@@ -216,3 +216,56 @@ test('Échelle EPCI : curseurs sur les valeurs agrégées d\'un EPCI (simulation
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Mode EPCI : « Comparer » dans le panneau (comme pour deux communes) — second EPCI, tableau côte à côte, les deux surlignés, simulation prise en compte', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.check('#echelle-epci-pop');
+    await page.waitForFunction(() => typeof echelleEstEPCI === 'function' && echelleEstEPCI() && document.querySelectorAll('#communeSelect option').length === 20);
+    const [n1, n2] = agreg.epci.map((e) => e.nom);
+    const siren1 = agreg.epci[0].siren, siren2 = agreg.epci[1].siren;
+    await page.selectOption('#communeSelect', n1);
+    await page.click('#validerCommune');
+    assert.ok(await page.locator('#resultCommune .epci-bouton-comparer').isVisible(), 'bouton Comparer dans le panneau');
+    assert.equal(await page.locator('#resultCommune .epci-comparer-select').count(), 0, 'sélecteur caché au départ');
+    await page.click('#resultCommune .epci-bouton-comparer');
+    const options = await page.$$eval('#resultCommune .epci-comparer-select option', (o) => o.map((x) => x.value).filter(Boolean));
+    assert.equal(options.length, 18);
+    assert.ok(!options.includes(siren1));
+    // valider sans choix : message, pas de tableau
+    await page.click('#resultCommune .epci-valider-comparaison');
+    assert.ok(await page.locator('#resultCommune .epci-comparer-erreur').isVisible());
+    assert.equal(await page.locator('#resultCommune .epci-comparaison').count(), 0);
+    // second EPCI
+    await page.selectOption('#resultCommune .epci-comparer-select', siren2);
+    await page.click('#resultCommune .epci-valider-comparaison');
+    const tableau = page.locator('#resultCommune .epci-table-comparaison');
+    assert.ok(await tableau.isVisible());
+    const entete = (await tableau.locator('tr').first().textContent()).replace(/\s+/g, ' ');       // textContent : les en-têtes sont en majuscules à l'écran
+    assert.ok(entete.includes(n1) && entete.includes(n2));
+    assert.equal(await tableau.locator('tr:has-text("Opp") >> nth=0').count() > 0, true);
+    // valeurs = epciResultats (échelle « EPCI population » : pro rata)
+    const attendu = await page.evaluate(([a, b]) => { const r = epciResultats.prorata; return { idxa: r[a].oppchovec, idxb: r[b].oppchovec, vec1a: r[a].agregats.Indicateur_Vec1, vec1b: r[b].agregats.Indicateur_Vec1 }; }, [siren1, siren2]);
+    const fmt = (x, d) => Number(x).toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d }).replace(/\s+/g, ' ');       // espaces insécables des milliers normalisés comme le texte de la page
+    const ligne = async (mot) => (await tableau.locator('tr', { hasText: mot }).first().innerText()).replace(/\s+/g, ' ');
+    const lIdx = await ligne('Indice OppChoVec');
+    assert.ok(lIdx.includes(fmt(attendu.idxa, 2)) && lIdx.includes(fmt(attendu.idxb, 2)), lIdx);
+    const lVec1 = await ligne('Vec1');
+    assert.ok(lVec1.includes(fmt(attendu.vec1a, 0)) && lVec1.includes(fmt(attendu.vec1b, 0)) && lVec1.includes('€'), lVec1);
+    // les deux EPCI sont surlignés sur la carte principale
+    const surlignes = await page.evaluate(() => [...Dejasurligner]);
+    assert.ok(surlignes.includes(n1) && surlignes.includes(n2), `surlignés : ${surlignes}`);
+    // changer de méthode (EPCI commune) redessine la comparaison en moyenne simple
+    await page.check('#echelle-epci-commune');
+    await page.waitForFunction(() => document.getElementById('echelle-epci-etat').textContent.includes('simples'));
+    await page.selectOption('#communeSelect', n1);
+    await page.click('#validerCommune');
+    assert.ok(await page.locator('#resultCommune .epci-table-comparaison').isVisible(), 'la comparaison est conservée pour cet EPCI');
+    assert.ok((await page.locator('#resultCommune .epci-comparaison').innerText()).includes('moyenne simple'));
+    const simple = await page.evaluate(([a]) => epciResultats.simple[a].oppchovec, [siren1]);
+    assert.ok((await page.locator('#resultCommune .epci-table-comparaison tr', { hasText: 'Indice OppChoVec' }).first().innerText()).includes(fmt(simple, 2)));
+    // le bouton referme le sélecteur et le tableau
+    await page.click('#resultCommune .epci-bouton-comparer');
+    assert.equal(await page.locator('#resultCommune .epci-comparaison').count(), 0);
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
