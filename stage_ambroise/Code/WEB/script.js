@@ -55,7 +55,7 @@ const traductions = {
             vec: "Vec"
         },
         titresCartes: {
-            oppchovec: "Score OppChoVec",
+            oppchovec: "Score OppChoVec · 2024",
             opp: "Score Opp",
             cho: "Score Cho",
             vec: "Score Vec"
@@ -97,7 +97,7 @@ const traductions = {
             vec: "Liv"
         },
         titresCartes: {
-            oppchovec: "OppChoLiv score",
+            oppchovec: "OppChoLiv score · 2024",
             opp: "Opp score",
             cho: "Cho score",
             vec: "Liv score"
