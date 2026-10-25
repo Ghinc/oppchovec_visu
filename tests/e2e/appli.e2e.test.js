@@ -49,3 +49,21 @@ test('les cartes de dimension affichent les scores 0-10 du fichier de données (
     }
   });
 });
+
+test('carte principale : le millésime « 2024 » est affiché en haut de la carte, et seulement sur celle-là', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    const repere = page.locator('#map-oppchovec .millesime-carte');
+    assert.equal(await repere.count(), 1, 'un seul repère sur la carte principale');
+    assert.equal((await repere.innerText()).trim(), '2024');
+    assert.ok(await repere.isVisible(), 'visible');
+    // en haut, au centre de la carte
+    const pos = await page.evaluate(() => {
+      const c = document.getElementById('map-oppchovec').getBoundingClientRect(), r = document.querySelector('#map-oppchovec .millesime-carte').getBoundingClientRect();
+      return { haut: r.top - c.top, centre: (r.left + r.width / 2) - (c.left + c.width / 2) };
+    });
+    assert.ok(pos.haut >= 0 && pos.haut < 40, `en haut : ${pos.haut}`);
+    assert.ok(Math.abs(pos.centre) < 3, `au centre : ${pos.centre}`);
+    for (const id of ['map-opp', 'map-cho', 'map-vec']) assert.equal(await page.locator(`#${id} .millesime-carte`).count(), 0, `pas sur ${id}`);
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});

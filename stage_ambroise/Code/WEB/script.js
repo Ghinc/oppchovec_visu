@@ -252,6 +252,17 @@ function ajouterVillesPrincipales(carte) {
     });
 }
 
+// Millésime de la carte principale, en haut au centre de la carte (un repère bien visible : l'année des données)
+const MILLESIME_CARTE_PRINCIPALE = '2024';
+function ajouterMillesime(carte) {
+    const conteneur = carte.getContainer();
+    if (conteneur.querySelector('.millesime-carte')) return;
+    const div = L.DomUtil.create('div', 'millesime-carte', conteneur);
+    div.textContent = MILLESIME_CARTE_PRINCIPALE;
+    div.title = "Millésime de la carte : sources officielles de 2023 à 2025 (recensement 2023, ARCEP et équipements 2024, revenus 2024)";
+    L.DomEvent.disableClickPropagation(div);
+}
+
 // Fonction pour ajouter une rose des vents
 function ajouterRoseDesVents(carte) {
     // Vérifier si la rose des vents existe déjà
@@ -1325,6 +1336,7 @@ function afficherCarteUnique(mapId, type, geojsonData, indicateursDict, titre) {
     ajouterReseauRoutier(cartes[type], type);
     ajouterVillesPrincipales(cartes[type]);
     ajouterRoseDesVents(cartes[type]);
+    if (type === 'oppchovec') ajouterMillesime(cartes[type]);          // carte principale seulement
     ajouterCopyright(cartes[type]);
     ajouterBoutonTelechargement(cartes[type], type);
 }
