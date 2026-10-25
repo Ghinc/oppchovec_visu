@@ -91,6 +91,80 @@ function evolutionResume(donnees, variable, minHab = 0) {
     };
 }
 
+// ---------- Vue d'ensemble de la Corse : ce qui monte ou baisse, échelle de chaque variable, variables discriminantes et explicatives, courbes ----------
+// Pour chaque indicateur : moyenne sur la Corse aux deux dates (pondérée par la population de chaque année, ou chaque commune pour 1), variation, nombre de communes en hausse / en baisse,
+// contribution à la variation du score de sa dimension, dispersion entre communes (pouvoir discriminant) et corrélation avec la variation de l'indice (variable explicative de l'évolution).
+const EVOLUTION_SEUIL_STABLE = 0.5;          // en points de l'échelle de l'indicateur (0-100) : en dessous, une commune compte comme « stable »
+const EVOLUTION_FORMAT_INDICATEURS = { Opp1: [2, ''], Opp2: [3, ''], Opp3: [0, ''], Opp4: [1, ' %'], Cho1: [2, ''], Cho2: [1, ' %'], Vec1: [0, ' €'], Vec2: [3, ''], Vec3: [3, ''], Vec4: [0, ''] };
+const EVOLUTION_NOMS_COURTS = { Opp1: 'Opp1 · diplôme', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité', Cho1: 'Cho1 · quartiers prioritaires', Cho2: 'Cho2 · droit de vote', Vec1: 'Vec1 · revenu fiscal moyen', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l’emploi', Vec4: 'Vec4 · services à 20 min' };
+const EVOLUTION_COURBES = [['OppChoVec', 'Indice', '#222222'], ['Opp', 'Opp', '#0072b2'], ['Cho', 'Cho', '#d55e00'], ['Vec', 'Vec', '#009e73']];
+
+function evolutionMoyennePonderee(valeurs, poids) {
+    let s = 0, w = 0;
+    valeurs.forEach((v, i) => { const p = poids ? poids[i] : 1; s += p * v; w += p; });
+    return w > 0 ? s / w : NaN;
+}
+function evolutionEcartType(valeurs) {
+    const m = valeurs.reduce((s, x) => s + x, 0) / valeurs.length;
+    return Math.sqrt(valeurs.reduce((s, x) => s + (x - m) ** 2, 0) / valeurs.length);
+}
+function evolutionCorrelation(x, y) {            // Pearson ; NaN si l'une des deux séries est constante
+    const n = x.length, mx = x.reduce((s, v) => s + v, 0) / n, my = y.reduce((s, v) => s + v, 0) / n;
+    let sxy = 0, sxx = 0, syy = 0;
+    for (let i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; syy += (y[i] - my) ** 2; }
+    return sxx > 0 && syy > 0 ? sxy / Math.sqrt(sxx * syy) : NaN;
+}
+const evolutionPopulation = (donnees, commune, annee) => donnees.communes[commune][String(annee)].composantes.Cho2.population;
+
+// ponderer : true = moyennes pondérées par la population de chaque année ; false = chaque commune compte pour 1. Les effectifs, dispersions et corrélations portent toujours sur les communes.
+function evolutionVueGlobale(donnees, ponderer = false) {
+    const noms = Object.keys(donnees.communes);
+    const a0 = donnees.annees[0], a1 = donnees.annees[donnees.annees.length - 1];
+    const ech = evolutionEchellesScores(donnees);
+    const moyenne = (f, a) => evolutionMoyennePonderee(noms.map(c => f(c, a)), ponderer ? noms.map(c => evolutionPopulation(donnees, c, a)) : null);
+    const variationIndice = noms.map(c => evolutionVariation(donnees, c, 'OppChoVec'));
+    const [s1, s2] = EVOLUTION_SEUILS_VARIATION.slice(1, 3);
+    const ligneScore = variable => {
+        const v = noms.map(c => evolutionVariation(donnees, c, variable));
+        const m0 = moyenne((c, a) => evolutionValeur(donnees, c, a, variable), a0), m1 = moyenne((c, a) => evolutionValeur(donnees, c, a, variable), a1);
+        return {
+            cle: variable, moyenne0: m0, moyenne1: m1, variation: m1 - m0,
+            hausses: v.filter(x => x > s2).length, baisses: v.filter(x => x < s1).length, stables: v.filter(x => x >= s1 && x <= s2).length,
+            dispersion: evolutionEcartType(noms.map(c => evolutionValeur(donnees, c, a1, variable))), lien: evolutionCorrelation(v, variationIndice),
+        };
+    };
+    const indicateurs = [];
+    for (const [dim, ks] of Object.entries(donnees.dimensions)) {
+        const [dlo, dhi] = ech[dim];
+        for (const k of ks) {
+            const [lo, hi] = donnees.echelle[k], etendue = hi - lo;
+            const brut = (c, a) => donnees.communes[c][String(a)].indicateurs[k];
+            const m0 = moyenne(brut, a0), m1 = moyenne(brut, a1);
+            const dn = noms.map(c => (etendue ? (brut(c, a1) - brut(c, a0)) / etendue * 100 : 0));       // variation de chaque commune, en points de l'échelle (0-100)
+            indicateurs.push({
+                cle: k, dimension: dim, echelle: [lo, hi], moyenne0: m0, moyenne1: m1, variation: m1 - m0,
+                variationRelative: m0 ? (m1 - m0) / Math.abs(m0) * 100 : NaN, variationEchelle: etendue ? (m1 - m0) / etendue * 100 : 0,
+                hausses: dn.filter(x => x > EVOLUTION_SEUIL_STABLE).length, baisses: dn.filter(x => x < -EVOLUTION_SEUIL_STABLE).length, stables: dn.filter(x => Math.abs(x) <= EVOLUTION_SEUIL_STABLE).length,
+                contribution: etendue ? (m1 - m0) / etendue / ks.length / (dhi - dlo) * 10 : 0,           // points du score de la dimension (0-10) ; la somme sur la dimension = sa variation
+                dispersion: evolutionEcartType(noms.map(c => (etendue ? (brut(c, a1) - lo) / etendue * 100 : 0))), lien: evolutionCorrelation(dn, variationIndice),
+            });
+        }
+    }
+    return { annees: [a0, a1], n: noms.length, ponderer, indice: ligneScore('OppChoVec'), dimensions: Object.keys(donnees.dimensions).map(ligneScore), indicateurs };
+}
+
+// Courbes : moyenne de l'indice et des trois dimensions (0-10) à chaque année de la série, pour la Corse et, si on lui en donne une, pour une commune
+function evolutionCourbes(donnees, selection, ponderer = false) {
+    const noms = Object.keys(donnees.communes);
+    const poids = a => (ponderer ? noms.map(c => evolutionPopulation(donnees, c, a)) : null);
+    const serie = (variable, unite) => donnees.annees.map(a => ({
+        annee: a,
+        valeur: unite ? evolutionValeur(donnees, unite, a, variable) : evolutionMoyennePonderee(noms.map(c => evolutionValeur(donnees, c, a, variable)), poids(a)),
+    }));
+    const unite = selection && donnees.communes[selection] ? selection : null;
+    return EVOLUTION_COURBES.map(([variable, libelle, couleur]) => ({ variable, libelle, couleur, corse: serie(variable, null), unite: unite ? serie(variable, unite) : null, nomUnite: unite }));
+}
+
 // Détail du calcul d'une commune (mêmes formules que construire_serie_temporelle.py) :
 //   indicateur normalisé = (x - min) / (max - min) sur l'échelle commune aux deux années ; dimension (0-1) = moyenne des indicateurs normalisés de la dimension ;
 //   S = Σ p_k × dimension_k^β ; indice brut = (1/3) × S^(α/β) ; score 0-10 = (valeur - min) / (max - min) × 10, min et max pris sur toutes les communes des deux années.
@@ -342,6 +416,95 @@ function evolutionResumeHtml() {
               : `<div class="evolution-petit">Classements limités aux communes d'au moins ${EVOLUTION_SEUIL_FIABLE} habitants : les ${r.nbExclues} communes plus petites ont des évolutions qui dépendent de quelques personnes (écart-type de la variation de l'indice 1,4 à 1,8 point, contre 0,6 au-delà de 1 000 habitants) et dominaient auparavant ces listes.</div>`);
 }
 
+// ---------- Fenêtre « Toute la Corse » : ce qui monte ou baisse, échelle de chaque variable, variables discriminantes et explicatives, courbes ----------
+
+let evolutionGlobalPondere = true;       // moyennes pondérées par la population (décoché : chaque commune compte pour 1)
+
+// Courbes en SVG : une ligne par variable (indice, Opp, Cho, Vec) = moyenne Corse ; en pointillé, la commune sélectionnée. L'axe des abscisses suit les années de la série, quel qu'en soit le nombre.
+function evolutionCourbesSvg(courbes) {
+    const W = 560, H = 210, G = 46, D = 124, T = 12, B = 30;
+    const annees = courbes[0].corse.map(p => p.annee);
+    const valeurs = courbes.flatMap(c => [...c.corse, ...(c.unite || [])].map(p => p.valeur));
+    let lo = Math.max(0, Math.floor(Math.min(...valeurs) - 0.5)), hi = Math.min(10, Math.ceil(Math.max(...valeurs) + 0.5));
+    if (hi - lo < 2) { hi = Math.min(10, lo + 2); lo = Math.max(0, hi - 2); }
+    const x = a => (annees.length > 1 ? G + (a - annees[0]) / (annees[annees.length - 1] - annees[0]) * (W - G - D) : G);
+    const y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+    const pas = hi - lo > 6 ? 2 : 1;
+    let svg = '';
+    for (let v = lo; v <= hi; v += pas) svg += `<line x1="${G}" x2="${W - D}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e3e3"/><text x="${G - 6}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#555">${v}</text>`;
+    for (const a of annees) svg += `<line x1="${x(a)}" x2="${x(a)}" y1="${T}" y2="${H - B}" stroke="#f0f0f0"/><text x="${x(a)}" y="${H - B + 16}" text-anchor="middle" font-size="11.5" fill="#333">${a}</text>`;
+    const trace = (pts, couleur, pointille) => {
+        const d = pts.map((p, i) => `${i ? 'L' : 'M'}${x(p.annee).toFixed(1)} ${y(p.valeur).toFixed(1)}`).join(' ');
+        return `<path d="${d}" fill="none" stroke="${couleur}" stroke-width="${pointille ? 1.6 : 2.4}"${pointille ? ' stroke-dasharray="5 4"' : ''}/>` +
+            pts.map(p => `<circle cx="${x(p.annee).toFixed(1)}" cy="${y(p.valeur).toFixed(1)}" r="${pointille ? 2.6 : 3.4}" fill="${pointille ? '#fff' : couleur}" stroke="${couleur}" stroke-width="1.4"/>`).join('');
+    };
+    for (const c of courbes) { if (c.unite) svg += trace(c.unite, c.couleur, true); svg += trace(c.corse, c.couleur, false); }
+    // étiquettes à droite de la dernière année, écartées d'au moins 13 px pour rester lisibles quand les moyennes sont proches
+    const fin = courbes.map(c => ({ c, y: y(c.corse[c.corse.length - 1].valeur) })).sort((p, q) => p.y - q.y);
+    for (let i = 1; i < fin.length; i++) if (fin[i].y - fin[i - 1].y < 13) fin[i].y = fin[i - 1].y + 13;
+    for (const e of fin) svg += `<text x="${W - D + 8}" y="${e.y + 4}" font-size="12" font-weight="600" fill="${e.c.couleur}">${e.c.libelle} ${evolutionFmt(e.c.corse[e.c.corse.length - 1].valeur, 1)}</text>`;
+    const decrit = courbes.map(c => `${c.libelle} : ${c.corse.map(p => `${p.annee} ${evolutionFmt(p.valeur, 1)}`).join(', ')}`).join(' ; ');
+    return `<svg class="evolution-courbes" viewBox="0 0 ${W} ${H}" role="img" aria-label="Moyennes de l'indice et des dimensions, ${evolutionEchapper(decrit)}"><title>Moyennes en Corse (score 0-10) : ${evolutionEchapper(decrit)}</title>${svg}</svg>`;
+}
+
+function evolutionGlobalHtml() {
+    const d = evolutionDonneesCommunes();
+    if (!d) return 'Données de la série temporelle indisponibles.';
+    const v = evolutionVueGlobale(d, evolutionGlobalPondere);
+    const [a0, a1] = v.annees;
+    const f = evolutionFmt;
+    const sg = (x, dec) => (Number.isFinite(x) ? evolutionSigne(x, dec) : '—');
+    const lien = r => (Number.isFinite(r) ? f(r, 2) : '—');
+    const effectifs = r => `<span class="evolution-hausse">▲ ${r.hausses}</span> · = ${r.stables} · <span class="evolution-baisse">▼ ${r.baisses}</span>`;
+    const ligneScore = (r, libelle, gras) => `<tr class="${gras ? 'evolution-global-dim' : ''}"><td>${libelle}</td><td>0 – 10</td><td>${f(r.moyenne0)}</td><td>${f(r.moyenne1)}</td>` +
+        `<td>${evolutionFleche(r.variation, 2)} ${sg(r.variation, 2)}</td><td>${effectifs(r)}</td><td>—</td><td>${f(r.dispersion * 10, 1)}</td><td>${r.cle === 'OppChoVec' ? '—' : lien(r.lien)}</td></tr>`;
+    const ligneIndicateur = r => {
+        const [dec, unite] = EVOLUTION_FORMAT_INDICATEURS[r.cle];
+        const uniteVar = unite === ' %' ? ' pt' : unite;
+        return `<tr><td class="evolution-global-indic" title="${evolutionEchapper(EVOLUTION_NOMS_INDICATEURS[r.cle])}">${evolutionEchapper(EVOLUTION_NOMS_COURTS[r.cle])}</td><td>${f(r.echelle[0], dec)} – ${f(r.echelle[1], dec)}${unite}</td>` +
+            `<td>${f(r.moyenne0, dec)}${unite}</td><td>${f(r.moyenne1, dec)}${unite}</td>` +
+            `<td>${evolutionFleche(r.variation, dec)} ${sg(r.variation, dec)}${uniteVar}${Number.isFinite(r.variationRelative) ? ` <span class="evolution-petit">(${sg(r.variationRelative, 1)} %)</span>` : ''}</td>` +
+            `<td>${effectifs(r)}</td><td>${sg(r.contribution, 3)}</td><td>${f(r.dispersion, 1)}</td><td>${lien(r.lien)}</td></tr>`;
+    };
+    let lignes = ligneScore(v.indice, '<strong>Indice OppChoVec</strong>', true);
+    for (const dim of v.dimensions) {
+        lignes += ligneScore(dim, `<strong>${evolutionEchapper(EVOLUTION_VARIABLES[dim.cle])}</strong>`, true) + v.indicateurs.filter(r => r.dimension === dim.cle).map(ligneIndicateur).join('');
+    }
+    const courbes = evolutionCourbes(d, evolutionSelection, evolutionGlobalPondere);
+    const unite = courbes[0].nomUnite;
+    const moyennes = evolutionGlobalPondere ? 'pondérées par la population de chaque année' : 'simples (chaque commune compte pour 1)';
+    return `<div class="evolution-global-entete"><strong>Toute la Corse · ${a0} → ${a1}</strong>` +
+        `<label class="evolution-option"><input type="checkbox" id="evolution-global-pondere"${evolutionGlobalPondere ? ' checked' : ''}> Moyennes pondérées par la population</label></div>` +
+        `<div class="evolution-petit">${v.n} communes ; moyennes ${moyennes}. Cette vue porte toujours sur les communes, même quand la case « EPCI » est cochée.</div>` +
+        `<table class="evolution-table-global"><thead><tr><th>Variable</th><th title="Bornes min-max, sur les deux années, qui ramènent l'indicateur de 0 à 100 dans l'indice">Échelle</th><th>${a0}</th><th>${a1}</th><th>Variation</th>` +
+        `<th title="Communes dont l'indicateur monte (▲), reste stable (=, moins de 0,5 point de son échelle) ou baisse (▼)">Communes</th>` +
+        `<th title="Contribution : points du score de sa dimension (0-10) apportés par la variation moyenne de l'indicateur ; la somme sur une dimension est la variation de cette dimension">Contrib.</th>` +
+        `<th title="Écart-type, entre communes, des valeurs de ${a1} ramenées de 0 à 100 sur l'échelle de la variable : plus il est grand, plus la variable distingue les communes">Dispersion</th>` +
+        `<th title="Lien avec l'indice : corrélation, entre communes, entre la variation de la variable et celle de l'indice (1 : les communes où elle monte le plus sont celles où l'indice monte le plus)">Lien indice</th></tr></thead><tbody>${lignes}</tbody></table>` +
+        `<h4 class="evolution-global-titre">Courbes (score 0-10)</h4>${evolutionCourbesSvg(courbes)}` +
+        `<div class="evolution-petit">Trait plein : moyenne de la Corse${unite ? ` ; pointillé : ${evolutionEchapper(unite)}` : ' ; cliquez sur une commune pour afficher aussi la sienne en pointillé'}. ` +
+        `La série compte ${d.annees.length} dates (${d.annees.join(', ')}) : les courbes s'allongent d'elles-mêmes quand des années sont ajoutées.</div>` +
+        `<div class="evolution-petit"><strong>Échelle</strong> : bornes min-max utilisées pour ramener chaque indicateur de 0 à 100. <strong>Contribution</strong> : points du score de la dimension (0-10) apportés par la variation moyenne de l'indicateur. ` +
+        `<strong>Dispersion</strong> (variable <em>discriminante</em>) : écart-type entre communes des valeurs de ${a1}, en % de l'échelle (scores : en % de 0-10). ` +
+        `<strong>Lien avec l'indice</strong> (variable <em>explicative</em> de l'évolution) : corrélation, entre communes, avec la variation de l'indice. Une corrélation n'est pas une causalité, et la variation des très petites communes est bruitée.</div>`;
+}
+
+function evolutionGlobalRedessiner() {
+    const panneau = document.getElementById('evolution-global');
+    if (!panneau || panneau.hidden) return;
+    panneau.innerHTML = evolutionGlobalHtml();
+}
+
+function evolutionBasculerGlobal(ouvrir) {
+    const panneau = document.getElementById('evolution-global'), bouton = document.getElementById('evolution-bouton-global');
+    if (!panneau || !bouton) return;
+    const afficher = ouvrir === undefined ? panneau.hidden : ouvrir;
+    if (afficher) { evolutionBasculerResume(false); panneau.innerHTML = evolutionGlobalHtml(); }
+    panneau.hidden = !afficher;
+    bouton.setAttribute('aria-expanded', String(afficher));
+    bouton.textContent = afficher ? 'Toute la Corse ▴' : 'Toute la Corse ▾';
+}
+
 const evolutionDetailsOuverts = new Set();     // scores dont le détail est déplié (conservé quand on change de commune)
 
 const EVOLUTION_DECIMALES = { Opp3: 0, Vec1: 0 };
@@ -456,6 +619,7 @@ function evolutionFiche(nom) {
         evolutionCouches[type].eachLayer(l => { l.setStyle(evolutionStyle(type, l._evolutionNom)); if (l._evolutionNom === nom) l.bringToFront(); });
     }
     evolutionAfficherFiche();
+    evolutionGlobalRedessiner();             // les courbes de la fenêtre « Toute la Corse » montrent aussi la commune choisie
 }
 
 function evolutionBasculerDetail(variable) {
@@ -484,6 +648,7 @@ async function evolutionBasculerVariante(robuste) {
     evolutionMajDonnees();
     evolutionRedessiner();
     if (evolutionSelection) evolutionFiche(evolutionSelection);
+    evolutionGlobalRedessiner();
     return true;
 }
 
@@ -519,6 +684,7 @@ function evolutionAppliquerEchelle() {
     evolutionRecadrage = true;
     evolutionRecadrer();
     setTimeout(() => { evolutionRecadrer(); evolutionRecadrage = false; }, 600);
+    evolutionGlobalRedessiner();
 }
 
 function evolutionRedessiner() {
@@ -568,6 +734,7 @@ function evolutionRecadrer(type) {
 function evolutionBasculerResume(ouvrir) {
     const panneau = document.getElementById('evolution-resume'), bouton = document.getElementById('evolution-bouton-resume');
     const afficher = ouvrir === undefined ? panneau.hidden : ouvrir;
+    if (afficher) evolutionBasculerGlobal(false);          // une seule fenêtre ouverte à la fois
     panneau.hidden = !afficher;
     bouton.setAttribute('aria-expanded', String(afficher));
     bouton.textContent = afficher ? 'Résumé chiffré ▴' : 'Résumé chiffré ▾';
@@ -649,6 +816,20 @@ if (typeof document !== 'undefined') {
             document.addEventListener('click', e => { if (!e.target.closest('.evolution-resume-zone')) evolutionBasculerResume(false); });
             document.addEventListener('keydown', e => { if (e.key === 'Escape') evolutionBasculerResume(false); });
         }
+        // fenêtre « Toute la Corse » : même fonctionnement que le résumé chiffré (se ferme en cliquant ailleurs ou avec Échap)
+        const boutonGlobal = document.getElementById('evolution-bouton-global'), fenetreGlobal = document.getElementById('evolution-global');
+        if (boutonGlobal && fenetreGlobal) {
+            boutonGlobal.addEventListener('click', e => { e.stopPropagation(); if (evolutionInitialise) evolutionBasculerGlobal(); });
+            document.addEventListener('click', e => { if (!e.target.closest('.evolution-global-zone')) evolutionBasculerGlobal(false); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') evolutionBasculerGlobal(false); });
+            fenetreGlobal.addEventListener('change', e => {
+                if (e.target.id !== 'evolution-global-pondere') return;
+                evolutionGlobalPondere = e.target.checked;
+                evolutionGlobalRedessiner();
+                const c = document.getElementById('evolution-global-pondere');
+                if (c) c.focus();
+            });
+        }
         // panneau latéral masqué dans l'onglet Évolution (classe sur <body>), restauré dans les autres ; les cartes se redimensionnent
         document.querySelectorAll('.tab-button').forEach(b => b.addEventListener('click', () => {
             document.body.classList.toggle('mode-evolution', b.getAttribute('data-tab') === 'evolutiontab');
@@ -661,5 +842,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { evolutionSerieEPCI, evolutionCalculDepuis, evolutionEchellesScores, evolutionHabitants, EVOLUTION_SEUIL_FIABLE, evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
+    module.exports = { evolutionCourbesSvg, evolutionVueGlobale, evolutionCourbes, evolutionCorrelation, evolutionEcartType, EVOLUTION_SEUIL_STABLE, EVOLUTION_FORMAT_INDICATEURS, evolutionSerieEPCI, evolutionCalculDepuis, evolutionEchellesScores, evolutionHabitants, EVOLUTION_SEUIL_FIABLE, evolutionCalcul, evolutionDetails, evolutionComposantes, evolutionClasse, evolutionCouleursVariation, evolutionValeur, evolutionVariation, evolutionResume, EVOLUTION_SEUILS_VARIATION, EVOLUTION_NEUTRE };
 }

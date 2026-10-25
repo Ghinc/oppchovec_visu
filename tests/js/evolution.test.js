@@ -192,3 +192,104 @@ test('série EPCI : un « EPCI » d\'une seule commune retrouve exactement les s
   const ecart = (s) => Object.values(s.communes).map((c) => c['2021'].scores_0_10.OppChoVec - c['2016'].scores_0_10.OppChoVec);
   assert.ok(Math.max(...ecart(pop).map(Math.abs)) < 2.5);
 });
+
+// ---------- Fenêtre « Toute la Corse » : vue d'ensemble, variables discriminantes et explicatives, courbes ----------
+const { evolutionVueGlobale, evolutionCourbes, evolutionCourbesSvg, evolutionCorrelation, evolutionEcartType, EVOLUTION_SEUIL_STABLE, EVOLUTION_FORMAT_INDICATEURS } = require(path.join(WEB, 'evolution.js'));
+
+test('vue d\'ensemble : une ligne par indicateur (10), par dimension (3) et pour l\'indice ; effectifs = 360 communes', () => {
+  for (const ponderer of [false, true]) {
+    const v = evolutionVueGlobale(d, ponderer);
+    assert.equal(v.n, 360);
+    assert.equal(v.indicateurs.length, 10);
+    assert.deepEqual(v.indicateurs.map((r) => r.cle), d.indicateurs);
+    assert.deepEqual(v.dimensions.map((r) => r.cle), Object.keys(d.dimensions));
+    for (const r of [v.indice, ...v.dimensions, ...v.indicateurs]) assert.equal(r.hausses + r.stables + r.baisses, 360, r.cle);
+    for (const k of d.indicateurs) assert.ok(EVOLUTION_FORMAT_INDICATEURS[k], `format de ${k}`);
+  }
+});
+
+test('vue d\'ensemble : la somme des contributions des indicateurs d\'une dimension est exactement la variation du score de cette dimension', () => {
+  for (const ponderer of [false, true]) {
+    const v = evolutionVueGlobale(d, ponderer);
+    for (const dim of v.dimensions) {
+      const somme = v.indicateurs.filter((r) => r.dimension === dim.cle).reduce((s, r) => s + r.contribution, 0);
+      assert.ok(Math.abs(somme - dim.variation) < 1e-9, `${dim.cle} (pondéré : ${ponderer}) : ${somme} contre ${dim.variation}`);
+    }
+  }
+});
+
+test('vue d\'ensemble : moyennes, variations et échelles recalculées à la main', () => {
+  const v = evolutionVueGlobale(d, false);
+  for (const r of v.indicateurs) {
+    const m = (a) => noms.reduce((s, c) => s + d.communes[c][String(a)].indicateurs[r.cle], 0) / 360;
+    assert.ok(Math.abs(r.moyenne0 - m(2016)) < 1e-9 * Math.max(1, Math.abs(r.moyenne0)), r.cle);
+    assert.ok(Math.abs(r.moyenne1 - m(2021)) < 1e-9 * Math.max(1, Math.abs(r.moyenne1)), r.cle);
+    assert.ok(Math.abs(r.variation - (r.moyenne1 - r.moyenne0)) < 1e-9 * Math.max(1, Math.abs(r.moyenne0)), r.cle);
+    assert.deepEqual(r.echelle, d.echelle[r.cle]);
+    const [lo, hi] = r.echelle;
+    assert.ok(Math.abs(r.variationEchelle - r.variation / (hi - lo) * 100) < 1e-9, r.cle);
+    const stables = noms.filter((c) => Math.abs((d.communes[c]['2021'].indicateurs[r.cle] - d.communes[c]['2016'].indicateurs[r.cle]) / (hi - lo) * 100) <= EVOLUTION_SEUIL_STABLE).length;
+    assert.equal(r.stables, stables, r.cle);
+  }
+  const iv = v.indice;
+  assert.ok(Math.abs(iv.moyenne1 - iv.moyenne0 - iv.variation) < 1e-12);
+});
+
+test('vue d\'ensemble : la pondération par la population change les moyennes, pas les effectifs, les dispersions ni les corrélations', () => {
+  const a = evolutionVueGlobale(d, false), b = evolutionVueGlobale(d, true);
+  const popu = (c, an) => d.communes[c][String(an)].composantes.Cho2.population;
+  const attendu = noms.reduce((s, c) => s + popu(c, 2021) * d.communes[c]['2021'].indicateurs.Vec1, 0) / noms.reduce((s, c) => s + popu(c, 2021), 0);
+  const vec1 = b.indicateurs.find((r) => r.cle === 'Vec1');
+  assert.ok(Math.abs(vec1.moyenne1 - attendu) < 1e-6, 'moyenne pondérée de Vec1 en 2021');
+  assert.notEqual(vec1.moyenne1, a.indicateurs.find((r) => r.cle === 'Vec1').moyenne1);
+  a.indicateurs.forEach((r, i) => {
+    assert.equal(r.hausses, b.indicateurs[i].hausses);
+    assert.equal(r.dispersion, b.indicateurs[i].dispersion);
+    assert.ok(Object.is(r.lien, b.indicateurs[i].lien) || r.lien === b.indicateurs[i].lien);
+  });
+});
+
+test('vue d\'ensemble : dispersion positive, corrélations dans [-1, 1] ; Opp4 (connectivité) est l\'indicateur qui monte le plus sur l\'échelle', () => {
+  const v = evolutionVueGlobale(d, false);
+  for (const r of v.indicateurs) {
+    assert.ok(r.dispersion >= 0, r.cle);
+    assert.ok(Number.isNaN(r.lien) || (r.lien >= -1 - 1e-12 && r.lien <= 1 + 1e-12), `${r.cle} : ${r.lien}`);
+  }
+  const plusFort = [...v.indicateurs].sort((x, y) => y.variationEchelle - x.variationEchelle)[0];
+  assert.equal(plusFort.cle, 'Opp4');
+});
+
+test('corrélation et écart-type : cas simples', () => {
+  assert.ok(Math.abs(evolutionCorrelation([1, 2, 3, 4], [2, 4, 6, 8]) - 1) < 1e-12);
+  assert.ok(Math.abs(evolutionCorrelation([1, 2, 3, 4], [8, 6, 4, 2]) + 1) < 1e-12);
+  assert.ok(Number.isNaN(evolutionCorrelation([1, 1, 1], [1, 2, 3])));
+  assert.ok(Math.abs(evolutionEcartType([2, 4, 4, 4, 5, 5, 7, 9]) - 2) < 1e-12);
+});
+
+test('courbes : une valeur par année de la série et par variable, moyenne Corse et commune choisie', () => {
+  const c = evolutionCourbes(d, 'Ajaccio', false);
+  assert.deepEqual(c.map((x) => x.variable), ['OppChoVec', 'Opp', 'Cho', 'Vec']);
+  for (const x of c) {
+    assert.deepEqual(x.corse.map((p) => p.annee), d.annees);
+    assert.deepEqual(x.unite.map((p) => p.annee), d.annees);
+    const moyenne2021 = noms.reduce((s, n) => s + evolutionValeur(d, n, 2021, x.variable), 0) / 360;
+    assert.ok(Math.abs(x.corse[1].valeur - moyenne2021) < 1e-12, x.variable);
+    assert.equal(x.unite[1].valeur, evolutionValeur(d, 'Ajaccio', 2021, x.variable));
+    assert.equal(x.nomUnite, 'Ajaccio');
+  }
+  assert.equal(evolutionCourbes(d, null, false)[0].unite, null);
+  assert.equal(evolutionCourbes(d, 'Commune inexistante', false)[0].unite, null);
+});
+
+test('courbes : le dessin s\'adapte à un nombre quelconque d\'années', () => {
+  const trois = JSON.parse(JSON.stringify(d));
+  trois.annees = [2016, 2021, 2024];
+  for (const n of noms) trois.communes[n]['2024'] = JSON.parse(JSON.stringify(trois.communes[n]['2021']));
+  const c = evolutionCourbes(trois, null, false);
+  for (const x of c) assert.equal(x.corse.length, 3);
+  const svg = evolutionCourbesSvg(c);
+  assert.match(svg, /^<svg class="evolution-courbes"[^>]*role="img"/);
+  assert.equal((svg.match(/<path /g) || []).length, 4, 'une ligne par variable');
+  assert.equal((svg.match(/<circle /g) || []).length, 12, 'un point par variable et par année');
+  for (const a of [2016, 2021, 2024]) assert.ok(svg.includes(`>${a}</text>`), `année ${a}`);
+});

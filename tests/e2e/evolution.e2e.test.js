@@ -216,3 +216,47 @@ test('Évolution : grisage des communes de moins de 100 habitants, avertissement
     assert.deepEqual(nouvellesErreurs().filter((m) => !/404/.test(m)), []);
   });
 });
+
+test('Évolution : fenêtre « Toute la Corse » (tableau des variables, courbes, commune choisie, pondération, fermeture)', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await page.click('.tab-button[data-tab="evolutiontab"]');
+    await page.waitForFunction(() => typeof evolutionCouches !== 'undefined' && evolutionCouches.variation && document.querySelector('#evolution-legende-annees strong'));
+    assert.ok(!(await page.locator('#evolution-global').isVisible()), 'fermée au départ');
+    await page.click('#evolution-bouton-global');
+    assert.ok(await page.locator('#evolution-global').isVisible(), 'ouverte');
+    // 1 ligne d'indice + 3 dimensions + 10 indicateurs
+    assert.equal(await page.locator('#evolution-global .evolution-table-global tbody tr').count(), 14);
+    const texte = await page.locator('#evolution-global').innerText();
+    for (const mot of ['Toute la Corse', 'Opp4', 'Vec4', 'Échelle', 'Dispersion', 'Lien avec l\'indice', 'Courbes']) assert.ok(texte.includes(mot), `« ${mot} » absent`);
+    // une courbe (un <path>) par variable ; pas de commune choisie : aucune ligne en pointillé
+    assert.equal(await page.locator('#evolution-global svg.evolution-courbes path').count(), 4);
+    assert.equal(await page.locator('#evolution-global svg.evolution-courbes path[stroke-dasharray]').count(), 0);
+    // la ligne d'Opp4 est la plus forte hausse : la valeur 2021 affichée correspond à la moyenne pondérée calculée par l'appli
+    const attendu = await page.evaluate(() => { const v = evolutionVueGlobale(evolutionDonneesCommunes(), true); return v.indicateurs.find((r) => r.cle === 'Opp4').moyenne1.toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); });
+    const ligneOpp4 = await page.locator('#evolution-global .evolution-table-global tbody tr', { hasText: 'Opp4' }).innerText();
+    assert.ok(ligneOpp4.includes(attendu), `Opp4 : « ${ligneOpp4.replace(/\s+/g, ' ')} » ne contient pas ${attendu}`);
+    // ouvrir le résumé ferme la fenêtre ; la rouvrir ferme le résumé
+    await page.click('#evolution-bouton-resume');
+    assert.ok(!(await page.locator('#evolution-global').isVisible()) && await page.locator('#evolution-resume').isVisible());
+    await page.click('#evolution-bouton-global');
+    assert.ok(await page.locator('#evolution-global').isVisible() && !(await page.locator('#evolution-resume').isVisible()));
+    // une commune choisie sur une carte s'ajoute en pointillé, sans fermer la fenêtre
+    await page.evaluate(() => evolutionFiche('Ajaccio'));
+    assert.ok(await page.locator('#evolution-global').isVisible(), 'reste ouverte');
+    assert.equal(await page.locator('#evolution-global svg.evolution-courbes path[stroke-dasharray]').count(), 4);
+    assert.ok((await page.locator('#evolution-global').innerText()).includes('Ajaccio'));
+    // pondération : décocher change les moyennes
+    const avant = await page.locator('#evolution-global .evolution-table-global tbody tr', { hasText: 'Vec1' }).innerText();
+    await page.uncheck('#evolution-global-pondere');
+    const apres = await page.locator('#evolution-global .evolution-table-global tbody tr', { hasText: 'Vec1' }).innerText();
+    assert.notEqual(avant, apres, 'la pondération change les moyennes');
+    assert.ok(await page.locator('#evolution-global').isVisible(), 'reste ouverte après le changement de pondération');
+    // fermeture : clic extérieur, puis Échap
+    await page.mouse.click(400, 500);
+    assert.ok(!(await page.locator('#evolution-global').isVisible()), 'clic extérieur');
+    await page.click('#evolution-bouton-global');
+    await page.keyboard.press('Escape');
+    assert.ok(!(await page.locator('#evolution-global').isVisible()), 'Échap');
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
