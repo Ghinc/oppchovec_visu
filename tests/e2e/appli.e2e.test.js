@@ -67,3 +67,20 @@ test('carte principale : le millésime « 2024 » est affiché en haut de la car
     assert.deepEqual(nouvellesErreurs(), []);
   });
 });
+
+test('carte principale : la bulle du millésime s\'affiche au survol et au clavier, sinon elle est cachée', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    const repere = page.locator('#map-oppchovec .millesime-carte'), bulle = page.locator('#map-oppchovec .millesime-info');
+    assert.ok(!(await bulle.isVisible()), 'cachée au repos');
+    await repere.hover();
+    assert.ok(await bulle.isVisible(), 'visible au survol');
+    const texte = await bulle.innerText();
+    assert.ok(texte.includes('2023 à 2025') && texte.includes('ARCEP'), texte);
+    await page.mouse.move(5, 5);
+    assert.ok(!(await bulle.isVisible()), 'recachée quand la souris part');
+    await repere.focus();
+    assert.ok(await bulle.isVisible(), 'visible au clavier (focus)');
+    assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('#map-oppchovec .millesime-carte')).cursor), 'default', 'pas de point d\'interrogation');
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});

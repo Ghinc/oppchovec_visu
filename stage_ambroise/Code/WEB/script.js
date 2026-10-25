@@ -258,8 +258,13 @@ function ajouterMillesime(carte) {
     const conteneur = carte.getContainer();
     if (conteneur.querySelector('.millesime-carte')) return;
     const div = L.DomUtil.create('div', 'millesime-carte', conteneur);
-    div.textContent = MILLESIME_CARTE_PRINCIPALE;
-    div.title = "Millésime de la carte : sources officielles de 2023 à 2025 (recensement 2023, ARCEP et équipements 2024, revenus 2024)";
+    div.tabIndex = 0;                                             // la bulle s'ouvre aussi au clavier
+    div.setAttribute('aria-describedby', 'millesime-carte-info');
+    div.append(MILLESIME_CARTE_PRINCIPALE);
+    const bulle = L.DomUtil.create('span', 'millesime-info', div);
+    bulle.id = 'millesime-carte-info';
+    bulle.setAttribute('role', 'tooltip');
+    bulle.textContent = "Millésime de la carte : sources officielles de 2023 à 2025 (recensement 2023, ARCEP et équipements 2024, revenus 2024). La provenance et l'année de chaque indicateur sont dans l'infobulle ⓘ de l'indicateur.";
     L.DomEvent.disableClickPropagation(div);
 }
 
