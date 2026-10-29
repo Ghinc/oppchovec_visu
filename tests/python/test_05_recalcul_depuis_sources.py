@@ -48,11 +48,19 @@ class IndicateursDepuisLesComposantes(unittest.TestCase):
             return sum(n * e for n, e in zip(range(1, 8), effectifs)) / sum(effectifs)
         self.verifier("Opp1", f)
 
-    def test_opp2_theil_sur_8_categories(self):
+    def test_opp2_diversite_sociale_nuit_et_jour(self):
+        def diversite(x):
+            mu = sum(x) / len(x)
+            theil = sum((v / mu) * math.log(v / mu) for v in x if v > 0) / len(x)
+            return 1 - theil / math.log(len(x))                              # 0 = tout dans une catégorie, 1 = parfaitement équilibré
+
         def f(c):
-            x = [c["Opp2"][f"cs{i}"] for i in range(1, 9)]
-            mu = sum(x) / 8
-            return sum((v / mu) * math.log(v / mu) for v in x if v > 0) / 8
+            o = c["Opp2"]
+            nuit = diversite([o[f"cs{i}"] for i in range(1, 9)])            # habitants, 8 catégories
+            jour = diversite([o[f"j{i}"] for i in range(1, 8)])             # actifs à leur commune de travail (6) + retraités
+            self.assertAlmostEqual(o["nuit"], nuit, delta=1e-9)
+            self.assertAlmostEqual(o["jour"], jour, delta=1e-9)
+            return (nuit + jour) / 2
         self.verifier("Opp2", f)
 
     def test_opp3_voiture_transports_bus(self):

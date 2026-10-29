@@ -75,6 +75,29 @@ class SerieTemporelle(unittest.TestCase):
                 self.assertEqual(self.d["communes"][c][a]["indicateurs"]["Vec4"], v["communes"][c][a], f"{c} {a}")
                 self.assertEqual(self.d["communes"][c][a]["composantes"]["Vec4"]["services_20min"], v["communes"][c][a], f"{c} {a}")
 
+    def test_opp2_moyenne_des_diversites_de_nuit_et_de_jour_comme_l_indice_courant(self):
+        """Opp2 = (diversité de nuit + diversité de jour) / 2, chacune = 1 - Theil / ln n ; nuit : 8 catégories des habitants, jour : 6 groupes d'actifs à leur commune de travail + retraités (7)."""
+        def diversite(x):
+            mu = sum(x) / len(x)
+            return 1 - sum((v / mu) * math.log(v / mu) for v in x if v > 0) / len(x) / math.log(len(x))
+        for c in self.noms:
+            for a in ANNEES:
+                x = self.d["communes"][c][a]
+                o = x["composantes"]["Opp2"]
+                nuit = diversite([o[f"cs{i}"] for i in range(1, 9)])
+                jour = diversite([o[f"j{i}"] for i in range(1, 8)])
+                self.assertAlmostEqual(o["nuit"], nuit, delta=1e-5, msg=f"{c} {a}")
+                self.assertAlmostEqual(o["jour"], jour, delta=1e-5, msg=f"{c} {a}")
+                self.assertAlmostEqual(x["indicateurs"]["Opp2"], (nuit + jour) / 2, delta=1e-5, msg=f"{c} {a}")
+
+    def test_opp2_a_la_meme_definition_que_l_indice_courant(self):
+        """Mêmes catégories et même formule qu'en 2023 : les moyennes de nuit et de jour 2021 sont proches de celles de l'indice courant."""
+        courant = charger_json(RACINE / "stage_ambroise" / "Données" / "indice_v2" / "sources_indice_v2.json")["communes"]
+        for cle in ("nuit", "jour"):
+            moy_serie = sum(self.d["communes"][c]["2021"]["composantes"]["Opp2"][cle] for c in self.noms) / 360
+            moy_courant = sum(v["Opp2"][cle] for v in courant.values()) / 360
+            self.assertAlmostEqual(moy_serie, moy_courant, delta=0.03, msg=cle)
+
     def test_opp4_est_la_moyenne_de_la_4g_du_debit_et_de_la_fibre(self):
         """Opp4 = (4G + débit >= 30 Mbit/s + fibre) / 3, en %, depuis Données/opp4_serie_2016_2021.json (4G : population couverte par au moins un opérateur)."""
         o = json.loads((RACINE / "stage_ambroise" / "Données" / "opp4_serie_2016_2021.json").read_text(encoding="utf-8"))["communes"]
@@ -224,13 +247,13 @@ class FiabiliteEtDrapeauTransports(unittest.TestCase):
         self.assertLess(max(eff), 7)
 
     def test_le_bruit_diminue_avec_la_taille_de_la_commune(self):
-        """Écart-type de la variation de l'indice par classe de population : décroissant (1,25 sous 50 habitants ; 1,16 sous 100 ; 0,90 de 100 à 999 ; 0,82 à partir de 1 000). Opp4 (progression réelle de la connectivité, commune à toutes les tailles) atténue l'écart : avant Opp4, 1,8 contre 0,6."""
+        """Écart-type de la variation de l'indice par classe de population : décroissant (1,00 sous 50 habitants ; 0,98 de 50 à 99 ; 0,91 de 100 à 999 ; 0,80 à partir de 1 000, Opp2 dans le sens « plus diversifié = mieux »). Opp4 (progression réelle de la connectivité, commune à toutes les tailles) atténue l'écart : avant Opp4, 1,8 contre 0,6."""
         import statistics
         var = {c: self.std["communes"][c]["2021"]["scores_0_10"]["OppChoVec"] - self.std["communes"][c]["2016"]["scores_0_10"]["OppChoVec"] for c in self.noms}
         hab = {c: self.std["communes"][c]["2021"]["composantes"]["Cho2"]["population"] for c in self.noms}
         sd = lambda lo, hi: statistics.pstdev([var[c] for c in self.noms if lo <= hab[c] < hi])
         petites, moyennes, grandes = sd(0, 100), sd(100, 1000), sd(1000, 10 ** 9)
-        self.assertGreater(petites, 1.2 * moyennes)
+        self.assertGreater(petites, 1.05 * moyennes)
         self.assertGreater(moyennes, 1.05 * grandes)
         self.assertGreater(sum(1 for c in self.noms if hab[c] < 100), 100)                       # 121 communes de moins de 100 habitants
 

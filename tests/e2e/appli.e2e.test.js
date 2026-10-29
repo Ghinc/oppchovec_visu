@@ -9,7 +9,7 @@ test('chargement : aucune erreur nouvelle, aucune requête en échec, données e
     assert.deepEqual(requetesEchouees, []);
     assert.deepEqual(alertes, []);
     // exemple de vérification de WEB/README_FICHIERS.md
-    assert.equal(await page.evaluate(() => data_indicateursOriginaux['Alata'].OppChoVec_0_10), 10);
+    assert.equal(await page.evaluate(() => data_indicateursOriginaux['Afa'].OppChoVec_0_10), 10);
     assert.equal(await page.evaluate(() => seuilsJenks.oppchovec.length), 6);
     assert.equal(await page.evaluate(() => Object.keys(indiceFinale).length), 360);
   });

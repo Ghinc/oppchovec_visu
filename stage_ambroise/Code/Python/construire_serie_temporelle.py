@@ -10,7 +10,7 @@ Opp1 est sur 4 niveaux de diplôme (le détail à 7 niveaux n'existe pas en 2016
 Indicateurs (identiques aux deux dates ; recensement INSEE, bases « principaux indicateurs » communales, sauf mention)
   Opp1  niveau de diplôme moyen des 18 ans et plus non scolarisés, sur 4 niveaux comparables (1 aucun diplôme ou brevet, 2 CAP-BEP, 3 bac,
         4 enseignement supérieur) : le détail à 7 niveaux n'existe pas dans le millésime 2016. Les 15-17 ans non scolarisés sont retirés du niveau 1.
-  Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus (formule de oppchovec.py : Σ (x/μ) ln(x/μ) / 8)
+  Opp2  diversité sociale = (nuit + jour) / 2, chacune = 1 - Theil / ln n (Theil = Σ (x/μ) ln(x/μ) / n) ; nuit : 8 catégories socioprofessionnelles des habitants de 15 ans et plus ; jour : 6 groupes d'actifs occupés à leur commune de travail (fichier Mobilités professionnelles 2016, 2021) + retraités ; plus haut = plus diversifié
   Opp4  (4G + débit >= 30 Mbit/s + fibre) / 3, en % : 4G = population couverte par au moins un opérateur (cartes ARCEP de mars 2017 et de décembre 2021 x grille INSEE 200 m) ;
         débit = locaux éligibles à 30 Mbit/s (Observatoire THD T4 2016 ; ARCEP Ma connexion internet T4 2021, offres filaires) ; fibre = locaux raccordables FttH (mêmes fichiers) ;
         calculé par construire_opp4_serie.py -> Données/opp4_serie_2016_2021.json.
@@ -54,6 +54,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from calculer_diversite_jour import effectifs_jour
+
 RACINE = Path(__file__).resolve().parents[2]
 GEOJSON = RACINE / "Données" / "Commune_Corse.geojson"
 SORTIE = Path(__file__).resolve().parent.parent / "WEB" / "serie_temporelle.json"
@@ -96,6 +98,21 @@ def theil(x):
     return (r * np.log(r.where(r > 0))).fillna(0).sum(axis=1) / x.shape[1]
 
 
+def diversite(x):
+    """ln(n) - Theil. Le Theil mesure la concentration (0 = répartition équilibrée) ; plus la commune est diversifiée mieux c'est,
+    donc on retourne le sens : 0 = tout dans une seule catégorie, ln(n) = répartition parfaitement équilibrée."""
+    return np.log(x.shape[1]) - theil(x)
+
+
+def opp2_nuit_jour(nuit, jour):
+    """Opp2 = (diversité de nuit + diversité de jour) / 2, chacune = (ln n - Theil) / ln n, dans [0, 1].
+    nuit : DataFrame communes x 8 (cs1..cs8, habitants de 15 ans et plus) ; jour : DataFrame communes x 7 (j1..j7, voir calculer_diversite_jour.py).
+    Renvoie (indicateur, DataFrame des composantes : nuit, jour, cs1..cs8, j1..j7)."""
+    dn, dj = diversite(nuit) / np.log(nuit.shape[1]), diversite(jour) / np.log(jour.shape[1])
+    comp = pd.concat([pd.DataFrame({"nuit": dn, "jour": dj}), nuit, jour], axis=1)
+    return ((dn + dj) / 2).rename("Opp2"), comp
+
+
 def indicateurs_recensement(dossier, an, seuil_transports=0):
     """Renvoie (indicateurs, composantes) : DataFrame des indicateurs et dictionnaire {indicateur: DataFrame de ses composantes, une ligne par commune}."""
     a = str(an)[2:]
@@ -116,7 +133,7 @@ def indicateurs_recensement(dossier, an, seuil_transports=0):
     comp["Opp1"] = pd.DataFrame(effectifs.to_numpy(), index=d.index, columns=["niveau1", "niveau2", "niveau3", "niveau4"])
     # --- Opp2 : Theil sur les CSP
     d = lire_base_cc(trouver(dossier, "evol-struct"), [f"C{a}_POP15P_CS{i}" for i in range(1, 9)])
-    out["Opp2"] = theil(d)
+    out["Opp2"] = diversite(d)
     comp["Opp2"] = pd.DataFrame(d.to_numpy(), index=d.index, columns=[f"cs{i}" for i in range(1, 9)])
     # --- Opp3 : voiture + transports en commun + réseau de bus
     d = lire_base_cc(trouver(dossier, "log"), [P("RP"), P("NPER_RP"), P("NBPI_RP"), P("RP_SDB"), P("RPMAISON"), P("RP_VOIT1P")])
@@ -238,6 +255,8 @@ def calculer(source, seuil_transports=0):
         dossier = source / str(an)
         t, comp = indicateurs_recensement(dossier, an, seuil_transports)
         t["Cho2"], comp["Cho2"] = indicateur_nationalite(dossier)
+        cs = comp["Opp2"][[f"cs{i}" for i in range(1, 9)]]
+        t["Opp2"], comp["Opp2"] = opp2_nuit_jour(cs, effectifs_jour(source, list(t.index), cs["cs7"], an))     # nuit : habitants ; jour : actifs à leur commune de travail + retraités
         t["Opp4"], comp["Opp4"] = indicateur_connectivite(noms, list(t.index), an)
         t["Cho1"], comp["Cho1"] = indicateur_qpv(list(t.index), an)
         t["Vec4"], comp["Vec4"] = indicateur_services(noms, list(t.index), an)
@@ -252,6 +271,11 @@ def calculer(source, seuil_transports=0):
             sys.exit(f"{an} : communes ou valeurs manquantes (écart communes {sorted(set(noms) ^ set(t.index))[:5]}, NaN {t.isna().sum().to_dict()})")
         brut[an] = t.loc[list(noms)]
         composantes[an] = {k: v.loc[list(noms)] for k, v in comp.items()}
+    return assembler(noms, brut, estimees, composantes, seuil_transports)
+
+
+def assembler(noms, brut, estimees, composantes, seuil_transports=0):
+    """Normalisation, indice, Jenks et mise en forme à partir des indicateurs bruts de chaque année (brut[an] : DataFrame communes x indicateurs)."""
     # normalisation commune aux deux années
     tout = pd.concat(brut.values())
     lo, hi = tout.min(), tout.max()

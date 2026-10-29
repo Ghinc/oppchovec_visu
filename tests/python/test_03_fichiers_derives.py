@@ -266,9 +266,12 @@ class FichiersAnnexes(unittest.TestCase):
                 self.assertAlmostEqual(x[ind]["valeur"], d[ind], delta=1e-3, msg=f"{c}.{ind}")
             o1 = x["Opp1"]
             self.assertAlmostEqual(sum(n * o1[f"niveau{n}"] for n in range(1, 8)) / sum(o1[f"niveau{n}"] for n in range(1, 8)), d["Opp1"], delta=1e-3, msg=c)
-            cs = [x["Opp2"][f"cs{i}"] for i in range(1, 9)]
-            mu = sum(cs) / 8
-            self.assertAlmostEqual(sum((v / mu) * math.log(v / mu) for v in cs if v > 0) / 8, d["Opp2"], delta=1e-3, msg=c)
+            def diversite(e):
+                mu = sum(e) / len(e)
+                return 1 - sum((v / mu) * math.log(v / mu) for v in e if v > 0) / len(e) / math.log(len(e))
+            nuit = diversite([x["Opp2"][f"cs{i}"] for i in range(1, 9)])
+            jour = diversite([x["Opp2"][f"j{i}"] for i in range(1, 8)])
+            self.assertAlmostEqual((nuit + jour) / 2, d["Opp2"], delta=1e-3, msg=c)
             o3 = x["Opp3"]
             self.assertAlmostEqual(o3["voiture"] + (100 if o3["tc_actifs"] > 0 else 0) + o3["bus"], d["Opp3"], delta=1e-3, msg=c)
             o4 = x["Opp4"]

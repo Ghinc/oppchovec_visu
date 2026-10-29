@@ -35,20 +35,20 @@ seuil appartient à la classe **inférieure** (`valeur <= seuil`). C'est ce que 
 
 **OppChoVec :**
 ```
-Classe 1 : 0.00 - 3.16
-Classe 2 : 3.16 - 4.67
-Classe 3 : 4.67 - 6.03
-Classe 4 : 6.03 - 7.71
-Classe 5 : 7.71 - 10.00
+Classe 1 : 0.00 - 3.64
+Classe 2 : 3.64 - 4.85
+Classe 3 : 4.85 - 6.11
+Classe 4 : 6.11 - 7.62
+Classe 5 : 7.62 - 10.00
 ```
 
 **Score_Opp :**
 ```
-Classe 1 : 0.00 - 3.11
-Classe 2 : 3.11 - 5.02
-Classe 3 : 5.02 - 6.58
-Classe 4 : 6.58 - 7.86
-Classe 5 : 7.86 - 10.00
+Classe 1 : 0.00 - 3.47
+Classe 2 : 3.47 - 4.87
+Classe 3 : 4.87 - 6.08
+Classe 4 : 6.08 - 7.31
+Classe 5 : 7.31 - 10.00
 ```
 
 **Score_Cho :**
@@ -81,10 +81,10 @@ Voisinage = 5 plus proches voisins (KNN k = 5), 9999 permutations, graine 42.
 
 | Fichier | Constante JS | Indice | Seuil | Communes significatives |
 |---|---|---|---|---|
-| `lisa_data.js` | `LISA_DATA` | p_k égaux | 5 % | 67 communes (18,6 %) |
-| `lisa_data_1pct.js` | `LISA_DATA_1PCT` | p_k égaux | 1 % | 34 communes (9,4 %) |
-| `lisa_data_betti.js` | `LISA_DATA_BETTI` | p_k de Betti et al. | 5 % | 91 communes (25,3 %) |
-| `lisa_data_betti_1pct.js` | `LISA_DATA_BETTI_1PCT` | p_k de Betti et al. | 1 % | 45 communes (12,5 %) |
+| `lisa_data.js` | `LISA_DATA` | p_k égaux | 5 % | 100 communes (27,8 %) |
+| `lisa_data_1pct.js` | `LISA_DATA_1PCT` | p_k égaux | 1 % | 40 communes (11,1 %) |
+| `lisa_data_betti.js` | `LISA_DATA_BETTI` | p_k de Betti et al. | 5 % | 117 communes (32,5 %) |
+| `lisa_data_betti_1pct.js` | `LISA_DATA_BETTI_1PCT` | p_k de Betti et al. | 1 % | 54 communes (15,0 %) |
 
 Chaque fichier contient `metadata` (I de Moran global, poids p_k, seuil…), `statistiques` (effectif par type de cluster) et
 `clusters` : pour chaque commune `cluster` (`HH (High-High)`, `LL (Low-Low)`, `HL (High-Low)`, `LH (Low-High)` ou
@@ -156,7 +156,7 @@ comparent `oppchovec.py` aux données et le signalent comme « échec attendu »
 ## ✅ Vérification rapide
 
 1. **Console navigateur (F12)** : la page doit se charger sans aucune erreur.
-2. **Test rapide** : `console.log(data_indicateursOriginaux['Alata'].OppChoVec_0_10)` devrait afficher `10`.
+2. **Test rapide** : `console.log(data_indicateursOriginaux['Afa'].OppChoVec_0_10)` devrait afficher `10`.
 3. **Seuils** : `console.log(seuilsJenks.oppchovec)` devrait afficher 6 valeurs.
 
 ## ⚠️ Important
