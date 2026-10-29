@@ -75,7 +75,7 @@ const traductions = {
         },
         descriptions: {
             Indicateur_Opp1: "Avoir une bonne éducation. Niveau de diplôme moyen des personnes de 18 ans ou plus non scolarisées, sur une échelle de 1 à 7 : 1 aucun diplôme ou CEP, 2 brevet, 3 CAP-BEP, 4 baccalauréat, 5 bac + 2, 6 bac + 3 ou 4, 7 bac + 5 ou plus. Source : INSEE, recensement 2023. Les petites communes ont peu d'habitants concernés : leur valeur est plus incertaine.",
-            Indicateur_Opp2: "Représente l'indice de Theil qui mesure les inégalités et les proportions des catégories socioprofessionnelles (8 catégories, 15 ans et plus). Source : INSEE, recensement 2023.",
+            Indicateur_Opp2: "Mesure la diversité sociale : moyenne de la diversité de nuit (résidents, 8 catégories socioprofessionnelles) et de jour (actifs à leur commune de travail et retraités, 7 catégories), chacune égale à 1 moins l'indice de Theil rapporté à son maximum. Plus la valeur est élevée (maximum 1), plus la population est diversifiée. Source : INSEE, recensement 2023.",
             Indicateur_Opp3: "Avoir les moyens de mobilité. Part des ménages avec au moins une voiture, +100 points si des actifs vont travailler en transports en commun, +100 points pour les quatre communes qui ont un réseau de bus urbain régulier (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source : INSEE, recensement 2023.",
             Indicateur_Opp4: "Avoir accès aux TIC. Moyenne de la part de la population couverte en 4G (au moins un opérateur), de la part des locaux éligibles à un débit d'au moins 30 Mbit/s et de la part des locaux raccordables à la fibre. Source : ARCEP, T4 2024.",
             Indicateur_Cho1: "Ne pas être discriminé. −log(nombre de personnes vivant en quartier prioritaire de la politique de la ville), 0 si aucune. Source : INSEE, population communale en QPV 2024 (référence 1er janvier 2020).",
@@ -117,7 +117,7 @@ const traductions = {
         },
         descriptions: {
             Indicateur_Opp1: "Having a good education. Average diploma level of non-student people aged 18 or over, on a scale of 1 to 7: 1 no diploma or primary certificate, 2 lower secondary, 3 vocational (CAP-BEP), 4 baccalaureate, 5 two years of higher education, 6 three to four years, 7 five years or more. Source: INSEE, 2023 census. Small municipalities have few people concerned: their value is less certain.",
-            Indicateur_Opp2: "Represents the Theil index which measures inequalities and proportions of socio-professional categories (8 categories, aged 15 and over). Source: INSEE, 2023 census.",
+            Indicateur_Opp2: "Measures social diversity: average of night diversity (residents, 8 socio-professional categories) and day diversity (workers at their workplace commune plus retirees, 7 categories), each equal to 1 minus the Theil index divided by its maximum. The higher the value (maximum 1), the more diverse the population. Source: INSEE, 2023 census.",
             Indicateur_Opp3: "Having the means of mobility. Share of households with at least one car, +100 points if workers commute by public transport, +100 points for the four municipalities with a regular urban bus network (Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse). Source: INSEE, 2023 census.",
             Indicateur_Opp4: "Having access to ICT. Average of the share of the population covered by 4G (at least one operator), the share of premises eligible for at least 30 Mbit/s and the share of premises connectable to fibre. Source: ARCEP, Q4 2024.",
             Indicateur_Cho1: "Not being discriminated against. −log(number of people living in a priority neighbourhood), 0 if none. Source: INSEE, municipal population in priority neighbourhoods (QPV 2024, reference 1 January 2020).",
@@ -171,8 +171,8 @@ const traductions = {
 
 // Seuils de Jenks - seront chargés dynamiquement depuis seuils_jenks.json
 let seuilsJenks = {
-    oppchovec: [0, 3.16, 4.67, 6.03, 7.71, 10],  // 5 classes - valeurs par défaut basées sur Jenks
-    opp: [0, 3.11, 5.02, 6.58, 7.86, 10],
+    oppchovec: [0, 3.64, 4.85, 6.11, 7.62, 10],  // 5 classes - valeurs par défaut basées sur Jenks
+    opp: [0, 3.47, 4.87, 6.08, 7.31, 10],
     cho: [0, 2.44, 6.37, 8.31, 9.32, 10],
     vec: [0, 2.61, 3.96, 5.24, 7.30, 10]
 };
@@ -2226,8 +2226,10 @@ const RP23 = 'INSEE, recensement de la population 2023 (collectes de 2021 à 202
 const SOURCES_DONNEES = {
   Opp1: Object.assign({ indicateur: { provenance: `${RP23}, base communale Diplômes - Formation`, annee: '2023' } },
     Object.fromEntries([1, 2, 3, 4, 5, 6, 7].map(k => ['n' + k, { provenance: `${RP23}, base communale Diplômes - Formation (personnes de 15 ans et plus non scolarisées, moins les 15-17 ans non scolarisés ; niveau ${k})`, annee: '2023' }]))),
-  Opp2: Object.assign({ indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (catégories socioprofessionnelles)`, annee: '2023' } },
-    Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, { provenance: `${RP23}, base communale Évolution et structure de la population (population de 15 ans et plus par catégorie socioprofessionnelle)`, annee: '2023' }]))),
+  Opp2: Object.assign({ indicateur: { provenance: `${RP23}, base communale Évolution et structure de la population (résidents, « nuit ») et fichier détail Mobilités professionnelles (lieu de travail, « jour »)`, annee: '2023' } },
+    Object.fromEntries([1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, { provenance: `${RP23}, base communale Évolution et structure de la population (population de 15 ans et plus par catégorie socioprofessionnelle)`, annee: '2023' }])),
+    Object.fromEntries([1, 2, 3, 4, 5, 6].map(k => ['j' + k, { provenance: `${RP23}, fichier détail Mobilités professionnelles (actifs occupés comptés à leur commune de travail, groupe socioprofessionnel, poids de l'individu ; échantillon du recensement)`, annee: '2023' }])),
+    { j7: { provenance: `${RP23}, base communale Évolution et structure de la population (retraités de 15 ans et plus, comptés à leur commune de résidence)`, annee: '2023' } }),
   Opp3: {
     indicateur: { provenance: `${RP23} ; réseaux de bus : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr)`, annee: '2023' },
     voiture: { provenance: `${RP23}, base communale Logement (ménages avec voiture)`, annee: '2023' },
@@ -2447,7 +2449,11 @@ const VARIABLES_CALCUL = {
   Opp2: Object.fromEntries([
     'Agriculteurs exploitants', "Artisans, commerçants, chefs d'entreprise", 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
     'Employés', 'Ouvriers', 'Retraités', 'Autres personnes sans activité professionnelle'
-  ].map((n, i) => ['cs' + (i + 1), [n, 'Personnes de 15 ans et plus dans cette catégorie socioprofessionnelle.']])),
+  ].map((n, i) => ['cs' + (i + 1), ['Résidents · ' + n, 'Personnes de 15 ans et plus qui habitent la commune, dans cette catégorie socioprofessionnelle (« nuit »).']])
+    .concat([
+    'Agriculteurs exploitants', "Artisans, commerçants, chefs d'entreprise", 'Cadres et professions intellectuelles supérieures', 'Professions intermédiaires',
+    'Employés', 'Ouvriers', 'Retraités'
+  ].map((n, i) => ['j' + (i + 1), [(i < 6 ? 'Présents de jour · ' : 'Présents de jour · ') + n, i < 6 ? 'Actifs occupés qui travaillent dans la commune, dans ce groupe socioprofessionnel (« jour »).' : 'Retraités de la commune : sans déplacement domicile-travail, ils sont présents dans la commune toute la journée (« jour »).']]))),
   Opp3: {
     voiture: ['Ménages avec au moins une voiture', 'Part des ménages de la commune qui possèdent au moins une voiture.'],
     tc: ['Actifs occupés allant travailler en transports en commun', 'Au moins un actif occupé de la commune va travailler en transports en commun : + 100 points.'],
@@ -2503,8 +2509,9 @@ function explicationIndicateur(cle, d) {
       lignes: [1, 2, 3, 4, 5, 6, 7].map(k => ['n' + k, `${fmtDetail(d['niveau' + k], 0)} personnes`]),
       note: `Les ${fmtDetail(d.retire_15_17, 0)} personnes de 15 à 17 ans non scolarisées sont retirées du niveau 1 (le recensement compte les non-scolarisés dès 15 ans).` };
     case 'Opp2': return {
-      formule: 'Indice de Theil des 8 catégories socioprofessionnelles (15 ans et plus) : T = (1/8) × somme de (xᵢ/μ) × ln(xᵢ/μ), où xᵢ est l\'effectif de la catégorie et μ la moyenne des 8 effectifs.',
-      lignes: [1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, `${fmtDetail(d['cs' + k], 0)} personnes`]) };
+      formule: 'Opp2 = (diversité de nuit + diversité de jour) ÷ 2. Chaque diversité = 1 − T ÷ ln n, où T = (1/n) × somme de (xᵢ/μ) × ln(xᵢ/μ) est l\'indice de Theil (xᵢ : effectif de la catégorie, μ : moyenne des n effectifs). Nuit : les 8 catégories socioprofessionnelles des habitants de 15 ans et plus (n = 8). Jour : les 6 groupes d\'actifs occupés comptés à leur commune de travail et les retraités comptés à leur commune de résidence (n = 7). 0 = tout dans une catégorie, 1 = répartition parfaitement équilibrée, donc diversifiée.',
+      lignes: [1, 2, 3, 4, 5, 6, 7, 8].map(k => ['cs' + k, `${fmtDetail(d['cs' + k], 0)} personnes`]).concat([1, 2, 3, 4, 5, 6, 7].map(k => ['j' + k, `${fmtDetail(d['j' + k], 0)} personnes`])),
+      note: `Diversité de nuit : ${fmtDetail(d.nuit, 3)} ; diversité de jour : ${fmtDetail(d.jour, 3)} ; Opp2 = ${fmtDetail(d.valeur, 3)}. Les effectifs « de jour » des actifs viennent d\'un échantillon du recensement : ils sont arrondis à l\'unité mais restent approximatifs dans les petites communes.` };
     case 'Opp3': return {
       formule: 'Part des ménages avec au moins une voiture (%), + 100 points si au moins un actif occupé va travailler en transports en commun, + 100 points si la commune a un réseau de bus urbain régulier.',
       lignes: [['voiture', `${fmtDetail(d.voiture, 1)} %`], ['tc', d.tc > 0 ? `+ 100 points (${fmtDetail(d.tc_actifs, 0)} actifs)` : `0 (${fmtDetail(d.tc_actifs, 0)} actif)`],

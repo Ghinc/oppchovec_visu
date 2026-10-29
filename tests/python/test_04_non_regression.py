@@ -62,15 +62,16 @@ class PassageALaV2(unittest.TestCase):
     def test_correlations_de_rang_entre_la_v1_et_la_v2(self):
         """Corrélations de rang mesurées le 2026-10-19 (bornes basses avec marge) : même méthode et millésime plus récent pour Opp1, Opp2, Opp3, Cho2, Vec2, Vec3 ;
         sources changées pour Opp4 (4G et fibre recalculées) et Vec1 (médiane remplacée par le revenu fiscal moyen)."""
-        bornes = {"Opp1": 0.7, "Opp2": 0.75, "Opp3": 0.7, "Cho1": 0.999, "Cho2": 0.9, "Vec2": 0.9, "Vec3": 0.55, "Vec4": 0.999, "Opp4": 0.25, "Vec1": 0.25}
+        bornes = {"Opp1": 0.7, "Opp2": 0.55, "Opp3": 0.7, "Cho1": 0.999, "Cho2": 0.9, "Vec2": 0.9, "Vec3": 0.55, "Vec4": 0.999, "Opp4": 0.25, "Vec1": 0.25}
         for k, mini in bornes.items():
             with self.subTest(indicateur=k):
-                r = spearman([self.v1[c][k] for c in self.v1], [self.v2[c][k] for c in self.v1])
+                signe = -1 if k == "Opp2" else 1                      # la v1 donne le Theil brut ; la v2 le retourne (ln 8 - Theil, plus haut = plus diversifié)
+                r = spearman([signe * self.v1[c][k] for c in self.v1], [self.v2[c][k] for c in self.v1])
                 self.assertGreater(r, mini, f"{k} : corrélation de rang {r:.3f}")
 
     def test_l_indice_global_reste_correle_mais_change(self):
         r = spearman([self.v1[c]["OppChoVec_0_10"] for c in self.v1], [self.v2[c]["OppChoVec_0_10"] for c in self.v1])
-        self.assertGreater(r, 0.6, f"corrélation de rang de l'indice : {r:.3f}")
+        self.assertGreater(r, 0.5, f"corrélation de rang de l'indice : {r:.3f}")      # 0,59 depuis le retournement d'Opp2 (le v1 garde le Theil brut)
         self.assertLess(r, 0.95, "l'indice aurait dû changer avec le remplacement des sources")
 
     def test_les_dimensions_cho_et_vec_gardent_leur_classement(self):

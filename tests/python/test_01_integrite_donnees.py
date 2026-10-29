@@ -39,7 +39,7 @@ class IntegriteDataScores(unittest.TestCase):
 
     def test_echelles_des_indicateurs_bruts(self):
         """Plages réelles documentées dans VERIFICATION_COHERENCE_DONNEES.md (section « Échelles utilisées »)."""
-        plages = {"Opp1": (1, 7), "Opp2": (0, 2.1), "Opp3": (0, 300), "Opp4": (0, 100), "Cho1": (-20, 0),
+        plages = {"Opp1": (1, 7), "Opp2": (0, 1.0), "Opp3": (0, 300), "Opp4": (0, 100), "Cho1": (-20, 0),
                   "Cho2": (0, 100), "Vec1": (0, 70000), "Vec2": (0, 1), "Vec3": (0, 1), "Vec4": (0, 6000)}
         for ind, (lo, hi) in plages.items():
             vals = [d[ind] for d in self.data.values()]

@@ -96,8 +96,8 @@ Composantes :
   Opp1 - Niveau d'éducation          : {data['opportunites']['Opp1_Education']}
            → Niveau de diplôme moyen (1 à 7) des 18 ans et plus non scolarisés (INSEE, recensement 2023)
 
-  Opp2 - Inégalités (Indice de Theil) : {data['opportunites']['Opp2_Inegalites']}
-           → Indice de Theil sur les 8 catégories socioprofessionnelles : plus il est bas, moins la répartition est inégale (INSEE, recensement 2023)
+  Opp2 - Diversité sociale            : {data['opportunites']['Opp2_Inegalites']}
+           → moyenne de la diversité de nuit (habitants) et de jour (actifs à leur commune de travail et retraités) : plus il est élevé, plus la population est diversifiée, maximum 1 (INSEE, recensement 2023)
 
   Opp3 - Mobilité                     : {data['opportunites']['Opp3_Mobilite']}
            → Part de ménages avec voiture + 100 si des actifs vont au travail en transports en commun + 100 pour les villes à réseau de bus (INSEE, recensement 2023)

@@ -128,10 +128,10 @@ test('panneau commune : chaque indicateur et chaque sous-composante a une infobu
   await avecAppli(async ({ page }) => {
     await ouvrirCommune(page, 'Bastia');
     const badges = await page.$$eval('#resultCommune .src-badge', (els) => els.map((e) => ({ txt: e.dataset.src, manque: e.classList.contains('src-manquante') })));
-    // 10 indicateurs + 12 sous-curseurs + 36 variables des tableaux « Voir le calcul » (Opp1 7, Opp2 8, Opp3 3, Opp4 3, Cho1 1, Cho2 5, Vec1 2, Vec2 3, Vec3 3, Vec4 1)
-    assert.equal(badges.length, 10 + 12 + 36);
-    assert.equal(await page.locator('#resultCommune .calcul-detail .src-badge').count(), 36);
-    assert.ok(await page.locator('#resultCommune .calcul-detail .sc-aide').count() >= 36, 'un petit texte explicatif par variable du tableau');
+    // 10 indicateurs + 12 sous-curseurs + 43 variables des tableaux « Voir le calcul » (Opp1 7, Opp2 15, Opp3 3, Opp4 3, Cho1 1, Cho2 5, Vec1 2, Vec2 3, Vec3 3, Vec4 1)
+    assert.equal(badges.length, 10 + 12 + 43);
+    assert.equal(await page.locator('#resultCommune .calcul-detail .src-badge').count(), 43);
+    assert.ok(await page.locator('#resultCommune .calcul-detail .sc-aide').count() >= 43, 'un petit texte explicatif par variable du tableau');
     for (const b of badges) assert.match(b.txt, /^Provenance : .+ Année : .+\.$/);
     assert.equal(badges.filter((b) => b.manque).length, 0, 'toutes les données ont une provenance et une année');
     // l'infobulle s'affiche au survol

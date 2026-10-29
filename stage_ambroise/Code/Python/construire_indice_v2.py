@@ -6,7 +6,7 @@ Remplace l'indice « v1 » (millésimes 2020-2024, dont plusieurs sources inconn
 
 Indicateurs (mêmes définitions que la v1 sauf mention) :
   Opp1  niveau de diplôme moyen (7 niveaux) des 18 ans et plus non scolarisés ; recensement 2023, base communale « Diplômes - Formation » ; 15-17 ans non scolarisés retirés du niveau 1.
-  Opp2  indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus ; recensement 2023, base « Évolution et structure de la population ».
+  Opp2  diversité sociale = (nuit + jour) / 2, chacune = 1 - Theil / ln n (plus haut = plus diversifié) ; nuit : 8 catégories socioprofessionnelles des habitants de 15 ans et plus ; jour : 6 groupes d'actifs occupés à leur commune de travail (fichier Mobilités professionnelles) + retraités à leur commune de résidence ; recensement 2023, base « Évolution et structure de la population ».
   Opp3  % de ménages avec au moins une voiture (base « Logement 2023 ») + 100 si des actifs occupés vont travailler en transports en commun (base « Caractéristiques de l'emploi 2023 »,
         au moins une personne) + 100 pour Ajaccio, Bastia, Porto-Vecchio et L'Île-Rousse (réseaux de bus urbains réguliers, transport.data.gouv.fr).
   Opp4  (4G + débit >= 30 Mbit/s + fibre) / 3, en % : 4G = population couverte par au moins un opérateur (ARCEP T4 2024 x grille INSEE de 200 m) ; débit et fibre = locaux éligibles
@@ -35,7 +35,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from construire_serie_temporelle import indicateur_revenu_fiscal, theil
+from calculer_diversite_jour import effectifs_jour
+from construire_serie_temporelle import indicateur_revenu_fiscal, opp2_nuit_jour
 
 RACINE = Path(__file__).resolve().parents[2]
 GEOJSON = RACINE / "Données" / "Commune_Corse.geojson"
@@ -81,9 +82,11 @@ def indicateurs(dossier):
     if len(cs) != 8:
         sys.exit(f"Opp2 : 8 catégories attendues, trouvé {cs}")
     x = d[cs].astype(float)
-    t = theil(x)
+    x.columns = [f"cs{i}" for i in range(1, 9)]
+    xj = effectifs_jour(dossier, codes, x["cs7"])                       # présents de jour : actifs occupés à leur commune de travail + retraités
+    valeur, comp = opp2_nuit_jour(x, xj)                                 # 0 = tout dans une catégorie, 1 = répartition parfaitement équilibrée
     for c in codes:
-        sortie[c]["Opp2"] = {"valeur": float(t[c]), **{f"cs{i + 1}": float(x.loc[c].iloc[i]) for i in range(8)}}
+        sortie[c]["Opp2"] = {"valeur": float(valeur[c]), **{k: float(v) for k, v in comp.loc[c].items()}}
 
     # --- Opp3 (voiture, transports en commun) et Vec2 (logement) : base Logement 2023 et base emploi 2023
     lg = lire(rp / "base_cc_logement_2023.csv").reindex(codes)
@@ -156,7 +159,7 @@ def indicateurs(dossier):
 
 SOURCES = {
     "Opp1": "INSEE, recensement 2023, base communale Diplômes - Formation (base_cc_diplomes_formation_2023), mise en ligne le 25/06/2026",
-    "Opp2": "INSEE, recensement 2023, base communale Évolution et structure de la population (base_cc_evol_struct_pop_2023)",
+    "Opp2": "INSEE, recensement 2023, base communale Évolution et structure de la population (base_cc_evol_struct_pop_2023) pour les résidents (nuit) et les retraités ; fichier détail Mobilités professionnelles (RP2023_mobpro) pour les actifs occupés à leur commune de travail (jour)",
     "Opp3": "INSEE, recensement 2023, bases communales Logement (ménages avec voiture) et Caractéristiques de l'emploi (actifs occupés en transports en commun) ; réseaux de bus urbains réguliers : Muvistrada, Via Bastia, A Citadina, A Balanina (transport.data.gouv.fr), sélection faite par la doctorante",
     "Opp4": "ARCEP, couvertures théoriques 4G T4 2024 (4 opérateurs) x grille de population INSEE Filosofi 200 m (2021) ; ARCEP « Ma connexion internet » T4 2024, offres filaires (commune_debit_filaire, commune_techno)",
     "Cho1": "INSEE, population communale en QPV 2024 (pop_reference_communales_QPV24, référence 1er janvier 2020, publiée le 10/07/2025)",

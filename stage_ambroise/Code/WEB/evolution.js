@@ -9,7 +9,7 @@ const EVOLUTION_VARIABLES = {
     Vec: 'Vécu (Vec)',
 };
 const EVOLUTION_NOMS_INDICATEURS = {
-    Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité (4G, débit, fibre)',
+    Opp1: 'Opp1 · niveau de diplôme (1-4)', Opp2: 'Opp2 · diversité sociale', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité (4G, débit, fibre)',
     Cho1: 'Cho1 · quartiers prioritaires (−log du nombre de personnes)', Cho2: 'Cho2 · droit de vote (proxy : part de Français, 18 ans et plus, %)', Vec1: 'Vec1 · revenu fiscal moyen par foyer (€)', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l\'emploi', Vec4: 'Vec4 · services à 20 minutes (nombre)',
 };
 // Carte d'évolution (points sur 10) : classes de Jenks (5) calculées sur les 360 variations de la variable affichée (seuils_jenks_variation dans serie_temporelle.json).
@@ -96,7 +96,7 @@ function evolutionResume(donnees, variable, minHab = 0) {
 // contribution à la variation du score de sa dimension, dispersion entre communes (pouvoir discriminant) et corrélation avec la variation de l'indice (variable explicative de l'évolution).
 const EVOLUTION_SEUIL_STABLE = 0.5;          // en points de l'échelle de l'indicateur (0-100) : en dessous, une commune compte comme « stable »
 const EVOLUTION_FORMAT_INDICATEURS = { Opp1: [2, ''], Opp2: [3, ''], Opp3: [0, ''], Opp4: [1, ' %'], Cho1: [2, ''], Cho2: [1, ' %'], Vec1: [0, ' €'], Vec2: [3, ''], Vec3: [3, ''], Vec4: [0, ''] };
-const EVOLUTION_NOMS_COURTS = { Opp1: 'Opp1 · diplôme', Opp2: 'Opp2 · diversité sociale (Theil)', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité', Cho1: 'Cho1 · quartiers prioritaires', Cho2: 'Cho2 · droit de vote', Vec1: 'Vec1 · revenu fiscal moyen', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l’emploi', Vec4: 'Vec4 · services à 20 min' };
+const EVOLUTION_NOMS_COURTS = { Opp1: 'Opp1 · diplôme', Opp2: 'Opp2 · diversité sociale', Opp3: 'Opp3 · mobilité', Opp4: 'Opp4 · connectivité', Cho1: 'Cho1 · quartiers prioritaires', Cho2: 'Cho2 · droit de vote', Vec1: 'Vec1 · revenu fiscal moyen', Vec2: 'Vec2 · logement', Vec3: 'Vec3 · stabilité de l’emploi', Vec4: 'Vec4 · services à 20 min' };
 const EVOLUTION_COURBES = [['OppChoVec', 'Indice', '#222222'], ['Opp', 'Opp', '#0072b2'], ['Cho', 'Cho', '#d55e00'], ['Vec', 'Vec', '#009e73']];
 
 function evolutionMoyennePonderee(valeurs, poids) {
@@ -282,14 +282,21 @@ function evolutionComposantes(donnees, commune, cle) {
         });
         note = 'Le détail à 7 niveaux n\'existe pas en 2016 : les niveaux sont regroupés en 4 pour les deux dates.';
     } else if (cle === 'Opp2') {
-        intro = 'Opp2 = indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus = Σ (x/μ) ln(x/μ) / 8, où x est l\'effectif d\'une catégorie et μ la moyenne des 8 effectifs. Plus l\'indice est élevé, plus la répartition est inégale. Contribution d\'une catégorie = écart de son terme (x/μ) ln(x/μ) / 8.';
-        colonne = 'Part des 15 ans et plus (%)';
-        const terme = (o, i) => { const x = o['cs' + (i + 1)], mu = somme(o) / 8; return x > 0 ? (x / mu) * Math.log(x / mu) / 8 : 0; };
-        EVOLUTION_CSP.forEach((lib, i) => {
-            const p = k.map(o => 100 * o['cs' + (i + 1)] / somme(o));
-            ligne(lib, p[0], p[1], 1, terme(k[1], i) - terme(k[0], i), 4, '%');
+        intro = 'Opp2 = diversité sociale = (diversité de nuit + diversité de jour) ÷ 2. Chaque diversité = 1 − T ÷ ln n, où T = Σ (x/μ) ln(x/μ) / n est l\'indice de Theil (x : effectif d\'une catégorie, μ : moyenne des n effectifs). ' +
+            'Nuit : les 8 catégories socioprofessionnelles des habitants de 15 ans et plus (n = 8). Jour : les 6 groupes d\'actifs occupés comptés à leur commune de travail et les retraités à leur commune de résidence (n = 7). ' +
+            'Plus Opp2 est élevé (maximum 1), plus la répartition est équilibrée, donc diversifiée. Contribution d\'une catégorie = baisse de son terme (x/μ) ln(x/μ) / n, divisée par 2 ln n.';
+        colonne = 'Part de la population (%)';
+        const cat = (o, pref, n) => Array.from({ length: n }, (_, i) => o[pref + (i + 1)]);
+        const total = (o, pref, n) => cat(o, pref, n).reduce((t, v) => t + v, 0);
+        const terme = (o, pref, n, i) => { const x = o[pref + (i + 1)], mu = total(o, pref, n) / n; return x > 0 ? (x / mu) * Math.log(x / mu) / n : 0; };
+        const bloc = (prefixe, n, titre, libelles) => libelles.forEach((lib, i) => {
+            const p = k.map(o => 100 * o[prefixe + (i + 1)] / total(o, prefixe, n));
+            ligne(`${titre} · ${lib}`, p[0], p[1], 1, (terme(k[0], prefixe, n, i) - terme(k[1], prefixe, n, i)) / (2 * Math.log(n)), 4, '%');
         });
-        note = 'Une catégorie dont la part s\'éloigne de la moyenne (12,5 %) fait monter l\'indice ; un rapprochement le fait baisser.';
+        bloc('cs', 8, 'Habitants', EVOLUTION_CSP);
+        bloc('j', 7, 'Présents de jour', EVOLUTION_CSP.slice(0, 7));
+        note = 'Une catégorie dont la part s\'éloigne de la moyenne (12,5 % la nuit, 14,3 % le jour) fait baisser l\'indice ; un rapprochement le fait monter. ' +
+            'Les effectifs des actifs de jour viennent du fichier détail « Mobilités professionnelles » du recensement (échantillon pondéré, bruité dans les petites communes).';
     } else if (cle === 'Opp4') {
         intro = 'Opp4 = (part de la population couverte par la 4G + part des locaux éligibles à un débit d\'au moins 30 Mbit/s + part des locaux raccordables à la fibre) ÷ 3, en %. Contribution d\'une composante = écart de la composante ÷ 3.';
         colonne = 'Part (%)';

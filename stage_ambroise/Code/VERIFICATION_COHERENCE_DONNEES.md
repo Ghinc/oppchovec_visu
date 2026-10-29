@@ -45,8 +45,8 @@ scores de dimension (mode « Betti », mode par défaut de l'appli).
 
 | Champ | Valeur dans `data_scores_0_10.json` | Recalcul indépendant (tests) | Différence |
 |------------|---------------|-------------|------------|
-| **OppChoVec** | 0.461630 | 0.461630 | **0.000000** |
-| **Score_Opp** | 0.678505 | 0.678505 | **0.000000** |
+| **OppChoVec** | 0.639863 | 0.639863 | **0.000000** |
+| **Score_Opp** | 0.877489 | 0.877489 | **0.000000** |
 | **Score_Cho** | 0.430935 | 0.430935 | **0.000000** |
 | **Score_Vec** | 0.519077 | 0.519077 | **0.000000** |
 
@@ -96,7 +96,7 @@ L'indice courant a été **entièrement reconstruit** à partir de sources offic
 | Indicateur | Définition | Source | Millésime |
 |---|---|---|---|
 | Opp1 | niveau de diplôme moyen (1 à 7) des 18 ans et plus non scolarisés ; les 15-17 ans non scolarisés sont retirés du niveau 1 | INSEE, base communale Diplômes - Formation | recensement 2023 |
-| Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | INSEE, base Évolution et structure de la population | recensement 2023 |
+| Opp2 | diversité sociale = ln 8 − indice de Theil des 8 catégories socioprofessionnelles des 15 ans et plus (plus haut = plus diversifié) | INSEE, base Évolution et structure de la population | recensement 2023 |
 | Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés vont travailler en transports en commun (au moins une personne) + 100 pour Ajaccio, Bastia, Porto-Vecchio, L'Île-Rousse (réseaux de bus, transport.data.gouv.fr) | INSEE, bases Logement et Caractéristiques de l'emploi | recensement 2023 |
 | Opp4 | (4G + débit ≥ 30 Mbit/s + fibre) / 3, en % ; 4G = population couverte par au moins un opérateur (cartes ARCEP × grille de population de 200 m) ; débit et fibre = locaux éligibles, offres filaires | ARCEP, couvertures théoriques et « Ma connexion internet » | T4 2024 |
 | Cho1 | −log(personnes vivant en quartier prioritaire), 0 sans quartier | INSEE, population communale en QPV 2024 | référence 1er janvier 2020, publiée en 2025 |
@@ -128,7 +128,7 @@ recensement de l'INSEE (millésimes 2016 et 2021, qui ne se recouvrent pas : enq
 | Indicateur | Définition (identique aux deux dates) | Ressemblance avec l'indicateur actuel (corrélation, 2021) |
 |---|---|---|
 | Opp1 | niveau de diplôme moyen des 18 ans et plus non scolarisés, sur **4** niveaux (aucun diplôme ou brevet, CAP-BEP, bac, supérieur) : le millésime 2016 n'a pas le détail à 7 niveaux ; 15-17 ans non scolarisés retirés du niveau 1 | 0,91 (échelle différente) |
-| Opp2 | indice de Theil sur les 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
+| Opp2 | diversité sociale = ln 8 − indice de Theil des 8 catégories socioprofessionnelles des 15 ans et plus | 0,92 |
 | Opp3 | % de ménages avec au moins une voiture + 100 si des actifs occupés utilisent les transports en commun + 100 pour Ajaccio, Bastia, Porto-Vecchio et L'Île-Rousse | 0,99 |
 | Cho2 | % de Français parmi les **18 ans et plus**, utilisé comme **proxy du droit de vote** (il ne tient compte ni de l'inscription sur les listes électorales ni du vote des ressortissants européens aux municipales), par la méthode de `proportion_etrangers_18plus_final.py` (population de 18-24 ans en POP1B, Français 15-24 ans × 0,7 en NAT1, étrangers 25 ans et plus en NAT1) : appliquée aux deux dates, elle retrouve le fichier actuel (calculé en 2022) à 0,01 point près pour 357 communes sur 360 | 0,89 (millésimes 2021 et 2022) |
 | Vec1 | **revenu fiscal moyen par foyer fiscal** (DGFiP, IRCOM : revenu fiscal de référence total ÷ nombre de foyers fiscaux, par commune) ; communes sous secret statistique : moyenne du département (11 en 2016, 12 en 2021) | 0,45 (concept différent de la médiane de l'appli) ; 2021 identique à la variante « revenu fiscal » |
@@ -162,7 +162,7 @@ les tables NAT1 et POP1B et le fichier IRCOM (revenus) de l'année. 2016 : `base
 
 ### Indicateurs bruts (NON normalisés)
 - **Opp1** : 1 à 7 (niveau de diplôme moyen des 18 ans ou plus non scolarisés, recensement INSEE 2020 ; observé 2,00 à 4,57 : voir la section « Opp1 » ci-dessous)
-- **Opp2** : 0 à 1.5 (indice de Theil ; maximum observé 1,437)
+- **Opp2** : 0 à 2,08 (ln 8 − indice de Theil, plus haut = plus diversifié ; observé de 0,64 à 1,96)
 - **Opp3** : 0 à 300 (mobilité : % de ménages avec voiture, +100 si transports en commun, +100 si réseau de bus urbain)
 - **Opp4** : 0 à 100 (connectivité : moyenne de la 4G, du débit de 30 Mbit/s et de la fibre, en %)
 - **Cho1** : -10 à 0 (-log du nombre de personnes en quartier prioritaire ; 0 si aucune)
