@@ -334,7 +334,7 @@ function epciAfficherDansPanneau(nom) {         // panneau « sélection » de l
     const e = epciDonnees.epci.find(x => x.nom === nom);
     const autre = e && epciComparaisons[e.siren] ? epciDonnees.epci.find(x => x.siren === epciComparaisons[e.siren]) : null;
     if (autre) surlignerCommune(autre.nom, 'red');                    // comme pour deux communes comparées : les deux sont surlignés sur les cartes
-    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null) + epciDetailCalculHtml(e) + epciComparerHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+    document.getElementById('resultCommune').innerHTML = e ? (typeof htmlFourchetteRang === 'function' ? htmlFourchetteRang(nom) : '') + epciFicheHtml(e, null) + epciDetailCalculHtml(e) + epciComparerHtml(e) : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
 }
 
 // ---------- Comparaison de deux EPCI (même principe que la comparaison de deux communes : bouton « Comparer », choix du second, tableau côte à côte) ----------

@@ -2649,6 +2649,7 @@ function titreIndicateurHtml(indicateur) {
 }
 
 function afficherCommune(communeNom) {
+  if (typeof rafraichirComparer === 'function') rafraichirComparer(communeNom);      // onglet « Comparer ma commune » (si déjà ouvert)
   if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) {       // échelle EPCI : le panneau montre la fiche de l'EPCI choisi
     epciAfficherDansPanneau(communeNom);
     return;
@@ -2680,6 +2681,7 @@ function afficherCommune(communeNom) {
   let indicateursHTML = `
     <p><strong>Commune :</strong> ${communeNom}</p>
     <p><strong>OppChoVec :</strong> ${valeurIndice.toFixed(2)}/10${horsEchelle}</p>
+    ${typeof htmlFourchetteRang === 'function' ? htmlFourchetteRang(communeNom) : ''}
     <h4>Indicateurs :</h4>
     <p class="sliders-legende">0 % = valeur la plus basse observée en Corse, 100 % = la plus haute · ▾ = valeur d'origine</p>
     <ul>
@@ -3270,6 +3272,8 @@ function recalculerCarteOppChoVec() {
         dominanceInitialise = false;
         initialiserOngletDominance();
     }
+    // Onglet « Comparer ma commune » : catégories et fourchettes suivent les scores courants (simulation comprise)
+    if (typeof rafraichirComparer === 'function') rafraichirComparer();
     // Les corrélations reposent sur des données communales : pas de recalcul à l'échelle EPCI (elles se recalculent au retour aux communes)
     if (typeof echelleEstEPCI === 'function' && echelleEstEPCI()) return;
 
@@ -4928,6 +4932,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Si on clique sur l'onglet Dominance, initialiser (lazy loading)
             if (targetTab === 'dominancetab') {
                 initialiserOngletDominance();
+            }
+
+            // Si on clique sur l'onglet Comparer ma commune, initialiser (lazy loading)
+            if (targetTab === 'comparertab') {
+                initialiserOngletComparer();
             }
 
             // Invalider la taille de la carte pour forcer le redimensionnement

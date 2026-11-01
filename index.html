@@ -6,7 +6,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261017a">
+  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261101a">
 </head>
 <body>
   <div id="app">
@@ -64,6 +64,7 @@
           <button class="tab-button" data-tab="chotab" id="tab-cho">Cho</button>
           <button class="tab-button" data-tab="vectab" id="tab-vec">Vec</button>
           <button class="tab-button" data-tab="dominancetab">Dominance</button>
+          <button class="tab-button" data-tab="comparertab">Comparer ma commune</button>
           <button class="tab-button" data-tab="evolutiontab">Évolution</button>
         </div>
         <div class="tab-content active" id="oppchovectab">
@@ -107,6 +108,19 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <!-- Onglet Comparer ma commune : une commune face aux autres, et largeur de la fourchette de rang -->
+        <div class="tab-content" id="comparertab">
+          <div class="comparer-entete">
+            <strong>Comparer ma commune</strong>
+            <label class="comparer-choix"><input type="radio" name="comparer-vue" value="commune" checked> Ma commune face aux autres</label>
+            <label class="comparer-choix"><input type="radio" name="comparer-vue" value="largeur"> Solidité du classement (largeur de la fourchette de rang)</label>
+          </div>
+          <div id="comparer-resume" class="comparer-resume"></div>
+          <div class="comparer-carte-col">
+            <div id="map-comparer" class="map"></div>
+            <div id="comparer-legende" class="comparer-legende-carte"></div>
           </div>
         </div>
         <!-- Onglet EPCI : indice OppChoVec agrégé par intercommunalité -->
@@ -191,9 +205,11 @@
   <script src="stage_ambroise/Code/WEB/lisa_data_betti_1pct.js?v=20261020b"></script>
   <script src="stage_ambroise/Code/WEB/cah_data.js?v=20261020b"></script>
   <script src="stage_ambroise/Code/WEB/evolution.js?v=20261020b"></script>
-  <script src="stage_ambroise/Code/WEB/epci.js?v=20261023a"></script>
+  <script src="stage_ambroise/Code/WEB/epci.js?v=20261101a"></script>
   <script src="stage_ambroise/Code/WEB/site.js?v=20261020b"></script>
   <script src="stage_ambroise/Code/WEB/dominance.js?v=20261020b"></script>
-  <script src="stage_ambroise/Code/WEB/script.js?v=20261020b"></script>
+  <script src="stage_ambroise/Code/WEB/rang_fourchette.js?v=20261101a"></script>
+  <script src="stage_ambroise/Code/WEB/comparer.js?v=20261101a"></script>
+  <script src="stage_ambroise/Code/WEB/script.js?v=20261101a"></script>
 </body>
 </html>
