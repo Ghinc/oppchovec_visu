@@ -7,6 +7,7 @@ let _carteComparer = null;          // carte Leaflet (hors synchronisation des a
 let comparerCouche = null;
 let comparerVue = 'commune';        // 'commune' : ma commune face aux autres ; 'largeur' : largeur de la fourchette de rang
 let comparerRef = null;             // commune (ou EPCI) de référence
+let comparerPoids = null;           // null : carte d'origine (3 catégories, indépendantes de la pondération) ; sinon [p_Opp, p_Cho, p_Vec] normalisés : devant / derrière / égalité
 let comparerEtat = null;            // { cmp, rangs, ref, cat } du dernier dessin, lu par les bulles de survol
 
 const COMPARER_COULEURS = { mieux: '#2c7bb6', moins: '#e08214', depend: '#d9d9d9', identique: '#b2abd2', ref: '#f2c744', manquant: '#ffffff' };
@@ -59,10 +60,43 @@ const COMPARER_LIBELLES = {
     identique: 'Profil identique (mêmes trois scores)'
 };
 
+const COMPARER_LIBELLES_POIDS = {
+    mieux: 'Passe devant avec cette pondération',
+    moins: 'Est derrière avec cette pondération',
+    identique: 'À égalité avec cette pondération',
+    depend: ''
+};
+
+// Avec une pondération choisie : l'indice de chaque unité (même formule que l'appli, scores 0-1 retrouvés avec les bornes figées)
+// est comparé à celui de `ref`. Renvoie { cat, effectifs, rang } ; 'mieux' = l'unité passe devant ref.
+function comparerCategoriesPoids(cmp, ref, p) {
+    const raw = {};
+    for (const nom of cmp.noms) {
+        raw[nom] = {};
+        for (const d of ['Score_Opp', 'Score_Cho', 'Score_Vec']) {
+            const mn = bornesScoresRef.min[d], mx = bornesScoresRef.max[d];
+            raw[nom][d] = mn + scoresParCommune[nom][d] / 10 * (mx - mn);
+        }
+    }
+    const indice = calculerIndiceBienEtre(raw, p);
+    const cat = {}, ef = { mieux: 0, moins: 0, identiques: 0, depend: 0 };
+    for (const nom of cmp.noms) {
+        if (nom === ref) continue;
+        const ecart = indice[nom] - indice[ref];
+        const c = Math.abs(ecart) <= 1e-12 * Math.max(1, Math.abs(indice[ref])) ? 'identique' : ecart > 0 ? 'mieux' : 'moins';
+        cat[nom] = c;
+        if (c === 'identique') ef.identiques++; else ef[c]++;
+    }
+    return { cat, effectifs: ef, rang: rangsIndice(indice, cmp.noms)[ref] };
+}
+
+const comparerPct = (x) => Math.round(x * 100) + ' %';
+
 // Bulle au survol de `nom` : ses trois scores à côté de ceux de la commune sélectionnée
 function comparerBulle(nom) {
     const e = comparerEtat;
     const titre = `<strong>${comparerEch(nom)}</strong>`;
+    const libelles = e && e.poids ? COMPARER_LIBELLES_POIDS : COMPARER_LIBELLES;
     if (!e || !e.cmp.dominants[nom]) return `${titre}<br>Scores incomplets : non comparée`;
     const f = fourchetteRang(e.cmp, nom);
     const rang = e.rangs[nom] !== undefined ? `${ordinalFr(e.rangs[nom])} · ` : '';
@@ -77,7 +111,7 @@ function comparerBulle(nom) {
             : sNom[cle] < sRef[cle] ? '<span class="comparer-moins" title="plus bas que la commune sélectionnée">▼</span>' : '<span title="égal">=</span>';
         return `<tr><td title="${long}">${court}</td><td>${x}</td><td>${y} ${marque}</td></tr>`;
     }).join('');
-    return `${titre}<br><em>${COMPARER_LIBELLES[e.cat[nom]]}</em>` +
+    return `${titre}<br><em>${libelles[e.cat[nom]]}</em>` +
         `<table class="comparer-bulle-table"><tr><th></th><th>${comparerEch(e.ref)}<br><span>(sélectionnée)</span></th><th>${comparerEch(nom)}</th></tr>${lignes}</table>`;
 }
 
@@ -91,8 +125,14 @@ function comparerRemplir() {
     const calcul = comparerCalcul();
     const { cmp, rangs } = calcul;
     const ref = comparerRef && cmp.dominants[comparerRef] ? comparerRef : null;
-    const cat = ref ? categoriesUnite(cmp, ref) : null;
-    comparerEtat = { cmp, rangs, ref, cat };
+    let cat = ref ? categoriesUnite(cmp, ref) : null;
+    const poids = ref && comparerPoids && comparerVue === 'commune' ? comparerCategoriesPoids(cmp, ref, comparerPoids) : null;
+    if (poids) cat = poids.cat;
+    comparerEtat = { cmp, rangs, ref, cat, poids: !!poids };
+    const bloc = document.getElementById('comparer-poids');
+    if (bloc) bloc.hidden = comparerVue !== 'commune';
+    const retour = document.getElementById('comparer-poids-retour');
+    if (retour) retour.hidden = !comparerPoids;
     const largeurs = {};
     cmp.noms.forEach(nom => { largeurs[nom] = fourchetteRang(cmp, nom).largeur; });
     const seuils = comparerSeuilsLargeur(cmp.n);
@@ -128,17 +168,27 @@ function comparerRemplir() {
             html = `<p class="comparer-invite">Choisissez ${comparerEstEPCI() ? 'un EPCI' : 'une commune'} dans la liste à gauche, ou cliquez sur la carte.</p>`;
             leg = `<div class="comparer-legende-ligne">Aucune sélection</div>`;
         } else {
-            const ef = effectifsUnite(cmp, ref);
-            const idTxt = ef.identiques ? ` · ${comparerPluriel(ef.identiques, 'au profil identique', 'au profil identique')}` : '';
-            html = `<p class="comparer-ligne-rang"><strong>${comparerEch(ref)}</strong> : ${comparerLigneRang(calcul, ref)}</p>` +
-                `<p class="comparer-effectifs"><span class="comparer-pastille" style="background:${COMPARER_COULEURS.mieux}"></span>${ef.mieux} ${u(ef.mieux)} ${ef.mieux > 1 ? 'font' : 'fait'} mieux partout · ` +
-                `<span class="comparer-pastille" style="background:${COMPARER_COULEURS.moins}"></span>${ef.moins} moins bien partout · ` +
-                `<span class="comparer-pastille" style="background:${COMPARER_COULEURS.depend}"></span>${ef.depend} : ça dépend${idTxt}</p>` +
-                `<p class="comparer-phrase">${COMPARER_PHRASE}</p>`;
+            const ef = poids ? poids.effectifs : effectifsUnite(cmp, ref);
+            const idTxt = ef.identiques ? ` · ${ef.identiques} ${poids ? 'à égalité' : 'au profil identique'}` : '';
+            const lib = poids ? COMPARER_LIBELLES_POIDS : COMPARER_LIBELLES;
+            const pastille = (c) => `<span class="comparer-pastille" style="background:${c}"></span>`;
+            const ligneRang = `<p class="comparer-ligne-rang"><strong>${comparerEch(ref)}</strong> : ${comparerLigneRang(calcul, ref)}</p>`;
+            if (poids) {
+                html = ligneRang +
+                    `<p class="comparer-ligne-rang">Avec la pondération Opp ${comparerPct(comparerPoids[0])} · Cho ${comparerPct(comparerPoids[1])} · Vec ${comparerPct(comparerPoids[2])} : <strong>${comparerEch(ref)} est ${ordinalFr(poids.rang)}</strong>.</p>` +
+                    `<p class="comparer-effectifs">${pastille(COMPARER_COULEURS.mieux)}${ef.mieux} ${u(ef.mieux)} ${ef.mieux > 1 ? 'passent' : 'passe'} devant · ${pastille(COMPARER_COULEURS.moins)}${ef.moins} ${ef.moins > 1 ? 'sont derrière' : 'est derrière'}${idTxt}</p>` +
+                    `<p class="comparer-phrase">Plus de gris : avec une pondération donnée, chaque commune est devant, derrière ou à égalité. Celles qui faisaient mieux (ou moins bien) sur les trois dimensions restent du même côté, quelle que soit la pondération.</p>`;
+            } else {
+                html = ligneRang +
+                    `<p class="comparer-effectifs">${pastille(COMPARER_COULEURS.mieux)}${ef.mieux} ${u(ef.mieux)} ${ef.mieux > 1 ? 'font' : 'fait'} mieux partout · ` +
+                    `${pastille(COMPARER_COULEURS.moins)}${ef.moins} moins bien partout · ` +
+                    `${pastille(COMPARER_COULEURS.depend)}${ef.depend} : ça dépend${idTxt}</p>` +
+                    `<p class="comparer-phrase">${COMPARER_PHRASE}</p>`;
+            }
             const ligne = (c, txt, n) => `<div class="comparer-legende-ligne"><span class="comparer-pastille" style="background:${c}"></span>${txt} — ${n}</div>`;
-            leg = `<div class="comparer-legende-titre">Par rapport à ${comparerEch(ref)}</div>` +
-                ligne(COMPARER_COULEURS.mieux, COMPARER_LIBELLES.mieux, ef.mieux) + ligne(COMPARER_COULEURS.moins, COMPARER_LIBELLES.moins, ef.moins) +
-                ligne(COMPARER_COULEURS.depend, COMPARER_LIBELLES.depend, ef.depend) + (ef.identiques ? ligne(COMPARER_COULEURS.identique, COMPARER_LIBELLES.identique, ef.identiques) : '') +
+            leg = `<div class="comparer-legende-titre">${poids ? 'Avec la pondération choisie, face à' : 'Par rapport à'} ${comparerEch(ref)}</div>` +
+                ligne(COMPARER_COULEURS.mieux, lib.mieux, ef.mieux) + ligne(COMPARER_COULEURS.moins, lib.moins, ef.moins) +
+                (poids ? '' : ligne(COMPARER_COULEURS.depend, lib.depend, ef.depend)) + (ef.identiques ? ligne(COMPARER_COULEURS.identique, lib.identique, ef.identiques) : '') +
                 `<div class="comparer-legende-ligne"><span class="comparer-pastille" style="background:${COMPARER_COULEURS.ref}"></span>${comparerEch(ref)} (sélectionnée)</div>`;
         }
     } else {
@@ -183,8 +233,39 @@ function initialiserOngletComparer() {
         comparerVue = r.value;
         comparerRemplir();
     }));
+    comparerInitialiserPoids();
     if (liste) liste.addEventListener('change', () => rafraichirComparer(liste.value));
     comparerRemplir();
     _carteComparer.fitBounds(comparerCouche.getBounds(), { padding: [8, 8], animate: false });
     invaliderTailleApres(_carteComparer);
+}
+
+// ---------- Pondération jouable (Opp, Cho, Vec) ----------
+const COMPARER_CURSEURS = ['comparer-p-opp', 'comparer-p-cho', 'comparer-p-vec'];
+
+function comparerLirePoids() {
+    const v = COMPARER_CURSEURS.map(id => Number(document.getElementById(id).value));
+    const somme = v.reduce((a, b) => a + b, 0);
+    return somme > 0 ? v.map(x => x / somme) : [1 / 3, 1 / 3, 1 / 3];
+}
+
+function comparerAfficherPoids() {
+    const p = comparerLirePoids();
+    COMPARER_CURSEURS.forEach((id, i) => { document.getElementById(id + '-val').textContent = comparerPct(p[i]); });
+}
+
+function comparerPositionnerCurseurs(p) {
+    COMPARER_CURSEURS.forEach((id, i) => { document.getElementById(id).value = Math.round(p[i] * 1000); });
+    comparerAfficherPoids();
+}
+
+function comparerInitialiserPoids() {
+    if (!document.getElementById(COMPARER_CURSEURS[0])) return;
+    const poidsRetenus = () => comparerPositionnerCurseurs(referencePk(modeCalculPk).pk);
+    poidsRetenus();
+    COMPARER_CURSEURS.forEach(id => document.getElementById(id).addEventListener('input', comparerAfficherPoids));
+    document.getElementById('comparer-recalculer').addEventListener('click', () => { comparerPoids = comparerLirePoids(); comparerRemplir(); });
+    document.getElementById('comparer-poids-betti').addEventListener('click', () => comparerPositionnerCurseurs(referencePk('betti').pk));
+    document.getElementById('comparer-poids-egaux').addEventListener('click', () => comparerPositionnerCurseurs([1 / 3, 1 / 3, 1 / 3]));
+    document.getElementById('comparer-poids-retour').addEventListener('click', () => { comparerPoids = null; poidsRetenus(); comparerRemplir(); });
 }

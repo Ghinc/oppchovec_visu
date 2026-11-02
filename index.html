@@ -6,7 +6,7 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261101a">
+  <link rel="stylesheet" href="stage_ambroise/Code/WEB/dashboard.css?v=20261102a">
 </head>
 <body>
   <div id="app">
@@ -117,6 +117,16 @@
             <label class="comparer-choix"><input type="radio" name="comparer-vue" value="commune" checked> Ma commune face aux autres</label>
             <label class="comparer-choix"><input type="radio" name="comparer-vue" value="largeur"> Solidité du classement (largeur de la fourchette de rang)</label>
           </div>
+          <div id="comparer-poids" class="comparer-poids">
+            <strong>Jouer avec la pondération</strong>
+            <label class="comparer-curseur">Opp <input type="range" id="comparer-p-opp" min="0" max="1000" step="1" value="333"> <output id="comparer-p-opp-val"></output></label>
+            <label class="comparer-curseur">Cho <input type="range" id="comparer-p-cho" min="0" max="1000" step="1" value="333"> <output id="comparer-p-cho-val"></output></label>
+            <label class="comparer-curseur">Vec <input type="range" id="comparer-p-vec" min="0" max="1000" step="1" value="333"> <output id="comparer-p-vec-val"></output></label>
+            <button type="button" id="comparer-recalculer">Recalculer</button>
+            <button type="button" id="comparer-poids-betti" title="Poids de Betti et al. (2008)">Poids de Betti</button>
+            <button type="button" id="comparer-poids-egaux">Poids égaux</button>
+            <button type="button" id="comparer-poids-retour" hidden>Revenir à la carte d'origine</button>
+          </div>
           <div id="comparer-resume" class="comparer-resume"></div>
           <div class="comparer-carte-col">
             <div id="map-comparer" class="map"></div>
@@ -209,7 +219,7 @@
   <script src="stage_ambroise/Code/WEB/site.js?v=20261020b"></script>
   <script src="stage_ambroise/Code/WEB/dominance.js?v=20261020b"></script>
   <script src="stage_ambroise/Code/WEB/rang_fourchette.js?v=20261101a"></script>
-  <script src="stage_ambroise/Code/WEB/comparer.js?v=20261101a"></script>
+  <script src="stage_ambroise/Code/WEB/comparer.js?v=20261102a"></script>
   <script src="stage_ambroise/Code/WEB/script.js?v=20261101a"></script>
 </body>
 </html>

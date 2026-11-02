@@ -157,3 +157,59 @@ test('Comparer ma commune : à l\'échelle EPCI, 19 EPCI, bornes 1 et 19, effect
     assert.deepEqual(nouvellesErreurs(), []);
   });
 });
+
+test('Comparer ma commune : pondération jouable, plus de gris (devant / derrière / égalité), retour à la carte d\'origine', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await choisir(page, 'Corte');
+    await ouvrirOnglet(page);
+    const origine = await couleursComparer(page);
+    const r = R.comparerUnites(scores10), cat0 = R.categoriesUnite(r, 'Corte');
+    assert.ok(await page.isHidden('#comparer-poids-retour'), 'pas de bouton de retour avant de bouger');
+    // curseurs : 70 % Opp, 10 % Cho, 20 % Vec
+    await page.evaluate(() => { for (const [id, v] of [['comparer-p-opp', 700], ['comparer-p-cho', 100], ['comparer-p-vec', 200]]) { const e = document.getElementById(id); e.value = v; e.dispatchEvent(new Event('input')); } });
+    assert.equal(await page.$eval('#comparer-p-opp-val', (e) => e.textContent), '70 %');
+    assert.deepEqual(await couleursComparer(page), origine, 'rien ne change avant « Recalculer »');
+    await page.click('#comparer-recalculer');
+    const attendu = await page.evaluate(() => {
+      const idx = calculerIndiceBienEtre(scoresParCommuneRaw01, [0.7, 0.1, 0.2]);
+      const o = {}; for (const c of Object.keys(idx)) if (c !== 'Corte') o[c] = idx[c] > idx.Corte ? 'mieux' : idx[c] < idx.Corte ? 'moins' : 'identique';
+      return o;
+    });
+    const c = await couleursComparer(page);
+    const COUL = { ...COULEURS, identique: '#b2abd2' };
+    let devant = 0, derriere = 0;
+    for (const nom of communes) {
+      if (nom === 'Corte') continue;
+      assert.equal(c[nom], COUL[attendu[nom]], nom);
+      assert.notEqual(c[nom], COULEURS.depend, 'plus aucun gris');
+      if (attendu[nom] === 'mieux') devant++; else derriere++;
+      if (cat0[nom] === 'mieux') assert.equal(attendu[nom], 'mieux', `${nom} faisait mieux partout : reste devant`);
+      if (cat0[nom] === 'moins') assert.equal(attendu[nom], 'moins', `${nom} faisait moins bien partout : reste derrière`);
+    }
+    const resume = (await page.$eval('#comparer-resume', (e) => e.innerText)).replace(/\s+/g, ' ');
+    assert.ok(resume.includes(`${devant} communes passent devant`) && resume.includes(`${derriere} sont derrière`), resume);
+    assert.ok(resume.includes('Opp 70 % · Cho 10 % · Vec 20 %'), resume);
+    assert.ok(!(await page.$eval('#comparer-legende', (e) => e.innerText)).includes('ça dépend'));
+    // revenir à la carte d'origine
+    await page.click('#comparer-poids-retour');
+    assert.deepEqual(await couleursComparer(page), origine);
+    assert.ok(await page.isHidden('#comparer-poids-retour'));
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});
+
+test('Comparer ma commune : avec les poids de Betti, le classement des cases suit celui de l\'appli', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    await choisir(page, 'Bastia');
+    await ouvrirOnglet(page);
+    await page.click('#comparer-poids-betti');
+    await page.click('#comparer-recalculer');
+    const c = await couleursComparer(page);
+    const indice = await page.evaluate(() => indiceFinale);
+    for (const nom of communes) {
+      if (nom === 'Bastia') continue;
+      assert.equal(c[nom], indice[nom] > indice.Bastia ? COULEURS.mieux : COULEURS.moins, nom);
+    }
+    assert.deepEqual(nouvellesErreurs(), []);
+  });
+});

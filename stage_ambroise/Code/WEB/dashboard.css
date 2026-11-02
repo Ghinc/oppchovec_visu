@@ -2868,3 +2868,10 @@ body.mode-echelle-epci #correlationtab > :not(.epci-indisponible) { display: non
 }
 .rang-info:hover .rang-info-bulle,
 .rang-info:focus .rang-info-bulle { display: block; }
+
+.comparer-poids { flex: 0 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 6px 14px; border-bottom: 1px solid #ddd; font-size: 13px; }
+.comparer-poids[hidden], .comparer-poids button[hidden] { display: none; }
+.comparer-curseur { display: inline-flex; align-items: center; gap: 6px; }
+.comparer-curseur input { width: 110px; }
+.comparer-curseur output { min-width: 3em; font-variant-numeric: tabular-nums; }
+.comparer-poids button { padding: 3px 10px; cursor: pointer; }
