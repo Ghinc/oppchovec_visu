@@ -41,7 +41,7 @@ test('Comparer ma commune : trois teintes, effectifs, phrase d\'explication, lig
     const panneau = await page.$eval('#resultCommune', (e) => e.innerText);
     assert.ok(!/dominan|pareto/i.test(panneau));
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : bulle de survol = trois scores de la commune survolée à côté de ceux de la commune sélectionnée', { skip: sauter }, async () => {
@@ -67,7 +67,7 @@ test('Comparer ma commune : bulle de survol = trois scores de la commune survol�
       if (type === 'depend') assert.ok(fleches.includes('comparer-plus') && fleches.includes('comparer-moins'), 'ça dépend : des ▲ et des ▼');
     }
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : un clic sur la carte choisit la commune (liste et fiche du panneau suivent) ; sans sélection, carte grise', { skip: sauter }, async () => {
@@ -82,7 +82,7 @@ test('Comparer ma commune : un clic sur la carte choisit la commune (liste et fi
     const c = await couleursComparer(page);
     assert.equal(c.Bastia, COULEURS.ref);
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : carte de la largeur de la fourchette (cinq classes, effectifs = 360)', { skip: sauter }, async () => {
@@ -109,7 +109,7 @@ test('Comparer ma commune : carte de la largeur de la fourchette (cinq classes, 
     const L = communes.map((c) => largeurs[c]).sort((a, b) => a - b);
     assert.ok(resume.includes(`Largeur minimale ${L[0]}`) && resume.includes(`maximale ${L[359]}`), resume);
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : une commune modifiée avec les curseurs change de catégorie et de fourchette ; les autres bornes restent figées', { skip: sauter }, async () => {
@@ -135,7 +135,7 @@ test('Comparer ma commune : une commune modifiée avec les curseurs change de ca
     const rang = R.rangsIndice(await page.evaluate(() => indiceFinale), r.noms).Bastia;
     assert.ok(panneau.includes(R.texteFourchette(rang, R.fourchetteRang(r, 'Bastia'))), panneau);
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : à l\'échelle EPCI, 19 EPCI, bornes 1 et 19, effectifs = 18', { skip: sauter }, async () => {
@@ -155,7 +155,7 @@ test('Comparer ma commune : à l\'échelle EPCI, 19 EPCI, bornes 1 et 19, effect
     assert.ok((await page.$eval('#comparer-legende', (e) => e.innerText)).includes(`Par rapport à ${nom}`));
     assert.match(resume, /EPCI font mieux partout|EPCI fait mieux partout|0 EPCI|moins bien partout/);
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : pondération jouable, plus de gris (devant / derrière / égalité), retour à la carte d\'origine', { skip: sauter }, async () => {
@@ -195,7 +195,7 @@ test('Comparer ma commune : pondération jouable, plus de gris (devant / derriè
     assert.deepEqual(await couleursComparer(page), origine);
     assert.ok(await page.isHidden('#comparer-poids-retour'));
     assert.deepEqual(nouvellesErreurs(), []);
-  });
+  }, { comparer: true });
 });
 
 test('Comparer ma commune : avec les poids de Betti, le classement des cases suit celui de l\'appli', { skip: sauter }, async () => {
@@ -210,6 +210,17 @@ test('Comparer ma commune : avec les poids de Betti, le classement des cases sui
       if (nom === 'Bastia') continue;
       assert.equal(c[nom], indice[nom] > indice.Bastia ? COULEURS.mieux : COULEURS.moins, nom);
     }
+    assert.deepEqual(nouvellesErreurs(), []);
+  }, { comparer: true });
+});
+
+test('Onglet « Comparer ma commune » masqué par défaut, mais la fourchette reste dans le panneau de la commune', { skip: sauter }, async () => {
+  await avecAppli(async ({ page, nouvellesErreurs }) => {
+    assert.equal(await page.$('.tab-button[data-tab="comparertab"]'), null);
+    assert.equal(await page.$('#comparertab'), null);
+    await choisir(page, 'Corte');
+    await page.waitForSelector('.rang-info');
+    assert.match(await page.$eval('#resultCommune', (e) => e.innerText), /quelle que soit la pondération, entre la/);
     assert.deepEqual(nouvellesErreurs(), []);
   });
 });

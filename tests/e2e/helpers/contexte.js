@@ -33,8 +33,8 @@ test.after(async () => {
 });
 
 /** Ouvre l'appli, exécute `corps(appli)`, ferme la page. */
-async function avecAppli(corps) {
-  const appli = await ouvrirAppli(navigateur, serveur.url);
+async function avecAppli(corps, options) {
+  const appli = await ouvrirAppli(navigateur, serveur.url, options);
   try { await corps(appli); } finally { await appli.page.close(); }
 }
 
