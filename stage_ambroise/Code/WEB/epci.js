@@ -375,7 +375,7 @@ function epciAfficherDansPanneau(nom) {         // panneau « sélection » de l
     const e = epciDonnees.epci.find(x => x.nom === nom);
     const autre = e && epciComparaisons[e.siren] ? epciDonnees.epci.find(x => x.siren === epciComparaisons[e.siren]) : null;
     if (autre) surlignerCommune(autre.nom, 'red');                    // comme pour deux communes comparées : les deux sont surlignés sur les cartes
-    document.getElementById('resultCommune').innerHTML = e ? epciFicheHtml(e, null, 'P') : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
+    document.getElementById('resultCommune').innerHTML = e ? (typeof htmlFourchetteRang === 'function' ? htmlFourchetteRang(nom) : '') + epciFicheHtml(e, null, 'P') : '<p style="color:red;">❌ Données introuvables pour cet EPCI.</p>';
 }
 
 const EPCI_ONGLETS_NON_DISPONIBLES = {       // analyses qui reposent sur des données communales (l'Évolution a sa version EPCI : evolution.js)

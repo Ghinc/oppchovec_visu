@@ -2714,6 +2714,7 @@ function afficherCommune(communeNom) {
   let indicateursHTML = `
     <p><strong>Commune :</strong> ${communeNom}</p>
     <p><strong>OppChoVec :</strong> ${valeurIndice.toFixed(2)}/10${horsEchelle}</p>
+    ${typeof htmlFourchetteRang === 'function' ? htmlFourchetteRang(communeNom) : ''}
     <h4>Indicateurs :</h4>
     <p class="sliders-legende">0 % = valeur la plus basse observée en Corse, 100 % = la plus haute · ▾ = valeur d'origine</p>
     <ul>
